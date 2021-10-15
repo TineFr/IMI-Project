@@ -71,6 +71,9 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Location")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -82,6 +85,28 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Cages");
+                });
+
+            modelBuilder.Entity("Imi.Project.Api.Core.Entities.DailyTask", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CageId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDone")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CageId");
+
+                    b.ToTable("DailyTasks");
                 });
 
             modelBuilder.Entity("Imi.Project.Api.Core.Entities.Food", b =>
@@ -156,25 +181,6 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.ToTable("Species");
                 });
 
-            modelBuilder.Entity("Imi.Project.Api.Core.Entities.Task", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("CageId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CageId");
-
-                    b.ToTable("Task");
-                });
-
             modelBuilder.Entity("Imi.Project.Api.Core.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -221,18 +227,18 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .HasForeignKey("UserId");
                 });
 
+            modelBuilder.Entity("Imi.Project.Api.Core.Entities.DailyTask", b =>
+                {
+                    b.HasOne("Imi.Project.Api.Core.Entities.Cage", "Cage")
+                        .WithMany("DailyTasks")
+                        .HasForeignKey("CageId");
+                });
+
             modelBuilder.Entity("Imi.Project.Api.Core.Entities.Nest", b =>
                 {
                     b.HasOne("Imi.Project.Api.Core.Entities.Pair", "Pair")
                         .WithOne("Nest")
                         .HasForeignKey("Imi.Project.Api.Core.Entities.Nest", "PairId");
-                });
-
-            modelBuilder.Entity("Imi.Project.Api.Core.Entities.Task", b =>
-                {
-                    b.HasOne("Imi.Project.Api.Core.Entities.Cage", null)
-                        .WithMany("Tasks")
-                        .HasForeignKey("CageId");
                 });
 #pragma warning restore 612, 618
         }

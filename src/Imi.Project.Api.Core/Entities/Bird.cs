@@ -10,6 +10,8 @@ namespace Imi.Project.Api.Core.Entities
         public DateTime HatchDate { get; set; }
         public Gender Gender { get; set; }
         public Pair Pair { get; set; }
+
+        public Guid? PairId { get; set; }
         public Cage Cage { get; set; }
         public Guid? CageId { get; set; }
         public Species Species { get; set; }

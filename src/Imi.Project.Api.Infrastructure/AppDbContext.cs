@@ -15,6 +15,7 @@ namespace Imi.Project.Api.Infrastructure
         public DbSet<Pair> Pairs { get; set; }
         public DbSet<Nest> Nests { get; set; }
         public DbSet<Bird> Birds { get; set; }
+        public DbSet<DailyTask> DailyTasks { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
