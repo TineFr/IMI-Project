@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
-    <Folder Include="Seeding\" />
   </ItemGroup>
 
 </Project>
