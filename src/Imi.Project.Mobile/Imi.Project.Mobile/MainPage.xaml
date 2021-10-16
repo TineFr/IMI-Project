@@ -7,10 +7,10 @@
             BackgroundColor="white">
     
   <!--Pages can be added as references or inline-->
-  <mobile:CagesPage Title="Cages"></mobile:CagesPage>
-  <mobile:NestsPage Title="Nests"></mobile:NestsPage>
-  <mobile:HomePage Title="Home"></mobile:HomePage>
-  <mobile:BirdsPage Title="Birds"></mobile:BirdsPage>
-  <mobile:PairsPage Title="Pairs"></mobile:PairsPage>
+  <mobile:CagesPage Title="Cages" IconImageSource="cages.png"></mobile:CagesPage>
+  <mobile:NestsPage Title="Nests" IconImageSource="nests.png"></mobile:NestsPage>
+  <mobile:HomePage Title="Home" IconImageSource="home.png"></mobile:HomePage>
+  <mobile:BirdsPage Title="Birds" IconImageSource="birds.png"></mobile:BirdsPage>
+  <mobile:PairsPage Title="Pairs" IconImageSource="pairs.png"></mobile:PairsPage>
 
 </TabbedPage>
