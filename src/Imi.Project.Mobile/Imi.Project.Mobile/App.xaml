@@ -3,6 +3,52 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Imi.Project.Mobile.App">
     <Application.Resources>
+        <!--colors-->
+        <Color x:Key="Green">#D4E7C0</Color>
+        <Color x:Key="Purple">#DEC5E1</Color>
+        <Color x:Key="Blue">#B7D7F0</Color>
+        <Color x:Key="Yellow">LightYellow</Color>
+        <Color x:Key="Pink">pink</Color>
 
+        <!--filter style-->
+        <Style x:Key="Filter" TargetType="ImageButton">
+            <Setter Property="Source" Value="filter.png" ></Setter>
+            <Setter Property="Aspect" Value="AspectFill" ></Setter>
+            <Setter Property="Padding" Value="30" ></Setter>
+            <Setter Property="BackgroundColor" Value="Transparent" ></Setter>
+            <Setter Property="AbsoluteLayout.LayoutBounds" Value="0.05, 10, 100, 100" ></Setter>
+            <Setter Property="AbsoluteLayout.LayoutFlags" Value="XProportional" ></Setter>
+        </Style>
+        <!--logo style-->
+        <Style x:Key="Logo" TargetType="Image">
+            <Setter Property="Source" Value="logowhite.png" ></Setter>
+            <Setter Property="AbsoluteLayout.LayoutBounds" Value="0.97, 10, 50, 50" ></Setter>
+            <Setter Property="AbsoluteLayout.LayoutFlags" Value="XProportional" ></Setter>
+        </Style>
+        <!--Main frame style-->
+        <Style x:Key="MainLabel" TargetType="Label">
+            <Setter Property="FontSize" Value="40" ></Setter>
+            <Setter Property="TextColor" Value="white" ></Setter>
+            <Setter Property="HorizontalOptions" Value="Center" ></Setter>
+            <Setter Property="VerticalOptions" Value="End" ></Setter>
+        </Style>
+        <!--Main frame style-->
+        <Style x:Key="MainFrame" TargetType="Frame">
+            <Setter Property="Grid.Row" Value="0" ></Setter>
+            <Setter Property="HeightRequest" Value="20" ></Setter>
+        </Style>
+        <!--Main grid defenitions-->
+        <ColumnDefinitionCollection
+        x:Key="MainGridColumns">
+            <ColumnDefinition
+            Width="*" />
+        </ColumnDefinitionCollection>
+        <RowDefinitionCollection
+        x:Key="MainGridRows">
+            <RowDefinition
+            Height="130" />
+            <RowDefinition
+            Height="*" />
+        </RowDefinitionCollection>
     </Application.Resources>
 </Application>
