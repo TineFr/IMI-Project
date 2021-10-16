@@ -16,5 +16,10 @@ namespace Imi.Project.Mobile
         {
             InitializeComponent();
         }
+
+        private void colvPairs_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

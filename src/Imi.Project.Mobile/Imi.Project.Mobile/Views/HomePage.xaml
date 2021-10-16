@@ -16,7 +16,7 @@
             </Grid.ColumnDefinitions>
 
 
-            <Frame BackgroundColor="White" Grid.Column="0" Grid.Row="0"  HeightRequest="20" >
+            <Frame BackgroundColor="white" Grid.Column="0" Grid.Row="0"  HeightRequest="20" >
                 <Label Grid.Column="0" Grid.Row="1" Text="Home" TextColor="black" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="End" FontSize="40"></Label>
             </Frame>
             <AbsoluteLayout Grid.Column="0" Grid.Row="0" Grid.RowSpan="3">
@@ -31,12 +31,13 @@
             </AbsoluteLayout>
             <ScrollView  Grid.Column="0" Grid.Row="1" Grid.RowSpan="3">
                 <StackLayout  Grid.Column="0" Grid.Row="1" Grid.RowSpan="2">
-                    <Image x:Name="HomeLogo" Source="logoblack.png" Grid.Column="0" Grid.Row="1" Margin="10" WidthRequest="20" HeightRequest="100"></Image>
+                    <Image x:Name="HomeLogo" Source="logoblack.png" Grid.Column="0" Grid.Row="1" Margin="10" WidthRequest="20" HeightRequest="105"></Image>
                     <FlexLayout Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" 
                                 Wrap="Wrap"
                                 WidthRequest="100"
                                 JustifyContent="Center"
-                                AlignItems="Center">
+                                AlignItems="Center"
+                                BackgroundColor="#F5F5F5">
                         
                         <Label Text="Did you know?"
                                FontSize="30"
