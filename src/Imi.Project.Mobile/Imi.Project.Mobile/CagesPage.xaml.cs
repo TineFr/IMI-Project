@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace Imi.Project.Mobile
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MainPage : TabbedPage
+    public partial class CagesPage : ContentPage
     {
-        public MainPage()
+        public CagesPage()
         {
             InitializeComponent();
         }
