@@ -5,7 +5,7 @@
     <ContentPage.Content>
         <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
               RowDefinitions="{StaticResource MainGridRows}">
-            <Frame Style="{StaticResource MainFrame}" BackgroundColor="#D4E7C0">
+            <Frame Style="{StaticResource MainFrame}" BackgroundColor="{StaticResource Green}">
                 <Label Text="My Birds" Style="{StaticResource MainLabel}"></Label>
             </Frame>
             <AbsoluteLayout Grid.Row="0" Grid.RowSpan="4">
