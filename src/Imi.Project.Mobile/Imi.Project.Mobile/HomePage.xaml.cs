@@ -16,5 +16,11 @@ namespace Imi.Project.Mobile
         {
             InitializeComponent();
         }
+
+        private void btnTest_Clicked(object sender, EventArgs e)
+        {
+
+
+        }
     }
 }

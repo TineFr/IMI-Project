@@ -15,6 +15,9 @@ namespace Imi.Project.Mobile
         public MainPage()
         {
             InitializeComponent();
+            CurrentPage = Children[2];
         }
+
+
     }
 }
