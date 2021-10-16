@@ -6,7 +6,7 @@
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="3*" />
+                <RowDefinition Height="100" />
                 <RowDefinition Height="4*" />
                 <RowDefinition Height="7*" />
                 <RowDefinition Height="2*" />
@@ -21,8 +21,8 @@
                 <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Text="Home" TextColor="black" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="End" FontSize="40"></Label>
             </Frame>
             <AbsoluteLayout Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="4">
-                <ImageButton Source="accountdark.png"  Aspect="AspectFill" Padding="30" BackgroundColor="Transparent" AbsoluteLayout.LayoutBounds="0.05, 0, 0.17, 0.17" AbsoluteLayout.LayoutFlags="All" ></ImageButton>
-                <ImageButton Source="settings.png" Aspect="AspectFill" Padding="30" BackgroundColor="Transparent" AbsoluteLayout.LayoutBounds="0.95, 0, 0.17, 0.17" AbsoluteLayout.LayoutFlags="All"></ImageButton>
+                <ImageButton Source="accountdark.png"  Aspect="AspectFill" Padding="30" BackgroundColor="Transparent" AbsoluteLayout.LayoutBounds="0.05, 0, 0.15, 0.15" AbsoluteLayout.LayoutFlags="All" ></ImageButton>
+                <ImageButton Source="settings.png" Aspect="AspectFill" Padding="30" BackgroundColor="Transparent" AbsoluteLayout.LayoutBounds="0.95, 0, 0.15, 0.15" AbsoluteLayout.LayoutFlags="All"></ImageButton>
             </AbsoluteLayout>
             <Image x:Name="HomeLogo" Source="logoblack.png" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="10" WidthRequest="20" HeightRequest="20"></Image>
             

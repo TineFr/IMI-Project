@@ -16,5 +16,14 @@ namespace Imi.Project.Mobile
         {
             InitializeComponent();
         }
+
+        private void colvCages_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //var bird = e.CurrentSelection as Bird
+            //if (bird == null) return;
+            //await Navigation.PushAsync(new BirdDetailPage(bird));
+            //((CollectionView)sender).SelectedItem = null;
+
+        }
     }
 }

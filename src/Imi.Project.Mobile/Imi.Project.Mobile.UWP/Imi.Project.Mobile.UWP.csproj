@@ -103,6 +103,14 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="accountdark.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="accountlight.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />
@@ -132,10 +140,20 @@
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <Content Include="birds.png" />
     <Content Include="cages.png" />
+    <AndroidResource Include="filter.png" />
     <Content Include="home.png" />
+    <AndroidResource Include="logoblack.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="logowhite.png" />
     <Content Include="nests.png" />
     <Content Include="pairs.png" />
     <Content Include="Properties\Default.rd.xml" />
+    <AndroidResource Include="settings.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

@@ -35,4 +35,10 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Domain\Services\Mocking\" />
+    <Folder Include="Domain\Services\Local\" />
+    <Folder Include="Domain\Services\Api\" />
+  </ItemGroup>
 </Project>
