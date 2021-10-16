@@ -5,8 +5,8 @@
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.ToolbarPlacement="Bottom"
             BackgroundColor="white">
-    
-  <!--Pages can be added as references or inline-->
+
+    <!--Pages can be added as references or inline-->
   <mobile:CagesPage Title="Cages" IconImageSource="cages.png"></mobile:CagesPage>
   <mobile:NestsPage Title="Nests" IconImageSource="nests.png"></mobile:NestsPage>
   <mobile:HomePage Title="Home" IconImageSource="home.png"></mobile:HomePage>
