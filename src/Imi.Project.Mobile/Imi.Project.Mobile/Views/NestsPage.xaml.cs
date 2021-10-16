@@ -16,5 +16,10 @@ namespace Imi.Project.Mobile
         {
             InitializeComponent();
         }
+
+        private void colvNests_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

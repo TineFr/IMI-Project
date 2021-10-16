@@ -3,28 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Imi.Project.Mobile.CagesPage">
     <ContentPage.Content>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="130" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
-
-            <Frame BackgroundColor="#DEC5E1"  Grid.Row="0" HeightRequest="20" >
-                <Label  Grid.Row="1"  Text="My Cages" TextColor="white" HorizontalOptions="Center" VerticalOptions="End" FontSize="40"></Label>
+        <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
+              RowDefinitions="{StaticResource MainGridRows}">
+            <Frame Style="{StaticResource MainFrame}" BackgroundColor="{StaticResource Purple}">
+                <Label Text="My Cages" Style="{StaticResource MainLabel}"></Label>
             </Frame>
-            <AbsoluteLayout   Grid.RowSpan="2">
-                <ImageButton Source="filter.png"  Aspect="AspectFill" Padding="30" BackgroundColor="Transparent" AbsoluteLayout.LayoutBounds="0.05, 10, 100, 100" AbsoluteLayout.LayoutFlags="XProportional" ></ImageButton>
-                <Image Source="logowhite.png"  BackgroundColor="Transparent" AbsoluteLayout.LayoutBounds="0.97, 10, 50, 50" AbsoluteLayout.LayoutFlags="XProportional" ></Image>
+            <AbsoluteLayout Grid.Row="0" Grid.RowSpan="4">
+                <ImageButton Style="{StaticResource Filter}"></ImageButton>
+                <Image Style="{StaticResource Logo}" ></Image>
             </AbsoluteLayout>
             <RefreshView>
-                <CollectionView  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                             x:Name="colvCages"
-                             SelectionMode="Single"
-                             SelectionChanged="colvCages_SelectionChanged">
+                <CollectionView  Grid.Row="1" 
+                                 x:Name="colvCages"
+                                 SelectionMode="Single"
+                                 SelectionChanged="colvCages_SelectionChanged">
                 </CollectionView>
 
             </RefreshView>

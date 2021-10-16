@@ -8,7 +8,7 @@
         <Color x:Key="Purple">#DEC5E1</Color>
         <Color x:Key="Blue">#B7D7F0</Color>
         <Color x:Key="Yellow">LightYellow</Color>
-        <Color x:Key="Pink">pink</Color>
+        <Color x:Key="Pink">#E7C0D2</Color>
 
         <!--filter style-->
         <Style x:Key="Filter" TargetType="ImageButton">
