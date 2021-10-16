@@ -18,8 +18,8 @@
                 <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Text="My Cages" TextColor="white" HorizontalOptions="Center" VerticalOptions="End" FontSize="40"></Label>
             </Frame>
             <AbsoluteLayout Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="4">
-                <ImageButton Source="filter.png"  Aspect="AspectFill" Padding="30" BackgroundColor="Transparent" AbsoluteLayout.LayoutBounds="0.05, 0, 0.13, 0.13" AbsoluteLayout.LayoutFlags="All" ></ImageButton>
-                <ImageButton Source="logowhite.png" Aspect="AspectFill" Padding="30" BackgroundColor="Transparent" AbsoluteLayout.LayoutBounds="0.95, 0, 0.13, 0.13" AbsoluteLayout.LayoutFlags="All"></ImageButton>
+                <ImageButton Source="filter.png"  Aspect="AspectFill" Padding="30" BackgroundColor="Transparent" AbsoluteLayout.LayoutBounds="0.05, 0, 0.15, 0.15" AbsoluteLayout.LayoutFlags="All" ></ImageButton>
+                <Image Source="logowhite.png"  BackgroundColor="Transparent" AbsoluteLayout.LayoutBounds="0.97, 0, 0.10, 0.10" AbsoluteLayout.LayoutFlags="All"></Image>
             </AbsoluteLayout>
             <RefreshView>
                 <CollectionView  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
