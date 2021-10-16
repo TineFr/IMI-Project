@@ -3,10 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Imi.Project.Mobile.BirdsPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="130" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+
+            <Frame BackgroundColor="#D4E7C0" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HeightRequest="20" >
+                <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Text="My Birds" TextColor="white" HorizontalOptions="Center" VerticalOptions="End" FontSize="40"></Label>
+            </Frame>
+            <AbsoluteLayout Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="4">
+                <ImageButton Source="filter.png"  Aspect="AspectFill" Padding="30" BackgroundColor="Transparent" AbsoluteLayout.LayoutBounds="0.05, 10, 100, 100" AbsoluteLayout.LayoutFlags="XProportional" ></ImageButton>
+                <Image Source="logowhite.png"  BackgroundColor="Transparent" AbsoluteLayout.LayoutBounds="0.97, 10, 50, 50" AbsoluteLayout.LayoutFlags="XProportional" ></Image>
+            </AbsoluteLayout>
+            <RefreshView>
+                <CollectionView  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                             x:Name="colvBirds"
+                             SelectionMode="Single"
+                             SelectionChanged="colvBirds_SelectionChanged">
+                </CollectionView>
+
+            </RefreshView>
+
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
