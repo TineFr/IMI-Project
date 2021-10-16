@@ -23,7 +23,8 @@ namespace Imi.Project.Api.Infrastructure.Seeding
                     Image = "images/bird/budgie1.jpg",
                     SpeciesId = Guid.Parse("DBCEBCEB-24EE-4477-8A09-7042512F1F6D"),
                     PairId = Guid.Parse("49F6A183-DF21-47A4-80BE-A3AC46714584"),
-                    FoodId = Guid.Parse("A1A2AF92-244D-4A49-BF3A-E220298F49B3")
+                    FoodId = Guid.Parse("A1A2AF92-244D-4A49-BF3A-E220298F49B3"),
+                    UserId = Guid.Parse("5E146A05-34EC-4FF0-8DDE-6DC6D62C3591")
                     },
 
                     new Bird
@@ -36,7 +37,8 @@ namespace Imi.Project.Api.Infrastructure.Seeding
                     Image = "images/bird/budgie2.jpg",
                     SpeciesId = Guid.Parse("DBCEBCEB-24EE-4477-8A09-7042512F1F6D"),
                     PairId = Guid.Parse("49F6A183-DF21-47A4-80BE-A3AC46714584"),
-                    FoodId = Guid.Parse("A1A2AF92-244D-4A49-BF3A-E220298F49B3")
+                    FoodId = Guid.Parse("A1A2AF92-244D-4A49-BF3A-E220298F49B3"),
+                    UserId = Guid.Parse("5E146A05-34EC-4FF0-8DDE-6DC6D62C3591")
                     },
 
                     new Bird
@@ -49,7 +51,8 @@ namespace Imi.Project.Api.Infrastructure.Seeding
                     Image = "images/bird/cockatiel1.jpg",
                     SpeciesId = Guid.Parse("5894D41B-E7C2-4125-8A66-92C802BF8ED2"),
                     PairId = Guid.Parse("87CA38AC-99B3-487A-85A4-68053940432A"),
-                    FoodId = Guid.Parse("A1A2AF92-244D-4A49-BF3A-E220298F49B3")
+                    FoodId = Guid.Parse("A1A2AF92-244D-4A49-BF3A-E220298F49B3"),
+                    UserId = Guid.Parse("334CD0DB-6111-4A42-9F4D-6AF33FE6283B")
                     },
 
                     new Bird
@@ -62,7 +65,8 @@ namespace Imi.Project.Api.Infrastructure.Seeding
                     Image = "images/bird/cockatiel2.jpg",
                     SpeciesId = Guid.Parse("5894D41B-E7C2-4125-8A66-92C802BF8ED2"),
                     PairId = Guid.Parse("87CA38AC-99B3-487A-85A4-68053940432A"),
-                    FoodId = Guid.Parse("A1A2AF92-244D-4A49-BF3A-E220298F49B3")
+                    FoodId = Guid.Parse("A1A2AF92-244D-4A49-BF3A-E220298F49B3"),
+                    UserId = Guid.Parse("334CD0DB-6111-4A42-9F4D-6AF33FE6283B")
                     }
                 });
 

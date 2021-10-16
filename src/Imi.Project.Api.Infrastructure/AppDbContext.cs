@@ -1,4 +1,5 @@
 ﻿using Imi.Project.Api.Core.Entities;
+using Imi.Project.Api.Infrastructure.Seeding;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,15 @@ namespace Imi.Project.Api.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            UserSeeding.Seeding(modelBuilder);
+            DailyTasksSeeding.Seeding(modelBuilder);
+            CageSeeding.Seeding(modelBuilder);
+            SpeciesSeeding.Seeding(modelBuilder);
+            FoodSeeding.Seeding(modelBuilder);
+            BirdSeeding.Seeding(modelBuilder);
+            PairSeeding.Seeding(modelBuilder);
+            NestSeeding.Seeding(modelBuilder);
+            //base.OnModelCreating(modelBuilder);
         }
 
 

@@ -20,7 +20,6 @@ namespace Imi.Project.Api.Infrastructure.Seeding
                         FirstName = "Tine",
                         Email = "tine.franchois@gmail.com",
                         Password = "15rtfpTN"
-
                     },
 
                     new User

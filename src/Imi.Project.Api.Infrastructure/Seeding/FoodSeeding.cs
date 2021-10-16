@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Imi.Project.Api.Infrastructure.Seeding
 {
-    public class FoodSeeder
+    public class FoodSeeding
     {
         public static void Seeding(ModelBuilder modelBuilder)
         {
