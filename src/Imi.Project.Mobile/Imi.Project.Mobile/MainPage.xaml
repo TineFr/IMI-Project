@@ -1,9 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Imi.Project.Mobile.MainPage">
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:mobile="clr-namespace:Imi.Project.Mobile"
+            x:Class="Imi.Project.Mobile.MainPage"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom"
+            BackgroundColor="white">
+    
   <!--Pages can be added as references or inline-->
-  <ContentPage Title="Tab 1" />
-  <ContentPage Title="Tab 2" />
-  <ContentPage Title="Tab 3" />
+  <mobile:CagesPage Title="Cages"></mobile:CagesPage>
+  <mobile:NestsPage Title="Nests"></mobile:NestsPage>
+  <mobile:HomePage Title="Home"></mobile:HomePage>
+  <mobile:BirdsPage Title="Birds"></mobile:BirdsPage>
+  <mobile:PairsPage Title="Pairs"></mobile:PairsPage>
+
 </TabbedPage>
