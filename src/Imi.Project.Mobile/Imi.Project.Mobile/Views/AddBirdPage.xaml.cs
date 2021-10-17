@@ -7,16 +7,14 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Imi.Project.Mobile
+namespace Imi.Project.Mobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MainPage : TabbedPage
+    public partial class AddBirdPage : ContentPage
     {
-        public MainPage()
+        public AddBirdPage()
         {
             InitializeComponent();
-            CurrentPage = Children[2];
-            NavigationPage.SetHasNavigationBar(this, false);
-        }   
         }
+    }
 }
