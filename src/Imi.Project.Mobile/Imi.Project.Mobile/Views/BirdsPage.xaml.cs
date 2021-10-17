@@ -1,6 +1,7 @@
 ﻿using Imi.Project.Mobile.Domain.Models;
 using Imi.Project.Mobile.Domain.Services.Mocking;
 using Imi.Project.Mobile.Domain.Services.Mocking.Repositories;
+using Imi.Project.Mobile.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,7 +19,6 @@ namespace Imi.Project.Mobile
       
     {
         IBirdService birdservice;
-        public ObservableCollection<Bird> birds { get { return birds; } }
         public BirdsPage()
         {
             InitializeComponent();
@@ -30,6 +30,7 @@ namespace Imi.Project.Mobile
             base.OnAppearing();
             var birds = await birdservice.GetAllBirds();
             colvBirds.ItemsSource = birds;
+           
         }
 
 
@@ -40,9 +41,9 @@ namespace Imi.Project.Mobile
             //await Navigation.PushAsync(new BirdDetailsPage(bird))
         }
 
-        private void btnAddBird_Clicked(object sender, EventArgs e)
+        private async void btnAddBird_Clicked(object sender, EventArgs e)
         {
-
+            await Navigation.PushAsync(new AddBirdPage());
         }
     }
 }
