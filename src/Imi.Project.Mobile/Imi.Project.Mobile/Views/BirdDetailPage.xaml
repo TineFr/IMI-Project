@@ -17,13 +17,14 @@
                 <Frame>
                     <StackLayout>
                         <Label Text="Species:"></Label>
-                        <Label HeightRequest="200" HorizontalOptions="Center" Text="{Binding Bird.Species}" FontSize="30"></Label>
+                        <Label HeightRequest="200" HorizontalOptions="Center" Text="{Binding Bird.Species}" FontSize="20"></Label>
+                        <Label HeightRequest="200" HorizontalOptions="Center" Text="{Binding Bird.ScientificName}" FontSize="10" FontAttributes="Italic"></Label>
                     </StackLayout>
                 </Frame>
                 <Frame>
                     <StackLayout>
                         <Label Text="Location:"></Label>
-                        <Label HeightRequest="200" HorizontalOptions="Center" Text="{Binding Bird.Cage}" FontSize="30"></Label>
+                        <Label HeightRequest="200" HorizontalOptions="Center" Text="{Binding Bird.Cage}" FontSize="20"></Label>
                     </StackLayout>
                 </Frame>
             </StackLayout>
