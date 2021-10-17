@@ -6,7 +6,7 @@
         <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
               RowDefinitions="{StaticResource MainGridRows}">
             <Frame Style="{StaticResource MainFrame}" BackgroundColor="{StaticResource Blue}">
-                <Label Text="New Bird" Style="{StaticResource MainLabel}"></Label>
+                <Label Text="Add Bird" Style="{StaticResource MainLabel}"></Label>
                 
             </Frame>
             <AbsoluteLayout Grid.Row="0" Grid.RowSpan="4">
