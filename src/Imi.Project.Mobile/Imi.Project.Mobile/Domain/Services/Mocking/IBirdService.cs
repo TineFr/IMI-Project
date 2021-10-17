@@ -8,7 +8,7 @@ namespace Imi.Project.Mobile.Domain.Services.Mocking
 {
     public interface IBirdService
     {
-        Task<IEnumerable<Bird>> GetAllBirds();
+        Task<List<Bird>> GetAllBirds();
         Task<Bird> GetBirdById(Guid id);
         Task<Bird> AddBird(Bird bird);
         Task<Bird> UpdateBird(Bird bird);

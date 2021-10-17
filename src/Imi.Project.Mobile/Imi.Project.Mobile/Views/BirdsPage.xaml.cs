@@ -19,7 +19,6 @@ namespace Imi.Project.Mobile
       
     {
         IBirdService birdservice;
-        public ObservableCollection<Bird> birds { get { return birds; } }
         public BirdsPage()
         {
             InitializeComponent();
@@ -31,6 +30,7 @@ namespace Imi.Project.Mobile
             base.OnAppearing();
             var birds = await birdservice.GetAllBirds();
             colvBirds.ItemsSource = birds;
+           
         }
 
 

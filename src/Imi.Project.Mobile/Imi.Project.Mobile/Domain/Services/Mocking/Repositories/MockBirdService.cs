@@ -9,7 +9,7 @@ namespace Imi.Project.Mobile.Domain.Services.Mocking.Repositories
 {
     public class MockBirdService : IBirdService
     {
-        private static IEnumerable<Bird> birdrepository = new List<Bird>
+        private static List<Bird> birdrepository = new List<Bird>
         {
                     new Bird
                     {
@@ -61,12 +61,25 @@ namespace Imi.Project.Mobile.Domain.Services.Mocking.Repositories
                     Species = "Cockatiel",
                     ScientificName = "Nymphicus hollandicuss",
                     Food = "Parakeet mix"
+                    },
+
+                    new Bird
+                    {
+                    Id = Guid.Parse("8E74A018-6D85-4E2A-BB85-F8DA2D58F3BF"),
+                    Name = "July",
+                    Cage = "Outside cage 2",
+                    Gender = "Female",
+                    HatchDate = new DateTime(2017, 07, 13),
+                    Image = "cockatiel3.jpg",
+                    Species = "Cockatiel",
+                    ScientificName = "Nymphicus hollandicuss",
+                    Food = "Parakeet mix"
                     }
 
         };
         public Task<Bird> AddBird(Bird bird)
         {
-            birdrepository.ToList().Add(bird);
+            birdrepository.Add(bird);
             return Task.FromResult(bird);
         }
 
@@ -77,7 +90,7 @@ namespace Imi.Project.Mobile.Domain.Services.Mocking.Repositories
             return Task.FromResult(bird);
         }
 
-        public Task<IEnumerable<Bird>> GetAllBirds()
+        public Task<List<Bird>> GetAllBirds()
         {
             return Task.FromResult(birdrepository);
         }
