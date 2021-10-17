@@ -12,43 +12,35 @@
                 <ImageButton Style="{StaticResource Filter}"></ImageButton>
                 <Image Style="{StaticResource Logo}" ></Image>
             </AbsoluteLayout>
-            <Grid Grid.Row="1">
-                <Frame HorizontalOptions="Center" Margin="5"  WidthRequest="300" BackgroundColor="#EEEEEE"
-                                           CornerRadius="20" HeightRequest="100">
-                    <StackLayout HorizontalOptions="Center">
-                        <Button Text="Add new"></Button>
+            <StackLayout Grid.Row="1">
+                <Button Text="Add new" HorizontalOptions="EndAndExpand" WidthRequest="100" Margin="10"></Button>
+                <FlexLayout Direction="Column" JustifyContent="Center"  >
 
-                    </StackLayout>
-                </Frame>
-            </Grid>
-
-            <FlexLayout Direction="Column" JustifyContent="Center"  Grid.Row="2" Grid.RowSpan="3">
-                    <CollectionView  
-                                 Grid.Row="2" Grid.RowSpan="3"
+                <CollectionView  
+                                 Grid.RowSpan="3"
                                  x:Name="colvBirds"
                                  SelectionMode="Single"
                                  SelectionChanged="colvBirds_SelectionChanged">
                     <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="models:Bird" >
-                                <Grid>
-                                    <Frame Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="Center" Margin="5"  WidthRequest="300" BackgroundColor="#EEEEEE"
+                        <DataTemplate x:DataType="models:Bird" >
+                            <StackLayout>
+                                <Frame Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="Center" Margin="5"  WidthRequest="300" BackgroundColor="#EEEEEE"
                                            CornerRadius="20">
-                                        <FlexLayout JustifyContent="SpaceBetween">
-                                            <Image Grid.Column="0" Source="{Binding Image}" HeightRequest="60"></Image>
-                                            <StackLayout HorizontalOptions="Center">
-                                                <Label  Text="{Binding Name}" FontSize="20" />
-                                                <Label  Text="{Binding ScientificName}" FontAttributes="italic" />
-                                            </StackLayout>
+                                    <FlexLayout JustifyContent="SpaceBetween">
+                                        <Image Grid.Column="0" Source="{Binding Image}" HeightRequest="60"></Image>
+                                        <StackLayout HorizontalOptions="Center">
+                                            <Label  Text="{Binding Name}" FontSize="20" />
+                                            <Label  Text="{Binding ScientificName}" FontAttributes="italic" />
+                                        </StackLayout>
                                         <Image Grid.Column="0" Source="{Binding GenderImage}" HeightRequest="40"></Image>
                                     </FlexLayout>
-                                    </Frame>
-                                </Grid>
-                            </DataTemplate>
+                                </Frame>
+                            </StackLayout>
+                        </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-                </FlexLayout>
-
-
+            </FlexLayout>
+           </StackLayout>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
