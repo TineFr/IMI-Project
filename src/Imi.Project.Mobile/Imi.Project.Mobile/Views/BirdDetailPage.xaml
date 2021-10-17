@@ -6,10 +6,15 @@
         <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
               RowDefinitions="{StaticResource MainGridRows}">
             <Frame Style="{StaticResource MainFrame}" BackgroundColor="{StaticResource Green}">
-                <Label Text="{Binding Bird.Name}" Style="{StaticResource MainLabel}"></Label>
+                <StackLayout VerticalOptions="End">
+                    <FlexLayout JustifyContent="Center">
+                    <Label Text="{Binding Bird.Name}" Style="{StaticResource MainLabel}"></Label>
+                    <Image Source="{Binding Bird.GenderImage}" HeightRequest="20"></Image>
+                </FlexLayout>
+                </StackLayout>
             </Frame>
             <AbsoluteLayout Grid.Row="0" Grid.RowSpan="4">
-                <Image Source="{Binding Bird.GenderImage}" AbsoluteLayout.LayoutBounds="0.15, 15, 40, 100" AbsoluteLayout.LayoutFlags="XProportional"></Image>
+                <ImageButton x:Name="btnBack" Style="{StaticResource BackArrow}" Clicked="btnBack_Clicked"></ImageButton>
                 <Image Style="{StaticResource Logo}" ></Image>
             </AbsoluteLayout>
             <ScrollView Grid.Row="1" Grid.RowSpan="3">

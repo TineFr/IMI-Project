@@ -17,8 +17,14 @@ namespace Imi.Project.Mobile.Views
         public BirdDetailPage(Bird bird)
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
             BindingContext = new BirdDetailViewModel(bird);
             
+        }
+
+        private async void btnBack_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
         }
     }
 }
