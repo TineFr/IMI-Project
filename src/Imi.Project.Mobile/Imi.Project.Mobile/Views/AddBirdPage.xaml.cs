@@ -17,5 +17,10 @@ namespace Imi.Project.Mobile.Views
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
         }
+
+        private async void btnBack_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
+        }
     }
 }
