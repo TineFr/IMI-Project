@@ -48,6 +48,8 @@
             <RowDefinition
             Height="130" />
             <RowDefinition
+            Height="80" />
+            <RowDefinition
             Height="*" />
         </RowDefinitionCollection>
     </Application.Resources>

@@ -13,11 +13,11 @@
                 <Image Style="{StaticResource Logo}" ></Image>
             </AbsoluteLayout>
             <StackLayout Grid.Row="1">
-                <Button Text="Add new" HorizontalOptions="EndAndExpand" WidthRequest="100" Margin="10"></Button>
-                <FlexLayout Direction="Column" JustifyContent="Center"  >
+                <Button  Text="Add new" HorizontalOptions="EndAndExpand" WidthRequest="100" Margin="10"></Button>
+            </StackLayout>
 
+            <FlexLayout Grid.Row="2" Grid.RowSpan="3" Direction="Column" JustifyContent="Center"  >
                 <CollectionView  
-                                 Grid.RowSpan="3"
                                  x:Name="colvBirds"
                                  SelectionMode="Single"
                                  SelectionChanged="colvBirds_SelectionChanged">
@@ -40,7 +40,6 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </FlexLayout>
-           </StackLayout>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
