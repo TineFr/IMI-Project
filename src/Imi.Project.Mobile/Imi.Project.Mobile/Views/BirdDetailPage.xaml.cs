@@ -1,4 +1,5 @@
 ﻿using Imi.Project.Mobile.Domain.Models;
+using Imi.Project.Mobile.Domain.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace Imi.Project.Mobile.Views
         public BirdDetailPage(Bird bird)
         {
             InitializeComponent();
+            BindingContext = new BirdDetailViewModel(bird);
         }
     }
 }

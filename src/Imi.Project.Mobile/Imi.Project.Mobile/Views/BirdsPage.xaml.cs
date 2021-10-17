@@ -29,16 +29,19 @@ namespace Imi.Project.Mobile
         {
             base.OnAppearing();
             var birds = await birdservice.GetAllBirds();
-            colvBirds.ItemsSource = birds;
+            ObservableCollection<Bird> birdscollection = new ObservableCollection<Bird>();
+            birds.ForEach(b => birdscollection.Add(b));
+            colvBirds.ItemsSource = birdscollection;
            
         }
 
 
-        private void colvBirds_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void colvBirds_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var bird = e.CurrentSelection as Bird;
+            var selection = (CollectionView)sender;
+            var bird = selection.SelectedItem as Bird;
             if (bird == null) return;
-            //await Navigation.PushAsync(new BirdDetailsPage(bird))
+            await Navigation.PushAsync(new BirdDetailPage(bird));
         }
 
         private async void btnAddBird_Clicked(object sender, EventArgs e)

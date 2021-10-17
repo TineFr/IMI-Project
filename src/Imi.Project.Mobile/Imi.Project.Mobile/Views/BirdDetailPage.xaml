@@ -3,10 +3,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Imi.Project.Mobile.Views.BirdDetailPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
+              RowDefinitions="{StaticResource MainGridRows}">
+            <Frame Style="{StaticResource MainFrame}" BackgroundColor="{StaticResource Green}">
+                <Label Text="{Binding Bird.Name}" Style="{StaticResource MainLabel}"></Label>
+            </Frame>
+            <AbsoluteLayout Grid.Row="0" Grid.RowSpan="4">
+                <Image Source="{Binding Bird.GenderImage}" AbsoluteLayout.LayoutBounds="0.15, 15, 40, 100" AbsoluteLayout.LayoutFlags="XProportional"></Image>
+                <Image Style="{StaticResource Logo}" ></Image>
+            </AbsoluteLayout>
+            <StackLayout Grid.Row="1">
+                <Image Source="{Binding Bird.Image}"></Image>
+                <Frame>
+                    <StackLayout>
+                        <Label Text="Species:"></Label>
+                        <Label HeightRequest="200" HorizontalOptions="Center" Text="{Binding Bird.Species}" FontSize="30"></Label>
+                    </StackLayout>
+                </Frame>
+                <Frame>
+                    <StackLayout>
+                        <Label Text="Location:"></Label>
+                        <Label HeightRequest="200" HorizontalOptions="Center" Text="{Binding Bird.Cage}" FontSize="30"></Label>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
