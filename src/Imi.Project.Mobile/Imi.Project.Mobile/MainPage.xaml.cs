@@ -16,8 +16,7 @@ namespace Imi.Project.Mobile
         {
             InitializeComponent();
             CurrentPage = Children[2];
+            NavigationPage.SetHasNavigationBar(this, false);
+        }   
         }
-
-
-    }
 }
