@@ -39,5 +39,10 @@ namespace Imi.Project.Mobile
             if (bird == null) return;
             //await Navigation.PushAsync(new BirdDetailsPage(bird))
         }
+
+        private void btnAddBird_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -13,7 +13,7 @@
                 <Image Style="{StaticResource Logo}" ></Image>
             </AbsoluteLayout>
             <StackLayout Grid.Row="1">
-                <Button  Text="Add new" HorizontalOptions="EndAndExpand" WidthRequest="100" Margin="10"></Button>
+                <Button  x:Name="btnAddBird" Text="Add new" HorizontalOptions="EndAndExpand" WidthRequest="100" Margin="10" Clicked="btnAddBird_Clicked"></Button>
             </StackLayout>
 
             <FlexLayout Grid.Row="2" Grid.RowSpan="3" Direction="Column" JustifyContent="Center"  >
