@@ -21,9 +21,10 @@
                     </StackLayout>
                 </Frame>
             </Grid>
-            <RefreshView Grid.Row="2" Grid.RowSpan="3">
-                <FlexLayout Direction="Column" JustifyContent="Center" Grid.Row="1">
+
+            <FlexLayout Direction="Column" JustifyContent="Center"  Grid.Row="2" Grid.RowSpan="3">
                     <CollectionView  
+                                 Grid.Row="2" Grid.RowSpan="3"
                                  x:Name="colvBirds"
                                  SelectionMode="Single"
                                  SelectionChanged="colvBirds_SelectionChanged">
@@ -38,14 +39,15 @@
                                                 <Label  Text="{Binding Name}" FontSize="20" />
                                                 <Label  Text="{Binding ScientificName}" FontAttributes="italic" />
                                             </StackLayout>
-                                        </FlexLayout>
+                                        <Image Grid.Column="0" Source="{Binding GenderImage}" HeightRequest="40"></Image>
+                                    </FlexLayout>
                                     </Frame>
                                 </Grid>
                             </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
                 </FlexLayout>
-            </RefreshView>
+
 
         </Grid>
     </ContentPage.Content>

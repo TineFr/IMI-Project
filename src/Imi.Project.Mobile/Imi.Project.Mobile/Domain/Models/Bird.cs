@@ -13,6 +13,7 @@ namespace Imi.Project.Mobile.Domain.Models
         public string Food { get; set; }
         public string Cage { get; set; }
         public string Image { get; set; }
+        public string GenderImage => $"{Gender}.png";
 
     }
 }
