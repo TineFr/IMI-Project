@@ -10,6 +10,17 @@
         <Color x:Key="Yellow">LightYellow</Color>
         <Color x:Key="Pink">#E7C0D2</Color>
 
+
+        <!-- back arrow style-->
+        <Style x:Key="BackArrow" TargetType="ImageButton">
+            <Setter Property="Source" Value="leftarrow.png" ></Setter>
+            <Setter Property="Aspect" Value="AspectFill" ></Setter>
+            <Setter Property="Padding" Value="30" ></Setter>
+            <Setter Property="BackgroundColor" Value="Transparent" ></Setter>
+            <Setter Property="AbsoluteLayout.LayoutBounds" Value="0.02, 10, 100, 100" ></Setter>
+            <Setter Property="AbsoluteLayout.LayoutFlags" Value="XProportional" ></Setter>
+        </Style>
+
         <!--filter style-->
         <Style x:Key="Filter" TargetType="ImageButton">
             <Setter Property="Source" Value="filter.png" ></Setter>
