@@ -15,6 +15,7 @@ namespace Imi.Project.Mobile.Views
         public AddBirdPage()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
         }
     }
 }
