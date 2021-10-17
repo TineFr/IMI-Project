@@ -29,9 +29,7 @@ namespace Imi.Project.Mobile
         {
             base.OnAppearing();
             var birds = await birdservice.GetAllBirds();
-            ObservableCollection<Bird> birdscollection = new ObservableCollection<Bird>();
-            birds.ForEach(b => birdscollection.Add(b));
-            colvBirds.ItemsSource = birdscollection;
+            colvBirds.ItemsSource = birds;
            
         }
 

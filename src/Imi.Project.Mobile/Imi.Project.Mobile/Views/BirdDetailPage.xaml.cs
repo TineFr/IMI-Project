@@ -18,6 +18,7 @@ namespace Imi.Project.Mobile.Views
         {
             InitializeComponent();
             BindingContext = new BirdDetailViewModel(bird);
+            
         }
     }
 }
