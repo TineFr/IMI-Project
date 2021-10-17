@@ -28,7 +28,20 @@
                         <Label HeightRequest="200" HorizontalOptions="Center" Text="{Binding Bird.Cage}" FontSize="20"></Label>
                     </StackLayout>
                 </Frame>
-            </StackLayout>
+                    <Frame WidthRequest="300"  HeightRequest="80" HorizontalOptions="Center">
+                        <StackLayout>
+                            <Label Text="Date of hatching:"></Label>
+                            <Label HeightRequest="200" HorizontalOptions="Center" Text="{Binding Bird.Date}" FontSize="20"></Label>
+                        </StackLayout>
+                    </Frame>
+                    <Frame WidthRequest="300"  HeightRequest="80" HorizontalOptions="Center">
+                        <StackLayout>
+                            <Label Text="Food:"></Label>
+                            <Label HeightRequest="200" HorizontalOptions="Center" Text="{Binding Bird.Food}" FontSize="20"></Label>
+                        </StackLayout>
+                    </Frame>
+
+                </StackLayout>
             </ScrollView>
         </Grid>
     </ContentPage.Content>

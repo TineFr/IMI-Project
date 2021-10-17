@@ -24,7 +24,7 @@
                                  SelectionChanged="colvBirds_SelectionChanged">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:Bird" >
-                            <StackLayout>
+                            <StackLayout Style="{StaticResource CollectionSelection}">
                                 <Frame Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="Center" Margin="5"  WidthRequest="300" BackgroundColor="#EEEEEE"
                                            CornerRadius="20">
                                     <FlexLayout JustifyContent="SpaceBetween">
