@@ -26,5 +26,10 @@ namespace Imi.Project.Mobile.Views
         {
             await Navigation.PopAsync();
         }
+
+        private void btnEditBird_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }
