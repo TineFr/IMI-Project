@@ -138,10 +138,13 @@
     <Content Include="cages.png" />
     <Content Include="cockatiel1.jpg" />
     <Content Include="cockatiel3.jpg" />
+    <Content Include="female.png" />
     <Content Include="filter.png" />
     <Content Include="home.png" />
+    <Content Include="leftarrow.png" />
     <Content Include="logoblack.png" />
     <Content Include="logowhite.png" />
+    <Content Include="male.png" />
     <Content Include="nests.png" />
     <Content Include="pairs.png" />
     <Content Include="Properties\Default.rd.xml" />
