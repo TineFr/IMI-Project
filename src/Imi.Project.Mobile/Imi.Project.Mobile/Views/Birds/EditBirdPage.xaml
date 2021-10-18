@@ -52,14 +52,15 @@
                     </Frame>
                     <Frame Style="{StaticResource EditFrame}">
                         <StackLayout>
-                            <Label Text="Add image"  FontAttributes="Bold"></Label>
+                            <Label Text="Change image"  FontAttributes="Bold"></Label>
+                            <Image  Source="{Binding Bird.Image}" HeightRequest="30"></Image> 
                             <Button Text="From Camera"></Button>
                             <Button Text="From Gallery"></Button>
                         </StackLayout>
                     </Frame>
                     <FlexLayout JustifyContent="SpaceBetween">
-                        <Button x:Name="btnRemove" Text="Remove" Clicked="btnSave_Clicked" Margin="20"></Button>
-                        <Button x:Name="btnSave" Text="Save"  Clicked="btnSave_Clicked" Margin="20"></Button>
+                        <Button x:Name="btnRemove" Text="Delete" Clicked="btnSave_Clicked" Margin="25" BackgroundColor="IndianRed"></Button>
+                        <Button x:Name="btnSave" Text="Save"  Clicked="btnSave_Clicked" Margin="25" BackgroundColor="{StaticResource Green}"></Button>
                     </FlexLayout>
                 </StackLayout>
             </ScrollView>
