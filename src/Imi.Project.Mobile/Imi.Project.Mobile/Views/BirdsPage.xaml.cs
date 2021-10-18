@@ -34,11 +34,12 @@ namespace Imi.Project.Mobile
         }
 
 
-        private void colvBirds_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void colvBirds_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var bird = e.CurrentSelection as Bird;
+            var selection = (CollectionView)sender;
+            var bird = selection.SelectedItem as Bird;
             if (bird == null) return;
-            //await Navigation.PushAsync(new BirdDetailsPage(bird))
+            await Navigation.PushAsync(new BirdDetailPage(bird));
         }
 
         private async void btnAddBird_Clicked(object sender, EventArgs e)

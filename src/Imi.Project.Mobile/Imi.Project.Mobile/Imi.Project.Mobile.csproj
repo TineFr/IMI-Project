@@ -19,6 +19,9 @@
     <EmbeddedResource Update="Views\AddBirdPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\BirdDetailPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\BirdsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -40,7 +43,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\ViewModels\" />
     <Folder Include="Domain\Services\Api\" />
     <Folder Include="Domain\Services\Local\" />
   </ItemGroup>

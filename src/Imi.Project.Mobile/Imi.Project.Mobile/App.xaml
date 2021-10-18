@@ -4,6 +4,23 @@
              x:Class="Imi.Project.Mobile.App">
     <Application.Resources>
         
+        
+        <!--selection color-->
+
+        <Style x:Key="CollectionSelection" TargetType="StackLayout">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                        Value="Transparent" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
         <!--edit frame-->
         <Style x:Key="EditFrame" TargetType="Frame">
             <Setter Property="WidthRequest" Value="300" ></Setter>
