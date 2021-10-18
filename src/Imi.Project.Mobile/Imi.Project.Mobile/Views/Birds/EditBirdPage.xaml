@@ -3,10 +3,66 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Imi.Project.Mobile.Views.Birds.EditBirdPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
+              RowDefinitions="{StaticResource MainGridRows}">
+            <Frame Style="{StaticResource MainFrame}" BackgroundColor="{StaticResource Blue}">
+                <Label Text="Edit Bird" Style="{StaticResource MainLabel}"></Label>
+
+            </Frame>
+            <AbsoluteLayout Grid.Row="0" Grid.RowSpan="4">
+                <ImageButton x:Name="btnBack" Style="{StaticResource BackArrow}" Clicked="btnBack_Clicked"></ImageButton>
+                <Image Style="{StaticResource Logo}" ></Image>
+            </AbsoluteLayout>
+
+            <ScrollView Grid.Row="1" Grid.RowSpan="3" >
+                <StackLayout Grid.Row="1" Grid.RowSpan="2" >
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
+                            <Label Text="Name" FontAttributes="Bold"></Label>
+                            <Entry x:Name="entrName" Text="{Binding Bird.Name}"></Entry>
+                        </StackLayout>
+                    </Frame>
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
+                            <Label Text="Species"  FontAttributes="Bold"></Label>
+                            <Entry x:Name="entrSpecies" Text="{Binding Bird.Species}"></Entry>
+                            <!--<Picker  x:Name="pkrSpecies" Title="Select species"></Picker>-->
+                        </StackLayout>
+                    </Frame>
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
+                            <Label Text="Cage"  FontAttributes="Bold"></Label>
+                            <Entry x:Name="entrCage" Text="{Binding Bird.Cage}"></Entry>
+                            <!--<Picker  x:Name="pkrCage" Title="Select cage"></Picker>-->
+                            <!--<Picker  x:Name="pkrCage" Title="Select cage"></Picker>-->
+                        </StackLayout>
+                    </Frame>
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
+                            <Label Text="Gender"  FontAttributes="Bold"></Label>
+                            <Entry x:Name="entrGender" Text="{Binding Bird.Gender}"></Entry>
+                            <!--<Picker  x:Name="pkrGender" Title="Select gender"></Picker>-->
+                        </StackLayout>
+                    </Frame>
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
+                            <Label Text="Select date of hatching"  FontAttributes="Bold"></Label>
+                            <DatePicker x:Name="dpkHatchDate"></DatePicker>
+                        </StackLayout>
+                    </Frame>
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
+                            <Label Text="Add image"  FontAttributes="Bold"></Label>
+                            <Button Text="From Camera"></Button>
+                            <Button Text="From Gallery"></Button>
+                        </StackLayout>
+                    </Frame>
+                    <FlexLayout JustifyContent="SpaceBetween">
+                        <Button x:Name="btnRemove" Text="Remove" Clicked="btnSave_Clicked" Margin="20"></Button>
+                        <Button x:Name="btnSave" Text="Save"  Clicked="btnSave_Clicked" Margin="20"></Button>
+                    </FlexLayout>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

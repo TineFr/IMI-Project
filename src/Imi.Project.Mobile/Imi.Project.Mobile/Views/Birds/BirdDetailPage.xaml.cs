@@ -1,5 +1,6 @@
 ﻿using Imi.Project.Mobile.Domain.Models;
 using Imi.Project.Mobile.Domain.ViewModels;
+using Imi.Project.Mobile.Views.Birds;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,12 +15,13 @@ namespace Imi.Project.Mobile.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BirdDetailPage : ContentPage
     {
+        private static Bird birddetail;
         public BirdDetailPage(Bird bird)
         {
             InitializeComponent();
+            birddetail = bird;
             NavigationPage.SetHasNavigationBar(this, false);
-            BindingContext = new BirdDetailViewModel(bird);
-            
+            BindingContext = new BirdDetailViewModel(birddetail);
         }
 
         private async void btnBack_Clicked(object sender, EventArgs e)
@@ -27,9 +29,9 @@ namespace Imi.Project.Mobile.Views
             await Navigation.PopAsync();
         }
 
-        private void btnEditBird_Clicked(object sender, EventArgs e)
+        private async void btnEditBird_Clicked(object sender, EventArgs e)
         {
-
+            await Navigation.PushAsync(new EditBirdPage(birddetail));
         }
     }
 }
