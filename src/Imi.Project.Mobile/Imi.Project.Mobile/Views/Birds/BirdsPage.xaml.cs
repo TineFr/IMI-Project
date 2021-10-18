@@ -29,8 +29,7 @@ namespace Imi.Project.Mobile
         {
             base.OnAppearing();
             var birds = await birdservice.GetAllBirds();
-            colvBirds.ItemsSource = birds;
-           
+            colvBirds.ItemsSource = birds;         
         }
 
 

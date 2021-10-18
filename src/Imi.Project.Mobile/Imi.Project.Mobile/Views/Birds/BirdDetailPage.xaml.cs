@@ -21,6 +21,10 @@ namespace Imi.Project.Mobile.Views
             InitializeComponent();
             birddetail = bird;
             NavigationPage.SetHasNavigationBar(this, false);
+        }
+
+        protected override void OnAppearing()
+        {
             BindingContext = new BirdDetailViewModel(birddetail);
         }
 

@@ -59,7 +59,7 @@
                         </StackLayout>
                     </Frame>
                     <FlexLayout JustifyContent="SpaceBetween">
-                        <Button x:Name="btnRemove" Text="Delete" Clicked="btnSave_Clicked" Margin="25" BackgroundColor="IndianRed"></Button>
+                        <Button x:Name="btnRemove" Text="Delete" Margin="25" BackgroundColor="IndianRed" Clicked="btnRemove_Clicked"></Button>
                         <Button x:Name="btnSave" Text="Save"  Clicked="btnSave_Clicked" Margin="25" BackgroundColor="{StaticResource Green}"></Button>
                     </FlexLayout>
                 </StackLayout>
