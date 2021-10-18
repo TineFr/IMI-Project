@@ -34,9 +34,9 @@ namespace Imi.Project.Mobile.Views
             {
                 Id = new Guid(),
                 Name = entrName.Text,
-                ScientificName = entrCage.Text,
-                Gender = entrGender.Text,
-                Species = entrSpecies.Text,
+                //ScientificName = (Species)pkrCage.SelectedItem,
+                //Gender = entrGender.Text,
+                //Species = entrSpecies.Text,
                 Image = "budgie1.jpg"
             };
             await birdservice.AddBird(newBird);
