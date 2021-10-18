@@ -25,20 +25,20 @@
                 <Frame Style="{StaticResource EditFrame}">
                     <StackLayout>
                             <Label Text="Species"  FontAttributes="Bold"></Label>
-                    <Entry x:Name="entrSpecies" Placeholder="Select species" ></Entry>
-                    </StackLayout>
+                            <Picker  x:Name="pkrSpecies" Title="Select species"></Picker>
+                        </StackLayout>
                 </Frame>
                 <Frame Style="{StaticResource EditFrame}">
                     <StackLayout>
                             <Label Text="Cage"  FontAttributes="Bold"></Label>
-                        <Entry x:Name="entrCage" Placeholder="Select cage"></Entry>
-                    </StackLayout>
+                            <Picker  x:Name="pkrCage" Title="Select cage"></Picker>
+                        </StackLayout>
                 </Frame>
                 <Frame Style="{StaticResource EditFrame}">
                     <StackLayout>
                             <Label Text="Gender"  FontAttributes="Bold"></Label>
-                        <Entry x:Name="entrGender" Placeholder="Select gender"></Entry>
-                    </StackLayout>
+                            <Picker  x:Name="pkrGender" Title="Select gender"> </Picker>
+                        </StackLayout>
                 </Frame>
                 <Frame Style="{StaticResource EditFrame}">
                     <StackLayout>
@@ -46,7 +46,14 @@
                         <DatePicker></DatePicker>
                     </StackLayout>
                 </Frame>
-                <Button x:Name="btnSave" Text="Save" HorizontalOptions="End" Clicked="btnSave_Clicked"></Button>
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
+                            <Label Text="Add image"  FontAttributes="Bold"></Label>
+                            <Button Text="From Camera"></Button>
+                            <Button Text="From Gallery"></Button>
+                        </StackLayout>
+                    </Frame>
+                    <Button x:Name="btnSave" Text="Save" HorizontalOptions="End" Clicked="btnSave_Clicked" Margin="20"></Button>
             </StackLayout>
             </ScrollView>
         </Grid>
