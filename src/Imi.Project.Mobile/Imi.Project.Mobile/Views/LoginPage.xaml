@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Imi.Project.Mobile.Views.LoginPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Image Source="logotest.png" HorizontalOptions="Center" HeightRequest="150" Margin="0,40,0,0"></Image>
+            <Label HorizontalOptions="Center" WidthRequest="300"  Text="LOG IN" FontSize="30" Margin ="0, 30, 0, 0"  FontAttributes="Bold" TextColor="Black"></Label>
+            <Frame Padding="0" Margin="10" HorizontalOptions="Center" WidthRequest="300">
+                <Entry Placeholder="Email" ></Entry>
+            </Frame>
+            <Frame Padding="0" Margin="10"  HorizontalOptions="Center" WidthRequest="300">
+                <Entry Placeholder="Password" IsPassword="True" ></Entry>
+            </Frame>
+            <Button HorizontalOptions="Center" WidthRequest="300" TextColor="White" Text="Sign in" Clicked="Button_Clicked" BackgroundColor="{StaticResource Purple}"></Button>
+            <FlexLayout HorizontalOptions="Center" Padding="0" WidthRequest="320" Margin="0" JustifyContent="SpaceBetween">
+                <Button BackgroundColor="Transparent" Text="Forgot Password?" TextColor="{StaticResource Purple}"></Button>
+                <Button BackgroundColor="Transparent" Text="Sign up" TextColor="Black"></Button>
+            </FlexLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
