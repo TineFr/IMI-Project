@@ -16,16 +16,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Views\AddBirdPage.xaml">
+    <EmbeddedResource Update="Views\Birds\AddBirdPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\BirdDetailPage.xaml">
+    <EmbeddedResource Update="Views\Birds\BirdDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\BirdsPage.xaml">
+    <EmbeddedResource Update="Views\Birds\BirdsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\CagesPage.xaml">
+    <EmbeddedResource Update="Views\Birds\EditBirdPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Cages\CagesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\HomePage.xaml">
@@ -34,10 +37,10 @@
     <EmbeddedResource Update="MainPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\NestsPage.xaml">
+    <EmbeddedResource Update="Views\Nests\NestsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\PairsPage.xaml">
+    <EmbeddedResource Update="Views\Pairs\PairsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
