@@ -234,6 +234,9 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("CageId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
@@ -246,11 +249,18 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.Property<Guid?>("PairId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CageId");
 
                     b.HasIndex("PairId")
                         .IsUnique()
                         .HasFilter("[PairId] IS NOT NULL");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Nests");
 
@@ -258,18 +268,22 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("666c1fa7-c317-4e84-bba1-3590ba6fa5d9"),
+                            CageId = new Guid("2fb04232-9775-4ef8-bb2d-cc1c0296e84c"),
                             Image = "images/nest/nestbox2.jpg",
                             IsOccupied = true,
                             Name = "Nest Box 1",
-                            PairId = new Guid("49f6a183-df21-47a4-80be-a3ac46714584")
+                            PairId = new Guid("49f6a183-df21-47a4-80be-a3ac46714584"),
+                            UserId = new Guid("5e146a05-34ec-4ff0-8dde-6dc6d62c3591")
                         },
                         new
                         {
                             Id = new Guid("c29cf848-cdef-4251-a78b-b76bff142a7c"),
+                            CageId = new Guid("aba63d5f-8dd1-42e3-93b8-898c71554e5a"),
                             Image = "images/nest/nestbox1.jpg",
                             IsOccupied = true,
                             Name = "Nest Box 2",
-                            PairId = new Guid("87ca38ac-99b3-487a-85a4-68053940432a")
+                            PairId = new Guid("87ca38ac-99b3-487a-85a4-68053940432a"),
+                            UserId = new Guid("334cd0db-6111-4a42-9f4d-6af33fe6283b")
                         });
                 });
 
@@ -282,7 +296,12 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Pairs");
 
@@ -290,12 +309,14 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("49f6a183-df21-47a4-80be-a3ac46714584"),
-                            Name = "Jake X Holly"
+                            Name = "Jake X Holly",
+                            UserId = new Guid("5e146a05-34ec-4ff0-8dde-6dc6d62c3591")
                         },
                         new
                         {
                             Id = new Guid("87ca38ac-99b3-487a-85a4-68053940432a"),
-                            Name = "Steven X July"
+                            Name = "Steven X July",
+                            UserId = new Guid("334cd0db-6111-4a42-9f4d-6af33fe6283b")
                         });
                 });
 
@@ -390,7 +411,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .HasForeignKey("SpeciesId");
 
                     b.HasOne("Imi.Project.Api.Core.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("Birds")
                         .HasForeignKey("UserId");
                 });
 
@@ -410,9 +431,28 @@ namespace Imi.Project.Api.Infrastructure.Migrations
 
             modelBuilder.Entity("Imi.Project.Api.Core.Entities.Nest", b =>
                 {
+                    b.HasOne("Imi.Project.Api.Core.Entities.Cage", "Cage")
+                        .WithMany("Nests")
+                        .HasForeignKey("CageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Imi.Project.Api.Core.Entities.Pair", "Pair")
                         .WithOne("Nest")
                         .HasForeignKey("Imi.Project.Api.Core.Entities.Nest", "PairId");
+
+                    b.HasOne("Imi.Project.Api.Core.Entities.User", "User")
+                        .WithMany("Nests")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Imi.Project.Api.Core.Entities.Pair", b =>
+                {
+                    b.HasOne("Imi.Project.Api.Core.Entities.User", "User")
+                        .WithMany("Pairs")
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

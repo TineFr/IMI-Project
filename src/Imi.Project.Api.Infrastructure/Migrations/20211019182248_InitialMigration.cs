@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Imi.Project.Api.Infrastructure.Migrations
 {
-    public partial class Seeding : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,18 +17,6 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Food", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Pairs",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    Name = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Pairs", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -60,27 +48,6 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Nests",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    PairId = table.Column<Guid>(nullable: true),
-                    Image = table.Column<string>(nullable: true),
-                    IsOccupied = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Nests", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Nests_Pairs_PairId",
-                        column: x => x.PairId,
-                        principalTable: "Pairs",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Cages",
                 columns: table => new
                 {
@@ -97,6 +64,45 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         name: "FK_Cages_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Pairs",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    UserId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pairs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Pairs_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DailyTasks",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    CageId = table.Column<Guid>(nullable: true),
+                    IsDone = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DailyTasks", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DailyTasks_Cages_CageId",
+                        column: x => x.CageId,
+                        principalTable: "Cages",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -152,23 +158,38 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DailyTasks",
+                name: "Nests",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    CageId = table.Column<Guid>(nullable: true),
-                    IsDone = table.Column<bool>(nullable: false)
+                    PairId = table.Column<Guid>(nullable: true),
+                    CageId = table.Column<Guid>(nullable: false),
+                    Image = table.Column<string>(nullable: true),
+                    IsOccupied = table.Column<bool>(nullable: false),
+                    UserId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DailyTasks", x => x.Id);
+                    table.PrimaryKey("PK_Nests", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DailyTasks_Cages_CageId",
+                        name: "FK_Nests_Cages_CageId",
                         column: x => x.CageId,
                         principalTable: "Cages",
                         principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Nests_Pairs_PairId",
+                        column: x => x.PairId,
+                        principalTable: "Pairs",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Nests_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -178,15 +199,6 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 {
                     { new Guid("2191cbe2-9f0c-4064-94d6-e66834bd9064"), "Parrot mix" },
                     { new Guid("a1a2af92-244d-4a49-bf3a-e220298f49b3"), "Parakeet mix" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Pairs",
-                columns: new[] { "Id", "Name" },
-                values: new object[,]
-                {
-                    { new Guid("49f6a183-df21-47a4-80be-a3ac46714584"), "Jake X Holly" },
-                    { new Guid("87ca38ac-99b3-487a-85a4-68053940432a"), "Steven X July" }
                 });
 
             migrationBuilder.InsertData(
@@ -217,12 +229,12 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Nests",
-                columns: new[] { "Id", "Image", "IsOccupied", "Name", "PairId" },
+                table: "Pairs",
+                columns: new[] { "Id", "Name", "UserId" },
                 values: new object[,]
                 {
-                    { new Guid("666c1fa7-c317-4e84-bba1-3590ba6fa5d9"), "images/nest/nestbox2.jpg", true, "Nest Box 1", new Guid("49f6a183-df21-47a4-80be-a3ac46714584") },
-                    { new Guid("c29cf848-cdef-4251-a78b-b76bff142a7c"), "images/nest/nestbox1.jpg", true, "Nest Box 2", new Guid("87ca38ac-99b3-487a-85a4-68053940432a") }
+                    { new Guid("49f6a183-df21-47a4-80be-a3ac46714584"), "Jake X Holly", new Guid("5e146a05-34ec-4ff0-8dde-6dc6d62c3591") },
+                    { new Guid("87ca38ac-99b3-487a-85a4-68053940432a"), "Steven X July", new Guid("334cd0db-6111-4a42-9f4d-6af33fe6283b") }
                 });
 
             migrationBuilder.InsertData(
@@ -243,6 +255,15 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 {
                     { new Guid("dc063e36-6a74-429d-9569-97838a06ede7"), new Guid("aba63d5f-8dd1-42e3-93b8-898c71554e5a"), false, "Refill water" },
                     { new Guid("2fb04232-9775-4ef8-bb2d-cc1c0296e84c"), new Guid("aba63d5f-8dd1-42e3-93b8-898c71554e5a"), true, "Clean branches" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Nests",
+                columns: new[] { "Id", "CageId", "Image", "IsOccupied", "Name", "PairId", "UserId" },
+                values: new object[,]
+                {
+                    { new Guid("666c1fa7-c317-4e84-bba1-3590ba6fa5d9"), new Guid("2fb04232-9775-4ef8-bb2d-cc1c0296e84c"), "images/nest/nestbox2.jpg", true, "Nest Box 1", new Guid("49f6a183-df21-47a4-80be-a3ac46714584"), new Guid("5e146a05-34ec-4ff0-8dde-6dc6d62c3591") },
+                    { new Guid("c29cf848-cdef-4251-a78b-b76bff142a7c"), new Guid("aba63d5f-8dd1-42e3-93b8-898c71554e5a"), "images/nest/nestbox1.jpg", true, "Nest Box 2", new Guid("87ca38ac-99b3-487a-85a4-68053940432a"), new Guid("334cd0db-6111-4a42-9f4d-6af33fe6283b") }
                 });
 
             migrationBuilder.CreateIndex(
@@ -281,11 +302,26 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 column: "CageId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Nests_CageId",
+                table: "Nests",
+                column: "CageId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Nests_PairId",
                 table: "Nests",
                 column: "PairId",
                 unique: true,
                 filter: "[PairId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Nests_UserId",
+                table: "Nests",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pairs_UserId",
+                table: "Pairs",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

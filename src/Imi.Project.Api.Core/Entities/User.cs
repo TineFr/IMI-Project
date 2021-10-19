@@ -10,5 +10,9 @@ namespace Imi.Project.Api.Core.Entities
         public string Email { get; set; }
         public string Password { get; set; }
         public List<Cage> Cages { get; set; }
+        public List<Bird> Birds { get; set; }
+        public List<Nest> Nests { get; set; }
+        public List<Pair> Pairs {get; set; }
+
     }
 }

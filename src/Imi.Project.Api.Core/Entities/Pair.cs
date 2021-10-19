@@ -8,5 +8,7 @@ namespace Imi.Project.Api.Core.Entities
     {
         public List<Bird> Birds { get; set; }
         public Nest Nest { get; set; }
+        public User User { get; set; }
+        public Guid? UserId { get; set; }
     }
 }
