@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Imi.Project.Api.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20211019182248_InitialMigration")]
+    [Migration("20211019233524_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -172,7 +172,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CageId")
+                    b.Property<Guid>("CageId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsDone")
@@ -236,7 +236,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CageId")
+                    b.Property<Guid?>("CageId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Image")
@@ -251,7 +251,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.Property<Guid?>("PairId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -398,19 +398,23 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 {
                     b.HasOne("Imi.Project.Api.Core.Entities.Cage", "Cage")
                         .WithMany("Birds")
-                        .HasForeignKey("CageId");
+                        .HasForeignKey("CageId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Imi.Project.Api.Core.Entities.Food", "Food")
                         .WithMany("Birds")
-                        .HasForeignKey("FoodId");
+                        .HasForeignKey("FoodId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Imi.Project.Api.Core.Entities.Pair", "Pair")
                         .WithMany("Birds")
-                        .HasForeignKey("PairId");
+                        .HasForeignKey("PairId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Imi.Project.Api.Core.Entities.Species", "Species")
                         .WithMany("Birds")
-                        .HasForeignKey("SpeciesId");
+                        .HasForeignKey("SpeciesId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Imi.Project.Api.Core.Entities.User", "User")
                         .WithMany("Birds")
@@ -428,7 +432,9 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 {
                     b.HasOne("Imi.Project.Api.Core.Entities.Cage", "Cage")
                         .WithMany("DailyTasks")
-                        .HasForeignKey("CageId");
+                        .HasForeignKey("CageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Imi.Project.Api.Core.Entities.Nest", b =>
@@ -436,18 +442,16 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.HasOne("Imi.Project.Api.Core.Entities.Cage", "Cage")
                         .WithMany("Nests")
                         .HasForeignKey("CageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Imi.Project.Api.Core.Entities.Pair", "Pair")
                         .WithOne("Nest")
-                        .HasForeignKey("Imi.Project.Api.Core.Entities.Nest", "PairId");
+                        .HasForeignKey("Imi.Project.Api.Core.Entities.Nest", "PairId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Imi.Project.Api.Core.Entities.User", "User")
                         .WithMany("Nests")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Imi.Project.Api.Core.Entities.Pair", b =>

@@ -33,7 +33,53 @@ namespace Imi.Project.Api.Infrastructure
             BirdSeeding.Seeding(modelBuilder);
             PairSeeding.Seeding(modelBuilder);
             NestSeeding.Seeding(modelBuilder);
-            //base.OnModelCreating(modelBuilder);
+
+
+            modelBuilder.Entity<Pair>()
+                .HasMany(e => e.Birds)
+                .WithOne(e => e.Pair)
+                .HasForeignKey(e => e.PairId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Cage>()
+                .HasMany(e => e.Birds)
+                .WithOne(e => e.Cage)
+                .HasForeignKey(p => p.CageId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Cage>()
+                .HasMany(e => e.Nests)
+                .WithOne(e => e.Cage)
+                .HasForeignKey(p => p.CageId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Cage>()
+                .HasMany(e => e.DailyTasks)
+                .WithOne(e => e.Cage)
+                .HasForeignKey(p => p.CageId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Species>()
+                .HasMany(e => e.Birds)
+                .WithOne(e => e.Species)
+                .HasForeignKey(p => p.SpeciesId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Food>()
+                .HasMany(e => e.Birds)
+                .WithOne(e => e.Food)
+                .HasForeignKey(p => p.FoodId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Pair>()
+                .HasOne(e => e.Nest)
+                .WithOne(e => e.Pair)
+                .HasForeignKey<Nest>(c => c.PairId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+
+
+            base.OnModelCreating(modelBuilder);
         }
 
 

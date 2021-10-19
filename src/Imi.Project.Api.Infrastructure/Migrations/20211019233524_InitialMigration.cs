@@ -93,7 +93,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    CageId = table.Column<Guid>(nullable: true),
+                    CageId = table.Column<Guid>(nullable: false),
                     IsDone = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
@@ -104,7 +104,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         column: x => x.CageId,
                         principalTable: "Cages",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -130,25 +130,25 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         column: x => x.CageId,
                         principalTable: "Cages",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Birds_Food_FoodId",
                         column: x => x.FoodId,
                         principalTable: "Food",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Birds_Pairs_PairId",
                         column: x => x.PairId,
                         principalTable: "Pairs",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Birds_Species_SpeciesId",
                         column: x => x.SpeciesId,
                         principalTable: "Species",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Birds_Users_UserId",
                         column: x => x.UserId,
@@ -164,10 +164,10 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     PairId = table.Column<Guid>(nullable: true),
-                    CageId = table.Column<Guid>(nullable: false),
+                    CageId = table.Column<Guid>(nullable: true),
                     Image = table.Column<string>(nullable: true),
                     IsOccupied = table.Column<bool>(nullable: false),
-                    UserId = table.Column<Guid>(nullable: false)
+                    UserId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -177,19 +177,19 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         column: x => x.CageId,
                         principalTable: "Cages",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Nests_Pairs_PairId",
                         column: x => x.PairId,
                         principalTable: "Pairs",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Nests_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
