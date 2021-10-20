@@ -15,6 +15,18 @@ namespace Imi.Project.Mobile.Views
         public RegisterPage()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
+        }
+
+        private async void btnBack_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync(true);
+        }
+
+        private async void btnSignUp_Clicked(object sender, EventArgs e)
+        {
+
+            await Navigation.PushAsync(new MainPage());
         }
     }
 }

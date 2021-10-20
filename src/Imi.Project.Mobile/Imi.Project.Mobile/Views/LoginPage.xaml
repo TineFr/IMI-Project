@@ -10,7 +10,7 @@
                 <Entry Placeholder="Email" ></Entry>
             </Frame>
             <Frame Padding="0" Margin="10"  HorizontalOptions="Center" WidthRequest="300">
-                <Entry Placeholder="Password" IsPassword="True" ></Entry>
+                <Entry Placeholder="Password" IsPassword="True"></Entry>
             </Frame>
             <Button HorizontalOptions="Center" WidthRequest="300" TextColor="White" Text="Sign in" Clicked="Button_Clicked" BackgroundColor="{StaticResource Purple}"></Button>
             <FlexLayout HorizontalOptions="Center" Padding="0" WidthRequest="320" Margin="0" JustifyContent="SpaceBetween">
