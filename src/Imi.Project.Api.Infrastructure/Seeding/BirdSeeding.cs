@@ -22,7 +22,6 @@ namespace Imi.Project.Api.Infrastructure.Seeding
                     HatchDate = new DateTime(2015, 12, 25),
                     Image = "images/bird/budgie1.jpg",
                     SpeciesId = Guid.Parse("DBCEBCEB-24EE-4477-8A09-7042512F1F6D"),
-                    PairId = Guid.Parse("49F6A183-DF21-47A4-80BE-A3AC46714584"),
                     Food = "Parakeet mix",
                     UserId = Guid.Parse("5E146A05-34EC-4FF0-8DDE-6DC6D62C3591")
                     },
@@ -36,7 +35,6 @@ namespace Imi.Project.Api.Infrastructure.Seeding
                     HatchDate = new DateTime(2017, 07, 13),
                     Image = "images/bird/budgie2.jpg",
                     SpeciesId = Guid.Parse("DBCEBCEB-24EE-4477-8A09-7042512F1F6D"),
-                    PairId = Guid.Parse("49F6A183-DF21-47A4-80BE-A3AC46714584"),
                     Food = "Parakeet mix",
                     UserId = Guid.Parse("5E146A05-34EC-4FF0-8DDE-6DC6D62C3591")
                     },
@@ -50,7 +48,6 @@ namespace Imi.Project.Api.Infrastructure.Seeding
                     HatchDate = new DateTime(2012, 09, 03),
                     Image = "images/bird/cockatiel1.jpg",
                     SpeciesId = Guid.Parse("5894D41B-E7C2-4125-8A66-92C802BF8ED2"),
-                    PairId = Guid.Parse("87CA38AC-99B3-487A-85A4-68053940432A"),
                     Food = "Parakeet mix",
                     UserId = Guid.Parse("334CD0DB-6111-4A42-9F4D-6AF33FE6283B")
                     },
@@ -64,7 +61,6 @@ namespace Imi.Project.Api.Infrastructure.Seeding
                     HatchDate = new DateTime(2014, 11, 14),
                     Image = "images/bird/cockatiel2.jpg",
                     SpeciesId = Guid.Parse("5894D41B-E7C2-4125-8A66-92C802BF8ED2"),
-                    PairId = Guid.Parse("87CA38AC-99B3-487A-85A4-68053940432A"),
                     Food = "Parakeet mix",
                     UserId = Guid.Parse("334CD0DB-6111-4A42-9F4D-6AF33FE6283B")
                     }
