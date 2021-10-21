@@ -11,6 +11,7 @@ namespace Imi.Project.Api.Core.Entities
         public string Password { get; set; }
         public List<Cage> Cages { get; set; }
         public List<Bird> Birds { get; set; }
+        public List<Medicine> Medicines { get; set; }
 
     }
 }

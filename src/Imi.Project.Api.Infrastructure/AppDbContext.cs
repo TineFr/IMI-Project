@@ -32,7 +32,7 @@ namespace Imi.Project.Api.Infrastructure
             BirdMedicineSeeding.Seeding(modelBuilder);
 
             modelBuilder
-                .Entity<BirdMedicine>()
+                .Entity<BirdMedicines>()
                 .ToTable("BirdMedicine") 
                 .HasKey(bm => new { bm.BirdId, bm.MedicineId });
 

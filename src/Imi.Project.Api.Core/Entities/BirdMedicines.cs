@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Imi.Project.Api.Core.Entities
 {
-    public class BirdMedicine
+    public class BirdMedicines
     {
         public Bird Bird { get; set; }
         public Guid BirdId { get; set; }
