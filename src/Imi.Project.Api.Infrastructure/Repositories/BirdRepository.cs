@@ -23,6 +23,14 @@ namespace Imi.Project.Api.Infrastructure.Repositories
                                    .Include(b => b.Species);                         
         }
 
+        public async override Task<IEnumerable<Bird>> ListAllAsync()
+        {
+            return await GetAll().ToListAsync();
+        }
+        public async override Task<Bird> GetByIdAsync(Guid id)
+        {
+            return await GetAll().SingleOrDefaultAsync(b => b.Id.Equals(id));
+        }
         public async Task<IEnumerable<Bird>> GetByCageIdAsync(Guid id)
         {
             return await GetAll().Where(b => b.CageId.Equals(id)).ToListAsync();
