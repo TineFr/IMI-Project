@@ -2,12 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Core.Infrastructure
 {
-    public interface ICageRepository : IBaseRepository<Cage>
+    public interface ISpeciesRepository : IBaseRepository<Species>
     {
-        Task<IEnumerable<Cage>> GetByUserIdAsync(Guid id);
     }
 }
