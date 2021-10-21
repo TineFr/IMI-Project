@@ -11,5 +11,6 @@ namespace Imi.Project.Api.Core.Entities
         public Medicine Medicine { get; set; }
         public Guid MedicineId { get; set; }
 
+
     }
 }

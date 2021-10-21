@@ -12,9 +12,8 @@ namespace Imi.Project.Api.Infrastructure
         public DbSet<User> Users { get; set; }
         public DbSet<Cage> Cages { get; set; }
         public DbSet<Species> Species { get; set; }
-        public DbSet<Pair> Pairs { get; set; }
-        public DbSet<Nest> Nests { get; set; }
         public DbSet<Bird> Birds { get; set; }
+        public DbSet<Medicine> Medicine { get; set; }
         public DbSet<DailyTask> DailyTasks { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
@@ -29,8 +28,8 @@ namespace Imi.Project.Api.Infrastructure
             CageSeeding.Seeding(modelBuilder);
             SpeciesSeeding.Seeding(modelBuilder);
             BirdSeeding.Seeding(modelBuilder);
-            PairSeeding.Seeding(modelBuilder);
-            NestSeeding.Seeding(modelBuilder);
+            MedicineSeeding.Seeding(modelBuilder);
+            BirdMedicineSeeding.Seeding(modelBuilder);
 
             modelBuilder
                 .Entity<BirdMedicine>()
@@ -42,7 +41,6 @@ namespace Imi.Project.Api.Infrastructure
                 .WithOne(e => e.Cage)
                 .HasForeignKey(p => p.CageId)
                 .OnDelete(DeleteBehavior.SetNull);
-
 
             modelBuilder.Entity<Cage>()
                 .HasMany(e => e.DailyTasks)
