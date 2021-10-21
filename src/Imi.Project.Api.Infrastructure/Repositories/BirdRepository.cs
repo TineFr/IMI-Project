@@ -21,7 +21,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
             return _dbContext.Birds.Include(b => b.User)
                                    .Include(b => b.Cage)
                                    .Include(b => b.Species)
-                                   .Include(b => b.BirdMedicine);                         
+                                   .Include(b => b.BirdMedicines);                         
         }
         public async override Task<IEnumerable<Bird>> ListAllAsync()
         {
