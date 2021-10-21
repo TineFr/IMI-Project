@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Imi.Project.Api.Helper;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Controllers
@@ -40,13 +41,8 @@ namespace Imi.Project.Api.Controllers
                     
 
                 }).ToList(),
-                DailyTasks = c.DailyTasks.Select(b =>
-                new DailyTaskResponseDto
-                {
-                    Id = b.Id,
+                DailyTasks = c.DailyTasks.MaptoDtoList()
 
-
-                }).ToList(),
             });
 
             return Ok(cagesDto);

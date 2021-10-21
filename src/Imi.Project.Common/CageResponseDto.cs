@@ -6,8 +6,8 @@ namespace Imi.Project.Common
 {
     public class CageResponseDto : BaseDto
     {
-        public List<BirdResponseDto> Birds { get; set; }
-        public List<DailyTaskResponseDto> DailyTasks { get; set; }
+        public IEnumerable<BirdResponseDto> Birds { get; set; }
+        public IEnumerable<DailyTaskResponseDto> DailyTasks { get; set; }
         public string Image { get; set; }
         public string Location { get; set; }
         public UserResponseDto User { get; set; }
