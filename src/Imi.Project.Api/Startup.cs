@@ -1,4 +1,6 @@
+using Imi.Project.Api.Core.Infrastructure;
 using Imi.Project.Api.Infrastructure;
+using Imi.Project.Api.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -35,6 +37,12 @@ namespace Imi.Project.Api
             });
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer
             (Configuration.GetConnectionString("MyAviaryDataBase")));
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ICageRepository, CageRepository>();
+            services.AddScoped<IBirdRepository, BirdRepository>();
+            services.AddScoped<ISpeciesRepository, SpeciesRepository>();
+            services.AddScoped<IMedicineRepository, MedicineRepository>();
+            services.AddScoped<IDailyTaskRepository, DailyTaskRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
