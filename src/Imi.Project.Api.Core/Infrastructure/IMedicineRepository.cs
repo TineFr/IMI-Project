@@ -8,6 +8,6 @@ namespace Imi.Project.Api.Core.Infrastructure
 {
     public interface IMedicineRepository : IBaseRepository<Medicine>
     {
-        Task<IEnumerable<Cage>> GetByUserIdAsync(Guid id);
+        Task<IEnumerable<Medicine>> GetByUserIdAsync(Guid id);
     }
 }

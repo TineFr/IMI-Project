@@ -43,7 +43,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
 
         public async Task<IEnumerable<Bird>> GetBirdsWithMedicineAsync()
         {
-            return await GetAll().Where(b => b.BirdMedicine != null).ToListAsync();
+            return await GetAll().Where(b => b.BirdMedicines != null).ToListAsync();
         }
     }
 }
