@@ -45,7 +45,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
 
         public async Task<IEnumerable<T>> ListAllAsync()
         {
-          return await  _dbContext.Set<T>().ToListAsync();
+            return await  _dbContext.Set<T>().ToListAsync();
         }
 
         public async Task<T> UpdateAsync(T entity)
