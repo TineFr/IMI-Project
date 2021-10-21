@@ -10,5 +10,6 @@ namespace Imi.Project.Api.Core.Infrastructure
     {
         Task<IEnumerable<Bird>> GetByUserIdAsync(Guid id);
         Task<IEnumerable<Bird>> GetByCageIdAsync(Guid id);
+        Task<IEnumerable<Bird>> GetBirdsWithMedicineAsync(Guid id);
     }
 }
