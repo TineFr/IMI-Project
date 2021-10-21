@@ -37,13 +37,13 @@ namespace Imi.Project.Api.Infrastructure.Repositories
            return  _dbContext.Set<T>().AsQueryable();
         }
 
-        public async Task<T> GetByIdAsync(Guid id)
+        public virtual async Task<T> GetByIdAsync(Guid id)
         {
             var entity = await  _dbContext.Set<T>().FirstOrDefaultAsync(e => e.Id.Equals(id));
             return entity;
         }
 
-        public async Task<IEnumerable<T>> ListAllAsync()
+        public virtual async Task<IEnumerable<T>> ListAllAsync()
         {
             return await  _dbContext.Set<T>().ToListAsync();
         }
