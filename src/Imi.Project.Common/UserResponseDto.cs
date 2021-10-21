@@ -8,7 +8,7 @@ namespace Imi.Project.Common
     {
         public List<BirdResponseDto> Birds { get; set; }
         public List<CageResponseDto> Cages { get; set; }
-        public List<MedecineResponseDto> Medicines { get; set; }
+        public List<MedicineResponseDto> Medicines { get; set; }
     }
 
 }

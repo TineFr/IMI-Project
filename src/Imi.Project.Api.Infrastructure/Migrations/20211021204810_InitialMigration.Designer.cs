@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Imi.Project.Api.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20211021140910_InitialMigration")]
+    [Migration("20211021204810_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -112,7 +112,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Imi.Project.Api.Core.Entities.BirdMedicine", b =>
+            modelBuilder.Entity("Imi.Project.Api.Core.Entities.BirdMedicines", b =>
                 {
                     b.Property<Guid>("BirdId")
                         .HasColumnType("uniqueidentifier");
@@ -232,7 +232,12 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.Property<string>("Usage")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Medicine");
 
@@ -241,13 +246,15 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         {
                             Id = new Guid("eb6e6128-25cf-4b4b-b511-fce4a801d1f0"),
                             Name = "Dextrotonic",
-                            Usage = "15ml per liter of drinking water"
+                            Usage = "15ml per liter of drinking water",
+                            UserId = new Guid("5e146a05-34ec-4ff0-8dde-6dc6d62c3591")
                         },
                         new
                         {
                             Id = new Guid("44411f0e-5e99-49b4-9beb-922d3a97093d"),
                             Name = "Acox",
-                            Usage = "6ml per liter of drinking water"
+                            Usage = "6ml per liter of drinking water",
+                            UserId = new Guid("5e146a05-34ec-4ff0-8dde-6dc6d62c3591")
                         });
                 });
 
@@ -340,10 +347,10 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("Imi.Project.Api.Core.Entities.BirdMedicine", b =>
+            modelBuilder.Entity("Imi.Project.Api.Core.Entities.BirdMedicines", b =>
                 {
                     b.HasOne("Imi.Project.Api.Core.Entities.Bird", "Bird")
-                        .WithMany("BirdMedicine")
+                        .WithMany("BirdMedicines")
                         .HasForeignKey("BirdId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -369,6 +376,13 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .HasForeignKey("CageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Imi.Project.Api.Core.Entities.Medicine", b =>
+                {
+                    b.HasOne("Imi.Project.Api.Core.Entities.User", "User")
+                        .WithMany("Medicines")
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

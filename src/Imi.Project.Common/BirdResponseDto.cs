@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Imi.Project.Common
 {
-    public class BirdResponseDto
+    public class BirdResponseDto : BaseDto
     {
         public DateTime HatchDate { get; set; }
         public Gender Gender { get; set; }
@@ -12,7 +12,7 @@ namespace Imi.Project.Common
         public CageResponseDto Cage { get; set; }
         public SpeciesResponseDto Species { get; set; }
         public UserResponseDto User { get; set; }
-        public ICollection<MedecineResponseDto> Medicines { get; set; }
+        public ICollection<MedicineResponseDto> Medicines { get; set; }
         public string Image { get; set; }
     }
 }

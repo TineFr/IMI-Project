@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Imi.Project.Api.Infrastructure\Imi.Project.Api.Infrastructure.csproj" />
+    <ProjectReference Include="..\Imi.Project.Common\Imi.Project.Common.csproj" />
   </ItemGroup>
 
 

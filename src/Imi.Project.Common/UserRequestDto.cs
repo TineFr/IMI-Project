@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Imi.Project.Common
 {
-    class UserRequestDto
+    class UserRequestDto : BaseDto
     {
     }
 }

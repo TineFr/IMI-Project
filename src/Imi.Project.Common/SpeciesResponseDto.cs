@@ -2,7 +2,7 @@
 
 namespace Imi.Project.Common
 {
-    public class SpeciesResponseDto
+    public class SpeciesResponseDto : BaseDto
     {
         public string ScientificName { get; set; }
     }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Imi.Project.Common
 {
-    public class CageResponseDto
+    public class CageResponseDto : BaseDto
     {
         public List<BirdResponseDto> Birds { get; set; }
         public List<DailyTaskResponseDto> DailyTasks { get; set; }

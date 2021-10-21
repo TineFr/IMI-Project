@@ -19,7 +19,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
         public override IQueryable<User> GetAll()
         {
             return _dbContext.Users.Include(u => u.Cages)
-                                   .ThenInclude(c => c.DailyTasks)     
+                                   .ThenInclude(c => c.DailyTasks)
                                    .Include(u => u.Birds)
                                    .Include(u => u.Medicines);
         }
