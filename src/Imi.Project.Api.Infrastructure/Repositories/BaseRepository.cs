@@ -32,7 +32,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
             return entity;
         }
 
-        public  IQueryable<T> GetAll()
+        public virtual IQueryable<T> GetAll()
         {
            return  _dbContext.Set<T>().AsQueryable();
         }
