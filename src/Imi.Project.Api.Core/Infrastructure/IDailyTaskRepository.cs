@@ -8,6 +8,6 @@ namespace Imi.Project.Api.Core.Infrastructure
 {
     public interface IDailyTaskRepository : IBaseRepository<DailyTask>
     {
-        Task<IEnumerable<Bird>> GetByCageIdAsync(Guid id);
+        
     }
 }

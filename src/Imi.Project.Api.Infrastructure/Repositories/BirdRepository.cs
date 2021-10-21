@@ -23,7 +23,6 @@ namespace Imi.Project.Api.Infrastructure.Repositories
                                    .Include(b => b.Species)
                                    .Include(b => b.BirdMedicine);                         
         }
-
         public async override Task<IEnumerable<Bird>> ListAllAsync()
         {
             return await GetAll().ToListAsync();
