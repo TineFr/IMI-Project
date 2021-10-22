@@ -2,7 +2,7 @@
 
 namespace Imi.Project.Common
 {
-    public abstract class BaseDto
+    public abstract class BaseEntityDto
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

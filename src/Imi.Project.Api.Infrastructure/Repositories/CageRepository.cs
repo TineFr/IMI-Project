@@ -17,10 +17,11 @@ namespace Imi.Project.Api.Infrastructure.Repositories
         }
 
         public override IQueryable<Cage> GetAll()
-        { 
+        {
             return _dbContext.Cages.Include(c => c.User)
                                    .Include(c => c.DailyTasks)
                                    .Include(c => c.Birds);
+                                   
         }
 
         public async override Task<IEnumerable<Cage>> ListAllAsync()

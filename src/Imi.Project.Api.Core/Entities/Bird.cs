@@ -16,7 +16,7 @@ namespace Imi.Project.Api.Core.Entities
         public Guid? SpeciesId { get; set; }
         public User User { get; set; }
         public Guid? UserId { get; set; }
-        public ICollection<BirdMedicines> BirdMedicines { get; set; }
+        public IEnumerable<BirdMedicines> BirdMedicines { get; set; }
         public string Image { get; set; }
     }
 }

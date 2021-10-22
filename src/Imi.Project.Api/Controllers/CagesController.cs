@@ -27,25 +27,8 @@ namespace Imi.Project.Api.Controllers
         public async Task<IActionResult> Get()
         {
             var cages = await _cageRepository.ListAllAsync();
-            var cagesDto = cages.Select(c =>
-            new CageResponseDto
-            {
-                Id = c.Id,
-                Image = c.Image,
-                Name = c.Name,
-                Location = c.Location,
-                Birds = c.Birds.Select(b =>
-                new BirdResponseDto
-                {
-                    Id = b.Id,
-                    
-
-                }).ToList(),
-                DailyTasks = c.DailyTasks.MaptoDtoList()
-
-            });
-
-            return Ok(cagesDto);
+            var cagesDtoList = cages.MaptoDtoList();
+            return Ok(cagesDtoList);
 
         }
 

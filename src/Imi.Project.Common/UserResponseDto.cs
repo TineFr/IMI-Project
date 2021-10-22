@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Imi.Project.Common
 {
-    public class UserResponseDto : BaseDto
+    public class UserResponseDto : BaseEntityDto
     {
         public IEnumerable<BirdResponseDto> Birds { get; set; }
         public IEnumerable<CageResponseDto> Cages { get; set; }

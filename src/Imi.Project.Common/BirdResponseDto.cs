@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Imi.Project.Common
 {
-    public class BirdResponseDto : BaseDto
+    public class BirdResponseDto : BaseEntityDto
     {
         public DateTime HatchDate { get; set; }
         public Gender Gender { get; set; }
