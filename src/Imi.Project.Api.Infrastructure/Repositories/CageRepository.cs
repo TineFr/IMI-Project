@@ -20,8 +20,12 @@ namespace Imi.Project.Api.Infrastructure.Repositories
         {
             return _dbContext.Cages.Include(c => c.User)
                                    .Include(c => c.DailyTasks)
-                                   .Include(c => c.Birds);
-                                   
+                                   .Include(c => c.Birds)
+                                   .ThenInclude(b => b.Species)
+                                   .Include(c => c.Birds)
+                                   .ThenInclude(b => b.BirdMedicines);
+
+
         }
 
         public async override Task<IEnumerable<Cage>> ListAllAsync()

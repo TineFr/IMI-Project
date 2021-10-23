@@ -49,9 +49,10 @@ namespace Imi.Project.Api.Helper
                 Gender = bird.Gender,
                 HatchDate = bird.HatchDate,
                 Image = bird.Image,
-                User = bird.User.MaptoDto(),
-                Medicines = bird.BirdMedicines.Select(m => m.Medicine.MaptoDto()).ToList()
+                Cage = bird.Cage.Name,
+                Medicines = bird.BirdMedicines.Select(b => b.MedicineId)
             };
+
         }
 
         public static IEnumerable<BirdResponseDto> MaptoDtoList(this IEnumerable<Bird> birds)
@@ -66,8 +67,8 @@ namespace Imi.Project.Api.Helper
                 Id = cage.Id,
                 Name = cage.Name,
                 Image = cage.Image,
-                User = cage.User.MaptoDto(),
-                Birds = cage.Birds.MaptoDtoList()
+                Birds = cage.Birds.MaptoDtoList(),
+                DailyTasks = cage.DailyTasks.MaptoDtoList()
 
             };
         }
@@ -102,7 +103,7 @@ namespace Imi.Project.Api.Helper
                 Id = medicine.Id,
                 Name = medicine.Name,
                 Usage = medicine.Usage,
-                User = medicine.User.MaptoDto()
+              
             };
         }
 

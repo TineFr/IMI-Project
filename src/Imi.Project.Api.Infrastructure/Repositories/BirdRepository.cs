@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 namespace Imi.Project.Api.Infrastructure.Repositories
 {
     public class BirdRepository : BaseRepository<Bird>, IBirdRepository
+
     {
         public BirdRepository(AppDbContext dbContext) : base(dbContext)
         {
@@ -20,6 +21,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
         {
             return _dbContext.Birds.Include(b => b.User)
                                    .Include(b => b.Cage)
+                                   .ThenInclude(b => b.Birds)
                                    .Include(b => b.Species)
                                    .Include(b => b.BirdMedicines);                         
         }

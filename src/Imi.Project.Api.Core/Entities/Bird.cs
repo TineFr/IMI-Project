@@ -7,6 +7,8 @@ namespace Imi.Project.Api.Core.Entities
 {
     public class Bird : BaseEntity
     {
+
+
         public DateTime HatchDate { get; set; }
         public Gender Gender { get; set; }
         public string Food { get; set; }
@@ -16,7 +18,9 @@ namespace Imi.Project.Api.Core.Entities
         public Guid? SpeciesId { get; set; }
         public User User { get; set; }
         public Guid? UserId { get; set; }
-        public IEnumerable<BirdMedicines> BirdMedicines { get; set; }
+        public ICollection<BirdMedicines> BirdMedicines { get; set; }
         public string Image { get; set; }
+
+
     }
 }
