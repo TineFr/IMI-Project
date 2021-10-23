@@ -67,7 +67,9 @@ namespace Imi.Project.Api.Core.Helper
                 Id = cage.Id,
                 Name = cage.Name,
                 Image = cage.Image,
-                Birds = cage.Birds?.MaptoDtoList()
+                Location = cage.Location,
+                Birds = cage.Birds?.MaptoDtoList(),
+                DailyTasks = cage.DailyTasks.MapToDtoList()
             };
         }
 
