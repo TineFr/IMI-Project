@@ -1,4 +1,5 @@
 ﻿
+using Imi.Project.Api.Core.Dtos.Requests;
 using Imi.Project.Api.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -33,5 +34,29 @@ namespace Imi.Project.Api.Controllers
             var user = await _userService.GetUserByIdAsync(id);
             return Ok(user);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Post(UserRequestDto newUser)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var userDto = await _userService.AddUserAsync(newUser);
+            return Ok(userDto);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Put(UserRequestDto updatedUser)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var userDto = await _userService.UpdateUserAsync(updatedUser);
+            return Ok(userDto);
+        }
+
     }
+    
 }

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Imi.Project.Api.Core.Entities;
+using Imi.Project.Api.Core.Dtos.Requests;
 
 namespace Imi.Project.Api.Core.Services
 {
@@ -29,6 +30,22 @@ namespace Imi.Project.Api.Core.Services
         {
             var userList = await _userRepository.ListAllAsync();
             return userList.MaptoDtoList();
+        }
+        public async Task<UserResponseDto> AddUserAsync(UserRequestDto userRequestDto)
+        {
+            var user = userRequestDto.MapToEntity();
+            var result = await _userRepository.AddAsync(user);
+            var dto = result.MaptoDto();
+
+            return dto;
+        }
+        public async Task<UserResponseDto> UpdateUserAsync(UserRequestDto userRequestDto)
+        {
+            var user = userRequestDto.MapToEntity();
+            var result = await _userRepository.UpdateAsync(user);
+            var dto = result.MaptoDto();
+
+            return dto;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Imi.Project.Api.Core.Dtos.Responses;
+﻿using Imi.Project.Api.Core.Dtos.Requests;
+using Imi.Project.Api.Core.Dtos.Responses;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,5 +11,8 @@ namespace Imi.Project.Api.Core.Interfaces.Services
     {
         Task<IEnumerable<UserResponseDto>> ListAllUsersAsync();
         Task<UserResponseDto> GetUserByIdAsync(Guid id);
+        Task<UserResponseDto> AddUserAsync(UserRequestDto userRequestDto);
+        Task<UserResponseDto> UpdateUserAsync(UserRequestDto userRequestDto);
+
     }
 }
