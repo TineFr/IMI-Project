@@ -17,7 +17,8 @@ namespace Imi.Project.Api.Infrastructure.Seeding
                     {
                         Id = Guid.Parse("EB6E6128-25CF-4B4B-B511-FCE4A801D1F0"),
                         Name = "Dextrotonic",
-                        Usage ="15ml per liter of drinking water"
+                        Usage ="15ml per liter of drinking water",
+                        UserId = Guid.Parse("5E146A05-34EC-4FF0-8DDE-6DC6D62C3591")
 
                     },
 
@@ -25,12 +26,13 @@ namespace Imi.Project.Api.Infrastructure.Seeding
                     {
                         Id = Guid.Parse("44411F0E-5E99-49B4-9BEB-922D3A97093D"),
                         Name = "Acox",
-                        Usage ="6ml per liter of drinking water"
+                        Usage ="6ml per liter of drinking water",
+                        UserId = Guid.Parse("5E146A05-34EC-4FF0-8DDE-6DC6D62C3591")
                     },
 
                 }
 
-            );
+            ) ;
         }
     }
 }

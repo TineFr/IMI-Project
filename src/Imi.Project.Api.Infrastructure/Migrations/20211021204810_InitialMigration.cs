@@ -8,19 +8,6 @@ namespace Imi.Project.Api.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Medicine",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    Usage = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Medicine", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Species",
                 columns: table => new
                 {
@@ -63,6 +50,26 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     table.PrimaryKey("PK_Cages", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Cages_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Medicine",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    UserId = table.Column<Guid>(nullable: true),
+                    Usage = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Medicine", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Medicine_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -151,15 +158,6 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Medicine",
-                columns: new[] { "Id", "Name", "Usage" },
-                values: new object[,]
-                {
-                    { new Guid("eb6e6128-25cf-4b4b-b511-fce4a801d1f0"), "Dextrotonic", "15ml per liter of drinking water" },
-                    { new Guid("44411f0e-5e99-49b4-9beb-922d3a97093d"), "Acox", "6ml per liter of drinking water" }
-                });
-
-            migrationBuilder.InsertData(
                 table: "Species",
                 columns: new[] { "Id", "Name", "ScientificName" },
                 values: new object[,]
@@ -180,12 +178,20 @@ namespace Imi.Project.Api.Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "Cages",
                 columns: new[] { "Id", "Image", "Location", "Name", "UserId" },
-                values: new object[] { new Guid("2fb04232-9775-4ef8-bb2d-cc1c0296e84c"), "images/cage/cage1.png", "Outside", "Outside Cage 1", new Guid("5e146a05-34ec-4ff0-8dde-6dc6d62c3591") });
+                values: new object[,]
+                {
+                    { new Guid("2fb04232-9775-4ef8-bb2d-cc1c0296e84c"), "images/cage/cage1.png", "Outside", "Outside Cage 1", new Guid("5e146a05-34ec-4ff0-8dde-6dc6d62c3591") },
+                    { new Guid("aba63d5f-8dd1-42e3-93b8-898c71554e5a"), "images/cage/cage2.png", "Outside", "Outside Cage 2", new Guid("334cd0db-6111-4a42-9f4d-6af33fe6283b") }
+                });
 
             migrationBuilder.InsertData(
-                table: "Cages",
-                columns: new[] { "Id", "Image", "Location", "Name", "UserId" },
-                values: new object[] { new Guid("aba63d5f-8dd1-42e3-93b8-898c71554e5a"), "images/cage/cage2.png", "Outside", "Outside Cage 2", new Guid("334cd0db-6111-4a42-9f4d-6af33fe6283b") });
+                table: "Medicine",
+                columns: new[] { "Id", "Name", "Usage", "UserId" },
+                values: new object[,]
+                {
+                    { new Guid("eb6e6128-25cf-4b4b-b511-fce4a801d1f0"), "Dextrotonic", "15ml per liter of drinking water", new Guid("5e146a05-34ec-4ff0-8dde-6dc6d62c3591") },
+                    { new Guid("44411f0e-5e99-49b4-9beb-922d3a97093d"), "Acox", "6ml per liter of drinking water", new Guid("5e146a05-34ec-4ff0-8dde-6dc6d62c3591") }
+                });
 
             migrationBuilder.InsertData(
                 table: "Birds",
@@ -246,6 +252,11 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 name: "IX_DailyTasks_CageId",
                 table: "DailyTasks",
                 column: "CageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Medicine_UserId",
+                table: "Medicine",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

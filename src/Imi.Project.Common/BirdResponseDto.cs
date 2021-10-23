@@ -1,0 +1,17 @@
+﻿using Imi.Project.Api.Core.Enums;
+using System;
+using System.Collections.Generic;
+
+namespace Imi.Project.Common
+{
+    public class BirdResponseDto : BaseEntityDto
+    {
+        public DateTime HatchDate { get; set; }
+        public Gender Gender { get; set; }
+        public string Food { get; set; }
+        public string Cage { get; set; }
+        public SpeciesResponseDto Species { get; set; }
+        public ICollection<MedicineResponseDto> Medicines { get; set; }
+        public string Image { get; set; }
+    }
+}
