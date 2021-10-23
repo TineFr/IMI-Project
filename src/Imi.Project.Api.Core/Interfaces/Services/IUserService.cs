@@ -4,12 +4,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Imi.Project.Api.Core.Infrastructure.Services
+namespace Imi.Project.Api.Core.Interfaces.Services
 {
     public interface IUserService
     {
-        Task<IEnumerable<UserResponseDto>> ListAllAsync();
-        Task<UserResponseDto> GetByIdAsync(Guid id);
-
+        Task<IEnumerable<UserResponseDto>> ListAllUsersAsync();
+        Task<UserResponseDto> GetUserByIdAsync(Guid id);
     }
 }

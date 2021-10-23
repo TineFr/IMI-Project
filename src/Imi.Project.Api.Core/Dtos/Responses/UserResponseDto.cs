@@ -6,8 +6,8 @@ namespace Imi.Project.Api.Core.Dtos.Responses
 {
     public class UserResponseDto : BaseEntityDto
     {
-        public ICollection<BirdResponseDto> Birds { get; set; }
-        public ICollection<CageResponseDto> Cages { get; set; }
-        public ICollection<MedicineResponseDto> Medicines { get; set; }
+        public IEnumerable<Guid> Birds { get; set; }
+        public IEnumerable<Guid> Cages { get; set; }
+        public IEnumerable<Guid> Medicines { get; set; }
     }
 }

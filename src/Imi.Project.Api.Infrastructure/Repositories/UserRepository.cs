@@ -1,5 +1,4 @@
 ﻿using Imi.Project.Api.Core.Entities;
-using Imi.Project.Api.Core.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -22,6 +21,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
             return _dbContext.Users.Include(u => u.Cages)
                                    .ThenInclude(c => c.DailyTasks)
                                    .Include(u => u.Birds)
+                                   .ThenInclude(b => b.Species)
                                    .Include(u => u.Medicines);
         }
 

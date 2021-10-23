@@ -6,10 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Imi.Project.Api.Helper
+namespace Imi.Project.Api.Core.Helper
 {
     public static class Mapper
     {
+
 
         public static SpeciesResponseDto MaptoDto(this Species species)
         {
@@ -50,10 +51,8 @@ namespace Imi.Project.Api.Helper
                 Gender = bird.Gender,
                 HatchDate = bird.HatchDate,
                 Image = bird.Image,
-                Cage = bird.Cage.Name,
-              
+                Cage = bird.Cage.Name,        
             };
-
         }
 
         public static IEnumerable<BirdResponseDto> MaptoDtoList(this IEnumerable<Bird> birds)
@@ -68,8 +67,7 @@ namespace Imi.Project.Api.Helper
                 Id = cage.Id,
                 Name = cage.Name,
                 Image = cage.Image,
-
-
+                Birds = cage.Birds.MaptoDtoList()
             };
         }
 
@@ -84,8 +82,9 @@ namespace Imi.Project.Api.Helper
             {
                 Id = user.Id,
                 Name = user.Name,
-
-
+                Birds = user.Birds.Select(b => b.Id),
+                Cages = user.Cages.Select(b => b.Id),
+                Medicines = user.Medicines.Select(b => b.Id)
             };
         }
 
@@ -100,8 +99,7 @@ namespace Imi.Project.Api.Helper
             {
                 Id = medicine.Id,
                 Name = medicine.Name,
-                Usage = medicine.Usage,
-              
+                Usage = medicine.Usage,          
             };
         }
 
