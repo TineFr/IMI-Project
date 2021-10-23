@@ -7,19 +7,14 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Imi.Project.Mobile
+namespace Imi.Project.Mobile.Views.Medication
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class NestsPage : ContentPage
+    public partial class MedicationPage : ContentPage
     {
-        public NestsPage()
+        public MedicationPage()
         {
             InitializeComponent();
-        }
-
-        private void colvNests_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }
