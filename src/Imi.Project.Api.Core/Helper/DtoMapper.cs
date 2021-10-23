@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Core.Helper
 {
-    public static class Mapper
+    public static class DtoMapper
     {
 
 
-        public static SpeciesResponseDto MaptoDto(this Species species)
+        public static SpeciesResponseDto MapToDto(this Species species)
         {
             return new SpeciesResponseDto
             {
@@ -21,11 +21,11 @@ namespace Imi.Project.Api.Core.Helper
                 ScientificName = species.ScientificName
             };
         }
-        public static IEnumerable<SpeciesResponseDto> MaptoDtoList(this IEnumerable<Species> species)
+        public static IEnumerable<SpeciesResponseDto> MapToDtoList(this IEnumerable<Species> species)
         {
-            return species.Select(s => s.MaptoDto()).ToList();
+            return species.Select(s => s.MapToDto()).ToList();
         }
-        public static DailyTaskResponseDto MaptoDto(this DailyTask tasks)
+        public static DailyTaskResponseDto MapToDto(this DailyTask tasks)
         {
             return new DailyTaskResponseDto
             {
@@ -34,19 +34,19 @@ namespace Imi.Project.Api.Core.Helper
             };
         }
 
-        public static IEnumerable<DailyTaskResponseDto> MaptoDtoList(this IEnumerable<DailyTask> tasks)
+        public static IEnumerable<DailyTaskResponseDto> MapToDtoList(this IEnumerable<DailyTask> tasks)
         {
-            return tasks.Select(t => t.MaptoDto()).ToList();
+            return tasks.Select(t => t.MapToDto()).ToList();
         }
 
 
-        public static BirdResponseDto MaptoDto(this Bird bird)
+        public static BirdResponseDto MapToDto(this Bird bird)
         {
             return new BirdResponseDto
             {
                 Id = bird.Id,
                 Name = bird.Name,
-                Species = bird.Species?.MaptoDto(),
+                Species = bird.Species?.MapToDto(),
                 Food = bird.Food,
                 Gender = bird.Gender,
                 HatchDate = bird.HatchDate,
@@ -57,10 +57,10 @@ namespace Imi.Project.Api.Core.Helper
 
         public static IEnumerable<BirdResponseDto> MaptoDtoList(this IEnumerable<Bird> birds)
         {
-            return birds.Select(b => b.MaptoDto()).ToList();
+            return birds.Select(b => b.MapToDto()).ToList();
         }
 
-        public static CageResponseDto MaptoDto(this Cage cage)
+        public static CageResponseDto MapToDto(this Cage cage)
         {
             return new CageResponseDto
             {
@@ -71,12 +71,12 @@ namespace Imi.Project.Api.Core.Helper
             };
         }
 
-        public static IEnumerable<CageResponseDto> MaptoDtoList(this IEnumerable<Cage> cages)
+        public static IEnumerable<CageResponseDto> MapToDtoList(this IEnumerable<Cage> cages)
         {
-            return cages.Select(c => c.MaptoDto()).ToList();
+            return cages.Select(c => c.MapToDto()).ToList();
         }
 
-        public static UserResponseDto MaptoDto(this User user)
+        public static UserResponseDto MapToDto(this User user)
         {
             return new UserResponseDto
             {
@@ -88,12 +88,12 @@ namespace Imi.Project.Api.Core.Helper
             };
         }
 
-        public static IEnumerable<UserResponseDto> MaptoDtoList(this IEnumerable<User> users)
+        public static IEnumerable<UserResponseDto> MapToDtoList(this IEnumerable<User> users)
         {
-            return users.Select(u => u.MaptoDto()).ToList();
+            return users.Select(u => u.MapToDto()).ToList();
         }
 
-        public static MedicineResponseDto MaptoDto(this Medicine medicine)
+        public static MedicineResponseDto MapToDto(this Medicine medicine)
         {
             return new MedicineResponseDto
             {
@@ -103,9 +103,9 @@ namespace Imi.Project.Api.Core.Helper
             };
         }
 
-        public static IEnumerable<MedicineResponseDto> MaptoDtoList(this IEnumerable<Medicine> medicines)
+        public static IEnumerable<MedicineResponseDto> MaptoDToList(this IEnumerable<Medicine> medicines)
         {
-            return medicines.Select(u => u.MaptoDto()).ToList();
+            return medicines.Select(u => u.MapToDto()).ToList();
         }
 
     }

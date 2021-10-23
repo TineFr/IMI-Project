@@ -15,6 +15,7 @@ namespace Imi.Project.Api.Core.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
+
         public UserService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
@@ -23,19 +24,19 @@ namespace Imi.Project.Api.Core.Services
         public async Task<UserResponseDto> GetUserByIdAsync(Guid id)
         {
             var user= await _userRepository.GetByIdAsync(id);
-            return user.MaptoDto();
+            return user.MapToDto();
         }
 
         public async Task<IEnumerable<UserResponseDto>> ListAllUsersAsync()
         {
             var userList = await _userRepository.ListAllAsync();
-            return userList.MaptoDtoList();
+            return userList.MapToDtoList();
         }
         public async Task<UserResponseDto> AddUserAsync(UserRequestDto userRequestDto)
         {
             var user = userRequestDto.MapToEntity();
             var result = await _userRepository.AddAsync(user);
-            var dto = result.MaptoDto();
+            var dto = result.MapToDto();
 
             return dto;
         }
@@ -43,9 +44,15 @@ namespace Imi.Project.Api.Core.Services
         {
             var user = userRequestDto.MapToEntity();
             var result = await _userRepository.UpdateAsync(user);
-            var dto = result.MaptoDto();
+            var dto = result.MapToDto();
 
             return dto;
+        }
+
+        public async Task DeleteUserAsync(UserRequestDto userRequestDto)
+        {
+            var user = userRequestDto.MapToEntity();
+            await _userRepository.DeleteAsync(user);
         }
     }
 }

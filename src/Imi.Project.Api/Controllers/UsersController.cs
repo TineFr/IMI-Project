@@ -57,6 +57,18 @@ namespace Imi.Project.Api.Controllers
             return Ok(userDto);
         }
 
+        [HttpDelete]
+        public async Task<IActionResult> Delete(UserRequestDto updatedUser)
+        {
+            if (updatedUser == null)
+            {
+                return NotFound($"User does not exist");
+
+            }
+            await _userService.DeleteUserAsync(updatedUser);
+            return Ok();
+        }
+
     }
     
 }
