@@ -327,7 +327,8 @@ namespace Imi.Project.Api.Infrastructure.Migrations
 
                     b.HasOne("Imi.Project.Api.Core.Entities.User", "User")
                         .WithMany("Birds")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 
             modelBuilder.Entity("Imi.Project.Api.Core.Entities.BirdMedicines", b =>
@@ -349,7 +350,8 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 {
                     b.HasOne("Imi.Project.Api.Core.Entities.User", "User")
                         .WithMany("Cages")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 
             modelBuilder.Entity("Imi.Project.Api.Core.Entities.DailyTask", b =>
@@ -365,7 +367,8 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 {
                     b.HasOne("Imi.Project.Api.Core.Entities.User", "User")
                         .WithMany("Medicines")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 #pragma warning restore 612, 618
         }

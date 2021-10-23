@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Imi.Project.Api.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20211023133518_InitialMigration")]
+    [Migration("20211023150427_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -329,7 +329,8 @@ namespace Imi.Project.Api.Infrastructure.Migrations
 
                     b.HasOne("Imi.Project.Api.Core.Entities.User", "User")
                         .WithMany("Birds")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 
             modelBuilder.Entity("Imi.Project.Api.Core.Entities.BirdMedicines", b =>
@@ -351,7 +352,8 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 {
                     b.HasOne("Imi.Project.Api.Core.Entities.User", "User")
                         .WithMany("Cages")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 
             modelBuilder.Entity("Imi.Project.Api.Core.Entities.DailyTask", b =>
@@ -367,7 +369,8 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 {
                     b.HasOne("Imi.Project.Api.Core.Entities.User", "User")
                         .WithMany("Medicines")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 #pragma warning restore 612, 618
         }

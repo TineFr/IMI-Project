@@ -52,6 +52,7 @@ namespace Imi.Project.Api.Core.Services
         public async Task DeleteUserAsync(UserRequestDto userRequestDto)
         {
             var user = userRequestDto.MapToEntity();
+
             await _userRepository.DeleteAsync(user);
         }
     }
