@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Imi.Project.Api.Core.Interfaces.Repositories;
 namespace Imi.Project.Api.Infrastructure.Repositories
 {
     public class UserRepository : BaseRepository<User>, IUserRepository

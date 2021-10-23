@@ -1,5 +1,6 @@
-﻿using Imi.Project.Api.Core.Entities;
-using Imi.Project.Common;
+﻿using Imi.Project.Api.Core.Dtos.Responses;
+using Imi.Project.Api.Core.Entities;
+using Imi.Project.Api.Core.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,7 +51,7 @@ namespace Imi.Project.Api.Helper
                 HatchDate = bird.HatchDate,
                 Image = bird.Image,
                 Cage = bird.Cage.Name,
-                Medicines = bird.BirdMedicines.Select(b => b.MedicineId)
+              
             };
 
         }
@@ -67,8 +68,7 @@ namespace Imi.Project.Api.Helper
                 Id = cage.Id,
                 Name = cage.Name,
                 Image = cage.Image,
-                Birds = cage.Birds.MaptoDtoList(),
-                DailyTasks = cage.DailyTasks.MaptoDtoList()
+
 
             };
         }
@@ -84,9 +84,7 @@ namespace Imi.Project.Api.Helper
             {
                 Id = user.Id,
                 Name = user.Name,
-                Birds = user.Birds.MaptoDtoList(),
-                Cages = user.Cages.MaptoDtoList(),
-                Medicines = user.Medicines.MaptoDtoList()
+
 
             };
         }

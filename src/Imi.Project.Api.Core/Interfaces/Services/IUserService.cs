@@ -9,6 +9,7 @@ namespace Imi.Project.Api.Core.Infrastructure.Services
     public interface IUserService
     {
         Task<IEnumerable<UserResponseDto>> ListAllAsync();
+        Task<UserResponseDto> GetByIdAsync(Guid id);
 
     }
 }
