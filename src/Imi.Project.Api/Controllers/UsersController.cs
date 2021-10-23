@@ -1,5 +1,6 @@
-﻿using Imi.Project.Api.Core.Infrastructure;
-using Imi.Project.Common;
+﻿
+using Imi.Project.Api.Core.Dtos.Requests;
+using Imi.Project.Api.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,57 +14,61 @@ namespace Imi.Project.Api.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        protected readonly IUserRepository _userRepository;
+        protected readonly IUserService _userService;
 
-        public UsersController(IUserRepository userRepository)
+        public UsersController(IUserService userService)
         {
-            _userRepository = userRepository;
+            _userService = userService;
         }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var users = await _userRepository.ListAllAsync();
-            var usersDto = users.Select(u =>
-            new UserResponseDto
-            {
-                Id = u.Id,
-                Name = u.Name,
-                Cages = u.Cages.Select(b =>
-                new CageResponseDto
-                {
-                    Id = b.Id,
-                    DailyTasks = b.DailyTasks.Select(b =>
-                new DailyTaskResponseDto
-                {
-                    Id = b.Id,
-
-                }).ToList(),
-                Birds = b.Birds.Select(b =>
-                new BirdResponseDto
-                {
-                    Id = b.Id,
-
-                }).ToList(),
-                }).ToList(),
-                Birds = u.Birds.Select(b =>
-                new BirdResponseDto
-                {
-                    Id = b.Id,
-
-                }).ToList(),
-                Medicines = u.Medicines.Select(b =>
-                new MedicineResponseDto
-                {
-                    Id = b.Id,
-
-                }).ToList()
-
-
-            }) ;
-
-            return Ok(usersDto);
-
+            var users = await _userService.ListAllUsersAsync();
+            return Ok(users);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(Guid id)
+        {
+            var user = await _userService.GetUserByIdAsync(id);
+            return Ok(user);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post(UserRequestDto newUser)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var userDto = await _userService.AddUserAsync(newUser);
+            return Ok(userDto);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Put(UserRequestDto updatedUser)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var userDto = await _userService.UpdateUserAsync(updatedUser);
+            return Ok(userDto);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(UserRequestDto updatedUser)
+        {
+            if (updatedUser == null)
+            {
+                return NotFound($"User does not exist");
+
+            }
+            await _userService.DeleteUserAsync(updatedUser);
+            return Ok();
+        }
+
     }
+    
 }

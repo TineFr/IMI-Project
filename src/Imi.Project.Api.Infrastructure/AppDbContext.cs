@@ -54,6 +54,24 @@ namespace Imi.Project.Api.Infrastructure
                 .HasForeignKey(p => p.SpeciesId)
                 .OnDelete(DeleteBehavior.SetNull);
 
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.Birds)
+                .WithOne(e => e.User)
+                .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.Medicines)
+                .WithOne(e => e.User)
+                .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.Cages)
+                .WithOne(e => e.User)
+                .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.SetNull);
+
             base.OnModelCreating(modelBuilder);
         }
 

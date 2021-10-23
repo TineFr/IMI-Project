@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Imi.Project.Api.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20211021204810_InitialMigration")]
+    [Migration("20211023150427_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -295,16 +295,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -315,18 +306,12 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("5e146a05-34ec-4ff0-8dde-6dc6d62c3591"),
-                            Email = "tine.franchois@gmail.com",
-                            FirstName = "Tine",
-                            Name = "Franchois",
-                            Password = "15rtfpTN"
+                            Name = "Franchois"
                         },
                         new
                         {
                             Id = new Guid("334cd0db-6111-4a42-9f4d-6af33fe6283b"),
-                            Email = "claire.dequinnemaere@gmail.com",
-                            FirstName = "Claire",
-                            Name = "Dequinnemaere",
-                            Password = "iej456Pn"
+                            Name = "Dequinnemaere"
                         });
                 });
 
@@ -344,7 +329,8 @@ namespace Imi.Project.Api.Infrastructure.Migrations
 
                     b.HasOne("Imi.Project.Api.Core.Entities.User", "User")
                         .WithMany("Birds")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 
             modelBuilder.Entity("Imi.Project.Api.Core.Entities.BirdMedicines", b =>
@@ -366,7 +352,8 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 {
                     b.HasOne("Imi.Project.Api.Core.Entities.User", "User")
                         .WithMany("Cages")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 
             modelBuilder.Entity("Imi.Project.Api.Core.Entities.DailyTask", b =>
@@ -382,7 +369,8 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 {
                     b.HasOne("Imi.Project.Api.Core.Entities.User", "User")
                         .WithMany("Medicines")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 #pragma warning restore 612, 618
         }

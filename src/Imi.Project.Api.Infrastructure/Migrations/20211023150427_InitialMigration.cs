@@ -25,10 +25,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    FirstName = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -53,7 +50,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -73,7 +70,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -110,7 +107,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -168,11 +165,11 @@ namespace Imi.Project.Api.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "Email", "FirstName", "Name", "Password" },
+                columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("5e146a05-34ec-4ff0-8dde-6dc6d62c3591"), "tine.franchois@gmail.com", "Tine", "Franchois", "15rtfpTN" },
-                    { new Guid("334cd0db-6111-4a42-9f4d-6af33fe6283b"), "claire.dequinnemaere@gmail.com", "Claire", "Dequinnemaere", "iej456Pn" }
+                    { new Guid("5e146a05-34ec-4ff0-8dde-6dc6d62c3591"), "Franchois" },
+                    { new Guid("334cd0db-6111-4a42-9f4d-6af33fe6283b"), "Dequinnemaere" }
                 });
 
             migrationBuilder.InsertData(

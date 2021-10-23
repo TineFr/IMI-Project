@@ -2,12 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace Imi.Project.Api.Core.Infrastructure
+namespace Imi.Project.Api.Core.Interfaces.Repositories
 {
     public interface IDailyTaskRepository : IBaseRepository<DailyTask>
     {
-        
+
     }
 }

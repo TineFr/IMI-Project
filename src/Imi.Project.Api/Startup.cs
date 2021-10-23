@@ -1,4 +1,7 @@
-using Imi.Project.Api.Core.Infrastructure;
+
+using Imi.Project.Api.Core.Interfaces.Repositories;
+using Imi.Project.Api.Core.Interfaces.Services;
+using Imi.Project.Api.Core.Services;
 using Imi.Project.Api.Infrastructure;
 using Imi.Project.Api.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -43,6 +46,7 @@ namespace Imi.Project.Api
             services.AddScoped<ISpeciesRepository, SpeciesRepository>();
             services.AddScoped<IMedicineRepository, MedicineRepository>();
             services.AddScoped<IDailyTaskRepository, DailyTaskRepository>();
+            services.AddScoped<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

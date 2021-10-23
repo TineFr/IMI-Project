@@ -1,12 +1,11 @@
-﻿using Imi.Project.Api.Core.Infrastructure;
-using Imi.Project.Common;
+﻿using Imi.Project.Api.Core.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Imi.Project.Api.Helper;
 using System.Threading.Tasks;
+using Imi.Project.Api.Core.Interfaces.Repositories;
 
 namespace Imi.Project.Api.Controllers
 {
@@ -23,14 +22,7 @@ namespace Imi.Project.Api.Controllers
             _cageRepository = cageRepository;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Get()
-        {
-            var cages = await _cageRepository.ListAllAsync();
-            var cagesDtoList = cages.MaptoDtoList();
-            return Ok(cagesDtoList);
 
-        }
 
     }
 }
