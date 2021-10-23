@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Imi.Project.Common
+namespace Imi.Project.Api.Core.Dtos.Responses
 {
     public class CageResponseDto : BaseEntityDto
     {
