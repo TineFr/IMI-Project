@@ -3,6 +3,7 @@ using Imi.Project.Api.Core.Dtos.Birds;
 using Imi.Project.Api.Core.Dtos.Cages;
 using Imi.Project.Api.Core.Dtos.DailyTasks;
 using Imi.Project.Api.Core.Dtos.Medicines;
+using Imi.Project.Api.Core.Dtos.Species;
 using Imi.Project.Api.Core.Dtos.Users;
 using Imi.Project.Api.Core.Entities;
 using System;
@@ -76,6 +77,18 @@ namespace Imi.Project.Api.Core.Helper
                 IsDone = taskDto.IsDone
             };
             return task;
+        }
+
+        public static Species MapToEntity(this SpeciesRequestDto speciesDto)
+        {
+            var species = new Species
+            {
+                Id = speciesDto.Id,
+                Name = speciesDto.Name,
+                ScientificName = speciesDto.ScientificName
+
+            };
+            return species;
         }
     }
 }
