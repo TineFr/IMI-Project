@@ -59,10 +59,5 @@ namespace Imi.Project.Api.Core.Services
             await _userRepository.DeleteAsync(user);
         }
 
-        public async Task<IEnumerable<CageResponseDto>> GetCagesByUserIdAsync(Guid id)
-        {
-            var cage = await _cageRepository.GetByUserIdAsync(id);
-            return cage.MapToDtoList();
-        }
     }
 }

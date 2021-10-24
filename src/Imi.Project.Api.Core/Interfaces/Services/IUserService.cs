@@ -13,7 +13,6 @@ namespace Imi.Project.Api.Core.Interfaces.Services
         Task<UserResponseDto> GetUserByIdAsync(Guid id);
         Task<UserResponseDto> AddUserAsync(UserRequestDto userRequestDto);
         Task<UserResponseDto> UpdateUserAsync(UserRequestDto userRequestDto);
-        Task<IEnumerable<CageResponseDto>> GetCagesByUserIdAsync(Guid Id);
         Task DeleteUserAsync(UserRequestDto userRequestDto);
 
     }

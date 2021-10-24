@@ -36,9 +36,10 @@ namespace Imi.Project.Api.Core.Services
             return cage.MapToDto();
         }
 
-        public Task<CageResponseDto> GetCageByUserIdAsync(Guid id)
+        public async Task<IEnumerable<CageResponseDto>> GetCagesByUserIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var cages = await _cageRepository.GetByUserIdAsync(id);
+            return cages.MapToDtoList();
         }
 
         public async Task<IEnumerable<CageResponseDto>> ListAllCagesAsync()
