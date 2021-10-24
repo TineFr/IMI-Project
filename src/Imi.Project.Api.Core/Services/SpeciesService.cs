@@ -18,14 +18,21 @@ namespace Imi.Project.Api.Core.Services
             _speciesRepository = speciesRepository;
         }
 
-        public Task<SpeciesResponseDto> AddSpeciesAsync(SpeciesRequestDto userRequestDto)
+        public async Task<SpeciesResponseDto> AddSpeciesAsync(SpeciesRequestDto speciesRequestDto)
         {
-            throw new NotImplementedException();
+            var species = speciesRequestDto.MapToEntity();
+            var result = await _speciesRepository.AddAsync(species);
+            var dto = result.MapToDto();
+
+            return dto;
         }
 
-        public Task DeleteSpeciesAsync(SpeciesRequestDto userRequestDto)
+        public async Task DeleteSpeciesAsync(SpeciesRequestDto speciesRequestDto)
         {
-            throw new NotImplementedException();
+            var species = speciesRequestDto.MapToEntity();
+
+            await _speciesRepository.DeleteAsync(species);
+            
         }
 
         public async Task<SpeciesResponseDto> GetSpeciesByIdAsync(Guid id)
@@ -40,9 +47,13 @@ namespace Imi.Project.Api.Core.Services
             return species.MapToDtoList();
         }
 
-        public Task<SpeciesResponseDto> UpdateSpeciesAsync(SpeciesRequestDto userRequestDto)
+        public async Task<SpeciesResponseDto> UpdateSpeciesAsync(SpeciesRequestDto speciesRequestDto)
         {
-            throw new NotImplementedException();
+            var species = speciesRequestDto.MapToEntity();
+            var result = await _speciesRepository.UpdateAsync(species);
+            var dto = result.MapToDto();
+
+            return dto;
         }
     }
 }

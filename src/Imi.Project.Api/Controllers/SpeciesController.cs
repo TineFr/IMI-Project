@@ -1,4 +1,5 @@
-﻿using Imi.Project.Api.Core.Interfaces.Services;
+﻿using Imi.Project.Api.Core.Dtos.Species;
+using Imi.Project.Api.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -32,6 +33,40 @@ namespace Imi.Project.Api.Controllers
         {
             var species = await _speciesService.GetSpeciesByIdAsync(id);
             return Ok(species);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post(SpeciesRequestDto newspecies)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var speciesDto = await _speciesService.AddSpeciesAsync(newspecies);
+            return Ok(speciesDto);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Put(SpeciesRequestDto updatedspecies)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var speciesDto = await _speciesService.UpdateSpeciesAsync(updatedspecies);
+            return Ok(speciesDto);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(SpeciesRequestDto updatedspecies)
+        {
+            if (updatedspecies == null)
+            {
+                return NotFound($"species does not exist");
+
+            }
+            await _speciesService.DeleteSpeciesAsync(updatedspecies);
+            return Ok();
         }
     }
 }

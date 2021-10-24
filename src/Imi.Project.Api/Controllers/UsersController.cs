@@ -1,5 +1,6 @@
 ﻿
-using Imi.Project.Api.Core.Dtos.Requests;
+
+using Imi.Project.Api.Core.Dtos.Users;
 using Imi.Project.Api.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

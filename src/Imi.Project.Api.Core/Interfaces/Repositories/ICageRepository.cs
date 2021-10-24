@@ -10,6 +10,5 @@ namespace Imi.Project.Api.Core.Interfaces.Repositories
     {
         Task<IEnumerable<Cage>> GetCagesByUserIdAsync(Guid id);
 
-        //Task<Cage> GetCageByUserIdAsync(Guid userId, Guid cageId);
     }
 }

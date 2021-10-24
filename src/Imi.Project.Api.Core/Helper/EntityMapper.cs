@@ -16,6 +16,7 @@ namespace Imi.Project.Api.Core.Helper
     {
         public static User MapToEntity(this UserRequestDto userDto)
         {
+
            var user = new User
             {
                 Id = userDto.Id,

@@ -10,8 +10,8 @@ namespace Imi.Project.Api.Core.Interfaces.Services
     {
         Task<IEnumerable<SpeciesResponseDto>> ListAllSpeciessAsync();
         Task<SpeciesResponseDto> GetSpeciesByIdAsync(Guid id);
-        Task<SpeciesResponseDto> AddSpeciesAsync(SpeciesRequestDto userRequestDto);
-        Task<SpeciesResponseDto> UpdateSpeciesAsync(SpeciesRequestDto userRequestDto);
-        Task DeleteSpeciesAsync(SpeciesRequestDto userRequestDto);
+        Task<SpeciesResponseDto> AddSpeciesAsync(SpeciesRequestDto speciesRequestDto);
+        Task<SpeciesResponseDto> UpdateSpeciesAsync(SpeciesRequestDto speciesRequestDto);
+        Task DeleteSpeciesAsync(SpeciesRequestDto speciesRequestDto);
     }
 }
