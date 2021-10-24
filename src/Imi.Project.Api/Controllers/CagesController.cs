@@ -47,7 +47,5 @@ namespace Imi.Project.Api.Controllers
             return Ok(birds);
         }
 
-
-
     }
 }

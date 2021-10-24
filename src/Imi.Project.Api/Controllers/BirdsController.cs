@@ -19,15 +19,22 @@ namespace Imi.Project.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var cages = await _birdService.ListAllBirdsAsync();
-            return Ok(cages);
+            var birds = await _birdService.ListAllBirdsAsync();
+            return Ok(birds);
         }
+
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            var cage = await _birdService.GetBirdByIdAsync(id);
-            return Ok(cage);
+            var bird = await _birdService.GetBirdByIdAsync(id);
+            return Ok(bird);
         }
+
+
+
+
+
+
     }
 }   
