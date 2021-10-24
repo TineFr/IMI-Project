@@ -1,5 +1,5 @@
-﻿using Imi.Project.Api.Core.Dtos.Requests;
-using Imi.Project.Api.Core.Dtos.Responses;
+﻿using Imi.Project.Api.Core.Dtos.Birds;
+using Imi.Project.Api.Core.Dtos.Requests;
 using System;
 using System.Collections.Generic;
 using System.Text;

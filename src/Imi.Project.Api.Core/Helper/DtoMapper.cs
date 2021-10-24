@@ -1,4 +1,9 @@
-﻿using Imi.Project.Api.Core.Dtos.Responses;
+﻿using Imi.Project.Api.Core.Dtos.Birds;
+using Imi.Project.Api.Core.Dtos.Cages;
+using Imi.Project.Api.Core.Dtos.DailyTasks;
+using Imi.Project.Api.Core.Dtos.Medicines;
+using Imi.Project.Api.Core.Dtos.Species;
+using Imi.Project.Api.Core.Dtos.Users;
 using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Core.Enums;
 using System;

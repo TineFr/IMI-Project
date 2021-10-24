@@ -1,5 +1,5 @@
 ﻿using Imi.Project.Api.Core.Dtos.Requests;
-using Imi.Project.Api.Core.Dtos.Responses;
+using Imi.Project.Api.Core.Dtos.Users;
 using System;
 using System.Collections.Generic;
 using System.Text;
