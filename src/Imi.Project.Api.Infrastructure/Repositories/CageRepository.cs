@@ -48,11 +48,11 @@ namespace Imi.Project.Api.Infrastructure.Repositories
             return cages;
         }
 
-        public async Task<Cage> GetCageByUserIdAsync(Guid userId, Guid cageId) 
-        {
-            var cages = await GetCagesByUserIdAsync(userId);
-            var cage = cages.SingleOrDefault(c => c.Id.Equals(cageId));
-            return cage;
-        }
+        //public async Task<Cage> GetCageByUserIdAsync(Guid userId, Guid cageId) 
+        //{
+        //    var cages = await GetCagesByUserIdAsync(userId);
+        //    var cage = cages.SingleOrDefault(c => c.Id.Equals(cageId));
+        //    return cage;
+        //}
     }
 }
