@@ -1,5 +1,5 @@
-﻿using Imi.Project.Api.Core.Dtos.Requests;
-using Imi.Project.Api.Core.Dtos.Responses;
+﻿using Imi.Project.Api.Core.Dtos.Cages;
+using Imi.Project.Api.Core.Dtos.Requests;
 using Imi.Project.Api.Core.Helper;
 using Imi.Project.Api.Core.Interfaces.Repositories;
 using Imi.Project.Api.Core.Interfaces.Services;
@@ -36,11 +36,6 @@ namespace Imi.Project.Api.Core.Services
             return cage.MapToDto();
         }
 
-        //public async Task<CageResponseDto> GetCageByUserIdAsync(Guid userId, Guid cageId)
-        //{
-        //    var cage = await _cageRepository.GetCageByUserIdAsync(userId, cageId);
-        //    return cage.MapToDto();
-        //}
 
         public async Task<IEnumerable<CageResponseDto>> GetCagesByUserIdAsync(Guid id)
         {

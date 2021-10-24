@@ -17,10 +17,13 @@ namespace Imi.Project.Api.Controllers
     public class CagesController : ControllerBase
     {
         protected readonly ICageService _cageService;
+        protected readonly IBirdService _birdService;
 
-        public CagesController(ICageService cageService)
+
+        public CagesController(ICageService cageService , IBirdService birdService)
         {
             _cageService = cageService;
+            _birdService = birdService;
         }
 
         [HttpGet]
@@ -37,7 +40,12 @@ namespace Imi.Project.Api.Controllers
             return Ok(cage);
         }
 
-
+        [HttpGet("{id}/birds")]
+        public async Task<IActionResult> GetBirdsByCageId(Guid id)
+        {
+            var birds = await _birdService.GetBirdsByCageIdAsync(id);
+            return Ok(birds);
+        }
 
     }
 }
