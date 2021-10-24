@@ -8,8 +8,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Imi.Project.Api.Core.Entities;
-using Imi.Project.Api.Core.Dtos.Requests;
 using Imi.Project.Api.Core.Dtos.Users;
+
 
 namespace Imi.Project.Api.Core.Services
 {

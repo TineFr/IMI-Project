@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Imi.Project.Api.Core.Dtos.Requests
+namespace Imi.Project.Api.Core.Dtos.Cages
+
 {
     public class CageRequestDto : BaseEntityDto
     {

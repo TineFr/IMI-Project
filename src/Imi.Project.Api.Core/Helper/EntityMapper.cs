@@ -1,4 +1,6 @@
-﻿using Imi.Project.Api.Core.Dtos.Requests;
+﻿
+using Imi.Project.Api.Core.Dtos.Birds;
+using Imi.Project.Api.Core.Dtos.Users;
 using Imi.Project.Api.Core.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,17 +10,35 @@ namespace Imi.Project.Api.Core.Helper
 {
     public static class EntityMapper
     {
-
-
-        public static User MapToEntity(this UserRequestDto user)
+        public static User MapToEntity(this UserRequestDto userDto)
         {
-            return new User
+           var user = new User
             {
-                Id = user.Id,
-                Name = user.Name
-
+                Id = userDto.Id,
+                Name = userDto.Name
             };
+            return user;
         }
+    
+        public static Bird MapToEntity(this BirdRequestDto birdDto)
+        {
+            var bird = new Bird
+            {
+                Id = birdDto.Id,
+                Name = birdDto.Name,
+                CageId = birdDto.CageId,
+                Gender = birdDto.Gender,
+                Food = birdDto.Food,
+                Image = birdDto.Image,
+                HatchDate = birdDto.HatchDate,
+                SpeciesId = birdDto.SpeciesId,
+                UserId = birdDto.UserId
+            };
+            return bird;
+
+        }
+
+
 
     }
 }
