@@ -1,6 +1,7 @@
 ﻿
 using Imi.Project.Api.Core.Dtos.Birds;
 using Imi.Project.Api.Core.Dtos.Cages;
+using Imi.Project.Api.Core.Dtos.DailyTasks;
 using Imi.Project.Api.Core.Dtos.Medicines;
 using Imi.Project.Api.Core.Dtos.Users;
 using Imi.Project.Api.Core.Entities;
@@ -63,6 +64,18 @@ namespace Imi.Project.Api.Core.Helper
                 UserId = medicineDto.UserId
             };
             return medicine;
+        }
+
+        public static DailyTask MapToEntity(this DailyTaskRequestDto taskDto)
+        {
+            var task = new DailyTask
+            {
+                Id = taskDto.Id,
+                Name = taskDto.Name,
+                CageId = taskDto.CageId,
+                IsDone = taskDto.IsDone
+            };
+            return task;
         }
     }
 }
