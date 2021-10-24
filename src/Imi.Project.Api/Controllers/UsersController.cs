@@ -44,6 +44,13 @@ namespace Imi.Project.Api.Controllers
             return Ok(cages);
         }
 
+        [HttpGet("{userId}/cages/{cageId}")]
+        public async Task<IActionResult> GetCageFromUser(Guid userId, Guid cageId)
+        {
+            var cage = await _cageService.GetCageByUserIdAsync(userId, cageId);
+            return Ok(cage);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post(UserRequestDto newUser)
         {

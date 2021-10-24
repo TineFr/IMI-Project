@@ -41,5 +41,18 @@ namespace Imi.Project.Api.Infrastructure.Repositories
         {
             return await GetAll().Where(c => c.UserId.Equals(id)).ToListAsync();
         }
+
+        public async Task<IEnumerable<Cage>> GetCagesByUserIdAsync(Guid id)
+        {
+            var cages = await GetAll().Where(p => p.UserId.Equals(id)).ToListAsync();
+            return cages;
+        }
+
+        public async Task<Cage> GetCageByUserIdAsync(Guid userId, Guid cageId) 
+        {
+            var cages = await GetCagesByUserIdAsync(userId);
+            var cage = cages.SingleOrDefault(c => c.Id.Equals(cageId));
+            return cage;
+        }
     }
 }

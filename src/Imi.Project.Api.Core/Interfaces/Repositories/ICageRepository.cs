@@ -8,6 +8,8 @@ namespace Imi.Project.Api.Core.Interfaces.Repositories
 {
     public interface ICageRepository : IBaseRepository<Cage>
     {
-        Task<IEnumerable<Cage>> GetByUserIdAsync(Guid id);
+        Task<IEnumerable<Cage>> GetCagesByUserIdAsync(Guid id);
+
+        Task<Cage> GetCageByUserIdAsync(Guid userId, Guid cageId);
     }
 }

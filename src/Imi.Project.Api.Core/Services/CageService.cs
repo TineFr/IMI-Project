@@ -36,9 +36,15 @@ namespace Imi.Project.Api.Core.Services
             return cage.MapToDto();
         }
 
+        public async Task<CageResponseDto> GetCageByUserIdAsync(Guid userId, Guid cageId)
+        {
+            var cage = await _cageRepository.GetCageByUserIdAsync(userId, cageId);
+            return cage.MapToDto();
+        }
+
         public async Task<IEnumerable<CageResponseDto>> GetCagesByUserIdAsync(Guid id)
         {
-            var cages = await _cageRepository.GetByUserIdAsync(id);
+            var cages = await _cageRepository.GetCagesByUserIdAsync(id);
             return cages.MapToDtoList();
         }
 
