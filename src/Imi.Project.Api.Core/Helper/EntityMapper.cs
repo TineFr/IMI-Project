@@ -1,5 +1,6 @@
 ﻿
 using Imi.Project.Api.Core.Dtos.Birds;
+using Imi.Project.Api.Core.Dtos.Cages;
 using Imi.Project.Api.Core.Dtos.Users;
 using Imi.Project.Api.Core.Entities;
 using System;
@@ -38,6 +39,19 @@ namespace Imi.Project.Api.Core.Helper
 
         }
 
+        public static Cage MapToEntity(this CageRequestDto cageDto)
+        {
+            var cage = new Cage
+            {
+                Id = cageDto.Id,
+                Name = cageDto.Name,
+                Location = cageDto.Location,
+                Image = cageDto.Image,
+                UserId = cageDto.UserId
+            };
+            return cage;
+
+        }
 
 
     }
