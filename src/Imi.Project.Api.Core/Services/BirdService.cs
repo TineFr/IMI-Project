@@ -49,6 +49,12 @@ namespace Imi.Project.Api.Core.Services
             return birds.MapToDtoList();
         }
 
+        public async Task<IEnumerable<BirdResponseDto>> GetBirdsWithMedicineAsync()
+        {
+            var birds = await _birdRepository.GetBirdsWithMedicineAsync();
+            return birds.MapToDtoList();
+        }
+
         public async Task<IEnumerable<BirdResponseDto>> ListAllBirdsAsync()
         {
             var birds = await _birdRepository.ListAllAsync();

@@ -43,9 +43,9 @@ namespace Imi.Project.Api.Infrastructure.Repositories
             return await GetAll().Where(b => b.UserId.Equals(id)).ToListAsync();
         }
 
-        //public async Task<IEnumerable<Bird>> GetBirdsWithMedicineAsync()
-        //{
-        //    return await GetAll().Where(b => b.BirdMedicines != null).ToListAsync();
-        //}
+        public async Task<IEnumerable<Bird>> GetBirdsWithMedicineAsync()
+        {
+            return await GetAll().Where(b => b.BirdMedicines != null).ToListAsync();
+        }
     }
 }
