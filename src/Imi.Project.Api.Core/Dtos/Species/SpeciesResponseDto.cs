@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Imi.Project.Api.Core.Dtos.Responses
+namespace Imi.Project.Api.Core.Dtos.Species
 {
     public class SpeciesResponseDto : BaseEntityDto
     {

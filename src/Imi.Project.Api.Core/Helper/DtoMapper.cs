@@ -55,7 +55,7 @@ namespace Imi.Project.Api.Core.Helper
             };
         }
 
-        public static IEnumerable<BirdResponseDto> MaptoDtoList(this IEnumerable<Bird> birds)
+        public static IEnumerable<BirdResponseDto> MapToDtoList(this IEnumerable<Bird> birds)
         {
             return birds.Select(b => b.MapToDto()).ToList();
         }
@@ -68,7 +68,7 @@ namespace Imi.Project.Api.Core.Helper
                 Name = cage.Name,
                 Image = cage.Image,
                 Location = cage.Location,
-                Birds = cage.Birds?.MaptoDtoList(),
+                Birds = cage.Birds?.MapToDtoList(),
                 DailyTasks = cage.DailyTasks?.MapToDtoList()
             };
         }

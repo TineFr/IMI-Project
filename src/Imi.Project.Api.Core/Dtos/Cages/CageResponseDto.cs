@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Imi.Project.Api.Core.Dtos.Birds;
+using Imi.Project.Api.Core.Dtos.DailyTasks;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Imi.Project.Api.Core.Dtos.Responses
+namespace Imi.Project.Api.Core.Dtos.Cages
 {
     public class CageResponseDto : BaseEntityDto
     {

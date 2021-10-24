@@ -16,11 +16,14 @@ namespace Imi.Project.Api.Controllers
     {
         protected readonly IUserService _userService;
         protected readonly ICageService _cageService;
+        protected readonly IBirdService _birdService;
 
-        public UsersController(IUserService userService, ICageService cageService)
+
+        public UsersController(IUserService userService, ICageService cageService, IBirdService birdService)
         {
             _userService = userService;
             _cageService = cageService;
+            _birdService = birdService;
         }
 
         [HttpGet]
@@ -44,12 +47,12 @@ namespace Imi.Project.Api.Controllers
             return Ok(cages);
         }
 
-        //[HttpGet("{userId}/cages/{cageId}")]
-        //public async Task<IActionResult> GetCageFromUser(Guid userId, Guid cageId)
-        //{
-        //    var cage = await _cageService.GetCageByUserIdAsync(userId, cageId);
-        //    return Ok(cage);
-        //}
+        [HttpGet("{id}/birds")]
+        public async Task<IActionResult> GetBirdsByCageId(Guid id)
+        {
+            var birds = await _birdService.GetBirdsByUserIdAsync(id);
+            return Ok(birds);
+        }
 
         [HttpPost]
         public async Task<IActionResult> Post(UserRequestDto newUser)

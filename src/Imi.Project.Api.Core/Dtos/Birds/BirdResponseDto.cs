@@ -1,9 +1,11 @@
-﻿using Imi.Project.Api.Core.Enums;
+﻿using Imi.Project.Api.Core.Dtos.Medicines;
+using Imi.Project.Api.Core.Dtos.Species;
+using Imi.Project.Api.Core.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Imi.Project.Api.Core.Dtos.Responses
+namespace Imi.Project.Api.Core.Dtos.Birds
 {
     public class BirdResponseDto : BaseEntityDto
     {
