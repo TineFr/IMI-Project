@@ -1,4 +1,5 @@
 ﻿using Imi.Project.Api.Core.Interfaces.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -7,19 +8,21 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Controllers
 {
-    public class BirdsController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class MedicinesController : ControllerBase
     {
-        protected readonly IBirdService _birdService;
+        protected readonly IMedicineService _medicineService;
 
-        public BirdsController(IBirdService birdService)
+        public MedicinesController(IMedicineService medicineService)
         {
-            _birdService = birdService;
+            _medicineService = medicineService;
         }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var birds = await _birdService.ListAllBirdsAsync();
+            var birds = await _medicineService.ListAllMedicinesAsync();
             return Ok(birds);
         }
 
@@ -27,8 +30,8 @@ namespace Imi.Project.Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            var bird = await _birdService.GetBirdByIdAsync(id);
+            var bird = await _medicineService.GetMedicineByIdAsync(id);
             return Ok(bird);
         }
     }
-}   
+}

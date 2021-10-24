@@ -110,7 +110,7 @@ namespace Imi.Project.Api.Core.Helper
             };
         }
 
-        public static IEnumerable<MedicineResponseDto> MaptoDToList(this IEnumerable<Medicine> medicines)
+        public static IEnumerable<MedicineResponseDto> MapToDtoList(this IEnumerable<Medicine> medicines)
         {
             return medicines.Select(u => u.MapToDto()).ToList();
         }
