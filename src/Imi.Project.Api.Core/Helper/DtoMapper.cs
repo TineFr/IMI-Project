@@ -30,12 +30,13 @@ namespace Imi.Project.Api.Core.Helper
         {
             return species.Select(s => s.MapToDto()).ToList();
         }
-        public static DailyTaskResponseDto MapToDto(this DailyTask tasks)
+        public static DailyTaskResponseDto MapToDto(this DailyTask task)
         {
             return new DailyTaskResponseDto
             {
-                Id = tasks.Id,
-                Name = tasks.Name,
+                Id = task.Id,
+                Name = task.Name,
+                IsDone = task.IsDone
             };
         }
 
@@ -53,7 +54,7 @@ namespace Imi.Project.Api.Core.Helper
                 Name = bird.Name,
                 Species = bird.Species?.MapToDto(),
                 Food = bird.Food,
-                Gender = bird.Gender,
+                Gender = bird.Gender.ToString(),
                 HatchDate = bird.HatchDate,
                 Image = bird.Image,
                 Cage = bird.Cage.Name,        

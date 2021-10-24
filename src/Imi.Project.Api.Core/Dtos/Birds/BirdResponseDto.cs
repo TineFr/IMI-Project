@@ -10,7 +10,7 @@ namespace Imi.Project.Api.Core.Dtos.Birds
     public class BirdResponseDto : BaseEntityDto
     {
         public DateTime HatchDate { get; set; }
-        public Gender Gender { get; set; }
+        public string Gender { get; set; }
         public string Food { get; set; }
         public string Cage { get; set; }
         public SpeciesResponseDto Species { get; set; }
