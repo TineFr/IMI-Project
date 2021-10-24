@@ -57,7 +57,8 @@ namespace Imi.Project.Api.Core.Helper
                 Gender = bird.Gender.ToString(),
                 HatchDate = bird.HatchDate,
                 Image = bird.Image,
-                Cage = bird.Cage.Name,        
+                Cage = bird.Cage.Name, 
+                Medicines = bird.BirdMedicines?.Select(b => b.Medicine?.MapToDto())
             };
         }
 
@@ -74,7 +75,7 @@ namespace Imi.Project.Api.Core.Helper
                 Name = cage.Name,
                 Image = cage.Image,
                 Location = cage.Location,
-                Birds = cage.Birds?.MapToDtoList(),
+                Birds = cage.Birds?.Select(b => b.Id).ToList(),
                 DailyTasks = cage.DailyTasks?.MapToDtoList()
             };
         }

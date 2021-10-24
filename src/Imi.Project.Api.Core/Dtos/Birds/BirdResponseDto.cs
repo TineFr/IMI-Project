@@ -14,7 +14,7 @@ namespace Imi.Project.Api.Core.Dtos.Birds
         public string Food { get; set; }
         public string Cage { get; set; }
         public SpeciesResponseDto Species { get; set; }
-        public ICollection<MedicineResponseDto> Medicines { get; set; }
+        public IEnumerable<MedicineResponseDto> Medicines { get; set; }
         public string Image { get; set; }
     }
 }

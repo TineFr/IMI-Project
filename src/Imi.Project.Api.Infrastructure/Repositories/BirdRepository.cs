@@ -23,7 +23,8 @@ namespace Imi.Project.Api.Infrastructure.Repositories
                                    .Include(b => b.Cage)
                                    .ThenInclude(b => b.Birds)
                                    .Include(b => b.Species)
-                                   .Include(b => b.BirdMedicines);                         
+                                   .Include(b => b.BirdMedicines)
+                                   .ThenInclude(b => b.Medicine);
         }
         public async override Task<IEnumerable<Bird>> ListAllAsync()
         {
@@ -45,7 +46,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
 
         public async Task<IEnumerable<Bird>> GetBirdsWithMedicineAsync()
         {
-            return await GetAll().Where(b => b.BirdMedicines != null).ToListAsync();
+            return await GetAll().Where(b => b.BirdMedicines.Count > 0).ToListAsync();
         }
     }
 }
