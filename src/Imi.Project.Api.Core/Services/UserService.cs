@@ -15,10 +15,12 @@ namespace Imi.Project.Api.Core.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
+        private readonly ICageRepository _cageRepository;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository, ICageRepository cageRepository)
         {
             _userRepository = userRepository;
+            _cageRepository = cageRepository;
         }
 
         public async Task<UserResponseDto> GetUserByIdAsync(Guid id)
@@ -26,6 +28,7 @@ namespace Imi.Project.Api.Core.Services
             var user= await _userRepository.GetByIdAsync(id);
             return user.MapToDto();
         }
+
 
         public async Task<IEnumerable<UserResponseDto>> ListAllUsersAsync()
         {
@@ -55,5 +58,6 @@ namespace Imi.Project.Api.Core.Services
 
             await _userRepository.DeleteAsync(user);
         }
+
     }
 }

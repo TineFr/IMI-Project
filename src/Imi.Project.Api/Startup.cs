@@ -47,6 +47,7 @@ namespace Imi.Project.Api
             services.AddScoped<IMedicineRepository, MedicineRepository>();
             services.AddScoped<IDailyTaskRepository, DailyTaskRepository>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ICageService, CageService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

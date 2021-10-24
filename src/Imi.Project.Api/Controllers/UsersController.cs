@@ -15,10 +15,12 @@ namespace Imi.Project.Api.Controllers
     public class UsersController : ControllerBase
     {
         protected readonly IUserService _userService;
+        protected readonly ICageService _cageService;
 
-        public UsersController(IUserService userService)
+        public UsersController(IUserService userService, ICageService cageService)
         {
             _userService = userService;
+            _cageService = cageService;
         }
 
         [HttpGet]
@@ -33,6 +35,13 @@ namespace Imi.Project.Api.Controllers
         {
             var user = await _userService.GetUserByIdAsync(id);
             return Ok(user);
+        }
+
+        [HttpGet("{id}/cages")]
+        public async Task<IActionResult> GetCagesFromUser(Guid id)
+        {
+            var cages = await _cageService.GetCagesByUserIdAsync(id);
+            return Ok(cages);
         }
 
         [HttpPost]
