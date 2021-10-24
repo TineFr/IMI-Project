@@ -18,14 +18,20 @@ namespace Imi.Project.Api.Core.Services
             _dailyTaskRepository = dailyTaskRepository;
         }
 
-        public Task<DailyTaskResponseDto> AddDailyTaskAsync(DailyTaskRequestDto DailyTaskRequestDto)
+        public async Task<DailyTaskResponseDto> AddDailyTaskAsync(DailyTaskRequestDto dailyTaskRequestDto)
         {
-            throw new NotImplementedException();
+            var task = dailyTaskRequestDto.MapToEntity();
+            var result = await _dailyTaskRepository.AddAsync(task);
+            var dto = result.MapToDto();
+
+            return dto;
         }
 
-        public Task DeleteDailyTaskAsync(DailyTaskRequestDto userRequestDto)
+        public async Task DeleteDailyTaskAsync(DailyTaskRequestDto dailyTaskRequestDto)
         {
-            throw new NotImplementedException();
+            var task = dailyTaskRequestDto.MapToEntity();
+
+            await _dailyTaskRepository.DeleteAsync(task);
         }
 
         public async Task<DailyTaskResponseDto> GetDailyTaskByIdAsync(Guid id)
@@ -46,9 +52,13 @@ namespace Imi.Project.Api.Core.Services
             return tasks.MapToDtoList();
         }
 
-        public Task<DailyTaskResponseDto> UpdateDailyTaskAsync(DailyTaskRequestDto DailyTaskRequestDto)
+        public async Task<DailyTaskResponseDto> UpdateDailyTaskAsync(DailyTaskRequestDto dailyTaskRequestDto)
         {
-            throw new NotImplementedException();
+            var task = dailyTaskRequestDto.MapToEntity();
+            var result = await _dailyTaskRepository.UpdateAsync(task);
+            var dto = result.MapToDto();
+
+            return dto;
         }
     }
 }
