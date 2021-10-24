@@ -19,9 +19,7 @@ namespace Imi.Project.Api.Core.Dtos.Birds
         public string Food { get; set; }
         [Required(ErrorMessage = "{0} is required")]
         public Guid UserId { get; set; }
-        [Required(ErrorMessage = "{0} is required")]
         public Guid CageId { get; set; }
-        [Required(ErrorMessage = "{0} is required")]
         public Guid SpeciesId { get; set; }
         [Required(ErrorMessage = "{0} is required")]
         public string Image { get; set; }

@@ -1,6 +1,7 @@
 ﻿
 using Imi.Project.Api.Core.Dtos.Birds;
 using Imi.Project.Api.Core.Dtos.Cages;
+using Imi.Project.Api.Core.Dtos.Medicines;
 using Imi.Project.Api.Core.Dtos.Users;
 using Imi.Project.Api.Core.Entities;
 using System;
@@ -50,9 +51,18 @@ namespace Imi.Project.Api.Core.Helper
                 UserId = cageDto.UserId
             };
             return cage;
-
         }
 
-
+        public static Medicine MapToEntity(this MedicineRequestDto medicineDto)
+        {
+            var medicine = new Medicine
+            {
+                Id = medicineDto.Id,
+                Name = medicineDto.Name,
+                Usage = medicineDto.Usage,
+                UserId = medicineDto.UserId
+            };
+            return medicine;
+        }
     }
 }
