@@ -16,5 +16,6 @@ namespace Imi.Project.Api.Core.Interfaces.Services
         Task DeleteBirdAsync(BirdRequestDto userRequestDto);
         Task<IEnumerable<BirdResponseDto>> GetBirdsByUserIdAsync(Guid id);
         Task<IEnumerable<BirdResponseDto>> GetBirdsByCageIdAsync(Guid id);
+        Task<IEnumerable<BirdResponseDto>> GetBirdsWithMedicineAsync();
     }
 }

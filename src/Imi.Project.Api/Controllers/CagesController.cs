@@ -18,12 +18,14 @@ namespace Imi.Project.Api.Controllers
     {
         protected readonly ICageService _cageService;
         protected readonly IBirdService _birdService;
+        protected readonly IDailyTaskService _dailyTaskService;
 
 
-        public CagesController(ICageService cageService , IBirdService birdService)
+        public CagesController(ICageService cageService, IBirdService birdService, IDailyTaskService dailyTaskService)
         {
             _cageService = cageService;
             _birdService = birdService;
+            _dailyTaskService = dailyTaskService;
         }
 
         [HttpGet]
@@ -47,5 +49,11 @@ namespace Imi.Project.Api.Controllers
             return Ok(birds);
         }
 
+        [HttpGet("{id}/dailytasks")]
+        public async Task<IActionResult> GetDailyTasksByCageId(Guid id)
+        {
+            var tasks = await _dailyTaskService.GetDailyTasksByCageIdAsync(id);
+            return Ok(tasks);
+        }
     }
 }
