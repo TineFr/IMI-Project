@@ -19,15 +19,15 @@ namespace Imi.Project.Api.Core.Services
             _cageRepository = cageRepository;
         }
 
-        public Task<Cage> AddCageAsync(CageRequestDto userRequestDto)
+        public async Task<Cage> AddCageAsync(Cage cage)
         {
-            throw new NotImplementedException();
+            var result = await _cageRepository.AddAsync(cage);
+            return result;
         }
     
-
-        public Task DeleteCageAsync(CageRequestDto userRequestDto)
+        public async Task DeleteCageAsync(Cage cage)
         {
-            throw new NotImplementedException();
+           await _cageRepository.DeleteAsync(cage);
         }
 
         public async Task<Cage> GetCageByIdAsync(Guid id)
@@ -46,12 +46,13 @@ namespace Imi.Project.Api.Core.Services
         public async Task<IEnumerable<Cage>> ListAllCagesAsync()
         {
             var cageList = await _cageRepository.ListAllAsync();
-                return cageList;
+            return cageList;
         }
 
-        public Task<Cage> UpdateCageAsync(CageRequestDto userRequestDto)
+        public async Task<Cage> UpdateCageAsync(Cage cage)
         {
-            throw new NotImplementedException();
+            var result = await _cageRepository.UpdateAsync(cage);
+            return result;
         }
     }
 }

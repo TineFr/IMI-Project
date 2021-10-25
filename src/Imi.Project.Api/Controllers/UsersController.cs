@@ -34,7 +34,8 @@ namespace Imi.Project.Api.Controllers
         public async Task<IActionResult> Get()
         {
             var users = await _userService.ListAllUsersAsync();
-            return Ok(users);
+            var result = users.MapToDtoList();
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
@@ -66,7 +67,8 @@ namespace Imi.Project.Api.Controllers
                 return NotFound($"User with id {id} does not exist");
             }
             var cages = await _cageService.GetCagesByUserIdAsync(id);
-            return Ok(cages);
+            var result = cages.MapToDtoList();
+            return Ok(result);
         }
 
         [HttpGet("{id}/birds")]
@@ -82,7 +84,8 @@ namespace Imi.Project.Api.Controllers
                 return NotFound($"User with id {id} does not exist");
             }
             var birds = await _birdService.GetBirdsByUserIdAsync(id);
-            return Ok(birds);
+            var result = birds.MapToDtoList();
+            return Ok(result);
         }
         [HttpGet("{id}/medicines")]
         public async Task<IActionResult> GetMedicinesFromUser(Guid id)
@@ -96,8 +99,9 @@ namespace Imi.Project.Api.Controllers
             {
                 return NotFound($"User with id {id} does not exist");
             }
-            var birds = await _medicineService.GetMedicineByIdAsync(id);
-            return Ok(birds);
+            var medicines = await _medicineService.GetMedicinesByUserIdAsync(id);
+            var result = medicines.MapToDtoList();
+            return Ok(result);
         }
 
         [HttpPost]
@@ -136,17 +140,17 @@ namespace Imi.Project.Api.Controllers
         }
 
 
-        //[HttpDelete]
-        //public async Task<IActionResult> Delete(UserRequestDto userToDelete)
-        //{
-        //    var user = await _userService.GetUserByIdAsync(userToDelete.Id);
-        //    if (user == null)
-        //    {
-        //        return NotFound($"User with id {userToDelete.Id} does not exist");
-        //    }
-        //    await _userService.DeleteUserAsync(userToDelete.Id);
-        //    return Ok();
-        //}
+        [HttpDelete]
+        public async Task<IActionResult> Delete(UserRequestDto userToDelete)
+        {
+            var user = await _userService.GetUserByIdAsync(userToDelete.Id);
+            if (user == null)
+            {
+                return NotFound($"User with id {userToDelete.Id} does not exist");
+            }
+            await _userService.DeleteUserAsync(user);
+            return Ok();
+        }
 
 
     }

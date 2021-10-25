@@ -12,8 +12,8 @@ namespace Imi.Project.Api.Core.Interfaces.Services
         Task<IEnumerable<Cage>> ListAllCagesAsync();
         Task<Cage> GetCageByIdAsync(Guid id);
         Task<IEnumerable<Cage>> GetCagesByUserIdAsync(Guid id);
-        Task<Cage> AddCageAsync(CageRequestDto userRequestDto);
-        Task<Cage> UpdateCageAsync(CageRequestDto userRequestDto);
-        Task DeleteCageAsync(CageRequestDto userRequestDto);
+        Task<Cage> AddCageAsync(Cage cage);
+        Task<Cage> UpdateCageAsync(Cage cage);
+        Task DeleteCageAsync(Cage cage);
     }
 }

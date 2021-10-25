@@ -16,12 +16,12 @@ namespace Imi.Project.Api.Core.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
-        private readonly ICageRepository _cageRepository;
+        private readonly ICageService _cageService;
 
-        public UserService(IUserRepository userRepository, ICageRepository cageRepository)
+        public UserService(IUserRepository userRepository, ICageService cageService)
         {
             _userRepository = userRepository;
-            _cageRepository = cageRepository;
+            _cageService = cageService;
         }
 
         public async Task<User> GetUserByIdAsync(Guid id)
@@ -45,6 +45,8 @@ namespace Imi.Project.Api.Core.Services
 
         public async Task DeleteUserAsync(User user)
         {
+            var cages = await _cageService.GetCagesByUserIdAsync(user.Id);
+            cages.Select(async c => await _cageService.DeleteCageAsync(c)); //?
             await _userRepository.DeleteAsync(user);  
         }
 
