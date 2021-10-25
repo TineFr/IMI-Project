@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Imi.Project.Api.Core.Interfaces.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Core.Services
 {
-    public class ImageService
+    public class ImageService : IImageService
     {
         private readonly IHostEnvironment _env;
 

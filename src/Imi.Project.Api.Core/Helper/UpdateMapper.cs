@@ -35,7 +35,7 @@ namespace Imi.Project.Api.Core.Helper
 
             cage.Name = cageDto.Name;
             cage.Location = cageDto.Location;
-            cage.Image = cageDto.Image;
+            //cage.Image = cageDto.Image;
 
             return cage;
         }

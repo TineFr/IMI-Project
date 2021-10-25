@@ -50,7 +50,7 @@ namespace Imi.Project.Api.Core.Helper
                 Id = cageDto.Id,
                 Name = cageDto.Name,
                 Location = cageDto.Location,
-                Image = cageDto.Image,
+                //Image = cageDto.Image,
                 UserId = cageDto.UserId
             };
             return cage;

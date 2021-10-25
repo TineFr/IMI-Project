@@ -117,7 +117,6 @@ namespace Imi.Project.Api.Controllers
                 return BadRequest($"User with id {newUser.Id} already exists");
             }
             var newUserEntity = newUser.MapToEntity();
-            newUserEntity.Id = newUser.Id;
             var result = await _userService.AddUserAsync(newUserEntity);
             return Ok(result);
         }
