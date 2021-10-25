@@ -21,7 +21,7 @@ namespace Imi.Project.Api.Core.Services
         public async Task<string> AddOrUpdateImageAsync<T>(Guid entityId, IFormFile image)
         {
             
-            var pathForDatabase = Path.Combine("images", typeof(T).Name.ToLower() + "s"); 
+            var pathForDatabase = Path.Combine("images", typeof(T).Name.ToLower()); 
             var folderPathForImages = Path.Combine( _env.ContentRootPath, "wwwroot", pathForDatabase);
 
             if (!Directory.Exists(folderPathForImages))
@@ -35,7 +35,7 @@ namespace Imi.Project.Api.Core.Services
             var fullFilePath = Path.Combine(folderPathForImages, newFileName);
             if (image.Length > 0)
             {
-               using (var newfileStream = new FileStream(pathForDatabase, FileMode.Create))
+               using (var newfileStream = new FileStream(fullFilePath, FileMode.Create))
                {
                     await image.CopyToAsync(newfileStream);
                }
