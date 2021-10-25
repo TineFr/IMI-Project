@@ -1,4 +1,5 @@
 ﻿using Imi.Project.Api.Core.Dtos.Medicines;
+using Imi.Project.Api.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,12 +10,12 @@ namespace Imi.Project.Api.Core.Interfaces.Services
     public interface IMedicineService
 
     {
-        Task<IEnumerable<MedicineResponseDto>> ListAllMedicinesAsync();
-        Task<MedicineResponseDto> GetMedicineByIdAsync(Guid id);
-        Task<MedicineResponseDto> AddMedicineAsync(MedicineRequestDto MedicineRequestDto);
-        Task<MedicineResponseDto> UpdateMedicineAsync(MedicineRequestDto MedicineRequestDto);
+        Task<IEnumerable<Medicine>> ListAllMedicinesAsync();
+        Task<Medicine> GetMedicineByIdAsync(Guid id);
+        Task<Medicine> AddMedicineAsync(MedicineRequestDto MedicineRequestDto);
+        Task<Medicine> UpdateMedicineAsync(MedicineRequestDto MedicineRequestDto);
         Task DeleteMedicineAsync(MedicineRequestDto userRequestDto);
-        Task<IEnumerable<MedicineResponseDto>> GetMedicinesByUserIdAsync(Guid id);
+        Task<IEnumerable<Medicine>> GetMedicinesByUserIdAsync(Guid id);
      
     }
 }

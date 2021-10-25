@@ -19,7 +19,7 @@ namespace Imi.Project.Api.Core.Helper
 
            var user = new User
             {
-                Id = userDto.Id,
+               Id = userDto.Id,
                 Name = userDto.Name
             };
             return user;

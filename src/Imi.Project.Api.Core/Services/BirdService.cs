@@ -1,4 +1,5 @@
 ﻿using Imi.Project.Api.Core.Dtos.Birds;
+using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Core.Helper;
 using Imi.Project.Api.Core.Interfaces.Repositories;
 using Imi.Project.Api.Core.Interfaces.Services;
@@ -19,7 +20,7 @@ namespace Imi.Project.Api.Core.Services
         }
 
 
-        public Task<BirdResponseDto> AddBirdAsync(BirdRequestDto birdRequestDto)
+        public Task<Bird> AddBirdAsync(BirdRequestDto birdRequestDto)
         {
             throw new NotImplementedException();
         }
@@ -30,37 +31,37 @@ namespace Imi.Project.Api.Core.Services
             throw new NotImplementedException();
         }
 
-        public async Task<BirdResponseDto> GetBirdByIdAsync(Guid id)
+        public async Task<Bird> GetBirdByIdAsync(Guid id)
         {
             var bird = await _birdRepository.GetByIdAsync(id);
-            return bird.MapToDto();
+            return bird;
         }
 
-        public async Task<IEnumerable<BirdResponseDto>> GetBirdsByCageIdAsync(Guid id)
+        public async Task<IEnumerable<Bird>> GetBirdsByCageIdAsync(Guid id)
         {
             var birds = await _birdRepository.GetByCageIdAsync(id);
-            return birds.MapToDtoList();
+            return birds;
         }
 
-        public async Task<IEnumerable<BirdResponseDto>> GetBirdsByUserIdAsync(Guid id)
+        public async Task<IEnumerable<Bird>> GetBirdsByUserIdAsync(Guid id)
         {
             var birds = await _birdRepository.GetByUserIdAsync(id);
-            return birds.MapToDtoList();
+            return birds;
         }
 
-        public async Task<IEnumerable<BirdResponseDto>> GetBirdsWithMedicineAsync()
+        public async Task<IEnumerable<Bird>> GetBirdsWithMedicineAsync()
         {
             var birds = await _birdRepository.GetBirdsWithMedicineAsync();
-            return birds.MapToDtoList();
+            return birds;
         }
 
-        public async Task<IEnumerable<BirdResponseDto>> ListAllBirdsAsync()
+        public async Task<IEnumerable<Bird>> ListAllBirdsAsync()
         {
             var birds = await _birdRepository.ListAllAsync();
-            return birds.MapToDtoList();
+            return birds;
         }
 
-        public Task<BirdResponseDto> UpdateBirdAsync(BirdRequestDto birdRequestDto)
+        public Task<Bird> UpdateBirdAsync(BirdRequestDto birdRequestDto)
         {
             throw new NotImplementedException();
         }

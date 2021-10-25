@@ -1,4 +1,5 @@
 ﻿using Imi.Project.Api.Core.Dtos.Cages;
+using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Core.Helper;
 using Imi.Project.Api.Core.Interfaces.Repositories;
 using Imi.Project.Api.Core.Interfaces.Services;
@@ -18,7 +19,7 @@ namespace Imi.Project.Api.Core.Services
             _cageRepository = cageRepository;
         }
 
-        public Task<CageResponseDto> AddCageAsync(CageRequestDto userRequestDto)
+        public Task<Cage> AddCageAsync(CageRequestDto userRequestDto)
         {
             throw new NotImplementedException();
         }
@@ -29,26 +30,26 @@ namespace Imi.Project.Api.Core.Services
             throw new NotImplementedException();
         }
 
-        public async Task<CageResponseDto> GetCageByIdAsync(Guid id)
+        public async Task<Cage> GetCageByIdAsync(Guid id)
         {
             var cage = await _cageRepository.GetByIdAsync(id);
-            return cage.MapToDto();
+            return cage;
         }
 
 
-        public async Task<IEnumerable<CageResponseDto>> GetCagesByUserIdAsync(Guid id)
+        public async Task<IEnumerable<Cage>> GetCagesByUserIdAsync(Guid id)
         {
             var cages = await _cageRepository.GetCagesByUserIdAsync(id);
-            return cages.MapToDtoList();
+            return cages;
         }
 
-        public async Task<IEnumerable<CageResponseDto>> ListAllCagesAsync()
+        public async Task<IEnumerable<Cage>> ListAllCagesAsync()
         {
             var cageList = await _cageRepository.ListAllAsync();
-            return cageList.MapToDtoList();
+                return cageList;
         }
 
-        public Task<CageResponseDto> UpdateCageAsync(CageRequestDto userRequestDto)
+        public Task<Cage> UpdateCageAsync(CageRequestDto userRequestDto)
         {
             throw new NotImplementedException();
         }

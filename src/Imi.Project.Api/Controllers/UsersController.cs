@@ -1,6 +1,7 @@
 ﻿
 
 using Imi.Project.Api.Core.Dtos.Users;
+using Imi.Project.Api.Core.Helper;
 using Imi.Project.Api.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -39,13 +40,31 @@ namespace Imi.Project.Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
             var user = await _userService.GetUserByIdAsync(id);
-            return Ok(user);
+            if (user == null)
+            {
+                return NotFound($"User with id {id} does not exist");
+            }
+            var userDto = user.MapToDto();
+            return Ok(userDto);
         }
 
         [HttpGet("{id}/cages")]
         public async Task<IActionResult> GetCagesFromUser(Guid id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var user = await _userService.GetUserByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound($"User with id {id} does not exist");
+            }
             var cages = await _cageService.GetCagesByUserIdAsync(id);
             return Ok(cages);
         }
@@ -53,12 +72,30 @@ namespace Imi.Project.Api.Controllers
         [HttpGet("{id}/birds")]
         public async Task<IActionResult> GetBirdsFromUser(Guid id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var user = await _userService.GetUserByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound($"User with id {id} does not exist");
+            }
             var birds = await _birdService.GetBirdsByUserIdAsync(id);
             return Ok(birds);
         }
         [HttpGet("{id}/medicines")]
         public async Task<IActionResult> GetMedicinesFromUser(Guid id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var user = await _userService.GetUserByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound($"User with id {id} does not exist");
+            }
             var birds = await _medicineService.GetMedicineByIdAsync(id);
             return Ok(birds);
         }
@@ -70,8 +107,15 @@ namespace Imi.Project.Api.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var userDto = await _userService.AddUserAsync(newUser);
-            return Ok(userDto);
+            var user = await _userService.GetUserByIdAsync(newUser.Id);
+            if (user != null)
+            {
+                return BadRequest($"User with id {newUser.Id} already exists");
+            }
+            var newUserEntity = newUser.MapToEntity();
+            newUserEntity.Id = newUser.Id;
+            var result = await _userService.AddUserAsync(newUserEntity);
+            return Ok(result);
         }
 
         [HttpPut]
@@ -81,22 +125,32 @@ namespace Imi.Project.Api.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var userDto = await _userService.UpdateUserAsync(updatedUser);
-            return Ok(userDto);
-        }
-
-        [HttpDelete]
-        public async Task<IActionResult> Delete(UserRequestDto updatedUser)
-        {
-            if (updatedUser == null)
+            var user = await _userService.GetUserByIdAsync(updatedUser.Id);
+            if (user == null)
             {
-                return NotFound($"User does not exist");
-
+                return NotFound($"User with id {updatedUser.Id} does not exist");
             }
-            await _userService.DeleteUserAsync(updatedUser);
-            return Ok();
+            user.Update(updatedUser);
+            var result = await _userService.UpdateUserAsync(user);
+            return Ok(result);
         }
+
+
+        //[HttpDelete]
+        //public async Task<IActionResult> Delete(UserRequestDto userToDelete)
+        //{
+        //    var user = await _userService.GetUserByIdAsync(userToDelete.Id);
+        //    if (user == null)
+        //    {
+        //        return NotFound($"User with id {userToDelete.Id} does not exist");
+        //    }
+        //    await _userService.DeleteUserAsync(userToDelete.Id);
+        //    return Ok();
+        //}
+
 
     }
-    
+
 }
+    
+

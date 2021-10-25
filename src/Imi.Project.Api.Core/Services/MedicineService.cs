@@ -1,4 +1,5 @@
 ﻿using Imi.Project.Api.Core.Dtos.Medicines;
+using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Core.Helper;
 using Imi.Project.Api.Core.Interfaces.Repositories;
 using Imi.Project.Api.Core.Interfaces.Services;
@@ -18,7 +19,7 @@ namespace Imi.Project.Api.Core.Services
             _medicineRepository = medicineRepository;
         }
 
-        public Task<MedicineResponseDto> AddMedicineAsync(MedicineRequestDto MedicineRequestDto)
+        public Task<Medicine> AddMedicineAsync(MedicineRequestDto MedicineRequestDto)
         {
             throw new NotImplementedException();
         }
@@ -28,26 +29,26 @@ namespace Imi.Project.Api.Core.Services
             throw new NotImplementedException();
         }
 
-        public async Task<MedicineResponseDto> GetMedicineByIdAsync(Guid id)
+        public async Task<Medicine> GetMedicineByIdAsync(Guid id)
         {
             var medicine = await _medicineRepository.GetByIdAsync(id);
-            return medicine.MapToDto();
+            return medicine;
         }
 
-        public async  Task<IEnumerable<MedicineResponseDto>> GetMedicinesByUserIdAsync(Guid id)
+        public async  Task<IEnumerable<Medicine>> GetMedicinesByUserIdAsync(Guid id)
         {
             var medicines = await _medicineRepository.GetByUserIdAsync(id);
-            return medicines.MapToDtoList();
+            return medicines;
 
         }
 
-        public async Task<IEnumerable<MedicineResponseDto>> ListAllMedicinesAsync()
+        public async Task<IEnumerable<Medicine>> ListAllMedicinesAsync()
         {
             var medicines = await _medicineRepository.ListAllAsync();
-            return medicines.MapToDtoList();
+            return medicines;
         }
 
-        public Task<MedicineResponseDto> UpdateMedicineAsync(MedicineRequestDto MedicineRequestDto)
+        public Task<Medicine> UpdateMedicineAsync(MedicineRequestDto MedicineRequestDto)
         {
             throw new NotImplementedException();
         }

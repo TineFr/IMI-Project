@@ -1,4 +1,5 @@
 ﻿using Imi.Project.Api.Core.Dtos.Species;
+using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Core.Helper;
 using Imi.Project.Api.Core.Interfaces.Repositories;
 using Imi.Project.Api.Core.Interfaces.Services;
@@ -18,11 +19,11 @@ namespace Imi.Project.Api.Core.Services
             _speciesRepository = speciesRepository;
         }
 
-        public async Task<SpeciesResponseDto> AddSpeciesAsync(SpeciesRequestDto speciesRequestDto)
+        public async Task<Species> AddSpeciesAsync(SpeciesRequestDto speciesRequestDto)
         {
             var species = speciesRequestDto.MapToEntity();
             var result = await _speciesRepository.AddAsync(species);
-            var dto = result.MapToDto();
+            var dto = result;
 
             return dto;
         }
@@ -35,23 +36,23 @@ namespace Imi.Project.Api.Core.Services
             
         }
 
-        public async Task<SpeciesResponseDto> GetSpeciesByIdAsync(Guid id)
+        public async Task<Species> GetSpeciesByIdAsync(Guid id)
         {
             var species = await _speciesRepository.GetByIdAsync(id);
-            return species.MapToDto();
+            return species;
         }
 
-        public async Task<IEnumerable<SpeciesResponseDto>> ListAllSpeciessAsync()
+        public async Task<IEnumerable<Species>> ListAllSpeciessAsync()
         {
             var species = await _speciesRepository.ListAllAsync();
-            return species.MapToDtoList();
+            return species;
         }
 
-        public async Task<SpeciesResponseDto> UpdateSpeciesAsync(SpeciesRequestDto speciesRequestDto)
+        public async Task<Species> UpdateSpeciesAsync(SpeciesRequestDto speciesRequestDto)
         {
             var species = speciesRequestDto.MapToEntity();
             var result = await _speciesRepository.UpdateAsync(species);
-            var dto = result.MapToDto();
+            var dto = result;
 
             return dto;
         }

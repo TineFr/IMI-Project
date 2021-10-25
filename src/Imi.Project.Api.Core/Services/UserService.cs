@@ -24,41 +24,34 @@ namespace Imi.Project.Api.Core.Services
             _cageRepository = cageRepository;
         }
 
-        public async Task<UserResponseDto> GetUserByIdAsync(Guid id)
+        public async Task<User> GetUserByIdAsync(Guid id)
         {
             var user= await _userRepository.GetByIdAsync(id);
-            return user.MapToDto();
+            return user;
         }
 
 
-        public async Task<IEnumerable<UserResponseDto>> ListAllUsersAsync()
+        public async Task<IEnumerable<User>> ListAllUsersAsync()
         {
             var userList = await _userRepository.ListAllAsync();
-            return userList.MapToDtoList();
+            return userList;
         }
-        public async Task<UserResponseDto> AddUserAsync(UserRequestDto userRequestDto)
-        {
-            var user = userRequestDto.MapToEntity();
-            var result = await _userRepository.AddAsync(user);
-            var dto = result.MapToDto();
 
-            return dto;
-        }
-        public async Task<UserResponseDto> UpdateUserAsync(UserRequestDto userRequestDto)
+        public async Task<User> UpdateUserAsync(User user)
         {
-            var user = userRequestDto.MapToEntity();
             var result = await _userRepository.UpdateAsync(user);
-            var dto = result.MapToDto();
-
-            return dto;
+            return result;
         }
 
-        public async Task DeleteUserAsync(UserRequestDto userRequestDto)
+        public async Task DeleteUserAsync(User user)
         {
-            var user = userRequestDto.MapToEntity();
-
-            await _userRepository.DeleteAsync(user);
+            await _userRepository.DeleteAsync(user);  
         }
 
+        public async Task<User> AddUserAsync(User user)
+        {
+            var result = await _userRepository.AddAsync(user);
+            return result;
+        }
     }
 }

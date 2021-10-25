@@ -1,4 +1,5 @@
 ﻿using Imi.Project.Api.Core.Dtos.DailyTasks;
+using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Core.Helper;
 using Imi.Project.Api.Core.Interfaces.Repositories;
 using Imi.Project.Api.Core.Interfaces.Services;
@@ -18,11 +19,11 @@ namespace Imi.Project.Api.Core.Services
             _dailyTaskRepository = dailyTaskRepository;
         }
 
-        public async Task<DailyTaskResponseDto> AddDailyTaskAsync(DailyTaskRequestDto dailyTaskRequestDto)
+        public async Task<DailyTask> AddDailyTaskAsync(DailyTaskRequestDto dailyTaskRequestDto)
         {
             var task = dailyTaskRequestDto.MapToEntity();
             var result = await _dailyTaskRepository.AddAsync(task);
-            var dto = result.MapToDto();
+            var dto = result;
 
             return dto;
         }
@@ -34,29 +35,29 @@ namespace Imi.Project.Api.Core.Services
             await _dailyTaskRepository.DeleteAsync(task);
         }
 
-        public async Task<DailyTaskResponseDto> GetDailyTaskByIdAsync(Guid id)
+        public async Task<DailyTask> GetDailyTaskByIdAsync(Guid id)
         {
             var task = await _dailyTaskRepository.GetByIdAsync(id);
-            return task.MapToDto();
+            return task;
         }
 
-        public async Task<IEnumerable<DailyTaskResponseDto>> GetDailyTasksByCageIdAsync(Guid id)
+        public async Task<IEnumerable<DailyTask>> GetDailyTasksByCageIdAsync(Guid id)
         {
             var tasks = await _dailyTaskRepository.GetByCageIdAsync(id);
-            return tasks.MapToDtoList();
+            return tasks;
         }
 
-        public async Task<IEnumerable<DailyTaskResponseDto>> ListAllDailyTasksAsync()
+        public async Task<IEnumerable<DailyTask>> ListAllDailyTasksAsync()
         {
             var tasks = await _dailyTaskRepository.ListAllAsync();
-            return tasks.MapToDtoList();
+            return tasks;
         }
 
-        public async Task<DailyTaskResponseDto> UpdateDailyTaskAsync(DailyTaskRequestDto dailyTaskRequestDto)
+        public async Task<DailyTask> UpdateDailyTaskAsync(DailyTaskRequestDto dailyTaskRequestDto)
         {
             var task = dailyTaskRequestDto.MapToEntity();
             var result = await _dailyTaskRepository.UpdateAsync(task);
-            var dto = result.MapToDto();
+            var dto = result;
 
             return dto;
         }
