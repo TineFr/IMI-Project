@@ -2,6 +2,7 @@
 using Imi.Project.Api.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Imi.Project.Api.Core.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,8 @@ namespace Imi.Project.Api.Controllers
         public async Task<IActionResult> Get()
         {
             var species = await _speciesService.ListAllSpeciessAsync();
-            return Ok(species);
+            var result = species.MapToDtoList();
+            return Ok(result);
         }
 
 

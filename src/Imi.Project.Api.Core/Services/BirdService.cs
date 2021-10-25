@@ -20,15 +20,17 @@ namespace Imi.Project.Api.Core.Services
         }
 
 
-        public Task<Bird> AddBirdAsync(BirdRequestDto birdRequestDto)
+        public async Task<Bird> AddBirdAsync(Bird bird)
         {
-            throw new NotImplementedException();
+            var result = await _birdRepository.AddAsync(bird);
+            return result;
         }
 
 
-        public Task DeleteBirdAsync(BirdRequestDto userRequestDto)
+        public async Task DeleteBirdAsync(Bird bird)
         {
-            throw new NotImplementedException();
+             await _birdRepository.DeleteAsync(bird);
+       
         }
 
         public async Task<Bird> GetBirdByIdAsync(Guid id)
@@ -61,9 +63,10 @@ namespace Imi.Project.Api.Core.Services
             return birds;
         }
 
-        public Task<Bird> UpdateBirdAsync(BirdRequestDto birdRequestDto)
+        public async Task<Bird> UpdateBirdAsync(Bird bird)
         {
-            throw new NotImplementedException();
+            var result = await _birdRepository.UpdateAsync(bird);
+            return result;
         }
     }
 }

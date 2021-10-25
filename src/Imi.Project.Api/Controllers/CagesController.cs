@@ -135,7 +135,7 @@ namespace Imi.Project.Api.Controllers
         }
 
 
-        [HttpPut("{id}/image")]
+        [HttpPost("{id}/image"), HttpPut("{id}/image")]
 
         public async Task<IActionResult> AddOrUpdateImage(Guid id, IFormFile image)
         {
