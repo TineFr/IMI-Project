@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Imi.Project.Mobile.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,8 +16,18 @@ namespace Imi.Project.Mobile
         public MainPage()
         {
             InitializeComponent();
+            LoadLoginPage();
             CurrentPage = Children[2];
             NavigationPage.SetHasNavigationBar(this, false);
-        }   
         }
+
+        private async void LoadLoginPage()
+        {
+            await Navigation.PushModalAsync(new LoginPage());
+
+        }
+
+    }
+
+
 }

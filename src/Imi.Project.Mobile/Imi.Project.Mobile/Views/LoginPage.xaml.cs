@@ -20,13 +20,13 @@ namespace Imi.Project.Mobile.Views
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new MainPage());
+            await Navigation.PopModalAsync();
 
         }
 
         private async void btnSignUp_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new RegisterPage());
+            await Navigation.PushAsync(new NavigationPage(new RegisterPage()));
         }
     }
 }
