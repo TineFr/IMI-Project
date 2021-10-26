@@ -19,21 +19,16 @@ namespace Imi.Project.Api.Core.Services
             _speciesRepository = speciesRepository;
         }
 
-        public async Task<Species> AddSpeciesAsync(SpeciesRequestDto speciesRequestDto)
+        public async Task<Species> AddSpeciesAsync(Species species)
         {
-            var species = speciesRequestDto.MapToEntity();
-            var result = await _speciesRepository.AddAsync(species);
-            var dto = result;
 
-            return dto;
+            var result = await _speciesRepository.AddAsync(species);
+            return result;
         }
 
-        public async Task DeleteSpeciesAsync(SpeciesRequestDto speciesRequestDto)
+        public async Task DeleteSpeciesAsync(Species species)
         {
-            var species = speciesRequestDto.MapToEntity();
-
-            await _speciesRepository.DeleteAsync(species);
-            
+            await _speciesRepository.DeleteAsync(species);       
         }
 
         public async Task<Species> GetSpeciesByIdAsync(Guid id)
@@ -48,13 +43,11 @@ namespace Imi.Project.Api.Core.Services
             return species;
         }
 
-        public async Task<Species> UpdateSpeciesAsync(SpeciesRequestDto speciesRequestDto)
+        public async Task<Species> UpdateSpeciesAsync(Species species)
         {
-            var species = speciesRequestDto.MapToEntity();
             var result = await _speciesRepository.UpdateAsync(species);
-            var dto = result;
+            return result;
 
-            return dto;
         }
     }
 }

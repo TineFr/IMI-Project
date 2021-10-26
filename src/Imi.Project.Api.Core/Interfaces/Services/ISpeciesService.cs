@@ -11,8 +11,8 @@ namespace Imi.Project.Api.Core.Interfaces.Services
     {
         Task<IEnumerable<Species>> ListAllSpeciessAsync();
         Task<Species> GetSpeciesByIdAsync(Guid id);
-        Task<Species> AddSpeciesAsync(SpeciesRequestDto speciesRequestDto);
-        Task<Species> UpdateSpeciesAsync(SpeciesRequestDto speciesRequestDto);
-        Task DeleteSpeciesAsync(SpeciesRequestDto speciesRequestDto);
+        Task<Species> AddSpeciesAsync(Species species);
+        Task<Species> UpdateSpeciesAsync(Species species);
+        Task DeleteSpeciesAsync(Species species);
     }
 }

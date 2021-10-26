@@ -34,40 +34,57 @@ namespace Imi.Project.Api.Controllers
         public async Task<IActionResult> Get(Guid id)
         {
             var species = await _speciesService.GetSpeciesByIdAsync(id);
-            return Ok(species);
+            if (species == null)
+            {
+                return NotFound($"Species with id {id} does not exist");
+            }
+            var result = species.MapToDto();
+            return Ok(result);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(SpeciesRequestDto newspecies)
+        public async Task<IActionResult> Post(SpeciesRequestDto newSpecies)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var speciesDto = await _speciesService.AddSpeciesAsync(newspecies);
-            return Ok(speciesDto);
+            var species = await _speciesService.GetSpeciesByIdAsync(newSpecies.Id);
+            if (species != null)
+            {
+                return BadRequest($"Species with id {species.Id} already exists");
+            }
+            var newSpeciesEntity = newSpecies.MapToEntity();
+            var result = await _speciesService.AddSpeciesAsync(newSpeciesEntity);
+            return Ok(result.MapToDto());
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put(SpeciesRequestDto updatedspecies)
+        public async Task<IActionResult> Put(SpeciesRequestDto updatedSpecies)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var speciesDto = await _speciesService.UpdateSpeciesAsync(updatedspecies);
-            return Ok(speciesDto);
+            var species = await _speciesService.GetSpeciesByIdAsync(updatedSpecies.Id);
+            if (species == null)
+            {
+                return NotFound($"Bird with id {updatedSpecies.Id} does not exist");
+            }
+            species.Update(updatedSpecies);
+            var result = await _speciesService.UpdateSpeciesAsync(species);
+            return Ok(result);
         }
 
         [HttpDelete]
-        public async Task<IActionResult> Delete(SpeciesRequestDto updatedspecies)
+        public async Task<IActionResult> Delete(SpeciesRequestDto speciesToDelete)
         {
-            if (updatedspecies == null)
+            var species = await _speciesService.GetSpeciesByIdAsync(speciesToDelete.Id);
+            if (species == null)
             {
-                return NotFound($"species does not exist");
-
+                return NotFound($"Bird with id {speciesToDelete.Id} does not exist");
             }
-            await _speciesService.DeleteSpeciesAsync(updatedspecies);
+            await _speciesService.DeleteSpeciesAsync(species);
             return Ok();
         }
     }
