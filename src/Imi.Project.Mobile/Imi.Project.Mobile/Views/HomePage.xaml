@@ -21,11 +21,11 @@
             </Frame>
             <AbsoluteLayout Grid.Column="0" Grid.Row="0" Grid.RowSpan="3">
                 <FlexLayout AbsoluteLayout.LayoutBounds="0.05, 10, 100, 100" AbsoluteLayout.LayoutFlags="XProportional" Wrap="Wrap" JustifyContent="Center">
-                <ImageButton Source="accountdark.png"  Aspect="AspectFill" Padding="30" BackgroundColor="Transparent" AbsoluteLayout.LayoutBounds="0.05, 10, 100, 100" AbsoluteLayout.LayoutFlags="XProportional" ></ImageButton>
+                    <ImageButton x:Name="btnAccount" Source="accountdark.png"  Aspect="AspectFill" Padding="30" BackgroundColor="Transparent" AbsoluteLayout.LayoutBounds="0.05, 10, 100, 100" AbsoluteLayout.LayoutFlags="XProportional" Clicked="btnAccount_Clicked" ></ImageButton>
                 <Label Text="account"></Label>
                 </FlexLayout>
                 <FlexLayout  AbsoluteLayout.LayoutBounds="0.95, 10, 100, 100" AbsoluteLayout.LayoutFlags="XProportional" Wrap="Wrap" JustifyContent="Center">
-                    <ImageButton Source="settings.png" Aspect="AspectFill" Padding="30" BackgroundColor="Transparent" AbsoluteLayout.LayoutBounds="0.95, 10, 100, 100" AbsoluteLayout.LayoutFlags="XProportional"></ImageButton>
+                    <ImageButton x:Name="btnSettings" Source="settings.png" Aspect="AspectFill" Padding="30" BackgroundColor="Transparent" AbsoluteLayout.LayoutBounds="0.95, 10, 100, 100" AbsoluteLayout.LayoutFlags="XProportional" Clicked="btnSettings_Clicked"></ImageButton>
                     <Label Text="settings"></Label>
                 </FlexLayout>
             </AbsoluteLayout>
