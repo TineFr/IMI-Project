@@ -10,5 +10,7 @@ namespace Imi.Project.Mobile.Domain.Models
 
         public string Image { get; set; }
 
+        public List<string> DailyTasks { get; set; }
+
     }
 }

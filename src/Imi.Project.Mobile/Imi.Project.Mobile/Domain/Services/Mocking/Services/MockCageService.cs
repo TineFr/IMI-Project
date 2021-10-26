@@ -18,6 +18,11 @@ namespace Imi.Project.Mobile.Domain.Services.Mocking.Services
                     Name = "Outside Cage 1",
                     Location ="Outside",
                     Image = "cage1.png",
+                    DailyTasks = new List<string>
+                    {
+                        "Refill water",
+                        "Clean branches"
+                    }
 
                     },
 
@@ -27,6 +32,11 @@ namespace Imi.Project.Mobile.Domain.Services.Mocking.Services
                     Name = "Outside Cage 2",
                     Location ="Outside",
                     Image = "cage2.png",
+                    DailyTasks = new List<string>
+                    {
+                        "Refill water",
+                        "Clean branches"
+                    }
 
                     },
         };

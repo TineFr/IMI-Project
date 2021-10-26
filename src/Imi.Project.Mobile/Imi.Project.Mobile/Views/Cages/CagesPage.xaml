@@ -33,7 +33,7 @@
                                 <StackLayout>
                                     <Image  Source="{Binding Image}" HeightRequest="100"></Image>
                                     <StackLayout HorizontalOptions="Center">
-                                        <Label  Text="{Binding Name}" FontSize="20" />
+                                        <Label  Text="{Binding Name}" FontSize="15" FontAttributes="Bold" />
                                         <Label  Text="{Binding Location}" FontAttributes="italic" />
                                     </StackLayout>
                                 </StackLayout>

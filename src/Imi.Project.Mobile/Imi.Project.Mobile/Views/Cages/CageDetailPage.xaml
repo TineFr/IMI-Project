@@ -3,10 +3,36 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Imi.Project.Mobile.Views.Cages.CageDetailPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
+              RowDefinitions="{StaticResource MainGridRows}">
+            <Frame Style="{StaticResource MainFrame}" BackgroundColor="{StaticResource Green}">
+
+             <Label Text="{Binding Cage.Name}" Style="{StaticResource MainLabel}"></Label>
+            </Frame>
+            <AbsoluteLayout Grid.Row="0" Grid.RowSpan="4">
+                <ImageButton x:Name="btnBack" Style="{StaticResource BackArrow}"></ImageButton>
+                <Image Style="{StaticResource Logo}" ></Image>
+            </AbsoluteLayout>
+            <StackLayout Grid.Row="1">
+                <Button  x:Name="btnEditBird" Text="Edit" HorizontalOptions="EndAndExpand" WidthRequest="100" Margin="10" ></Button>
+            </StackLayout>
+            <ScrollView Grid.Row="2" Grid.RowSpan="2">
+                <StackLayout Grid.Row="1">
+                    <Frame WidthRequest="300" HeightRequest="200" HorizontalOptions="Center">
+                        <Image Source="{Binding Cage.Image}" WidthRequest="340"></Image>
+                    </Frame>
+                    <Frame WidthRequest="300" HeightRequest="80" HorizontalOptions="Center">
+                        <StackLayout>
+                            <Label Text="Location:"></Label>
+                            <Label HeightRequest="200" HorizontalOptions="Center" Text="{Binding Cage.Location}" FontSize="20"></Label>
+                        </StackLayout>
+                    </Frame>
+                    <ListView>
+                        
+                    </ListView>
+                    
+                </StackLayout>
+            </ScrollView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
