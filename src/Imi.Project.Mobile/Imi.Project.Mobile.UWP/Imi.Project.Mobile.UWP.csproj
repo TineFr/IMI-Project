@@ -135,6 +135,8 @@
     <Content Include="birds.png" />
     <Content Include="budgie1.jpg" />
     <Content Include="budgie4.jpg" />
+    <Content Include="cage1.png" />
+    <Content Include="cage2.png" />
     <Content Include="cages.png" />
     <Content Include="cockatiel1.jpg" />
     <Content Include="cockatiel3.jpg" />

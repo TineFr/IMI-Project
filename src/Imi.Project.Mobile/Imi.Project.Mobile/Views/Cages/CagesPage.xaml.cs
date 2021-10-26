@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Imi.Project.Mobile.Domain.Models;
+using Imi.Project.Mobile.Domain.Services.Mocking;
+using Imi.Project.Mobile.Domain.Services.Mocking.Services;
+using Imi.Project.Mobile.Views.Cages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,17 +16,31 @@ namespace Imi.Project.Mobile
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CagesPage : ContentPage
     {
+        ICageService cageservice;
         public CagesPage()
         {
             InitializeComponent();
+            cageservice = new MockCageService();
         }
 
-        private void colvCages_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        protected async override void OnAppearing()
         {
-            //var bird = e.CurrentSelection as Bird
-            //if (bird == null) return;
-            //await Navigation.PushAsync(new BirdDetailPage(bird));
-            //((CollectionView)sender).SelectedItem = null;
+            base.OnAppearing();
+            var cages = await cageservice.GetAllCages();
+            colvCages.ItemsSource = cages;
+        }
+
+        private async void colvCages_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selection = (CollectionView)sender;
+            var cage = selection.SelectedItem as Cage;
+            if (cage == null) return;
+            await Navigation.PushAsync(new CageDetailPage(cage));
+
+        }
+
+        private void btnAddCage_Clicked(object sender, EventArgs e)
+        {
 
         }
     }
