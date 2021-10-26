@@ -18,15 +18,16 @@ namespace Imi.Project.Mobile.Views
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
-        private async void Button_Clicked(object sender, EventArgs e)
+        private  void Button_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new MainPage());
+       
+             Application.Current.MainPage = new NavigationPage(new MainPage());
 
         }
 
         private async void btnSignUp_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new RegisterPage());
+            await Navigation.PushAsync(new NavigationPage(new RegisterPage()));
         }
     }
 }
