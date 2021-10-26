@@ -1,4 +1,6 @@
 ﻿using Imi.Project.Mobile.Domain.Models;
+using Imi.Project.Mobile.Domain.Services.Mocking;
+using Imi.Project.Mobile.Domain.Services.Mocking.Services;
 using Imi.Project.Mobile.Domain.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -12,13 +14,18 @@ using Xamarin.Forms.Xaml;
 namespace Imi.Project.Mobile.Views.Cages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
+
+
     public partial class CageDetailPage : ContentPage
     {
         private static Cage cagedetail;
+
+        IDailyTaskService taskservice;
         public CageDetailPage(Cage cage)
         {
             InitializeComponent();
             cagedetail = cage;
+            taskservice = new MockDailyTaskService();
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
@@ -26,6 +33,7 @@ namespace Imi.Project.Mobile.Views.Cages
         protected override void OnAppearing()
         {
             BindingContext = new CageDetailViewModel(cagedetail);
+            lstTasks.ItemsSource = taskservice.GetDailyTaskByCageId(cagedetail.Id);
         }
     }
 }

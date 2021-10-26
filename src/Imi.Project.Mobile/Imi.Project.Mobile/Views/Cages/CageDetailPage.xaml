@@ -18,19 +18,25 @@
             </StackLayout>
             <ScrollView Grid.Row="2" Grid.RowSpan="2">
                 <StackLayout Grid.Row="1">
-                    <Frame WidthRequest="300" HeightRequest="200" HorizontalOptions="Center">
-                        <Image Source="{Binding Cage.Image}" WidthRequest="340"></Image>
+                    <Frame WidthRequest="300" HeightRequest="150" HorizontalOptions="Center">
+                        <Image Source="{Binding Cage.Image}" WidthRequest="300"></Image>
                     </Frame>
-                    <Frame WidthRequest="300" HeightRequest="80" HorizontalOptions="Center">
-                        <StackLayout>
-                            <Label Text="Location:"></Label>
-                            <Label HeightRequest="200" HorizontalOptions="Center" Text="{Binding Cage.Location}" FontSize="20"></Label>
-                        </StackLayout>
-                    </Frame>
-                    <ListView>
-                        
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <Label Text="Location:"></Label>
+                        <Label HeightRequest="50" HorizontalOptions="Center" Text="{Binding Cage.Location}"></Label>
+                    </StackLayout>
+                    <ListView x:Name="lstTasks" VerticalOptions="FillAndExpand">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Orientation="Horizontal">
+                                        <CheckBox x:Name="{}"></CheckBox>
+                                        <Label Text="{Binding Name}" HorizontalOptions="StartAndExpand" Margin="10,0,0,0" FontSize="15" Padding="10"></Label>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
                     </ListView>
-                    
                 </StackLayout>
             </ScrollView>
         </Grid>

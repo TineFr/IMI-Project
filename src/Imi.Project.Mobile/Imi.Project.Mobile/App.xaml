@@ -69,7 +69,7 @@
         </Style>
         <!--Main frame style-->
         <Style x:Key="MainLabel" TargetType="Label">
-            <Setter Property="FontSize" Value="40" ></Setter>
+            <Setter Property="FontSize" Value="30" ></Setter>
             <Setter Property="TextColor" Value="white" ></Setter>
             <Setter Property="HorizontalOptions" Value="Center" ></Setter>
             <Setter Property="VerticalOptions" Value="End" ></Setter>

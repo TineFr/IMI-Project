@@ -28,7 +28,7 @@
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout Padding="10">
+                        <StackLayout Style="{StaticResource CollectionSelection}" Padding="5">
                             <Frame CornerRadius="20" BackgroundColor="#EEEEEE">
                                 <StackLayout>
                                     <Image  Source="{Binding Image}" HeightRequest="100"></Image>
