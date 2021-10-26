@@ -16,16 +16,18 @@
             <StackLayout Grid.Row="1">
                 <Button  x:Name="btnEditBird" Text="Edit" HorizontalOptions="EndAndExpand" WidthRequest="100" Margin="10" ></Button>
             </StackLayout>
-            <ScrollView Grid.Row="2" Grid.RowSpan="2">
-                <StackLayout Grid.Row="1">
-                    <Frame WidthRequest="300" HeightRequest="150" HorizontalOptions="Center">
+            <StackLayout Grid.Row="2"  Grid.RowSpan="2">
+                <Frame WidthRequest="300" HeightRequest="300" HorizontalOptions="Center">
                         <Image Source="{Binding Cage.Image}" WidthRequest="300"></Image>
                     </Frame>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                        <Label Text="Location:"></Label>
-                        <Label HeightRequest="50" HorizontalOptions="Center" Text="{Binding Cage.Location}"></Label>
-                    </StackLayout>
-                    <ListView x:Name="lstTasks" VerticalOptions="FillAndExpand">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <Label Text="Location:"></Label>
+                    <Label HeightRequest="50" HorizontalOptions="Center" Text="{Binding Cage.Location}"></Label>
+                </StackLayout>
+                <Frame>
+                    <StackLayout>
+                        <Label Text="Daily tasks" HorizontalTextAlignment="Center"></Label>
+                    <ListView x:Name="lstTasks">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
@@ -36,8 +38,11 @@
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
+
                     </ListView>
-                </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
             </ScrollView>
         </Grid>
     </ContentPage.Content>
