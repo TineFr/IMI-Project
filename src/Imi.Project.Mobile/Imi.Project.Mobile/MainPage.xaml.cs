@@ -16,15 +16,8 @@ namespace Imi.Project.Mobile
         public MainPage()
         {
             InitializeComponent();
-            LoadLoginPage();
             CurrentPage = Children[2];
             NavigationPage.SetHasNavigationBar(this, false);
-        }
-
-        private async void LoadLoginPage()
-        {
-            await Navigation.PushModalAsync(new LoginPage());
-
         }
 
     }
