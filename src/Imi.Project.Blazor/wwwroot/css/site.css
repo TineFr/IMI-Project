@@ -136,12 +136,33 @@ app {
     top: 0.5rem;
 }
 
-/*Custom*/
+h1 {
+    font-size: 100px;
+    text-align: center;
+    color: white;
+    background-color: #D4E7C0;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+h2 {
+
+    color: Black;
+
+}
+/*My Cages*/
+
+
+/*My Birds*/
 .containter{
 display: flex;
 justify-content: center;
 align-content: center;
 
+}
+.scientific{
+font-style:italic;
 }
 
 .itemscontainer {
@@ -163,6 +184,7 @@ align-content: center;
     background-color: #EEEEEE;
     margin: 20px;
     border-radius: 20px;
+    cursor: pointer;
 }
 .itemimage {
     height: 150px;
@@ -177,15 +199,7 @@ align-content: center;
     height: 100px;
     padding:20px;
 }
-h1 {
-    font-size: 100px;
-    text-align: center;
-    color: white;
-    background-color: #D4E7C0;
-    position: sticky;
-    top: 0;
-    z-index: 5;
-}
+
 
 @media (max-width: 767.98px) {
     .main .top-row:not(.auth) {

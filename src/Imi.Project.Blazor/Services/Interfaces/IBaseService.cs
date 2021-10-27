@@ -9,6 +9,7 @@ namespace Imi.Project.Blazor.Services.Interfaces
     {
 
         Task<IEnumerable<T>> GetAllAsync();
+        Task<T> AddAsync(T item);
         Task<T> GetByIdAsync(Guid id);
         Task<T> UpdateAsync(T item);
         Task<bool> DeleteAsync(Guid id);

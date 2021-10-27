@@ -31,18 +31,20 @@ namespace Imi.Project.Blazor.Services
 
                     },
         };
-        public Task<Cage> AddCage(Cage Cage)
+
+        public Task<Cage> AddAsync(Cage cage)
         {
-            Cagerepository.ToList().Add(Cage);
-            return Task.FromResult(Cage);
+            Cagerepository.ToList().Add(cage);
+            return Task.FromResult(cage);
         }
+
+
 
         public Task<bool> DeleteAsync(Guid id)
         {
             var cage = Cagerepository.FirstOrDefault(b => b.Id.Equals(id));
             var IsRemoved = Cagerepository.ToList().Remove(cage);
-            return Task.FromResult(IsRemoved);
-            
+            return Task.FromResult(IsRemoved); 
         }
 
         public Task<IEnumerable<Cage>> GetAllAsync()
