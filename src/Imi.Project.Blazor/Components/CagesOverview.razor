@@ -1,0 +1,33 @@
+﻿<div class="container">
+    <div class="itemscontainer">
+
+        @foreach (var item in Cages)
+        {
+            <div class="flexitem">
+                <img class="itemimage" src="@item.Image" />
+                <div>
+                    <h3>@item.Name</h3>
+                    <p>@item.Location</p>
+                </div>
+         
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+
+
+    [Parameter]
+    public IEnumerable<Cage> Cages { get; set; } = new List<Cage>();
+
+    [Inject]
+    public ICageService cageService { get; set; }
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        Cages = await cageService.GetAllAsync();
+
+    }
+}

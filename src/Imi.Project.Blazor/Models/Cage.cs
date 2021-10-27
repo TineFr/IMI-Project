@@ -8,7 +8,7 @@ namespace Imi.Project.Blazor.Models
     public class Cage : BaseEntity
     {
         public string Location { get; set; }
+        public string Image { get; set; }
 
-        public IEnumerable<DailyTask> DailyTasks { get; set; }
     }
 }
