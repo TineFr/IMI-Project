@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Imi.Project.Mobile.Views.AccountPage">
+    <ContentPage.Content>
+        <StackLayout >
+            <Frame >
+                <FlexLayout Wrap="NoWrap" JustifyContent="Center">
+                    <Image Source="accountdark.png" HeightRequest="70" ></Image>
+                    <Label Text="Account" Margin="10, 0, 0, 0" FontSize="50" TextColor="#4C4949"></Label>
+                </FlexLayout>
+            </Frame>
+            <TableView>
+                <TableRoot>
+                    <TableSection>
+                        <EntryCell Text="Name"></EntryCell>
+                    </TableSection>
+                    <TableSection>
+                        <EntryCell Text="E-mail"></EntryCell>
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+            <Button Text="LOG OUT"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -29,8 +29,10 @@ namespace Imi.Project.Mobile
             await Navigation.PushAsync(new SettingsPage());
         }
 
-        private void btnAccount_Clicked(object sender, EventArgs e)
+        private async void btnAccount_Clicked(object sender, EventArgs e)
         {
+
+            await Navigation.PushAsync(new AccountPage());
 
         }
     }
