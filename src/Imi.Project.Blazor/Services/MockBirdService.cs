@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Blazor.Services
 {
-    public class MockBirdService : IBaseService<Bird>
+    public class MockBirdService : IBirdService
     {
 
         private static IEnumerable<Bird> birdrepository = new List<Bird>
@@ -92,5 +92,6 @@ namespace Imi.Project.Blazor.Services
             birdrepository.ToList().Add(updatedBird);
             return Task.FromResult(updatedBird);
         }
+
     }
 }
