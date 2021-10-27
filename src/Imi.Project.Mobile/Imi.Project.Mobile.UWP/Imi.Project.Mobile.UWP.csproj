@@ -145,6 +145,7 @@
     <Content Include="home.png" />
     <Content Include="leftarrow.png" />
     <Content Include="logoblack.png" />
+    <Content Include="logolight.png" />
     <Content Include="logowhite.png" />
     <Content Include="male.png" />
     <Content Include="nests.png" />

@@ -31,10 +31,11 @@
             </AbsoluteLayout>
             <ScrollView  Grid.Column="0" Grid.Row="1" Grid.RowSpan="3">
                 <StackLayout  Grid.Column="0" Grid.Row="1" Grid.RowSpan="2">
-                    <Image x:Name="HomeLogo" Source="logotest.png" Grid.Column="0" Grid.Row="1" Margin="10" WidthRequest="20" HeightRequest="105"></Image>
-                    <FlexLayout Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" 
+                    <Image x:Name="HomeLogo" Source="logolight.png" Grid.Column="0" Grid.Row="1" Margin="10" WidthRequest="20" HeightRequest="105"></Image>
+                    <FlexLayout HorizontalOptions="Center"
                                 Wrap="Wrap"
-                                WidthRequest="100"
+                                WidthRequest="1000"
+                                HeightRequest="400"
                                 JustifyContent="Center"
                                 AlignItems="Center"
                                 BackgroundColor="#F5F5F5">

@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Imi.Project.Mobile.Views.RegisterPage">
     <ContentPage.Content>
-        <StackLayout>
+        <ScrollView>
+            <StackLayout>
             <Image Source="budgieregister.png" HorizontalOptions="Center" HeightRequest="150" Margin="0,40,0,0"></Image>
             <Label HorizontalOptions="Center" Text="Register" FontSize="30" Margin ="0, 30, 0, 0"  FontAttributes="Bold" TextColor="{StaticResource Blue}"></Label>
             <Frame Padding="0" Margin="10"  HorizontalOptions="Center" WidthRequest="300">
@@ -23,5 +24,6 @@
                 <Button x:Name="btnSignUp" BackgroundColor="Transparent" Text="Save" TextColor="{StaticResource Blue}" Clicked="btnSignUp_Clicked"></Button>
             </FlexLayout>
         </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

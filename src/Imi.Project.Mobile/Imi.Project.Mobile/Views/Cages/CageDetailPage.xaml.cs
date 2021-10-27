@@ -35,5 +35,15 @@ namespace Imi.Project.Mobile.Views.Cages
             BindingContext = new CageDetailViewModel(cagedetail);
             lstTasks.ItemsSource = taskservice.GetDailyTaskByCageId(cagedetail.Id);
         }
+
+        private void btnEditCage_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private async void btnBack_Clicked(object sender, EventArgs e)
+        {
+           await Navigation.PopAsync();
+        }
     }
 }

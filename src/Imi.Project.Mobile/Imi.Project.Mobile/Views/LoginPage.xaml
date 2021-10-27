@@ -3,8 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Imi.Project.Mobile.Views.LoginPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Image Source="logotest.png" HorizontalOptions="Center" HeightRequest="150" Margin="0,40,0,0"></Image>
+        <ScrollView>
+            <StackLayout>
+            <Image Source="logolight.png" HorizontalOptions="Center" HeightRequest="150" Margin="0,40,0,0"></Image>
             <Label HorizontalOptions="Center" WidthRequest="300"  Text="LOG IN" FontSize="30" Margin ="0, 30, 0, 0"  FontAttributes="Bold" TextColor="Black"></Label>
             <Frame Padding="0" Margin="10" HorizontalOptions="Center" WidthRequest="300">
                 <Entry Placeholder="Email" ></Entry>
@@ -18,5 +19,6 @@
                 <Button x:Name="btnSignUp" BackgroundColor="Transparent" Text="Sign up" TextColor="Black" Clicked="btnSignUp_Clicked"></Button>
             </FlexLayout>
         </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
