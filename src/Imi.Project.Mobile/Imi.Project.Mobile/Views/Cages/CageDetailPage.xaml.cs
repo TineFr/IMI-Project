@@ -36,9 +36,9 @@ namespace Imi.Project.Mobile.Views.Cages
             lstTasks.ItemsSource = taskservice.GetDailyTaskByCageId(cagedetail.Id);
         }
 
-        private void btnEditCage_Clicked(object sender, EventArgs e)
+        private async void btnEditCage_Clicked(object sender, EventArgs e)
         {
-
+            await Navigation.PushAsync(new EditCagePage(cagedetail));
         }
 
         private async void btnBack_Clicked(object sender, EventArgs e)
