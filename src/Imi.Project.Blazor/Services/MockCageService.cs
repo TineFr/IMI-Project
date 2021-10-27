@@ -1,4 +1,5 @@
 ﻿using Imi.Project.Blazor.Models;
+using Imi.Project.Blazor.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Blazor.Services
 {
-    public class MockCageService
+    public class MockCageService : ICageService
     {
-        private static List<Cage> Cagerepository = new List<Cage>
+        private static IEnumerable<Cage> Cagerepository = new List<Cage>
         {
                     new Cage
                     {
@@ -32,34 +33,37 @@ namespace Imi.Project.Blazor.Services
         };
         public Task<Cage> AddCage(Cage Cage)
         {
-            Cagerepository.Add(Cage);
+            Cagerepository.ToList().Add(Cage);
             return Task.FromResult(Cage);
         }
 
-        public Task<Cage> DeleteCage(Guid id)
+        public Task<bool> DeleteAsync(Guid id)
         {
-            var Cage = Cagerepository.FirstOrDefault(b => b.Id.Equals(id));
-            Cagerepository.Remove(Cage);
-            return Task.FromResult(Cage);
+            var cage = Cagerepository.FirstOrDefault(b => b.Id.Equals(id));
+            var IsRemoved = Cagerepository.ToList().Remove(cage);
+            return Task.FromResult(IsRemoved);
+            
         }
 
-        public Task<List<Cage>> GetAllCages()
+        public Task<IEnumerable<Cage>> GetAllAsync()
         {
             return Task.FromResult(Cagerepository);
         }
 
-        public Task<Cage> GetCageById(Guid id)
+
+        public Task<Cage> GetByIdAsync(Guid id)
         {
             var Cage = Cagerepository.FirstOrDefault(b => b.Id.Equals(id));
             return Task.FromResult(Cage);
         }
-
-        public Task<Cage> UpdateCage(Cage updatedCage)
+        public Task<Cage> UpdateAsync(Cage updatedCage)
         {
             var Cage = Cagerepository.FirstOrDefault(b => b.Id.Equals(updatedCage.Id));
             Cagerepository.ToList().Remove(Cage);
             Cagerepository.ToList().Add(updatedCage);
             return Task.FromResult(updatedCage);
         }
+
+
     }
 }
