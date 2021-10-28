@@ -140,7 +140,6 @@ h1 {
     font-size: 100px;
     text-align: center;
     color: white;
-    background-color: #D4E7C0;
     position: sticky;
     top: 0;
     z-index: 5;
@@ -150,6 +149,16 @@ h2 {
 
     color: Black;
 
+}
+/*Header colors*/
+.blue {
+    background-color: #B5DEF0;
+}
+.green {
+    background-color: #D4E7C0;
+}
+.purple {
+    background-color: #EACFEF;
 }
 /*My Cages*/
 
@@ -182,10 +191,16 @@ font-style:italic;
     text-align: center;
     color: darkgrey;
     background-color: #EEEEEE;
-    margin: 20px;
+    margin: 10px;
     border-radius: 20px;
     cursor: pointer;
 }
+
+    .flexitem:hover {
+        background-color: #C4C4C4;
+    }
+
+
 .itemimage {
     height: 150px;
     width: auto;
