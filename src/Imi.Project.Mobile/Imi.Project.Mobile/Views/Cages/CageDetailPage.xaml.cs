@@ -51,7 +51,7 @@ namespace Imi.Project.Mobile.Views.Cages
             var selection = (ImageButton)sender;
             var dailyTask = selection.CommandParameter as DailyTask;
             if (dailyTask == null) return;
-            var edit = await DisplayPromptAsync("Edit Task", null ,"Save", "Cancel", null , 1, null, dailyTask.Name);
+            var edit = await DisplayPromptAsync("Edit Task", null ,"Save", "Cancel", null , 50, null, dailyTask.Name);
 
             if (edit != null)
             {
@@ -67,6 +67,27 @@ namespace Imi.Project.Mobile.Views.Cages
 
         private void chkTask_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
+
+
+        }
+
+        private async void btnAddTask_Clicked(object sender, EventArgs e)
+        {
+            var add = await DisplayPromptAsync("Add Task", null, "Save", "Cancel", "ex:Refill water");
+
+            if (add != null)
+            {
+                DailyTask newTask = new DailyTask
+                {
+                    Id = new Guid(),
+                    Name = add,
+                    IsDone = false,
+                    CageId = cagedetail.Id
+                    
+                };
+                await taskservice.AddDailyTask(newTask);
+                lstTasks.ItemsSource = taskservice.GetDailyTaskByCageId(cagedetail.Id);
+            }
 
 
         }
