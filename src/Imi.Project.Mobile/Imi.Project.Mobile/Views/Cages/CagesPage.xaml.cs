@@ -39,9 +39,9 @@ namespace Imi.Project.Mobile
 
         }
 
-        private void btnAddCage_Clicked(object sender, EventArgs e)
+        private async void btnAddCage_Clicked(object sender, EventArgs e)
         {
-
+            await Navigation.PushAsync(new AddCagePage());
         }
     }
 }
