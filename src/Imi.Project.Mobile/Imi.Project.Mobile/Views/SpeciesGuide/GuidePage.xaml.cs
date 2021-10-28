@@ -7,19 +7,14 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Imi.Project.Mobile
+namespace Imi.Project.Mobile.Views.SpeciesGuide
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PairsPage : ContentPage
+    public partial class GuidePage : ContentPage
     {
-        public PairsPage()
+        public GuidePage()
         {
             InitializeComponent();
-        }
-
-        private void colvPairs_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }

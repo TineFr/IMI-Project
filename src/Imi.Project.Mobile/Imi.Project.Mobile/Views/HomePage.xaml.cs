@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Imi.Project.Mobile.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,18 @@ namespace Imi.Project.Mobile
         private void btnTest_Clicked(object sender, EventArgs e)
         {
 
+
+        }
+
+        private async void btnSettings_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SettingsPage());
+        }
+
+        private async void btnAccount_Clicked(object sender, EventArgs e)
+        {
+
+            await Navigation.PushAsync(new AccountPage());
 
         }
     }

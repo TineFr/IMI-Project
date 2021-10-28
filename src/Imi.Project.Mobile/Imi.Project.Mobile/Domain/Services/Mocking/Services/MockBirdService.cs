@@ -1,6 +1,7 @@
 ﻿using Imi.Project.Mobile.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace Imi.Project.Mobile.Domain.Services.Mocking.Repositories
 {
     public class MockBirdService : IBirdService
     {
-        private static List<Bird> birdrepository = new List<Bird>
+        private static ObservableCollection<Bird> birdrepository = new ObservableCollection<Bird>
         {
                     new Bird
                     {
@@ -73,11 +74,11 @@ namespace Imi.Project.Mobile.Domain.Services.Mocking.Repositories
         public Task<Bird> DeleteBird(Guid id)
         {
             var bird = birdrepository.FirstOrDefault(b => b.Id.Equals(id));
-            birdrepository.ToList().Remove(bird);
+            birdrepository.Remove(bird);
             return Task.FromResult(bird);
         }
 
-        public Task<List<Bird>> GetAllBirds()
+        public Task<ObservableCollection<Bird>> GetAllBirds()
         {
             return Task.FromResult(birdrepository);
         }

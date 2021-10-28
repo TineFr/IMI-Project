@@ -4,8 +4,13 @@ using System.Text;
 
 namespace Imi.Project.Mobile.Domain.Models
 {
-    public class Cage
+    public class Cage : BaseEntity
     {
-        public int MyProperty { get; set; }
+        public string Location { get; set; }
+
+        public string Image { get; set; }
+
+        public List<DailyTask> DailyTasks { get; set; }
+
     }
 }

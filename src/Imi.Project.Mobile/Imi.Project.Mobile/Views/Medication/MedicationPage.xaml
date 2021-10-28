@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Imi.Project.Mobile.CagesPage">
+             x:Class="Imi.Project.Mobile.Views.Medication.MedicationPage">
     <ContentPage.Content>
         <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
               RowDefinitions="{StaticResource MainGridRows}">
-            <Frame Style="{StaticResource MainFrame}" BackgroundColor="{StaticResource Purple}">
-                <Label Text="My Cages" Style="{StaticResource MainLabel}"></Label>
+            <Frame Style="{StaticResource MainFrame}" BackgroundColor="{StaticResource Pink}">
+                <Label Text="Medication" Style="{StaticResource MainLabel}"></Label>
             </Frame>
             <AbsoluteLayout Grid.Row="0" Grid.RowSpan="4">
                 <ImageButton Style="{StaticResource Filter}"></ImageButton>
@@ -14,9 +14,9 @@
             </AbsoluteLayout>
             <RefreshView>
                 <CollectionView  Grid.Row="1" 
-                                 x:Name="colvCages"
+                                 x:Name="colvMedication"
                                  SelectionMode="Single"
-                                 SelectionChanged="colvCages_SelectionChanged">
+                      >
                 </CollectionView>
 
             </RefreshView>

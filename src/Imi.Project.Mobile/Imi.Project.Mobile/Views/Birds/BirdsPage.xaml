@@ -15,17 +15,19 @@
             <StackLayout Grid.Row="1">
                 <Button  x:Name="btnAddBird" Text="Add new" HorizontalOptions="EndAndExpand" WidthRequest="100" Margin="10" Clicked="btnAddBird_Clicked"></Button>
             </StackLayout>
-
-            <FlexLayout Grid.Row="2" Grid.RowSpan="3" Direction="Column" JustifyContent="Center"  >
-
-                    <CollectionView  
+            <FlexLayout WidthRequest="700" HorizontalOptions="Center" Grid.Row="2" 
+                                 Grid.RowSpan="3">
+                <CollectionView  
                                  x:Name="colvBirds"
+                                 Grid.Row="2" 
+                                 Grid.RowSpan="3"
                                  SelectionMode="Single"
                                  SelectionChanged="colvBirds_SelectionChanged">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:Bird" >
                             <StackLayout Style="{StaticResource CollectionSelection}">
-                                <Frame Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="Center" Margin="5"  WidthRequest="300" BackgroundColor="#EEEEEE"
+
+                                <Frame Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="Center" Margin="10,5,10,5"  BackgroundColor="#EEEEEE"
                                            CornerRadius="20">
                                     <FlexLayout JustifyContent="SpaceBetween">
                                         <Image Grid.Column="0" Source="{Binding Image}" HeightRequest="60"></Image>
@@ -37,11 +39,11 @@
                                     </FlexLayout>
                                 </Frame>
                             </StackLayout>
-                        </DataTemplate>
+                    </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-
             </FlexLayout>
+
         </Grid>
     </ContentPage.Content>
 </ContentPage>
