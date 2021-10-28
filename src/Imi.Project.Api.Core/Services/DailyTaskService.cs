@@ -19,20 +19,20 @@ namespace Imi.Project.Api.Core.Services
             _dailyTaskRepository = dailyTaskRepository;
         }
 
-        public async Task<DailyTask> AddDailyTaskAsync(DailyTaskRequestDto dailyTaskRequestDto)
+        public async Task<DailyTask> AddDailyTaskAsync(DailyTask dailyTask)
         {
-            var task = dailyTaskRequestDto.MapToEntity();
-            var result = await _dailyTaskRepository.AddAsync(task);
+
+            var result = await _dailyTaskRepository.AddAsync(dailyTask);
             var dto = result;
 
             return dto;
         }
 
-        public async Task DeleteDailyTaskAsync(DailyTaskRequestDto dailyTaskRequestDto)
+        public async Task DeleteDailyTaskAsync(DailyTask dailyTask)
         {
-            var task = dailyTaskRequestDto.MapToEntity();
 
-            await _dailyTaskRepository.DeleteAsync(task);
+
+            await _dailyTaskRepository.DeleteAsync(dailyTask);
         }
 
         public async Task<DailyTask> GetDailyTaskByIdAsync(Guid id)
@@ -53,10 +53,10 @@ namespace Imi.Project.Api.Core.Services
             return tasks;
         }
 
-        public async Task<DailyTask> UpdateDailyTaskAsync(DailyTaskRequestDto dailyTaskRequestDto)
+        public async Task<DailyTask> UpdateDailyTaskAsync(DailyTask dailyTask)
         {
-            var task = dailyTaskRequestDto.MapToEntity();
-            var result = await _dailyTaskRepository.UpdateAsync(task);
+
+            var result = await _dailyTaskRepository.UpdateAsync(dailyTask);
             var dto = result;
 
             return dto;

@@ -72,7 +72,7 @@ namespace Imi.Project.Api.Controllers
                 return NotFound($"User with id {newBird.UserId} does not exist");
             }
             var cage = await _cageService.GetCageByIdAsync(newBird.CageId);
-            if (user == null)
+            if (cage == null)
             {
                 return NotFound($"Cage with id {newBird.CageId} does not exist");
             }
@@ -88,27 +88,27 @@ namespace Imi.Project.Api.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var Bird = await _birdService.GetBirdByIdAsync(updatedBird.Id);
-            if (Bird == null)
+            var bird = await _birdService.GetBirdByIdAsync(updatedBird.Id);
+            if (bird == null)
             {
                 return NotFound($"Bird with id {updatedBird.Id} does not exist");
             }
-            Bird.Update(updatedBird);
-            var result = await _birdService.UpdateBirdAsync(Bird);
+            bird.Update(updatedBird);
+            var result = await _birdService.UpdateBirdAsync(bird);
             return Ok(result);
         }
 
 
 
         [HttpDelete]
-        public async Task<IActionResult> Delete(BirdRequestDto BirdToDelete)
+        public async Task<IActionResult> Delete(BirdRequestDto birdToDelete)
         {
-            var Bird = await _birdService.GetBirdByIdAsync(BirdToDelete.Id);
-            if (Bird == null)
+            var bird = await _birdService.GetBirdByIdAsync(birdToDelete.Id);
+            if (bird == null)
             {
-                return NotFound($"Bird with id {BirdToDelete.Id} does not exist");
+                return NotFound($"Bird with id {birdToDelete.Id} does not exist");
             }
-            await _birdService.DeleteBirdAsync(Bird);
+            await _birdService.DeleteBirdAsync(bird);
             return Ok();
         }
 
@@ -121,14 +121,14 @@ namespace Imi.Project.Api.Controllers
             if (image.ContentType.Contains("image"))
             {
                 var databasePath = await _imageService.AddOrUpdateImageAsync<Bird>(id, image);
-                var album = await _birdService.GetBirdByIdAsync(id);
-                if (album == null)
+                var bird = await _birdService.GetBirdByIdAsync(id);
+                if (bird == null)
                 {
-                    return NotFound($"No album with an id of {id} could be found");
+                    return NotFound($"No bird id {id} could be found");
                 }
-                album.Image = databasePath;
-                await _birdService.UpdateBirdAsync(album);
-                var albumDto = album.MapToDto();
+                bird.Image = databasePath;
+                await _birdService.UpdateBirdAsync(bird);
+                var albumDto = bird.MapToDto();
                 return Ok(albumDto);
             }
             else return BadRequest("Uploaded file should be an image"); //bad request?     
