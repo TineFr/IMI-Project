@@ -11,10 +11,6 @@
     <mobile:BirdsPage Title="Birds" IconImageSource="birds.png"></mobile:BirdsPage>
     <mobile:HomePage Title="Home" IconImageSource="home.png"></mobile:HomePage>
     <medication:MedicationPage Title="Medication" IconImageSource="medication.png"></medication:MedicationPage>
-    <speciesguide:GuidePage Title="Guide" IconImageSource="guide.png"></speciesguide:GuidePage>
-
-
-
-
+    <speciesguide:SpeciesPage Title="Species" IconImageSource="guide.png"></speciesguide:SpeciesPage>
 
 </TabbedPage>
