@@ -23,5 +23,6 @@ namespace Imi.Project.Api.Core.Dtos.Birds
         public Guid SpeciesId { get; set; }
         [Required(ErrorMessage = "{0} is required")]
         public string Image { get; set; }
+
     }
 }

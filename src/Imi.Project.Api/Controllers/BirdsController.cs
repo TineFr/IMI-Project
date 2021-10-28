@@ -17,15 +17,17 @@ namespace Imi.Project.Api.Controllers
     {
         protected readonly IBirdService _birdService;
         protected readonly ICageService _cageService;
+        protected readonly IMedicineService _medicineService;
         protected readonly IUserService _userService;
         protected readonly IImageService _imageService;
 
-        public BirdsController(IBirdService birdService, ICageService cageService, IUserService userService, IImageService imageService)
+        public BirdsController(IBirdService birdService, ICageService cageService, IUserService userService, IImageService imageService, IMedicineService medicineService)
         {
             _birdService = birdService;
             _cageService = cageService;
             _userService = userService;
             _imageService = imageService;
+            _medicineService = medicineService;
         }
 
         [HttpGet]
@@ -36,12 +38,13 @@ namespace Imi.Project.Api.Controllers
             return Ok(result);
         }
 
-        //[HttpGet("{id}/medicines")]
-        //public async Task<IActionResult> GetBirdsWithMedicine()
-        //{
-        //    var Bird = await _BirdService.GetBirdsWithMedicineAsync();
-        //    return Ok(Bird);
-        //}
+        [HttpGet("{id}/medicines")]
+        public async Task<IActionResult> GetBirdsWithMedicine(Guid id)
+        {
+            var medicines = await _medicineService.GetMedicinesByBirdIdAsync(id);
+            var result = medicines.MapToDtoList();
+            return Ok(result);
+        }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)

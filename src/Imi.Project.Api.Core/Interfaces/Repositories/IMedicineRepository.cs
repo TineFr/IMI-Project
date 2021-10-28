@@ -9,5 +9,8 @@ namespace Imi.Project.Api.Core.Interfaces.Repositories
     public interface IMedicineRepository : IBaseRepository<Medicine>
     {
         Task<IEnumerable<Medicine>> GetByUserIdAsync(Guid id);
+
+        Task<IEnumerable<Medicine>> GetByBirdIdAsync(Guid id);
+
     }
 }

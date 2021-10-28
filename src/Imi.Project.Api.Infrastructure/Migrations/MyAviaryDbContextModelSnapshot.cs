@@ -4,16 +4,14 @@ using Imi.Project.Api.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Imi.Project.Api.Infrastructure.Migrations
 {
     [DbContext(typeof(MyAviaryDbContext))]
-    [Migration("20211025191225_InitialMigration")]
-    partial class InitialMigration
+    partial class MyAviaryDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,7 +110,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Imi.Project.Api.Core.Entities.BirdMedicines", b =>
+            modelBuilder.Entity("Imi.Project.Api.Core.Entities.BirdMedicine", b =>
                 {
                     b.Property<Guid>("BirdId")
                         .HasColumnType("uniqueidentifier");
@@ -124,7 +122,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
 
                     b.HasIndex("MedicineId");
 
-                    b.ToTable("BirdMedicine");
+                    b.ToTable("BirdMedicines");
 
                     b.HasData(
                         new
@@ -333,7 +331,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.SetNull);
                 });
 
-            modelBuilder.Entity("Imi.Project.Api.Core.Entities.BirdMedicines", b =>
+            modelBuilder.Entity("Imi.Project.Api.Core.Entities.BirdMedicine", b =>
                 {
                     b.HasOne("Imi.Project.Api.Core.Entities.Bird", "Bird")
                         .WithMany("BirdMedicines")
@@ -342,7 +340,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("Imi.Project.Api.Core.Entities.Medicine", "Medicine")
-                        .WithMany("BirdMedicine")
+                        .WithMany("BirdMedicines")
                         .HasForeignKey("MedicineId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

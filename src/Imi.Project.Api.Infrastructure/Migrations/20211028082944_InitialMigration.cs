@@ -131,7 +131,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BirdMedicine",
+                name: "BirdMedicines",
                 columns: table => new
                 {
                     BirdId = table.Column<Guid>(nullable: false),
@@ -139,15 +139,15 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BirdMedicine", x => new { x.BirdId, x.MedicineId });
+                    table.PrimaryKey("PK_BirdMedicines", x => new { x.BirdId, x.MedicineId });
                     table.ForeignKey(
-                        name: "FK_BirdMedicine_Birds_BirdId",
+                        name: "FK_BirdMedicines_Birds_BirdId",
                         column: x => x.BirdId,
                         principalTable: "Birds",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_BirdMedicine_Medicine_MedicineId",
+                        name: "FK_BirdMedicines_Medicine_MedicineId",
                         column: x => x.MedicineId,
                         principalTable: "Medicine",
                         principalColumn: "Id",
@@ -211,18 +211,18 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "BirdMedicine",
+                table: "BirdMedicines",
                 columns: new[] { "BirdId", "MedicineId" },
                 values: new object[] { new Guid("6668e055-e99c-4b50-ad12-5a28ca2ad422"), new Guid("44411f0e-5e99-49b4-9beb-922d3a97093d") });
 
             migrationBuilder.InsertData(
-                table: "BirdMedicine",
+                table: "BirdMedicines",
                 columns: new[] { "BirdId", "MedicineId" },
                 values: new object[] { new Guid("8e74a018-6d85-4e2a-bb85-f8da2d58f3bf"), new Guid("eb6e6128-25cf-4b4b-b511-fce4a801d1f0") });
 
             migrationBuilder.CreateIndex(
-                name: "IX_BirdMedicine_MedicineId",
-                table: "BirdMedicine",
+                name: "IX_BirdMedicines_MedicineId",
+                table: "BirdMedicines",
                 column: "MedicineId");
 
             migrationBuilder.CreateIndex(
@@ -259,7 +259,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "BirdMedicine");
+                name: "BirdMedicines");
 
             migrationBuilder.DropTable(
                 name: "DailyTasks");

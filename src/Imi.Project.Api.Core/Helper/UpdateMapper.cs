@@ -27,7 +27,6 @@ namespace Imi.Project.Api.Core.Helper
             bird.Image = birdDto.Image;
             bird.HatchDate = birdDto.HatchDate;
             bird.SpeciesId = birdDto.SpeciesId;
-
             return bird;
         }
         public static Cage Update(this Cage cage, CageRequestDto cageDto)

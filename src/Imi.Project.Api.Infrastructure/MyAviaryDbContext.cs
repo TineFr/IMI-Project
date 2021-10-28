@@ -16,6 +16,8 @@ namespace Imi.Project.Api.Infrastructure
         public DbSet<Medicine> Medicine { get; set; }
         public DbSet<DailyTask> DailyTasks { get; set; }
 
+        public DbSet<BirdMedicine> BirdMedicines { get; set; }
+
         public MyAviaryDbContext(DbContextOptions<MyAviaryDbContext> options) : base(options)
         {
 
@@ -32,8 +34,8 @@ namespace Imi.Project.Api.Infrastructure
             BirdMedicineSeeding.Seeding(modelBuilder);
 
             modelBuilder
-                .Entity<BirdMedicines>()
-                .ToTable("BirdMedicine") 
+                .Entity<BirdMedicine>()
+                .ToTable("BirdMedicines") 
                 .HasKey(bm => new { bm.BirdId, bm.MedicineId });
 
             modelBuilder.Entity<Cage>()
