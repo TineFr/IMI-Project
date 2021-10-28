@@ -10,7 +10,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
     {
         public SpeciesRepository(AppDbContext dbContext) : base(dbContext)
         {
-
         }
     }
+
 }

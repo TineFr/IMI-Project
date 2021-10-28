@@ -53,7 +53,7 @@ namespace Imi.Project.Api.Controllers
             var medicine = await _medicineService.GetMedicineByIdAsync(medicineRequestDto.Id);
             if (medicine != null)
             {
-                return BadRequest($"medicine with id {medicineRequestDto.Id} already exists");
+                return BadRequest($"Medicine with id {medicineRequestDto.Id} already exists");
             }
             var user = await _userService.GetUserByIdAsync(medicineRequestDto.UserId);
             if (user == null)
@@ -75,7 +75,7 @@ namespace Imi.Project.Api.Controllers
             var medicine = await _medicineService.GetMedicineByIdAsync(medicineRequestDto.Id);
             if (medicine == null)
             {
-                return NotFound($"medicine with id {medicineRequestDto.Id} does not exist");
+                return NotFound($"Medicine with id {medicineRequestDto.Id} does not exist");
             }
             medicine.Update(medicineRequestDto);
             var result = await _medicineService.UpdateMedicineAsync(medicine);
@@ -90,7 +90,7 @@ namespace Imi.Project.Api.Controllers
             var medicine = await _medicineService.GetMedicineByIdAsync(medicineRequestDto.Id);
             if (medicine == null)
             {
-                return NotFound($"medicine with id {medicineRequestDto.Id} does not exist");
+                return NotFound($"Medicine with id {medicineRequestDto.Id} does not exist");
             }
             await _medicineService.DeleteMedicineAsync(medicine);
             return Ok();

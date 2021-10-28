@@ -28,7 +28,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
         }
         public async override Task<IEnumerable<Bird>> ListAllAsync()
         {
-            return await GetAll().ToListAsync();
+            return await GetAll().OrderBy(b => b.Name).ToListAsync();
         }
         public async override Task<Bird> GetByIdAsync(Guid id)
         {

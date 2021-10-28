@@ -30,21 +30,16 @@ namespace Imi.Project.Api.Infrastructure.Repositories
 
         public async override Task<IEnumerable<Cage>> ListAllAsync()
         {
-            return await GetAll().ToListAsync();
+            return await GetAll().OrderBy(c => c.Name).ToListAsync();
         }
         public async override Task<Cage> GetByIdAsync(Guid id)
         {
             return await GetAll().SingleOrDefaultAsync(b => b.Id.Equals(id));
         }
 
-        public async Task<IEnumerable<Cage>> GetByUserIdAsync(Guid id)
-        {
-            return await GetAll().Where(c => c.UserId.Equals(id)).ToListAsync();
-        }
-
         public async Task<IEnumerable<Cage>> GetCagesByUserIdAsync(Guid id)
         {
-            var cages = await GetAll().Where(p => p.UserId.Equals(id)).ToListAsync();
+            var cages = await GetAll().Where(p => p.UserId.Equals(id)).OrderBy(c => c.Name).ToListAsync();
             return cages;
         }
 
