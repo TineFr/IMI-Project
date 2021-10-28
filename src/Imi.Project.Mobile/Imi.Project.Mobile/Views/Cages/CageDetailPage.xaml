@@ -17,25 +17,23 @@
                 <Button  x:Name="btnEditCage" Text="Edit" HorizontalOptions="EndAndExpand" WidthRequest="100" Margin="10" Clicked="btnEditCage_Clicked"></Button>
             </StackLayout>
             <StackLayout Grid.Row="2"  Grid.RowSpan="3">
-                <ScrollView Grid.Row="2"  Grid.RowSpan="2">
-                    <StackLayout >
-                        <Frame WidthRequest="300" HeightRequest="300" HorizontalOptions="Center">
-                        <Image Source="{Binding Cage.Image}" WidthRequest="300"></Image>
-                    </Frame>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                        <Label Text="Location:"></Label>
-                        <Label HeightRequest="50" HorizontalOptions="Center" Text="{Binding Cage.Location}"></Label>
-                    </StackLayout>
-                    </StackLayout>
-                </ScrollView>
-            <Frame>
                 <StackLayout>
-                    <Label Text="Daily tasks" HorizontalTextAlignment="Center"></Label>
-                        <ListView x:Name="lstTasks" VerticalScrollBarVisibility="Never" Grid.Row="3">
+                        <Frame WidthRequest="300" HeightRequest="500" HorizontalOptions="Center">
+                            <Image Source="{Binding Cage.Image}" HeightRequest="200"></Image>
+                        </Frame>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                            <Label Text="Location:"></Label>
+                            <Label HeightRequest="50" HorizontalOptions="Center" Text="{Binding Cage.Location}"></Label>
+                        </StackLayout>
+                    </StackLayout>
+                    <Frame>
+                    <StackLayout Style="{StaticResource CollectionSelection}">
+                    <Label Text="Daily tasks" HorizontalTextAlignment="Center" FontSize="30"></Label>
+                        <ListView x:Name="lstTasks" SelectionMode="None" >
                         <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <StackLayout Orientation="Horizontal">
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <StackLayout Orientation="Horizontal" Style="{StaticResource CollectionSelection}">
                                         <CheckBox x:Name="{}"></CheckBox>
                                         <Label Text="{Binding Name}" HorizontalOptions="StartAndExpand" Margin="10,0,0,0" FontSize="15" Padding="10"></Label>
                                     </StackLayout>
