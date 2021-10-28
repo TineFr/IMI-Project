@@ -8,6 +8,7 @@ namespace Imi.Project.Api.Core.Dtos
     public abstract class BaseEntityDto
     {
         [Required(ErrorMessage = "{0} is required")]
+       
         public Guid Id { get; set; }
 
         [Required(ErrorMessage = "{0} is required")]

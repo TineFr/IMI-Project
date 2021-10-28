@@ -37,6 +37,19 @@ namespace Imi.Project.Api.Infrastructure
                 .HasKey(bm => new { bm.BirdId, bm.MedicineId });
 
             modelBuilder.Entity<Cage>()
+                 .HasKey(c => c.Id);
+            modelBuilder.Entity<User>()
+                  .HasKey(c => c.Id);
+            modelBuilder.Entity<Bird>()
+                  .HasKey(c => c.Id);
+            modelBuilder.Entity<Medicine>()
+                  .HasKey(c => c.Id);
+            modelBuilder.Entity<DailyTask>()
+                  .HasKey(c => c.Id);
+            modelBuilder.Entity<Species>()
+                  .HasKey(c => c.Id);
+
+            modelBuilder.Entity<Cage>()
                 .HasMany(e => e.Birds)
                 .WithOne(e => e.Cage)
                 .HasForeignKey(p => p.CageId)
