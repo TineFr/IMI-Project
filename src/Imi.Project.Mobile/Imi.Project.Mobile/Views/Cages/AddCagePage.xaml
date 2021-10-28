@@ -10,7 +10,7 @@
 
             </Frame>
             <AbsoluteLayout Grid.Row="0" Grid.RowSpan="4">
-                <ImageButton x:Name="btnBack" Style="{StaticResource BackArrow}"></ImageButton>
+                <ImageButton x:Name="btnBack" Style="{StaticResource BackArrow}" Clicked="btnBack_Clicked"></ImageButton>
                 <Image Style="{StaticResource Logo}" ></Image>
             </AbsoluteLayout>
 

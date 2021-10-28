@@ -36,5 +36,10 @@ namespace Imi.Project.Mobile.Views.Cages
 
             await Navigation.PopAsync();
         }
+
+        private async void btnBack_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
+        }
     }
 }
