@@ -36,6 +36,7 @@
                                         <StackLayout Orientation="Horizontal" Style="{StaticResource CollectionSelection}">
                                         <CheckBox x:Name="{}"></CheckBox>
                                         <Label Text="{Binding Name}" HorizontalOptions="StartAndExpand" Margin="10,0,0,0" FontSize="15" Padding="10"></Label>
+                                        <ImageButton x:Name="btnEditTask" CommandParameter="{Binding .}" Source="pencil.png" WidthRequest="20" BackgroundColor="Transparent" Clicked="btnEditTask_Clicked"></ImageButton>
                                     </StackLayout>
                                 </ViewCell>
                             </DataTemplate>

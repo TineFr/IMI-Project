@@ -16729,7 +16729,7 @@ namespace Imi.Project.Mobile.Droid
 			public const int notify_panel_notification_icon_bg = 2131165349;
 			
 			// aapt resource value: 0x7F0700A6
-			public const int pairs = 2131165350;
+			public const int pencil = 2131165350;
 			
 			// aapt resource value: 0x7F0700A7
 			public const int preference_list_divider_material = 2131165351;

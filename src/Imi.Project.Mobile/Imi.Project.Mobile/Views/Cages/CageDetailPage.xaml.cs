@@ -45,5 +45,24 @@ namespace Imi.Project.Mobile.Views.Cages
         {
            await Navigation.PopAsync();
         }
+
+        private async void btnEditTask_Clicked(object sender, EventArgs e)
+        {
+            var selection = (ImageButton)sender;
+            var dailyTask = selection.CommandParameter as DailyTask;
+            if (dailyTask == null) return;
+            var edit = await DisplayPromptAsync("Edit Task", null ,"Save", "Cancel", null , 1, null, dailyTask.Name);
+
+            if (edit != null)
+            {
+                var taskToUpdate = await taskservice.GetDailyTaskById(dailyTask.Id);
+                taskToUpdate.Name = edit;
+                await taskservice.UpdateDailyTask(taskToUpdate);
+                lstTasks.ItemsSource = taskservice.GetDailyTaskByCageId(cagedetail.Id);
+            }
+
+
+
+        }
     }
 }

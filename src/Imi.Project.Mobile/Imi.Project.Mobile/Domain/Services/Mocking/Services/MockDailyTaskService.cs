@@ -21,21 +21,21 @@ namespace Imi.Project.Mobile.Domain.Services.Mocking.Services
                     },
                     new DailyTask
                     {
-                    Id = Guid.Parse("8606C209-1D51-4EE3-9F8D-8DE3D0F3F24E"),
+                    Id = Guid.Parse("5E94B39A-58B3-4719-9595-1440681C53A6"),
                     Name = "Clean branches",
                     CageId = Guid.Parse("36122865-A1B6-410E-AFB9-662F8EE16949")
 
                     },
                     new DailyTask
                     {
-                    Id = Guid.Parse("8606C209-1D51-4EE3-9F8D-8DE3D0F3F24E"),
-                    Name = "Refill water",
+                    Id = Guid.Parse("5F15E9F6-FCBE-4FB7-A15B-5E59E9613238"),
+                    Name = "Clean branches",
                     CageId =  Guid.Parse("8606C209-1D51-4EE3-9F8D-8DE3D0F3F24E")
 
                     },
                     new DailyTask
                     {
-                    Id = Guid.Parse("8606C209-1D51-4EE3-9F8D-8DE3D0F3F24E"),
+                    Id = Guid.Parse("EA29EC6D-918D-4590-A409-D332B06E7133"),
                     Name = "Refill water",
                     CageId =   Guid.Parse("36122865-A1B6-410E-AFB9-662F8EE16949")
 
