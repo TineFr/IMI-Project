@@ -19,14 +19,17 @@ namespace Imi.Project.Api.Core.Services
             _medicineRepository = medicineRepository;
         }
 
-        public Task<Medicine> AddMedicineAsync(MedicineRequestDto MedicineRequestDto)
+        public async Task<Medicine> AddMedicineAsync(Medicine medicine)
         {
-            throw new NotImplementedException();
+            var result = await _medicineRepository.AddAsync(medicine);
+            return result;
+          
         }
 
-        public Task DeleteMedicineAsync(MedicineRequestDto userRequestDto)
+        public async Task DeleteMedicineAsync(Medicine medicine)
         {
-            throw new NotImplementedException();
+           await _medicineRepository.DeleteAsync(medicine);
+
         }
 
         public async Task<Medicine> GetMedicineByIdAsync(Guid id)
@@ -48,9 +51,10 @@ namespace Imi.Project.Api.Core.Services
             return medicines;
         }
 
-        public Task<Medicine> UpdateMedicineAsync(MedicineRequestDto MedicineRequestDto)
+        public async Task<Medicine> UpdateMedicineAsync(Medicine medicine)
         {
-            throw new NotImplementedException();
+            var result = await _medicineRepository.UpdateAsync(medicine);
+            return result;
         }
     }
 }

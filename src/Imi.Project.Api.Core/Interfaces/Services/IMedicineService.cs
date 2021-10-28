@@ -12,9 +12,9 @@ namespace Imi.Project.Api.Core.Interfaces.Services
     {
         Task<IEnumerable<Medicine>> ListAllMedicinesAsync();
         Task<Medicine> GetMedicineByIdAsync(Guid id);
-        Task<Medicine> AddMedicineAsync(MedicineRequestDto MedicineRequestDto);
-        Task<Medicine> UpdateMedicineAsync(MedicineRequestDto MedicineRequestDto);
-        Task DeleteMedicineAsync(MedicineRequestDto userRequestDto);
+        Task<Medicine> AddMedicineAsync(Medicine medicine);
+        Task<Medicine> UpdateMedicineAsync(Medicine medicine);
+        Task DeleteMedicineAsync(Medicine medicine);
         Task<IEnumerable<Medicine>> GetMedicinesByUserIdAsync(Guid id);
      
     }

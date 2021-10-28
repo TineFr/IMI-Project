@@ -28,6 +28,7 @@ namespace Imi.Project.Api.Core.Services
         public async Task DeleteCageAsync(Cage cage)
         {
            await _cageRepository.DeleteAsync(cage);
+           
         }
 
         public async Task<Cage> GetCageByIdAsync(Guid id)
