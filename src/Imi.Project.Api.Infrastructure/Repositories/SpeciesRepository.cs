@@ -8,7 +8,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
 {
     public class SpeciesRepository : BaseRepository<Species>, ISpeciesRepository
     {
-        public SpeciesRepository(AppDbContext dbContext) : base(dbContext)
+        public SpeciesRepository(MyAviaryDbContext dbContext) : base(dbContext)
         {
         }
     }

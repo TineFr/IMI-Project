@@ -11,9 +11,9 @@ namespace Imi.Project.Api.Infrastructure.Repositories
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
-        protected readonly AppDbContext _dbContext;
+        protected readonly MyAviaryDbContext _dbContext;
 
-        public BaseRepository(AppDbContext dbContext)
+        public BaseRepository(MyAviaryDbContext dbContext)
         {
             _dbContext = dbContext;
         }

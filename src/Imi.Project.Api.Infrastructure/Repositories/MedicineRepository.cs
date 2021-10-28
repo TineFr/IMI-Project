@@ -12,7 +12,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
 {
     public class MedicineRepository : BaseRepository<Medicine>, IMedicineRepository
     {
-        public MedicineRepository(AppDbContext dbContext) : base(dbContext)
+        public MedicineRepository(MyAviaryDbContext dbContext) : base(dbContext)
         {
 
         }

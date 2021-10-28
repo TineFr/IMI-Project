@@ -11,7 +11,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
 {
     public class UserRepository : BaseRepository<User>, IUserRepository
     {
-        public UserRepository(AppDbContext dbContext) : base(dbContext)
+        public UserRepository(MyAviaryDbContext dbContext) : base(dbContext)
         {
 
         }

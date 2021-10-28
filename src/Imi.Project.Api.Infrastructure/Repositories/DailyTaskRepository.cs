@@ -11,7 +11,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
 {
     public class DailyTaskRepository : BaseRepository<DailyTask>, IDailyTaskRepository
     {
-        public DailyTaskRepository(AppDbContext dbContext) : base(dbContext)
+        public DailyTaskRepository(MyAviaryDbContext dbContext) : base(dbContext)
         {
 
         }

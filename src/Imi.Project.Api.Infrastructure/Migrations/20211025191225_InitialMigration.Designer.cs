@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Imi.Project.Api.Infrastructure.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(MyAviaryDbContext))]
     [Migration("20211025191225_InitialMigration")]
     partial class InitialMigration
     {

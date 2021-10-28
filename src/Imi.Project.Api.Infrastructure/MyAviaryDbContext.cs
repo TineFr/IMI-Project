@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Imi.Project.Api.Infrastructure
 {
-    public class AppDbContext : DbContext
+    public class MyAviaryDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Cage> Cages { get; set; }
@@ -16,7 +16,7 @@ namespace Imi.Project.Api.Infrastructure
         public DbSet<Medicine> Medicine { get; set; }
         public DbSet<DailyTask> DailyTasks { get; set; }
 
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        public MyAviaryDbContext(DbContextOptions<MyAviaryDbContext> options) : base(options)
         {
 
         }

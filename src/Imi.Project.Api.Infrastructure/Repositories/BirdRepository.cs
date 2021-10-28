@@ -12,7 +12,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
     public class BirdRepository : BaseRepository<Bird>, IBirdRepository
 
     {
-        public BirdRepository(AppDbContext dbContext) : base(dbContext)
+        public BirdRepository(MyAviaryDbContext dbContext) : base(dbContext)
         {
 
         }

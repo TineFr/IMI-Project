@@ -11,7 +11,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
 {
     public class CageRepository : BaseRepository<Cage>, ICageRepository
     {
-        public CageRepository(AppDbContext dbContext) : base(dbContext)
+        public CageRepository(MyAviaryDbContext dbContext) : base(dbContext)
         {
 
         }
