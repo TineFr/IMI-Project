@@ -64,5 +64,11 @@ namespace Imi.Project.Mobile.Views.Cages
 
 
         }
+
+        private void chkTask_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+
+
+        }
     }
 }
