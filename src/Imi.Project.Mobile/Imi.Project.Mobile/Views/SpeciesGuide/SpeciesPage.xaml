@@ -26,7 +26,7 @@
                             <StackLayout Style="{StaticResource CollectionSelection}">
 
                                 <Frame Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="Center" Margin="10,5,10,5"  BackgroundColor="#EEEEEE"
-                                           CornerRadius="20">
+                                           HeightRequest="35">
                                     <FlexLayout JustifyContent="Center">
                                         <StackLayout HorizontalOptions="Center">
                                             <Label  Text="{Binding Name}" FontSize="20" HorizontalTextAlignment="Center" />
