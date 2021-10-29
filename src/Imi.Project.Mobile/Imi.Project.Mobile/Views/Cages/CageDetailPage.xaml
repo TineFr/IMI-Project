@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Imi.Project.Mobile.Views.Cages.CageDetailPage">
+             x:Class="Imi.Project.Mobile.Views.Cages.CageDetailPage"
+             xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions">
     <ContentPage.Content>
         <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
               RowDefinitions="{StaticResource MainGridRows}">
@@ -37,8 +38,9 @@
                                         <StackLayout Orientation="Horizontal" Style="{StaticResource CollectionSelection}">
                                             <CheckBox x:Name= "chkTask"  PropertyChanged="chkTask_PropertyChanged" IsChecked="{Binding IsDone}"></CheckBox>
                                         <Label Text="{Binding Name}" HorizontalOptions="StartAndExpand" Margin="10,0,0,0" FontSize="15" Padding="10"></Label>
-                                        <ImageButton x:Name="btnEditTask" CommandParameter="{Binding .}" Source="pencil.png" WidthRequest="20" BackgroundColor="Transparent" Clicked="btnEditTask_Clicked"></ImageButton>
-                                    </StackLayout>
+                                            <ImageButton x:Name="btnEditTask" CommandParameter="{Binding .}" Source="{extensions:ImageResource Imi.Project.Mobile.icons.pencil.png}" WidthRequest="20" BackgroundColor="Transparent" Clicked="btnEditTask_Clicked"></ImageButton>
+                                            <ImageButton x:Name="btnDeleteTask" CommandParameter="{Binding .}" Source="{extensions:ImageResource Imi.Project.Mobile.icons.delete.png}" WidthRequest="15" BackgroundColor="Transparent" Margin="5,0, 0, 0"  Clicked="btnDeleteTask_Clicked"></ImageButton>
+                                        </StackLayout>
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>

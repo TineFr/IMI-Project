@@ -1,7 +1,8 @@
-﻿using Imi.Project.Mobile.Domain.Models;
-using Imi.Project.Mobile.Domain.Services.Mocking;
-using Imi.Project.Mobile.Domain.Services.Mocking.Services;
-using Imi.Project.Mobile.Domain.ViewModels;
+﻿using Imi.Project.Mobile.Core.Models;
+using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
+using Imi.Project.Mobile.Core.Services.Mocking.Services;
+using Imi.Project.Mobile.Core.ViewModels;
+using Imi.Project.Mobile.Domain.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -90,6 +91,20 @@ namespace Imi.Project.Mobile.Views.Cages
             }
 
 
+        }
+
+        private async void btnDeleteTask_Clicked(object sender, EventArgs e)
+        {
+           var action =  await DisplayAlert("Do you wish to delete this task?", null, "YES", "CANCEL");
+            if (action)
+            {
+                var selection = (ImageButton)sender;
+                var dailyTask = selection.CommandParameter as DailyTask;
+                await taskservice.DeleteDailyTask(dailyTask.Id);
+                lstTasks.ItemsSource = taskservice.GetDailyTaskByCageId(cagedetail.Id);
+            }
+            
+           
         }
     }
 }

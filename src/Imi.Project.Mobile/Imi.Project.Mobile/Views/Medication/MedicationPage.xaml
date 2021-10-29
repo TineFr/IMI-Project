@@ -1,26 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Imi.Project.Mobile.Views.Medication.MedicationPage">
+             x:Class="Imi.Project.Mobile.Views.Medication.MedicationPage"
+             xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions">
     <ContentPage.Content>
         <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
               RowDefinitions="{StaticResource MainGridRows}">
-            <Frame Style="{StaticResource MainFrame}" BackgroundColor="{StaticResource Pink}">
+            <Frame Style="{StaticResource MainFrame}" BackgroundColor="{StaticResource Purple}">
                 <Label Text="Medication" Style="{StaticResource MainLabel}"></Label>
             </Frame>
             <AbsoluteLayout Grid.Row="0" Grid.RowSpan="4">
                 <ImageButton Style="{StaticResource Filter}"></ImageButton>
                 <Image Style="{StaticResource Logo}" ></Image>
             </AbsoluteLayout>
-            <RefreshView>
-                <CollectionView  Grid.Row="1" 
+            <StackLayout Grid.Row="1">
+                <Button  x:Name="btnAddCage" Text="Add new" HorizontalOptions="EndAndExpand" WidthRequest="100" Margin="10" ></Button>
+            </StackLayout>
+            <CollectionView      Grid.Row="2" 
+                                 Grid.RowSpan="3"
                                  x:Name="colvMedication"
                                  SelectionMode="Single"
-                      >
-                </CollectionView>
-
-            </RefreshView>
-
+                                 SelectionChanged="colvMedication_SelectionChanged"
+                                 VerticalOptions="Center"   
+                                 HorizontalOptions="Center"   
+                                 Margin="10">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="2"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Style="{StaticResource CollectionSelection}" Padding="5">
+                            <Frame CornerRadius="20" BackgroundColor="#EEEEEE">
+                                <FlexLayout Direction="Column" JustifyContent="SpaceAround" AlignItems="Center">
+                                    <Image  Source="{extensions:ImageResource Imi.Project.Mobile.icons.medication.png}" HeightRequest="50" HorizontalOptions="Center"></Image>
+                                    <StackLayout HorizontalOptions="Center">
+                                        <Label  Text="{Binding Name}" FontSize="20" FontAttributes="Bold" />
+                                        <Label  Text="{Binding Usage}" FontAttributes="italic" HorizontalTextAlignment="Start" />
+                                    </StackLayout>
+                                    <Button x:Name="btnShowBirds" Text="Show birds" Clicked="btnShowBirds_Clicked" CommandParameter="{Binding .}"></Button>
+                                </FlexLayout>
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

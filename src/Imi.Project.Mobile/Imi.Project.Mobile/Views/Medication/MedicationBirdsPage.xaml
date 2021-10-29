@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:models1="clr-namespace:Imi.Project.Mobile.Core.Models;assembly=Imi.Project.Mobile.Core"
-             x:Class="Imi.Project.Mobile.Views.SpeciesGuide.SpeciesPage">
+             x:Class="Imi.Project.Mobile.Views.Medication.MedicationBirdsPage">
     <ContentPage.Content>
         <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
               RowDefinitions="{StaticResource MainGridRows}">
@@ -16,13 +16,12 @@
             <FlexLayout WidthRequest="700" HorizontalOptions="Center" Grid.Row="2" 
                                  Grid.RowSpan="3">
                 <CollectionView  
-                                 x:Name="colvSpecies"
+                                 x:Name="colvBirds"
                                  Grid.Row="2" 
                                  Grid.RowSpan="3"
-                                 SelectionMode="Single"
-                                 SelectionChanged="colvSpecies_SelectionChanged">
+                                 SelectionMode="Single">
                     <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models1:Species" >
+                        <DataTemplate x:DataType="models1:Bird" >
                             <StackLayout Style="{StaticResource CollectionSelection}">
 
                                 <Frame Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="Center" Margin="10,5,10,5"  BackgroundColor="#EEEEEE"
@@ -30,7 +29,7 @@
                                     <FlexLayout JustifyContent="Center">
                                         <StackLayout HorizontalOptions="Center">
                                             <Label  Text="{Binding Name}" FontSize="20" HorizontalTextAlignment="Center" />
-                                            <Label  Text="{Binding ScientificName}" FontAttributes="italic"  HorizontalTextAlignment="Center"/>
+                                            <Label  Text="{Binding Cage}" FontAttributes="italic"  HorizontalTextAlignment="Center"/>
                                         </StackLayout>
                                     </FlexLayout>
                                 </Frame>
