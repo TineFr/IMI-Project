@@ -18,7 +18,7 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     Id = Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
                     Name = "Budgerigar",
                     ScientificName = "lorem ipsum" ,
-                    Image = "cockatiel3.jpg",
+                    Image = "images/cockatiel1.jpg",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
                     },
 
@@ -27,7 +27,7 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     Id = Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
                     Name = "Monk parakeet",
                     ScientificName = "lorem ipsum",
-                    Image = "budgie1.jpg",
+                    Image = "images/budgie1.jpg",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
                     },
                     new Species
@@ -35,7 +35,7 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     Id = Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
                     Name = "Cockatiel",
                     ScientificName = "lorem ipsum",
-                    Image = "budgie1.jpg",
+                    Image = "images/budgie1.jpg",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
                     },
 
@@ -44,7 +44,7 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     Id = Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
                     Name = "Indian ringneck parakeet",
                     ScientificName = "lorem ipsum",
-                    Image = "cockatiel3.jpg",
+                    Image = "images/cockatiel2.jpg",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
                     },
 
@@ -53,7 +53,7 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     Id = Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
                     Name = "Regent parakeet",
                     ScientificName ="lorem ipsum" ,
-                    Image = "cockatiel3.jpg",
+                    Image = "images/cockatiel2.jpg",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
                     },
 
@@ -62,7 +62,7 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     Id = Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
                     Name = "Bourke’s parakeet",
                     ScientificName = "lorem ipsum",
-                    Image = "cockatiel3.jpg",
+                    Image = "images/cockatiel1.jpg",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
                     },
         };

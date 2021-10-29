@@ -18,7 +18,7 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     Id = Guid.Parse("8606C209-1D51-4EE3-9F8D-8DE3D0F3F24E"),
                     Name = "Outside Cage 1",
                     Location ="Outside",
-                    Image = "cage1.png",
+                    Image = "images/cage1.png",
 
 
                     },
@@ -28,7 +28,7 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     Id = Guid.Parse("36122865-A1B6-410E-AFB9-662F8EE16949"),
                     Name = "Outside Cage 2",
                     Location ="Outside",
-                    Image = "cage2.png",
+                    Image = "images/cage2.png",
 
 
                     },

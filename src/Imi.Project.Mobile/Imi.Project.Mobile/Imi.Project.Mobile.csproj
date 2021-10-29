@@ -21,7 +21,9 @@
     <None Remove="icons\home.png" />
     <None Remove="icons\leftarrow.png" />
     <None Remove="icons\logolight.png" />
+    <None Remove="icons\logolightwhite.png" />
     <None Remove="icons\male.png" />
+    <None Remove="icons\medication.png" />
     <None Remove="icons\pencil.png" />
     <None Remove="icons\settings.png" />
   </ItemGroup>
@@ -37,7 +39,9 @@
     <EmbeddedResource Include="icons\home.png" />
     <EmbeddedResource Include="icons\leftarrow.png" />
     <EmbeddedResource Include="icons\logolight.png" />
+    <EmbeddedResource Include="icons\logolightwhite.png" />
     <EmbeddedResource Include="icons\male.png" />
+    <EmbeddedResource Include="icons\medication.png" />
     <EmbeddedResource Include="icons\pencil.png" />
     <EmbeddedResource Include="icons\settings.png" />
   </ItemGroup>

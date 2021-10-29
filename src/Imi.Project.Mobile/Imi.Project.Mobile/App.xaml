@@ -64,7 +64,7 @@
         </Style>
         <!--logo style-->
         <Style x:Key="Logo" TargetType="Image">
-            <Setter Property="Source" Value="{extensions:ImageResource Imi.Poject.Mobile.icons.logolightwhite.png}" ></Setter>
+            <Setter Property="Source" Value="{extensions:ImageResource Imi.Project.Mobile.icons.logolightwhite.png}" ></Setter>
             <Setter Property="AbsoluteLayout.LayoutBounds" Value="0.97, 10, 50, 50" ></Setter>
             <Setter Property="AbsoluteLayout.LayoutFlags" Value="XProportional" ></Setter>
         </Style>

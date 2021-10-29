@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Imi.Project.Mobile.Views.Medication.MedicationPage">
+             x:Class="Imi.Project.Mobile.Views.Medication.MedicationPage"
+             xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions">
     <ContentPage.Content>
         <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
               RowDefinitions="{StaticResource MainGridRows}">
@@ -31,7 +32,7 @@
                         <StackLayout Style="{StaticResource CollectionSelection}" Padding="5">
                             <Frame CornerRadius="20" BackgroundColor="#EEEEEE">
                                 <FlexLayout Direction="Column" JustifyContent="SpaceAround" AlignItems="Center">
-                                    <Image  Source="medication.png" HeightRequest="50" HorizontalOptions="Center"></Image>
+                                    <Image  Source="{extensions:ImageResource Imi.Project.Mobile.icons.medication.png}" HeightRequest="50" HorizontalOptions="Center"></Image>
                                     <StackLayout HorizontalOptions="Center">
                                         <Label  Text="{Binding Name}" FontSize="20" FontAttributes="Bold" />
                                         <Label  Text="{Binding Usage}" FontAttributes="italic" HorizontalTextAlignment="Start" />

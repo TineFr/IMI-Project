@@ -20,7 +20,7 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     Cage ="Outside cage",
                     Gender = "Male",
                     HatchDate = new DateTime(2015, 12, 25),
-                    Image = "budgie1.jpg",
+                    Image = "images/budgie1.jpg",
                     Species = "Budgerigar",
                     ScientificName ="Melopsittacus undulatus",
                     Food = "Parakeet mix"
@@ -33,7 +33,7 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     Cage = "Outside cage",
                     Gender = "Female",
                     HatchDate = new DateTime(2017, 07, 13),
-                    Image = "budgie4.jpg",
+                    Image = "images/budgie2.jpg",
                     Species = "Budgerigar",
                     ScientificName ="Melopsittacus undulatus",
                     Food = "Parakeet mix"
@@ -46,7 +46,7 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     Cage = "Outside cage 2",
                     Gender = "Male",
                     HatchDate = new DateTime(2012, 09, 03),
-                    Image = "cockatiel1.jpg",
+                    Image = "images/cockatiel1.jpg",
                     Species = "Cockatiel",
                     ScientificName = "Nymphicus hollandicuss",
                     Food = "Parakeet mix",
@@ -60,7 +60,7 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     Cage = "Outside cage 2",
                     Gender = "Female",
                     HatchDate = new DateTime(2017, 07, 13),
-                    Image = "cockatiel3.jpg",
+                    Image = "images/cockatiel2.jpg",
                     Species = "Cockatiel",
                     ScientificName = "Nymphicus hollandicuss",
                     Food = "Parakeet mix"

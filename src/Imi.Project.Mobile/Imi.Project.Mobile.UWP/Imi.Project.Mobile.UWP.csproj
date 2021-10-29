@@ -103,8 +103,6 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="accountdark.png" />
-    <Content Include="accountlight.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />
@@ -132,27 +130,16 @@
     <Content Include="Assets\Wide310x150Logo.scale-100.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
-    <Content Include="birds.png" />
-    <Content Include="budgie1.jpg" />
-    <Content Include="budgie4.jpg" />
-    <Content Include="cage1.png" />
-    <Content Include="cage2.png" />
-    <Content Include="cages.png" />
-    <Content Include="cockatiel1.jpg" />
-    <Content Include="cockatiel3.jpg" />
-    <Content Include="female.png" />
-    <Content Include="filter.png" />
-    <Content Include="home.png" />
-    <Content Include="leftarrow.png" />
-    <Content Include="logoblack.png" />
-    <Content Include="logolight.png" />
-    <Content Include="logowhite.png" />
-    <Content Include="male.png" />
-    <Content Include="nests.png" />
-    <Content Include="pairs.png" />
+    <Content Include="images\budgie1.jpg" />
+    <Content Include="images\budgie2.jpg" />
+    <Content Include="images\cage1.png" />
+    <Content Include="images\cage2.png" />
+    <Content Include="images\cockatiel1.jpg" />
+    <Content Include="images\cockatiel2.jpg" />
+    <Content Include="images\female.png" />
+    <Content Include="images\male.png" />
     <Content Include="Properties\Default.rd.xml" />
-    <Content Include="raven.jpg" />
-    <Content Include="settings.png" />
+    <Content Include="images\budgies.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

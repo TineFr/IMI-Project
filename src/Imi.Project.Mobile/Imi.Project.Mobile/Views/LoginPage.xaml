@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Imi.Project.Mobile.Views.LoginPage">
+             x:Class="Imi.Project.Mobile.Views.LoginPage"
+             xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
-            <Image Source="logolight.png" HorizontalOptions="Center" HeightRequest="150" Margin="0,40,0,0"></Image>
+                <Image Source="{extensions:ImageResource Imi.Project.Mobile.icons.logolight.png}" HorizontalOptions="Center" HeightRequest="150" Margin="0,40,0,0"></Image>
             <Label HorizontalOptions="Center" WidthRequest="300"  Text="LOG IN" FontSize="30" Margin ="0, 30, 0, 0"  FontAttributes="Bold" TextColor="Black"></Label>
             <Frame Padding="0" Margin="10" HorizontalOptions="Center" WidthRequest="300">
                 <Entry Placeholder="Email" ></Entry>

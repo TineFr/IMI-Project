@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Imi.Project.Mobile.Views.RegisterPage">
+             x:Class="Imi.Project.Mobile.Views.RegisterPage"
+             xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
-            <Image Source="budgieregister.png" HorizontalOptions="Center" HeightRequest="150" Margin="0,40,0,0"></Image>
+                <Image Source="{extensions:ImageResource Imi.Project.Mobile.icons.budgieregister.png}" HorizontalOptions="Center" HeightRequest="150" Margin="0,40,0,0"></Image>
             <Label HorizontalOptions="Center" Text="Register" FontSize="30" Margin ="0, 30, 0, 0"  FontAttributes="Bold" TextColor="{StaticResource Blue}"></Label>
             <Frame Padding="0" Margin="10"  HorizontalOptions="Center" WidthRequest="300">
                 <Entry Placeholder="Name" ></Entry>
