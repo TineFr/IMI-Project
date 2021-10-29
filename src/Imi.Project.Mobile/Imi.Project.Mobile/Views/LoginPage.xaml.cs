@@ -27,7 +27,7 @@ namespace Imi.Project.Mobile.Views
 
         private async void btnSignUp_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new NavigationPage(new RegisterPage()));
+            await Navigation.PushAsync(new RegisterPage());
         }
     }
 }

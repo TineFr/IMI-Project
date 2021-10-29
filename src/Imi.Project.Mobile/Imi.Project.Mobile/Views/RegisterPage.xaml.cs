@@ -20,13 +20,14 @@ namespace Imi.Project.Mobile.Views
 
         private async void btnBack_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PopAsync(true);
+            await Navigation.PopAsync();
         }
 
-        private async void btnSignUp_Clicked(object sender, EventArgs e)
-        {
 
-            await Navigation.PopToRootAsync();
+
+        private void btnSave_Clicked(object sender, EventArgs e)
+        {
+            Application.Current.MainPage = new NavigationPage(new MainPage());
         }
     }
 }

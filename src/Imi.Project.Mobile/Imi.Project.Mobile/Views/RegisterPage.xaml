@@ -22,7 +22,7 @@
             </Frame>
             <FlexLayout HorizontalOptions="Center" Padding="0" WidthRequest="320" Margin="0" JustifyContent="SpaceBetween">
                 <Button x:Name="btnBack" Padding="0" Margin="0" BackgroundColor="Transparent" Text="BACK" TextColor="Black" Clicked="btnBack_Clicked"></Button>
-                <Button x:Name="btnSignUp" BackgroundColor="Transparent" Text="Save" TextColor="{StaticResource Blue}" Clicked="btnSignUp_Clicked"></Button>
+                <Button x:Name="btnSave" BackgroundColor="Transparent" Text="SAVE" TextColor="{StaticResource Blue}" Clicked="btnSave_Clicked"></Button>
             </FlexLayout>
         </StackLayout>
         </ScrollView>
