@@ -1,6 +1,7 @@
-﻿using Imi.Project.Mobile.Domain.Models;
-using Imi.Project.Mobile.Domain.Services.Mocking;
-using Imi.Project.Mobile.Domain.Services.Mocking.Repositories;
+﻿using Imi.Project.Mobile.Core.Models;
+using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
+using Imi.Project.Mobile.Core.Services.Mocking.Services;
+using Imi.Project.Mobile.Core.ViewModels;
 using Imi.Project.Mobile.Views;
 using System;
 using System.Collections.Generic;

@@ -36,7 +36,7 @@
                                         <Label  Text="{Binding Name}" FontSize="20" FontAttributes="Bold" />
                                         <Label  Text="{Binding Usage}" FontAttributes="italic" HorizontalTextAlignment="Start" />
                                     </StackLayout>
-                                    <Button x:Name="btnShowBirds" Text="Show birds" Clicked="btnShowBirds_Clicked"></Button>
+                                    <Button x:Name="btnShowBirds" Text="Show birds" Clicked="btnShowBirds_Clicked" CommandParameter="{Binding .}"></Button>
                                 </FlexLayout>
                             </Frame>
                         </StackLayout>

@@ -1,49 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:models="clr-namespace:Imi.Project.Mobile.Domain.Models" xmlns:models1="clr-namespace:Imi.Project.Mobile.Core.Models;assembly=Imi.Project.Mobile.Core"
-             x:Class="Imi.Project.Mobile.BirdsPage">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:models1="clr-namespace:Imi.Project.Mobile.Core.Models;assembly=Imi.Project.Mobile.Core"
+             x:Class="Imi.Project.Mobile.Views.Medication.MedicationBirdsPage">
     <ContentPage.Content>
         <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
               RowDefinitions="{StaticResource MainGridRows}">
-            <Frame Style="{StaticResource MainFrame}" BackgroundColor="{StaticResource Green}">
-                <Label Text="My Birds" Style="{StaticResource MainLabel}"></Label>
+            <Frame Style="{StaticResource MainFrame}" BackgroundColor="{StaticResource Blue}">
+                <Label Text="Species Guide" Style="{StaticResource MainLabel}"></Label>
             </Frame>
+            <Label Grid.Row="1" Text="Most common cage species" HorizontalTextAlignment="Center" Margin="20" FontSize="20"></Label>
             <AbsoluteLayout Grid.Row="0" Grid.RowSpan="4">
                 <ImageButton Style="{StaticResource Filter}"></ImageButton>
                 <Image Style="{StaticResource Logo}" ></Image>
             </AbsoluteLayout>
-            <StackLayout Grid.Row="1">
-                <Button  x:Name="btnAddBird" Text="Add new" HorizontalOptions="EndAndExpand" WidthRequest="100" Margin="10" Clicked="btnAddBird_Clicked"></Button>
-            </StackLayout>
             <FlexLayout WidthRequest="700" HorizontalOptions="Center" Grid.Row="2" 
                                  Grid.RowSpan="3">
                 <CollectionView  
                                  x:Name="colvBirds"
                                  Grid.Row="2" 
                                  Grid.RowSpan="3"
-                                 SelectionMode="Single"
-                                 SelectionChanged="colvBirds_SelectionChanged">
+                                 SelectionMode="Single">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models1:Bird" >
                             <StackLayout Style="{StaticResource CollectionSelection}">
 
                                 <Frame Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="Center" Margin="10,5,10,5"  BackgroundColor="#EEEEEE"
-                                           CornerRadius="20">
-                                    <FlexLayout JustifyContent="SpaceBetween">
-                                        <Image Grid.Column="0" Source="{Binding Image}" HeightRequest="60"></Image>
+                                           HeightRequest="35">
+                                    <FlexLayout JustifyContent="Center">
                                         <StackLayout HorizontalOptions="Center">
-                                            <Label  Text="{Binding Name}" FontSize="20" />
-                                            <Label  Text="{Binding ScientificName}" FontAttributes="italic" />
+                                            <Label  Text="{Binding Name}" FontSize="20" HorizontalTextAlignment="Center" />
+                                            <Label  Text="{Binding Cage}" FontAttributes="italic"  HorizontalTextAlignment="Center"/>
                                         </StackLayout>
-                                        <Image Grid.Column="0" Source="{Binding GenderImage}" HeightRequest="40"></Image>
                                     </FlexLayout>
                                 </Frame>
                             </StackLayout>
-                    </DataTemplate>
+                        </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </FlexLayout>
-
         </Grid>
     </ContentPage.Content>
 </ContentPage>
