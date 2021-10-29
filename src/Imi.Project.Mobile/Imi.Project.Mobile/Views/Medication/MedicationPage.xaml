@@ -31,7 +31,7 @@
                     <DataTemplate>
                         <StackLayout Style="{StaticResource CollectionSelection}" Padding="5">
                             <Frame CornerRadius="20" BackgroundColor="#EEEEEE">
-                                <FlexLayout Direction="Column" JustifyContent="SpaceAround" AlignItems="Center">
+                                <FlexLayout Direction="Column" JustifyContent="Center" AlignItems="Center">
                                     <Image  Source="{extensions:ImageResource Imi.Project.Mobile.icons.medication.png}" HeightRequest="50" HorizontalOptions="Center"></Image>
                                     <StackLayout HorizontalOptions="Center">
                                         <Label  Text="{Binding Name}" FontSize="20" FontAttributes="Bold" />

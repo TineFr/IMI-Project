@@ -21,6 +21,7 @@ namespace Imi.Project.Mobile.Views.Medication
         {
             InitializeComponent();
             medicationservice = new MockMedicationService();
+            birdservice = new MockBirdService();
         }
 
         protected async override void OnAppearing()
@@ -30,8 +31,9 @@ namespace Imi.Project.Mobile.Views.Medication
             colvMedication.ItemsSource = medications;
         }
 
-        private void colvMedication_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void colvMedication_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
 
         }
 
@@ -40,9 +42,8 @@ namespace Imi.Project.Mobile.Views.Medication
             var selection = (Button)sender;
             var medication = selection.CommandParameter as Core.Models.Medication;
             if (medication == null) return;
-
-            var birdlist = birdservice.GetBirdsByMedication(medication);
-            await Navigation.PushAsync(new MedicationBirdsPage(birdlist));
+            var birds = birdservice.GetBirdsByMedication(medication);
+            await Navigation.PushAsync(new MedicationBirdsPage(medication, birds));
         }
     }
 }

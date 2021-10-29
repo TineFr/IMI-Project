@@ -23,7 +23,14 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     Image = "images/budgie1.jpg",
                     Species = "Budgerigar",
                     ScientificName ="Melopsittacus undulatus",
-                    Food = "Parakeet mix"
+                    Food = "Parakeet mix",
+                    Medications = new List<Guid>
+                    {
+                        Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
+                        Guid.Parse("8b9d60ed-ba62-439e-89e8-d0097dc62b58"),
+                        Guid.Parse("4ab9d646-7010-479c-ae3e-8fe6cd15c687"),
+                        Guid.Parse("13931038-e515-45f4-b036-ea22c0c24d62")
+                    }
                     },
 
                     new Bird
@@ -36,11 +43,12 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     Image = "images/budgie2.jpg",
                     Species = "Budgerigar",
                     ScientificName ="Melopsittacus undulatus",
-                    Food = "Parakeet mix"
+                    Food = "Parakeet mix",
+                    Medications = new List<Guid>()
                     },
 
                     new Bird
-                    {                                                                                                                                                         
+                    {
                     Id = Guid.Parse("8E74A018-6D85-4E2A-BB85-F8DA2D58F3BF"),
                     Name = "Steven",
                     Cage = "Outside cage 2",
@@ -50,7 +58,11 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     Species = "Cockatiel",
                     ScientificName = "Nymphicus hollandicuss",
                     Food = "Parakeet mix",
+                    Medications = new List<Guid>
+                    {
+                        Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
 
+                    }
                     },
 
                     new Bird
@@ -63,7 +75,13 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     Image = "images/cockatiel2.jpg",
                     Species = "Cockatiel",
                     ScientificName = "Nymphicus hollandicuss",
-                    Food = "Parakeet mix"
+                    Food = "Parakeet mix",
+                    Medications = new List<Guid>
+                    {
+                        Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
+                        Guid.Parse("13931038-e515-45f4-b036-ea22c0c24d62")
+
+                    }
                     }
 
         };
@@ -93,7 +111,7 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
 
         public  IEnumerable<Bird> GetBirdsByMedication(Medication medication)
         {
-            var birds = birdrepository.Where(b => b.Medications.Contains(medication)).ToList();
+            var birds = birdrepository.Where(b => b.Medications.Contains(medication.Id)).ToList();
             return birds;
         }
 

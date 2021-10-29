@@ -1,4 +1,5 @@
 ﻿using Imi.Project.Mobile.Core.Models;
+using Imi.Project.Mobile.Core.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,19 +14,24 @@ namespace Imi.Project.Mobile.Views.Medication
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MedicationBirdsPage : ContentPage
     {
-        public List<Bird> Birds { get; set; }
-        public MedicationBirdsPage(IEnumerable<Bird> birds)
+        private static IEnumerable<Bird> Birds;
+        private static Core.Models.Medication Medication;
+
+       
+        public MedicationBirdsPage(Core.Models.Medication medication, IEnumerable<Bird> birds)
         {
             InitializeComponent();
-            Birds = birds.ToList();
+            Birds = birds;
+            Medication = medication;
 
         }
 
         protected override void OnAppearing()
         {
-            colvBirds.ItemsSource = Birds; 
+            BindingContext = new BirdMedicineViewModel(Medication);
+            colvBirds.ItemsSource = Birds;
         }
-        private void colvBirds_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void colvBirds_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
