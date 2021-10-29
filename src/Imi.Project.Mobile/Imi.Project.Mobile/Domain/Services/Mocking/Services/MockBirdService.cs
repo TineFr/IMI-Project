@@ -53,7 +53,7 @@ namespace Imi.Project.Mobile.Domain.Services.Mocking.Repositories
 
                     new Bird
                     {
-                    Id = Guid.Parse("8E74A018-6D85-4E2A-BB85-F8DA2D58F3BF"),
+                    Id = Guid.Parse("F797C0C1-B01A-4F54-9C5D-7C66D5EDDC52"),
                     Name = "July",
                     Cage = "Outside cage 2",
                     Gender = "Female",
@@ -87,6 +87,12 @@ namespace Imi.Project.Mobile.Domain.Services.Mocking.Repositories
         {
             var bird = birdrepository.FirstOrDefault(b => b.Id.Equals(id));
             return Task.FromResult(bird);
+        }
+
+        public  IEnumerable<Bird> GetBirdsByMedication(Medication medication)
+        {
+            var birds = birdrepository.Where(b => b.Medications.Contains(medication)).ToList();
+            return birds;
         }
 
         public Task<Bird> UpdateBird(Bird updatedBird)

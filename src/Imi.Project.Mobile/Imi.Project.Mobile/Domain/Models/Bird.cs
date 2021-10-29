@@ -16,5 +16,7 @@ namespace Imi.Project.Mobile.Domain.Models
         public string GenderImage => $"{Gender}.png";
         public string Date => HatchDate.ToString("dd/MM/yyyy");
 
+        public List<Medication> Medications { get; set; }
+
     }
 }

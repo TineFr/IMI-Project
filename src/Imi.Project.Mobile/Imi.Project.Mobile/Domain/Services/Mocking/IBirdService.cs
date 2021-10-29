@@ -14,6 +14,7 @@ namespace Imi.Project.Mobile.Domain.Services.Mocking
         Task<Bird> AddBird(Bird bird);
         Task<Bird> UpdateBird(Bird bird);
         Task<Bird> DeleteBird(Guid id);
+        IEnumerable<Bird> GetBirdsByMedication(Medication medicine);
 
 
     }
