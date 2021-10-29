@@ -92,5 +92,19 @@ namespace Imi.Project.Mobile.Views.Cages
 
 
         }
+
+        private async void btnDeleteTask_Clicked(object sender, EventArgs e)
+        {
+           var action =  await DisplayAlert("Do you wish to delete this task?", null, "YES", "CANCEL");
+            if (action)
+            {
+                var selection = (ImageButton)sender;
+                var dailyTask = selection.CommandParameter as DailyTask;
+                await taskservice.DeleteDailyTask(dailyTask.Id);
+                lstTasks.ItemsSource = taskservice.GetDailyTaskByCageId(cagedetail.Id);
+            }
+            
+           
+        }
     }
 }

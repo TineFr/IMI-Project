@@ -15,6 +15,7 @@
     <None Remove="icons\birds.png" />
     <None Remove="icons\budgieregister.png" />
     <None Remove="icons\cages.png" />
+    <None Remove="icons\delete.png" />
     <None Remove="icons\female.png" />
     <None Remove="icons\filter.png" />
     <None Remove="icons\guide.png" />
@@ -33,6 +34,7 @@
     <EmbeddedResource Include="icons\birds.png" />
     <EmbeddedResource Include="icons\budgieregister.png" />
     <EmbeddedResource Include="icons\cages.png" />
+    <EmbeddedResource Include="icons\delete.png" />
     <EmbeddedResource Include="icons\female.png" />
     <EmbeddedResource Include="icons\filter.png" />
     <EmbeddedResource Include="icons\guide.png" />
