@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions"
              x:Class="Imi.Project.Mobile.App">
     <Application.Resources>
 
@@ -44,7 +45,7 @@
 
         <!-- back arrow style-->
         <Style x:Key="BackArrow" TargetType="ImageButton">
-            <Setter Property="Source" Value="leftarrow.png" ></Setter>
+            <Setter Property="Source" Value="{extensions:ImageResource Imi.Project.Mobile.icons.leftarrow.png}" ></Setter>
             <Setter Property="Aspect" Value="AspectFill" ></Setter>
             <Setter Property="Padding" Value="30" ></Setter>
             <Setter Property="BackgroundColor" Value="Transparent" ></Setter>
@@ -54,7 +55,7 @@
 
         <!--filter style-->
         <Style x:Key="Filter" TargetType="ImageButton">
-            <Setter Property="Source" Value="filter.png" ></Setter>
+            <Setter Property="Source" Value="{extensions:ImageResource Imi.Project.Mobile.icons.filter.png}" ></Setter>
             <Setter Property="Aspect" Value="AspectFill" ></Setter>
             <Setter Property="Padding" Value="30" ></Setter>
             <Setter Property="BackgroundColor" Value="Transparent" ></Setter>
@@ -63,7 +64,7 @@
         </Style>
         <!--logo style-->
         <Style x:Key="Logo" TargetType="Image">
-            <Setter Property="Source" Value="logolightwhite.png" ></Setter>
+            <Setter Property="Source" Value="{extensions:ImageResource Imi.Poject.Mobile.icons.logolightwhite.png}" ></Setter>
             <Setter Property="AbsoluteLayout.LayoutBounds" Value="0.97, 10, 50, 50" ></Setter>
             <Setter Property="AbsoluteLayout.LayoutFlags" Value="XProportional" ></Setter>
         </Style>
