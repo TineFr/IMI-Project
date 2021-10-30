@@ -37,7 +37,7 @@
                                 <FlexLayout Direction="Column" JustifyContent="Center" AlignItems="Center">
                                         <Image  Source="{extensions:ImageResource Imi.Project.Mobile.icons.medication.png}" HeightRequest="50" HorizontalOptions="Center"></Image>
                                         <Label  Text="{Binding Name}" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Center" />
-                                        <Button x:Name="btnShowBirds" Text="DETAILS" Clicked="btnShowBirds_Clicked" CommandParameter="{Binding .}" CornerRadius="10"></Button>
+                                        <Button x:Name="btnShowBirds" Text="DETAILS" Clicked="btnShowBirds_Clicked" CommandParameter="{Binding .}" CornerRadius="10" Margin="10"></Button>
                                 </FlexLayout>
                             </Frame>
                         </StackLayout>
