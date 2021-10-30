@@ -15,7 +15,7 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     new Medication
                     {
                     Id = Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
-                    Name = "   Acox",
+                    Name = "Acox",
                     Usage = "7 ml per liter drinking water",
 
                     
@@ -23,22 +23,22 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     new Medication
                     {
                     Id = Guid.Parse("4ab9d646-7010-479c-ae3e-8fe6cd15c687"),
-                    Name = "   Acox",
-                    Usage = "7 ml per liter drinking water",
+                    Name = "Baytril",
+                    Usage = "0,3 ml per 500 ml drinking water",
 
                     },
                     new Medication
                     {
                     Id = Guid.Parse("13931038-e515-45f4-b036-ea22c0c24d62"),
-                    Name = "   Acox",
-                    Usage = "7 ml per liter drinking water",
+                    Name = "Amtyl",
+                    Usage = "The easiest way to give Baytril to your Birds is mixing it up in their normal drinking water. Give 1ml of solution per 100grams of body weight.",
 
                     },
                     new Medication
                     {
                     Id = Guid.Parse("8b9d60ed-ba62-439e-89e8-d0097dc62b58"),
-                    Name = "   Acox",
-                    Usage = "7 ml per liter drinking water",
+                    Name = "Doxycycline",
+                    Usage = " 1 tsp. per gallon of water",
 
                     },
 

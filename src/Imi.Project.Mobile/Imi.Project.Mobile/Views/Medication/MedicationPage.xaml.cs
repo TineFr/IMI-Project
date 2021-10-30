@@ -43,7 +43,7 @@ namespace Imi.Project.Mobile.Views.Medication
             var medication = selection.CommandParameter as Core.Models.Medication;
             if (medication == null) return;
             var birds = birdservice.GetBirdsByMedication(medication);
-            await Navigation.PushAsync(new MedicationBirdsPage(medication, birds));
+            await Navigation.PushAsync(new MedicationDetailPage(medication, birds));
         }
     }
 }

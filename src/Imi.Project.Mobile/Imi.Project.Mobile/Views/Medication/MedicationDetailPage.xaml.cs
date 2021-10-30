@@ -14,14 +14,14 @@ using Xamarin.Forms.Xaml;
 namespace Imi.Project.Mobile.Views.Medication
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MedicationBirdsPage : ContentPage
+    public partial class MedicationDetailPage : ContentPage
     {
         private static IEnumerable<Bird> Birds;
         private static Core.Models.Medication Medication;
         IBirdService birdservice;
 
        
-        public MedicationBirdsPage(Core.Models.Medication medication, IEnumerable<Bird> birds)
+        public MedicationDetailPage(Core.Models.Medication medication, IEnumerable<Bird> birds)
         {
             InitializeComponent();
             Birds = birds;
