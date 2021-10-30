@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Imi.Project.Mobile.Core.Models
 {
-    public class Prescriptions
+    public class Prescription
     {
         public Medication medicine { get; set; }
 
