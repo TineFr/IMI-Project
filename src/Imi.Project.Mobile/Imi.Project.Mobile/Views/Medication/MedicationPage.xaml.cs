@@ -31,6 +31,8 @@ namespace Imi.Project.Mobile.Views.Medication
             colvMedication.ItemsSource = medications;
         }
 
+
+
         private async void colvMedication_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 

@@ -3,6 +3,7 @@ using Imi.Project.Mobile.Core.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -59,6 +60,7 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
         {
             return Task.FromResult( medicationrepository);
         }
+
 
         public Task<Medication> GetMedicationById(Guid id)
         {

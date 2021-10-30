@@ -9,6 +9,7 @@
               RowDefinitions="{StaticResource MainGridRows}">
             <StackLayout WidthRequest="700" HorizontalOptions="Center" Grid.Row="0" 
                                  Grid.RowSpan="3">
+                <Button x:Name="Remove" Text="X" HorizontalOptions="End" WidthRequest="40" HeightRequest="40" BackgroundColor="IndianRed" Margin="5"></Button>
                 <Frame Grid.Row="0" BackgroundColor="#EEEEEE">
                     <FlexLayout Direction="Row" JustifyContent="Center" AlignItems="Center">
                         <Label  Text="{Binding Medication.Name}" FontSize="30" FontAttributes="Bold" />

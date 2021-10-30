@@ -30,16 +30,6 @@
                     <Label Text="settings" HeightRequest="20" HorizontalTextAlignment="Center"></Label>
                 </StackLayout>
             </FlexLayout>
-            <!--<AbsoluteLayout Grid.Column="0" Grid.Row="0" Grid.RowSpan="3">
-                <StackLayout AbsoluteLayout.LayoutBounds="0.05, 10, 100, 200" AbsoluteLayout.LayoutFlags="XProportional">
-                    <ImageButton x:Name="btnAccount" Source="{extensions:ImageResource Imi.Project.Mobile.icons.accountdark.png}"   Aspect="AspectFill" BackgroundColor="Transparent"   Clicked="btnAccount_Clicked" ></ImageButton>
-                    <Label Text="account" HorizontalTextAlignment="Center"></Label>
-                </StackLayout>
-                <StackLayout  AbsoluteLayout.LayoutBounds="0.95, 10, 100, 100" AbsoluteLayout.LayoutFlags="XProportional">
-                    <ImageButton x:Name="btnSettings" Source="{extensions:ImageResource Imi.Project.Mobile.icons.settings.png}" Aspect="AspectFill"  BackgroundColor="Transparent" Clicked="btnSettings_Clicked"></ImageButton>
-                    <Label Text="settings" HorizontalTextAlignment="Center"></Label>
-                </StackLayout>
-            </AbsoluteLayout>-->
             <ScrollView  Grid.Column="0" Grid.Row="1" Grid.RowSpan="3">
                 <StackLayout  Grid.Column="0" Grid.Row="1" Grid.RowSpan="2">
                     <Image x:Name="HomeLogo" Source="{extensions:ImageResource Imi.Project.Mobile.icons.logolight.png}" Grid.Column="0" Grid.Row="1" Margin="10" WidthRequest="20" HeightRequest="105"></Image>
