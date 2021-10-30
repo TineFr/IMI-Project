@@ -20,45 +20,52 @@
             <Frame BackgroundColor="white" Grid.Column="0" Grid.Row="0"  HeightRequest="20" >
                 <Label Grid.Column="0" Grid.Row="1" Text="Home" TextColor="black" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="End" FontSize="40"></Label>
             </Frame>
-            <AbsoluteLayout Grid.Column="0" Grid.Row="0" Grid.RowSpan="3">
-                <FlexLayout AbsoluteLayout.LayoutBounds="0.05, 10, 100, 100" AbsoluteLayout.LayoutFlags="XProportional" Wrap="Wrap" JustifyContent="Center">
-                    <ImageButton x:Name="btnAccount" Source="{extensions:ImageResource Imi.Project.Mobile.icons.accountdark.png}"  Aspect="AspectFill" Padding="30" BackgroundColor="Transparent" AbsoluteLayout.LayoutBounds="0.05, 10, 100, 100" AbsoluteLayout.LayoutFlags="XProportional" Clicked="btnAccount_Clicked" ></ImageButton>
-                <Label Text="account"></Label>
-                </FlexLayout>
-                <FlexLayout  AbsoluteLayout.LayoutBounds="0.95, 10, 100, 100" AbsoluteLayout.LayoutFlags="XProportional" Wrap="Wrap" JustifyContent="Center">
-                    <ImageButton x:Name="btnSettings" Source="{extensions:ImageResource Imi.Project.Mobile.icons.settings.png}" Aspect="AspectFill" Padding="30" BackgroundColor="Transparent" AbsoluteLayout.LayoutBounds="0.95, 10, 100, 100" AbsoluteLayout.LayoutFlags="XProportional" Clicked="btnSettings_Clicked"></ImageButton>
-                    <Label Text="settings"></Label>
-                </FlexLayout>
-            </AbsoluteLayout>
+            <FlexLayout Grid.Row="0" JustifyContent="SpaceBetween">
+                <StackLayout  Margin="30, 20, 0, 0">
+                    <ImageButton x:Name="btnAccount"  HeightRequest="50"  Source="{extensions:ImageResource Imi.Project.Mobile.icons.accountdark.png}"   Aspect="AspectFill" BackgroundColor="Transparent"   Clicked="btnAccount_Clicked" ></ImageButton>
+                    <Label Text="account"  HorizontalTextAlignment="Center"></Label>
+                </StackLayout>
+                <StackLayout  Margin="0, 20, 30, 0" >
+                    <ImageButton x:Name="btnSettings" HeightRequest="50" Source="{extensions:ImageResource Imi.Project.Mobile.icons.settings.png}" Aspect="AspectFill"  BackgroundColor="Transparent" Clicked="btnSettings_Clicked"></ImageButton>
+                    <Label Text="settings" HeightRequest="20" HorizontalTextAlignment="Center"></Label>
+                </StackLayout>
+            </FlexLayout>
+            <!--<AbsoluteLayout Grid.Column="0" Grid.Row="0" Grid.RowSpan="3">
+                <StackLayout AbsoluteLayout.LayoutBounds="0.05, 10, 100, 200" AbsoluteLayout.LayoutFlags="XProportional">
+                    <ImageButton x:Name="btnAccount" Source="{extensions:ImageResource Imi.Project.Mobile.icons.accountdark.png}"   Aspect="AspectFill" BackgroundColor="Transparent"   Clicked="btnAccount_Clicked" ></ImageButton>
+                    <Label Text="account" HorizontalTextAlignment="Center"></Label>
+                </StackLayout>
+                <StackLayout  AbsoluteLayout.LayoutBounds="0.95, 10, 100, 100" AbsoluteLayout.LayoutFlags="XProportional">
+                    <ImageButton x:Name="btnSettings" Source="{extensions:ImageResource Imi.Project.Mobile.icons.settings.png}" Aspect="AspectFill"  BackgroundColor="Transparent" Clicked="btnSettings_Clicked"></ImageButton>
+                    <Label Text="settings" HorizontalTextAlignment="Center"></Label>
+                </StackLayout>
+            </AbsoluteLayout>-->
             <ScrollView  Grid.Column="0" Grid.Row="1" Grid.RowSpan="3">
                 <StackLayout  Grid.Column="0" Grid.Row="1" Grid.RowSpan="2">
                     <Image x:Name="HomeLogo" Source="{extensions:ImageResource Imi.Project.Mobile.icons.logolight.png}" Grid.Column="0" Grid.Row="1" Margin="10" WidthRequest="20" HeightRequest="105"></Image>
-                    <FlexLayout HorizontalOptions="Center"
+                    <StackLayout HorizontalOptions="Center">
+                        <FlexLayout 
                                 Wrap="Wrap"
+                                Direction="Column"
+                                Grid.ColumnSpan="2"
                                 WidthRequest="1000"
                                 HeightRequest="400"
-                                JustifyContent="Center"
-                                AlignItems="Center"
-                                BackgroundColor="#F5F5F5">
-                        
-                        <Label Text="Did you know?"
-                               FontSize="30"
-                               Margin="0,10,0,0">
-                        </Label>
-                        <Label Text="Budgies have highly acute vision and can register over 150 mages per second...
-                               This compares to a measly 16 for humans." 
-                               HorizontalTextAlignment="Center"
-                               Margin="50,0,50,0"
+                                BackgroundColor="#F5F5F5"
+                                JustifyContent="SpaceAround"
+>
 
-                               HeightRequest="70">
+                        <Label Text="Did you know?" FontSize="30" HorizontalTextAlignment="Center" Margin="0,10,0,0"></Label>
+                          
+                         <Label Text="Budgies have highly acute vision and can register over 150 mages per second...This compares to a measly 16 for humans." 
+                                 HorizontalTextAlignment="Center">
                         </Label>
-                        <Image Source="images/budgies.jpg" 
+
+                            <Image Source="images/budgies.jpg" 
                                HeightRequest="150"
                                Margin="10">
                         </Image>
-
-
                     </FlexLayout>
+                    </StackLayout>
                 </StackLayout>
             </ScrollView>
         </Grid>
