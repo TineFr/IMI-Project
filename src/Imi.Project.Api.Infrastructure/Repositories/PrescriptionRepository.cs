@@ -20,6 +20,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
             var prescriptions = _dbContext.Prescriptions.Include(p => p.User)
                                                            .Include(p => p.BirdPrescriptions)
                                                            .ThenInclude(p => p.Bird)
+                                                           .ThenInclude(b => b.Cage)
                                                            .Include(p => p.Medicine);
             return prescriptions;
 

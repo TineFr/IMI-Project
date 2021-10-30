@@ -119,19 +119,33 @@ namespace Imi.Project.Api.Core.Helper
 
         public static PrescriptionResponseDto MapToDto(this Prescription prescription)
         {
-            return new PrescriptionResponseDto
+            var  prescriptionDto =  new PrescriptionResponseDto
             {
                 Id = prescription.Id,
                 Medicine = prescription.Medicine.MapToDto(),
-
+                StartDate = prescription.StartDate,
+                EndDate = prescription.EndDate
 
             };
+            var birds = prescription.BirdPrescriptions?.Select(b => b.Bird);
+            List<BirdResponseDto> birdlist = new List<BirdResponseDto>();
+            foreach (var bird in birds)
+            {
+                var newbirddto = new BirdResponseDto
+                {
+                    Name = bird.Name,
+                    Cage = bird.Cage.Name
+                };
+                birdlist.Add(newbirddto);
+            }
+            prescriptionDto.Birds = birdlist;
+            return prescriptionDto;
         }
 
-        //public static IEnumerable<MedicineResponseDto> MapToDtoList(this IEnumerable<Medicine> medicines)
-        //{
-        //    return medicines.Select(u => u.MapToDto()).ToList();
-        //}
+        public static IEnumerable<PrescriptionResponseDto> MapToDtoList(this IEnumerable<Prescription> presciptions)
+        {
+            return presciptions.Select(u => u.MapToDto()).ToList();
+        }
 
     }
 }
