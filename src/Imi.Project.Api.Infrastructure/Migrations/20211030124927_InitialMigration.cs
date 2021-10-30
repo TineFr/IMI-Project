@@ -131,25 +131,53 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BirdMedicines",
+                name: "Prescriptions",
                 columns: table => new
                 {
-                    BirdId = table.Column<Guid>(nullable: false),
-                    MedicineId = table.Column<Guid>(nullable: false)
+                    Id = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    MedicineId = table.Column<Guid>(nullable: false),
+                    StartDate = table.Column<DateTime>(nullable: false),
+                    EndDate = table.Column<DateTime>(nullable: false),
+                    UserId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BirdMedicines", x => new { x.BirdId, x.MedicineId });
+                    table.PrimaryKey("PK_Prescriptions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_BirdMedicines_Birds_BirdId",
+                        name: "FK_Prescriptions_Medicine_MedicineId",
+                        column: x => x.MedicineId,
+                        principalTable: "Medicine",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Prescriptions_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BirdPrescriptions",
+                columns: table => new
+                {
+                    BirdId = table.Column<Guid>(nullable: false),
+                    PrescriptionId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BirdPrescriptions", x => new { x.BirdId, x.PrescriptionId });
+                    table.ForeignKey(
+                        name: "FK_BirdPrescriptions_Birds_BirdId",
                         column: x => x.BirdId,
                         principalTable: "Birds",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_BirdMedicines_Medicine_MedicineId",
-                        column: x => x.MedicineId,
-                        principalTable: "Medicine",
+                        name: "FK_BirdPrescriptions_Prescriptions_PrescriptionId",
+                        column: x => x.PrescriptionId,
+                        principalTable: "Prescriptions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -211,19 +239,28 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "BirdMedicines",
-                columns: new[] { "BirdId", "MedicineId" },
-                values: new object[] { new Guid("6668e055-e99c-4b50-ad12-5a28ca2ad422"), new Guid("44411f0e-5e99-49b4-9beb-922d3a97093d") });
+                table: "Prescriptions",
+                columns: new[] { "Id", "EndDate", "MedicineId", "Name", "StartDate", "UserId" },
+                values: new object[,]
+                {
+                    { new Guid("53d1b65f-4785-4790-8f0f-62378de01f4e"), new DateTime(2021, 11, 6, 14, 49, 27, 600, DateTimeKind.Local).AddTicks(1757), new Guid("eb6e6128-25cf-4b4b-b511-fce4a801d1f0"), null, new DateTime(2021, 10, 30, 14, 49, 27, 597, DateTimeKind.Local).AddTicks(5206), null },
+                    { new Guid("f8dc77b5-ef08-4ce6-936c-fc3c44f682a8"), new DateTime(2021, 11, 3, 14, 49, 27, 600, DateTimeKind.Local).AddTicks(2052), new Guid("44411f0e-5e99-49b4-9beb-922d3a97093d"), null, new DateTime(2021, 10, 30, 14, 49, 27, 600, DateTimeKind.Local).AddTicks(2037), null }
+                });
 
             migrationBuilder.InsertData(
-                table: "BirdMedicines",
-                columns: new[] { "BirdId", "MedicineId" },
-                values: new object[] { new Guid("8e74a018-6d85-4e2a-bb85-f8da2d58f3bf"), new Guid("eb6e6128-25cf-4b4b-b511-fce4a801d1f0") });
+                table: "BirdPrescriptions",
+                columns: new[] { "BirdId", "PrescriptionId" },
+                values: new object[] { new Guid("6668e055-e99c-4b50-ad12-5a28ca2ad422"), new Guid("53d1b65f-4785-4790-8f0f-62378de01f4e") });
+
+            migrationBuilder.InsertData(
+                table: "BirdPrescriptions",
+                columns: new[] { "BirdId", "PrescriptionId" },
+                values: new object[] { new Guid("8e74a018-6d85-4e2a-bb85-f8da2d58f3bf"), new Guid("f8dc77b5-ef08-4ce6-936c-fc3c44f682a8") });
 
             migrationBuilder.CreateIndex(
-                name: "IX_BirdMedicines_MedicineId",
-                table: "BirdMedicines",
-                column: "MedicineId");
+                name: "IX_BirdPrescriptions_PrescriptionId",
+                table: "BirdPrescriptions",
+                column: "PrescriptionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Birds_CageId",
@@ -254,12 +291,22 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 name: "IX_Medicine_UserId",
                 table: "Medicine",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Prescriptions_MedicineId",
+                table: "Prescriptions",
+                column: "MedicineId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Prescriptions_UserId",
+                table: "Prescriptions",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "BirdMedicines");
+                name: "BirdPrescriptions");
 
             migrationBuilder.DropTable(
                 name: "DailyTasks");
@@ -268,13 +315,16 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 name: "Birds");
 
             migrationBuilder.DropTable(
-                name: "Medicine");
+                name: "Prescriptions");
 
             migrationBuilder.DropTable(
                 name: "Cages");
 
             migrationBuilder.DropTable(
                 name: "Species");
+
+            migrationBuilder.DropTable(
+                name: "Medicine");
 
             migrationBuilder.DropTable(
                 name: "Users");

@@ -38,11 +38,11 @@ namespace Imi.Project.Api.Core.Services
             return medicine;
         }
 
-        public async Task<IEnumerable<Medicine>> GetMedicinesByBirdIdAsync(Guid id)
-        {
-            var medicines = await _medicineRepository.GetByBirdIdAsync(id);
-            return medicines;
-        }
+        //public async Task<IEnumerable<Medicine>> GetMedicinesByBirdIdAsync(Guid id)
+        //{
+        //    var medicines = await _medicineRepository.GetByBirdIdAsync(id);
+        //    return medicines;
+        //}
 
         public async  Task<IEnumerable<Medicine>> GetMedicinesByUserIdAsync(Guid id)
         {

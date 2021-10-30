@@ -38,14 +38,6 @@ namespace Imi.Project.Api.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{id}/medicines")]
-        public async Task<IActionResult> GetBirdsWithMedicine(Guid id)
-        {
-            var medicines = await _medicineService.GetMedicinesByBirdIdAsync(id);
-            var result = medicines.MapToDtoList();
-            return Ok(result);
-        }
-
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {

@@ -2,6 +2,7 @@
 using Imi.Project.Api.Core.Dtos.Cages;
 using Imi.Project.Api.Core.Dtos.DailyTasks;
 using Imi.Project.Api.Core.Dtos.Medicines;
+using Imi.Project.Api.Core.Dtos.Prescriptions;
 using Imi.Project.Api.Core.Dtos.Species;
 using Imi.Project.Api.Core.Dtos.Users;
 using Imi.Project.Api.Core.Entities;
@@ -58,7 +59,6 @@ namespace Imi.Project.Api.Core.Helper
                 HatchDate = bird.HatchDate,
                 Image = bird.Image,
                 Cage = bird.Cage.Name, 
-                Medicines = bird.BirdMedicines?.Select(b => b.Medicine?.MapToDto())
             };
         }
 
@@ -116,6 +116,22 @@ namespace Imi.Project.Api.Core.Helper
         {
             return medicines.Select(u => u.MapToDto()).ToList();
         }
+
+        public static PrescriptionResponseDto MapToDto(this Prescription prescription)
+        {
+            return new PrescriptionResponseDto
+            {
+                Id = prescription.Id,
+                Medicine = prescription.Medicine.MapToDto(),
+
+
+            };
+        }
+
+        //public static IEnumerable<MedicineResponseDto> MapToDtoList(this IEnumerable<Medicine> medicines)
+        //{
+        //    return medicines.Select(u => u.MapToDto()).ToList();
+        //}
 
     }
 }

@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Core.Interfaces.Repositories
 {
-    public interface IMedicineRepository : IBaseRepository<Medicine>
+    public interface IPrescriptionRepository : IBaseRepository<Prescription>
     {
-        Task<IEnumerable<Medicine>> GetByUserIdAsync(Guid id);
-
-
+        Task<IEnumerable<Prescription>> GetByUserIdAsync(Guid id);
     }
 }

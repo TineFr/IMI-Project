@@ -15,8 +15,8 @@ namespace Imi.Project.Api.Infrastructure
         public DbSet<Bird> Birds { get; set; }
         public DbSet<Medicine> Medicine { get; set; }
         public DbSet<DailyTask> DailyTasks { get; set; }
-
-        public DbSet<BirdMedicine> BirdMedicines { get; set; }
+        public DbSet<Prescription> Prescriptions { get; set; }
+        public DbSet<BirdPrescription> BirdPrescriptions { get; set; }
 
         public MyAviaryDbContext(DbContextOptions<MyAviaryDbContext> options) : base(options)
         {
@@ -31,14 +31,17 @@ namespace Imi.Project.Api.Infrastructure
             SpeciesSeeding.Seeding(modelBuilder);
             BirdSeeding.Seeding(modelBuilder);
             MedicineSeeding.Seeding(modelBuilder);
-            BirdMedicineSeeding.Seeding(modelBuilder);
+            PrescriptionSeeding.Seeding(modelBuilder);
+            BirdPrescriptionSeeding.Seeding(modelBuilder);
 
             modelBuilder
-                .Entity<BirdMedicine>()
-                .ToTable("BirdMedicines") 
-                .HasKey(bm => new { bm.BirdId, bm.MedicineId });
+                .Entity<BirdPrescription>()
+                .ToTable(nameof(BirdPrescriptions))
+                .HasKey(bm => new { bm.BirdId, bm.PrescriptionId });
 
             modelBuilder.Entity<Cage>()
+                 .HasKey(c => c.Id);
+            modelBuilder.Entity<Prescription>()
                  .HasKey(c => c.Id);
             modelBuilder.Entity<User>()
                   .HasKey(c => c.Id);

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Imi.Project.Api.Infrastructure.Migrations
 {
     [DbContext(typeof(MyAviaryDbContext))]
-    [Migration("20211028082944_InitialMigration")]
+    [Migration("20211030124927_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -112,30 +112,30 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Imi.Project.Api.Core.Entities.BirdMedicine", b =>
+            modelBuilder.Entity("Imi.Project.Api.Core.Entities.BirdPrescription", b =>
                 {
                     b.Property<Guid>("BirdId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("MedicineId")
+                    b.Property<Guid>("PrescriptionId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("BirdId", "MedicineId");
+                    b.HasKey("BirdId", "PrescriptionId");
 
-                    b.HasIndex("MedicineId");
+                    b.HasIndex("PrescriptionId");
 
-                    b.ToTable("BirdMedicines");
+                    b.ToTable("BirdPrescriptions");
 
                     b.HasData(
                         new
                         {
                             BirdId = new Guid("6668e055-e99c-4b50-ad12-5a28ca2ad422"),
-                            MedicineId = new Guid("44411f0e-5e99-49b4-9beb-922d3a97093d")
+                            PrescriptionId = new Guid("53d1b65f-4785-4790-8f0f-62378de01f4e")
                         },
                         new
                         {
                             BirdId = new Guid("8e74a018-6d85-4e2a-bb85-f8da2d58f3bf"),
-                            MedicineId = new Guid("eb6e6128-25cf-4b4b-b511-fce4a801d1f0")
+                            PrescriptionId = new Guid("f8dc77b5-ef08-4ce6-936c-fc3c44f682a8")
                         });
                 });
 
@@ -258,6 +258,52 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Imi.Project.Api.Core.Entities.Prescription", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("MedicineId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MedicineId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Prescriptions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("53d1b65f-4785-4790-8f0f-62378de01f4e"),
+                            EndDate = new DateTime(2021, 11, 6, 14, 49, 27, 600, DateTimeKind.Local).AddTicks(1757),
+                            MedicineId = new Guid("eb6e6128-25cf-4b4b-b511-fce4a801d1f0"),
+                            StartDate = new DateTime(2021, 10, 30, 14, 49, 27, 597, DateTimeKind.Local).AddTicks(5206)
+                        },
+                        new
+                        {
+                            Id = new Guid("f8dc77b5-ef08-4ce6-936c-fc3c44f682a8"),
+                            EndDate = new DateTime(2021, 11, 3, 14, 49, 27, 600, DateTimeKind.Local).AddTicks(2052),
+                            MedicineId = new Guid("44411f0e-5e99-49b4-9beb-922d3a97093d"),
+                            StartDate = new DateTime(2021, 10, 30, 14, 49, 27, 600, DateTimeKind.Local).AddTicks(2037)
+                        });
+                });
+
             modelBuilder.Entity("Imi.Project.Api.Core.Entities.Species", b =>
                 {
                     b.Property<Guid>("Id")
@@ -333,17 +379,17 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.SetNull);
                 });
 
-            modelBuilder.Entity("Imi.Project.Api.Core.Entities.BirdMedicine", b =>
+            modelBuilder.Entity("Imi.Project.Api.Core.Entities.BirdPrescription", b =>
                 {
                     b.HasOne("Imi.Project.Api.Core.Entities.Bird", "Bird")
-                        .WithMany("BirdMedicines")
+                        .WithMany("BirdPrescriptions")
                         .HasForeignKey("BirdId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Imi.Project.Api.Core.Entities.Medicine", "Medicine")
-                        .WithMany("BirdMedicines")
-                        .HasForeignKey("MedicineId")
+                    b.HasOne("Imi.Project.Api.Core.Entities.Prescription", "Prescription")
+                        .WithMany("BirdPrescriptions")
+                        .HasForeignKey("PrescriptionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -371,6 +417,19 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .WithMany("Medicines")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.SetNull);
+                });
+
+            modelBuilder.Entity("Imi.Project.Api.Core.Entities.Prescription", b =>
+                {
+                    b.HasOne("Imi.Project.Api.Core.Entities.Medicine", "Medicine")
+                        .WithMany("Prescriptions")
+                        .HasForeignKey("MedicineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Imi.Project.Api.Core.Entities.User", "User")
+                        .WithMany("Prescriptions")
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

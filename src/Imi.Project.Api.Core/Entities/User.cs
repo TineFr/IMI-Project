@@ -8,6 +8,7 @@ namespace Imi.Project.Api.Core.Entities
     {
         public ICollection<Cage> Cages { get; set; } 
         public ICollection<Bird> Birds { get; set; }
-        public ICollection<Medicine> Medicines { get; set; } 
+        public ICollection<Medicine> Medicines { get; set; }
+        public ICollection<Prescription> Prescriptions { get; set; }
     }
 }

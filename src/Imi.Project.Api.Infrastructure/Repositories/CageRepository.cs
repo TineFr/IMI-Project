@@ -22,8 +22,8 @@ namespace Imi.Project.Api.Infrastructure.Repositories
                                    .Include(c => c.DailyTasks)
                                    .Include(c => c.Birds)
                                    .ThenInclude(b => b.Species)
-                                   .Include(c => c.Birds)
-                                   .ThenInclude(b => b.BirdMedicines);
+                                   .Include(c => c.Birds);
+
 
 
         }
