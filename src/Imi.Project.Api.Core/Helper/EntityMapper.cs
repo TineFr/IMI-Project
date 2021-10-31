@@ -3,6 +3,7 @@ using Imi.Project.Api.Core.Dtos.Birds;
 using Imi.Project.Api.Core.Dtos.Cages;
 using Imi.Project.Api.Core.Dtos.DailyTasks;
 using Imi.Project.Api.Core.Dtos.Medicines;
+using Imi.Project.Api.Core.Dtos.Prescriptions;
 using Imi.Project.Api.Core.Dtos.Species;
 using Imi.Project.Api.Core.Dtos.Users;
 using Imi.Project.Api.Core.Entities;
@@ -90,6 +91,31 @@ namespace Imi.Project.Api.Core.Helper
 
             };
             return species;
+        }
+
+
+        public static Prescription MapToEntity(this PrescriptionRequestDto prescriptionDto)
+        {
+            var prescription = new Prescription
+            {
+                Id = prescriptionDto.Id,
+                EndDate = prescriptionDto.EndDate,
+                StartDate = prescriptionDto.StartDate,
+                MedicineId = prescriptionDto.Medicine,
+                UserId = prescriptionDto.UserId,
+                BirdPrescriptions = new List<BirdPrescription>()
+            };
+            foreach (var bird in prescriptionDto.Birds)
+            {
+                var birdprescription = new BirdPrescription
+                {
+                    BirdId = bird,
+                    PrescriptionId = prescriptionDto.Id
+                };
+
+                prescription.BirdPrescriptions.Add(birdprescription);
+            }
+            return prescription;
         }
     }
 }

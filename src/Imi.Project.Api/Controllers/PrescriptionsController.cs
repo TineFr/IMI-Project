@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Imi.Project.Api.Core.Helper;
 using System.Threading.Tasks;
+using Imi.Project.Api.Core.Dtos.Prescriptions;
+using Imi.Project.Api.Core.Entities;
 
 namespace Imi.Project.Api.Controllers
 {
@@ -16,6 +18,7 @@ namespace Imi.Project.Api.Controllers
         protected readonly IUserService _userService;
         protected readonly IImageService _imageService;
         protected readonly IPrescriptionService _prescriptionService;
+
         public PrescriptionsController(IUserService userService, IImageService imageService, IPrescriptionService prescriptionService)
         {
             _userService = userService;
@@ -42,6 +45,62 @@ namespace Imi.Project.Api.Controllers
             prescription.MapToDto();
             return Ok(prescription);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Post(PrescriptionRequestDto newPrescription)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var prescription = await _prescriptionService.GetPrescriptionByIdAsync(newPrescription.Id);
+            if (prescription != null)
+            {
+                return BadRequest($"Prescription with id {newPrescription.Id} already exists");
+            }
+            var user = await _userService.GetUserByIdAsync(newPrescription.UserId);
+            if (user == null)
+            {
+                return NotFound($"User with id {prescription.UserId} does not exist");
+            }
+            var newPrescripptionEntity = newPrescription.MapToEntity();
+            await _prescriptionService.AddPrescriptionAsync(newPrescripptionEntity);
+            return Ok();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Put(PrescriptionRequestDto updatedPrescription)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var prescription = await _prescriptionService.GetPrescriptionByIdAsync(updatedPrescription.Id);
+            if (prescription == null)
+            {
+                return NotFound($"Prescription with id {updatedPrescription.Id} does not exist");
+            }
+            var prescriptionEntity = prescription.Update(updatedPrescription);
+            var result = await _prescriptionService.UpdatePrescriptionAsync(prescriptionEntity);
+            
+            return Ok();
+        }
+
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(PrescriptionRequestDto prescriptionToDelete)
+        {
+            var prescription = await _prescriptionService.GetPrescriptionByIdAsync(prescriptionToDelete.Id);
+            if (prescription == null)
+            {
+                return NotFound($"Prescription with id {prescription.Id} does not exist");
+            }
+            await _prescriptionService.DeletePrescriptionAsync(prescription);
+            return Ok();
+        }
+
+
+
 
     }
 }

@@ -18,7 +18,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<T> AddAsync(T entity)
+        public  async Task<T> AddAsync(T entity)
         {
             await _dbContext.Set<T>().AddAsync(entity);
             await _dbContext.SaveChangesAsync();

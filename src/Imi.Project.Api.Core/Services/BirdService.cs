@@ -51,12 +51,6 @@ namespace Imi.Project.Api.Core.Services
             return birds;
         }
 
-        //public async Task<IEnumerable<Bird>> GetBirdsWithMedicineAsync()
-        //{
-        //    var birds = await _birdRepository.GetBirdsWithMedicineAsync();
-        //    return birds;
-        //}
-
         public async Task<IEnumerable<Bird>> ListAllBirdsAsync()
         {
             var birds = await _birdRepository.ListAllAsync();
