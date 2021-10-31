@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Imi.Project.Mobile.Domain.Services.Interfaces
+namespace Imi.Project.Mobile.Core.Services.Mocking.Interfaces
 {
     public interface ISpeciesService
     {

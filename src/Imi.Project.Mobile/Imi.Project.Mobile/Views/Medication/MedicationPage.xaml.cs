@@ -17,18 +17,20 @@ namespace Imi.Project.Mobile.Views.Medication
     {
         IMedicationService medicationservice;
         IBirdService birdservice;
+        IPrescriptionService prescriptionService;
         public MedicationPage()
         {
             InitializeComponent();
             medicationservice = new MockMedicationService();
             birdservice = new MockBirdService();
+            prescriptionService = new MockPrescriptionService();
         }
 
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            var medications = await medicationservice.GetAllMedications();
-            colvMedication.ItemsSource = medications;
+            var prescriptions = await prescriptionService.GetAllPrescriptions();
+            colvMedication.ItemsSource = prescriptions;
         }
 
 

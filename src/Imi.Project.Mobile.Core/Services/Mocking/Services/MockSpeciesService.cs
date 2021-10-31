@@ -1,5 +1,5 @@
 ﻿using Imi.Project.Mobile.Core.Models;
-using Imi.Project.Mobile.Domain.Services.Interfaces;
+using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

@@ -4,10 +4,11 @@ using System.Text;
 
 namespace Imi.Project.Mobile.Core.Models
 {
-    public class Prescription
+    public class Prescription : BaseEntity
     {
-        public Medication medicine { get; set; }
-
-        public IEnumerable<Bird> bird { get; set; }
+        public Guid Medicine { get; set; }
+        public IEnumerable<Guid> Birds { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
     }
 }

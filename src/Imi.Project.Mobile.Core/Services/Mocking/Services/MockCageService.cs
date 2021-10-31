@@ -1,5 +1,5 @@
 ﻿using Imi.Project.Mobile.Core.Models;
-using Imi.Project.Mobile.Domain.Services.Interfaces;
+using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -33,17 +33,17 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
 
                     },
         };
-        public Task<Cage> AddCage(Cage Cage)
+        public Task<Cage> AddCage(Cage cage)
         {
-            Cagerepository.Add(Cage);
-            return Task.FromResult(Cage);
+            Cagerepository.Add(cage);
+            return Task.FromResult(cage);
         }
 
         public Task<Cage> DeleteCage(Guid id)
         {
-            var Cage = Cagerepository.FirstOrDefault(b => b.Id.Equals(id));
-            Cagerepository.Remove(Cage);
-            return Task.FromResult(Cage);
+            var cage = Cagerepository.FirstOrDefault(b => b.Id.Equals(id));
+            Cagerepository.Remove(cage);
+            return Task.FromResult(cage);
         }
 
         public Task<ObservableCollection<Cage>> GetAllCages()
@@ -53,14 +53,14 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
 
         public Task<Cage> GetCageById(Guid id)
         {
-            var Cage = Cagerepository.FirstOrDefault(b => b.Id.Equals(id));
-            return Task.FromResult(Cage);
+            var cage = Cagerepository.FirstOrDefault(b => b.Id.Equals(id));
+            return Task.FromResult(cage);
         }
 
         public Task<Cage> UpdateCage(Cage updatedCage)
         {
-            var Cage = Cagerepository.FirstOrDefault(b => b.Id.Equals(updatedCage.Id));
-            Cagerepository.ToList().Remove(Cage);
+            var cage = Cagerepository.FirstOrDefault(b => b.Id.Equals(updatedCage.Id));
+            Cagerepository.ToList().Remove(cage);
             Cagerepository.ToList().Add(updatedCage);
             return Task.FromResult(updatedCage);
         }

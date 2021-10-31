@@ -14,8 +14,7 @@ namespace Imi.Project.Mobile.Core.Models
         public string Cage { get; set; }
         public string Image { get; set; }
         public string GenderImage => $"{Gender}.png";
-        public string Date => HatchDate.ToString("dd/MM/yyyy");
-        public List<Guid> Medications { get; set; }
+        public string Date => HatchDate.ToString("dd/MM/yyyy");x
 
     }
 }

@@ -6,12 +6,6 @@ namespace Imi.Project.Mobile.Core.Models
 {
     public class Medication : BaseEntity
     {
-        public string Usage { get; set; }
-
-        public List<Guid> Birds { get; set; } 
-
-        public int AmountOfBirds { get; set; }
-
-
+       public string Usage { get; set; }
     }
 }
