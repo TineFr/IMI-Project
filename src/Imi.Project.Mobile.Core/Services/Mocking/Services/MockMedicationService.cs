@@ -42,9 +42,6 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     Usage = " 1 tsp. per gallon of water",
 
                     },
-
-
-
         };
         public Task<Medication> AddMedication(Medication medication)
         {

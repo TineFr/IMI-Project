@@ -18,8 +18,8 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     new Prescription
                     {
                     Id = Guid.Parse("E7FE31F2-1996-4102-90E3-9530A0838217"),
-                    Medicine = Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
-                    Birds = new List<Guid>
+                    MedicationId = Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
+                    BirdIds = new List<Guid>
                     {
                         Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
                         Guid.Parse("13931038-e515-45f4-b036-ea22c0c24d62")
@@ -31,41 +31,45 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     },
                     new Prescription
                     {
-                    Id = Guid.Parse("29B764DE-09A7-47BA-95E8-70B7FAF7908A"),
-                    Medicine = Guid.Parse("4ab9d646-7010-479c-ae3e-8fe6cd15c687"),
-                    Birds = new List<Guid>
+                    Id = Guid.Parse("5206461d-3ba9-4701-a6a1-6a563ccceff2"),
+                    MedicationId = Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
+                    BirdIds = new List<Guid>
                     {
                         Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
                         Guid.Parse("13931038-e515-45f4-b036-ea22c0c24d62")
                     },
                     StartDate = DateTime.Now,
                     EndDate = DateTime.Now.AddDays(5)
-                    },
 
+
+                    },
                     new Prescription
                     {
-                    Id = Guid.Parse("64571D4B-A65F-41D1-B8A2-2B371D6FAFF2"),
-                    Medicine = Guid.Parse("13931038-e515-45f4-b036-ea22c0c24d62"),
-                    Birds = new List<Guid>
+                    Id = Guid.Parse("bd2670bb-392c-44a9-b2d8-88e6e413c165"),
+                    MedicationId = Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
+                    BirdIds = new List<Guid>
                     {
                         Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
                         Guid.Parse("13931038-e515-45f4-b036-ea22c0c24d62")
                     },
                     StartDate = DateTime.Now,
                     EndDate = DateTime.Now.AddDays(5)
-                    },
 
+
+                    },
                     new Prescription
                     {
-                    Id = Guid.Parse("3D5883D5-F0F8-46E4-BF80-0B2FEA7503A3"),
-                    Medicine = Guid.Parse("8b9d60ed-ba62-439e-89e8-d0097dc62b58"),
-                    Birds = new List<Guid>
+                    Id = Guid.Parse("6cdff968-d2fb-45af-a916-957a00ff5fe1"),
+                    MedicationId = Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
+                    BirdIds = new List<Guid>
                     {
                         Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
                         Guid.Parse("13931038-e515-45f4-b036-ea22c0c24d62")
                     },
                     StartDate = DateTime.Now,
                     EndDate = DateTime.Now.AddDays(5)
+
+
                     },
         };
         public Task<Prescription> AddPrescription(Prescription prescription)

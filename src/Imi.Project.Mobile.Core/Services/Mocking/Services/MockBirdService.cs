@@ -99,9 +99,9 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
             return Task.FromResult(bird);
         }
 
-        public  IEnumerable<Bird> GetBirdsByMedication(Medication medication)
+        public  IEnumerable<Bird> GetBirdsByPrescription(Prescription prescription)
         {
-            var birds = birdrepository.Where(b => b.Medications.Contains(medication.Id)).ToList();
+            var birds = birdrepository.Where(b => b.Prescriptions.Contains(prescription.Id)).ToList();
             return birds;
         }
 
