@@ -8,10 +8,16 @@
               RowDefinitions="{StaticResource MainGridRows}">
             <StackLayout WidthRequest="700" HorizontalOptions="Center" Grid.Row="0" 
                                  Grid.RowSpan="3">
-                <Button x:Name="btnRemove" Text="X" HorizontalOptions="End" WidthRequest="40" HeightRequest="40" BackgroundColor="IndianRed" Margin="5"></Button>
+                <Button x:Name="btnRemove" Text="X" HorizontalOptions="End" WidthRequest="40" HeightRequest="40" BackgroundColor="IndianRed" Margin="5" Clicked="btnRemove_Clicked" CommandParameter="{Binding Prescription}"></Button>
                 <Frame Grid.Row="0" BackgroundColor="#EEEEEE">
                     <FlexLayout Direction="Row" JustifyContent="Center" AlignItems="Center">
                         <Label  Text="{Binding Prescription.Medication.Name}" FontSize="30" FontAttributes="Bold" />
+                    </FlexLayout>
+                </Frame>
+                <Frame Grid.Row="0" BackgroundColor="#EEEEEE">
+                    <FlexLayout Direction="Column" AlignItems="Center">
+                        <Label  Text="Usage:" FontSize="20" FontAttributes="Bold" />
+                        <Label  Text="{Binding Prescription.Medication.Usage}" FontSize="15" Margin="20" />
                     </FlexLayout>
                 </Frame>
                 <Frame Grid.Row="0" BackgroundColor="#EEEEEE">

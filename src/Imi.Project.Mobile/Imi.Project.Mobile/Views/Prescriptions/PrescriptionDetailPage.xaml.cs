@@ -19,12 +19,14 @@ namespace Imi.Project.Mobile.Views.Prescriptions
 
         public Prescription Prescription { get; set; }
         IBirdService birdservice;
+        IPrescriptionService prescriptionservice;
 
         public PrescriptionDetailPage(Prescription prescription)
         {
             InitializeComponent();
             Prescription = prescription;
             birdservice = new MockBirdService();
+            prescriptionservice = new MockPrescriptionService();
         }
 
 
@@ -50,6 +52,15 @@ namespace Imi.Project.Mobile.Views.Prescriptions
             {
                 colvBirds.ItemsSource = birdList;
             }
+        }
+
+        private async void btnRemove_Clicked(object sender, EventArgs e)
+        {
+            var selection = (Button)sender;
+            var prescription = selection.CommandParameter as Prescription;
+            await prescriptionservice.DeletePrescription(prescription.Id);
+            birdservice.GetBirdsByPrescription(prescription).ToList().ForEach(b => b.Prescriptions.Remove(prescription.Id));
+            await Navigation.PopAsync();
         }
     }
 }
