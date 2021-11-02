@@ -87,7 +87,6 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
         public Task<ObservableCollection<Prescription>> GetAllPrescriptions()
         {
             prescriptionrepository.ToList().ForEach(async c => c.Medication = await GetMedicationByPrescription(c));
-            //prescriptionrepository.ToList().ForEach( p=> p.BirdIds.ToList().ForEach(async b => p.Birds.ToList().Add(await birdrepository.GetBirdById(b))));
             prescriptionrepository.ToList().ForEach(p => p.Birds = birdrepository.GetBirdsByPrescription(p));
             return Task.FromResult(prescriptionrepository);        
         }

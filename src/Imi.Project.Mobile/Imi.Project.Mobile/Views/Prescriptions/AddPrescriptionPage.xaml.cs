@@ -50,6 +50,8 @@ namespace Imi.Project.Mobile.Views.Prescriptions
                 StartDate = pkrStartDate.Date.ToString("d"),
                 EndDate = pkrEndDate.Date.ToString("d")
             };
+            var bird = await birdService.GetBirdById(birds.ToArray()[pkrBirds.SelectedIndex].Id);
+            bird.Prescriptions.Add(newPrescription.Id);
             await PrescriptionService.AddPrescription(newPrescription);
             await Navigation.PopAsync();
         }
