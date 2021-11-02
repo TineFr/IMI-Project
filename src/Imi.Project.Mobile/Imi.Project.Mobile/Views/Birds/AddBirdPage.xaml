@@ -25,13 +25,13 @@
                 <Frame Style="{StaticResource EditFrame}">
                     <StackLayout>
                             <Label Text="Species"  FontAttributes="Bold"></Label>
-                            <Picker  x:Name="pkrSpecies" Title="Select species"></Picker>
+                            <Picker  x:Name="pkrSpecies" ItemsSource="{Binding Species}" ItemDisplayBinding="{Binding Name}" Title="Select species"></Picker>
                         </StackLayout>
                 </Frame>
                 <Frame Style="{StaticResource EditFrame}">
                     <StackLayout>
                             <Label Text="Cage"  FontAttributes="Bold"></Label>
-                            <Picker  x:Name="pkrCage" Title="Select cage"></Picker>
+                            <Picker  x:Name="pkrCage" ItemsSource="{Binding Cages}" ItemDisplayBinding="{Binding Name}" Title="Select cage"></Picker>
                         </StackLayout>
                 </Frame>
                 <Frame Style="{StaticResource EditFrame}">
@@ -46,6 +46,12 @@
                         <DatePicker></DatePicker>
                     </StackLayout>
                 </Frame>
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
+                            <Label Text="Food"  FontAttributes="Bold"></Label>
+                            <Entry  x:Name="entrFood" Placeholder="Enter food"></Entry>
+                        </StackLayout>
+                    </Frame>
                     <Frame Style="{StaticResource EditFrame}">
                         <StackLayout>
                             <Label Text="Add image"  FontAttributes="Bold"></Label>

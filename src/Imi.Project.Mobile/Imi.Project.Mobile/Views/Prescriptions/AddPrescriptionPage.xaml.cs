@@ -20,6 +20,7 @@ namespace Imi.Project.Mobile.Views.Prescriptions
         IBirdService birdService;
         IMedicationService medicationService;
         IPrescriptionService PrescriptionService;
+
         public AddPrescriptionPage()
         {
             InitializeComponent();
@@ -39,6 +40,7 @@ namespace Imi.Project.Mobile.Views.Prescriptions
         {
             var medication = await medicationService.GetAllMedications();
             var birds = await birdService.GetAllBirds();
+            
 
             Prescription newPrescription = new Prescription
             {
