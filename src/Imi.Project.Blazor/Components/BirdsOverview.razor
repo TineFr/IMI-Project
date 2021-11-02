@@ -2,23 +2,25 @@
 
 <div class="container">
     <div class="itemscontainer">
-        
+
         @foreach (var item in Birds)
         {
-        <a>
-            <div class="flexitem">
-                <img class="itemimage" src="@item.Image" />
-                <div>
-                    <h2>@item.Name</h2>
-                    <p class="scientific">@item.ScientificName</p>
-                    <p>@item.Cage</p>
+            <a href="@($"birddetails/{item.Id}")">
+                <div class="flexitem">
+                    <img class="itemimage" src="@item.Image" />
+                    <div>
+                        <h2>@item.Name</h2>
+                        <p class="scientific">@item.ScientificName</p>
+                        <p>@item.Cage</p>
+                    </div>
+                    <img class="genderimage" src="@SetGenderImage(item.Gender)" />
                 </div>
-                <img class="genderimage" src="@SetGenderImage(item.Gender)" />
-            </div>
-        </a>
+            </a>
         }
     </div>
 </div>
+
+
 
 @code {
 
@@ -41,6 +43,11 @@
     protected async override Task OnInitializedAsync()
     {
         Birds = await birdService.GetAllAsync();
+    }
+
+
+    private void ShowDetails(Bird bird)
+    {
 
     }
 }
