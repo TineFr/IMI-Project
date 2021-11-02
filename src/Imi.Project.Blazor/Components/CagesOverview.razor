@@ -3,7 +3,7 @@
 
         @foreach (var item in Cages)
         {
-        <a>
+        <a href="@($"cagedetails/{item.Id}")">
             <div class="flexitem">
                 <img class="itemimage" src="@item.Image" />
                 <div>

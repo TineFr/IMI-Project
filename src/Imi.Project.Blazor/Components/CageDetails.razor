@@ -1,0 +1,34 @@
+﻿<h1 class="blue">@Cage.Name</h1>
+
+<div class="detailscontainer">
+    <div class="detailsflex">
+
+        <img class="detailimage" src="@Cage.Image" />
+        <div>
+            <h2>@Cage.Name</h2>
+            <p> Location: @Cage.Location</p>
+
+        </div>
+    </div>
+
+</div>
+
+
+@code {
+
+    [Parameter]
+    public Cage Cage { get; set; }
+
+    [Inject]
+    public ICageService cageService { get; set; }
+
+    [Parameter]
+    public Guid Id { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        Cage = await cageService.GetByIdAsync(Id);
+    }
+
+
+}

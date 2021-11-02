@@ -53,7 +53,7 @@ namespace Imi.Project.Blazor.Services
 
                     new Bird
                     {
-                    Id = Guid.Parse("8E74A018-6D85-4E2A-BB85-F8DA2D58F3BF"),
+                    Id = Guid.Parse("8781fe8e-b954-4f8f-b958-f2b976cfb42f"),
                     Name = "July",
                     Cage = "Outside cage 2",
                     Gender = "Female",
