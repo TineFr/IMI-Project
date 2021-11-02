@@ -191,6 +191,12 @@ align-content: center;
 
 
 }
+
+.maincontainer {
+    display: flex;
+    justify-content: center;
+
+}
 .scientific{
 font-style:italic;
 }
