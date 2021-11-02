@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Imi.Project.Mobile.Views.Prescriptions.AddPrescriptionPage">
+    <ContentPage.Content>
+        <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
+              RowDefinitions="{StaticResource MainGridRows}">
+            <!--<Frame Style="{StaticResource MainFrame}" BackgroundColor="{StaticResource Blue}">
+                <Label Text="Add Prescription" Style="{StaticResource MainLabel}"></Label>
+
+            </Frame>
+            <AbsoluteLayout Grid.Row="0" Grid.RowSpan="4">
+                <ImageButton x:Name="btnBack" Style="{StaticResource BackArrow}"></ImageButton>
+                <Image Style="{StaticResource Logo}" ></Image>
+            </AbsoluteLayout>-->
+
+            <ScrollView Grid.Row="0" Grid.RowSpan="3" Margin="10">
+                <StackLayout Grid.Row="1" Grid.RowSpan="2" >
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
+                            <Label Text="Medicine:" FontAttributes="Bold"></Label>
+                            <Picker x:Name="pkrMedicine" Title="Select medicine" ItemsSource="{Binding Medications}" ItemDisplayBinding="{Binding Name}" ></Picker>
+                        </StackLayout>
+                    </Frame>
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
+                            <Label Text="Give to following birds:"  FontAttributes="Bold"></Label>
+                            <Picker  x:Name="pkrBirds" Title="Select birds" ItemsSource="{Binding Birds}" ItemDisplayBinding="{Binding Name}" ></Picker>
+                        </StackLayout>
+                    </Frame>
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
+                            <Label Text="Start date:"  FontAttributes="Bold"></Label>
+                            <DatePicker  x:Name="pkrStartDate"></DatePicker>
+                        </StackLayout>
+                    </Frame>
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
+                            <Label Text="Start date:"  FontAttributes="Bold"></Label>
+                            <DatePicker  x:Name="pkrEndDate"></DatePicker>
+                        </StackLayout>
+                    </Frame>
+
+                    <Button x:Name="btnSave" Text="Save" HorizontalOptions="End" Margin="20" Clicked="btnSave_Clicked"></Button>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

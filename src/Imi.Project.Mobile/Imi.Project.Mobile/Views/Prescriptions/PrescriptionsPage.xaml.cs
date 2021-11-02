@@ -45,5 +45,10 @@ namespace Imi.Project.Mobile.Views.Prescriptions
           
             await Navigation.PushAsync(new PrescriptionDetailPage(prescription));
         }
+
+        private async void btnAddPrescription_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AddPrescriptionPage());
+        }
     }
 }
