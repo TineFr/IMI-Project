@@ -15,8 +15,8 @@ namespace Imi.Project.Api.Infrastructure.Seeding
                 {
                     new Prescription
                     {
-                        Id = Guid.Parse("53d1b65f-4785-4790-8f0f-62378de01f4e"),
-                        MedicineId = Guid.Parse("EB6E6128-25CF-4B4B-B511-FCE4A801D1F0"),
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000001"),
+                        MedicineId = Guid.Parse("00000000-0000-0000-0000-000000000001"),
                         StartDate = DateTime.Now,
                         EndDate = DateTime.Now.AddDays(7)
 
@@ -24,13 +24,106 @@ namespace Imi.Project.Api.Infrastructure.Seeding
 
                     new Prescription
                     {
-                        Id = Guid.Parse("f8dc77b5-ef08-4ce6-936c-fc3c44f682a8"),
-                        MedicineId = Guid.Parse("44411F0E-5E99-49B4-9BEB-922D3A97093D"),
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000002"),
+                        MedicineId = Guid.Parse("00000000-0000-0000-0000-000000000002"),
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.Now.AddDays(4)
+
+                    },
+                    new Prescription
+                    {
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000003"),
+                        MedicineId = Guid.Parse("00000000-0000-0000-0000-000000000003"),
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.Now.AddDays(7)
+
+                    },
+
+                    new Prescription
+                    {
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000004"),
+                        MedicineId = Guid.Parse("00000000-0000-0000-0000-000000000004"),
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.Now.AddDays(4)
+
+                    },
+                    new Prescription
+                    {
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000005"),
+                        MedicineId = Guid.Parse("00000000-0000-0000-0000-000000000005"),
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.Now.AddDays(6)
+
+                    },
+
+                    new Prescription
+                    {
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000006"),
+                        MedicineId = Guid.Parse("00000000-0000-0000-0000-000000000006"),
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.Now.AddDays(4)
+
+                    },
+                    new Prescription
+                    {
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000007"),
+                        MedicineId = Guid.Parse("00000000-0000-0000-0000-000000000007"),
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.Now.AddDays(2)
+
+                    },
+
+                    new Prescription
+                    {
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000008"),
+                        MedicineId = Guid.Parse("00000000-0000-0000-0000-000000000008"),
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.Now.AddDays(11)
+
+                    },
+                    new Prescription
+                    {
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000009"),
+                        MedicineId = Guid.Parse("00000000-0000-0000-0000-000000000009"),
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.Now.AddDays(5)
+
+                    },
+
+                    new Prescription
+                    {
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000010"),
+                        MedicineId = Guid.Parse("00000000-0000-0000-0000-000000000010"),
                         StartDate = DateTime.Now,
                         EndDate = DateTime.Now.AddDays(4)
 
                     },
 
+                    new Prescription
+                    {
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000011"),
+                        MedicineId = Guid.Parse("00000000-0000-0000-0000-000000000011"),
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.Now.AddDays(4)
+
+                    },
+                    new Prescription
+                    {
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000012"),
+                        MedicineId = Guid.Parse("00000000-0000-0000-0000-000000000012"),
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.Now.AddDays(7)
+
+                    },
+
+                    new Prescription
+                    {
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000013"),
+                        MedicineId = Guid.Parse("00000000-0000-0000-0000-000000000013"),
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.Now.AddDays(4)
+
+                    },
                 }
 
             );
