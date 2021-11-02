@@ -42,20 +42,20 @@ namespace Imi.Project.Mobile.Views.Medication
 
         private async void btnRemoveBird_Clicked(object sender, EventArgs e)
         {
-            var selection = (ImageButton)sender;
-            var bird = selection.CommandParameter as Bird;
-            bird.Medications.Remove(Medication.Id);
-            var birdList = birdservice.GetBirdsByMedication(Medication);
+            //var selection = (ImageButton)sender;
+            //var bird = selection.CommandParameter as Bird;
+            //bird.Medications.Remove(Medication.Id);
+            //var birdList = birdservice.GetBirdsByMedication(Medication);
             
 
-            if (birdList.Count() == 0)
-            {
-                await Navigation.PopAsync();
-            }
-            else
-            {
-                colvBirds.ItemsSource = birdList;
-            }
+            //if (birdList.Count() == 0)
+            //{
+            //    await Navigation.PopAsync();
+            //}
+            //else
+            //{
+            //    colvBirds.ItemsSource = birdList;
+            //}
         }
 
 

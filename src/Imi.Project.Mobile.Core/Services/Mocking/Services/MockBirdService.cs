@@ -24,6 +24,13 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     Species = "Budgerigar",
                     ScientificName ="Melopsittacus undulatus",
                     Food = "Parakeet mix",
+                    Prescriptions = new List<Guid>
+                    {
+                        Guid.Parse("E7FE31F2-1996-4102-90E3-9530A0838217"),
+                        Guid.Parse("5206461d-3ba9-4701-a6a1-6a563ccceff2"),
+                        Guid.Parse("bd2670bb-392c-44a9-b2d8-88e6e413c165"),
+                        Guid.Parse("6cdff968-d2fb-45af-a916-957a00ff5fe1")
+                    }
 
                     },
 
@@ -38,6 +45,13 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     Species = "Budgerigar",
                     ScientificName ="Melopsittacus undulatus",
                     Food = "Parakeet mix",
+                    Prescriptions = new List<Guid>
+                    {
+                        Guid.Parse("E7FE31F2-1996-4102-90E3-9530A0838217"),
+                        Guid.Parse("5206461d-3ba9-4701-a6a1-6a563ccceff2"),
+                        Guid.Parse("bd2670bb-392c-44a9-b2d8-88e6e413c165"),
+                        Guid.Parse("6cdff968-d2fb-45af-a916-957a00ff5fe1")
+                    }
 
                     },
 
@@ -52,7 +66,13 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     Species = "Cockatiel",
                     ScientificName = "Nymphicus hollandicuss",
                     Food = "Parakeet mix",
-
+                    Prescriptions = new List<Guid>
+                    {
+                        Guid.Parse("E7FE31F2-1996-4102-90E3-9530A0838217"),
+                        Guid.Parse("5206461d-3ba9-4701-a6a1-6a563ccceff2"),
+                        Guid.Parse("bd2670bb-392c-44a9-b2d8-88e6e413c165"),
+                        Guid.Parse("6cdff968-d2fb-45af-a916-957a00ff5fe1")
+                    }
                     },
 
                     new Bird
@@ -66,11 +86,12 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     Species = "Cockatiel",
                     ScientificName = "Nymphicus hollandicuss",
                     Food = "Parakeet mix",
-                    Medications = new List<Guid>
+                     Prescriptions = new List<Guid>
                     {
-                        Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
-                        Guid.Parse("13931038-e515-45f4-b036-ea22c0c24d62")
-
+                        Guid.Parse("E7FE31F2-1996-4102-90E3-9530A0838217"),
+                        Guid.Parse("5206461d-3ba9-4701-a6a1-6a563ccceff2"),
+                        Guid.Parse("bd2670bb-392c-44a9-b2d8-88e6e413c165"),
+                        Guid.Parse("6cdff968-d2fb-45af-a916-957a00ff5fe1")
                     }
                     }
 

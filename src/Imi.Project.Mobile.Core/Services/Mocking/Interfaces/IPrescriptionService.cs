@@ -15,5 +15,7 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Interfaces
         Task<Prescription> UpdatePrescription(Prescription updatedPrescription);
         Task<Prescription> DeletePrescription(Guid id);
         Task<Prescription> GetPrescriptionById(Guid id);
+        //Task<Medication> GetMedicationByPrescription(Prescription prescription);
+        //Task<IEnumerable<Task<Bird>>> GetBirdsByPrescription(Prescription prescription);
     }
 }

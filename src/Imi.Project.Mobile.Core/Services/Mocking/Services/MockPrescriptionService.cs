@@ -12,6 +12,7 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
     public class MockPrescriptionService : IPrescriptionService
     {
         private static IMedicationService medicationrepository = new MockMedicationService();
+        private static IBirdService birdrepository = new MockBirdService();
 
         private static ObservableCollection<Prescription> prescriptionrepository = new ObservableCollection<Prescription>
         {
@@ -20,13 +21,13 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     Id = Guid.Parse("E7FE31F2-1996-4102-90E3-9530A0838217"),
                     MedicationId = Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
                     BirdIds = new List<Guid>
-                    {
-                        Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
-                        Guid.Parse("13931038-e515-45f4-b036-ea22c0c24d62")
+                    {   
+                        Guid.Parse("8606C209-1D51-4EE3-9F8D-8DE3D0F3F24E"),
+                        Guid.Parse("6668E055-E99C-4B50-AD12-5A28CA2AD422")
                     },
-                    StartDate = DateTime.Now,
-                    EndDate = DateTime.Now.AddDays(5)
-                    
+                    StartDate = DateTime.Now.ToString("d"),
+                    EndDate = DateTime.Now.AddDays(5).ToString("d"),
+                    Birds = new List<Bird>()
 
                     },
                     new Prescription
@@ -35,11 +36,12 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     MedicationId = Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
                     BirdIds = new List<Guid>
                     {
-                        Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
-                        Guid.Parse("13931038-e515-45f4-b036-ea22c0c24d62")
+                        Guid.Parse("8606C209-1D51-4EE3-9F8D-8DE3D0F3F24E"),
+                        Guid.Parse("6668E055-E99C-4B50-AD12-5A28CA2AD422")
                     },
-                    StartDate = DateTime.Now,
-                    EndDate = DateTime.Now.AddDays(5)
+                    StartDate = DateTime.Now.ToString("d"),
+                    EndDate = DateTime.Now.AddDays(5).ToString("d"),
+                    Birds = new List<Bird>()
 
 
                     },
@@ -49,12 +51,12 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     MedicationId = Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
                     BirdIds = new List<Guid>
                     {
-                        Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
-                        Guid.Parse("13931038-e515-45f4-b036-ea22c0c24d62")
+                        Guid.Parse("8606C209-1D51-4EE3-9F8D-8DE3D0F3F24E"),
+                        Guid.Parse("6668E055-E99C-4B50-AD12-5A28CA2AD422")
                     },
-                    StartDate = DateTime.Now,
-                    EndDate = DateTime.Now.AddDays(5)
-
+                    StartDate = DateTime.Now.ToString("d"),
+                    EndDate = DateTime.Now.AddDays(5).ToString("d"),
+                    Birds = new List<Bird>()
 
                     },
                     new Prescription
@@ -63,12 +65,12 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     MedicationId = Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
                     BirdIds = new List<Guid>
                     {
-                        Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
-                        Guid.Parse("13931038-e515-45f4-b036-ea22c0c24d62")
+                        Guid.Parse("8606C209-1D51-4EE3-9F8D-8DE3D0F3F24E"),
+                        Guid.Parse("6668E055-E99C-4B50-AD12-5A28CA2AD422")
                     },
-                    StartDate = DateTime.Now,
-                    EndDate = DateTime.Now.AddDays(5)
-
+                    StartDate = DateTime.Now.ToString("d"),
+                    EndDate = DateTime.Now.AddDays(5).ToString("d"),
+                    Birds = new List<Bird>()
 
                     },
         };
@@ -81,8 +83,10 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
 
         public Task<ObservableCollection<Prescription>> GetAllPrescriptions()
         {
-            
-            return Task.FromResult(prescriptionrepository);
+            prescriptionrepository.ToList().ForEach(async c => c.Medication = await GetMedicationByPrescription(c));
+            //prescriptionrepository.ToList().ForEach( p=> p.BirdIds.ToList().ForEach(async b => p.Birds.ToList().Add(await birdrepository.GetBirdById(b))));
+            prescriptionrepository.ToList().ForEach(p => p.Birds = birdrepository.GetBirdsByPrescription(p));
+            return Task.FromResult(prescriptionrepository);        
         }
 
         public Task<Prescription> GetPrescriptionById(Guid id)
@@ -90,6 +94,14 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
             var prescription = prescriptionrepository.FirstOrDefault(b => b.Id.Equals(id));
             return Task.FromResult(prescription);
         }
+
+
+        public  Task<Medication> GetMedicationByPrescription(Prescription prescription)
+        {
+            var medication =  medicationrepository.GetMedicationById(prescription.MedicationId);
+            return medication;
+        }
+
 
         public Task<Prescription> UpdatePrescription(Prescription updatedPrescription)
         {
@@ -105,5 +117,18 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
             prescriptionrepository.Remove(prescription);
             return Task.FromResult(prescription);
         }
+
+        //public async void GetBirdsByPrescription(Prescription prescription)
+        //{
+
+        //    prescription.BirdIds.ToList().ForEach(  b => prescription.Birds.ToList().Add( await birdrepository.GetBirdById(b)));
+
+        //    foreach (var bird in prescription.BirdIds)
+        //    {
+        //        prescription.Birds.ToList().Add(birdrepository.GetBirdById(bird))
+        //    }
+            
+
+        //}
     }
 }

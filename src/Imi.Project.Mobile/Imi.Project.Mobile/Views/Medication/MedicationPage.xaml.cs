@@ -8,7 +8,6 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
 using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
-using Imi.Project.Mobile.Core.Services.Interfaces;
 
 namespace Imi.Project.Mobile.Views.Medication
 {
@@ -30,7 +29,7 @@ namespace Imi.Project.Mobile.Views.Medication
         {
             base.OnAppearing();
             var prescriptions = await prescriptionService.GetAllPrescriptions();
-            colvMedication.ItemsSource = prescriptions;
+
         }
 
 
@@ -43,11 +42,11 @@ namespace Imi.Project.Mobile.Views.Medication
 
         private async void btnShowBirds_Clicked(object sender, EventArgs e)
         {
-            var selection = (Button)sender;
-            var medication = selection.CommandParameter as Core.Models.Medication;
-            if (medication == null) return;
-            var birds = birdservice.GetBirdsByMedication(medication);
-            await Navigation.PushAsync(new MedicationDetailPage(medication, birds));
+            //var selection = (Button)sender;
+            //var medication = selection.CommandParameter as Core.Models.Medication;
+            //if (medication == null) return;
+            //var birds = birdservice.GetBirdsByMedication(medication);
+            //await Navigation.PushAsync(new MedicationDetailPage(medication, birds));
         }
     }
 }
