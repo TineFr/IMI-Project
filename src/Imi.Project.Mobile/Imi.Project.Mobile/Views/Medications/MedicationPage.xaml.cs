@@ -41,7 +41,9 @@ namespace Imi.Project.Mobile.Views.Medications
 
         private async void btnEditMedication_Clicked(object sender, EventArgs e)
         {
-
+            var selection = (ImageButton)sender;
+            var medication = selection.CommandParameter as Medication;
+            await Navigation.PushAsync(new EditMedicationPage(medication));
         }
 
         private async void btnDeleteMedication_Clicked(object sender, EventArgs e)
