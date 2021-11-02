@@ -3,7 +3,7 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:mobile="clr-namespace:Imi.Project.Mobile"
             x:Class="Imi.Project.Mobile.MainPage"
             xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions"
-            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core" xmlns:medication="clr-namespace:Imi.Project.Mobile.Views.Medication" xmlns:speciesguide="clr-namespace:Imi.Project.Mobile.Views.SpeciesGuide"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core" xmlns:medication="clr-namespace:Imi.Project.Mobile.Views.Medication" xmlns:speciesguide="clr-namespace:Imi.Project.Mobile.Views.SpeciesGuide" xmlns:prescriptions="clr-namespace:Imi.Project.Mobile.Views.Prescriptions"
             android:TabbedPage.ToolbarPlacement="Bottom"
             BackgroundColor="white">
 
@@ -11,7 +11,7 @@
     <mobile:CagesPage Title="Cages" IconImageSource="{extensions:ImageResource Imi.Project.Mobile.icons.cages.png}"></mobile:CagesPage>
     <mobile:BirdsPage Title="Birds"  IconImageSource="{extensions:ImageResource Imi.Project.Mobile.icons.birds.png}"></mobile:BirdsPage>
     <mobile:HomePage Title="Home"  IconImageSource="{extensions:ImageResource Imi.Project.Mobile.icons.home.png}"></mobile:HomePage>
-    <medication:MedicationPage Title="Medication"  IconImageSource="{extensions:ImageResource Imi.Project.Mobile.icons.medication.png}"></medication:MedicationPage>
+    <prescriptions:PrescriptionsPage Title="Medication"  IconImageSource="{extensions:ImageResource Imi.Project.Mobile.icons.medication.png}"></prescriptions:PrescriptionsPage>
     <speciesguide:SpeciesPage Title="Species"  IconImageSource="{extensions:ImageResource Imi.Project.Mobile.icons.guide.png}"></speciesguide:SpeciesPage>
 
 </TabbedPage>

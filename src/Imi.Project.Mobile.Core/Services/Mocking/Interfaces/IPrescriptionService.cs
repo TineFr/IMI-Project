@@ -11,8 +11,11 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Interfaces
     public interface IPrescriptionService
     {
         Task<ObservableCollection<Prescription>> GetAllPrescriptions();
-        Task<Prescription> AddPrescription(Species species);
-        Task<Species> UpdatePrescription(Species species);
-        Task<Species> DeletePrescription(Guid id);
+        Task<Prescription> AddPrescription(Prescription prescription);
+        Task<Prescription> UpdatePrescription(Prescription updatedPrescription);
+        Task<Prescription> DeletePrescription(Guid id);
+        Task<Prescription> GetPrescriptionById(Guid id);
+        //Task<Medication> GetMedicationByPrescription(Prescription prescription);
+        //Task<IEnumerable<Task<Bird>>> GetBirdsByPrescription(Prescription prescription);
     }
 }

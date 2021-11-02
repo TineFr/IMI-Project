@@ -1,5 +1,5 @@
 ﻿using Imi.Project.Mobile.Core.Models;
-using Imi.Project.Mobile.Core.Services.Interfaces;
+using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -42,34 +42,38 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     Usage = " 1 tsp. per gallon of water",
 
                     },
-
-
-
         };
-        public Task<Medication> AddMedication(Medication Medication)
+        public Task<Medication> AddMedication(Medication medication)
         {
-            throw new NotImplementedException();
+            medicationrepository.Add(medication);
+            return Task.FromResult(medication);
         }
 
         public Task<Medication> DeleteMedication(Guid id)
         {
-            throw new NotImplementedException();
+            var medication = medicationrepository.FirstOrDefault(b => b.Id.Equals(id));
+            medicationrepository.Remove(medication);
+            return Task.FromResult(medication);
         }
 
         public Task<ObservableCollection<Medication>> GetAllMedications()
         {
-            return Task.FromResult( medicationrepository);
+            return Task.FromResult(medicationrepository);
         }
 
 
         public Task<Medication> GetMedicationById(Guid id)
         {
-            throw new NotImplementedException();
+            var medication = medicationrepository.FirstOrDefault(b => b.Id.Equals(id));
+            return Task.FromResult(medication);
         }
 
-        public Task<Medication> UpdateMedication(Medication Medication)
+        public Task<Medication> UpdateMedication(Medication updatedMedication)
         {
-            throw new NotImplementedException();
+            var medication = medicationrepository.FirstOrDefault(b => b.Id.Equals(updatedMedication.Id));
+            medicationrepository.ToList().Remove(medication);
+            medicationrepository.ToList().Add(updatedMedication);
+            return Task.FromResult(updatedMedication);
         }
     }
 }

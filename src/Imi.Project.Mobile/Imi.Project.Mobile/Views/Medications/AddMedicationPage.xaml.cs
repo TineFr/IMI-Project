@@ -1,7 +1,6 @@
 ﻿using Imi.Project.Mobile.Core.Models;
 using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
-using Imi.Project.Mobile.Core.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,35 +10,28 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Imi.Project.Mobile.Views.Cages
+namespace Imi.Project.Mobile.Views.Medications
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AddCagePage : ContentPage
+    public partial class AddMedicationPage : ContentPage
     {
-        ICageService cageservice;
-        public AddCagePage()
+        IMedicationService medicationService;
+        public AddMedicationPage()
         {
             InitializeComponent();
-            NavigationPage.SetHasNavigationBar(this, false);
-            cageservice = new MockCageService();
+            medicationService = new MockMedicationService();
         }
 
         private async void btnSave_Clicked(object sender, EventArgs e)
         {
-            Cage newCage = new Cage
+            Medication newMedication = new Medication
             {
                 Id = new Guid(),
                 Name = entrName.Text,
-                Location = entrLocation.Text,
-                Image = "cage1.png"
+                Usage = entrUsage.Text
+
             };
-            await cageservice.AddCage(newCage);
-
-            await Navigation.PopAsync();
-        }
-
-        private async void btnBack_Clicked(object sender, EventArgs e)
-        {
+            await medicationService.AddMedication(newMedication);
             await Navigation.PopAsync();
         }
     }

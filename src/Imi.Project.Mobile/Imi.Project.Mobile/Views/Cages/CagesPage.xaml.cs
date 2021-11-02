@@ -2,7 +2,6 @@
 using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
 using Imi.Project.Mobile.Core.ViewModels;
-using Imi.Project.Mobile.Domain.Services.Interfaces;
 using Imi.Project.Mobile.Views.Cages;
 using System;
 using System.Collections.Generic;

@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Imi.Project.Mobile.Core.Models
 {
-    public class Medication : BaseEntity
+    public enum Gender
     {
-       public string Usage { get; set; }
+        Male, Female
     }
 }

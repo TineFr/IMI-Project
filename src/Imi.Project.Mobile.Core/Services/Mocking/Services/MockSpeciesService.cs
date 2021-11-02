@@ -1,8 +1,9 @@
 ﻿using Imi.Project.Mobile.Core.Models;
-using Imi.Project.Mobile.Domain.Services.Interfaces;
+using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -84,7 +85,8 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
 
         public Task<Species> GetSpeciesById(Guid id)
         {
-            throw new NotImplementedException();
+            var species = speciesrepository.FirstOrDefault(b => b.Id.Equals(id));
+            return Task.FromResult(species);
         }
 
         public Task<Species> UpdateSpecies(Species species)

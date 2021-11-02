@@ -9,59 +9,66 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Mobile.Core.Services.Mocking.Services
 {
+   
     public class MockBirdService : IBirdService
     {
+        private static ICageService cageService = new MockCageService();
+        private static ISpeciesService speciesService = new MockSpeciesService();
         private static ObservableCollection<Bird> birdrepository = new ObservableCollection<Bird>
         {
                     new Bird
                     {
                     Id = Guid.Parse("8606C209-1D51-4EE3-9F8D-8DE3D0F3F24E"),
                     Name = "Jake",
-                    Cage ="Outside cage",
+                    CageId = Guid.Parse("8606C209-1D51-4EE3-9F8D-8DE3D0F3F24E"),
                     Gender = "Male",
                     HatchDate = new DateTime(2015, 12, 25),
                     Image = "images/budgie1.jpg",
-                    Species = "Budgerigar",
-                    ScientificName ="Melopsittacus undulatus",
+                    SpeciesId = Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
                     Food = "Parakeet mix",
-                    Medications = new List<Guid>
+                    Prescriptions = new List<Guid>
                     {
-                        Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
-                        Guid.Parse("8b9d60ed-ba62-439e-89e8-d0097dc62b58"),
-                        Guid.Parse("4ab9d646-7010-479c-ae3e-8fe6cd15c687"),
-                        Guid.Parse("13931038-e515-45f4-b036-ea22c0c24d62")
+                        Guid.Parse("E7FE31F2-1996-4102-90E3-9530A0838217"),
+                        Guid.Parse("5206461d-3ba9-4701-a6a1-6a563ccceff2"),
+                        Guid.Parse("bd2670bb-392c-44a9-b2d8-88e6e413c165"),
+                        Guid.Parse("6cdff968-d2fb-45af-a916-957a00ff5fe1")
                     }
+
                     },
 
                     new Bird
                     {
                     Id = Guid.Parse("6668E055-E99C-4B50-AD12-5A28CA2AD422"),
                     Name = "Holly",
-                    Cage = "Outside cage",
+                    CageId = Guid.Parse("8606C209-1D51-4EE3-9F8D-8DE3D0F3F24E"),
                     Gender = "Female",
                     HatchDate = new DateTime(2017, 07, 13),
                     Image = "images/budgie2.jpg",
-                    Species = "Budgerigar",
-                    ScientificName ="Melopsittacus undulatus",
+                    SpeciesId = Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
                     Food = "Parakeet mix",
-                    Medications = new List<Guid>()
+                    Prescriptions = new List<Guid>
+                    {
+
+                        Guid.Parse("5206461d-3ba9-4701-a6a1-6a563ccceff2"),
+                        Guid.Parse("bd2670bb-392c-44a9-b2d8-88e6e413c165"),
+                        Guid.Parse("6cdff968-d2fb-45af-a916-957a00ff5fe1")
+                    }
+
                     },
 
                     new Bird
                     {
                     Id = Guid.Parse("8E74A018-6D85-4E2A-BB85-F8DA2D58F3BF"),
                     Name = "Steven",
-                    Cage = "Outside cage 2",
+                    CageId = Guid.Parse("36122865-A1B6-410E-AFB9-662F8EE16949"),
+                    SpeciesId = Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
                     Gender = "Male",
                     HatchDate = new DateTime(2012, 09, 03),
                     Image = "images/cockatiel1.jpg",
-                    Species = "Cockatiel",
-                    ScientificName = "Nymphicus hollandicuss",
                     Food = "Parakeet mix",
-                    Medications = new List<Guid>
+                    Prescriptions = new List<Guid>
                     {
-                        Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
-
+                        Guid.Parse("6cdff968-d2fb-45af-a916-957a00ff5fe1")
                     }
                     },
 
@@ -69,18 +76,15 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     {
                     Id = Guid.Parse("F797C0C1-B01A-4F54-9C5D-7C66D5EDDC52"),
                     Name = "July",
-                    Cage = "Outside cage 2",
+                    CageId = Guid.Parse("36122865-A1B6-410E-AFB9-662F8EE16949"),
+                    SpeciesId = Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),                    
                     Gender = "Female",
                     HatchDate = new DateTime(2017, 07, 13),
                     Image = "images/cockatiel2.jpg",
-                    Species = "Cockatiel",
-                    ScientificName = "Nymphicus hollandicuss",
                     Food = "Parakeet mix",
-                    Medications = new List<Guid>
+                     Prescriptions = new List<Guid>
                     {
-                        Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
-                        Guid.Parse("13931038-e515-45f4-b036-ea22c0c24d62")
-
+                         Guid.Parse("6cdff968-d2fb-45af-a916-957a00ff5fe1")
                     }
                     }
 
@@ -100,6 +104,9 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
 
         public Task<ObservableCollection<Bird>> GetAllBirds()
         {
+            birdrepository.ToList().ForEach(async b => b.Cage = await cageService.GetCageById(b.CageId));
+            birdrepository.ToList().ForEach(async b => b.Species = await speciesService.GetSpeciesById(b.SpeciesId));
+            var test = 4;
             return Task.FromResult(birdrepository);
         }
 
@@ -109,9 +116,9 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
             return Task.FromResult(bird);
         }
 
-        public  IEnumerable<Bird> GetBirdsByMedication(Medication medication)
+        public  IEnumerable<Bird> GetBirdsByPrescription(Prescription prescription)
         {
-            var birds = birdrepository.Where(b => b.Medications.Contains(medication.Id)).ToList();
+            var birds = birdrepository.Where(b => b.Prescriptions.Contains(prescription.Id)).ToList();
             return birds;
         }
 
