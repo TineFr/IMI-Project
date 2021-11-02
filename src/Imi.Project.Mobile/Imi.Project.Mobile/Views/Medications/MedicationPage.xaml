@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Imi.Project.Mobile.Views.Medication.MedicationPage"
+             x:Class="Imi.Project.Mobile.Views.Medications.MedicationPage"
              xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions" xmlns:models1="clr-namespace:Imi.Project.Mobile.Core.Models;assembly=Imi.Project.Mobile.Core">
     <NavigationPage.TitleView>
         <Label Text="Medication" TextColor="white" VerticalTextAlignment="Center"/>
@@ -18,7 +18,6 @@
                                  Grid.RowSpan="3"
                                  x:Name="colvMedication"
                                  SelectionMode="Single"
-                                 SelectionChanged="colvMedication_SelectionChanged"
                                  VerticalOptions="Center"   
                                  HorizontalOptions="Center"   
                                  Margin="10">
@@ -36,8 +35,8 @@
                                             <Label  Text="{Binding Name}" FontSize="20" HorizontalTextAlignment="Center" />
                                         </StackLayout>
                                         <StackLayout Orientation="Horizontal">
-                                            <ImageButton x:Name="btnEditTask" CommandParameter="{Binding .}" Source="{extensions:ImageResource Imi.Project.Mobile.icons.pencil.png}" WidthRequest="20" BackgroundColor="Transparent" ></ImageButton>
-                                            <ImageButton x:Name="btnDeleteTask" CommandParameter="{Binding .}" Source="{extensions:ImageResource Imi.Project.Mobile.icons.delete.png}" WidthRequest="15" BackgroundColor="Transparent" Margin="5,0,10, 0"  ></ImageButton>
+                                            <ImageButton x:Name="btnEditMedication" CommandParameter="{Binding .}" Source="{extensions:ImageResource Imi.Project.Mobile.icons.pencil.png}" WidthRequest="20" BackgroundColor="Transparent" Clicked="btnEditMedication_Clicked" ></ImageButton>
+                                            <ImageButton x:Name="btnDeleteMedication" CommandParameter="{Binding .}" Source="{extensions:ImageResource Imi.Project.Mobile.icons.delete.png}" WidthRequest="15" BackgroundColor="Transparent" Margin="5,0,10, 0" Clicked="btnDeleteMedication_Clicked" ></ImageButton>
                                         </StackLayout>
                                     </FlexLayout>
                                 </Frame>

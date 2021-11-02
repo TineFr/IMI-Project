@@ -9,7 +9,7 @@ using Xamarin.Forms.Xaml;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
 using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 
-namespace Imi.Project.Mobile.Views.Medication
+namespace Imi.Project.Mobile.Views.Medications
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MedicationPage : ContentPage
@@ -33,23 +33,17 @@ namespace Imi.Project.Mobile.Views.Medication
         }
 
 
-
-        private async void colvMedication_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-
-        }
-
-        private async void btnShowBirds_Clicked(object sender, EventArgs e)
-        {
-            //var selection = (Button)sender;
-            //var medication = selection.CommandParameter as Core.Models.Medication;
-            //if (medication == null) return;
-            //var birds = birdservice.GetBirdsByMedication(medication);
-            //await Navigation.PushAsync(new MedicationDetailPage(medication, birds));
-        }
-
         private async void btnAddMedication_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AddMedicationPage());
+        }
+
+        private async void btnEditMedication_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private async void btnDeleteMedication_Clicked(object sender, EventArgs e)
         {
 
         }
