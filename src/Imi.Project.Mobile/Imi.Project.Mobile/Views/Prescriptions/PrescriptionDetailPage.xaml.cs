@@ -1,5 +1,6 @@
 ﻿using Imi.Project.Mobile.Core.Models;
 using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
+using Imi.Project.Mobile.Core.Services.Mocking.Services;
 using Imi.Project.Mobile.Core.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -17,11 +18,13 @@ namespace Imi.Project.Mobile.Views.Prescriptions
     {
 
         public Prescription Prescription { get; set; }
+        IBirdService birdservice;
 
         public PrescriptionDetailPage(Prescription prescription)
         {
             InitializeComponent();
             Prescription = prescription;
+            birdservice = new MockBirdService();
         }
 
 
@@ -31,9 +34,22 @@ namespace Imi.Project.Mobile.Views.Prescriptions
             colvBirds.ItemsSource = Prescription.Birds;
         }
 
-        private void btnRemoveBird_Clicked(object sender, EventArgs e)
+        private async void btnRemoveBird_Clicked(object sender, EventArgs e)
         {
+            var selection = (ImageButton)sender;
+            var bird = selection.CommandParameter as Bird;
+            bird.Prescriptions.Remove(Prescription.Id);
+            var birdList = birdservice.GetBirdsByPrescription(Prescription);
 
+
+            if (birdList.Count() == 0)
+            {
+                await Navigation.PopAsync();
+            }
+            else
+            {
+                colvBirds.ItemsSource = birdList;
+            }
         }
     }
 }

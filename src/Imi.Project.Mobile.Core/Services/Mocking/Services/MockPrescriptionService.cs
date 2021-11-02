@@ -23,7 +23,7 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     BirdIds = new List<Guid>
                     {   
                         Guid.Parse("8606C209-1D51-4EE3-9F8D-8DE3D0F3F24E"),
-                        Guid.Parse("6668E055-E99C-4B50-AD12-5A28CA2AD422")
+
                     },
                     StartDate = DateTime.Now.ToString("d"),
                     EndDate = DateTime.Now.AddDays(5).ToString("d"),
@@ -33,7 +33,7 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     new Prescription
                     {
                     Id = Guid.Parse("5206461d-3ba9-4701-a6a1-6a563ccceff2"),
-                    MedicationId = Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
+                    MedicationId = Guid.Parse("8b9d60ed-ba62-439e-89e8-d0097dc62b58"),
                     BirdIds = new List<Guid>
                     {
                         Guid.Parse("8606C209-1D51-4EE3-9F8D-8DE3D0F3F24E"),
@@ -48,7 +48,7 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     new Prescription
                     {
                     Id = Guid.Parse("bd2670bb-392c-44a9-b2d8-88e6e413c165"),
-                    MedicationId = Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
+                    MedicationId =Guid.Parse("13931038-e515-45f4-b036-ea22c0c24d62"),
                     BirdIds = new List<Guid>
                     {
                         Guid.Parse("8606C209-1D51-4EE3-9F8D-8DE3D0F3F24E"),
@@ -62,11 +62,14 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     new Prescription
                     {
                     Id = Guid.Parse("6cdff968-d2fb-45af-a916-957a00ff5fe1"),
-                    MedicationId = Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
+                    MedicationId = Guid.Parse("4ab9d646-7010-479c-ae3e-8fe6cd15c687"),
                     BirdIds = new List<Guid>
                     {
-                        Guid.Parse("8606C209-1D51-4EE3-9F8D-8DE3D0F3F24E"),
-                        Guid.Parse("6668E055-E99C-4B50-AD12-5A28CA2AD422")
+                         Guid.Parse("F797C0C1-B01A-4F54-9C5D-7C66D5EDDC52"),
+                         Guid.Parse("8E74A018-6D85-4E2A-BB85-F8DA2D58F3BF"),
+                         Guid.Parse("6668E055-E99C-4B50-AD12-5A28CA2AD422"),
+                         Guid.Parse("8606C209-1D51-4EE3-9F8D-8DE3D0F3F24E")
+
                     },
                     StartDate = DateTime.Now.ToString("d"),
                     EndDate = DateTime.Now.AddDays(5).ToString("d"),
