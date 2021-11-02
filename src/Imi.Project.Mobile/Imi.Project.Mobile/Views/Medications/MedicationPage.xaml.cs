@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
 using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
+using Imi.Project.Mobile.Core.Models;
 
 namespace Imi.Project.Mobile.Views.Medications
 {
@@ -45,7 +46,14 @@ namespace Imi.Project.Mobile.Views.Medications
 
         private async void btnDeleteMedication_Clicked(object sender, EventArgs e)
         {
+            var action = await DisplayAlert("Do you wish to delete this medication?", null, "YES", "CANCEL");
+            if (action)
+            {
+                var selection = (ImageButton)sender;
+                var medication = selection.CommandParameter as Medication;
+                await medicationservice.DeleteMedication(medication.Id);
 
+            }
         }
     }
 }
