@@ -47,7 +47,7 @@
                                         <Image Source="{Binding Image}" Margin="0,0,20,0"></Image>
                                         <StackLayout HorizontalOptions="Center">
                                             <Label  Text="{Binding Name}" FontSize="20" HorizontalTextAlignment="Start" />
-                                            <Label  Text="{Binding Cage}" FontAttributes="italic"  HorizontalTextAlignment="Start"/>
+                                            <Label  Text="{Binding Cage.Name}" FontAttributes="italic"  HorizontalTextAlignment="Start"/>
                                         </StackLayout>
                                         <ImageButton x:Name="btnRemoveBird" Source="{extensions:ImageResource Imi.Project.Mobile.icons.delete.png}" BackgroundColor="Transparent" HeightRequest="15" Margin="20, 0, 0, 0" HorizontalOptions="End" Clicked="btnRemoveBird_Clicked" CommandParameter="{Binding .}"></ImageButton>
                                     </FlexLayout>
