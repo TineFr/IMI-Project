@@ -25,7 +25,7 @@ app {
     display: flex;
     align-items: center;
 }
-a{
+a:hover{
     text-decoration: none;
 }
 /*Details*/
@@ -188,6 +188,7 @@ h2 {
 display: flex;
 justify-content: center;
 align-content: center;
+
 
 }
 .scientific{
