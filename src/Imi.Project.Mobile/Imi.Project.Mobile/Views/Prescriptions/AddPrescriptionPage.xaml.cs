@@ -2,6 +2,7 @@
 using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
 using Imi.Project.Mobile.Core.ViewModels;
+using Imi.Project.Mobile.Views.Medication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,6 +55,11 @@ namespace Imi.Project.Mobile.Views.Prescriptions
             bird.Prescriptions.Add(newPrescription.Id);
             await PrescriptionService.AddPrescription(newPrescription);
             await Navigation.PopAsync();
+        }
+
+        private void btnAddMedicine_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new MedicationPage());
         }
     }
 }

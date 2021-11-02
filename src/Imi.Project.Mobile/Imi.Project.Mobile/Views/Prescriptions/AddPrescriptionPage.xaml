@@ -2,24 +2,19 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Imi.Project.Mobile.Views.Prescriptions.AddPrescriptionPage">
+    <NavigationPage.TitleView>
+        <Label Text="Add Prescription" TextColor="white" VerticalTextAlignment="Center"/>
+    </NavigationPage.TitleView>
     <ContentPage.Content>
         <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
               RowDefinitions="{StaticResource MainGridRows}">
-            <!--<Frame Style="{StaticResource MainFrame}" BackgroundColor="{StaticResource Blue}">
-                <Label Text="Add Prescription" Style="{StaticResource MainLabel}"></Label>
-
-            </Frame>
-            <AbsoluteLayout Grid.Row="0" Grid.RowSpan="4">
-                <ImageButton x:Name="btnBack" Style="{StaticResource BackArrow}"></ImageButton>
-                <Image Style="{StaticResource Logo}" ></Image>
-            </AbsoluteLayout>-->
-
             <ScrollView Grid.Row="0" Grid.RowSpan="3" Margin="10">
                 <StackLayout Grid.Row="1" Grid.RowSpan="2" >
                     <Frame Style="{StaticResource EditFrame}">
                         <StackLayout>
                             <Label Text="Medicine:" FontAttributes="Bold"></Label>
                             <Picker x:Name="pkrMedicine" Title="Select medicine" ItemsSource="{Binding Medications}" ItemDisplayBinding="{Binding Name}" ></Picker>
+                            <Button x:Name="btnAddMedicine" Text="+" HeightRequest="40"  WidthRequest="40" HorizontalOptions="End" Clicked="btnAddMedicine_Clicked" BackgroundColor="{StaticResource Green}"></Button>
                         </StackLayout>
                     </Frame>
                     <Frame Style="{StaticResource EditFrame}">

@@ -28,7 +28,7 @@ namespace Imi.Project.Mobile.Views.Medication
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            var prescriptions = await prescriptionService.GetAllPrescriptions();
+            colvMedication.ItemsSource = await medicationservice.GetAllMedications();
 
         }
 
@@ -47,6 +47,11 @@ namespace Imi.Project.Mobile.Views.Medication
             //if (medication == null) return;
             //var birds = birdservice.GetBirdsByMedication(medication);
             //await Navigation.PushAsync(new MedicationDetailPage(medication, birds));
+        }
+
+        private async void btnAddMedication_Clicked(object sender, EventArgs e)
+        {
+
         }
     }
 }

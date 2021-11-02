@@ -29,7 +29,7 @@
                     </StackLayout>
                     <Frame>
                     <StackLayout>
-                    <Label Text="Daily tasks" HorizontalTextAlignment="Center" FontSize="30"></Label>
+                    <Label Text="Daily Tasks" HorizontalTextAlignment="Center" FontSize="30"></Label>
                         <Button x:Name="btnAddTask" Text="+" HorizontalOptions="End" BackgroundColor="{StaticResource Green}" HeightRequest="40"  WidthRequest="40" Clicked="btnAddTask_Clicked"></Button>
                         <ListView x:Name="lstTasks" SelectionMode="None" >
                         <ListView.ItemTemplate>
@@ -39,7 +39,7 @@
                                             <CheckBox x:Name= "chkTask"  PropertyChanged="chkTask_PropertyChanged" IsChecked="{Binding IsDone}"></CheckBox>
                                         <Label Text="{Binding Name}" HorizontalOptions="StartAndExpand" Margin="10,0,0,0" FontSize="15" Padding="10"></Label>
                                             <ImageButton x:Name="btnEditTask" CommandParameter="{Binding .}" Source="{extensions:ImageResource Imi.Project.Mobile.icons.pencil.png}" WidthRequest="20" BackgroundColor="Transparent" Clicked="btnEditTask_Clicked"></ImageButton>
-                                            <ImageButton x:Name="btnDeleteTask" CommandParameter="{Binding .}" Source="{extensions:ImageResource Imi.Project.Mobile.icons.delete.png}" WidthRequest="15" BackgroundColor="Transparent" Margin="5,0, 0, 0"  Clicked="btnDeleteTask_Clicked"></ImageButton>
+                                            <ImageButton x:Name="btnDeleteTask" CommandParameter="{Binding .}" Source="{extensions:ImageResource Imi.Project.Mobile.icons.delete.png}" WidthRequest="15" BackgroundColor="Transparent" Margin="5,0,10, 0"  Clicked="btnDeleteTask_Clicked"></ImageButton>
                                         </StackLayout>
                                 </ViewCell>
                             </DataTemplate>

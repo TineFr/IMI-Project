@@ -2,21 +2,16 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Imi.Project.Mobile.Views.Medication.MedicationPage"
-             xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions">
+             xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions" xmlns:models1="clr-namespace:Imi.Project.Mobile.Core.Models;assembly=Imi.Project.Mobile.Core">
+    <NavigationPage.TitleView>
+        <Label Text="Medication" TextColor="white" VerticalTextAlignment="Center"/>
+    </NavigationPage.TitleView>
     <ContentPage.Content>
         <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
               RowDefinitions="{StaticResource MainGridRows}">
-            <Frame Style="{StaticResource MainFrame}" BackgroundColor="{StaticResource Purple}">
-                <Label Text="Medication" Style="{StaticResource MainLabel}"></Label>
-            </Frame>
-            <AbsoluteLayout Grid.Row="0" Grid.RowSpan="4">
-                <ImageButton Style="{StaticResource Filter}"></ImageButton>
-                <Image Style="{StaticResource Logo}" ></Image>
-            </AbsoluteLayout>
-            <Label Grid.Row="1" Text="Current prescriptions" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="20"></Label>
-            <StackLayout Grid.Row="2" Grid.RowSpan="3">
+            <StackLayout Grid.Row="0" Grid.RowSpan="3">
                 <StackLayout Grid.Row="2">
-                <Button  x:Name="btnAddPrescription" Text="Add new" HorizontalOptions="EndAndExpand" WidthRequest="100" Margin="10" ></Button>
+                <Button  x:Name="btnAddMedication" Text="Add new" HorizontalOptions="EndAndExpand" WidthRequest="100" Margin="10" Clicked="btnAddMedication_Clicked"></Button>
                     </StackLayout>
 
             <CollectionView      
@@ -28,20 +23,26 @@
                                  HorizontalOptions="Center"   
                                  Margin="10">
                 <CollectionView.ItemsLayout>
-                    <GridItemsLayout Orientation="Vertical" Span="2"/>
+                    <GridItemsLayout Orientation="Vertical"/>
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout Style="{StaticResource CollectionSelection}">
-                            <Frame CornerRadius="20" BackgroundColor="#EEEEEE" Margin="5">
-                                <FlexLayout Direction="Column" JustifyContent="Center" AlignItems="Center">
-                                        <Image  Source="{extensions:ImageResource Imi.Project.Mobile.icons.medication.png}" HeightRequest="50" HorizontalOptions="Center"></Image>
-                                        <Label  Text="{Binding Name}" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Center" />
-                                        <Button x:Name="btnShowBirds" Text="DETAILS" Clicked="btnShowBirds_Clicked" CommandParameter="{Binding .}" CornerRadius="10" Margin="10"></Button>
-                                </FlexLayout>
-                            </Frame>
-                        </StackLayout>
-                    </DataTemplate>
+                        <DataTemplate x:DataType="models1:Medication" >
+                            <StackLayout Style="{StaticResource CollectionSelection}">
+
+                                <Frame Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="Center" Margin="10,5,10,5"  BackgroundColor="#EEEEEE"
+                                           HeightRequest="35">
+                                    <FlexLayout JustifyContent="SpaceBetween">
+                                        <StackLayout HorizontalOptions="Center">
+                                            <Label  Text="{Binding Name}" FontSize="20" HorizontalTextAlignment="Center" />
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                            <ImageButton x:Name="btnEditTask" CommandParameter="{Binding .}" Source="{extensions:ImageResource Imi.Project.Mobile.icons.pencil.png}" WidthRequest="20" BackgroundColor="Transparent" ></ImageButton>
+                                            <ImageButton x:Name="btnDeleteTask" CommandParameter="{Binding .}" Source="{extensions:ImageResource Imi.Project.Mobile.icons.delete.png}" WidthRequest="15" BackgroundColor="Transparent" Margin="5,0,10, 0"  ></ImageButton>
+                                        </StackLayout>
+                                    </FlexLayout>
+                                </Frame>
+                            </StackLayout>
+                        </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
             </StackLayout>
