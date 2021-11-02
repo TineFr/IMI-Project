@@ -22,8 +22,14 @@
                 </Frame>
                 <Frame Grid.Row="0" BackgroundColor="#EEEEEE">
                     <FlexLayout Direction="Column" AlignItems="Center">
-                        <Label  Text="Usage:" FontSize="20" FontAttributes="Bold" />
-                        <Label  Text="{Binding Prescription.Medication.Usage}" FontSize="15" Margin="20" />
+                        <StackLayout Orientation="Horizontal">
+                            <Label  Text="From:" FontSize="15" FontAttributes="Bold" />
+                            <Label  Text="{Binding Prescription.StartDate}" FontSize="15" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label  Text="Till:" FontSize="15" FontAttributes="Bold" />
+                            <Label  Text="{Binding Prescription.EndDate}" FontSize="15" />
+                        </StackLayout>
                     </FlexLayout>
                 </Frame>
                 <Label Grid.Row="1" Text="Give to following birds" HorizontalTextAlignment="Center" Margin="20" FontSize="20"></Label>
