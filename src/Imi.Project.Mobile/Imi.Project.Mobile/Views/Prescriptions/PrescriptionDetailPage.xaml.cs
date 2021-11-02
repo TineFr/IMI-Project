@@ -44,8 +44,10 @@ namespace Imi.Project.Mobile.Views.Prescriptions
             var birdList = birdservice.GetBirdsByPrescription(Prescription);
 
 
+
             if (birdList.Count() == 0)
             {
+                await prescriptionservice.DeletePrescription(Prescription.Id);
                 await Navigation.PopAsync();
             }
             else
