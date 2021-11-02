@@ -9,20 +9,22 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Mobile.Core.Services.Mocking.Services
 {
+   
     public class MockBirdService : IBirdService
     {
+        private static ICageService cageService = new MockCageService();
+        private static ISpeciesService speciesService = new MockSpeciesService();
         private static ObservableCollection<Bird> birdrepository = new ObservableCollection<Bird>
         {
                     new Bird
                     {
                     Id = Guid.Parse("8606C209-1D51-4EE3-9F8D-8DE3D0F3F24E"),
                     Name = "Jake",
-                    Cage ="Outside cage",
+                    CageId = Guid.Parse("8606C209-1D51-4EE3-9F8D-8DE3D0F3F24E"),
                     Gender = "Male",
                     HatchDate = new DateTime(2015, 12, 25),
                     Image = "images/budgie1.jpg",
-                    Species = "Budgerigar",
-                    ScientificName ="Melopsittacus undulatus",
+                    SpeciesId = Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
                     Food = "Parakeet mix",
                     Prescriptions = new List<Guid>
                     {
@@ -38,12 +40,11 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     {
                     Id = Guid.Parse("6668E055-E99C-4B50-AD12-5A28CA2AD422"),
                     Name = "Holly",
-                    Cage = "Outside cage",
+                    CageId = Guid.Parse("8606C209-1D51-4EE3-9F8D-8DE3D0F3F24E"),
                     Gender = "Female",
                     HatchDate = new DateTime(2017, 07, 13),
                     Image = "images/budgie2.jpg",
-                    Species = "Budgerigar",
-                    ScientificName ="Melopsittacus undulatus",
+                    SpeciesId = Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
                     Food = "Parakeet mix",
                     Prescriptions = new List<Guid>
                     {
@@ -59,12 +60,11 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     {
                     Id = Guid.Parse("8E74A018-6D85-4E2A-BB85-F8DA2D58F3BF"),
                     Name = "Steven",
-                    Cage = "Outside cage 2",
+                    CageId = Guid.Parse("36122865-A1B6-410E-AFB9-662F8EE16949"),
+                    SpeciesId = Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),
                     Gender = "Male",
                     HatchDate = new DateTime(2012, 09, 03),
                     Image = "images/cockatiel1.jpg",
-                    Species = "Cockatiel",
-                    ScientificName = "Nymphicus hollandicuss",
                     Food = "Parakeet mix",
                     Prescriptions = new List<Guid>
                     {
@@ -76,12 +76,11 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     {
                     Id = Guid.Parse("F797C0C1-B01A-4F54-9C5D-7C66D5EDDC52"),
                     Name = "July",
-                    Cage = "Outside cage 2",
+                    CageId = Guid.Parse("36122865-A1B6-410E-AFB9-662F8EE16949"),
+                    SpeciesId = Guid.Parse("C46C8A99-382C-426E-A8A5-4DF55A3FE2C0"),                    
                     Gender = "Female",
                     HatchDate = new DateTime(2017, 07, 13),
                     Image = "images/cockatiel2.jpg",
-                    Species = "Cockatiel",
-                    ScientificName = "Nymphicus hollandicuss",
                     Food = "Parakeet mix",
                      Prescriptions = new List<Guid>
                     {
@@ -105,6 +104,9 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
 
         public Task<ObservableCollection<Bird>> GetAllBirds()
         {
+            birdrepository.ToList().ForEach(async b => b.Cage = await cageService.GetCageById(b.CageId));
+            birdrepository.ToList().ForEach(async b => b.Species = await speciesService.GetSpeciesById(b.SpeciesId));
+            var test = 4;
             return Task.FromResult(birdrepository);
         }
 

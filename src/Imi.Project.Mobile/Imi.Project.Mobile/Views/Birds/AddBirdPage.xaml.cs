@@ -51,9 +51,8 @@ namespace Imi.Project.Mobile.Views
             {
                 Id = new Guid(),
                 Name = entrName.Text,
-                Species = species.ToArray()[pkrSpecies.SelectedIndex].Name,
-                ScientificName = species.ToArray()[pkrSpecies.SelectedIndex].ScientificName,
-                Cage = cages.ToArray()[pkrCage.SelectedIndex].Name,
+                SpeciesId = species.ToArray()[pkrSpecies.SelectedIndex].Id,
+                CageId = cages.ToArray()[pkrCage.SelectedIndex].Id,
                 Gender = pkrGender.SelectedItem.ToString(),
                 Food = entrFood.Text,
                 Image = "budgie1.jpg"

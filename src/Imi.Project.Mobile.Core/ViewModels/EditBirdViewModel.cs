@@ -9,9 +9,17 @@ namespace Imi.Project.Mobile.Core.ViewModels
     {
         public Bird Bird { get; set; }
 
-        public EditBirdViewModel(Bird bird)
+        public IEnumerable<Species> Species { get; set; }
+
+        public IEnumerable<Cage> Cages { get; set; }
+
+        public int MyProperty { get; set; }
+
+        public EditBirdViewModel(Bird bird, IEnumerable<Species> species, IEnumerable<Cage> cages)
         {
             Bird = bird;
+            Species = species;
+            Cages = cages;
         }
     }
 }
