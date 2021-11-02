@@ -106,7 +106,6 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
         {
             birdrepository.ToList().ForEach(async b => b.Cage = await cageService.GetCageById(b.CageId));
             birdrepository.ToList().ForEach(async b => b.Species = await speciesService.GetSpeciesById(b.SpeciesId));
-            var test = 4;
             return Task.FromResult(birdrepository);
         }
 
