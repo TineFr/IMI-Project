@@ -17,17 +17,174 @@ namespace Imi.Project.Api.Infrastructure.Seeding
                     {
                         new DailyTask
                         {
-                            Id = Guid.Parse("DC063E36-6A74-429D-9569-97838A06EDE7"),
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000001"),
                             Name = "Refill water",
-                            CageId = Guid.Parse("ABA63D5F-8DD1-42E3-93B8-898C71554E5A"),
+                            CageId = Guid.Parse("00000000-0000-0000-0000-000000000001"),
                             IsDone = false
                         },
                         new DailyTask
                         {
-                            Id = Guid.Parse("2FB04232-9775-4EF8-BB2D-CC1C0296E84C"),
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000002"),
                             Name = "Clean branches",
-                            CageId = Guid.Parse("ABA63D5F-8DD1-42E3-93B8-898C71554E5A"),
+                            CageId = Guid.Parse("00000000-0000-0000-0000-000000000001"),
                             IsDone = true
+                        },
+                        new DailyTask
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000003"),
+                            Name = "Refill water",
+                            CageId = Guid.Parse("00000000-0000-0000-0000-000000000002"),
+                            IsDone = false
+                        },
+                        new DailyTask
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000004"),
+                            Name = "Clean branches",
+                            CageId = Guid.Parse("00000000-0000-0000-0000-000000000002"),
+                            IsDone = true
+                        },
+                        new DailyTask
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000005"),
+                            Name = "Add food",
+                            CageId = Guid.Parse("00000000-0000-0000-0000-000000000002"),
+                            IsDone = true
+                        },
+                        new DailyTask
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000006"),
+                            Name = "Refill water",
+                            CageId = Guid.Parse("00000000-0000-0000-0000-000000000003"),
+                            IsDone = false
+                        },
+                        new DailyTask
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000007"),
+                            Name = "Clean branches",
+                            CageId = Guid.Parse("00000000-0000-0000-0000-000000000003"),
+                            IsDone = true
+                        },
+                        new DailyTask
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000008"),
+                            Name = "Add food",
+                            CageId = Guid.Parse("00000000-0000-0000-0000-000000000004"),
+                            IsDone = true
+                        },
+                        new DailyTask
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000009"),
+                            Name = "Refill water",
+                            CageId = Guid.Parse("00000000-0000-0000-0000-000000000004"),
+                            IsDone = false
+                        },
+                        new DailyTask
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000010"),
+                            Name = "Clean branches",
+                            CageId = Guid.Parse("00000000-0000-0000-0000-000000000004"),
+                            IsDone = true
+                        },
+                        new DailyTask
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000011"),
+                            Name = "Refill water",
+                            CageId = Guid.Parse("00000000-0000-0000-0000-000000000005"),
+                            IsDone = false
+                        },
+                        new DailyTask
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000012"),
+                            Name = "Clean branches",
+                            CageId = Guid.Parse("00000000-0000-0000-0000-000000000005"),
+                            IsDone = true
+                        },
+
+                        new DailyTask
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000013"),
+                            Name = "Clean branches",
+                            CageId = Guid.Parse("00000000-0000-0000-0000-000000000006"),
+                            IsDone = true
+                        },
+                        new DailyTask
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000014"),
+                            Name = "Add food",
+                            CageId = Guid.Parse("00000000-0000-0000-0000-000000000006"),
+                            IsDone = true
+                        },
+                        new DailyTask
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000015"),
+                            Name = "Refill water",
+                            CageId = Guid.Parse("00000000-0000-0000-0000-000000000006"),
+                            IsDone = false
+                        },
+
+                        new DailyTask
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000016"),
+                            Name = "Refill water",
+                            CageId = Guid.Parse("00000000-0000-0000-0000-000000000007"),
+                            IsDone = false
+                        },
+                        new DailyTask
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000017"),
+                            Name = "Clean branches",
+                            CageId = Guid.Parse("00000000-0000-0000-0000-000000000007"),
+                            IsDone = true
+                        },
+                        new DailyTask
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000018"),
+                            Name = "Refill water",
+                            CageId = Guid.Parse("00000000-0000-0000-0000-000000000008"),
+                            IsDone = false
+                        },
+                        new DailyTask
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000019"),
+                            Name = "Clean branches",
+                            CageId = Guid.Parse("00000000-0000-0000-0000-000000000008"),
+                            IsDone = true
+                        },
+
+                        new DailyTask
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000020"),
+                            Name = "Clean branches",
+                            CageId = Guid.Parse("00000000-0000-0000-0000-000000000009"),
+                            IsDone = true
+                        },
+                        new DailyTask
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000021"),
+                            Name = "Add food",
+                            CageId = Guid.Parse("00000000-0000-0000-0000-000000000009"),
+                            IsDone = true
+                        },
+                        new DailyTask
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000022"),
+                            Name = "Refill water",
+                            CageId = Guid.Parse("00000000-0000-0000-0000-000000000009"),
+                            IsDone = false
+                        },
+                        new DailyTask
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000023"),
+                            Name = "Add food",
+                            CageId = Guid.Parse("00000000-0000-0000-0000-000000000010"),
+                            IsDone = true
+                        },
+                        new DailyTask
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000024"),
+                            Name = "Refill water",
+                            CageId = Guid.Parse("00000000-0000-0000-0000-000000000010"),
+                            IsDone = false
                         },
                     }
 
