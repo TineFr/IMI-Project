@@ -35,7 +35,10 @@ namespace Imi.Project.Api
         {
             services.AddDbContext<MyAviaryDbContext>(options => options.UseSqlServer
              (Configuration.GetConnectionString("MyAviary")));
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.IgnoreNullValues = true;
+            }); ;
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "IMI API", Version = "v1" });

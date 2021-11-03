@@ -35,7 +35,7 @@ namespace Imi.Project.Api.Infrastructure.Seeding
                             HatchDate = new DateTime(2017, 07, 13),
                             Image = "images/bird/budgie2.jpg",
                             SpeciesId = Guid.Parse("00000000-0000-0000-0000-000000000002"),
-                            Food = "Parakeet mix",
+                            Food = null /*"Parakeet mix"*/,
                             UserId = Guid.Parse("00000000-0000-0000-0000-000000000002")
                         },
 

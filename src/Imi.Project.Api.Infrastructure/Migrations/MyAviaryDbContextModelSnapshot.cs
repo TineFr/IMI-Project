@@ -63,7 +63,6 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
-                            CageId = new Guid("00000000-0000-0000-0000-000000000002"),
                             Food = "Parakeet mix",
                             Gender = 0,
                             HatchDate = new DateTime(2015, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -76,7 +75,6 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000002"),
                             CageId = new Guid("00000000-0000-0000-0000-000000000002"),
-                            Food = "Parakeet mix",
                             Gender = 1,
                             HatchDate = new DateTime(2017, 7, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Image = "images/bird/budgie2.jpg",
@@ -826,105 +824,105 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
-                            EndDate = new DateTime(2021, 11, 10, 1, 57, 24, 233, DateTimeKind.Local).AddTicks(6533),
+                            EndDate = new DateTime(2021, 11, 10, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(7769),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000001"),
-                            StartDate = new DateTime(2021, 11, 3, 1, 57, 24, 230, DateTimeKind.Local).AddTicks(166),
+                            StartDate = new DateTime(2021, 11, 3, 11, 25, 30, 520, DateTimeKind.Local).AddTicks(8939),
                             UserId = new Guid("00000000-0000-0000-0000-000000000001")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000002"),
-                            EndDate = new DateTime(2021, 11, 7, 1, 57, 24, 233, DateTimeKind.Local).AddTicks(6853),
+                            EndDate = new DateTime(2021, 11, 7, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8129),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000002"),
-                            StartDate = new DateTime(2021, 11, 3, 1, 57, 24, 233, DateTimeKind.Local).AddTicks(6838),
+                            StartDate = new DateTime(2021, 11, 3, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8114),
                             UserId = new Guid("00000000-0000-0000-0000-000000000001")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000003"),
-                            EndDate = new DateTime(2021, 11, 10, 1, 57, 24, 233, DateTimeKind.Local).AddTicks(6912),
+                            EndDate = new DateTime(2021, 11, 10, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8145),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000003"),
-                            StartDate = new DateTime(2021, 11, 3, 1, 57, 24, 233, DateTimeKind.Local).AddTicks(6909),
+                            StartDate = new DateTime(2021, 11, 3, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8142),
                             UserId = new Guid("00000000-0000-0000-0000-000000000002")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000004"),
-                            EndDate = new DateTime(2021, 11, 7, 1, 57, 24, 233, DateTimeKind.Local).AddTicks(6923),
+                            EndDate = new DateTime(2021, 11, 7, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8155),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000004"),
-                            StartDate = new DateTime(2021, 11, 3, 1, 57, 24, 233, DateTimeKind.Local).AddTicks(6920),
+                            StartDate = new DateTime(2021, 11, 3, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8152),
                             UserId = new Guid("00000000-0000-0000-0000-000000000002")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000005"),
-                            EndDate = new DateTime(2021, 11, 9, 1, 57, 24, 233, DateTimeKind.Local).AddTicks(6932),
+                            EndDate = new DateTime(2021, 11, 9, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8164),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000005"),
-                            StartDate = new DateTime(2021, 11, 3, 1, 57, 24, 233, DateTimeKind.Local).AddTicks(6929),
+                            StartDate = new DateTime(2021, 11, 3, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8162),
                             UserId = new Guid("00000000-0000-0000-0000-000000000003")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000006"),
-                            EndDate = new DateTime(2021, 11, 7, 1, 57, 24, 233, DateTimeKind.Local).AddTicks(6942),
+                            EndDate = new DateTime(2021, 11, 7, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8173),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000006"),
-                            StartDate = new DateTime(2021, 11, 3, 1, 57, 24, 233, DateTimeKind.Local).AddTicks(6939),
+                            StartDate = new DateTime(2021, 11, 3, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8170),
                             UserId = new Guid("00000000-0000-0000-0000-000000000003")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000007"),
-                            EndDate = new DateTime(2021, 11, 5, 1, 57, 24, 233, DateTimeKind.Local).AddTicks(6951),
+                            EndDate = new DateTime(2021, 11, 5, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8182),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000007"),
-                            StartDate = new DateTime(2021, 11, 3, 1, 57, 24, 233, DateTimeKind.Local).AddTicks(6949),
+                            StartDate = new DateTime(2021, 11, 3, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8179),
                             UserId = new Guid("00000000-0000-0000-0000-000000000004")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000008"),
-                            EndDate = new DateTime(2021, 11, 14, 1, 57, 24, 233, DateTimeKind.Local).AddTicks(6962),
+                            EndDate = new DateTime(2021, 11, 14, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8191),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000008"),
-                            StartDate = new DateTime(2021, 11, 3, 1, 57, 24, 233, DateTimeKind.Local).AddTicks(6959),
+                            StartDate = new DateTime(2021, 11, 3, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8188),
                             UserId = new Guid("00000000-0000-0000-0000-000000000004")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000009"),
-                            EndDate = new DateTime(2021, 11, 8, 1, 57, 24, 233, DateTimeKind.Local).AddTicks(6972),
+                            EndDate = new DateTime(2021, 11, 8, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8199),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000009"),
-                            StartDate = new DateTime(2021, 11, 3, 1, 57, 24, 233, DateTimeKind.Local).AddTicks(6969),
+                            StartDate = new DateTime(2021, 11, 3, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8196),
                             UserId = new Guid("00000000-0000-0000-0000-000000000005")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000010"),
-                            EndDate = new DateTime(2021, 11, 7, 1, 57, 24, 233, DateTimeKind.Local).AddTicks(6980),
+                            EndDate = new DateTime(2021, 11, 7, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8208),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000010"),
-                            StartDate = new DateTime(2021, 11, 3, 1, 57, 24, 233, DateTimeKind.Local).AddTicks(6978),
+                            StartDate = new DateTime(2021, 11, 3, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8206),
                             UserId = new Guid("00000000-0000-0000-0000-000000000005")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000011"),
-                            EndDate = new DateTime(2021, 11, 7, 1, 57, 24, 233, DateTimeKind.Local).AddTicks(6993),
+                            EndDate = new DateTime(2021, 11, 7, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8218),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000011"),
-                            StartDate = new DateTime(2021, 11, 3, 1, 57, 24, 233, DateTimeKind.Local).AddTicks(6990),
+                            StartDate = new DateTime(2021, 11, 3, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8215),
                             UserId = new Guid("00000000-0000-0000-0000-000000000006")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000012"),
-                            EndDate = new DateTime(2021, 11, 10, 1, 57, 24, 233, DateTimeKind.Local).AddTicks(7002),
+                            EndDate = new DateTime(2021, 11, 10, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8227),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000012"),
-                            StartDate = new DateTime(2021, 11, 3, 1, 57, 24, 233, DateTimeKind.Local).AddTicks(6999),
+                            StartDate = new DateTime(2021, 11, 3, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8224),
                             UserId = new Guid("00000000-0000-0000-0000-000000000010")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000013"),
-                            EndDate = new DateTime(2021, 11, 7, 1, 57, 24, 233, DateTimeKind.Local).AddTicks(7010),
+                            EndDate = new DateTime(2021, 11, 7, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8236),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000013"),
-                            StartDate = new DateTime(2021, 11, 3, 1, 57, 24, 233, DateTimeKind.Local).AddTicks(7008),
+                            StartDate = new DateTime(2021, 11, 3, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8233),
                             UserId = new Guid("00000000-0000-0000-0000-000000000007")
                         });
                 });
