@@ -31,6 +31,11 @@ namespace Imi.Project.Api.Core.Services
            
         }
 
+        public async Task DeleteMultiple(List<Cage> cages)
+        {
+            await _cageRepository.DeleteMultipleAsync(cages);
+        }
+
         public async Task<Cage> GetCageByIdAsync(Guid id)
         {
             var cage = await _cageRepository.GetByIdAsync(id);

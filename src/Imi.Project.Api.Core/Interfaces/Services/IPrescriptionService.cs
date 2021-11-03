@@ -13,6 +13,7 @@ namespace Imi.Project.Api.Core.Interfaces.Services
         Task<Prescription> AddPrescriptionAsync(Prescription prescription);
         Task<Prescription> UpdatePrescriptionAsync(Prescription Pprescription);
         Task DeletePrescriptionAsync(Prescription Prescription);
+        Task DeleteMultiple(List<Prescription> prescriptions);
         Task<IEnumerable<Prescription>> GetPrescriptionsByUserIdAsync(Guid id);
 
     }

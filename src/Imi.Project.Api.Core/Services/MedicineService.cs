@@ -32,17 +32,16 @@ namespace Imi.Project.Api.Core.Services
 
         }
 
+        public async Task DeleteMultiple(List<Medicine> medicines)
+        {
+            await _medicineRepository.DeleteMultipleAsync(medicines);
+        }
+
         public async Task<Medicine> GetMedicineByIdAsync(Guid id)
         {
             var medicine = await _medicineRepository.GetByIdAsync(id);
             return medicine;
         }
-
-        //public async Task<IEnumerable<Medicine>> GetMedicinesByBirdIdAsync(Guid id)
-        //{
-        //    var medicines = await _medicineRepository.GetByBirdIdAsync(id);
-        //    return medicines;
-        //}
 
         public async  Task<IEnumerable<Medicine>> GetMedicinesByUserIdAsync(Guid id)
         {
