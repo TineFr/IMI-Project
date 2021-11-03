@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Imi.Project.Mobile.HomePage"
+             xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions">
+    
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="130" />
+                <RowDefinition Height="100" />
+                <RowDefinition Height="*" />
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+
+            <Frame BackgroundColor="white" Grid.Column="0" Grid.Row="0"  HeightRequest="20" >
+                <Label Grid.Column="0" Grid.Row="1" Text="Home" TextColor="black" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="End" FontSize="40"></Label>
+            </Frame>
+            <FlexLayout Grid.Row="0" JustifyContent="SpaceBetween">
+                <StackLayout  Margin="30, 20, 0, 0">
+                    <ImageButton x:Name="btnAccount"  HeightRequest="50"  Source="{extensions:ImageResource Imi.Project.Mobile.icons.accountdark.png}"   Aspect="AspectFill" BackgroundColor="Transparent"   Clicked="btnAccount_Clicked" ></ImageButton>
+                    <Label Text="account"  HorizontalTextAlignment="Center"></Label>
+                </StackLayout>
+                <StackLayout  Margin="0, 20, 30, 0" >
+                    <ImageButton x:Name="btnSettings" HeightRequest="50" Source="{extensions:ImageResource Imi.Project.Mobile.icons.settings.png}" Aspect="AspectFill"  BackgroundColor="Transparent" Clicked="btnSettings_Clicked"></ImageButton>
+                    <Label Text="settings" HeightRequest="20" HorizontalTextAlignment="Center"></Label>
+                </StackLayout>
+            </FlexLayout>
+            <ScrollView  Grid.Column="0" Grid.Row="1" Grid.RowSpan="3">
+                <StackLayout  Grid.Column="0" Grid.Row="1" Grid.RowSpan="2">
+                    <Image x:Name="HomeLogo" Source="{extensions:ImageResource Imi.Project.Mobile.icons.logolight.png}" Grid.Column="0" Grid.Row="1" Margin="10" WidthRequest="20" HeightRequest="105"></Image>
+                    <StackLayout HorizontalOptions="Center">
+                        <FlexLayout 
+                                Wrap="Wrap"
+                                Direction="Column"
+                                Grid.ColumnSpan="2"
+                                WidthRequest="1000"
+                                HeightRequest="400"
+                                BackgroundColor="#F5F5F5"
+                                JustifyContent="SpaceAround"
+>
+
+                        <Label Text="Did you know?" FontSize="30" HorizontalTextAlignment="Center" Margin="0,10,0,0"></Label>
+                          
+                         <Label Text="Budgies have highly acute vision and can register over 150 mages per second...This compares to a measly 16 for humans." 
+                                 HorizontalTextAlignment="Center">
+                        </Label>
+
+                            <Image Source="images/budgies.jpg" 
+                               HeightRequest="150"
+                               Margin="10">
+                        </Image>
+                    </FlexLayout>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

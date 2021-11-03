@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Imi.Project.Mobile.Views.Prescriptions.PrescriptionDetailPage"
+             xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions" xmlns:models1="clr-namespace:Imi.Project.Mobile.Core.Models;assembly=Imi.Project.Mobile.Core">
+    <ContentPage.Content>
+        <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
+              RowDefinitions="{StaticResource MainGridRows}">
+            <StackLayout WidthRequest="700" HorizontalOptions="Center" Grid.Row="0" 
+                                 Grid.RowSpan="3">
+                <Button x:Name="btnRemove" Text="X" HorizontalOptions="End" WidthRequest="40" HeightRequest="40" BackgroundColor="IndianRed" Margin="5" Clicked="btnRemove_Clicked" CommandParameter="{Binding Prescription}"></Button>
+                <Frame Grid.Row="0" BackgroundColor="#EEEEEE">
+                    <FlexLayout Direction="Row" JustifyContent="Center" AlignItems="Center">
+                        <Label  Text="{Binding Prescription.Medication.Name}" FontSize="30" FontAttributes="Bold" />
+                    </FlexLayout>
+                </Frame>
+                <Frame Grid.Row="0" BackgroundColor="#EEEEEE">
+                    <FlexLayout Direction="Column" AlignItems="Center">
+                        <Label  Text="Usage:" FontSize="20" FontAttributes="Bold" />
+                        <Label  Text="{Binding Prescription.Medication.Usage}" FontSize="15" Margin="20" />
+                    </FlexLayout>
+                </Frame>
+                <Frame Grid.Row="0" BackgroundColor="#EEEEEE">
+                    <FlexLayout Direction="Column" AlignItems="Center">
+                        <StackLayout Orientation="Horizontal">
+                            <Label  Text="From:" FontSize="15" FontAttributes="Bold" />
+                            <Label  Text="{Binding Prescription.StartDate}" FontSize="15" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label  Text="Till:" FontSize="15" FontAttributes="Bold" />
+                            <Label  Text="{Binding Prescription.EndDate}" FontSize="15" />
+                        </StackLayout>
+                    </FlexLayout>
+                </Frame>
+                <Label Grid.Row="1" Text="Give to following birds" HorizontalTextAlignment="Center" Margin="20" FontSize="20"></Label>
+                <CollectionView  
+                                 x:Name="colvBirds"
+                                 Grid.Row="1" 
+                                 Grid.RowSpan="3"
+                                 SelectionMode="Single">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models1:Bird" >
+                            <StackLayout Style="{StaticResource CollectionSelection}">
+                                <Frame Grid.Column="0" Grid.ColumnSpan="3" WidthRequest="250" HorizontalOptions="Center" Margin="10,5,10,5"  BackgroundColor="#EEEEEE"
+                                           HeightRequest="40">
+                                    <FlexLayout JustifyContent="SpaceBetween">
+                                        <Image Source="{Binding Image}" Margin="0,0,20,0"></Image>
+                                        <StackLayout HorizontalOptions="Center">
+                                            <Label  Text="{Binding Name}" FontSize="20" HorizontalTextAlignment="Start" />
+                                            <Label  Text="{Binding Cage.Name}" FontAttributes="italic"  HorizontalTextAlignment="Start"/>
+                                        </StackLayout>
+                                        <ImageButton x:Name="btnRemoveBird" Source="{extensions:ImageResource Imi.Project.Mobile.icons.delete.png}" BackgroundColor="Transparent" HeightRequest="15" Margin="20, 0, 0, 0" HorizontalOptions="End" Clicked="btnRemoveBird_Clicked" CommandParameter="{Binding .}"></ImageButton>
+                                    </FlexLayout>
+                                </Frame>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
