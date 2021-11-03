@@ -39,7 +39,8 @@ namespace Imi.Project.Api.Controllers
             {
                 return NotFound($"Medicine with id {id} does not exist");
             }
-            return Ok(medicine.MapToDto());
+            var result = medicine.MapToDto();
+            return Ok(result);
         }
 
 
@@ -62,7 +63,8 @@ namespace Imi.Project.Api.Controllers
             }
             var medicineRequestDtoEntity = medicineRequestDto.MapToEntity();
             var result = await _medicineService.AddMedicineAsync(medicineRequestDtoEntity);
-            return Ok(result.MapToDto());
+            var resultDto = result.MapToDto();
+            return Ok(resultDto);
         }
 
         [HttpPut]
@@ -79,7 +81,8 @@ namespace Imi.Project.Api.Controllers
             }
             medicine.Update(medicineRequestDto);
             var result = await _medicineService.UpdateMedicineAsync(medicine);
-            return Ok();
+            var resultDto = result.MapToDto();
+            return Ok(resultDto);
         }
 
 

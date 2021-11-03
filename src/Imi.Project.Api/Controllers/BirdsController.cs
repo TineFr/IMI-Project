@@ -46,8 +46,8 @@ namespace Imi.Project.Api.Controllers
             {
                 return NotFound($"bird with id {id} does not exist");
             }
-            var birdDto = bird.MapToDto();
-            return Ok(birdDto);
+            var result = bird.MapToDto();
+            return Ok(result);
         }
 
         [HttpPost]

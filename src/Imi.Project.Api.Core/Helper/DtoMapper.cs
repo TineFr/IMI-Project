@@ -58,7 +58,7 @@ namespace Imi.Project.Api.Core.Helper
                 Gender = bird.Gender.ToString(),
                 HatchDate = bird.HatchDate,
                 Image = bird.Image,
-                Cage = bird.Cage.Name, 
+                Cage = bird.Cage?.Name, 
             };
         }
 

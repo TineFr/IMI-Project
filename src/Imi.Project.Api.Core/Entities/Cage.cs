@@ -15,8 +15,6 @@ namespace Imi.Project.Api.Core.Entities
 
         [Required(ErrorMessage = "{0} is required")]
         public string Location { get; set; }
-
-        [Required(ErrorMessage = "{0} is required")]
         public User User { get; set; }
         public Guid? UserId { get; set; }
 

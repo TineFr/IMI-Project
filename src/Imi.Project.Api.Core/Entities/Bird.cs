@@ -18,8 +18,6 @@ namespace Imi.Project.Api.Core.Entities
         public Guid? CageId { get; set; }
         public Species Species { get; set; }
         public Guid? SpeciesId { get; set; }
-
-        [Required(ErrorMessage = "{0} is required")]
         public User User { get; set; }
         public Guid? UserId { get; set; }
         public ICollection<BirdPrescription> BirdPrescriptions { get; set; }

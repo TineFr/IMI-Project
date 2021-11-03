@@ -56,7 +56,8 @@ namespace Imi.Project.Api.Controllers
             }
             var newSpeciesEntity = newSpecies.MapToEntity();
             var result = await _speciesService.AddSpeciesAsync(newSpeciesEntity);
-            return Ok(result.MapToDto());
+            var resultDto = result.MapToDto();
+            return Ok(resultDto);
         }
 
         [HttpPut]
@@ -73,7 +74,8 @@ namespace Imi.Project.Api.Controllers
             }
             species.Update(updatedSpecies);
             var result = await _speciesService.UpdateSpeciesAsync(species);
-            return Ok(result);
+            var resultDto = result.MapToDto();
+            return Ok(resultDto);
         }
 
         [HttpDelete]

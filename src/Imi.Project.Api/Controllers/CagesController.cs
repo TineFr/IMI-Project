@@ -100,7 +100,8 @@ namespace Imi.Project.Api.Controllers
             }
             var newCageEntity = newCage.MapToEntity();
             var result = await _cageService.AddCageAsync(newCageEntity);
-            return Ok(result.MapToDto());
+            var resultDto = result.MapToDto();
+            return Ok(resultDto);
         }
 
         [HttpPut]
@@ -117,7 +118,8 @@ namespace Imi.Project.Api.Controllers
             }
             cage.Update(updatedCage);
             var result = await _cageService.UpdateCageAsync(cage);
-            return Ok(result);
+            var resultDto = result.MapToDto();
+            return Ok(resultDto);
         }
 
 
@@ -142,18 +144,17 @@ namespace Imi.Project.Api.Controllers
             if (image.ContentType.Contains("image"))
             {
                 var databasePath = await _imageService.AddOrUpdateImageAsync<Cage>(id, image);
-                var album = await _cageService.GetCageByIdAsync(id);
-                if (album == null)
+                var cage = await _cageService.GetCageByIdAsync(id);
+                if (cage == null)
                 {
-                    return NotFound($"No album with an id of {id} could be found");
+                    return NotFound($"No cage with an id of {id} could be found");
                 }
-                album.Image = databasePath;
-                await _cageService.UpdateCageAsync(album);
-                var albumDto = album.MapToDto();
-                return Ok(albumDto);
+                cage.Image = databasePath;
+                await _cageService.UpdateCageAsync(cage);
+                var cageDto = cage.MapToDto();
+                return Ok(cageDto);
             }
-            else return BadRequest("Uploaded file should be an image"); //bad request?     
-        }
+            else return BadRequest("Uploaded file should be an image"); 
 
 
     }

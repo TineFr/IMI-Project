@@ -137,7 +137,8 @@ namespace Imi.Project.Api.Controllers
             }
             var newUserEntity = newUser.MapToEntity();
             var result = await _userService.AddUserAsync(newUserEntity);
-            return Ok(result);
+            var resultDto = result.MapToDto();
+            return Ok(resultDto);
         }
 
         [HttpPut]
@@ -154,7 +155,8 @@ namespace Imi.Project.Api.Controllers
             }
             user.Update(updatedUser);
             var result = await _userService.UpdateUserAsync(user);
-            return Ok(result);
+            var resultDto = result.MapToDto();
+            return Ok(resultDto);
         }
 
 
