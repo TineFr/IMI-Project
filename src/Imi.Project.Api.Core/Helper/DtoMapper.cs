@@ -58,7 +58,11 @@ namespace Imi.Project.Api.Core.Helper
                 Gender = bird.Gender.ToString(),
                 HatchDate = bird.HatchDate,
                 Image = bird.Image,
-                Cage = bird.Cage?.Name, 
+                Cage = new CageResponseDto
+                {
+                    Id = bird.Cage.Id,
+                    Name = bird.Cage.Name
+                }
             };
         }
 
@@ -134,7 +138,12 @@ namespace Imi.Project.Api.Core.Helper
                 var newbirddto = new BirdResponseDto
                 {
                     Name = bird.Name,
-                    Cage = bird.Cage.Name
+                    Cage = new CageResponseDto
+                    {
+                        Id = bird.Cage.Id,
+                        Name = bird.Cage.Name
+                    },
+                    Image = bird.Image
                 };
                 birdlist.Add(newbirddto);
             }

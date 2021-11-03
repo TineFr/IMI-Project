@@ -82,7 +82,8 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(CageRequestDto newCage)
+
+        public async Task<IActionResult> Post([FromForm] CageRequestDto newCage)
         {
             if (!ModelState.IsValid)
             {
@@ -99,13 +100,24 @@ namespace Imi.Project.Api.Controllers
                 return NotFound($"User with id {newCage.UserId} does not exist");
             }
             var newCageEntity = newCage.MapToEntity();
+
+            if (newCage.Image != null)
+            {
+                if (newCage.Image.ContentType.Contains("image"))
+                {
+                    var databasePath = await _imageService.AddOrUpdateImageAsync<Cage>(newCage.Id, newCage.Image);
+                    newCageEntity.Image = databasePath;
+                }
+                else return BadRequest("Uploaded file should be an image");
+            }
+           
             var result = await _cageService.AddCageAsync(newCageEntity);
             var resultDto = result.MapToDto();
             return Ok(resultDto);
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put(CageRequestDto updatedCage)
+        public async Task<IActionResult> Put([FromForm] CageRequestDto updatedCage)
         {
             if (!ModelState.IsValid)
             {
@@ -116,8 +128,17 @@ namespace Imi.Project.Api.Controllers
             {
                 return NotFound($"cage with id {updatedCage.Id} does not exist");
             }
-            cage.Update(updatedCage);
-            var result = await _cageService.UpdateCageAsync(cage);
+            var updatedCageEntity = cage.Update(updatedCage);
+            if (updatedCage.Image != null)
+            {
+                if (updatedCage.Image.ContentType.Contains("image"))
+                {
+                    var databasePath = await _imageService.AddOrUpdateImageAsync<Cage>(updatedCage.Id, updatedCage.Image);
+                    updatedCageEntity.Image = databasePath;
+                }
+                else return BadRequest("Uploaded file should be an image");
+            }
+            var result = await _cageService.UpdateCageAsync(updatedCageEntity);
             var resultDto = result.MapToDto();
             return Ok(resultDto);
         }
@@ -135,26 +156,6 @@ namespace Imi.Project.Api.Controllers
             await _cageService.DeleteCageAsync(cage);
             return Ok();
         }
-
-
-        [HttpPost("{id}/image"), HttpPut("{id}/image")]
-
-        public async Task<IActionResult> AddOrUpdateImage(Guid id, IFormFile image)
-        {
-            if (image.ContentType.Contains("image"))
-            {
-                var databasePath = await _imageService.AddOrUpdateImageAsync<Cage>(id, image);
-                var cage = await _cageService.GetCageByIdAsync(id);
-                if (cage == null)
-                {
-                    return NotFound($"No cage with an id of {id} could be found");
-                }
-                cage.Image = databasePath;
-                await _cageService.UpdateCageAsync(cage);
-                var cageDto = cage.MapToDto();
-                return Ok(cageDto);
-            }
-            else return BadRequest("Uploaded file should be an image"); 
 
 
     }
