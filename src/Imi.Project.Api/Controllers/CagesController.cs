@@ -9,6 +9,8 @@ using Imi.Project.Api.Core.Helper;
 using Imi.Project.Api.Core.Interfaces.Services;
 using Imi.Project.Api.Core.Dtos.Cages;
 using Imi.Project.Api.Core.Entities;
+using Imi.Project.Api.Core.Entities.Pagination;
+using Newtonsoft.Json;
 
 namespace Imi.Project.Api.Controllers
 {
@@ -36,10 +38,13 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get( [FromQuery] PaginationParameters parameters)
         {
             var cages = await _cageService.ListAllCagesAsync();
-            var result = cages.MapToDtoList();
+            var paginationData = new PaginationMetaData(parameters.Page, cages.Count(), parameters.ItemsPerPage);
+            Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
+            var cagesPaginated = Pagination.AddPagination<Cage>(cages, parameters);
+            var result = cagesPaginated.MapToDtoList();
             return Ok(result);
         }
 
@@ -56,7 +61,7 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpGet("{id}/birds")]
-        public async Task<IActionResult> GetBirdsByCageId(Guid id)
+        public async Task<IActionResult> GetBirdsByCageId(Guid id, [FromQuery] PaginationParameters parameters)
         {
             var cage = await _cageService.GetCageByIdAsync(id);
             if (cage == null)
@@ -64,12 +69,15 @@ namespace Imi.Project.Api.Controllers
                 return NotFound($"cage with id {id} does not exist");
             }
             var birds = await _birdService.GetBirdsByCageIdAsync(id);
-            var result = birds.MapToDtoList(); 
+            var paginationData = new PaginationMetaData(parameters.Page, birds.Count(), parameters.ItemsPerPage);
+            Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
+            var birdsPaginated = Pagination.AddPagination<Bird>(birds, parameters);
+            var result = birdsPaginated.MapToDtoList(); 
             return Ok(result);
         }
 
         [HttpGet("{id}/dailytasks")]
-        public async Task<IActionResult> GetDailyTasksByCageId(Guid id)
+        public async Task<IActionResult> GetDailyTasksByCageId(Guid id, [FromQuery] PaginationParameters parameters)
         {
             var cage = await _cageService.GetCageByIdAsync(id);
             if (cage == null)
@@ -77,7 +85,10 @@ namespace Imi.Project.Api.Controllers
                 return NotFound($"cage with id {id} does not exist");
             }
             var tasks = await _dailyTaskService.GetDailyTasksByCageIdAsync(id);
-            var result = tasks.MapToDtoList();
+            var paginationData = new PaginationMetaData(parameters.Page, tasks.Count(), parameters.ItemsPerPage);
+            Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
+            var tasksPaginated = Pagination.AddPagination<DailyTask>(tasks, parameters);
+            var result = tasksPaginated.MapToDtoList();
             return Ok(result);
         }
 

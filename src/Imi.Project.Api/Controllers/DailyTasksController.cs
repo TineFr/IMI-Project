@@ -7,6 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Imi.Project.Api.Core.Helper;
 using System.Threading.Tasks;
+using Imi.Project.Api.Core.Entities.Pagination;
+using Newtonsoft.Json;
+using Imi.Project.Api.Core.Entities;
 
 namespace Imi.Project.Api.Controllers
 {
@@ -22,10 +25,13 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery] PaginationParameters parameters)
         {
             var tasks = await _dailyTaskService.ListAllDailyTasksAsync();
-            var result = tasks.MapToDtoList();
+            var paginationData = new PaginationMetaData(parameters.Page, tasks.Count(), parameters.ItemsPerPage);
+            Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
+            var tasksPaginated = Pagination.AddPagination<DailyTask>(tasks, parameters);
+            var result = tasksPaginated.MapToDtoList();
             return Ok(result);
         }
 
