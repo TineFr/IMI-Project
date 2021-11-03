@@ -34,7 +34,7 @@ namespace Imi.Project.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<MyAviaryDbContext>(options => options.UseSqlServer
-             (Configuration.GetConnectionString("Prescriptions")));
+             (Configuration.GetConnectionString("MyAviary")));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

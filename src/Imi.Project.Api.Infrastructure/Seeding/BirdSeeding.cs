@@ -13,57 +13,230 @@ namespace Imi.Project.Api.Infrastructure.Seeding
             modelBuilder.Entity<Bird>().HasData(
                 new Bird[]
                 {
-                    new Bird
-                    {
-                    Id = Guid.Parse("8606C209-1D51-4EE3-9F8D-8DE3D0F3F24E"),
-                    Name = "Jake",
-                    CageId = Guid.Parse("2FB04232-9775-4EF8-BB2D-CC1C0296E84C"),
-                    Gender = Core.Enums.Gender.Male,
-                    HatchDate = new DateTime(2015, 12, 25),
-                    Image = "images/bird/budgie1.jpg",
-                    SpeciesId = Guid.Parse("DBCEBCEB-24EE-4477-8A09-7042512F1F6D"),
-                    Food = "Parakeet mix",
-                    UserId = Guid.Parse("5E146A05-34EC-4FF0-8DDE-6DC6D62C3591")
-                    },
+                        new Bird
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000001"),
+                            Name = "Jake",
+                            CageId = Guid.Parse("00000000-0000-0000-0000-000000000002"),
+                            Gender = Core.Enums.Gender.Male,
+                            HatchDate = new DateTime(2015, 12, 25),
+                            Image = "images/bird/budgie1.jpg",
+                            SpeciesId = Guid.Parse("00000000-0000-0000-0000-000000000002"),
+                            Food = "Parakeet mix",
+                            UserId = Guid.Parse("00000000-0000-0000-0000-000000000002")
+                        },
 
-                    new Bird
-                    {
-                    Id = Guid.Parse("6668E055-E99C-4B50-AD12-5A28CA2AD422"),
-                    Name = "Holly",
-                    CageId = Guid.Parse("2FB04232-9775-4EF8-BB2D-CC1C0296E84C"),
-                    Gender = Core.Enums.Gender.Female,
-                    HatchDate = new DateTime(2017, 07, 13),
-                    Image = "images/bird/budgie2.jpg",
-                    SpeciesId = Guid.Parse("DBCEBCEB-24EE-4477-8A09-7042512F1F6D"),
-                    Food = "Parakeet mix",
-                    UserId = Guid.Parse("5E146A05-34EC-4FF0-8DDE-6DC6D62C3591")
-                    },
+                        new Bird
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000002"),
+                            Name = "Holly",
+                            CageId = Guid.Parse("00000000-0000-0000-0000-000000000002"),
+                            Gender = Core.Enums.Gender.Female,
+                            HatchDate = new DateTime(2017, 07, 13),
+                            Image = "images/bird/budgie2.jpg",
+                            SpeciesId = Guid.Parse("00000000-0000-0000-0000-000000000002"),
+                            Food = "Parakeet mix",
+                            UserId = Guid.Parse("00000000-0000-0000-0000-000000000002")
+                        },
 
-                    new Bird
-                    {
-                    Id = Guid.Parse("8E74A018-6D85-4E2A-BB85-F8DA2D58F3BF"),
-                    Name = "Steven",
-                    CageId = Guid.Parse("ABA63D5F-8DD1-42E3-93B8-898C71554E5A"),
-                    Gender = Core.Enums.Gender.Male,
-                    HatchDate = new DateTime(2012, 09, 03),
-                    Image = "images/bird/cockatiel1.jpg",
-                    SpeciesId = Guid.Parse("5894D41B-E7C2-4125-8A66-92C802BF8ED2"),
-                    Food = "Parakeet mix",
-                    UserId = Guid.Parse("334CD0DB-6111-4A42-9F4D-6AF33FE6283B")
-                    },
+                        new Bird
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000003"),
+                            Name = "Steven",
+                            CageId = Guid.Parse("00000000-0000-0000-0000-000000000001"),
+                            Gender = Core.Enums.Gender.Male,
+                            HatchDate = new DateTime(2012, 09, 03),
+                            Image = "images/bird/cockatiel1.jpg",
+                            SpeciesId = Guid.Parse("00000000-0000-0000-0000-000000000001"),
+                            Food = "Parakeet mix",
+                            UserId = Guid.Parse("00000000-0000-0000-0000-000000000001")
+                        },
 
-                    new Bird
-                    {
-                    Id = Guid.Parse("8470BC8B-28AC-4E51-9FAF-4FCF4C5F0D14"),
-                    Name = "July",
-                    CageId = Guid.Parse("ABA63D5F-8DD1-42E3-93B8-898C71554E5A"),
-                    Gender = Core.Enums.Gender.Female,
-                    HatchDate = new DateTime(2014, 11, 14),
-                    Image = "images/bird/cockatiel2.jpg",
-                    SpeciesId = Guid.Parse("5894D41B-E7C2-4125-8A66-92C802BF8ED2"),
-                    Food = "Parakeet mix",
-                    UserId = Guid.Parse("334CD0DB-6111-4A42-9F4D-6AF33FE6283B")
-                    }
+                        new Bird
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000004"),
+                            Name = "July",
+                            CageId = Guid.Parse("00000000-0000-0000-0000-000000000001"),
+                            Gender = Core.Enums.Gender.Female,
+                            HatchDate = new DateTime(2014, 11, 14),
+                            Image = "images/bird/cockatiel2.jpg",
+                            SpeciesId = Guid.Parse("00000000-0000-0000-0000-000000000001"),
+                            Food = "Parakeet mix",
+                            UserId = Guid.Parse("00000000-0000-0000-0000-000000000001")
+                         },
+
+                       new Bird
+                        {
+                           Id = Guid.Parse("00000000-0000-0000-0000-000000000005"),
+                           Name = "June",
+                           CageId=Guid.Parse("00000000-0000-0000-0000-000000000001"),
+                           Gender = Core.Enums.Gender.Female,
+                           HatchDate = new DateTime(2014, 11, 14),
+                           Image = "images/bird/cockatiel3.jpg",
+                           SpeciesId = Guid.Parse("00000000-0000-0000-0000-000000000001"),
+                           Food = "Parakeet mix",
+                           UserId = Guid.Parse("00000000-0000-0000-0000-000000000001")
+                        },
+
+                       new Bird
+                         {
+                           Id = Guid.Parse("00000000-0000-0000-0000-000000000006"),
+                           Name = "Jupiter",
+                           CageId=Guid.Parse("00000000-0000-0000-0000-000000000001"),
+                           Gender = Core.Enums.Gender.Male,
+                           HatchDate = new DateTime(2014, 6, 10),
+                           Image = "images/bird/cockatiel4.jpg",
+                           SpeciesId = Guid.Parse("00000000-0000-0000-0000-000000000001"),
+                           Food = "Parakeet mix",
+                           UserId = Guid.Parse("00000000-0000-0000-0000-000000000001")
+                          },
+
+
+                        new Bird
+                        {
+                           Id = Guid.Parse("00000000-0000-0000-0000-000000000007"),
+                           Name = "Flynn",
+                           CageId=Guid.Parse("00000000-0000-0000-0000-000000000003"),
+                           Gender = Core.Enums.Gender.Male,
+                           HatchDate = new DateTime(2019, 06, 28),
+                           Image = "images/bird/zebrafinch1.jpg",
+                           SpeciesId = Guid.Parse("00000000-0000-0000-0000-000000000003"),
+                           Food = "Birdseed",
+                           UserId = Guid.Parse("00000000-0000-0000-0000-000000000003")
+                        },
+
+
+                        new Bird
+                        {
+                           Id = Guid.Parse("00000000-0000-0000-0000-000000000008"),
+                           Name = "Keira",
+                           CageId=Guid.Parse("00000000-0000-0000-0000-000000000003"),
+                           Gender = Core.Enums.Gender.Female,
+                           HatchDate = new DateTime(2018, 07, 07),
+                           Image = "images/bird/zebrafinch2.jpg",
+                           SpeciesId = Guid.Parse("00000000-0000-0000-0000-000000000003"),
+                           Food = "Birdseed",
+                           UserId = Guid.Parse("00000000-0000-0000-0000-000000000003")
+                        },
+
+
+                        new Bird
+                        {
+                           Id = Guid.Parse("00000000-0000-0000-0000-000000000009"),
+                           Name = "Connie",
+                           CageId=Guid.Parse("00000000-0000-0000-0000-000000000004"),
+                           Gender = Core.Enums.Gender.Female,
+                           HatchDate = new DateTime(2015, 11, 02),
+                           Image = "images/bird/canary1.jpg",
+                           SpeciesId = Guid.Parse("00000000-0000-0000-0000-000000000004"),
+                           Food = "Canary Seed",
+                           UserId = Guid.Parse("00000000-0000-0000-0000-000000000004")
+                        },
+
+
+
+                        new Bird
+                        {
+                           Id = Guid.Parse("00000000-0000-0000-0000-000000000010"),
+                           Name = "Parro",
+                           CageId=Guid.Parse("00000000-0000-0000-0000-000000000005"),
+                           Gender = Core.Enums.Gender.Male,
+                           HatchDate = new DateTime(2010, 10, 14),
+                           Image = "images/bird/pacificparrotlet1.jpg",
+                           SpeciesId = Guid.Parse("00000000-0000-0000-0000-000000000005"),
+                           Food = "Parrot Food",
+                           UserId = Guid.Parse("00000000-0000-0000-0000-000000000005")
+                        },
+
+
+
+                        new Bird
+                        {
+                           Id = Guid.Parse("00000000-0000-0000-0000-000000000011"),
+                           Name = "Bourkie",
+                           CageId=Guid.Parse("00000000-0000-0000-0000-000000000006"),
+                           Gender = Core.Enums.Gender.Female,
+                           HatchDate = new DateTime(2012, 11, 04),
+                           Image = "images/bird/bourkesparakeet1.jpg",
+                           SpeciesId = Guid.Parse("00000000-0000-0000-0000-000000000006"),
+                           Food = "Parakeet mix",
+                           UserId = Guid.Parse("00000000-0000-0000-0000-000000000006")
+                        },
+
+
+
+                        new Bird
+                        {
+                           Id = Guid.Parse("00000000-0000-0000-0000-000000000012"),
+                           Name = "Rosie",
+                           CageId=Guid.Parse("00000000-0000-0000-0000-000000000007"),
+                           Gender = Core.Enums.Gender.Female,
+                           HatchDate = new DateTime(2011, 08, 14),
+                           Image = "images/bird/lovebird1.jpg",
+                           SpeciesId = Guid.Parse("00000000-0000-0000-0000-000000000007"),
+                           Food = "Parrot food",
+                           UserId = Guid.Parse("00000000-0000-0000-0000-000000000007")
+                        },
+
+
+                        new Bird
+                        {
+                           Id = Guid.Parse("00000000-0000-0000-0000-000000000013"),
+                           Name = "Birdo",
+                           CageId=Guid.Parse("00000000-0000-0000-0000-000000000007"),
+                           Gender = Core.Enums.Gender.Male,
+                           HatchDate = new DateTime(2011, 04, 14),
+                           Image = "images/bird/lovebird2.jpg",
+                           SpeciesId = Guid.Parse("00000000-0000-0000-0000-000000000007"),
+                           Food = "Parrot food",
+                           UserId = Guid.Parse("00000000-0000-0000-0000-000000000007")
+                        },
+
+
+                        new Bird
+                        {
+                           Id = Guid.Parse("00000000-0000-0000-0000-000000000014"),
+                           Name = "Cheeky",
+                           CageId=Guid.Parse("00000000-0000-0000-0000-000000000008"),
+                           Gender = Core.Enums.Gender.Male,
+                           HatchDate = new DateTime(2012, 08, 19),
+                           Image = "images/bird/greencheekedconure1.jpg",
+                           SpeciesId = Guid.Parse("00000000-0000-0000-0000-000000000008"),
+                           Food = "Classic Avi-Cakes for Small Birds",
+                           UserId = Guid.Parse("00000000-0000-0000-0000-000000000008")
+                        },
+
+
+
+                        new Bird
+                        {
+                           Id = Guid.Parse("00000000-0000-0000-0000-000000000015"),
+                           Name = "Goldie",
+                           CageId=Guid.Parse("00000000-0000-0000-0000-000000000009"),
+                           Gender = Core.Enums.Gender.Female,
+                           HatchDate = new DateTime(2021, 03, 30),
+                           Image = "images/bird/goldianfinch1.jpg",
+                           SpeciesId = Guid.Parse("00000000-0000-0000-0000-000000000009"),
+                           Food = "Birdseed",
+                           UserId = Guid.Parse("00000000-0000-0000-0000-000000000009")
+                        },
+
+
+
+                        new Bird
+                        {
+                           Id = Guid.Parse("00000000-0000-0000-0000-000000000016"),
+                           Name = "Lily",
+                           CageId=Guid.Parse("00000000-0000-0000-0000-000000000010"),
+                           Gender = Core.Enums.Gender.Female,
+                           HatchDate = new DateTime(2020, 08, 20),
+                           Image = "images/bird/societyfinch1.jpg",
+                           SpeciesId = Guid.Parse("00000000-0000-0000-0000-000000000010"),
+                           Food = "Birdseed",
+                           UserId = Guid.Parse("00000000-0000-0000-0000-000000000010")
+                        }
+
+
                 });
 
         }

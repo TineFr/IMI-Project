@@ -15,14 +15,68 @@ namespace Imi.Project.Api.Infrastructure.Seeding
                 {
                     new User
                     {
-                        Id = Guid.Parse("5E146A05-34EC-4FF0-8DDE-6DC6D62C3591"),
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000001"),
                         Name = "Franchois",
                     },
 
                     new User
                     {
-                        Id = Guid.Parse("334CD0DB-6111-4A42-9F4D-6AF33FE6283B"),
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000002"),
                         Name = "Dequinnemaere",
+                    },
+
+                    new User
+                    {
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000003"),
+                        Name = "Depotter",
+                    },
+
+                    new User
+                    {
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000004"),
+                        Name = "Haenebalcke",
+                    },
+
+
+                    new User
+                    {
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000005"),
+                        Name = "De Wandel",
+                    },
+
+
+                    new User
+                    {
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000006"),
+                        Name = "De Smet",
+                    },
+
+
+                    new User
+                    {
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000007"),
+                        Name = "Verbeke",
+                    },
+
+
+                    new User
+                    {
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000008"),
+                        Name = "Meerpoel",
+                    },
+
+
+                    new User
+                    {
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000009"),
+                        Name = "Lootens",
+                    },
+
+
+                    new User
+                    {
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000010"),
+                        Name = "Van De Sompel",
                     },
 
                 }

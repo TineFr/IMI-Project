@@ -15,21 +15,104 @@ namespace Imi.Project.Api.Infrastructure.Seeding
                 {
                     new Cage
                     {
-                        Id = Guid.Parse("2FB04232-9775-4EF8-BB2D-CC1C0296E84C"),
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000001"),                                        
                         Name = "Outside Cage 1",
                         Location = "Outside",
                         Image =  "images/cage/cage1.png",
-                        UserId = Guid.Parse("5E146A05-34EC-4FF0-8DDE-6DC6D62C3591")
+                        UserId = Guid.Parse("00000000-0000-0000-0000-000000000001")
+                                             
                     },
 
                     new Cage
                     {
-                        Id = Guid.Parse("ABA63D5F-8DD1-42E3-93B8-898C71554E5A"),
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000002"),
                         Name = "Outside Cage 2",
                         Location = "Outside",
                         Image =  "images/cage/cage2.png",
-                        UserId = Guid.Parse("334CD0DB-6111-4A42-9F4D-6AF33FE6283B")
+                        UserId = Guid.Parse("00000000-0000-0000-0000-000000000002")
                     },
+
+                    new Cage
+                    {
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000003"),
+                        Name = "White Cage",
+                        Location = "Living room",
+                        Image =  "images/cage/cage3.jpg",
+                        UserId = Guid.Parse("00000000-0000-0000-0000-000000000003")
+                    },
+
+
+                    new Cage
+                    {
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000004"),
+                        Name = "Desk Cage",
+                        Location = "Study room",
+                        Image = "images/cage/cage4.jpg",
+                        UserId = Guid.Parse("00000000-0000-0000-0000-000000000004")
+                    },
+
+
+                    new Cage
+                    {
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000005"),
+                        Name = "Gold Cage",
+                        Location = "Living room",
+                        Image =  "images/cage/cage9.jpg",
+                        UserId = Guid.Parse("00000000-0000-0000-0000-000000000005")
+                    },
+
+
+                    new Cage
+                    {
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000006"),
+                        Name = "House-shaped Cage",
+                        Location = "Kitchen",
+                        Image =  "images/cage/cage6.jpg",
+                        UserId = Guid.Parse("00000000-0000-0000-0000-000000000006")
+                    },
+
+
+                    new Cage
+                    {
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000007"),
+                        Name = "Small Black Cage",
+                        Location = "Dining room",
+                        Image =  "images/cage/cage7.jpg",
+                        UserId = Guid.Parse("00000000-0000-0000-0000-000000000007")
+                    },
+
+
+                    new Cage
+                    {
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000008"),
+                        Name = "Mansion Cage",
+                        Location = "Dining room",
+                        Image =  "images/cage/cage8.jpg",
+                        UserId = Guid.Parse("00000000-0000-0000-0000-000000000008")
+                    },
+
+
+
+                    new Cage
+                    {
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000009"),
+                        Name = "Pink Cage",
+                        Location = "Outside",
+                        Image =  "images/cage/cage5.jpg",
+                        UserId = Guid.Parse("00000000-0000-0000-0000-000000000009")
+                    },
+
+
+                    new Cage
+                    {
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000010"),                   
+                        Name = "Vintage Cage",
+                        Location = "Outside",
+                        Image =  "images/cage/cage10.png",
+                        UserId = Guid.Parse("00000000-0000-0000-0000-000000000010")
+
+                    },
+
 
                 }
 
