@@ -74,7 +74,7 @@ namespace Imi.Project.Api.Core.Helper
             var task = new DailyTask
             {
                 Id = taskDto.Id,
-                Name = taskDto.Name,
+                Description = taskDto.Name,
                 CageId = taskDto.CageId,
                 IsDone = taskDto.IsDone
             };

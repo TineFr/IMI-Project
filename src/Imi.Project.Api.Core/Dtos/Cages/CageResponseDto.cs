@@ -8,6 +8,7 @@ namespace Imi.Project.Api.Core.Dtos.Cages
 {
     public class CageResponseDto : BaseEntityDto
     {
+        public string Name { get; set; }
         public IEnumerable<Guid> Birds { get; set; }
         public IEnumerable<DailyTaskResponseDto> DailyTasks { get; set; }
         public string Image { get; set; }

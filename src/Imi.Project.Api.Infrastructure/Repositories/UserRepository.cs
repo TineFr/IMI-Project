@@ -22,12 +22,14 @@ namespace Imi.Project.Api.Infrastructure.Repositories
                                    .ThenInclude(c => c.DailyTasks)
                                    .Include(u => u.Birds)
                                    .ThenInclude(b => b.Species)
-                                   .Include(u => u.Medicines);
+                                   .Include(u => u.Medicines)
+                                   .Include(u => u.Prescriptions)
+                                   .ThenInclude(u => u.BirdPrescriptions);
         }
 
         public async override Task<IEnumerable<User>> ListAllAsync()
         {
-            return await GetAll().ToListAsync();
+            return await GetAll().OrderBy(u  => u.Name).ToListAsync();
         }
 
         public async override Task<User> GetByIdAsync(Guid id)

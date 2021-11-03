@@ -10,7 +10,5 @@ namespace Imi.Project.Api.Core.Entities
         [Required(ErrorMessage = "{0} is required")]
         public Guid Id { get; set; }
 
-        [Required(ErrorMessage = "{0} is required")]
-        public string Name { get; set; }
     }
 }

@@ -8,6 +8,8 @@ namespace Imi.Project.Api.Core.Dtos.Medicines
     public class MedicineRequestDto : BaseEntityDto
     {
         [Required(ErrorMessage = "{0} is required")]
+        public string Name { get; set; }
+        [Required(ErrorMessage = "{0} is required")]
         public string Usage { get; set; }
         [Required(ErrorMessage = "{0} is required")]
         public Guid UserId { get; set; }

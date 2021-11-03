@@ -52,7 +52,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
 
         public virtual async Task<IEnumerable<T>> ListAllAsync()
         {
-            return await  _dbContext.Set<T>().OrderBy(b => b.Name).ToListAsync();
+            return await  _dbContext.Set<T>().ToListAsync();
         }
 
         public async Task<T> UpdateAsync(T entity)

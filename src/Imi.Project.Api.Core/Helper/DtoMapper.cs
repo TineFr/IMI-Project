@@ -36,7 +36,7 @@ namespace Imi.Project.Api.Core.Helper
             return new DailyTaskResponseDto
             {
                 Id = task.Id,
-                Name = task.Name,
+                Description = task.Description,
                 IsDone = task.IsDone
             };
         }

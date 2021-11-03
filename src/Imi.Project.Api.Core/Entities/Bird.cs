@@ -9,7 +9,8 @@ namespace Imi.Project.Api.Core.Entities
     public class Bird : BaseEntity
     {
 
-
+        [Required(ErrorMessage = "{0} is required")]
+        public string Name { get; set; }
         public DateTime HatchDate { get; set; }
         public Gender Gender { get; set; }
         public string Food { get; set; }

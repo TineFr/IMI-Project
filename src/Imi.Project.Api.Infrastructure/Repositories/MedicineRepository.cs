@@ -35,21 +35,8 @@ namespace Imi.Project.Api.Infrastructure.Repositories
 
         public async Task<IEnumerable<Medicine>> GetByUserIdAsync(Guid id)
         {
-            return await GetAll().Where(m => m.UserId.Equals(id)).ToListAsync();
+            return await GetAll().Where(m => m.UserId.Equals(id)).OrderBy(b => b.Name).ToListAsync();
         }
-
-        //public async Task<IEnumerable<Medicine>> GetByBirdIdAsync(Guid id)
-        //{
-        //    var birdmedicines = await _dbContext.BirdMedicines.Include(bm => bm.Medicine)
-        //                                                      .Where(b => b.BirdId.Equals(id))
-        //                                                      .ToListAsync();
-        //    var medicines = birdmedicines.Select(bm => bm.Medicine);
-        //    return medicines;
-
-
-        //}
-
-
 
     }
 }

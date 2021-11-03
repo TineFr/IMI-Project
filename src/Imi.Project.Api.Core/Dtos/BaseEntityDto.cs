@@ -11,7 +11,5 @@ namespace Imi.Project.Api.Core.Dtos
        
         public Guid Id { get; set; }
 
-        [Required(ErrorMessage = "{0} is required")]
-        public string Name { get; set; }
     }
 }

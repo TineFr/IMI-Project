@@ -9,7 +9,8 @@ namespace Imi.Project.Api.Core.Dtos.Birds
 {
     public class BirdRequestDto : BaseEntityDto
     {
-       
+        [Required(ErrorMessage = "{0} is required")]
+        public string Name { get; set; }
         [Required(ErrorMessage = "{0} is required")]
         [DataType(DataType.Date)]
         public DateTime HatchDate { get; set; }
