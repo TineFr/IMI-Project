@@ -17,11 +17,17 @@ namespace Imi.Project.Api.Core.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly ICageService _cageService;
+        private readonly IBirdService _birdService;
+        private readonly IMedicineService _medicineService;
+        private readonly IPrescriptionService _prescriptionService;
 
-        public UserService(IUserRepository userRepository, ICageService cageService)
+        public UserService(IUserRepository userRepository, ICageService cageService, IBirdService birdService, IMedicineService medicineService, IPrescriptionService prescriptionService)
         {
             _userRepository = userRepository;
             _cageService = cageService;
+            _birdService = birdService;
+            _medicineService = medicineService;
+            _prescriptionService = prescriptionService;
         }
 
         public async Task<User> GetUserByIdAsync(Guid id)
@@ -46,7 +52,16 @@ namespace Imi.Project.Api.Core.Services
         public async Task DeleteUserAsync(User user)
         {
             var cages = await _cageService.GetCagesByUserIdAsync(user.Id);
-            cages.Select(async c => await _cageService.DeleteCageAsync(c)); //?
+            await _cageService.DeleteMultiple(cages.ToList());
+
+            var birds = await _birdService.GetBirdsByUserIdAsync(user.Id);
+            await _birdService.DeleteMultiple(birds.ToList());
+
+            var medicines = await _medicineService.GetMedicinesByUserIdAsync(user.Id);
+            await _medicineService.DeleteMultiple(medicines.ToList());
+
+            var prescriptions = await _prescriptionService.GetPrescriptionsByUserIdAsync(user.Id);
+            await _prescriptionService.DeleteMultiple(prescriptions.ToList());
             await _userRepository.DeleteAsync(user);  
         }
 

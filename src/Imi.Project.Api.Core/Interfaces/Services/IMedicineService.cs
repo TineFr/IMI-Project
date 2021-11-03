@@ -15,6 +15,7 @@ namespace Imi.Project.Api.Core.Interfaces.Services
         Task<Medicine> AddMedicineAsync(Medicine medicine);
         Task<Medicine> UpdateMedicineAsync(Medicine medicine);
         Task DeleteMedicineAsync(Medicine medicine);
+        Task DeleteMultiple(List<Medicine> medicines);
         Task<IEnumerable<Medicine>> GetMedicinesByUserIdAsync(Guid id);
      
     }

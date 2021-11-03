@@ -23,6 +23,11 @@ namespace Imi.Project.Api.Core.Services
             return result;
         }
 
+        public async Task DeleteMultiple(List<Prescription> prescriptions)
+        {
+            await _prescriptionRepository.DeleteMultipleAsync(prescriptions);
+        }
+
         public async Task DeletePrescriptionAsync(Prescription prescription)
         {
             await _prescriptionRepository.DeleteAsync(prescription);

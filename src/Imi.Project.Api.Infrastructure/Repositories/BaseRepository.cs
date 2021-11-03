@@ -25,11 +25,18 @@ namespace Imi.Project.Api.Infrastructure.Repositories
             return entity;
         }
 
-        public async Task<T> DeleteAsync(T entity)
+        public async Task DeleteAsync(T entity)
         {
             _dbContext.Set<T>().Remove(entity);
             await _dbContext.SaveChangesAsync();
-            return entity;
+
+        }
+
+        public async Task DeleteMultipleAsync(List<T> entities)
+        {
+            _dbContext.Set<T>().RemoveRange(entities);
+            await _dbContext.SaveChangesAsync();
+
         }
 
         public virtual IQueryable<T> GetAll()

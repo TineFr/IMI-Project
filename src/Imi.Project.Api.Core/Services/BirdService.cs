@@ -33,6 +33,11 @@ namespace Imi.Project.Api.Core.Services
        
         }
 
+        public async Task DeleteMultiple(List<Bird> birds)
+        {
+            await _birdRepository.DeleteMultipleAsync(birds);
+        }
+
         public async Task<Bird> GetBirdByIdAsync(Guid id)
         {
             var bird = await _birdRepository.GetByIdAsync(id);

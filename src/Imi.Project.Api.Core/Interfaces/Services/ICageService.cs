@@ -13,6 +13,8 @@ namespace Imi.Project.Api.Core.Interfaces.Services
         Task<Cage> GetCageByIdAsync(Guid id);
         Task<IEnumerable<Cage>> GetCagesByUserIdAsync(Guid id);
         Task<Cage> AddCageAsync(Cage cage);
+
+        Task DeleteMultiple(List<Cage> cages);
         Task<Cage> UpdateCageAsync(Cage cage);
         Task DeleteCageAsync(Cage cage);
     }
