@@ -15,11 +15,12 @@ namespace Imi.Project.Api.Infrastructure.Seeding
                 {
                     new Cage
                     {
-                        Id = Guid.Parse("00000000-0000-0000-0000-000000000001"),
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000001"),                                        
                         Name = "Outside Cage 1",
                         Location = "Outside",
                         Image =  "images/cage/cage1.png",
                         UserId = Guid.Parse("00000000-0000-0000-0000-000000000001")
+                                             
                     },
 
                     new Cage
@@ -104,11 +105,12 @@ namespace Imi.Project.Api.Infrastructure.Seeding
 
                     new Cage
                     {
-                        Id = Guid.Parse("00000000-0000-0000-0000-0000000000010"),
+                        Id = Guid.Parse("00000000-0000-0000-0000-000000000010"),                   
                         Name = "Vintage Cage",
                         Location = "Outside",
                         Image =  "images/cage/cage10.png",
                         UserId = Guid.Parse("00000000-0000-0000-0000-000000000010")
+
                     },
 
 

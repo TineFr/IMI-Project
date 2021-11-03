@@ -39,7 +39,7 @@ namespace Imi.Project.Api.Controllers
             {
                 return NotFound($"Medicine with id {id} does not exist");
             }
-            return Ok(medicine);
+            return Ok(medicine.MapToDto());
         }
 
 
@@ -79,7 +79,7 @@ namespace Imi.Project.Api.Controllers
             }
             medicine.Update(medicineRequestDto);
             var result = await _medicineService.UpdateMedicineAsync(medicine);
-            return Ok(result);
+            return Ok();
         }
 
 
