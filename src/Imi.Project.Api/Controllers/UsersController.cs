@@ -19,15 +19,17 @@ namespace Imi.Project.Api.Controllers
         protected readonly IUserService _userService;
         protected readonly ICageService _cageService;
         protected readonly IBirdService _birdService;
+        protected readonly IPrescriptionService _prescriptionService;
         protected readonly IMedicineService _medicineService;
 
 
-        public UsersController(IUserService userService, ICageService cageService, IBirdService birdService, IMedicineService medicineService)
+        public UsersController(IUserService userService, ICageService cageService, IBirdService birdService, IMedicineService medicineService, IPrescriptionService prescriptionService)
         {
             _userService = userService;
             _cageService = cageService;
             _birdService = birdService;
             _medicineService = medicineService;
+            _prescriptionService = prescriptionService;
         }
 
         [HttpGet]
@@ -101,6 +103,23 @@ namespace Imi.Project.Api.Controllers
             }
             var medicines = await _medicineService.GetMedicinesByUserIdAsync(id);
             var result = medicines.MapToDtoList();
+            return Ok(result);
+        }
+
+        [HttpGet("{id}/prescriptions")]
+        public async Task<IActionResult> GetPrescriptionsFromUser(Guid id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var user = await _userService.GetUserByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound($"User with id {id} does not exist");
+            }
+            var prescriptions = await _prescriptionService.GetPrescriptionsByUserIdAsync(id);
+            var result = prescriptions.MapToDtoList();
             return Ok(result);
         }
 
