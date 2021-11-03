@@ -15,8 +15,8 @@ namespace Imi.Project.Api.Infrastructure.Seeding
                 {
                     new BirdPrescription
                     {
-                        BirdId = Guid.Parse("6668E055-E99C-4B50-AD12-5A28CA2AD422"),
-                        PrescriptionId = Guid.Parse("53d1b65f-4785-4790-8f0f-62378de01f4e")
+                        BirdId = Guid.Parse("00000000-0000-0000-0000-000000000001"),
+                        PrescriptionId = Guid.Parse("00000000-0000-0000-0000-000000000001")
                     },
 
                     new BirdPrescription
