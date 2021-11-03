@@ -8,6 +8,8 @@ using System.Linq;
 using Imi.Project.Api.Core.Helper;
 using System.Threading.Tasks;
 using Imi.Project.Api.Core.Entities;
+using Imi.Project.Api.Core.Entities.Pagination;
+using Newtonsoft.Json;
 
 namespace Imi.Project.Api.Controllers
 {
@@ -31,10 +33,14 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery] PaginationParameters parameters)
         {
-            var birds = await _birdService.ListAllBirdsAsync();
-            var result = birds.MapToDtoList();
+
+            var birds = await _birdService.ListAllBirdsAsync();         
+            var paginationData = new PaginationMetaData(parameters.Page, birds.Count(), parameters.ItemsPerPage);
+            Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
+            var birdsPaginated = Pagination.AddPagination<Bird>(birds, parameters);
+            var result = birdsPaginated.MapToDtoList();
             return Ok(result);
         }
 

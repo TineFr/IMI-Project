@@ -7,6 +7,9 @@ using System.Linq;
 using Imi.Project.Api.Core.Helper;
 using System.Threading.Tasks;
 using Imi.Project.Api.Core.Dtos.Medicines;
+using Imi.Project.Api.Core.Entities.Pagination;
+using Newtonsoft.Json;
+using Imi.Project.Api.Core.Entities;
 
 namespace Imi.Project.Api.Controllers
 {
@@ -23,10 +26,13 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery] PaginationParameters parameters)
         {
             var medicines = await _medicineService.ListAllMedicinesAsync();
-            var result = medicines.MapToDtoList();
+            var paginationData = new PaginationMetaData(parameters.Page, medicines.Count(), parameters.ItemsPerPage);
+            Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
+            var medicinesPaginated = Pagination.AddPagination<Medicine>(medicines, parameters);
+            var result = medicinesPaginated.MapToDtoList();
             return Ok(result);
         }
 

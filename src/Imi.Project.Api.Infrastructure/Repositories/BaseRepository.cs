@@ -40,7 +40,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
 
         }
 
-        public virtual IQueryable<T> GetAll(PaginationParameters parameters)
+        public virtual IQueryable<T> GetAll()
         {
            return  _dbContext.Set<T>().AsQueryable();
         }

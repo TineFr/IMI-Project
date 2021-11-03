@@ -10,7 +10,7 @@ namespace Imi.Project.Api.Core.Interfaces.Repositories
 {
     public interface IBaseRepository<T> where T : BaseEntity
     {
-        IQueryable<T> GetAll(PaginationParameters parameters);
+        IQueryable<T> GetAll();
         Task<IEnumerable<T>> ListAllAsync();
         Task<T> GetByIdAsync(Guid id);
         Task<T> UpdateAsync(T entity);
