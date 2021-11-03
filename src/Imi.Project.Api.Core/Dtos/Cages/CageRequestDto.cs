@@ -13,7 +13,7 @@ namespace Imi.Project.Api.Core.Dtos.Cages
         public string Name { get; set; }
         [Required(ErrorMessage = "{0} is required")]
         public string Location { get; set; }
-        //[Required(ErrorMessage = "{0} is required")]
+
         public Guid UserId { get; set; }
         public IFormFile Image { get; set; }
     }

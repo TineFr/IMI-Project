@@ -77,6 +77,7 @@ namespace Imi.Project.Api.Core.Helper
                 prescription.StartDate = prescriptionDto.StartDate;
                 prescription.MedicineId = prescriptionDto.Medicine;
                 prescription.UserId = prescriptionDto.UserId;
+
                 foreach (var bird in prescriptionDto.Birds)
                 {
                        if (!prescription.BirdPrescriptions.Select(bp => bp.BirdId).ToList().Contains(bird))
