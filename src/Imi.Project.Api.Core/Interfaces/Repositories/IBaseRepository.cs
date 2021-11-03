@@ -1,4 +1,5 @@
 ﻿using Imi.Project.Api.Core.Entities;
+using Imi.Project.Api.Core.Entities.Pagination;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Imi.Project.Api.Core.Interfaces.Repositories
 {
     public interface IBaseRepository<T> where T : BaseEntity
     {
-        IQueryable<T> GetAll();
+        IQueryable<T> GetAll(PaginationParameters parameters);
         Task<IEnumerable<T>> ListAllAsync();
         Task<T> GetByIdAsync(Guid id);
         Task<T> UpdateAsync(T entity);
