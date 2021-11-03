@@ -1,0 +1,44 @@
+﻿
+<h1 class="green">@Bird.Name</h1>
+
+<div class="detailscontainer">
+    <div class="detailsflex">
+
+        <img class="detailimage" src="@Bird.Image" />
+        <div>
+            <h2>@Bird.Name</h2>
+            <p> Species: @Bird.Species</p>
+            <p class="scientific"> Scientific name: @Bird.ScientificName</p>
+            <p> Locatin: @Bird.Cage</p>
+            <img class="genderimage" src="@SetGenderImage(Bird.Gender)" />
+        </div>
+    </div>
+
+</div>
+
+
+
+
+@code {
+
+    [Parameter]
+    public Bird Bird { get; set; }
+
+    [Inject]
+    public IBirdService birdService { get; set; }
+
+    [Parameter]
+    public Guid Id { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        Bird = await birdService.GetByIdAsync(Id);
+    }
+
+    private string SetGenderImage(string gender)
+    {
+        string imageSource = "";
+        imageSource = gender.ToLower() == "male" ? "images/male.png" : "images/female.png";
+        return imageSource;
+    }
+}
