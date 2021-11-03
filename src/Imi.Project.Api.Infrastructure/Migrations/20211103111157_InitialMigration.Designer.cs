@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Imi.Project.Api.Infrastructure.Migrations
 {
     [DbContext(typeof(MyAviaryDbContext))]
-    [Migration("20211103102530_InitialMigration")]
+    [Migration("20211103111157_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,6 +43,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("SpeciesId")
@@ -65,6 +66,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
+                            CageId = new Guid("00000000-0000-0000-0000-000000000002"),
                             Food = "Parakeet mix",
                             Gender = 0,
                             HatchDate = new DateTime(2015, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -361,9 +363,11 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Location")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("UserId")
@@ -467,11 +471,12 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.Property<Guid>("CageId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsDone")
                         .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -484,169 +489,169 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
                             CageId = new Guid("00000000-0000-0000-0000-000000000001"),
-                            IsDone = false,
-                            Name = "Refill water"
+                            Description = "Refill water",
+                            IsDone = false
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000002"),
                             CageId = new Guid("00000000-0000-0000-0000-000000000001"),
-                            IsDone = true,
-                            Name = "Clean branches"
+                            Description = "Clean branches",
+                            IsDone = true
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000003"),
                             CageId = new Guid("00000000-0000-0000-0000-000000000002"),
-                            IsDone = false,
-                            Name = "Refill water"
+                            Description = "Refill water",
+                            IsDone = false
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000004"),
                             CageId = new Guid("00000000-0000-0000-0000-000000000002"),
-                            IsDone = true,
-                            Name = "Clean branches"
+                            Description = "Clean branches",
+                            IsDone = true
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000005"),
                             CageId = new Guid("00000000-0000-0000-0000-000000000002"),
-                            IsDone = true,
-                            Name = "Add food"
+                            Description = "Add food",
+                            IsDone = true
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000006"),
                             CageId = new Guid("00000000-0000-0000-0000-000000000003"),
-                            IsDone = false,
-                            Name = "Refill water"
+                            Description = "Refill water",
+                            IsDone = false
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000007"),
                             CageId = new Guid("00000000-0000-0000-0000-000000000003"),
-                            IsDone = true,
-                            Name = "Clean branches"
+                            Description = "Clean branches",
+                            IsDone = true
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000008"),
                             CageId = new Guid("00000000-0000-0000-0000-000000000004"),
-                            IsDone = true,
-                            Name = "Add food"
+                            Description = "Add food",
+                            IsDone = true
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000009"),
                             CageId = new Guid("00000000-0000-0000-0000-000000000004"),
-                            IsDone = false,
-                            Name = "Refill water"
+                            Description = "Refill water",
+                            IsDone = false
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000010"),
                             CageId = new Guid("00000000-0000-0000-0000-000000000004"),
-                            IsDone = true,
-                            Name = "Clean branches"
+                            Description = "Clean branches",
+                            IsDone = true
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000011"),
                             CageId = new Guid("00000000-0000-0000-0000-000000000005"),
-                            IsDone = false,
-                            Name = "Refill water"
+                            Description = "Refill water",
+                            IsDone = false
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000012"),
                             CageId = new Guid("00000000-0000-0000-0000-000000000005"),
-                            IsDone = true,
-                            Name = "Clean branches"
+                            Description = "Clean branches",
+                            IsDone = true
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000013"),
                             CageId = new Guid("00000000-0000-0000-0000-000000000006"),
-                            IsDone = true,
-                            Name = "Clean branches"
+                            Description = "Clean branches",
+                            IsDone = true
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000014"),
                             CageId = new Guid("00000000-0000-0000-0000-000000000006"),
-                            IsDone = true,
-                            Name = "Add food"
+                            Description = "Add food",
+                            IsDone = true
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000015"),
                             CageId = new Guid("00000000-0000-0000-0000-000000000006"),
-                            IsDone = false,
-                            Name = "Refill water"
+                            Description = "Refill water",
+                            IsDone = false
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000016"),
                             CageId = new Guid("00000000-0000-0000-0000-000000000007"),
-                            IsDone = false,
-                            Name = "Refill water"
+                            Description = "Refill water",
+                            IsDone = false
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000017"),
                             CageId = new Guid("00000000-0000-0000-0000-000000000007"),
-                            IsDone = true,
-                            Name = "Clean branches"
+                            Description = "Clean branches",
+                            IsDone = true
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000018"),
                             CageId = new Guid("00000000-0000-0000-0000-000000000008"),
-                            IsDone = false,
-                            Name = "Refill water"
+                            Description = "Refill water",
+                            IsDone = false
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000019"),
                             CageId = new Guid("00000000-0000-0000-0000-000000000008"),
-                            IsDone = true,
-                            Name = "Clean branches"
+                            Description = "Clean branches",
+                            IsDone = true
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000020"),
                             CageId = new Guid("00000000-0000-0000-0000-000000000009"),
-                            IsDone = true,
-                            Name = "Clean branches"
+                            Description = "Clean branches",
+                            IsDone = true
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000021"),
                             CageId = new Guid("00000000-0000-0000-0000-000000000009"),
-                            IsDone = true,
-                            Name = "Add food"
+                            Description = "Add food",
+                            IsDone = true
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000022"),
                             CageId = new Guid("00000000-0000-0000-0000-000000000009"),
-                            IsDone = false,
-                            Name = "Refill water"
+                            Description = "Refill water",
+                            IsDone = false
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000023"),
                             CageId = new Guid("00000000-0000-0000-0000-000000000010"),
-                            IsDone = true,
-                            Name = "Add food"
+                            Description = "Add food",
+                            IsDone = true
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000024"),
                             CageId = new Guid("00000000-0000-0000-0000-000000000010"),
-                            IsDone = false,
-                            Name = "Refill water"
+                            Description = "Refill water",
+                            IsDone = false
                         });
                 });
 
@@ -657,9 +662,11 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Usage")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("UserId")
@@ -805,9 +812,6 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.Property<Guid>("MedicineId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
@@ -826,105 +830,105 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
-                            EndDate = new DateTime(2021, 11, 10, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(7769),
+                            EndDate = new DateTime(2021, 11, 10, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8487),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000001"),
-                            StartDate = new DateTime(2021, 11, 3, 11, 25, 30, 520, DateTimeKind.Local).AddTicks(8939),
+                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 257, DateTimeKind.Local).AddTicks(6502),
                             UserId = new Guid("00000000-0000-0000-0000-000000000001")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000002"),
-                            EndDate = new DateTime(2021, 11, 7, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8129),
+                            EndDate = new DateTime(2021, 11, 7, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8862),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000002"),
-                            StartDate = new DateTime(2021, 11, 3, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8114),
+                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8845),
                             UserId = new Guid("00000000-0000-0000-0000-000000000001")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000003"),
-                            EndDate = new DateTime(2021, 11, 10, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8145),
+                            EndDate = new DateTime(2021, 11, 10, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8882),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000003"),
-                            StartDate = new DateTime(2021, 11, 3, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8142),
+                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8879),
                             UserId = new Guid("00000000-0000-0000-0000-000000000002")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000004"),
-                            EndDate = new DateTime(2021, 11, 7, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8155),
+                            EndDate = new DateTime(2021, 11, 7, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8891),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000004"),
-                            StartDate = new DateTime(2021, 11, 3, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8152),
+                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8889),
                             UserId = new Guid("00000000-0000-0000-0000-000000000002")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000005"),
-                            EndDate = new DateTime(2021, 11, 9, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8164),
+                            EndDate = new DateTime(2021, 11, 9, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8900),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000005"),
-                            StartDate = new DateTime(2021, 11, 3, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8162),
+                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8897),
                             UserId = new Guid("00000000-0000-0000-0000-000000000003")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000006"),
-                            EndDate = new DateTime(2021, 11, 7, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8173),
+                            EndDate = new DateTime(2021, 11, 7, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8961),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000006"),
-                            StartDate = new DateTime(2021, 11, 3, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8170),
+                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8958),
                             UserId = new Guid("00000000-0000-0000-0000-000000000003")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000007"),
-                            EndDate = new DateTime(2021, 11, 5, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8182),
+                            EndDate = new DateTime(2021, 11, 5, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8970),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000007"),
-                            StartDate = new DateTime(2021, 11, 3, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8179),
+                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8967),
                             UserId = new Guid("00000000-0000-0000-0000-000000000004")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000008"),
-                            EndDate = new DateTime(2021, 11, 14, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8191),
+                            EndDate = new DateTime(2021, 11, 14, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8978),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000008"),
-                            StartDate = new DateTime(2021, 11, 3, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8188),
+                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8976),
                             UserId = new Guid("00000000-0000-0000-0000-000000000004")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000009"),
-                            EndDate = new DateTime(2021, 11, 8, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8199),
+                            EndDate = new DateTime(2021, 11, 8, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8987),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000009"),
-                            StartDate = new DateTime(2021, 11, 3, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8196),
+                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8984),
                             UserId = new Guid("00000000-0000-0000-0000-000000000005")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000010"),
-                            EndDate = new DateTime(2021, 11, 7, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8208),
+                            EndDate = new DateTime(2021, 11, 7, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8995),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000010"),
-                            StartDate = new DateTime(2021, 11, 3, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8206),
+                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8993),
                             UserId = new Guid("00000000-0000-0000-0000-000000000005")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000011"),
-                            EndDate = new DateTime(2021, 11, 7, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8218),
+                            EndDate = new DateTime(2021, 11, 7, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(9005),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000011"),
-                            StartDate = new DateTime(2021, 11, 3, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8215),
+                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(9002),
                             UserId = new Guid("00000000-0000-0000-0000-000000000006")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000012"),
-                            EndDate = new DateTime(2021, 11, 10, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8227),
+                            EndDate = new DateTime(2021, 11, 10, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(9014),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000012"),
-                            StartDate = new DateTime(2021, 11, 3, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8224),
+                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(9012),
                             UserId = new Guid("00000000-0000-0000-0000-000000000010")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000013"),
-                            EndDate = new DateTime(2021, 11, 7, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8236),
+                            EndDate = new DateTime(2021, 11, 7, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(9023),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000013"),
-                            StartDate = new DateTime(2021, 11, 3, 11, 25, 30, 523, DateTimeKind.Local).AddTicks(8233),
+                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(9020),
                             UserId = new Guid("00000000-0000-0000-0000-000000000007")
                         });
                 });
@@ -936,9 +940,11 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ScientificName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -1015,6 +1021,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

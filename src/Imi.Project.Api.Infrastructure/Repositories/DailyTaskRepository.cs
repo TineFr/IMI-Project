@@ -22,7 +22,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
         }
         public async override Task<IEnumerable<DailyTask>> ListAllAsync()
         {
-            return await GetAll().ToListAsync();
+            return await GetAll().OrderBy(b => b.Description).ToListAsync();
         }
         public async override Task<DailyTask> GetByIdAsync(Guid id)
         {

@@ -52,7 +52,7 @@ namespace Imi.Project.Api.Core.Helper
 
         public static DailyTask Update(this DailyTask dailytask, DailyTaskRequestDto taskDto)
         {
-            dailytask.Name = taskDto.Name;
+            dailytask.Description = taskDto.Description;
             dailytask.IsDone = taskDto.IsDone;
 
             return dailytask;

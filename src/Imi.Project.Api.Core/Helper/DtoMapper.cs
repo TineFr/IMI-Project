@@ -36,7 +36,7 @@ namespace Imi.Project.Api.Core.Helper
             return new DailyTaskResponseDto
             {
                 Id = task.Id,
-                Name = task.Name,
+                Description = task.Description,
                 IsDone = task.IsDone
             };
         }
@@ -58,7 +58,7 @@ namespace Imi.Project.Api.Core.Helper
                 Gender = bird.Gender.ToString(),
                 HatchDate = bird.HatchDate,
                 Image = bird.Image,
-                Cage = bird.Cage.Name, 
+                Cage = bird.Cage?.Name, 
             };
         }
 

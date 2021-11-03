@@ -42,8 +42,8 @@ namespace Imi.Project.Api.Controllers
             {
                 return NotFound($"bird with id {id} does not exist");
             }
-            prescription.MapToDto();
-            return Ok(prescription);
+            var result = prescription.MapToDto();
+            return Ok(result);
         }
 
         [HttpPost]
@@ -64,8 +64,9 @@ namespace Imi.Project.Api.Controllers
                 return NotFound($"User with id {prescription.UserId} does not exist");
             }
             var newPrescripptionEntity = newPrescription.MapToEntity();
-            await _prescriptionService.AddPrescriptionAsync(newPrescripptionEntity);
-            return Ok();
+            var result = await _prescriptionService.AddPrescriptionAsync(newPrescripptionEntity);
+            var resultDto = result.MapToDto();
+            return Ok(resultDto);
         }
 
         [HttpPut]
@@ -82,8 +83,8 @@ namespace Imi.Project.Api.Controllers
             }
             var prescriptionEntity = prescription.Update(updatedPrescription);
             var result = await _prescriptionService.UpdatePrescriptionAsync(prescriptionEntity);
-            
-            return Ok();
+            var resultDto = result.MapToDto();
+            return Ok(resultDto);
         }
 
 

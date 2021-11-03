@@ -46,8 +46,8 @@ namespace Imi.Project.Api.Controllers
             {
                 return NotFound($"bird with id {id} does not exist");
             }
-            //bird.MapToDto();
-            return Ok(bird.MapToDto());
+            var result = bird.MapToDto();
+            return Ok(result);
         }
 
         [HttpPost]
@@ -74,7 +74,8 @@ namespace Imi.Project.Api.Controllers
             }
             var newBirdEntity = newBird.MapToEntity();
             var result = await _birdService.AddBirdAsync(newBirdEntity);
-            return Ok(result.MapToDto());
+            var resultDto = result.MapToDto();
+            return Ok(resultDto);
         }
 
         [HttpPut]
@@ -91,7 +92,8 @@ namespace Imi.Project.Api.Controllers
             }
             bird.Update(updatedBird);
             var result = await _birdService.UpdateBirdAsync(bird);
-            return Ok(result);
+            var resultDto = result.MapToDto();
+            return Ok(resultDto);
         }
 
 
@@ -124,10 +126,10 @@ namespace Imi.Project.Api.Controllers
                 }
                 bird.Image = databasePath;
                 await _birdService.UpdateBirdAsync(bird);
-                var albumDto = bird.MapToDto();
-                return Ok(albumDto);
+                var birdDto = bird.MapToDto();
+                return Ok(birdDto);
             }
-            else return BadRequest("Uploaded file should be an image"); //bad request?     
+            else return BadRequest("Uploaded file should be an image"); 
         }
     }
 }

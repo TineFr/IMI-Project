@@ -36,12 +36,12 @@ namespace Imi.Project.Api.Infrastructure.Repositories
         }
         public async Task<IEnumerable<Bird>> GetByCageIdAsync(Guid id)
         {
-            return await GetAll().Where(b => b.CageId.Equals(id)).ToListAsync();
+            return await GetAll().Where(b => b.CageId.Equals(id)).OrderBy(b => b.Name).ToListAsync();
         }
 
         public async Task<IEnumerable<Bird>> GetByUserIdAsync(Guid id)
         {
-            return await GetAll().Where(b => b.UserId.Equals(id)).ToListAsync();
+            return await GetAll().Where(b => b.UserId.Equals(id)).OrderBy(b => b.Name).ToListAsync();
         }
 
 

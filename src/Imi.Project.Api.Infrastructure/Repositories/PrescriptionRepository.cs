@@ -17,7 +17,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
         }
         public  override IQueryable<Prescription> GetAll()
         {
-            var prescriptions = _dbContext.Prescriptions.Include(p => p.User)
+            var prescriptions =    _dbContext.Prescriptions.Include(p => p.User)
                                                            .Include(p => p.BirdPrescriptions)
                                                            .ThenInclude(p => p.Bird)
                                                            .ThenInclude(b => b.Cage)
@@ -37,7 +37,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
 
         public async override Task<IEnumerable<Prescription>> ListAllAsync()
         {
-            return await GetAll().OrderBy(b => b.Name).ToListAsync();
+            return await GetAll().OrderBy(b => b.StartDate).ToListAsync();
         }
 
 
