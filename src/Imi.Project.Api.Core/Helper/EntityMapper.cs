@@ -35,7 +35,6 @@ namespace Imi.Project.Api.Core.Helper
                 CageId = birdDto.CageId,
                 Gender = birdDto.Gender,
                 Food = birdDto.Food,
-                Image = birdDto.Image,
                 HatchDate = birdDto.HatchDate,
                 SpeciesId = birdDto.SpeciesId,
                 UserId = birdDto.UserId
@@ -51,7 +50,6 @@ namespace Imi.Project.Api.Core.Helper
                 Id = cageDto.Id,
                 Name = cageDto.Name,
                 Location = cageDto.Location,
-                //Image = cageDto.Image,
                 UserId = cageDto.UserId
             };
             return cage;

@@ -51,7 +51,7 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(BirdRequestDto newBird)
+        public async Task<IActionResult> Post([FromForm] BirdRequestDto newBird)
         {
             if (!ModelState.IsValid)
             {
@@ -73,13 +73,23 @@ namespace Imi.Project.Api.Controllers
                 return NotFound($"Cage with id {newBird.CageId} does not exist");
             }
             var newBirdEntity = newBird.MapToEntity();
+
+            if (newBird.Image != null)
+            {
+                if (newBird.Image.ContentType.Contains("image"))
+                {
+                    var databasePath = await _imageService.AddOrUpdateImageAsync<Bird>(newBird.Id, newBird.Image);
+                    newBirdEntity.Image = databasePath;
+                }
+                else return BadRequest("Uploaded file should be an image");
+            }
             var result = await _birdService.AddBirdAsync(newBirdEntity);
             var resultDto = result.MapToDto();
             return Ok(resultDto);
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put(BirdRequestDto updatedBird)
+        public async Task<IActionResult> Put([FromForm]  BirdRequestDto updatedBird)
         {
             if (!ModelState.IsValid)
             {
@@ -90,12 +100,22 @@ namespace Imi.Project.Api.Controllers
             {
                 return NotFound($"Bird with id {updatedBird.Id} does not exist");
             }
-            bird.Update(updatedBird);
+            var updatedBirdEntity =  bird.Update(updatedBird);
+
+            if (updatedBird.Image != null)
+            {
+                if (updatedBird.Image.ContentType.Contains("image"))
+                {
+                    var databasePath = await _imageService.AddOrUpdateImageAsync<Bird>(updatedBird.Id, updatedBird.Image);
+                    updatedBirdEntity.Image = databasePath;
+                }
+                else return BadRequest("Uploaded file should be an image");
+            }
+
             var result = await _birdService.UpdateBirdAsync(bird);
             var resultDto = result.MapToDto();
             return Ok(resultDto);
         }
-
 
 
         [HttpDelete]
@@ -110,26 +130,5 @@ namespace Imi.Project.Api.Controllers
             return Ok();
         }
 
-
-        [HttpPost("{id}/image"), HttpPut("{id}/image")]
-
-
-        public async Task<IActionResult> AddOrUpdateImage(Guid id, IFormFile image)
-        {
-            if (image.ContentType.Contains("image"))
-            {
-                var databasePath = await _imageService.AddOrUpdateImageAsync<Bird>(id, image);
-                var bird = await _birdService.GetBirdByIdAsync(id);
-                if (bird == null)
-                {
-                    return NotFound($"No bird id {id} could be found");
-                }
-                bird.Image = databasePath;
-                await _birdService.UpdateBirdAsync(bird);
-                var birdDto = bird.MapToDto();
-                return Ok(birdDto);
-            }
-            else return BadRequest("Uploaded file should be an image"); 
-        }
     }
 }
