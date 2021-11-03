@@ -1,0 +1,18 @@
+﻿
+
+
+.outerQuestionContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-content: center
+}
+
+.innerQuestionContainer {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+
+}
