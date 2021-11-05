@@ -6,7 +6,7 @@
 
     @foreach (var answer in question.PossibleAnswers)
     {
-        <button class="item">
+        <button @onclick="() => AnswerPicked(answer, question.CorrectAnswer)"class="item">
             @answer
         </button>
     }
@@ -15,6 +15,7 @@
 
 @code {
 
+    private int count;
 
     [Inject]
     public IQuizService QuizService { get; set; }
@@ -43,4 +44,13 @@
         return questions.ToArray()[rndQuestion];
 
     }
+
+    public async void AnswerPicked(string answer, string correctAnswer)
+    {
+
+        if (answer == correctAnswer) count += 1;
+        question = await ReturnQuestion();
+    }
+
+
 }
