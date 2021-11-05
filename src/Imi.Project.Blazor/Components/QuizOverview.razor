@@ -9,7 +9,7 @@
 <div class="itemscontainer">
 
     <div class="item">
-        <button @onclick="() => startQuiz = true">Play!</button>
+        <button @onclick="Start">Play!</button>
     </div>
     <div class="item">
         <button>Statistics</button>
@@ -18,17 +18,30 @@
 </div>
 }
 else
-{          
-    <QuestionView></QuestionView>
+{
+    <QuestionView @ref="question" Question="@ShowFirstQuestion" OnStart="OnCancelDelete"></QuestionView>
 }
-
-
 
 
 @code {
 
+    //private QuestionView question;
 
     bool startQuiz;
+
+    [Parameter] //output
+    public EventCallback OnStart { get; set; }
+
+    private async void Start()
+    {
+        await OnStart.InvokeAsync();
+        startQuiz = true;
+
+
+    }
+
+    //private async Task<QuizElement> ShowFirstQuestion() => await question.ReturnQuestion();
+}
 }
 
 

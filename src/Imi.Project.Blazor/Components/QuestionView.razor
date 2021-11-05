@@ -4,20 +4,43 @@
 <div class="questionImage"></div>
 <div class="itemscontainer">
 
-    <div class="item">
-        <p>Bald Eagle</p>
-    </div>
-    <div class="item">
-        <p>Golden Eagle</p>
-    </div>
-    <div class="item">
-        <p>Mockingbird</p>
-    </div>
-    <div class="item">
-        <p>Starling</p>
-    </div>
+    <button class="item">
+           Bald Eagle
+    </button>
+    <button class="item">
+        Golden Eagle
+    </button>
+    <button class="item">
+        Mockingbird
+    </button>
+    <button class="item">
+        Starling
+    </button>
 </div>
 
 @code {
 
+    [Parameter]
+    public QuizElement Question { get; set; }
+
+    List<int> askedQuestions = new List<int>();
+
+
+    [Inject]
+    public IQuizService QuizService { get; set; }
+
+    private bool CheckIfCorrect(string choice, string answer)
+    {
+        return choice == answer;
+    }
+    
+    public async Task<QuizElement> ReturnQuestion()
+    {
+        Random rnd  = new Random():
+        var questions = await QuizService.GetAllAsync();
+        var rndQuestion = rnd.Next(questions.Count());
+        askedQuestions.Add(rndQuestion);
+        return questions.ToArray()[rndQuestion];
+
+    }
 }

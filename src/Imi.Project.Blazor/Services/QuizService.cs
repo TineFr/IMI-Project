@@ -1,4 +1,5 @@
 ﻿using Imi.Project.Blazor.Models.Quiz;
+using Imi.Project.Blazor.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Blazor.Services
 {
-    public class QuizService
+    public class QuizService : IQuizService
     {
-        private static IEnumerable<QuizElement> QuestionsRepository = new List<QuizElement>
+        private static IEnumerable<QuizElement> questionsRepository = new List<QuizElement>
         {
                     new QuizElement
                     {
                         Question = "Which bird is the national bird of the USA?",
+                        Image = "images/quiz/americanflag.png",
                         PossibleAnswers = new List<string>()
                         {
                             "Bald eagle", "Golden eagle", "Raven", "Mockingbird"
@@ -23,10 +25,11 @@ namespace Imi.Project.Blazor.Services
 
                     new QuizElement
                     {
-                        Question = "Which bird is the national bird of the USA?",
+                        Question = "Test question?",
+                        Image = "images/quiz/logolightnotext.png",
                         PossibleAnswers = new List<string>()
                         {
-                            "Bald eagle", "Golden eagle", "Raven", "Mockingbird"
+                            "Test", "Test", "Raven", "Mockingbird"
                         },
                         CorrectAnswer="Bald eagle"
 
@@ -64,5 +67,11 @@ namespace Imi.Project.Blazor.Services
 
                     },
         };
+
+
+        public Task<IEnumerable<QuizElement>> GetAllAsync()
+        {
+            return Task.FromResult(questionsRepository);
+        }
     }
 }
