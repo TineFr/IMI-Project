@@ -4,45 +4,31 @@
 {
 
 
-<div class="quiztitle"><h3>Test your bird knowledge!</h3></div>
-<div class="mainImage"></div>
-<div class="itemscontainer">
+    <div class="quiztitle"><h3>Test your bird knowledge!</h3></div>
+    <div class="mainImage"></div>
+    <div class="itemscontainer">
 
-    <div class="item">
-        <button @onclick="Start">Play!</button>
-    </div>
-    <div class="item">
-        <button>Statistics</button>
-    </div>
+        <div class="item">
+            <button @onclick="() => startQuiz = true">Play!</button>
+        </div>
+        <div class="item">
+            <button>Statistics</button>
+        </div>
 
-</div>
+    </div>
 }
 else
 {
-    <QuestionView @ref="question" Question="@ShowFirstQuestion" OnStart="OnCancelDelete"></QuestionView>
+    <QuestionView></QuestionView>
 }
 
 
 @code {
 
-    //private QuestionView question;
-
     bool startQuiz;
 
-    [Parameter] //output
-    public EventCallback OnStart { get; set; }
-
-    private async void Start()
-    {
-        await OnStart.InvokeAsync();
-        startQuiz = true;
-
-
-    }
-
-    //private async Task<QuizElement> ShowFirstQuestion() => await question.ReturnQuestion();
 }
-}
+
 
 
 

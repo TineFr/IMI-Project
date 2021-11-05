@@ -1,42 +1,42 @@
 ﻿
 
-<div class="question"><h3>What bird is the symbol of America?</h3></div>
+<div class="question"><h3>@question.Question</h3></div>
 <div class="questionImage"></div>
 <div class="itemscontainer">
 
-    <button class="item">
-           Bald Eagle
-    </button>
-    <button class="item">
-        Golden Eagle
-    </button>
-    <button class="item">
-        Mockingbird
-    </button>
-    <button class="item">
-        Starling
-    </button>
+    @foreach (var answer in question.PossibleAnswers)
+    {
+        <button class="item">
+            @answer
+        </button>
+    }
+
 </div>
 
 @code {
-
-    [Parameter]
-    public QuizElement Question { get; set; }
-
-    List<int> askedQuestions = new List<int>();
 
 
     [Inject]
     public IQuizService QuizService { get; set; }
 
+    public QuizElement question;
+
+    protected async override Task OnInitializedAsync()
+    {
+        question = await ReturnQuestion();
+        await base.OnInitializedAsync();
+    }
+
+    List<int> askedQuestions = new List<int>();
+
     private bool CheckIfCorrect(string choice, string answer)
     {
         return choice == answer;
     }
-    
+
     public async Task<QuizElement> ReturnQuestion()
     {
-        Random rnd  = new Random():
+        Random rnd = new Random();
         var questions = await QuizService.GetAllAsync();
         var rndQuestion = rnd.Next(questions.Count());
         askedQuestions.Add(rndQuestion);

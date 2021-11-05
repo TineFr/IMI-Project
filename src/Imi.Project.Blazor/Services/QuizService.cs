@@ -25,7 +25,7 @@ namespace Imi.Project.Blazor.Services
 
                     new QuizElement
                     {
-                        Question = "Test question?",
+                        Question = "Question2?",
                         Image = "images/quiz/logolightnotext.png",
                         PossibleAnswers = new List<string>()
                         {
@@ -37,7 +37,7 @@ namespace Imi.Project.Blazor.Services
 
                     new QuizElement
                     {
-                        Question = "Which bird is the national bird of the USA?",
+                        Question = "Question3",
                         PossibleAnswers = new List<string>()
                         {
                             "Bald eagle", "Golden eagle", "Raven", "Mockingbird"
@@ -48,7 +48,7 @@ namespace Imi.Project.Blazor.Services
 
                     new QuizElement
                     {
-                        Question = "Which bird is the national bird of the USA?",
+                        Question = "Question4",
                         PossibleAnswers = new List<string>()
                         {
                             "Bald eagle", "Golden eagle", "Raven", "Mockingbird"
@@ -58,7 +58,7 @@ namespace Imi.Project.Blazor.Services
                     },
                     new QuizElement
                     {
-                        Question = "Which bird is the national bird of the USA?",
+                        Question = "Question5",
                         PossibleAnswers = new List<string>()
                         {
                             "Bald eagle", "Golden eagle", "Raven", "Mockingbird"
