@@ -13,7 +13,7 @@
 
         @foreach (var answer in question.PossibleAnswers)
         {
-            <button @onclick="() => AnswerPicked(answer.IsCorrect)" class="answer @(AddClass ? answer.IsCorrect ? "green" : "red" : "")">
+            <button @onclick="() => AnswerPicked(answer.IsCorrect)" class="answer @(AddColor ? answer.IsCorrect ? "green" : "red" : "")">
                 @answer.Text
             </button>
         }
@@ -31,18 +31,18 @@ else
 
     public bool Visibility { get; set; }
 
-    public bool AddClass { get; set; }
+    public bool AddColor { get; set; }
 
     public void AddClassName()
     {
-        AddClass = true;
+        AddColor = true;
         StateHasChanged();
 
     }
     async void NextQuestion()
     {
         question = await ReturnQuestion();
-        AddClass = false;
+        AddColor = false;
         Visibility = false;
     }
 
@@ -94,19 +94,6 @@ else
 
 
     }
-
-    //async void Test()
-    //{
-    //    Task.Delay(10000).Wait();
-    //    question = await ReturnQuestion();
-    //    AddClass = false;
-    //}
-
-
-
-    //Task.Delay(10000).Wait();
-    //AddClass = false;
-    //question = await ReturnQuestion();
 
 }
 
