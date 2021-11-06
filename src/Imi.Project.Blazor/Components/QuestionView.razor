@@ -36,8 +36,6 @@ else
     public void AddClassName()
     {
         AddColor = true;
-        StateHasChanged();
-
     }
     async void NextQuestion()
     {
@@ -73,7 +71,7 @@ else
             var questions = await QuizService.GetAllAsync();
             do
             {
-            rndQuestion = rnd.Next(questions.Count());
+                rndQuestion = rnd.Next(questions.Count());
             } while (askedQuestions.Contains(rndQuestion));
             askedQuestions.Add(rndQuestion);
             return questions.ToArray()[rndQuestion];
@@ -91,8 +89,6 @@ else
         AddClassName();
         if (isCorrect) count += 1;
         Visibility = true;
-
-
     }
 
 }
