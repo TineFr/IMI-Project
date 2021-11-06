@@ -30,7 +30,7 @@ button {
 .questionImage {
     background-image: url(/images/quiz/americanflag.png);
     width: 400px;
-    height: 200px;
+    height: auto;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

@@ -17,53 +17,104 @@ namespace Imi.Project.Blazor.Services
                         Image = "images/quiz/americanflag.png",
                         PossibleAnswers = new List<string>()
                         {
-                            "Bald eagle", "Golden eagle", "Raven", "Mockingbird"
+                            "Bald Eagle", "Golden Eagle", "Raven", "Mockingbird"
                         },
-                        CorrectAnswer="Bald eagle"
+                        CorrectAnswer="Bald Eagle"
                         
                     },
 
                     new QuizElement
                     {
-                        Question = "Question2?",
-                        Image = "images/quiz/logolightnotext.png",
+                        Question = "What is the world’s smallest living bird?",
+                        Image = "images/quiz/beehummingbird.jpg",
                         PossibleAnswers = new List<string>()
                         {
-                            "Test", "Test", "Raven", "Mockingbird"
+                            "Bee Hummingbird", "Diamond Firetail", "Grey Fantail", "Spotted Pardalote"
                         },
-                        CorrectAnswer="Bald eagle"
+                        CorrectAnswer="Bee Hummingbird"
 
                     },
 
                     new QuizElement
                     {
-                        Question = "Question3",
+                        Question = "Which bird has the fastest maximum airspeed and is classified as the fastest animal in the world",
+                        Image = "images/quiz/fastestbird.jpg",
                         PossibleAnswers = new List<string>()
                         {
-                            "Bald eagle", "Golden eagle", "Raven", "Mockingbird"
+                            "Peregrine Falcon", "Saker falcon", "Golden Eagle", "Grey-headed Albatross"
                         },
-                        CorrectAnswer="Bald eagle"
+                        CorrectAnswer="Peregrine Falcon"
 
                     },
 
                     new QuizElement
                     {
-                        Question = "Question4",
+                        Question = "What is the collective name for a group of crows?",
+                        Image = "images/quiz/crows.jfif",
                         PossibleAnswers = new List<string>()
                         {
-                            "Bald eagle", "Golden eagle", "Raven", "Mockingbird"
+                            "A Wreck", "A Murder", "A Flock", "A Muster"
                         },
-                        CorrectAnswer="Bald eagle"
+                        CorrectAnswer="A Murder"
 
                     },
                     new QuizElement
                     {
-                        Question = "Question5",
+                        Question = "Which birds did coal miners traditionally bring into the mines with them to detect dangerous levels of carbon monoxide?",
+                        Image = "images/quiz/mine.jfif",
                         PossibleAnswers = new List<string>()
                         {
-                            "Bald eagle", "Golden eagle", "Raven", "Mockingbird"
+                            "Robins", "Crows", "Canaries", "Blackbirds"
                         },
-                        CorrectAnswer="Bald eagle"
+                        CorrectAnswer="Canaries"
+
+                    },
+
+
+                    new QuizElement
+                    {
+                        Question = "What color eggs does a gray catbird lay?",
+                        Image = "",
+                        PossibleAnswers = new List<string>()
+                        {
+                            "White", "Blue", "Pink", "Green"
+                        },
+                        CorrectAnswer="Blue"
+
+                    },
+
+                    new QuizElement
+                    {
+                        Question = "Pica pica is the scientific name for which bird?",
+                        Image = "images/quiz/fastestbird.jpg",
+                        PossibleAnswers = new List<string>()
+                        {
+                            "Eurasian Magpie", "Laughing kookaburra", "Conure", "Cockatoo"
+                        },
+                        CorrectAnswer="Eurasian Magpie"
+
+                    },
+
+                    new QuizElement
+                    {
+                        Question = "There is only one bird in the world which has nostrils at the end of its beak. Which is it?",
+                        Image = "images/quiz/crows.jfif",
+                        PossibleAnswers = new List<string>()
+                        {
+                            "Kiwi", "Ostrich", "Southern Cassowary", "Magpie Goose"
+                        },
+                        CorrectAnswer="Kiwi"
+
+                    },
+                    new QuizElement
+                    {
+                        Question = "The kakapo bird is native to which country?",
+                        Image = "images/quiz/mine.jfif",
+                        PossibleAnswers = new List<string>()
+                        {
+                            "Tanzania", "Papua New Guinea", "India", "New Zealand"
+                        },
+                        CorrectAnswer="New Zealand"
 
                     },
         };
