@@ -1,8 +1,5 @@
 ﻿
 
-
-
-
 @if (!quizEnded)
 {
 
@@ -12,9 +9,9 @@
 
         @foreach (var answer in question.PossibleAnswers)
         {
-        <button @onclick="() => AnswerPicked(answer.IsCorrect)" class="answer @(addClass ? answer.IsCorrect ? "green" : "red" : "")">
-            @answer.Text
-        </button>
+            <button @onclick="() => AnswerPicked(answer.IsCorrect)" class="answer @(AddClass ? answer.IsCorrect ? "green" : "red" : "")">
+                @answer.Text
+            </button>
         }
     </div>
 }
@@ -27,54 +24,65 @@ else
 
 @code {
 
-    private bool addClass = false;
+    @*AnswerPicked(answer.IsCorrect)*@
 
-    public void AddClass() => addClass = true;
+public bool AddClass { get; set; } = false;
 
+public void AddClassName() {
+    AddClass = true;
+    StateHasChanged();
 
-    private bool quizEnded = false;
+}
 
-    private int count;
+private bool quizEnded = false;
 
-    [Inject]
-    public IQuizService QuizService { get; set; }
+private int count;
 
-    public QuizElement question;
+[Inject]
+public IQuizService QuizService { get; set; }
 
-    protected async override Task OnInitializedAsync()
+public QuizElement question;
+
+protected async override Task OnInitializedAsync()
+{
+    question = await ReturnQuestion();
+    await base.OnInitializedAsync();
+}
+
+List<int> askedQuestions = new List<int>();
+
+public async Task<QuizElement> ReturnQuestion()
+{
+    int rndQuestion;
+    if (askedQuestions.Count < 5)
     {
-        question = await ReturnQuestion();
-        await base.OnInitializedAsync();
-    }
-
-    List<int> askedQuestions = new List<int>();
-
-    public async Task<QuizElement> ReturnQuestion()
-    {
-        int rndQuestion;
-        if (askedQuestions.Count < 5)
+        Random rnd = new Random();
+        var questions = await QuizService.GetAllAsync();
+        do
         {
-            Random rnd = new Random();
-            var questions = await QuizService.GetAllAsync();
-            do
-            {
             rndQuestion = rnd.Next(questions.Count());
-            } while (askedQuestions.Contains(rndQuestion));
-            askedQuestions.Add(rndQuestion);
-            return questions.ToArray()[rndQuestion];
-        }
-        else
-        {
-            quizEnded = true;
-            return null;
-        }
+        } while (askedQuestions.Contains(rndQuestion));
+        askedQuestions.Add(rndQuestion);
+        return questions.ToArray()[rndQuestion];
     }
-
-    public async void AnswerPicked(bool isCorrect)
+    else
     {
-        AddClass();
-        if (isCorrect) count += 1;  
+        quizEnded = true;
+        return null;
     }
+}
+
+
+public async void AnswerPicked(bool isCorrect)
+{
+    AddClassName();
+    if (isCorrect) count += 1;
+    Task.Delay(2000).Wait();
+    //AddClass = false;
+    question = await ReturnQuestion();
+
+
+}
 
 
 }

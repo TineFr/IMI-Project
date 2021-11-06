@@ -47,16 +47,19 @@ button {
     background-size: cover;
     background-position: center;
 }
-green:hover{
-    background-color:darkseagreen;
+.green:hover {
+    background-color: lightgreen;
+}
+.red:hover {
+    background-color: lightcoral;
 }
 
 .green {
-    background-color: aquamarine;
+    background-color: lightgreen;
 }
 
 .red {
-    background-color: darkred;
+    background-color: lightcoral;
 }
 
 .itemscontainer {
