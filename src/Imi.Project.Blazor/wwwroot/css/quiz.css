@@ -1,6 +1,4 @@
 ﻿
-
-
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap');
 
 
@@ -12,8 +10,8 @@
     margin-top: 5vh;
 }
 
-.quiztitle {
-    font-size: 2em;
+.question > h3 {
+    font-size: 1.2em;
 }
 
 button {
@@ -28,8 +26,10 @@ button {
 }
 
 .questionImage {
-    background-image: url(/images/quiz/americanflag.png);
-    width: 400px;
+
+    width:auto;
+    max-width: 400px;
+    max-height:300px;
     height: auto;
     background-repeat: no-repeat;
     background-size: cover;
@@ -47,6 +47,17 @@ button {
     background-size: cover;
     background-position: center;
 }
+green:hover{
+    background-color:darkseagreen;
+}
+
+.green {
+    background-color: aquamarine;
+}
+
+.red {
+    background-color: darkred;
+}
 
 .itemscontainer {
     max-width: 600px;
@@ -61,7 +72,7 @@ button {
     border-radius: 5%;
 }
 
-.item {
+.item, .answer {
     margin: 15px;
     border: 10px white;
     position: relative;

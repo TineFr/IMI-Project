@@ -9,7 +9,6 @@ namespace Imi.Project.Blazor.Models.Quiz
     {
         public string Question { get; set; }
         public string Image { get; set; }
-        public List<string> PossibleAnswers { get; set; }
-        public string CorrectAnswer { get; set; }
+        public List<QuizAnswer> PossibleAnswers { get; set; }
     }
 }

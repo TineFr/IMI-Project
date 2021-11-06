@@ -6,18 +6,17 @@
 @if (!quizEnded)
 {
 
-<div class="question"><h3>@question.Question</h3></div>
-<img class="questionImage" src="@question.Image">
-<div class="itemscontainer">
+    <div class="question"><h3>@question.Question</h3></div>
+    <img class="questionImage" src="@question.Image">
+    <div class="itemscontainer">
 
-    @foreach (var answer in question.PossibleAnswers)
-    {
-        <button @onclick="() => AnswerPicked(answer, question.CorrectAnswer)"class="item">
-            @answer
+        @foreach (var answer in question.PossibleAnswers)
+        {
+        <button @onclick="() => AnswerPicked(answer.IsCorrect)" class="answer @(addClass ? answer.IsCorrect ? "green" : "red" : "")">
+            @answer.Text
         </button>
-    }
-
-</div>
+        }
+    </div>
 }
 
 else
@@ -27,6 +26,11 @@ else
 
 
 @code {
+
+    private bool addClass = false;
+
+    public void AddClass() => addClass = true;
+
 
     private bool quizEnded = false;
 
@@ -45,11 +49,6 @@ else
 
     List<int> askedQuestions = new List<int>();
 
-    private bool CheckIfCorrect(string choice, string answer)
-    {
-        return choice == answer;
-    }
-
     public async Task<QuizElement> ReturnQuestion()
     {
         int rndQuestion;
@@ -59,7 +58,7 @@ else
             var questions = await QuizService.GetAllAsync();
             do
             {
-                rndQuestion = rnd.Next(questions.Count());
+            rndQuestion = rnd.Next(questions.Count());
             } while (askedQuestions.Contains(rndQuestion));
             askedQuestions.Add(rndQuestion);
             return questions.ToArray()[rndQuestion];
@@ -71,14 +70,14 @@ else
         }
     }
 
-
-
-    public async void AnswerPicked(string answer, string correctAnswer)
+    public async void AnswerPicked(bool isCorrect)
     {
-
-        if (answer == correctAnswer) count += 1;
-        question = await ReturnQuestion();
+        AddClass();
+        if (isCorrect) count += 1;  
     }
 
 
 }
+
+
+
