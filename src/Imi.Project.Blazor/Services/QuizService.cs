@@ -37,7 +37,7 @@ namespace Imi.Project.Blazor.Services
 
                     new QuizElement
                     {
-                        Question = "Which bird has the fastest maximum airspeed and is classified as the fastest animal in the world",
+                        Question = "Which bird has the fastest maximum airspeed and is classified as the fastest animal in the world?",
                         Image = "images/quiz/fastestbird.jpg",
                         PossibleAnswers = new List<string>()
                         {
@@ -74,10 +74,10 @@ namespace Imi.Project.Blazor.Services
                     new QuizElement
                     {
                         Question = "What color eggs does a gray catbird lay?",
-                        Image = "",
+                        Image = "images/quiz/catbird.jfif",
                         PossibleAnswers = new List<string>()
                         {
-                            "White", "Blue", "Pink", "Green"
+                            "White", "Blue", "Gray", "Green"
                         },
                         CorrectAnswer="Blue"
 
@@ -86,7 +86,7 @@ namespace Imi.Project.Blazor.Services
                     new QuizElement
                     {
                         Question = "Pica pica is the scientific name for which bird?",
-                        Image = "images/quiz/fastestbird.jpg",
+                        Image = "images/quiz/pica.png",
                         PossibleAnswers = new List<string>()
                         {
                             "Eurasian Magpie", "Laughing kookaburra", "Conure", "Cockatoo"
@@ -98,7 +98,7 @@ namespace Imi.Project.Blazor.Services
                     new QuizElement
                     {
                         Question = "There is only one bird in the world which has nostrils at the end of its beak. Which is it?",
-                        Image = "images/quiz/crows.jfif",
+                        Image = "images/quiz/nostrils.jpg",
                         PossibleAnswers = new List<string>()
                         {
                             "Kiwi", "Ostrich", "Southern Cassowary", "Magpie Goose"
@@ -109,7 +109,7 @@ namespace Imi.Project.Blazor.Services
                     new QuizElement
                     {
                         Question = "The kakapo bird is native to which country?",
-                        Image = "images/quiz/mine.jfif",
+                        Image = "images/quiz/kakapo.jpg",
                         PossibleAnswers = new List<string>()
                         {
                             "Tanzania", "Papua New Guinea", "India", "New Zealand"
