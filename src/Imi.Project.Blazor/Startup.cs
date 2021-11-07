@@ -33,6 +33,7 @@ namespace Imi.Project.Blazor
             services.AddSingleton<WeatherForecastService>();
             services.AddTransient<IBirdService, MockBirdService>();
             services.AddTransient<ICageService, MockCageService>();
+            services.AddTransient<IQuizService, QuizService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
