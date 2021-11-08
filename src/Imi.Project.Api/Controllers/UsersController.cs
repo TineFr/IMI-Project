@@ -41,7 +41,7 @@ namespace Imi.Project.Api.Controllers
             var users = await _userService.ListAllUsersAsync();
             var paginationData = new PaginationMetaData(parameters.Page, users.Count(), parameters.ItemsPerPage);
             Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
-            var usersPaginated = Pagination.AddPagination<User>(users, parameters);
+            var usersPaginated = Pagination.AddPagination<ApplicationUser>(users, parameters);
             var result = usersPaginated.MapToDtoList();
             return Ok(result);
         }

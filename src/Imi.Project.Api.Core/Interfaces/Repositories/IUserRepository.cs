@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Imi.Project.Api.Core.Interfaces.Repositories
 {
-    public interface IUserRepository : IBaseRepository<User>
+    public interface IUserRepository : IBaseRepository<ApplicationUser>
     {
     }
 }

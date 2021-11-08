@@ -16,7 +16,7 @@ namespace Imi.Project.Api.Core.Entities
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public Guid? UserId { get; set; }
-        public User User { get; set; }
+        public ApplicationUser User { get; set; }
 
 
 

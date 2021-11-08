@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Imi.Project.Api.Core.Entities
 {
-    public class User : IdentityUser<Guid>
+    public class ApplicationUser : IdentityUser<Guid>
     {
         public ICollection<Cage> Cages { get; set; } 
         public ICollection<Bird> Birds { get; set; }

@@ -89,7 +89,7 @@ namespace Imi.Project.Api.Core.Helper
             return cages.Select(c => c.MapToDto()).ToList();
         }
 
-        public static UserResponseDto MapToDto(this User user)
+        public static UserResponseDto MapToDto(this ApplicationUser user)
         {
             return new UserResponseDto
             {
@@ -101,7 +101,7 @@ namespace Imi.Project.Api.Core.Helper
             };
         }
 
-        public static IEnumerable<UserResponseDto> MapToDtoList(this IEnumerable<User> users)
+        public static IEnumerable<UserResponseDto> MapToDtoList(this IEnumerable<ApplicationUser> users)
         {
             return users.Select(u => u.MapToDto()).ToList();
         }

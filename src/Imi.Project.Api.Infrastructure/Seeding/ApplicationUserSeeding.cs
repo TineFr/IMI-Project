@@ -7,16 +7,16 @@ using System.Text;
 
 namespace Imi.Project.Api.Infrastructure.Seeding
 {
-    public class UserSeeding
+    public class ApplicationUserSeeding
     {
        
         public static void Seeding(ModelBuilder modelBuilder)
         {
-            IPasswordHasher<User> hasher = new PasswordHasher<User>();
-            modelBuilder.Entity<User>().HasData(
-               new User[]
+            IPasswordHasher<ApplicationUser> hasher = new PasswordHasher<ApplicationUser>();
+            modelBuilder.Entity<ApplicationUser>().HasData(
+               new ApplicationUser[]
                {
-                    new User
+                    new ApplicationUser
                     {
                         Id = Guid.Parse("00000000-0000-0000-0000-000000000001"),
                         UserName = "tine.franchois@gmail.com",
@@ -28,7 +28,7 @@ namespace Imi.Project.Api.Infrastructure.Seeding
                         PasswordHash = hasher.HashPassword(null, "Pa$$w0rd")
                     },
 
-                    new User
+                    new ApplicationUser
                     {
                         Id = Guid.Parse("00000000-0000-0000-0000-000000000002"),
                         UserName = "deq.claire@gmail.com",
@@ -41,7 +41,7 @@ namespace Imi.Project.Api.Infrastructure.Seeding
 
                     },
 
-                    new User
+                    new ApplicationUser
                     {
                         Id = Guid.Parse("00000000-0000-0000-0000-000000000003"),
                         UserName = "depotter.sander@gmail.com",
@@ -54,7 +54,7 @@ namespace Imi.Project.Api.Infrastructure.Seeding
                         NormalizedUserName = ("depotter.sander@gmail.com").ToUpper(),                      
                     },
 
-                    new User
+                    new ApplicationUser
                     {
                         Id = Guid.Parse("00000000-0000-0000-0000-000000000004"),
                         UserName = "haenebalcke.niels@gmail.com",
@@ -68,7 +68,7 @@ namespace Imi.Project.Api.Infrastructure.Seeding
                     },
 
 
-                    new User
+                    new ApplicationUser
                     {
                         Id = Guid.Parse("00000000-0000-0000-0000-000000000005"),
                         UserName = "jochem.dewandel@gmail.com",
@@ -82,7 +82,7 @@ namespace Imi.Project.Api.Infrastructure.Seeding
                     },
 
 
-                    new User
+                    new ApplicationUser
                     {
                         Id = Guid.Parse("00000000-0000-0000-0000-000000000006"),
                         UserName = "jonas.desmet@telenet.be",
@@ -96,7 +96,7 @@ namespace Imi.Project.Api.Infrastructure.Seeding
                     },
 
 
-                    new User
+                    new ApplicationUser
                     {
                         Id = Guid.Parse("00000000-0000-0000-0000-000000000007"),
                         UserName = "niels.verbeke@hotmail.com",
@@ -110,7 +110,7 @@ namespace Imi.Project.Api.Infrastructure.Seeding
                     },
 
 
-                    new User
+                    new ApplicationUser
                     {
                         Id = Guid.Parse("00000000-0000-0000-0000-000000000008"),
                         UserName = "ann.meerpoel@skynet.be",
@@ -124,7 +124,7 @@ namespace Imi.Project.Api.Infrastructure.Seeding
                     },
 
 
-                    new User
+                    new ApplicationUser
                     {
                         Id = Guid.Parse("00000000-0000-0000-0000-000000000009"),
                         UserName = "lotens.jurgen@hotmail.com",
@@ -138,7 +138,7 @@ namespace Imi.Project.Api.Infrastructure.Seeding
                     },
 
 
-                    new User
+                    new ApplicationUser
                     {
                         Id = Guid.Parse("00000000-0000-0000-0000-000000000010"),
                         UserName = "janne.jannes@gmail.com",

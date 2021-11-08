@@ -30,26 +30,26 @@ namespace Imi.Project.Api.Core.Services
             _prescriptionService = prescriptionService;
         }
 
-        public async Task<User> GetUserByIdAsync(Guid id)
+        public async Task<ApplicationUser> GetUserByIdAsync(Guid id)
         {
             var user= await _userRepository.GetByIdAsync(id);
             return user;
         }
 
 
-        public async Task<IEnumerable<User>> ListAllUsersAsync()
+        public async Task<IEnumerable<ApplicationUser>> ListAllUsersAsync()
         {
             var userList = await _userRepository.ListAllAsync();
             return userList;
         }
 
-        public async Task<User> UpdateUserAsync(User user)
+        public async Task<ApplicationUser> UpdateUserAsync(ApplicationUser user)
         {
             var result = await _userRepository.UpdateAsync(user);
             return result;
         }
 
-        public async Task DeleteUserAsync(User user)
+        public async Task DeleteUserAsync(ApplicationUser user)
         {
             var cages = await _cageService.GetCagesByUserIdAsync(user.Id);
             await _cageService.DeleteMultiple(cages.ToList());
@@ -65,7 +65,7 @@ namespace Imi.Project.Api.Core.Services
             await _userRepository.DeleteAsync(user);  
         }
 
-        public async Task<User> AddUserAsync(User user)
+        public async Task<ApplicationUser> AddUserAsync(ApplicationUser user)
         {
             var result = await _userRepository.AddAsync(user);
             return result;
