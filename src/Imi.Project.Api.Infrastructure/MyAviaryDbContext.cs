@@ -1,5 +1,7 @@
 ﻿using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Infrastructure.Seeding;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,9 +9,9 @@ using System.Text;
 
 namespace Imi.Project.Api.Infrastructure
 {
-    public class MyAviaryDbContext : DbContext
+    public class MyAviaryDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     {
-        public DbSet<User> Users { get; set; }
+        //public DbSet<User> Users { get; set; }
         public DbSet<Cage> Cages { get; set; }
         public DbSet<Species> Species { get; set; }
         public DbSet<Bird> Birds { get; set; }
