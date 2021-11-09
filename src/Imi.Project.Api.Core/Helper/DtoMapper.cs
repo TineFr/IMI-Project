@@ -94,7 +94,7 @@ namespace Imi.Project.Api.Core.Helper
             return new UserResponseDto
             {
                 Id = user.Id,
-                Name = user.Name,
+                Name = user.UserName,
                 Birds = user.Birds?.Select(b => b.Id),
                 Cages = user.Cages?.Select(b => b.Id),
                 Medicines = user.Medicines?.Select(b => b.Id)
