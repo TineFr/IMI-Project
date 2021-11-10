@@ -84,7 +84,7 @@ namespace Imi.Project.Api
 
 
 
-
+            services.AddRouting(options => options.LowercaseUrls = true);
 
 
             services.AddScoped<IUserRepository, UserRepository>();
