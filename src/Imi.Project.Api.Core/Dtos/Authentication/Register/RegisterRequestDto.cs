@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Imi.Project.Api.Core.Dtos.Users
+namespace Imi.Project.Api.Core.Dtos.Authentication.Register
 {
     public class RegisterRequestDto
     {

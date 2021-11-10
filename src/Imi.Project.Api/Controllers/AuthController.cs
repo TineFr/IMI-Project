@@ -1,4 +1,6 @@
-﻿using Imi.Project.Api.Core.Dtos.Users;
+﻿using Imi.Project.Api.Core.Dtos.Authentication.Login;
+using Imi.Project.Api.Core.Dtos.Authentication.Register;
+using Imi.Project.Api.Core.Dtos.Users;
 using Imi.Project.Api.Core.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

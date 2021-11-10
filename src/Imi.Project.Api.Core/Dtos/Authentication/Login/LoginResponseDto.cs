@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Imi.Project.Api.Core.Dtos.Users
+namespace Imi.Project.Api.Core.Dtos.Authentication.Login
 {
     public class LoginResponseDto
     {
