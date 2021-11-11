@@ -35,56 +35,6 @@ namespace Imi.Project.Api
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-
-        //public void ConfigureServices(IServiceCollection services)
-        //{
-        //    services.AddDbContext<MyAviaryDbContext>(options =>
-        //    options.UseSqlServer(
-        //    Configuration.GetConnectionString("MyAviaryIdentity")));
-        //    // Identity configuration
-        //    services.AddIdentity<ApplicationUser, IdentityRole>(options => 
-        //    {
-        //        options.SignIn.RequireConfirmedEmail = false;
-        //    }).AddEntityFrameworkStores<MyAviaryDbContext>();
-        //    services.AddControllers();
-        //    services.AddAuthentication(option =>
-        //    {
-        //        option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        //        option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        //    })
-        //    .AddJwtBearer(jwtOptions =>
-        //    {
-        //        jwtOptions.TokenValidationParameters = new TokenValidationParameters()
-        //        {
-        //            ValidateActor = true,
-        //            ValidateAudience = true,
-        //            ValidateLifetime = true,
-        //            ValidIssuer = Configuration["JWTConfig:Issuer"],
-        //            ValidAudience = Configuration["JWTConfig:Audience"],
-        //            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWTConfig:SigningKey"]))
-
-        //    };
-        //    });
-        //}
-        //public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        //{
-        //    if (env.IsDevelopment())
-        //    {
-        //        app.UseDeveloperExceptionPage();
-        //    }
-        //    app.UseHttpsRedirection();
-        //    app.UseRouting();
-        //    app.UseAuthentication();
-        //    app.UseAuthorization();
-        //    app.UseEndpoints(endpoints =>
-        //    {
-        //        endpoints.MapControllers();
-        //    });
-        //}
-
-
-
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<MyAviaryDbContext>(options => options.UseSqlServer
@@ -119,7 +69,7 @@ namespace Imi.Project.Api
                     ValidateLifetime = true,
                     ValidAudience = Configuration["JWTConfig:Audience"],
                     ValidIssuer = Configuration["JWTConfig:Issuer"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWTConfig: SigningKey"])),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWTConfig:SigningKey"])),
                 };
             });
 
@@ -128,6 +78,31 @@ namespace Imi.Project.Api
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "IMI API", Version = "v1" });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Enter token",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    BearerFormat = "JWT",
+                    Scheme = "bearer"
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                  {
+                    {
+                      new OpenApiSecurityScheme
+                      {
+                        Reference = new OpenApiReference
+                          {
+                            Type = ReferenceType.SecurityScheme,
+                             Id = "Bearer"
+                          },
+                        },
+                        new List<string>()
+                      }
+                    });
+
             });
 
 
@@ -151,7 +126,7 @@ namespace Imi.Project.Api
             services.AddScoped<IPrescriptionService, PrescriptionService>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseSwagger();
