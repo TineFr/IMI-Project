@@ -44,8 +44,12 @@ namespace Imi.Project.Api.Controllers
             }
             ApplicationUser newUser = new ApplicationUser
             {
+                Id = new Guid(),
                 Email = registration.Email,
                 UserName = registration.Email,
+                FirstName = registration.FirstName,
+                Name = registration.Name,
+                DateOfBirth = registration.DateOfBirth
             };
             IdentityResult result = await _userManager.CreateAsync(newUser, registration.Password);
             if (!result.Succeeded)

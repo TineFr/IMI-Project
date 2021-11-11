@@ -10,9 +10,11 @@ using System.Threading.Tasks;
 using Imi.Project.Api.Core.Entities.Pagination;
 using Newtonsoft.Json;
 using Imi.Project.Api.Core.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Imi.Project.Api.Controllers
 {
+    [Authorize("Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class SpeciesController : ControllerBase
