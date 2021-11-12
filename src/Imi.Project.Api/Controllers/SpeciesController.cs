@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Imi.Project.Api.Controllers
 {
-    [Authorize("Admin")]
+
     [Route("api/[controller]")]
     [ApiController]
     public class SpeciesController : ControllerBase
@@ -26,6 +26,7 @@ namespace Imi.Project.Api.Controllers
             _speciesService = speciesService;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] PaginationParameters parameters)
         {
@@ -37,7 +38,7 @@ namespace Imi.Project.Api.Controllers
             return Ok(result);
         }
 
-
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
@@ -51,6 +52,7 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize("Admin")]
         public async Task<IActionResult> Post(SpeciesRequestDto newSpecies)
         {
             if (!ModelState.IsValid)
@@ -69,6 +71,7 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpPut]
+        [Authorize("Admin")]
         public async Task<IActionResult> Put(SpeciesRequestDto updatedSpecies)
         {
             if (!ModelState.IsValid)
@@ -87,6 +90,7 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpDelete]
+        [Authorize("Admin")]
         public async Task<IActionResult> Delete(SpeciesRequestDto speciesToDelete)
         {
             var species = await _speciesService.GetSpeciesByIdAsync(speciesToDelete.Id);

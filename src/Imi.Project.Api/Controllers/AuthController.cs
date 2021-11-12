@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Controllers
 {
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
@@ -34,7 +35,7 @@ namespace Imi.Project.Api.Controllers
             _configuration = configuration;
         }
 
-        [AllowAnonymous]
+
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequestDto registration)
         {
@@ -66,7 +67,7 @@ namespace Imi.Project.Api.Controllers
             return Ok();
         }
 
-        [AllowAnonymous]
+
         [HttpPost("login")]
         public async Task<ActionResult> Login([FromBody] LoginRequestDto login)
         {

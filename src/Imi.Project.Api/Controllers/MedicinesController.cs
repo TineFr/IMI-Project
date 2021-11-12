@@ -10,9 +10,11 @@ using Imi.Project.Api.Core.Dtos.Medicines;
 using Imi.Project.Api.Core.Entities.Pagination;
 using Newtonsoft.Json;
 using Imi.Project.Api.Core.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Imi.Project.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class MedicinesController : ControllerBase
