@@ -11,9 +11,11 @@ using Imi.Project.Api.Core.Dtos.Cages;
 using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Core.Entities.Pagination;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Imi.Project.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
 

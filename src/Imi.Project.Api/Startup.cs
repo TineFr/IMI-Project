@@ -1,22 +1,27 @@
 
+using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Core.Interfaces.Repositories;
 using Imi.Project.Api.Core.Interfaces.Services;
 using Imi.Project.Api.Core.Services;
 using Imi.Project.Api.Infrastructure;
 using Imi.Project.Api.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Api
@@ -30,19 +35,80 @@ namespace Imi.Project.Api
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<MyAviaryDbContext>(options => options.UseSqlServer
-             (Configuration.GetConnectionString("MyAviary")));
+             (Configuration.GetConnectionString("MyAviaryIdentity")));
+
             services.AddControllers().AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.IgnoreNullValues = true;
             }); ;
+
+            //identity
+
+            services.AddIdentity<ApplicationUser, IdentityRole<Guid>>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+                options.Password.RequiredLength = 8;
+                options.Password.RequiredUniqueChars = 3;
+            }).AddEntityFrameworkStores<MyAviaryDbContext>();
+
+            //authentication
+            services.AddAuthentication(option =>
+            {
+                option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(jwtOptions =>
+            {
+                jwtOptions.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateActor = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidAudience = Configuration["JWTConfig:Audience"],
+                    ValidIssuer = Configuration["JWTConfig:Issuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWTConfig:SigningKey"])),
+                };
+            });
+
+            //swagger
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "IMI API", Version = "v1" });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Enter token",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    BearerFormat = "JWT",
+                    Scheme = "bearer"
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                  {
+                    {
+                      new OpenApiSecurityScheme
+                      {
+                        Reference = new OpenApiReference
+                          {
+                            Type = ReferenceType.SecurityScheme,
+                             Id = "Bearer"
+                          },
+                        },
+                        new List<string>()
+                      }
+                    });
+
             });
+
+
+            services.AddRouting(options => options.LowercaseUrls = true);
+
+
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICageRepository, CageRepository>();
             services.AddScoped<IBirdRepository, BirdRepository>();
@@ -60,7 +126,7 @@ namespace Imi.Project.Api
             services.AddScoped<IPrescriptionService, PrescriptionService>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseSwagger();
@@ -78,7 +144,10 @@ namespace Imi.Project.Api
 
             app.UseRouting();
 
+
+            app.UseAuthentication();
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {

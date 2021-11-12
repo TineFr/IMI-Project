@@ -5,6 +5,7 @@ using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Core.Entities.Pagination;
 using Imi.Project.Api.Core.Helper;
 using Imi.Project.Api.Core.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -15,6 +16,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Controllers
 {
+    [Authorize("Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -41,7 +43,7 @@ namespace Imi.Project.Api.Controllers
             var users = await _userService.ListAllUsersAsync();
             var paginationData = new PaginationMetaData(parameters.Page, users.Count(), parameters.ItemsPerPage);
             Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
-            var usersPaginated = Pagination.AddPagination<User>(users, parameters);
+            var usersPaginated = Pagination.AddPagination<ApplicationUser>(users, parameters);
             var result = usersPaginated.MapToDtoList();
             return Ok(result);
         }

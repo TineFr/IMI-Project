@@ -15,13 +15,13 @@ namespace Imi.Project.Api.Core.Helper
 {
     public static class EntityMapper
     {
-        public static User MapToEntity(this UserRequestDto userDto)
+        public static ApplicationUser MapToEntity(this UserRequestDto userDto)
         {
 
-           var user = new User
+           var user = new ApplicationUser
             {
                Id = userDto.Id,
-                Name = userDto.Name
+                UserName = userDto.Name
             };
             return user;
         }

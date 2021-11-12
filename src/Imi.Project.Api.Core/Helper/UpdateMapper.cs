@@ -15,9 +15,9 @@ namespace Imi.Project.Api.Core.Helper
 {
    public static class UpdateMapper
     {
-        public static User Update(this User user, UserRequestDto dto)
+        public static ApplicationUser Update(this ApplicationUser user, UserRequestDto dto)
         {
-            user.Name = dto.Name;
+            user.UserName = dto.Name;
             return user;
         }
         public static Bird Update(this Bird bird, BirdRequestDto birdDto)
