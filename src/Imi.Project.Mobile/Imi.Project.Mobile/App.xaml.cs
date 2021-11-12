@@ -1,4 +1,7 @@
-﻿using Imi.Project.Mobile.Views;
+﻿using FreshMvvm;
+using Imi.Project.Mobile.Core.Services;
+using Imi.Project.Mobile.Core.ViewModels;
+using Imi.Project.Mobile.Pages;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -10,7 +13,8 @@ namespace Imi.Project.Mobile
         public App()
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new LoginPage());
+            FreshPageModelResolver.PageModelMapper = new CustomFreshPageModelMapper( typeof(LoginPage).Namespace, typeof(LoginPage).Assembly.ToString());
+            MainPage = new FreshNavigationContainer(FreshPageModelResolver.ResolvePageModel<LoginViewModel>());
         }
 
         

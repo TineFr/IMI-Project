@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Imi.Project.Mobile.Pages.Medications.EditMedicationPage">
+    <ContentPage.Content>
+        <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
+              RowDefinitions="{StaticResource MainGridRows}">
+            <ScrollView Grid.Row="1" Grid.RowSpan="3" >
+                <StackLayout Grid.Row="1" Grid.RowSpan="2" >
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
+                            <Label Text="Name" FontAttributes="Bold"></Label>
+                            <Entry x:Name="entrName" Text="{Binding Medication.Name}"></Entry>
+                        </StackLayout>
+                    </Frame>
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
+                            <Label Text="Location"  FontAttributes="Bold"></Label>
+                            <Entry x:Name="entrSpecies" Text="{Binding Medication.Usage}"></Entry>
+                        </StackLayout>
+                    </Frame>
+                    <Button x:Name="btnSave" Text="Save"  Clicked="btnSave_Clicked" Margin="25" BackgroundColor="{StaticResource Green}"></Button>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Imi.Project.Mobile.Pages.Medications.AddMedicationPage">
+    <NavigationPage.TitleView>
+        <Label Text="Add Medication" TextColor="white" VerticalTextAlignment="Center"/>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
+              RowDefinitions="{StaticResource MainGridRows}">
+            <ScrollView Grid.Row="0" Grid.RowSpan="3" Margin="10">
+                <StackLayout Grid.Row="1" Grid.RowSpan="2" >
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
+                            <Label Text="Name:" FontAttributes="Bold"></Label>
+                            <Entry x:Name="entrName" Placeholder="Enter name"></Entry>
+                        </StackLayout>
+                    </Frame>
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
+                            <Label Text="Usage:" FontAttributes="Bold"></Label>
+                            <Entry x:Name="entrUsage" Placeholder="Enter usage"></Entry>
+                        </StackLayout>
+                    </Frame>
+
+                    <Button x:Name="btnSave" Text="Save" HorizontalOptions="End" Margin="20" Clicked="btnSave_Clicked"></Button>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
