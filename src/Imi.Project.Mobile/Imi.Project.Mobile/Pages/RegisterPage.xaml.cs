@@ -21,16 +21,5 @@ namespace Imi.Project.Mobile.Pages
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
-        private async void btnBack_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PopAsync();
-        }
-
-
-
-        private void btnSave_Clicked(object sender, EventArgs e)
-        {
-            Application.Current.MainPage = new FreshNavigationContainer(FreshPageModelResolver.ResolvePageModel<MainViewModel>());
-        }
     }
 }

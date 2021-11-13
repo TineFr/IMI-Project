@@ -1,4 +1,5 @@
 ﻿using FreshMvvm;
+using Imi.Project.Mobile.Core;
 using Imi.Project.Mobile.Core.Services;
 using Imi.Project.Mobile.ViewModels;
 using System;
@@ -19,16 +20,6 @@ namespace Imi.Project.Mobile.Pages
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
-        }
-
-        private  void Button_Clicked(object sender, EventArgs e)
-        {
-            Application.Current.MainPage = new FreshNavigationContainer(FreshPageModelResolver.ResolvePageModel<MainViewModel>());
-        }
-
-        private async void btnSignUp_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new RegisterPage());
         }
     }
 }
