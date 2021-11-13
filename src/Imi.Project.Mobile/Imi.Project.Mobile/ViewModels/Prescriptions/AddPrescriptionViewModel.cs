@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 
-namespace Imi.Project.Mobile.Core.ViewModels
+namespace Imi.Project.Mobile.ViewModels
 {
     public class AddPrescriptionViewModel
     {

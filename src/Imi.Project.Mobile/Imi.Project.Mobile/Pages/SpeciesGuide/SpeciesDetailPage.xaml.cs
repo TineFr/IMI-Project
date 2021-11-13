@@ -1,5 +1,5 @@
 ﻿using Imi.Project.Mobile.Core.Models;
-using Imi.Project.Mobile.Core.ViewModels;
+using Imi.Project.Mobile.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

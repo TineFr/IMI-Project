@@ -1,6 +1,6 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Core.Services;
-using Imi.Project.Mobile.Core.ViewModels;
+using Imi.Project.Mobile.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +30,6 @@ namespace Imi.Project.Mobile.Pages
 
         private void btnSave_Clicked(object sender, EventArgs e)
         {
-            FreshPageModelResolver.PageModelMapper = new CustomFreshPageModelMapper(typeof(MainPage).Namespace, typeof(MainPage).Assembly.ToString());
             Application.Current.MainPage = new FreshNavigationContainer(FreshPageModelResolver.ResolvePageModel<MainViewModel>());
         }
     }

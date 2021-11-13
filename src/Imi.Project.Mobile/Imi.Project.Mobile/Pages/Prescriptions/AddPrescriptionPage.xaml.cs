@@ -1,7 +1,7 @@
 ﻿using Imi.Project.Mobile.Core.Models;
 using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
-using Imi.Project.Mobile.Core.ViewModels;
+using Imi.Project.Mobile.ViewModels;
 using Imi.Project.Mobile.Pages.Medications;
 using System;
 using System.Collections.Generic;
