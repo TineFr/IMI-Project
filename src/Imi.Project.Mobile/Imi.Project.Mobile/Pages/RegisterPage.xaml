@@ -9,20 +9,23 @@
                 <Image Source="{extensions:ImageResource Imi.Project.Mobile.icons.budgieregister.png}" HorizontalOptions="Center" HeightRequest="150" Margin="0,40,0,0"></Image>
             <Label HorizontalOptions="Center" Text="Register" FontSize="30" Margin ="0, 30, 0, 0"  FontAttributes="Bold" TextColor="{StaticResource Blue}"></Label>
             <Frame Padding="0" Margin="10"  HorizontalOptions="Center" WidthRequest="300">
-                <Entry Placeholder="Name" ></Entry>
-            </Frame>
-            <Frame Padding="0" Margin="10" HorizontalOptions="Center" WidthRequest="300">
-                <Entry Placeholder="Email" ></Entry>
+                <Entry Placeholder="Name" Text="{Binding Name}" ></Entry>
             </Frame>
             <Frame Padding="0" Margin="10"  HorizontalOptions="Center" WidthRequest="300">
-                <Entry Placeholder="Password" IsPassword="True" ></Entry>
+                    <Entry Placeholder="FirstName" Text="{Binding FirstName}" ></Entry>
             </Frame>
             <Frame Padding="0" Margin="10" HorizontalOptions="Center" WidthRequest="300">
-                <Entry Placeholder="Repeat password" IsPassword="True" ></Entry>
+                    <Entry Placeholder="Email" Text="{Binding Email}" ></Entry>
+            </Frame>
+            <Frame Padding="0" Margin="10"  HorizontalOptions="Center" WidthRequest="300">
+                    <Entry Placeholder="Password" IsPassword="True"  Text="{Binding Password}"></Entry>
+            </Frame>
+            <Frame Padding="0" Margin="10" HorizontalOptions="Center" WidthRequest="300">
+                    <Entry Placeholder="Repeat password" IsPassword="True"  Text="{Binding ConfirmPassword}" ></Entry>
             </Frame>
             <FlexLayout HorizontalOptions="Center" Padding="0" WidthRequest="320" Margin="0" JustifyContent="SpaceBetween">
-                <Button x:Name="btnBack" Padding="0" Margin="0" BackgroundColor="Transparent" Text="BACK" TextColor="Black" Clicked="btnBack_Clicked"></Button>
-                <Button x:Name="btnSave" BackgroundColor="Transparent" Text="SAVE" TextColor="{StaticResource Blue}" Clicked="btnSave_Clicked"></Button>
+                    <Button x:Name="btnBack" Padding="0" Margin="0" BackgroundColor="Transparent" Text="BACK" TextColor="Black" Command="{Binding BackCommand}"></Button>
+                    <Button x:Name="btnSave" BackgroundColor="Transparent" Text="SAVE" TextColor="{StaticResource Blue}" Command="{Binding RegisterCommand}"></Button>
             </FlexLayout>
         </StackLayout>
         </ScrollView>

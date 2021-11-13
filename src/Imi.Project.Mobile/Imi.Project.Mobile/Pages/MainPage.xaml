@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:mobile="clr-namespace:Imi.Project.Mobile"
-            x:Class="Imi.Project.Mobile.MainPage"
+            x:Class="Imi.Project.Mobile.Pages.MainPage"
             xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core" xmlns:medication="clr-namespace:Imi.Project.Mobile.Views.Medication" xmlns:speciesguide="clr-namespace:Imi.Project.Mobile.Views.SpeciesGuide" xmlns:prescriptions="clr-namespace:Imi.Project.Mobile.Views.Prescriptions" xmlns:cages="clr-namespace:Imi.Project.Mobile.Pages.Cages" xmlns:birds="clr-namespace:Imi.Project.Mobile.Pages.Birds" xmlns:pages="clr-namespace:Imi.Project.Mobile.Pages" xmlns:prescriptions1="clr-namespace:Imi.Project.Mobile.Pages.Prescriptions" xmlns:speciesguide1="clr-namespace:Imi.Project.Mobile.Pages.SpeciesGuide"
             android:TabbedPage.ToolbarPlacement="Bottom"
