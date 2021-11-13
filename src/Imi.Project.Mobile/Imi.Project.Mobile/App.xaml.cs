@@ -5,23 +5,32 @@ using Imi.Project.Mobile.Pages;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Imi.Project.Mobile.Core;
+using Imi.Project.Mobile.ViewModels.Cages;
+using Imi.Project.Mobile.ViewModels.Birds;
+using Imi.Project.Mobile.ViewModels.Prescriptions;
+using Imi.Project.Mobile.ViewModels.SpeciesGuide;
 
 namespace Imi.Project.Mobile
 {
     public partial class App : Application
     {
-
         public App()
         {
             InitializeComponent();
-            //var loginPage = FreshPageModelResolver.ResolvePageModel<LoginViewModel>();
-            //var loginContainer = new FreshNavigationContainer(loginPage, ContainerNames.AuthenticationContainer);
-            //var mainpageContainer = new FreshTabbedNavigationContainer(ContainerNames.MainContainer);  
+            var mainPage = new FreshTabbedNavigationContainer();
+            mainPage.AddTab<CagesViewModel>("Cages", null);
+            mainPage.AddTab<BirdsViewModel>("Birds", null);
+            mainPage.AddTab<HomeViewModel>("Home", null);
+            mainPage.AddTab<PrescriptionsViewModel>("Medicines", null);
+            mainPage.AddTab<SpeciesViewModel>("Species guide", null);
+            MainPage = mainPage;
 
-            //MainPage = loginContainer;
-            MainPage = new FreshNavigationContainer(FreshPageModelResolver.ResolvePageModel<LoginViewModel>());
+
+            //new FreshNavigationContainer(FreshPageModelResolver.ResolvePageModel<LoginViewModel>());
+
         }
+
+        
 
         protected override void OnStart()
         {

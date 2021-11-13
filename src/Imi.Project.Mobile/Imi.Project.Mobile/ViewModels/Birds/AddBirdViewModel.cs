@@ -7,10 +7,10 @@ namespace Imi.Project.Mobile.ViewModels
 {
     public class AddBirdViewModel
     {
-        public IEnumerable<Species> Species { get; set; }
+        public IEnumerable<Core.Models.Species> Species { get; set; }
         public IEnumerable<Cage> Cages { get; set; }
 
-        public AddBirdViewModel(IEnumerable<Species> species, IEnumerable<Cage> cages)
+        public AddBirdViewModel(IEnumerable<Core.Models.Species> species, IEnumerable<Cage> cages)
         {
             Species = species;
             Cages = cages;

@@ -1,5 +1,6 @@
 ﻿using Imi.Project.Mobile.Core.Models;
 using Imi.Project.Mobile.ViewModels;
+using Imi.Project.Mobile.ViewModels.SpeciesGuide;
 using System;
 using System.Collections.Generic;
 using System.Linq;
