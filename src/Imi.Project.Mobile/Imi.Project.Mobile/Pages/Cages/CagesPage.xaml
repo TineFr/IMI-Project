@@ -13,7 +13,7 @@
                 <Image Style="{StaticResource Logo}" ></Image>
             </AbsoluteLayout>
             <StackLayout Grid.Row="1">
-                <Button  x:Name="btnAddCage" Text="Add new" HorizontalOptions="EndAndExpand" WidthRequest="100" Margin="10"></Button>
+                <Button  x:Name="btnAddCage" Text="Add new" HorizontalOptions="EndAndExpand" WidthRequest="100" Margin="10" Command="{Binding AddCageCommand}"></Button>
             </StackLayout>
             <CollectionView      Grid.Row="2" 
                                  Grid.RowSpan="3"

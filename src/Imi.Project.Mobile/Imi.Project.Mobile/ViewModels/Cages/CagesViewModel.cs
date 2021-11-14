@@ -42,18 +42,8 @@ namespace Imi.Project.Mobile.ViewModels.Cages
             base.ViewIsAppearing(sender, e);
             await RefreshCages();
         }
-        public ICommand ShowCagesCommand => new Command(
-                 async () => {
-                     Cages = await cageservice.GetAllCages();
-                 });
 
-        public ICommand ViewCageCommand => new Command<Cage>(
-            async (Cage cage) =>
-            {
-                var test = cage;
-                await CoreMethods.PushPageModel<CageDetailViewModel>(cage);
-            });
-
+ 
         private async Task RefreshCages()
         {
             var cages = await cageservice.GetAllCages();
@@ -61,6 +51,24 @@ namespace Imi.Project.Mobile.ViewModels.Cages
             Cages = new ObservableCollection<Cage>(cages);
         }
 
+        #region commands
+        public ICommand ShowCagesCommand => new Command(
+         async () => {
+             Cages = await cageservice.GetAllCages();
+         });
+
+        public ICommand ViewCageCommand => new Command<Cage>(
+            async (Cage cage) =>
+            {
+                var test = cage;
+                await CoreMethods.PushPageModel<CageDetailViewModel>(cage);
+            });
+        public ICommand AddCageCommand => new Command(
+            async () =>
+            {
+                await CoreMethods.PushPageModel<AddCageViewModel>();
+            });
+        #endregion
 
     }
 }
