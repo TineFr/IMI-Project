@@ -4,6 +4,7 @@ using Imi.Project.Mobile.Core.Services.Mocking.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -16,18 +17,26 @@ namespace Imi.Project.Mobile.ViewModels.Cages
         MockCageService cageservice = new MockCageService();
 
         #region properties
-        private Cage selectedCage;
-        public Cage SelectedCage
-        {
-            get { return selectedCage; }
-            set
-            {
-                if (selectedCage != value)
-                {
-                    selectedCage = value;
-                }
-            }
-        }
+        //private Cage selectedCage;
+
+
+        //public Cage SelectedCage
+        //{
+        //    get 
+        //    { 
+        //        return selectedCage;
+
+        //    }
+        //    set
+        //    {
+        //        if (selectedCage != value)
+        //        {
+        //            selectedCage = value;
+        //            RaisePropertyChanged(nameof(SelectedCage));
+
+        //        }
+        //    }
+        //}
 
         private ObservableCollection<Cage> cages;
         public ObservableCollection<Cage> Cages
@@ -58,11 +67,11 @@ namespace Imi.Project.Mobile.ViewModels.Cages
                      Cages = await cageservice.GetAllCages();
                  });
 
-        public ICommand ViewCageCommand => new Command(
-            async () =>
+        public ICommand ViewCageCommand => new Command<Cage>(
+            async (Cage cage) =>
             {
-                var test = SelectedCage;
-                await CoreMethods.PushPageModel<CageDetailViewModel>(SelectedCage);
+                var test = cage;
+                await CoreMethods.PushPageModel<CageDetailViewModel>(cage);
             });
 
 

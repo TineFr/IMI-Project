@@ -19,14 +19,14 @@ namespace Imi.Project.Mobile.Pages.Cages
 
     public partial class CageDetailPage : ContentPage
     {
-        private static Cage cagedetail;
+        //private static Cage cagedetail;
 
-        IDailyTaskService taskservice;
+        //IDailyTaskService taskservice;
         public CageDetailPage(Cage cage)
         {
             InitializeComponent();
-            cagedetail = cage;
-            taskservice = new MockDailyTaskService();
+            //cagedetail = cage;
+            //taskservice = new MockDailyTaskService();
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
@@ -34,12 +34,12 @@ namespace Imi.Project.Mobile.Pages.Cages
         protected override void OnAppearing()
         {
             //BindingContext = new CageDetailViewModel(cagedetail);
-            lstTasks.ItemsSource = taskservice.GetDailyTaskByCageId(cagedetail.Id);
+            //lstTasks.ItemsSource = taskservice.GetDailyTaskByCageId(cagedetail.Id);
         }
 
         private async void btnEditCage_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new EditCagePage(cagedetail));
+            //await Navigation.PushAsync(new EditCagePage(cagedetail));
         }
 
         private async void btnBack_Clicked(object sender, EventArgs e)
@@ -49,18 +49,18 @@ namespace Imi.Project.Mobile.Pages.Cages
 
         private async void btnEditTask_Clicked(object sender, EventArgs e)
         {
-            var selection = (ImageButton)sender;
-            var dailyTask = selection.CommandParameter as DailyTask;
-            if (dailyTask == null) return;
-            var edit = await DisplayPromptAsync("Edit Task", null ,"Save", "Cancel", null , 50, null, dailyTask.Name);
+            //var selection = (ImageButton)sender;
+            //var dailyTask = selection.CommandParameter as DailyTask;
+            //if (dailyTask == null) return;
+            //var edit = await DisplayPromptAsync("Edit Task", null ,"Save", "Cancel", null , 50, null, dailyTask.Name);
 
-            if (edit != null)
-            {
-                var taskToUpdate = await taskservice.GetDailyTaskById(dailyTask.Id);
-                taskToUpdate.Name = edit;
-                await taskservice.UpdateDailyTask(taskToUpdate);
-                lstTasks.ItemsSource = taskservice.GetDailyTaskByCageId(cagedetail.Id);
-            }
+            //if (edit != null)
+            //{
+            //    var taskToUpdate = await taskservice.GetDailyTaskById(dailyTask.Id);
+            //    taskToUpdate.Name = edit;
+            //    await taskservice.UpdateDailyTask(taskToUpdate);
+            //    lstTasks.ItemsSource = taskservice.GetDailyTaskByCageId(cagedetail.Id);
+            
 
 
 
@@ -74,37 +74,38 @@ namespace Imi.Project.Mobile.Pages.Cages
 
         private async void btnAddTask_Clicked(object sender, EventArgs e)
         {
-            var add = await DisplayPromptAsync("Add Task", null, "Save", "Cancel", "ex:Refill water");
+            //var add = await DisplayPromptAsync("Add Task", null, "Save", "Cancel", "ex:Refill water");
 
-            if (add != null)
-            {
-                DailyTask newTask = new DailyTask
-                {
-                    Id = new Guid(),
-                    Name = add,
-                    IsDone = false,
-                    CageId = cagedetail.Id
+            //if (add != null)
+            //{
+            //    DailyTask newTask = new DailyTask
+            //    {
+            //        Id = new Guid(),
+            //        Name = add,
+            //        IsDone = false,
+            //        CageId = cagedetail.Id
                     
-                };
-                await taskservice.AddDailyTask(newTask);
-                lstTasks.ItemsSource = taskservice.GetDailyTaskByCageId(cagedetail.Id);
-            }
+            //    };
+            //    await taskservice.AddDailyTask(newTask);
+            //    lstTasks.ItemsSource = taskservice.GetDailyTaskByCageId(cagedetail.Id);
+            //}
 
 
         }
 
         private async void btnDeleteTask_Clicked(object sender, EventArgs e)
         {
-           var action =  await DisplayAlert("Do you wish to delete this task?", null, "YES", "CANCEL");
-            if (action)
-            {
-                var selection = (ImageButton)sender;
-                var dailyTask = selection.CommandParameter as DailyTask;
-                await taskservice.DeleteDailyTask(dailyTask.Id);
-                lstTasks.ItemsSource = taskservice.GetDailyTaskByCageId(cagedetail.Id);
-            }
-            
-           
+            //   var action =  await DisplayAlert("Do you wish to delete this task?", null, "YES", "CANCEL");
+            //    if (action)
+            //    {
+            //        var selection = (ImageButton)sender;
+            //        var dailyTask = selection.CommandParameter as DailyTask;
+            //        await taskservice.DeleteDailyTask(dailyTask.Id);
+            //        lstTasks.ItemsSource = taskservice.GetDailyTaskByCageId(cagedetail.Id);
+            //    }
+
+
+            //}
         }
     }
 }

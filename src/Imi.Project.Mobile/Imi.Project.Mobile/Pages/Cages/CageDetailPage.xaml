@@ -8,23 +8,23 @@
               RowDefinitions="{StaticResource MainGridRows}">
             <Frame Style="{StaticResource MainFrame}" BackgroundColor="{StaticResource Green}">
 
-             <Label Text="{Binding Name}" Style="{StaticResource MainLabel}"></Label>
+             <Label Text="{Binding Cage.Name}" Style="{StaticResource MainLabel}"></Label>
             </Frame>
             <AbsoluteLayout Grid.Row="0" Grid.RowSpan="4">
                 <ImageButton x:Name="btnBack" Style="{StaticResource BackArrow}" Clicked="btnBack_Clicked"></ImageButton>
                 <Image Style="{StaticResource Logo}" ></Image>
             </AbsoluteLayout>
             <StackLayout Grid.Row="1">
-                <Button  x:Name="btnEditCage" Text="Edit" HorizontalOptions="EndAndExpand" WidthRequest="100" Margin="10" Clicked="btnEditCage_Clicked"></Button>
+                <Button  x:Name="btnEditCage" Text="Edit" HorizontalOptions="EndAndExpand" WidthRequest="100" Margin="10" Command="{Binding EditCageCommand}" CommandParameter="{Binding .}"></Button>
             </StackLayout>
             <StackLayout Grid.Row="2"  Grid.RowSpan="3">
                 <StackLayout>
                         <Frame WidthRequest="300" HeightRequest="500" HorizontalOptions="Center">
-                            <Image Source="{Binding Image}" HeightRequest="200"></Image>
+                            <Image Source="{Binding Cage.Image}" HeightRequest="200"></Image>
                         </Frame>
                         <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                             <Label Text="Location:"></Label>
-                            <Label HeightRequest="50" HorizontalOptions="Center" Text="{Binding Location}"></Label>
+                            <Label HeightRequest="50" HorizontalOptions="Center" Text="{Binding Cage.Location}"></Label>
                         </StackLayout>
                     </StackLayout>
                     <Frame>

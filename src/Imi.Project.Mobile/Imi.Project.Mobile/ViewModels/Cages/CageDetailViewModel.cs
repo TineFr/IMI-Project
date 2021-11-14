@@ -29,10 +29,10 @@ namespace Imi.Project.Mobile.ViewModels.Cages
             Cage = updatedCage;
         }
 
-        public ICommand EditCageCommand => new Command(
-         async () =>
+        public ICommand EditCageCommand => new Command<Cage>(
+         async (Cage cage) =>
          {
-             await CoreMethods.PushPageModel<EditCageViewModel>(Cage);
+             await CoreMethods.PushPageModel<EditCageViewModel>(cage);
          });
     }
 

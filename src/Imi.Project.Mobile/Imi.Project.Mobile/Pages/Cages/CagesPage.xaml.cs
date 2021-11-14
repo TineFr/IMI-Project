@@ -16,7 +16,9 @@ namespace Imi.Project.Mobile.Pages.Cages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CagesPage : ContentPage
     {
-        ICageService cageservice;
+
+
+
         public CagesPage()
         {
             InitializeComponent();
@@ -30,14 +32,6 @@ namespace Imi.Project.Mobile.Pages.Cages
         //    colvCages.ItemsSource = cages;
         //}
 
-        private async void colvCages_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var selection = (CollectionView)sender;
-            var cage = selection.SelectedItem as Cage;
-            if (cage == null) return;
-            await Navigation.PushAsync(new CageDetailPage(cage));
-
-        }
 
         private async void btnAddCage_Clicked(object sender, EventArgs e)
         {

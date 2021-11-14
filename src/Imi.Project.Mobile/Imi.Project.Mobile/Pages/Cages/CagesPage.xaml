@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:models="clr-namespace:Imi.Project.Mobile.Domain.Models"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Imi.Project.Mobile.Pages.Cages.CagesPage">
     <ContentPage.Content>
         <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
@@ -17,12 +17,11 @@
             </StackLayout>
             <CollectionView      Grid.Row="2" 
                                  Grid.RowSpan="3"
-                                 x:Name="colvCages"
+                                 x:Name="cvCages"
                                  SelectionMode="Single"
                                  ItemsSource="{Binding Cages}"
                                  SelectionChangedCommand="{Binding ViewCageCommand}"
-                                 SelectionChangedCommandParameter="{Binding SelectedCage}"
-                                 SelectionChanged="colvCages_SelectionChanged"
+                                 SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference cvCages}}"
                                  VerticalOptions="Center"   
                                  HorizontalOptions="Center"   
                                  Margin="10">
