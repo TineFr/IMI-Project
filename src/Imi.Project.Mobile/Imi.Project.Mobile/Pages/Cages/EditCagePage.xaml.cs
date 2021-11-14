@@ -17,26 +17,10 @@ namespace Imi.Project.Mobile.Pages.Cages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EditCagePage : ContentPage
     {
-        //private static Cage cageToEdit;
-        //ICageService cageservice;
         public EditCagePage(Cage cage)
         {
             InitializeComponent();
-            //cageToEdit = cage;
-            //cageservice = new MockCageService();
-            //BindingContext = new EditCageViewModel(cageToEdit);
             NavigationPage.SetHasNavigationBar(this, false);
-        }
-
-        private async void btnBack_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PopAsync();
-        }
-
-        private async void btnRemove_Clicked(object sender, EventArgs e)
-        {
-            //await cageservice.DeleteCage(cageToEdit.Id);
-            await Navigation.PopToRootAsync();
         }
 
     }

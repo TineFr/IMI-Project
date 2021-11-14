@@ -16,23 +16,9 @@ namespace Imi.Project.Mobile.Pages.Cages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CagesPage : ContentPage
     {
-
         public CagesPage()
         {
             InitializeComponent();
         }
-
-        //protected async override void OnAppearing()
-        //{
-        //    base.OnAppearing();
-        //    var cages = await cageservice.GetAllCages();
-        //    colvCages.ItemsSource = cages;
-        //}
-
-
-        //private async void btnAddCage_Clicked(object sender, EventArgs e)
-        //{
-        //    await Navigation.PushAsync(new AddCagePage());
-        //}
     }
 }

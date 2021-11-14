@@ -30,16 +30,16 @@
                     <Frame>
                     <StackLayout>
                     <Label Text="Daily Tasks" HorizontalTextAlignment="Center" FontSize="30"></Label>
-                        <Button x:Name="btnAddTask" Text="+" HorizontalOptions="End" BackgroundColor="{StaticResource Green}" HeightRequest="40"  WidthRequest="40" ></Button>
-                        <ListView x:Name="lstTasks" SelectionMode="None" >
+                        <Button x:Name="btnAddTask" Text="+" HorizontalOptions="End" BackgroundColor="{StaticResource Green}" Command="{Binding AddTaskCommand}" HeightRequest="40"  WidthRequest="40" ></Button>
+                        <ListView x:Name="lstTasks" SelectionMode="None" ItemsSource="{Binding Tasks}">
                         <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>
                                         <StackLayout Orientation="Horizontal" Style="{StaticResource CollectionSelection}">
                                             <CheckBox x:Name= "chkTask" IsChecked="{Binding IsDone}"></CheckBox>
                                         <Label Text="{Binding Name}" HorizontalOptions="StartAndExpand" Margin="10,0,0,0" FontSize="15" Padding="10"></Label>
-                                            <ImageButton x:Name="btnEditTask" CommandParameter="{Binding .}" Source="{extensions:ImageResource Imi.Project.Mobile.icons.pencil.png}" WidthRequest="20" BackgroundColor="Transparent" ></ImageButton>
-                                            <ImageButton x:Name="btnDeleteTask" CommandParameter="{Binding .}" Source="{extensions:ImageResource Imi.Project.Mobile.icons.delete.png}" WidthRequest="15" BackgroundColor="Transparent" Margin="5,0,10, 0"  ></ImageButton>
+                                            <ImageButton x:Name="btnEditTask" Command="{Binding EditTaskCommand}" CommandParameter="{Binding .}" Source="{extensions:ImageResource Imi.Project.Mobile.icons.pencil.png}" WidthRequest="20" BackgroundColor="Transparent" ></ImageButton>
+                                            <ImageButton x:Name="btnDeleteTask" Command="{Binding DeleteTaskCommand}" CommandParameter="{Binding .}" Source="{extensions:ImageResource Imi.Project.Mobile.icons.delete.png}" WidthRequest="15" BackgroundColor="Transparent" Margin="5,0,10, 0"  ></ImageButton>
                                         </StackLayout>
                                 </ViewCell>
                             </DataTemplate>

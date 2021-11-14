@@ -19,23 +19,12 @@ namespace Imi.Project.Mobile.Pages.Cages
 
     public partial class CageDetailPage : ContentPage
     {
-        //private static Cage cagedetail;
-
-        //IDailyTaskService taskservice;
         public CageDetailPage(Cage cage)
         {
             InitializeComponent();
-            //cagedetail = cage;
-            //taskservice = new MockDailyTaskService();
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
-
-        protected override void OnAppearing()
-        {
-            //BindingContext = new CageDetailViewModel(cagedetail);
-            //lstTasks.ItemsSource = taskservice.GetDailyTaskByCageId(cagedetail.Id);
-        }
 
         //private async void btnEditCage_Clicked(object sender, EventArgs e)
         //{
