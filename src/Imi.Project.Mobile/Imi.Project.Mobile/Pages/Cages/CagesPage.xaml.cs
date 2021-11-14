@@ -20,15 +20,15 @@ namespace Imi.Project.Mobile.Pages.Cages
         public CagesPage()
         {
             InitializeComponent();
-            cageservice = new MockCageService();
+            //cageservice = new MockCageService();
         }
 
-        protected async override void OnAppearing()
-        {
-            base.OnAppearing();
-            var cages = await cageservice.GetAllCages();
-            colvCages.ItemsSource = cages;
-        }
+        //protected async override void OnAppearing()
+        //{
+        //    base.OnAppearing();
+        //    var cages = await cageservice.GetAllCages();
+        //    colvCages.ItemsSource = cages;
+        //}
 
         private async void colvCages_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

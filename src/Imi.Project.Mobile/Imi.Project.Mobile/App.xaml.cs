@@ -9,6 +9,8 @@ using Imi.Project.Mobile.ViewModels.Cages;
 using Imi.Project.Mobile.ViewModels.Birds;
 using Imi.Project.Mobile.ViewModels.Prescriptions;
 using Imi.Project.Mobile.ViewModels.SpeciesGuide;
+using Xamarin.Forms.PlatformConfiguration;
+
 
 namespace Imi.Project.Mobile
 {

@@ -2,6 +2,7 @@
 using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
 using Imi.Project.Mobile.ViewModels;
+using Imi.Project.Mobile.ViewModels.Cages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace Imi.Project.Mobile.Pages.Cages
 
         protected override void OnAppearing()
         {
-            BindingContext = new CageDetailViewModel(cagedetail);
+            //BindingContext = new CageDetailViewModel(cagedetail);
             lstTasks.ItemsSource = taskservice.GetDailyTaskByCageId(cagedetail.Id);
         }
 

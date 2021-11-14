@@ -2,6 +2,7 @@
 using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
 using Imi.Project.Mobile.ViewModels;
+using Imi.Project.Mobile.ViewModels.Cages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,14 +17,14 @@ namespace Imi.Project.Mobile.Pages.Cages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EditCagePage : ContentPage
     {
-        private static Cage cageToEdit;
-        ICageService cageservice;
+        //private static Cage cageToEdit;
+        //ICageService cageservice;
         public EditCagePage(Cage cage)
         {
             InitializeComponent();
-            cageToEdit = cage;
-            cageservice = new MockCageService();
-            BindingContext = new EditCageViewModel(cageToEdit);
+            //cageToEdit = cage;
+            //cageservice = new MockCageService();
+            //BindingContext = new EditCageViewModel(cageToEdit);
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
@@ -34,15 +35,10 @@ namespace Imi.Project.Mobile.Pages.Cages
 
         private async void btnRemove_Clicked(object sender, EventArgs e)
         {
-            await cageservice.DeleteCage(cageToEdit.Id);
+            //await cageservice.DeleteCage(cageToEdit.Id);
             await Navigation.PopToRootAsync();
         }
 
-        private async void btnSave_Clicked(object sender, EventArgs e)
-        {
-            await cageservice.UpdateCage(cageToEdit);
-            await Navigation.PopAsync();
-        }
     }
 }
 

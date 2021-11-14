@@ -19,26 +19,26 @@
                     <Frame Style="{StaticResource EditFrame}">
                         <StackLayout>
                             <Label Text="Name" FontAttributes="Bold"></Label>
-                            <Entry x:Name="entrName" Text="{Binding Cage.Name}"></Entry>
+                            <Entry x:Name="entrName" Text="{Binding Name}"></Entry>
                         </StackLayout>
                     </Frame>
                     <Frame Style="{StaticResource EditFrame}">
                         <StackLayout>
                             <Label Text="Location"  FontAttributes="Bold"></Label>
-                            <Entry x:Name="entrSpecies" Text="{Binding Cage.Location}"></Entry>
+                            <Entry x:Name="entrSpecies" Text="{Binding Location}"></Entry>
                         </StackLayout>
                     </Frame>
                     <Frame Style="{StaticResource EditFrame}">
                         <StackLayout>
                             <Label Text="Change image"  FontAttributes="Bold"></Label>
-                            <Image  Source="{Binding Cage.Image}" HeightRequest="30"></Image>
+                            <Image  Source="{Binding Image}" HeightRequest="30"></Image>
                             <Button Text="From Camera"></Button>
                             <Button Text="From Gallery"></Button>
                         </StackLayout>
                     </Frame>
                     <FlexLayout JustifyContent="SpaceBetween">
                         <Button x:Name="btnRemove" Text="Delete" Margin="25" BackgroundColor="IndianRed" Clicked="btnRemove_Clicked"></Button>
-                        <Button x:Name="btnSave" Text="Save"  Clicked="btnSave_Clicked" Margin="25" BackgroundColor="{StaticResource Green}"></Button>
+                        <Button x:Name="btnSave" Text="Save" Command ="{Binding SaveCommand}" Margin="25" BackgroundColor="{StaticResource Green}"></Button>
                     </FlexLayout>
                 </StackLayout>
             </ScrollView>
