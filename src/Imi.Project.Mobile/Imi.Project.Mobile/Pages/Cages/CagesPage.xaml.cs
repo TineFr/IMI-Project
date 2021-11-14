@@ -17,12 +17,9 @@ namespace Imi.Project.Mobile.Pages.Cages
     public partial class CagesPage : ContentPage
     {
 
-
-
         public CagesPage()
         {
             InitializeComponent();
-            //cageservice = new MockCageService();
         }
 
         //protected async override void OnAppearing()
@@ -33,9 +30,9 @@ namespace Imi.Project.Mobile.Pages.Cages
         //}
 
 
-        private async void btnAddCage_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new AddCagePage());
-        }
+        //private async void btnAddCage_Clicked(object sender, EventArgs e)
+        //{
+        //    await Navigation.PushAsync(new AddCagePage());
+        //}
     }
 }

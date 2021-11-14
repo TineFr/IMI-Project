@@ -10,7 +10,7 @@
 
             </Frame>
             <AbsoluteLayout Grid.Row="0" Grid.RowSpan="4">
-                <ImageButton x:Name="btnBack" Style="{StaticResource BackArrow}" Clicked="btnBack_Clicked"></ImageButton>
+                <ImageButton x:Name="btnBack" Style="{StaticResource BackArrow}"  Command ="{Binding BackCommand}"></ImageButton>
                 <Image Style="{StaticResource Logo}" ></Image>
             </AbsoluteLayout>
 
@@ -37,7 +37,7 @@
                         </StackLayout>
                     </Frame>
                     <FlexLayout JustifyContent="SpaceBetween">
-                        <Button x:Name="btnRemove" Text="Delete" Margin="25" BackgroundColor="IndianRed" Clicked="btnRemove_Clicked"></Button>
+                        <Button x:Name="btnRemove" Text="Delete" Margin="25" BackgroundColor="IndianRed" Command ="{Binding DeleteCommand}" ></Button>
                         <Button x:Name="btnSave" Text="Save" Command ="{Binding SaveCommand}" Margin="25" BackgroundColor="{StaticResource Green}"></Button>
                     </FlexLayout>
                 </StackLayout>

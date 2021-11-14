@@ -19,9 +19,9 @@ namespace Imi.Project.Mobile.Customs
             
         }
 
-        public CustomContainer(string NavigationServiceName)
+        public CustomContainer(string navigationServiceName)
         {
-            NavigationServiceName = NavigationServiceName;
+            NavigationServiceName = navigationServiceName;
             RegisterNavigation();
         }
 

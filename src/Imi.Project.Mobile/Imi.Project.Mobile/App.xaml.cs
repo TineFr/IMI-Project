@@ -20,21 +20,22 @@ namespace Imi.Project.Mobile
         {
             InitializeComponent();
             var mainPage = new CustomContainer();
-            NavigationPage.SetHasNavigationBar(mainPage, false);
             mainPage.FixedMode = true;
             mainPage.BarBackgroundColor = Color.White;
             mainPage.BarTextColor = Color.Black;
+            mainPage.AddTab<HomeViewModel>("home", "home24.png");
             mainPage.AddTab<CagesViewModel>("cages", "cage24.png");
             mainPage.AddTab<BirdsViewModel>("birds", "bird24.png");
-            mainPage.AddTab<HomeViewModel>("home", "home24.png");
             mainPage.AddTab<PrescriptionsViewModel>("meds", "medication24.png");
             mainPage.AddTab<SpeciesViewModel>("guide", "guide24.png");
             MainPage = mainPage;
+        }
+
+    
 
 
             //new FreshNavigationContainer(FreshPageModelResolver.ResolvePageModel<LoginViewModel>());
 
-        }
 
         
 

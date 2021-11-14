@@ -10,17 +10,19 @@ namespace Imi.Project.Mobile.ViewModels.Cages
 {
     public class CageDetailViewModel : FreshBasePageModel
     {
-
-        public Cage Cage { get; set; }
-
-        public CageDetailViewModel()
+        private Cage cage;
+        public Cage Cage
         {
-          
+            get { return cage; }
+            set 
+            { 
+                cage = value;
+                RaisePropertyChanged(nameof(Cage));
+            }
         }
         public override void Init(object initData)
         {
             Cage = initData as Cage;
-
             base.Init(initData);
         }
         public override void ReverseInit(object value)
@@ -34,6 +36,13 @@ namespace Imi.Project.Mobile.ViewModels.Cages
          {
              await CoreMethods.PushPageModel<EditCageViewModel>(cage);
          });
+
+        public ICommand BackCommand => new Command(
+             async () =>
+             {
+                 await CoreMethods.PopPageModel();
+             });
+  
     }
 
         

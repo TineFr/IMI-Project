@@ -51,14 +51,26 @@ namespace Imi.Project.Mobile.ViewModels.Cages
         }
 
         #endregion
-
-        public EditCageViewModel(Cage cage)
+        public override void Init(object initData)
         {
-            cageToEdit = cage;
-            Name = cage.Name;
-            Location = cage.Location;
-            Image = cage.Image;
+            cageToEdit = initData as Cage;
+            Name = cageToEdit.Name;
+            Location = cageToEdit.Location;
+            Image = cageToEdit.Image;
+            base.Init(initData);
         }
+
+        #region commands
+        public ICommand DeleteCommand => new Command(
+             async () =>
+             {
+                 var action = await CoreMethods.DisplayAlert("Do you wish to delete this cage?", null, "YES", "NO");
+                 if (action)
+                 {
+                     await cageservice.DeleteCage(cageToEdit.Id);
+                     await CoreMethods.PopToRoot(true);
+                 }
+             });
 
         public ICommand SaveCommand => new Command(
              async () =>
@@ -70,7 +82,11 @@ namespace Imi.Project.Mobile.ViewModels.Cages
                  await CoreMethods.PopPageModel(cageToEdit);
              });
 
-
-
+        public ICommand BackCommand => new Command(
+             async () =>
+             {
+                 await CoreMethods.PopPageModel();
+             });
+        #endregion
     }
 }
