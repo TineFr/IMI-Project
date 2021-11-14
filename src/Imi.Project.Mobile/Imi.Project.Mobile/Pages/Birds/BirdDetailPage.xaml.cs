@@ -16,27 +16,10 @@ namespace Imi.Project.Mobile.Pages.Birds
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BirdDetailPage : ContentPage
     {
-        private static Bird birddetail;
-        public BirdDetailPage(Bird bird)
+        public BirdDetailPage()
         {
             InitializeComponent();
-            birddetail = bird;
             NavigationPage.SetHasNavigationBar(this, false);
-        }
-
-        protected override void OnAppearing()
-        {
-            BindingContext = new BirdDetailViewModel(birddetail);
-        }
-
-        private async void btnBack_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PopAsync();
-        }
-
-        private async void btnEditBird_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new EditBirdPage(birddetail));
         }
     }
 }

@@ -18,32 +18,9 @@ namespace Imi.Project.Mobile.Pages.Birds
     public partial class BirdsPage : ContentPage
       
     {
-        IBirdService birdservice;
         public BirdsPage()
         {
             InitializeComponent();
-            birdservice = new MockBirdService();
-        }
-
-        protected async override void OnAppearing()
-        {
-            base.OnAppearing();
-            var birds = await birdservice.GetAllBirds();
-            colvBirds.ItemsSource = birds;         
-        }
-
-
-        private async void colvBirds_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var selection = (CollectionView)sender;
-            var bird = selection.SelectedItem as Bird;
-            if (bird == null) return;
-            await Navigation.PushAsync(new BirdDetailPage(bird));
-        }
-
-        private async void btnAddBird_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new AddBirdPage());
         }
     }
 }
