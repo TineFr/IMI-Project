@@ -13,17 +13,17 @@
                     <Frame Style="{StaticResource EditFrame}">
                         <StackLayout>
                             <Label Text="Name:" FontAttributes="Bold"></Label>
-                            <Entry x:Name="entrName" Placeholder="Enter name"></Entry>
+                            <Entry x:Name="entrName" Placeholder="Enter name" Text="{Binding Name}"></Entry>
                         </StackLayout>
                     </Frame>
                     <Frame Style="{StaticResource EditFrame}">
                         <StackLayout>
                             <Label Text="Usage:" FontAttributes="Bold"></Label>
-                            <Entry x:Name="entrUsage" Placeholder="Enter usage"></Entry>
+                            <Entry x:Name="entrUsage" Placeholder="Enter usage" Text="{Binding Usage}"></Entry>
                         </StackLayout>
                     </Frame>
 
-                    <Button x:Name="btnSave" Text="Save" HorizontalOptions="End" Margin="20" Clicked="btnSave_Clicked"></Button>
+                    <Button x:Name="btnSave" Text="Save" HorizontalOptions="End" Margin="20" Command="{Binding SaveCommand}"></Button>
                 </StackLayout>
             </ScrollView>
         </Grid>

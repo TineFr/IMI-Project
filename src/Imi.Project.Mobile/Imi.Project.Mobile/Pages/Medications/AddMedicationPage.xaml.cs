@@ -15,24 +15,9 @@ namespace Imi.Project.Mobile.Pages.Medications
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AddMedicationPage : ContentPage
     {
-        IMedicationService medicationService;
         public AddMedicationPage()
         {
             InitializeComponent();
-            medicationService = new MockMedicationService();
-        }
-
-        private async void btnSave_Clicked(object sender, EventArgs e)
-        {
-            Medication newMedication = new Medication
-            {
-                Id = new Guid(),
-                Name = entrName.Text,
-                Usage = entrUsage.Text
-
-            };
-            await medicationService.AddMedication(newMedication);
-            await Navigation.PopAsync();
         }
     }
 }

@@ -39,7 +39,7 @@
                                             <CheckBox x:Name= "chkTask" IsChecked="{Binding IsDone}"></CheckBox>
                                         <Label Text="{Binding Name}" HorizontalOptions="StartAndExpand" Margin="10,0,0,0" FontSize="15" Padding="10"></Label>
                                             <ImageButton x:Name="btnEditTask" Command="{Binding EditTaskCommand}" CommandParameter="{Binding .}" Source="{extensions:ImageResource Imi.Project.Mobile.icons.pencil.png}" WidthRequest="20" BackgroundColor="Transparent" ></ImageButton>
-                                            <ImageButton x:Name="btnDeleteTask" Command="{Binding DeleteTaskCommand}" CommandParameter="{Binding .}" Source="{extensions:ImageResource Imi.Project.Mobile.icons.delete.png}" WidthRequest="15" BackgroundColor="Transparent" Margin="5,0,10, 0"  ></ImageButton>
+                                            <ImageButton x:Name="btnDeleteTask" Command="{Binding DeleteTaskCommand}" Source="{extensions:ImageResource Imi.Project.Mobile.icons.delete.png}" WidthRequest="15" BackgroundColor="Transparent" Margin="5,0,10, 0"></ImageButton>
                                         </StackLayout>
                                 </ViewCell>
                             </DataTemplate>

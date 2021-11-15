@@ -62,6 +62,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Pages\Medications\MedicationsPage.xaml.cs">
+      <DependentUpon>MedicationsPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Update="Pages\AccountPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -104,7 +110,7 @@
     <EmbeddedResource Update="Pages\Medications\EditMedicationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Medications\MedicationPage.xaml">
+    <EmbeddedResource Update="Pages\Medications\MedicationsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\Prescriptions\AddPrescriptionPage.xaml">
