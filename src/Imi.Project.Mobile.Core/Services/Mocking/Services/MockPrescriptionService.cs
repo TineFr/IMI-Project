@@ -113,7 +113,7 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
             return Task.FromResult(updatedPrescription);
         }
 
-        Task<Prescription> IPrescriptionService.DeletePrescription(Guid id)
+        public Task<Prescription> DeletePrescription(Guid id)
         {
             var prescription = prescriptionrepository.FirstOrDefault(b => b.Id.Equals(id));
             prescriptionrepository.Remove(prescription);

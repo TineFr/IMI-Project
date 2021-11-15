@@ -26,7 +26,7 @@
                     <GridItemsLayout Orientation="Vertical"/>
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models1:Medication" >
+                        <DataTemplate>
                             <StackLayout Style="{StaticResource CollectionSelection}">
 
                                 <Frame Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="Center" Margin="10,5,10,5"  BackgroundColor="#EEEEEE"
@@ -36,8 +36,8 @@
                                             <Label  Text="{Binding Name}" FontSize="20" HorizontalTextAlignment="Center" />
                                         </StackLayout>
                                         <StackLayout Orientation="Horizontal">
-                                            <ImageButton x:Name="btnEditMedication" Command="{Binding EditMedicationCommand}" CommandParameter="{Binding .}" Source="{extensions:ImageResource Imi.Project.Mobile.icons.pencil.png}" WidthRequest="20" BackgroundColor="Transparent" Clicked="btnEditMedication_Clicked" ></ImageButton>
-                                            <ImageButton x:Name="btnDeleteMedication" Command="{Binding DeleteMedicationCommand}" CommandParameter="{Binding .}" Source="{extensions:ImageResource Imi.Project.Mobile.icons.delete.png}" WidthRequest="15" BackgroundColor="Transparent" Margin="5,0,10, 0" Clicked="btnDeleteMedication_Clicked" ></ImageButton>
+                                            <ImageButton x:Name="btnEditMedication" Command="{Binding EditMedicationCommand}"  Source="{extensions:ImageResource Imi.Project.Mobile.icons.pencil.png}" WidthRequest="20" BackgroundColor="Transparent"></ImageButton>
+                                            <ImageButton x:Name="btnDeleteMedication" Command="{Binding DeleteMedicationCommand}"  Source="{extensions:ImageResource Imi.Project.Mobile.icons.delete.png}" WidthRequest="15" BackgroundColor="Transparent" Margin="5,0,10, 0"></ImageButton>
                                         </StackLayout>
                                     </FlexLayout>
                                 </Frame>

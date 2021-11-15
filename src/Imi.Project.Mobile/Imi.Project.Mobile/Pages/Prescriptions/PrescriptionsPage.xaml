@@ -15,14 +15,14 @@
             </AbsoluteLayout>
             <StackLayout Grid.Row="1" Grid.RowSpan="3">
                 <StackLayout Grid.Row="2">
-                    <Button  x:Name="btnAddPrescription" Text="Add new" HorizontalOptions="EndAndExpand" WidthRequest="100" Margin="10" Clicked="btnAddPrescription_Clicked"></Button>
+                    <Button  x:Name="btnAddPrescription" Text="Add new" HorizontalOptions="EndAndExpand" WidthRequest="100" Margin="10" Command="{Binding ViewPrescriptionCommand }"></Button>
                 </StackLayout>
 
                 <CollectionView      
                                  Grid.RowSpan="3"
                                  x:Name="colvPrescriptions"
                                  SelectionMode="Single"
-                                 SelectionChanged="colvPrescriptions_SelectionChanged"
+                                 ItemsSource="{Binding Prescriptions}"
                                  VerticalOptions="Center"   
                                  HorizontalOptions="Center"   
                                  Margin="10">
@@ -47,7 +47,7 @@
                                             <Label  Text="Till:" FontSize="15" FontAttributes="Bold" HorizontalTextAlignment="Center" />
                                             <Label  Text="{Binding EndDate}" FontSize="15" FontAttributes="Bold" HorizontalTextAlignment="Center" />
                                         </StackLayout>
-                                        <Button x:Name="btnShowBirds" Text="DETAILS" CommandParameter="{Binding .}" CornerRadius="10" Margin="10" Clicked="btnShowBirds_Clicked"></Button>
+                                        <Button x:Name="btnShowBirds" Text="DETAILS" Command="{Binding ViewPrescriptionCommand }" CornerRadius="10" Margin="10"></Button>
                                     </FlexLayout>
                                 </Frame>
                             </StackLayout>

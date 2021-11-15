@@ -1,4 +1,5 @@
-﻿using Imi.Project.Mobile.Core.Models;
+﻿using FreshMvvm;
+using Imi.Project.Mobile.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace Imi.Project.Mobile.ViewModels
 {
-    public class AddPrescriptionViewModel
+    public class AddPrescriptionViewModel : FreshBasePageModel
     {
         public IEnumerable<Medication> Medications { get; set; }
         public IEnumerable<Bird> Birds { get; set; }

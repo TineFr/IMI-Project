@@ -60,7 +60,6 @@ namespace Imi.Project.Mobile.ViewModels.Cages
         public ICommand ViewCageCommand => new Command<Cage>(
             async (Cage cage) =>
             {
-                var test = cage;
                 await CoreMethods.PushPageModel<CageDetailViewModel>(cage);
             });
         public ICommand AddCageCommand => new Command(
