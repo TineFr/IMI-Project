@@ -9,7 +9,7 @@ using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace Imi.Project.Mobile.ViewModels
+namespace Imi.Project.Mobile.ViewModels.Birds
 {
     public class EditBirdViewModel : FreshBasePageModel
     {
@@ -73,8 +73,8 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
-        private Gender gender;
-        public Gender Gender
+        private string gender;
+        public string Gender
         {
             get { return gender; }
             set
@@ -132,21 +132,25 @@ namespace Imi.Project.Mobile.ViewModels
         public ICommand SaveCommand => new Command(
              async () =>
              {
-                 Bird newBird = new Bird
+                 birdToEdit.Name = Name;
+                 birdToEdit.Gender = Gender;
+                 birdToEdit.HatchDate = HatchDate;
+                 birdToEdit.Species = Species;
+                 birdToEdit.Cage = Cage;
+                 birdToEdit.Food = Food;
+                 birdToEdit.Image = Image;
+                 await birdService.UpdateBird(birdToEdit);
+                 await CoreMethods.PopPageModel(birdToEdit);
+             });
+        public ICommand DeleteCommand => new Command(
+             async () =>
+             {
+                 var action = await CoreMethods.DisplayAlert("Do you wish to delete this bird?", null, "YES", "NO");
+                 if (action)
                  {
-                     Id = new Guid(),
-                     Name = this.Name,
-                     Gender = this.Gender.ToString(),
-                     HatchDate = this.HatchDate,
-                     Cage = this.Cage,
-                     CageId = Cage.Id,
-                     SpeciesId = Species.Id,
-                     Species = this.Species,
-                     Food = this.Food,
-                     Image = "birds/budgie2.png" //later nog veranderen
-                 };
-                 await birdService.AddBird(newBird);
-                 await CoreMethods.PopPageModel();
+                     await birdService.DeleteBird(birdToEdit.Id);
+                     await CoreMethods.PopToRoot(true);
+                 }
              });
 
         public ICommand BackCommand => new Command(
@@ -154,6 +158,7 @@ namespace Imi.Project.Mobile.ViewModels
              {
                  await CoreMethods.PopPageModel();
              });
+
         #endregion
 
         public async override void Init(object initData)
@@ -161,7 +166,7 @@ namespace Imi.Project.Mobile.ViewModels
             var species = await speciesService.GetAllSpecies();
             SpeciesList = new ObservableCollection<Species>(species);
             var cages = await cageservice.GetAllCages();
-            cagesList = new ObservableCollection<Cage>(cages);
+            CagesList = new ObservableCollection<Cage>(cages);
 
             Genders = Enum.GetValues(typeof(Gender)).Cast<Gender>()
                                                     .Select(g => g.ToString())
@@ -170,7 +175,7 @@ namespace Imi.Project.Mobile.ViewModels
 
             birdToEdit = initData as Bird;
             Name = birdToEdit.Name;
-            //Gender = birdToEdit.Gender;
+            Gender = birdToEdit.Gender;
             HatchDate = birdToEdit.HatchDate;
             Cage = birdToEdit.Cage;
             Species = birdToEdit.Species;

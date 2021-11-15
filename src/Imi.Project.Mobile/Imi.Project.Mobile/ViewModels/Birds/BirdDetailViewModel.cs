@@ -1,12 +1,13 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Core.Models;
+using Imi.Project.Mobile.ViewModels.Birds;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace Imi.Project.Mobile.ViewModels
+namespace Imi.Project.Mobile.ViewModels.Birds
 {
     public class BirdDetailViewModel : FreshBasePageModel
     {
@@ -22,7 +23,7 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
-        public async override void Init(object initData)
+        public override void Init(object initData)
         {
             Bird = initData as Bird;
             base.Init(initData);
@@ -38,6 +39,11 @@ namespace Imi.Project.Mobile.ViewModels
          {
              await CoreMethods.PushPageModel<EditBirdViewModel>(bird);
          });
+        public ICommand BackCommand => new Command(
+             async () =>
+             {
+                 await CoreMethods.PopPageModel();
+             });
 
 
     }

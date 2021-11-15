@@ -25,7 +25,7 @@ namespace Imi.Project.Mobile.ViewModels.Birds
             set
             {
                 birds = value;
-                RaisePropertyChanged(nameof(Cages));
+                RaisePropertyChanged(nameof(Birds));
             }
         }
         #endregion
