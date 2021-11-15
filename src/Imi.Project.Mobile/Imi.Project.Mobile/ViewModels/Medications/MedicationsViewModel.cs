@@ -1,5 +1,6 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Core.Models;
+using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
 using Imi.Project.Mobile.ViewModels.Medications;
 using System;
@@ -14,7 +15,12 @@ namespace Imi.Project.Mobile.ViewModels.Medicines
 {
     public class MedicationsViewModel : FreshBasePageModel
     {
-        MockMedicationService medicationService = new MockMedicationService();
+        private readonly IMedicationService medicationService;
+
+        public MedicationsViewModel(IMedicationService medicationService)
+        {
+            this.medicationService = medicationService;
+        }
 
         #region properties
 

@@ -1,5 +1,6 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Core.Models;
+using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
 using System;
 using System.Collections.Generic;
@@ -12,8 +13,15 @@ namespace Imi.Project.Mobile.ViewModels
 {
     public class PrescriptionDetailViewModel : FreshBasePageModel
     {
-        MockBirdService birdService = new MockBirdService();
-        MockPrescriptionService prescriptionService = new MockPrescriptionService();
+        private readonly IBirdService birdService;
+        private readonly IPrescriptionService prescriptionService;
+
+        public PrescriptionDetailViewModel(IPrescriptionService prescriptionService, IBirdService birdService)
+        {
+            this.prescriptionService = prescriptionService;
+            this.birdService = birdService;
+        }
+
         #region properties
         public Prescription prescription { get; set; }
         public Prescription Prescription

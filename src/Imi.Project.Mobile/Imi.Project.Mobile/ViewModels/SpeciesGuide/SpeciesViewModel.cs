@@ -1,5 +1,6 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Core.Models;
+using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,12 @@ namespace Imi.Project.Mobile.ViewModels.SpeciesGuide
 {
     public class SpeciesViewModel : FreshBasePageModel
     {
-        MockSpeciesService speciesService = new MockSpeciesService();
+        private readonly ISpeciesService speciesService;
+
+        public SpeciesViewModel(ISpeciesService speciesService)
+        {
+            this.speciesService = speciesService;
+        }
 
         #region properties
 
