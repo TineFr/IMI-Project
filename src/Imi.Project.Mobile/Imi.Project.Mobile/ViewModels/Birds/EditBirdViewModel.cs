@@ -1,5 +1,6 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Core.Models;
+using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,15 @@ namespace Imi.Project.Mobile.ViewModels.Birds
 {
     public class EditBirdViewModel : FreshBasePageModel
     {
-        MockBirdService birdService = new MockBirdService();
-        MockCageService cageservice = new MockCageService();
-        MockSpeciesService speciesService = new MockSpeciesService();
+        private readonly IBirdService birdService;
+        private readonly ICageService cageService;
+        private readonly ISpeciesService speciesService;
+        public EditBirdViewModel(IBirdService birdService, ICageService cageService, ISpeciesService speciesService)
+        {
+            this.birdService = birdService;
+            this.cageService = cageService;
+            this.speciesService = speciesService;
+        }
 
 
         private Bird birdToEdit;
@@ -165,7 +172,7 @@ namespace Imi.Project.Mobile.ViewModels.Birds
         {
             var species = await speciesService.GetAllSpecies();
             SpeciesList = new ObservableCollection<Species>(species);
-            var cages = await cageservice.GetAllCages();
+            var cages = await cageService.GetAllCages();
             CagesList = new ObservableCollection<Cage>(cages);
 
             Genders = Enum.GetValues(typeof(Gender)).Cast<Gender>()

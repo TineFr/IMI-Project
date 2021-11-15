@@ -1,5 +1,6 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Core.Models;
+using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,12 @@ namespace Imi.Project.Mobile.ViewModels.Cages
 {
     public class AddCageViewModel : FreshBasePageModel
     {
-        MockCageService cageservice = new MockCageService();
+        private readonly ICageService cageService;
+
+        public AddCageViewModel(ICageService cageService)
+        {
+            this.cageService = cageService;
+        }
 
         #region properties
 
@@ -63,7 +69,7 @@ namespace Imi.Project.Mobile.ViewModels.Cages
                      Location = this.Location,
                      Image = "cage1.png" //later aan te passen
                  };
-                 await cageservice.AddCage(newCage);
+                 await cageService.AddCage(newCage);
                  await CoreMethods.PopPageModel();
              });
 

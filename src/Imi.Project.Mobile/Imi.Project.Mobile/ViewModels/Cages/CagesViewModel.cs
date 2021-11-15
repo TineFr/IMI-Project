@@ -1,5 +1,6 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Core.Models;
+using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
 using System;
 using System.Collections.Generic;
@@ -14,8 +15,13 @@ namespace Imi.Project.Mobile.ViewModels.Cages
 {
     public class CagesViewModel : FreshBasePageModel
     {
+        private readonly ICageService cageService;
 
-        MockCageService cageservice = new MockCageService();
+        public CagesViewModel(ICageService cageService)
+        {
+            this.cageService = cageService;
+        }
+
 
         #region properties
 
@@ -46,7 +52,7 @@ namespace Imi.Project.Mobile.ViewModels.Cages
  
         private async Task RefreshCages()
         {
-            var cages = await cageservice.GetAllCages();
+            var cages = await cageService.GetAllCages();
             Cages = null;    
             Cages = new ObservableCollection<Cage>(cages);
         }
@@ -54,7 +60,7 @@ namespace Imi.Project.Mobile.ViewModels.Cages
         #region commands
         public ICommand ShowCagesCommand => new Command(
          async () => {
-             Cages = await cageservice.GetAllCages();
+             Cages = await cageService.GetAllCages();
          });
 
         public ICommand ViewCageCommand => new Command<Cage>(

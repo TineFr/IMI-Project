@@ -1,5 +1,6 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Core.Models;
+using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,13 @@ namespace Imi.Project.Mobile.ViewModels.Cages
 {
     public class EditCageViewModel : FreshBasePageModel
     {
-        MockCageService cageservice = new MockCageService();
+        private readonly ICageService cageService;
+
+        public EditCageViewModel(ICageService cageService)
+        {
+            this.cageService = cageService;
+        }
+
         private Cage cageToEdit;
 
         #region properties
@@ -67,7 +74,7 @@ namespace Imi.Project.Mobile.ViewModels.Cages
                  var action = await CoreMethods.DisplayAlert("Do you wish to delete this cage?", null, "YES", "NO");
                  if (action)
                  {
-                     await cageservice.DeleteCage(cageToEdit.Id);
+                     await cageService.DeleteCage(cageToEdit.Id);
                      await CoreMethods.PopToRoot(true);
                  }
              });
@@ -78,7 +85,7 @@ namespace Imi.Project.Mobile.ViewModels.Cages
                  cageToEdit.Name = Name;
                  cageToEdit.Location = Location;
                  cageToEdit.Image = Image;
-                 await cageservice.UpdateCage(cageToEdit);
+                 await cageService.UpdateCage(cageToEdit);
                  await CoreMethods.PopPageModel(cageToEdit);
              });
 

@@ -1,5 +1,6 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Core.Models;
+using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
 using System;
 using System.Collections.Generic;
@@ -14,8 +15,12 @@ namespace Imi.Project.Mobile.ViewModels.Cages
     public class CageDetailViewModel : FreshBasePageModel
     {
 
-        MockDailyTaskService dailytaskService = new MockDailyTaskService();
+        private readonly IDailyTaskService dailyTaskService;
 
+        public CageDetailViewModel(IDailyTaskService dailyTaskService)
+        {
+            this.dailyTaskService = dailyTaskService;
+        }
 
         private ObservableCollection<DailyTask> tasks;
 
@@ -49,7 +54,7 @@ namespace Imi.Project.Mobile.ViewModels.Cages
 
         private async Task RefreshTasks()
         {
-            var tasks = dailytaskService.GetDailyTaskByCageId(Cage.Id);
+            var tasks = dailyTaskService.GetDailyTaskByCageId(Cage.Id);
             Tasks = null;
             Tasks = new ObservableCollection<DailyTask>(tasks);
         }
@@ -85,9 +90,9 @@ namespace Imi.Project.Mobile.ViewModels.Cages
 
                  if (edit != null)
                  {
-                     var taskToUpdate = await dailytaskService.GetDailyTaskById(dailyTask.Id);
+                     var taskToUpdate = await dailyTaskService.GetDailyTaskById(dailyTask.Id);
                      taskToUpdate.Name = edit;
-                     await dailytaskService.UpdateDailyTask(taskToUpdate);
+                     await dailyTaskService.UpdateDailyTask(taskToUpdate);
                      await RefreshTasks();
                  }
              });
@@ -97,7 +102,7 @@ namespace Imi.Project.Mobile.ViewModels.Cages
                  var action = await Application.Current.MainPage.DisplayAlert("Do you wish to delete this task?", null, "YES", "CANCEL");
                  if (action)
                  {
-                     await dailytaskService.DeleteDailyTask(dailyTask.Id);
+                     await dailyTaskService.DeleteDailyTask(dailyTask.Id);
                      await RefreshTasks();
                  }
              });
@@ -116,7 +121,7 @@ namespace Imi.Project.Mobile.ViewModels.Cages
                          IsDone = false,
                          CageId = Cage.Id
                      };
-                     await dailytaskService.AddDailyTask(newTask);
+                     await dailyTaskService.AddDailyTask(newTask);
                      await RefreshTasks();
                  };
              });

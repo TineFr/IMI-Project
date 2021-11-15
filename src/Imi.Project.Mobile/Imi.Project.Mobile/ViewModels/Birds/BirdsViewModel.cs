@@ -1,5 +1,6 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Core.Models;
+using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,12 @@ namespace Imi.Project.Mobile.ViewModels.Birds
 {
     public class BirdsViewModel :FreshBasePageModel  
     {
-        MockBirdService birdService = new MockBirdService();
+        private readonly IBirdService birdService;
+
+        public BirdsViewModel(IBirdService birdService)
+        {
+            this.birdService = birdService;
+        }
 
         #region properties
 
