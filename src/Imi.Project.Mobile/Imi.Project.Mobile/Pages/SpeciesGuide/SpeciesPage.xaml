@@ -16,11 +16,13 @@
             <FlexLayout WidthRequest="700" HorizontalOptions="Center" Grid.Row="2" 
                                  Grid.RowSpan="3">
                 <CollectionView  
-                                 x:Name="colvSpecies"
+                                 x:Name="cvSpecies"
                                  Grid.Row="2" 
                                  Grid.RowSpan="3"
                                  SelectionMode="Single"
-                                 SelectionChanged="colvSpecies_SelectionChanged">
+                                 ItemsSource="{Binding Species}"
+                                 SelectionChangedCommand="{Binding ViewSpeciesCommand}"
+                                 SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference cvSpecies}}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models1:Species" >
                             <StackLayout Style="{StaticResource CollectionSelection}">

@@ -9,7 +9,7 @@
                 <Label Text="{Binding Species.Name}" Style="{StaticResource MainLabel}"></Label>
             </Frame>
             <AbsoluteLayout Grid.Row="0" Grid.RowSpan="4">
-                <ImageButton x:Name="btnBack" Style="{StaticResource BackArrow}" Clicked="btnBack_Clicked"></ImageButton>
+                <ImageButton x:Name="btnBack" Style="{StaticResource BackArrow}" Command="{Binding BackCommand}"></ImageButton>
                 <Image Style="{StaticResource Logo}" ></Image>
             </AbsoluteLayout>
             <ScrollView Grid.Row="1" Grid.RowSpan="3">
