@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Imi.Project.Mobile.Pages.Medications.MedicationPage"
-             xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions" xmlns:models1="clr-namespace:Imi.Project.Mobile.Core.Models;assembly=Imi.Project.Mobile.Core">
+             xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions"
+             x:Name="PageBinding">
     <NavigationPage.TitleView>
         <Label Text="Medication" TextColor="white" VerticalTextAlignment="Center"/>
     </NavigationPage.TitleView>
@@ -36,8 +37,8 @@
                                             <Label  Text="{Binding Name}" FontSize="20" HorizontalTextAlignment="Center" />
                                         </StackLayout>
                                         <StackLayout Orientation="Horizontal">
-                                            <ImageButton x:Name="btnEditMedication" Command="{Binding EditMedicationCommand}"  Source="{extensions:ImageResource Imi.Project.Mobile.icons.pencil.png}" WidthRequest="20" BackgroundColor="Transparent"></ImageButton>
-                                            <ImageButton x:Name="btnDeleteMedication" Command="{Binding DeleteMedicationCommand}"  Source="{extensions:ImageResource Imi.Project.Mobile.icons.delete.png}" WidthRequest="15" BackgroundColor="Transparent" Margin="5,0,10, 0"></ImageButton>
+                                            <ImageButton x:Name="btnEditMedication" Command="{Binding BindingContext.EditMedicationCommand, Source={x:Reference PageBinding}}" CommandParameter="{Binding .}"  Source="{extensions:ImageResource Imi.Project.Mobile.icons.pencil.png}" WidthRequest="20" BackgroundColor="Transparent"></ImageButton>
+                                            <ImageButton x:Name="btnDeleteMedication" Command="{Binding BindingContext.DeleteMedicationCommand, Source={x:Reference PageBinding}}" CommandParameter="{Binding .}"  Source="{extensions:ImageResource Imi.Project.Mobile.icons.delete.png}" WidthRequest="15" BackgroundColor="Transparent" Margin="5,0,10, 0"></ImageButton>
                                         </StackLayout>
                                     </FlexLayout>
                                 </Frame>

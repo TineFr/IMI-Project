@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Imi.Project.Mobile.Pages.Prescriptions.PrescriptionsPage"
-             xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions">
+             xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions"
+             x:Name="PageBinding">
     <ContentPage.Content>
         <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
               RowDefinitions="{StaticResource MainGridRows}">
@@ -47,7 +48,7 @@
                                             <Label  Text="Till:" FontSize="15" FontAttributes="Bold" HorizontalTextAlignment="Center" />
                                             <Label  Text="{Binding EndDate}" FontSize="15" FontAttributes="Bold" HorizontalTextAlignment="Center" />
                                         </StackLayout>
-                                        <Button x:Name="btnShowBirds" Text="DETAILS" Command="{Binding ViewPrescriptionCommand }" CornerRadius="10" Margin="10"></Button>
+                                        <Button x:Name="btnShowBirds" Text="DETAILS" Command="{Binding BindingContext.ViewPrescriptionCommand, Source={x:Reference PageBinding}}" CommandParameter="{Binding .}"  CornerRadius="10" Margin="10"></Button>
                                     </FlexLayout>
                                 </Frame>
                             </StackLayout>
@@ -57,4 +58,4 @@
             </StackLayout>
         </Grid>
     </ContentPage.Content>
-</ContentPage>
+</ContentPage> 
