@@ -13,9 +13,9 @@ using Imi.Project.Mobile.Core.Models;
 namespace Imi.Project.Mobile.Pages.Medications
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MedicationPage : ContentPage
+    public partial class MedicationsPage : ContentPage
     {
-        public MedicationPage()
+        public MedicationsPage()
         {
             InitializeComponent();
         }

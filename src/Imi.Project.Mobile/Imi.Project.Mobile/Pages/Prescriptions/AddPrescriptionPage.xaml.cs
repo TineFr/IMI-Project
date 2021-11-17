@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Imi.Project.Mobile.ViewModels.Prescriptions;
 
 namespace Imi.Project.Mobile.Pages.Prescriptions
 {
@@ -61,7 +62,7 @@ namespace Imi.Project.Mobile.Pages.Prescriptions
 
         private void btnAddMedicine_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new MedicationPage());
+            Navigation.PushAsync(new MedicationsPage());
         }
     }
 }

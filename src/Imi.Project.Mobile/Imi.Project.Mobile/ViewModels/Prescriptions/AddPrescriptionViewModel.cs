@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 
-namespace Imi.Project.Mobile.ViewModels
+namespace Imi.Project.Mobile.ViewModels.Prescriptions
 {
     public class AddPrescriptionViewModel : FreshBasePageModel
     {
