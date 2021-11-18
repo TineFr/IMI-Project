@@ -29,21 +29,22 @@ namespace Imi.Project.Mobile
             FreshIOC.Container.Register<IPrescriptionService>(new MockPrescriptionService());
             FreshIOC.Container.Register<IDailyTaskService>(new MockDailyTaskService());
 
-            var mainPage = new CustomContainer();
-            mainPage.FixedMode = true;
-            mainPage.BarBackgroundColor = Color.White;
-            mainPage.BarTextColor = Color.Black;
-            mainPage.AddTab<HomeViewModel>("home", "home24.png");
-            mainPage.AddTab<CagesViewModel>("cages", "cage24.png");
-            mainPage.AddTab<BirdsViewModel>("birds", "bird24.png");
-            mainPage.AddTab<PrescriptionsViewModel>("meds", "medication24.png");
-            mainPage.AddTab<SpeciesViewModel>("guide", "guide24.png");
-            MainPage = mainPage;
+            //var mainPage = new CustomContainer();
+            //mainPage.FixedMode = true;
+            //mainPage.BarBackgroundColor = Color.White;
+            //mainPage.BarTextColor = Color.Black;
+            //mainPage.AddTab<HomeViewModel>("home", "home24.png");
+            //mainPage.AddTab<CagesViewModel>("cages", "cage24.png");
+            //mainPage.AddTab<BirdsViewModel>("birds", "bird24.png");
+            //mainPage.AddTab<PrescriptionsViewModel>("meds", "medication24.png");
+            //mainPage.AddTab<SpeciesViewModel>("guide", "guide24.png");
+            //MainPage = mainPage;
 
 
 
 
             //new FreshNavigationContainer(FreshPageModelResolver.ResolvePageModel<LoginViewModel>());
+            MainPage = new FreshNavigationContainer(FreshPageModelResolver.ResolvePageModel<LoginViewModel>());
 
         }
 
