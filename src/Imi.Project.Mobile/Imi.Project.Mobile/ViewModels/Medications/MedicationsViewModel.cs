@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace Imi.Project.Mobile.ViewModels.Medicines
+namespace Imi.Project.Mobile.ViewModels.Medications
 {
     public class MedicationsViewModel : FreshBasePageModel
     {

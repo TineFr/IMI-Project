@@ -68,10 +68,10 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
              {
                  await CoreMethods.PushPageModel<PrescriptionDetailViewModel>(prescription);
              });
-        public ICommand AddPrescriptionCommand => new Command<Prescription>(
-             async (Prescription prescription) =>
+        public ICommand AddPrescriptionCommand => new Command(
+             async () =>
              {
-                 await CoreMethods.PushPageModel<AddPrescriptionViewModel>(prescription);
+                 await CoreMethods.PushPageModel<AddPrescriptionViewModel>();
              });
 
         #endregion
