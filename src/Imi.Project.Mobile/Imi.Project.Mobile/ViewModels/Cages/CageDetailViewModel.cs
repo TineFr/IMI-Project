@@ -54,7 +54,7 @@ namespace Imi.Project.Mobile.ViewModels.Cages
 
         private async Task RefreshTasks()
         {
-            var tasks = dailyTaskService.GetDailyTaskByCageId(Cage.Id);
+            var tasks = await dailyTaskService.GetDailyTaskByCageId(Cage.Id);
             Tasks = null;
             Tasks = new ObservableCollection<DailyTask>(tasks);
         }
