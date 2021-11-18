@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Imi.Project.Mobile.ViewModels
 {
-    public class MainViewModel : FreshBasePageModel
+    class AccountViewModel : FreshBasePageModel
     {
     }
 }

@@ -9,9 +9,9 @@ namespace Imi.Project.Mobile.ViewModels
 {
     public class LoginViewModel : FreshBasePageModel
     {
-        public ICommand LoginCommand => new Command(() =>
-        {
-            Application.Current.MainPage = new FreshNavigationContainer(FreshPageModelResolver.ResolvePageModel<MainViewModel>());
-        });
+        //public ICommand LoginCommand => new Command(() =>
+        //{
+        //    //Application.Current.MainPage = new FreshNavigationContainer(FreshPageModelResolver.ResolvePageModel<MainViewModel>());
+        //});
     }
 }

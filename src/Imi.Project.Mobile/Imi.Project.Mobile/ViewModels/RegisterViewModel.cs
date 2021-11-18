@@ -69,10 +69,10 @@ namespace Imi.Project.Mobile.ViewModels
         }
 
         #endregion
-        public ICommand RegisterCommand => new Command(() =>
-        {
-            Application.Current.MainPage = new FreshNavigationContainer(FreshPageModelResolver.ResolvePageModel<MainViewModel>());
-        });
+        //public ICommand RegisterCommand => new Command(() =>
+        //{
+        //    Application.Current.MainPage = new FreshNavigationContainer(FreshPageModelResolver.ResolvePageModel<MainViewModel>());
+        //});
 
         public ICommand BackCommand => new Command(async () =>
         {

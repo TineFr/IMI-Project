@@ -22,11 +22,11 @@
             </Frame>
             <FlexLayout Grid.Row="0" JustifyContent="SpaceBetween">
                 <StackLayout  Margin="30, 20, 0, 0">
-                    <ImageButton x:Name="btnAccount"  HeightRequest="50"  Source="{extensions:ImageResource Imi.Project.Mobile.icons.accountdark.png}"   Aspect="AspectFill" BackgroundColor="Transparent" Command="{Binding OpenAccount}" ></ImageButton>
+                    <ImageButton x:Name="btnAccount"  HeightRequest="50"  Source="{extensions:ImageResource Imi.Project.Mobile.icons.accountdark.png}"   Aspect="AspectFill" BackgroundColor="Transparent" Command="{Binding OpenAccountCommand}" ></ImageButton>
                     <Label Text="account"  HorizontalTextAlignment="Center"></Label>
                 </StackLayout>
                 <StackLayout  Margin="0, 20, 30, 0" >
-                    <ImageButton x:Name="btnSettings" HeightRequest="50" Source="{extensions:ImageResource Imi.Project.Mobile.icons.settings.png}" Aspect="AspectFill"  BackgroundColor="Transparent"  Command="{Binding OpenSettings}"></ImageButton>
+                    <ImageButton x:Name="btnSettings" HeightRequest="50" Source="{extensions:ImageResource Imi.Project.Mobile.icons.settings.png}" Aspect="AspectFill"  BackgroundColor="Transparent"  Command="{Binding OpenSettingsCommand}"></ImageButton>
                     <Label Text="settings" HeightRequest="20" HorizontalTextAlignment="Center"></Label>
                 </StackLayout>
             </FlexLayout>
