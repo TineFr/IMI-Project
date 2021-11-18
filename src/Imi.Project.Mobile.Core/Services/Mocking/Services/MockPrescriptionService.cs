@@ -137,8 +137,6 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
         //    {
         //        prescription.Birds.ToList().Add(birdrepository.GetBirdById(bird))
         //    }
-            
-
         //}
     }
 }
