@@ -11,10 +11,18 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
 {
     public class MockPrescriptionService : IPrescriptionService
     {
-        private static IMedicationService medicationrepository = new MockMedicationService();
-        private static IBirdService birdrepository = new MockBirdService();
+        private static readonly IMedicationService medicationrepository = new MockMedicationService();
+        private static readonly IBirdService birdrepository = new MockBirdService();
 
-        private static ObservableCollection<Prescription> prescriptionrepository = new ObservableCollection<Prescription>
+        //private static IMedicationService _medicationrepository;
+        //private static IBirdService _birdrepository;
+
+        //public MockPrescriptionService(IMedicationService medicationService, IBirdService birdService)
+        //{
+        //    _medicationrepository = medicationService;
+        //    _birdrepository = birdService;
+        //}
+        private static readonly ObservableCollection<Prescription> prescriptionrepository = new ObservableCollection<Prescription>
         {
                     new Prescription
                     {
@@ -113,7 +121,7 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
             return Task.FromResult(updatedPrescription);
         }
 
-        Task<Prescription> IPrescriptionService.DeletePrescription(Guid id)
+        public Task<Prescription> DeletePrescription(Guid id)
         {
             var prescription = prescriptionrepository.FirstOrDefault(b => b.Id.Equals(id));
             prescriptionrepository.Remove(prescription);

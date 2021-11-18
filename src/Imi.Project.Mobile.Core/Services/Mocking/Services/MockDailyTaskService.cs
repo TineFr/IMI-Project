@@ -11,7 +11,7 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
 {
     public class MockDailyTaskService : IDailyTaskService
     {
-        private static ObservableCollection<DailyTask> DailyTaskrepository = new ObservableCollection<DailyTask>
+        private static readonly ObservableCollection<DailyTask> dailyTaskrepository = new ObservableCollection<DailyTask>
         {
                     new DailyTask
                     {
@@ -49,35 +49,38 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
 
         public Task<DailyTask> AddDailyTask(DailyTask DailyTask)
         {
-            DailyTaskrepository.Add(DailyTask);
+            dailyTaskrepository.Add(DailyTask);
             return Task.FromResult(DailyTask);
         }
 
         public Task<DailyTask> DeleteDailyTask(Guid id)
         {
-            var DailyTask = DailyTaskrepository.FirstOrDefault(b => b.Id.Equals(id));
-            DailyTaskrepository.Remove(DailyTask);
+            var DailyTask = dailyTaskrepository.FirstOrDefault(b => b.Id.Equals(id));
+            dailyTaskrepository.Remove(DailyTask);
             return Task.FromResult(DailyTask);
         }
 
-        public IEnumerable<DailyTask> GetDailyTaskByCageId(Guid id)
+
+        public Task<List<DailyTask>> GetDailyTaskByCageId(Guid id)
         {
-            var DailyTasks = DailyTaskrepository.Where(b => b.CageId.Equals(id)).ToList();
-            return DailyTasks;
+            var DailyTasks = dailyTaskrepository.Where(b => b.CageId.Equals(id)).ToList();
+            return Task.FromResult(DailyTasks);
         }
+
 
         public Task<DailyTask> GetDailyTaskById(Guid id)
         {
-            var DailyTask = DailyTaskrepository.FirstOrDefault(b => b.Id.Equals(id));
+            var DailyTask = dailyTaskrepository.FirstOrDefault(b => b.Id.Equals(id));
             return Task.FromResult(DailyTask);
         }
 
         public Task<DailyTask> UpdateDailyTask(DailyTask updatedDailyTask)
         {
-            var DailyTask = DailyTaskrepository.FirstOrDefault(b => b.Id.Equals(updatedDailyTask.Id));
-            DailyTaskrepository.ToList().Remove(DailyTask);
-            DailyTaskrepository.ToList().Add(updatedDailyTask);
+            var DailyTask = dailyTaskrepository.FirstOrDefault(b => b.Id.Equals(updatedDailyTask.Id));
+            dailyTaskrepository.ToList().Remove(DailyTask);
+            dailyTaskrepository.ToList().Add(updatedDailyTask);
             return Task.FromResult(updatedDailyTask);
         }
+
     }
 }

@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Imi.Project.Mobile.Pages.Cages.AddCagePage">
+    <ContentPage.Content>
+        <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
+              RowDefinitions="{StaticResource MainGridRows}">
+            <Frame Style="{StaticResource MainFrame}" BackgroundColor="{StaticResource Blue}">
+                <Label Text="Add Cage" Style="{StaticResource MainLabel}"></Label>
+
+            </Frame>
+            <AbsoluteLayout Grid.Row="0" Grid.RowSpan="4">
+                <ImageButton x:Name="btnBack" Style="{StaticResource BackArrow}" Command="{Binding BackCommand}"></ImageButton>
+                <Image Style="{StaticResource Logo}" ></Image>
+            </AbsoluteLayout>
+
+            <ScrollView Grid.Row="1" Grid.RowSpan="3" >
+                <StackLayout Grid.Row="1" Grid.RowSpan="2" >
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
+                            <Label Text="Name" FontAttributes="Bold"></Label>
+                            <Entry x:Name="entrName" Placeholder="Enter name" Text="{Binding Name}"></Entry>
+                        </StackLayout>
+                    </Frame>
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
+                            <Label Text="Location"  FontAttributes="Bold"></Label>
+                            <Entry x:Name="entrLocation" Placeholder="Enter location" Text="{Binding Location}"></Entry>
+                        </StackLayout>
+                    </Frame>
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
+                            <Label Text="Add image"  FontAttributes="Bold"></Label>
+                            <Button Text="From Camera"></Button>
+                            <Button Text="From Gallery"></Button>
+                        </StackLayout>
+                    </Frame>
+                    <Button x:Name="btnSave" Text="Save" HorizontalOptions="End" Command="{Binding SaveCommand}" Margin="20"></Button>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
