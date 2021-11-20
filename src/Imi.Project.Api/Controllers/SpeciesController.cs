@@ -52,7 +52,7 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpPost]
-        [Authorize("Admin")]
+        [Authorize(Policy = "AdministratorRole")]
         public async Task<IActionResult> Post(SpeciesRequestDto newSpecies)
         {
             if (!ModelState.IsValid)
@@ -71,7 +71,7 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpPut]
-        [Authorize("Admin")]
+        [Authorize(Policy = "AdministratorRole")]
         public async Task<IActionResult> Put(SpeciesRequestDto updatedSpecies)
         {
             if (!ModelState.IsValid)
@@ -90,7 +90,7 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpDelete]
-        [Authorize("Admin")]
+        [Authorize(Policy = "AdministratorRole")]
         public async Task<IActionResult> Delete(SpeciesRequestDto speciesToDelete)
         {
             var species = await _speciesService.GetSpeciesByIdAsync(speciesToDelete.Id);

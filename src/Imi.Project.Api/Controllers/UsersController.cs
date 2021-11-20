@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Controllers
 {
-    [Authorize("Admin")]
+    [Authorize(Policy = "AdministratorRole")]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
