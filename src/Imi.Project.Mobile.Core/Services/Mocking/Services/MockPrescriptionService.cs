@@ -11,17 +11,14 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
 {
     public class MockPrescriptionService : IPrescriptionService
     {
-        private static readonly IMedicationService medicationrepository = new MockMedicationService();
-        private static readonly IBirdService birdrepository = new MockBirdService();
+        private static IMedicationService medicationrepository;
+        private static IBirdService birdrepository;
 
-        //private static IMedicationService _medicationrepository;
-        //private static IBirdService _birdrepository;
-
-        //public MockPrescriptionService(IMedicationService medicationService, IBirdService birdService)
-        //{
-        //    _medicationrepository = medicationService;
-        //    _birdrepository = birdService;
-        //}
+        public MockPrescriptionService(IMedicationService medicationService, IBirdService birdService)
+        {
+            medicationrepository = medicationService;
+            birdrepository = birdService;
+        }
         private static readonly ObservableCollection<Prescription> prescriptionrepository = new ObservableCollection<Prescription>
         {
                     new Prescription
