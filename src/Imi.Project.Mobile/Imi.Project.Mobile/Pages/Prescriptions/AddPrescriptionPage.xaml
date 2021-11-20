@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Imi.Project.Mobile.Pages.Prescriptions.AddPrescriptionPage">
+             x:Class="Imi.Project.Mobile.Pages.Prescriptions.AddPrescriptionPage"
+             xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms">
     <NavigationPage.TitleView>
         <Label Text="Add Prescription" TextColor="white" VerticalTextAlignment="Center"/>
     </NavigationPage.TitleView>
@@ -13,14 +14,26 @@
                     <Frame Style="{StaticResource EditFrame}">
                         <StackLayout>
                             <Label Text="Medicine:" FontAttributes="Bold"></Label>
-                            <Picker x:Name="pkrMedicine" Title="Select medicine" ItemsSource="{Binding Medications}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding Medication}" ></Picker>
+                            <!--<Picker x:Name="pkrMedicine" Title="Select medicine" ItemsSource="{Binding Medications}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding Medication}" ></Picker>-->
+                            <combobox:SfComboBox HeightRequest="40"  DataSource="{Binding Medications}" DisplayMemberPath="Name" SelectedItem="{Binding Medication}" x:Name="cmbMedications"/>
                             <Button x:Name="btnAddMedicine" Text="+" HeightRequest="40"  WidthRequest="40" HorizontalOptions="End" Command="{Binding ShowMedicationsCommand}" BackgroundColor="{StaticResource Green}"></Button>
                         </StackLayout>
                     </Frame>
                     <Frame Style="{StaticResource EditFrame}">
                         <StackLayout>
                             <Label Text="Give to following birds:"  FontAttributes="Bold"></Label>
-                            <Picker  x:Name="pkrBirds" Title="Select birds" ItemsSource="{Binding Birds}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding Bird}"></Picker>
+                            <!--<Picker  x:Name="pkrBirds" Title="Select birds" ItemsSource="{Binding Birds}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding Bird}"></Picker>-->
+                            <combobox:SfComboBox 
+                                    HeightRequest="50"
+                                     IsEditableMode="false"
+                                     IgnoreDiacritic="true"
+                                     MultiSelectMode="Token"
+                                     DisplayMemberPath="Name"                                
+                                     DataSource="{Binding Birds}"
+                                     SelectedItem="{Binding SelectedBirds,Mode=TwoWay}"
+                                     Watermark="Select an Item"
+                                     x:Name="cmbBirds" 
+                                     ComboBoxMode="Suggest"/>
                         </StackLayout>
                     </Frame>
                     <Frame Style="{StaticResource EditFrame}">

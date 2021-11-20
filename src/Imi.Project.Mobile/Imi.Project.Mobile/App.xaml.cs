@@ -22,12 +22,12 @@ namespace Imi.Project.Mobile
         {
             InitializeComponent();
 
-            FreshIOC.Container.Register<IBirdService>(new MockBirdService());
-            FreshIOC.Container.Register<ISpeciesService>(new MockSpeciesService());
-            FreshIOC.Container.Register<ICageService>(new MockCageService());
-            FreshIOC.Container.Register<IMedicationService>(new MockMedicationService());
-            FreshIOC.Container.Register<IPrescriptionService>(new MockPrescriptionService());
-            FreshIOC.Container.Register<IDailyTaskService>(new MockDailyTaskService());
+            FreshIOC.Container.Register<IBirdService, MockBirdService>();
+            FreshIOC.Container.Register<ISpeciesService, MockSpeciesService>();
+            FreshIOC.Container.Register<ICageService, MockCageService>();
+            FreshIOC.Container.Register<IMedicationService, MockMedicationService>();
+            FreshIOC.Container.Register<IPrescriptionService, MockPrescriptionService>();
+            FreshIOC.Container.Register<IDailyTaskService, MockDailyTaskService>();
 
             //var mainPage = new CustomContainer();
             //mainPage.FixedMode = true;
@@ -45,16 +45,7 @@ namespace Imi.Project.Mobile
 
             //new FreshNavigationContainer(FreshPageModelResolver.ResolvePageModel<LoginViewModel>());
             MainPage = new FreshNavigationContainer(FreshPageModelResolver.ResolvePageModel<LoginViewModel>());
-
         }
-
-
-
-
-
-
-
-
         protected override void OnStart()
         {
         }

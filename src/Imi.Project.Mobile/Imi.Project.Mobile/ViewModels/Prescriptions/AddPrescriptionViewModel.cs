@@ -64,26 +64,31 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
             }
         }
 
-        private Bird bird;
+        //private Bird bird;
 
-        public Bird Bird
-        {
-            get { return bird; }
-            set { bird = value; }
-        }
-
-
-        //private List<Guid> selectedBirds;
-
-        //public List<Guid> SelectedBirds
+        //public Bird Bird
         //{
-        //    get { return selectedBirds; }
-        //    set
-        //    {
-        //        selectedBirds = value;
-        //        RaisePropertyChanged(nameof(SelectedBirds));
+        //    get { return bird; }
+        //    set 
+        //    { 
+        //        bird = value;
+        //        RaisePropertyChanged(nameof(Bird));
         //    }
         //}
+
+
+
+        private List<Bird> selectedBirds;
+
+        public List<Bird> SelectedBirds
+        {
+            get { return selectedBirds; }
+            set
+            {
+                selectedBirds = value;
+                RaisePropertyChanged(nameof(SelectedBirds));
+            }
+        }
 
         private DateTime startDate;
 
@@ -120,23 +125,19 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
                      StartDate = this.StartDate.ToString("d"),
                      EndDate = this.EndDate.ToString("d"),
                      MedicationId = this.Medication.Id,
-                     //BirdIds =  new List<Guid> 
+                     //BirdIds = new List<Guid>
                      //{
                      //    this.Bird.Id
-                     //},
-                     Birds = new ObservableCollection<Bird>
-                     {
-                         this.Bird
-                     }
-                     
+                     //}
+                     //Birds = SelectedBirds
+
                  };
 
-                 //    bird.Prescriptions.Add(newPrescription.Id);
                  await _prescriptionService.AddPrescription(newPrescription);
-                 var bird = await _birdService.GetBirdById(Bird.Id);
-                 bird.Prescriptions.Add(newPrescription.Id);
-                 await _birdService.UpdateBird(bird);
-                 await CoreMethods.PopPageModel();
+                 //var bird = await _birdService.GetBirdById(Bird.Id);
+                 //bird.Prescriptions.Add(newPrescription.Id);
+                 //await _birdService.UpdateBird(bird);
+                  await CoreMethods.PopPageModel();
              });
         public ICommand ShowMedicationsCommand => new Command(
              async () =>
