@@ -73,6 +73,15 @@ namespace Imi.Project.Api
                 };
             });
 
+
+            //authorization
+            services.AddAuthorization(options =>
+
+                options.AddPolicy("AdministratorRole", policy =>
+                {
+                    policy.RequireRole("Administrator");
+                }));
+
             //swagger
 
             services.AddSwaggerGen(c =>
