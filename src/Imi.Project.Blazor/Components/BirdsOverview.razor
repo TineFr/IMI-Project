@@ -1,0 +1,53 @@
+﻿
+
+<div class="maincontainer">
+    <div class="itemscontainer">
+
+        @foreach (var item in Birds)
+        {
+            <a href="@($"birddetails/{item.Id}")">
+                <div class="flexitem">
+                    <img class="itemimage" src="@item.Image" />
+                    <div>
+                        <h2>@item.Name</h2>
+                        <p class="scientific">@item.ScientificName</p>
+                        <p>@item.Cage</p>
+                    </div>
+                    <img class="genderimage" src="@SetGenderImage(item.Gender)" />
+                </div>
+            </a>
+        }
+    </div>
+</div>
+
+
+
+@code {
+
+
+
+    private string SetGenderImage(string gender)
+    {
+        string imageSource = "";
+        imageSource = gender.ToLower() == "male" ? "images/male.png" : "images/female.png";
+        return imageSource;
+    }
+
+    [Parameter]
+    public IEnumerable<Bird> Birds { get; set; } = new List<Bird>();
+
+    [Inject]
+    public IBirdService birdService { get; set; }
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        Birds = await birdService.GetAllAsync();
+    }
+
+
+    private void ShowDetails(Bird bird)
+    {
+
+    }
+}

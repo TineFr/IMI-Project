@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Imi.Project.Mobile.Views.SpeciesGuide.SpeciesDetailPage">
+    <ContentPage.Content>
+        <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
+              RowDefinitions="{StaticResource MainGridRows}">
+            <Frame Style="{StaticResource MainFrame}" BackgroundColor="{StaticResource Green}">
+                <Label Text="{Binding Species.Name}" Style="{StaticResource MainLabel}"></Label>
+            </Frame>
+            <AbsoluteLayout Grid.Row="0" Grid.RowSpan="4">
+                <ImageButton x:Name="btnBack" Style="{StaticResource BackArrow}" Clicked="btnBack_Clicked"></ImageButton>
+                <Image Style="{StaticResource Logo}" ></Image>
+            </AbsoluteLayout>
+            <ScrollView Grid.Row="1" Grid.RowSpan="3">
+                <StackLayout>
+                    <FlexLayout Grid.Row="1" Grid.RowSpan="3" Direction="Column" WidthRequest="1000" HorizontalOptions="Center">
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <Label HeightRequest="50" HorizontalTextAlignment="Center" Text="{Binding Species.ScientificName}" FontAttributes="Italic" FontSize="30"></Label>
+                    </StackLayout>
+                </StackLayout>
+                <Frame>
+                    <Image Source="{Binding Species.Image}" WidthRequest="340"></Image>
+                </Frame>
+                <Frame>
+                    <Label Text="{Binding Species.Description}"></Label>
+                </Frame>
+            </FlexLayout>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

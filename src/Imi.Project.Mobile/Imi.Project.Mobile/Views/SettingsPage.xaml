@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Imi.Project.Mobile.Views.SettingsPage">
+    <ContentPage.Content>
+        <StackLayout >
+            <Frame >
+                <FlexLayout Wrap="NoWrap" JustifyContent="Center">
+                    <Image Source="settings.png" HeightRequest="70" ></Image>
+                    <Label Text="Settings" Margin="10, 0, 0, 0" FontSize="50" TextColor="Gray"></Label>
+                </FlexLayout>
+            </Frame>
+            <TableView>
+                <TableRoot>
+                    <TableSection>
+                        <SwitchCell x:Name="swSendStats" Text="Send push notifications" On="true" ></SwitchCell>
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

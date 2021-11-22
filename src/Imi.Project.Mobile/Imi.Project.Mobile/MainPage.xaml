@@ -1,24 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Imi.Project.Mobile.MainPage">
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:mobile="clr-namespace:Imi.Project.Mobile"
+            x:Class="Imi.Project.Mobile.MainPage"
+            xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core" xmlns:medication="clr-namespace:Imi.Project.Mobile.Views.Medication" xmlns:speciesguide="clr-namespace:Imi.Project.Mobile.Views.SpeciesGuide" xmlns:prescriptions="clr-namespace:Imi.Project.Mobile.Views.Prescriptions"
+            android:TabbedPage.ToolbarPlacement="Bottom"
+            BackgroundColor="white">
 
-    <StackLayout>
-        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-            <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
-        </Frame>
-        <Label Text="Start developing now" FontSize="Title" Padding="30,10,30,10"/>
-        <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="30,0,30,0"/>
-        <Label FontSize="16" Padding="30,24,30,0">
-            <Label.FormattedText>
-                <FormattedString>
-                    <FormattedString.Spans>
-                        <Span Text="Learn more at "/>
-                        <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
-                    </FormattedString.Spans>
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
-    </StackLayout>
+    <!--Pages can be added as references or inline-->
+    <mobile:CagesPage Title="Cages" IconImageSource="{extensions:ImageResource Imi.Project.Mobile.icons.cages.png}"></mobile:CagesPage>
+    <mobile:BirdsPage Title="Birds"  IconImageSource="{extensions:ImageResource Imi.Project.Mobile.icons.birds.png}"></mobile:BirdsPage>
+    <mobile:HomePage Title="Home"  IconImageSource="{extensions:ImageResource Imi.Project.Mobile.icons.home.png}"></mobile:HomePage>
+    <prescriptions:PrescriptionsPage Title="Medication"  IconImageSource="{extensions:ImageResource Imi.Project.Mobile.icons.medication.png}"></prescriptions:PrescriptionsPage>
+    <speciesguide:SpeciesPage Title="Species"  IconImageSource="{extensions:ImageResource Imi.Project.Mobile.icons.guide.png}"></speciesguide:SpeciesPage>
 
-</ContentPage>
+</TabbedPage>
+
