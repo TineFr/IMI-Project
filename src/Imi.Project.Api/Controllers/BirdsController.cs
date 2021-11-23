@@ -15,7 +15,7 @@ using Imi.Project.Common.Dtos.Birds;
 
 namespace Imi.Project.Api.Controllers
 {
-    [AllowAnonymous]
+    [AllowAnonymous] // change this back
     [Route("api/[controller]")]
     [ApiController]
     public class BirdsController : ControllerBase
