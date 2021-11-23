@@ -9,5 +9,6 @@ namespace Imi.Project.WPF.Interfaces
     public interface IApiService
     {
         Task<IEnumerable<BirdApiResponse>> GetBirds();
+        Task AddBird(Bird newBird);
     }
 }

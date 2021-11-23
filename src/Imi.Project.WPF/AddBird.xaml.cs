@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Imi.Project.WPF.Interfaces;
+using Imi.Project.WPF.Models.Birds;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -17,9 +19,25 @@ namespace Imi.Project.WPF
     /// </summary>
     public partial class AddBird : Window
     {
-        public AddBird()
+        private readonly IApiService _apiService;
+        public AddBird(IApiService apiService)
         {
             InitializeComponent();
+            _apiService = apiService;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var newBird = new Bird
+            {
+                Name = txtName.Text,
+                Id = Guid.NewGuid(),
+                UserId = Guid.Parse("00000000-0000-0000-0000-000000000002"),
+                CageId = Guid.Parse("00000000-0000-0000-0000-000000000002"),
+                SpeciesId = Guid.Parse("00000000-0000-0000-0000-000000000002")
+            };
+
+            _apiService.AddBird(newBird);
         }
     }
 }

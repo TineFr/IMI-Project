@@ -49,7 +49,7 @@ namespace Imi.Project.WPF
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Window addBird = new AddBird();
+            Window addBird = new AddBird(_apiService);
             addBird.Show();
         }
     }

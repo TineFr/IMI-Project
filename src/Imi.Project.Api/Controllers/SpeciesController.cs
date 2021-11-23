@@ -26,7 +26,7 @@ namespace Imi.Project.Api.Controllers
             _speciesService = speciesService;
         }
 
-        [Authorize]
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] PaginationParameters parameters)
         {
