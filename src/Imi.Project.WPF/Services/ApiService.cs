@@ -1,4 +1,6 @@
-﻿using Imi.Project.WPF.Models.Birds;
+﻿using Imi.Project.WPF.Interfaces;
+using Imi.Project.WPF.Models;
+using Imi.Project.WPF.Models.Birds;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.WPF.Services
 {
-    public class ApiService
+    public class ApiService : IApiService
     {
 
         private HttpClient _httpClient;
@@ -21,11 +23,6 @@ namespace Imi.Project.WPF.Services
             _httpClient.BaseAddress = new Uri("https://localhost:5001/api/");
         }
 
-        public void LogIn(string username, string password)
-        {
-
-        }
-
         public async Task<IEnumerable<BirdApiResponse>> GetBirds()
         {
             var response = await _httpClient.GetAsync("birds");
@@ -33,6 +30,20 @@ namespace Imi.Project.WPF.Services
             var birdresponse = await JsonSerializer.DeserializeAsync<IEnumerable<BirdApiResponse>>(responseStream);
             return birdresponse;
           
+        }
+
+        public async void AddBird()
+        {
+
+        }
+
+        public async void UpdateBird()
+        {
+
+        }
+        public async void DeleteBird()
+        {
+
         }
 
     }

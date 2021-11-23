@@ -18,7 +18,7 @@ namespace Imi.Project.WPF.Models.Birds
 
         public override string ToString()
         {
-            return $"{Name}";
+            return $"{Name} - {Gender}";
         }
 
     }

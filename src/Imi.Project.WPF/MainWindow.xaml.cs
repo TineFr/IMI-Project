@@ -1,4 +1,5 @@
-﻿using Imi.Project.WPF.Models.Birds;
+﻿using Imi.Project.WPF.Interfaces;
+using Imi.Project.WPF.Models.Birds;
 using Imi.Project.WPF.Services;
 using System;
 using System.Collections.Generic;
@@ -24,11 +25,32 @@ namespace Imi.Project.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-
-        public MainWindow()
+        private readonly IApiService _apiService;
+        public MainWindow(IApiService apiService)
         {
-
+            InitializeComponent();
+            _apiService = apiService;
         }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            FillBirdsListBox();
+            lblMainTitle.Content = "My Birds";
+        }
+
+        private async void FillBirdsListBox()
+        {
+            var birds = await _apiService.GetBirds();
+            foreach (var bird in birds)
+            {
+                lstBirds.Items.Add(bird);
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Window addBird = new AddBird();
+            addBird.Show();
+        }
     }
 }

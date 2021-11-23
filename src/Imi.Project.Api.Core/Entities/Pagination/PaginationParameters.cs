@@ -7,7 +7,7 @@ namespace Imi.Project.Api.Core.Entities.Pagination
     public class PaginationParameters
     {
         const int MaxItemsPerPage  = 20;
-        private int itemsPerPage = 5;
+        private int itemsPerPage = 10;
 
         public int ItemsPerPage
         {

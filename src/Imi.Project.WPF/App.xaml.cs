@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Imi.Project.WPF.Interfaces;
+using Imi.Project.WPF.Services;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -37,7 +39,9 @@ namespace Imi.Project.WPF
         private void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpClient();
+            services.AddScoped<IApiService, ApiService>();
             services.AddTransient(typeof(MainWindow));
         }
     }
 }
+
