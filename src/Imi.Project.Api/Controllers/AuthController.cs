@@ -1,7 +1,7 @@
-﻿using Imi.Project.Api.Core.Dtos.Authentication.Login;
-using Imi.Project.Api.Core.Dtos.Authentication.Register;
-using Imi.Project.Api.Core.Dtos.Users;
+﻿
 using Imi.Project.Api.Core.Entities;
+using Imi.Project.Common.Dtos.Authentication.Login;
+using Imi.Project.Common.Dtos.Authentication.Register;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -48,6 +48,8 @@ namespace Imi.Project.Api.Controllers
                 Id = new Guid(),
                 Email = registration.Email,
                 UserName = registration.Email,
+                NormalizedEmail = (registration.Email).ToUpper(),
+                NormalizedUserName = (registration.Email).ToUpper(),
                 FirstName = registration.FirstName,
                 Name = registration.Name,
                 DateOfBirth = registration.DateOfBirth

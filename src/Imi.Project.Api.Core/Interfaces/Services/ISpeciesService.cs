@@ -1,5 +1,4 @@
-﻿using Imi.Project.Api.Core.Dtos.Species;
-using Imi.Project.Api.Core.Entities;
+﻿using Imi.Project.Api.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;

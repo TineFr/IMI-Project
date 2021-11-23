@@ -1,4 +1,4 @@
-﻿using Imi.Project.Api.Core.Dtos.DailyTasks;
+﻿
 using Imi.Project.Api.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +11,7 @@ using Imi.Project.Api.Core.Entities.Pagination;
 using Newtonsoft.Json;
 using Imi.Project.Api.Core.Entities;
 using Microsoft.AspNetCore.Authorization;
+using Imi.Project.Common.Dtos.DailyTasks;
 
 namespace Imi.Project.Api.Controllers
 {

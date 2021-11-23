@@ -32,19 +32,5 @@ namespace Imi.Project.WPF.Services
           
         }
 
-        public async void AddBird()
-        {
-
-        }
-
-        public async void UpdateBird()
-        {
-
-        }
-        public async void DeleteBird()
-        {
-
-        }
-
     }
 }

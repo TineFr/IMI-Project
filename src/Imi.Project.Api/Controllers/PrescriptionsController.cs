@@ -6,11 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Imi.Project.Api.Core.Helper;
 using System.Threading.Tasks;
-using Imi.Project.Api.Core.Dtos.Prescriptions;
 using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Core.Entities.Pagination;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Authorization;
+using Imi.Project.Common.Dtos.Prescriptions;
 
 namespace Imi.Project.Api.Controllers
 {

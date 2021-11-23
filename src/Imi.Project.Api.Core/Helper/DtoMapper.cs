@@ -1,16 +1,16 @@
-﻿using Imi.Project.Api.Core.Dtos.Birds;
-using Imi.Project.Api.Core.Dtos.Cages;
-using Imi.Project.Api.Core.Dtos.DailyTasks;
-using Imi.Project.Api.Core.Dtos.Medicines;
-using Imi.Project.Api.Core.Dtos.Prescriptions;
-using Imi.Project.Api.Core.Dtos.Species;
-using Imi.Project.Api.Core.Dtos.Users;
-using Imi.Project.Api.Core.Entities;
-using Imi.Project.Api.Core.Enums;
+﻿using Imi.Project.Common.Dtos.Cages;
+using Imi.Project.Common.Dtos.DailyTasks;
+using Imi.Project.Common.Dtos.Species;
+using Imi.Project.Common.Dtos;
+using Imi.Project.Common.Dtos.ApplicationUsers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Imi.Project.Common.Dtos.Medicines;
+using Imi.Project.Common.Dtos.Prescriptions;
+using Imi.Project.Api.Core.Entities;
+using Imi.Project.Api.Core.Dtos.Birds;
 
 namespace Imi.Project.Api.Core.Helper
 {
@@ -89,9 +89,9 @@ namespace Imi.Project.Api.Core.Helper
             return cages.Select(c => c.MapToDto()).ToList();
         }
 
-        public static UserResponseDto MapToDto(this ApplicationUser user)
+        public static ApplicationUserResponseDto MapToDto(this ApplicationUser user)
         {
-            return new UserResponseDto
+            return new ApplicationUserResponseDto
             {
                 Id = user.Id,
                 Name = user.UserName,
@@ -101,7 +101,7 @@ namespace Imi.Project.Api.Core.Helper
             };
         }
 
-        public static IEnumerable<UserResponseDto> MapToDtoList(this IEnumerable<ApplicationUser> users)
+        public static IEnumerable<ApplicationUserResponseDto> MapToDtoList(this IEnumerable<ApplicationUser> users)
         {
             return users.Select(u => u.MapToDto()).ToList();
         }
