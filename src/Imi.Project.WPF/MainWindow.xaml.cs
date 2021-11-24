@@ -25,17 +25,19 @@ namespace Imi.Project.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly IApiService _apiService;
-        public MainWindow(IApiService apiService)
+        private readonly IBirdApiService _apiService;
+        public MainWindow(IBirdApiService apiService)
         {
             InitializeComponent();
             _apiService = apiService;
+
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             FillBirdsListBox();
-            lblMainTitle.Content = "My Birds";
+            stkDetails.Visibility = Visibility.Hidden;
         }
 
         private async void FillBirdsListBox()
@@ -46,8 +48,12 @@ namespace Imi.Project.WPF
                 lstBirds.Items.Add(bird);
             }
         }
+        private void lstBirds_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            stkDetails.Visibility = Visibility.Visible;
+        }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnAddBird_Click(object sender, RoutedEventArgs e)
         {
             Window addBird = new AddBird(_apiService);
             addBird.Show();

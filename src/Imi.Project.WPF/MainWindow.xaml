@@ -5,12 +5,60 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Imi.Project.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1000" Loaded="Window_Loaded">
+        Title="MainWindow" Height="800" Width="1100" Loaded="Window_Loaded"
+        WindowStartupLocation="CenterScreen">
     <Grid>
-        <Label x:Name="lblMainTitle" Width="300" HorizontalContentAlignment="Center" Height="100"  VerticalContentAlignment="Center" FontSize="20" MaxHeight="40" Background="#D4E7C0" Foreground="White" Margin="350,237,350,497"/>
-        <ListBox Margin="350,136,350,0" Width="300" Height="319" x:Name="lstBirds" Grid.ColumnSpan="2"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="710,322,0,0" VerticalAlignment="Top" Click="Button_Click"/>
-
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <Label   Content="My Birds" HorizontalContentAlignment="Center" Background="#D4E7C0" Foreground="White" FontSize="30" Margin ="10, 50, 10, 20" />
+            <Button x:Name="btnAddBird" Foreground="White" Content="+ add" Width="40" Height="40" FontSize="10"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#DEC5E1" BorderThickness="0" HorizontalAlignment="right" Margin="0,0,10,0" Click="btnAddBird_Click" >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="20"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <ListBox x:Name="lstBirds" BorderThickness="0" Height="200" Margin="10,20,10,40" SelectionChanged="lstBirds_SelectionChanged"></ListBox>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.ColumnSpan="2" x:Name="stkDetails" Margin="80,0,80,0">
+            <Label  Content="Details" HorizontalContentAlignment="Center" Background="#B7D7F0" Foreground="White" FontSize="30" Margin ="5, 50, 5, 20" />
+            <Button Foreground="White" Content="edit" Width="40" Height="40" FontSize="10"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#DEC5E1" BorderThickness="0" HorizontalAlignment="right" Margin="0,0,10,0">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="20"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Image Height="100" Width="100"></Image>
+            <StackPanel Margin="50,10,50,0">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Name:"></Label>
+                    <TextBlock Text="Jhonny" Padding="5"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Gender:"></Label>
+                    <TextBlock Text="Male" Padding="5"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Species:"></Label>
+                    <TextBlock Text="Cockatiel - lorem ipsum" Padding="5"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Cage:"></Label>
+                    <TextBlock Text="Outside cage 2" Padding="5"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Food:"></Label>
+                    <TextBlock Text="Parrot seeds" Padding="5"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Hatch date:"></Label>
+                    <TextBlock Text="2015-03-15" Padding="5"></TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>

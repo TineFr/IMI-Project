@@ -13,13 +13,13 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.WPF.Services
 {
-    public class ApiService : IApiService
+    public class BirdApiService : IBirdApiService
     {
 
-        private HttpClient _httpClient;
+        private readonly HttpClient _httpClient;
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public ApiService(IHttpClientFactory clientFactory)
+        public BirdApiService(IHttpClientFactory clientFactory)
         {
             _httpClientFactory = clientFactory;
             _httpClient = _httpClientFactory.CreateClient();

@@ -32,15 +32,15 @@ namespace Imi.Project.WPF
 
             ServiceProvider = serviceCollection.BuildServiceProvider();
 
-            var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
+            var mainWindow = ServiceProvider.GetRequiredService<Login>();
             mainWindow.Show();
         }
 
         private void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpClient();
-            services.AddScoped<IApiService, ApiService>();
-            services.AddTransient(typeof(MainWindow));
+            services.AddScoped<IBirdApiService, BirdApiService>();
+            services.AddTransient(typeof(Login));
         }
     }
 }

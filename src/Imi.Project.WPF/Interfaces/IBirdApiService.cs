@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.WPF.Interfaces
 {
-    public interface IApiService
+    public interface IBirdApiService
     {
         Task<IEnumerable<BirdApiResponse>> GetBirds();
         Task AddBird(Bird newBird);

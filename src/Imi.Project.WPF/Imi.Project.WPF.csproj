@@ -13,11 +13,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\" />
+    <ProjectReference Include="..\Imi.Project.Common\Imi.Project.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Imi.Project.Common\Imi.Project.Common.csproj" />
+    <Folder Include="images\" />
   </ItemGroup>
 
 </Project>

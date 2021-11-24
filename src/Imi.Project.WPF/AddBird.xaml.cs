@@ -19,8 +19,8 @@ namespace Imi.Project.WPF
     /// </summary>
     public partial class AddBird : Window
     {
-        private readonly IApiService _apiService;
-        public AddBird(IApiService apiService)
+        private readonly IBirdApiService _apiService;
+        public AddBird(IBirdApiService apiService)
         {
             InitializeComponent();
             _apiService = apiService;
@@ -30,7 +30,7 @@ namespace Imi.Project.WPF
         {
             var newBird = new Bird
             {
-                Name = txtName.Text,
+                //Name = txtName.Text,
                 Id = Guid.NewGuid(),
                 UserId = Guid.Parse("00000000-0000-0000-0000-000000000002"),
                 CageId = Guid.Parse("00000000-0000-0000-0000-000000000002"),
