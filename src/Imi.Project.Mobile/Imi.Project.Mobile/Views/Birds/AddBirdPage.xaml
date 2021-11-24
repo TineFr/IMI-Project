@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Imi.Project.Mobile.Views.AddBirdPage">
+    <ContentPage.Content>
+        <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
+              RowDefinitions="{StaticResource MainGridRows}">
+            <Frame Style="{StaticResource MainFrame}" BackgroundColor="{StaticResource Blue}">
+                <Label Text="Add Bird" Style="{StaticResource MainLabel}"></Label>
+                
+            </Frame>
+            <AbsoluteLayout Grid.Row="0" Grid.RowSpan="4">
+                <ImageButton x:Name="btnBack" Style="{StaticResource BackArrow}" Clicked="btnBack_Clicked"></ImageButton>
+                <Image Style="{StaticResource Logo}"></Image>
+            </AbsoluteLayout>
+
+            <ScrollView Grid.Row="1" Grid.RowSpan="3" >
+                <StackLayout Grid.Row="1" Grid.RowSpan="2" >
+                <Frame Style="{StaticResource EditFrame}">
+                    <StackLayout>
+                        <Label Text="Name" FontAttributes="Bold"></Label>
+                        <Entry x:Name="entrName" Placeholder="Enter name"></Entry>
+                    </StackLayout>
+                </Frame>
+                <Frame Style="{StaticResource EditFrame}">
+                    <StackLayout>
+                            <Label Text="Species"  FontAttributes="Bold"></Label>
+                            <Picker  x:Name="pkrSpecies" ItemsSource="{Binding Species}" ItemDisplayBinding="{Binding Name}" Title="Select species"></Picker>
+                        </StackLayout>
+                </Frame>
+                <Frame Style="{StaticResource EditFrame}">
+                    <StackLayout>
+                            <Label Text="Cage"  FontAttributes="Bold"></Label>
+                            <Picker  x:Name="pkrCage" ItemsSource="{Binding Cages}" ItemDisplayBinding="{Binding Name}" Title="Select cage"></Picker>
+                        </StackLayout>
+                </Frame>
+                <Frame Style="{StaticResource EditFrame}">
+                    <StackLayout>
+                            <Label Text="Gender"  FontAttributes="Bold"></Label>
+                            <Picker  x:Name="pkrGender" Title="Select gender"> </Picker>
+                        </StackLayout>
+                </Frame>
+                <Frame Style="{StaticResource EditFrame}">
+                    <StackLayout>
+                            <Label Text="Select date of hatching"  FontAttributes="Bold"></Label>
+                        <DatePicker></DatePicker>
+                    </StackLayout>
+                </Frame>
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
+                            <Label Text="Food"  FontAttributes="Bold"></Label>
+                            <Entry  x:Name="entrFood" Placeholder="Enter food"></Entry>
+                        </StackLayout>
+                    </Frame>
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
+                            <Label Text="Add image"  FontAttributes="Bold"></Label>
+                            <Button Text="From Camera"></Button>
+                            <Button Text="From Gallery"></Button>
+                        </StackLayout>
+                    </Frame>
+                    <Button x:Name="btnSave" Text="Save" HorizontalOptions="End" Clicked="btnSave_Clicked" Margin="20"></Button>
+            </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

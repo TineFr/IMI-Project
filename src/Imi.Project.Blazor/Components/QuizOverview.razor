@@ -1,0 +1,34 @@
+﻿
+
+
+
+
+<div class="itemscontainer">
+    <div>
+        <h3>Quiz</h3>
+
+        <button @onclick="() => startQuiz = true">Play!</button>
+        <button>Statistics</button>
+
+    </div>
+
+
+
+</div>
+
+@if (startQuiz)
+{
+    <QuestionView></QuestionView>
+}
+
+
+
+
+@code {
+
+
+    bool startQuiz;
+}
+
+
+
