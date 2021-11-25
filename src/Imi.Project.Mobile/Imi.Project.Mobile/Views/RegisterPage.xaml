@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Imi.Project.Mobile.Views.RegisterPage"
+             xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Image Source="{extensions:ImageResource Imi.Project.Mobile.icons.budgieregister.png}" HorizontalOptions="Center" HeightRequest="150" Margin="0,40,0,0"></Image>
+            <Label HorizontalOptions="Center" Text="Register" FontSize="30" Margin ="0, 30, 0, 0"  FontAttributes="Bold" TextColor="{StaticResource Blue}"></Label>
+            <Frame Padding="0" Margin="10"  HorizontalOptions="Center" WidthRequest="300">
+                <Entry Placeholder="Name" ></Entry>
+            </Frame>
+            <Frame Padding="0" Margin="10" HorizontalOptions="Center" WidthRequest="300">
+                <Entry Placeholder="Email" ></Entry>
+            </Frame>
+            <Frame Padding="0" Margin="10"  HorizontalOptions="Center" WidthRequest="300">
+                <Entry Placeholder="Password" IsPassword="True" ></Entry>
+            </Frame>
+            <Frame Padding="0" Margin="10" HorizontalOptions="Center" WidthRequest="300">
+                <Entry Placeholder="Repeat password" IsPassword="True" ></Entry>
+            </Frame>
+            <FlexLayout HorizontalOptions="Center" Padding="0" WidthRequest="320" Margin="0" JustifyContent="SpaceBetween">
+                <Button x:Name="btnBack" Padding="0" Margin="0" BackgroundColor="Transparent" Text="BACK" TextColor="Black" Clicked="btnBack_Clicked"></Button>
+                <Button x:Name="btnSave" BackgroundColor="Transparent" Text="SAVE" TextColor="{StaticResource Blue}" Clicked="btnSave_Clicked"></Button>
+            </FlexLayout>
+        </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

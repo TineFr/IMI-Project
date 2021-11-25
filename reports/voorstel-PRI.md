@@ -76,15 +76,50 @@ https://some-random-api.ml/animal/bird
  Deze stuurt een willekeurig weetje over vogels terug. Zo kan da gebruiker leuke fait diversjes te weten komen.
 
 ### Endpoints
-api/cages\
-api/cages/id\
-api/bird\
-api/birds/id\
-api/pairs\
-api/pairs/id\
-api/nests\
-api/nests/id\
-api/species\
-api/species/id\
-api/food\
-api/food/id
+GET api/cages\
+GET api/cages/id\
+PUT api/cages\
+POST api/cages\
+DEL api/cages\id\
+
+
+GET api/birds\
+GET api/birds/id\
+PUT api/birds\
+POST api/birds\
+DEL api/birds\id\
+
+GET api/nests\
+GET api/nests/id\
+PUT api/nests\
+POST api/nests\
+DEL api/nests\id\
+
+GET api/pairs\
+GET api/pairs/id\
+PUT api/pairs\
+POST api/pairs\
+DEL api/pairs\id\
+
+GET api/species\
+GET api/species/id\
+PUT api/species\
+POST api/species\
+DEL api/species\id\
+
+
+GET api/tasks\
+GET api/tasks/id\
+PUT api/tasks\
+POST api/tasks\
+DEL api/tasks\id\
+
+
+GET api/food\
+GET api/food/id\
+PUT api/food\
+POST api/food\
+DEL api/food\id\
+
+
+
