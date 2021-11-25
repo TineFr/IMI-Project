@@ -1,4 +1,5 @@
-﻿using Imi.Project.Common.Dtos.Birds;
+﻿using Imi.Project.Common.Dtos.Authentication.Login;
+using Imi.Project.Common.Dtos.Birds;
 using Imi.Project.WPF.Interfaces;
 using Imi.Project.WPF.Models;
 using Imi.Project.WPF.Models.Birds;
@@ -18,6 +19,7 @@ namespace Imi.Project.WPF.Services
 
         private readonly HttpClient _httpClient;
         private readonly IHttpClientFactory _httpClientFactory;
+        private string token;
 
         public BirdApiService(IHttpClientFactory clientFactory)
         {
@@ -26,9 +28,24 @@ namespace Imi.Project.WPF.Services
             _httpClient.BaseAddress = new Uri("https://localhost:5001/api/");
         }
 
+        public async void Authenticate(string email, string password)
+        {
+            LoginRequestDto dto = new LoginRequestDto
+            {
+                Email = email,
+                Password = password
+            };
+            var response = _httpClient.PostAsJsonAsync("Auth/login", dto).Result;
+            using var responseStream = await response.Content.ReadAsStreamAsync();
+            var loginresponse = await System.Text.Json.JsonSerializer.DeserializeAsync<LogInApiResponse>(responseStream);
+            token = loginresponse.JWT;
+
+        }
+
         public async Task<IEnumerable<BirdApiResponse>> GetBirds()
         {
-            var response = await _httpClient.GetAsync("birds");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = await _httpClient.GetAsync("me/birds");
 
             if (response.IsSuccessStatusCode)
             {

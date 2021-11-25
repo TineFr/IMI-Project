@@ -1,4 +1,6 @@
-﻿using Imi.Project.WPF.Interfaces;
+﻿using Imi.Project.Common.Dtos.Authentication.Login;
+using Imi.Project.WPF.Interfaces;
+using Imi.Project.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -22,17 +24,19 @@ namespace Imi.Project.WPF
         public Login(IBirdApiService apiService)
         {
             InitializeComponent();
-            _apiService = apiService;
-
+            _apiService = apiService;    
+        }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.DataContext = new LoginViewModel();
 
         }
         private void btnSignIn_Click(object sender, RoutedEventArgs e)
         {
-
-            Window login = new MainWindow(_apiService);
-            login.Show();
+            _apiService.Authenticate(txtEmail.Text, txtPassword.Text);
+            Window window = new MainWindow(_apiService);
+            window.Show();
             this.Close();
         }
-
     }
 }
