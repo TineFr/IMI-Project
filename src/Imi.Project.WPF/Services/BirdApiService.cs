@@ -4,6 +4,7 @@ using Imi.Project.WPF.Interfaces;
 using Imi.Project.WPF.Models;
 using Imi.Project.WPF.Models.Birds;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;

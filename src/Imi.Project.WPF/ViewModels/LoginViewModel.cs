@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace Imi.Project.WPF.ViewModels
 {
-    public class LoginViewModel
+    public class LoginViewModel : INotifyPropertyChanged
     {
         private string email;
 

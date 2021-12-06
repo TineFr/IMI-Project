@@ -21,7 +21,10 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <ListBox x:Name="lstBirds" BorderThickness="0" Height="200" Margin="10,20,10,40" SelectionChanged="lstBirds_SelectionChanged"></ListBox>
+            <ListBox x:Name="lstBirds" ItemsSource="{Binding MyBirds}" DisplayMemberPath="Name" BorderThickness="0" Height="200" Margin="10,20,10,40" SelectionChanged="lstBirds_SelectionChanged">
+                
+                
+            </ListBox>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.ColumnSpan="2" x:Name="stkDetails" Margin="80,0,80,0">
             <Label  Content="Details" HorizontalContentAlignment="Center" Background="#B7D7F0" Foreground="White" FontSize="30" Margin ="5, 50, 5, 20" />
@@ -32,31 +35,31 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <Image Height="100" Width="100"></Image>
+            <Image Height="200" Source="{Binding Bird.Image}"></Image>
             <StackPanel Margin="50,10,50,0">
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Name:"></Label>
-                    <TextBlock Text="Jhonny" Padding="5"></TextBlock>
+                    <TextBlock Text="{Binding Bird.Name}" Padding="5"></TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Gender:"></Label>
-                    <TextBlock Text="Male" Padding="5"></TextBlock>
+                    <TextBlock Text="{Binding Bird.Gender}" Padding="5"></TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Species:"></Label>
-                    <TextBlock Text="Cockatiel - lorem ipsum" Padding="5"></TextBlock>
+                    <TextBlock Text="{Binding Bird.Species.Name}" Padding="5"></TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Cage:"></Label>
-                    <TextBlock Text="Outside cage 2" Padding="5"></TextBlock>
+                    <TextBlock Text="{Binding Bird.Cage.Name}" Padding="5"></TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Food:"></Label>
-                    <TextBlock Text="Parrot seeds" Padding="5"></TextBlock>
+                    <TextBlock Text="{Binding Bird.Food}" Padding="5"></TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Hatch date:"></Label>
-                    <TextBlock Text="2015-03-15" Padding="5"></TextBlock>
+                    <TextBlock Text="{Binding Bird.Date}" Padding="5"></TextBlock>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

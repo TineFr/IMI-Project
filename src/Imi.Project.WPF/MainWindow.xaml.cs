@@ -1,6 +1,7 @@
 ﻿using Imi.Project.WPF.Interfaces;
 using Imi.Project.WPF.Models.Birds;
 using Imi.Project.WPF.Services;
+using Imi.Project.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,27 +31,21 @@ namespace Imi.Project.WPF
         {
             InitializeComponent();
             _apiService = apiService;
+            this.DataContext = new MainViewModel(_apiService);
 
 
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            FillBirdsListBox();
             stkDetails.Visibility = Visibility.Hidden;
         }
 
-        private async void FillBirdsListBox()
-        {
-            var birds = await _apiService.GetBirds();
-            foreach (var bird in birds)
-            {
-                lstBirds.Items.Add(bird);
-            }
-        }
         private void lstBirds_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             stkDetails.Visibility = Visibility.Visible;
+            stkDetails.DataContext = new BirdDetailViewModel(lstBirds.SelectedItem as BirdApiResponse);
+
         }
 
         private void btnAddBird_Click(object sender, RoutedEventArgs e)

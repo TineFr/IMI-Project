@@ -11,6 +11,7 @@ using Imi.Project.Common.Dtos.Medicines;
 using Imi.Project.Common.Dtos.Prescriptions;
 using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Core.Dtos.Birds;
+using Microsoft.AspNetCore.Http;
 
 namespace Imi.Project.Api.Core.Helper
 {
@@ -49,6 +50,7 @@ namespace Imi.Project.Api.Core.Helper
 
         public static BirdResponseDto MapToDto(this Bird bird)
         {
+
             return new BirdResponseDto
             {
                 Id = bird.Id,
@@ -57,7 +59,7 @@ namespace Imi.Project.Api.Core.Helper
                 Food = bird.Food,
                 Gender = bird.Gender.ToString(),
                 HatchDate = bird.HatchDate,
-                Image = bird.Image,
+                Image = GetFullImageUrl(bird.Image),
                 Cage = new CageResponseDto
                 {
                     Id = bird.Cage.Id,
@@ -77,7 +79,7 @@ namespace Imi.Project.Api.Core.Helper
             {
                 Id = cage.Id,
                 Name = cage.Name,
-                Image = cage.Image,
+                Image = GetFullImageUrl(cage.Image),
                 Location = cage.Location,
                 Birds = cage.Birds?.Select(b => b.Id).ToList(),
                 DailyTasks = cage.DailyTasks?.MapToDtoList()
@@ -143,7 +145,7 @@ namespace Imi.Project.Api.Core.Helper
                         Id = bird.Cage.Id,
                         Name = bird.Cage.Name
                     },
-                    Image = bird.Image
+                    Image = GetFullImageUrl(bird.Image)
                 };
                 birdlist.Add(newbirddto);
             }
@@ -154,6 +156,23 @@ namespace Imi.Project.Api.Core.Helper
         public static IEnumerable<PrescriptionResponseDto> MapToDtoList(this IEnumerable<Prescription> presciptions)
         {
             return presciptions.Select(u => u.MapToDto()).ToList();
+        }
+
+        private static string GetFullImageUrl(string image)
+        {
+            if (string.IsNullOrEmpty(image))
+            {
+                return null;
+            }
+
+            HttpContextAccessor httpContextAccessor = new HttpContextAccessor();
+
+            var scheme = httpContextAccessor.HttpContext.Request.Scheme; // example: https or http
+            var url = httpContextAccessor.HttpContext.Request.Host.Value; // example: localhost:5001, howest.be, steam.com, localhost:44785, ...
+
+            var fullImageUrl = $"{scheme}://{url}/{image.Replace("\\", "/")}";
+
+            return fullImageUrl;
         }
 
     }
