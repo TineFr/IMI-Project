@@ -1,11 +1,11 @@
-﻿using Imi.Project.Api.Core.Dtos.Birds;
-using Imi.Project.Api.Core.Dtos.Cages;
-using Imi.Project.Api.Core.Dtos.DailyTasks;
-using Imi.Project.Api.Core.Dtos.Medicines;
-using Imi.Project.Api.Core.Dtos.Prescriptions;
-using Imi.Project.Api.Core.Dtos.Species;
-using Imi.Project.Api.Core.Dtos.Users;
-using Imi.Project.Api.Core.Entities;
+﻿using Imi.Project.Api.Core.Entities;
+using Imi.Project.Common.Dtos.ApplicationUsers;
+using Imi.Project.Common.Dtos.Birds;
+using Imi.Project.Common.Dtos.Cages;
+using Imi.Project.Common.Dtos.DailyTasks;
+using Imi.Project.Common.Dtos.Medicines;
+using Imi.Project.Common.Dtos.Prescriptions;
+using Imi.Project.Common.Dtos.Species;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +15,7 @@ namespace Imi.Project.Api.Core.Helper
 {
    public static class UpdateMapper
     {
-        public static ApplicationUser Update(this ApplicationUser user, UserRequestDto dto)
+        public static ApplicationUser Update(this ApplicationUser user, ApplicationUserRequestDto dto)
         {
             user.UserName = dto.Name;
             return user;

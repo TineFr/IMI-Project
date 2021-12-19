@@ -82,6 +82,7 @@ namespace Imi.Project.Api
                     policy.RequireRole("Administrator");
                 }));
 
+
             //swagger
 
             services.AddSwaggerGen(c =>
@@ -149,6 +150,7 @@ namespace Imi.Project.Api
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
             app.UseHttpsRedirection();
 
             app.UseRouting();

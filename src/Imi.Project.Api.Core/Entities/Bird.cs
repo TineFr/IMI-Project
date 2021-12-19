@@ -1,4 +1,4 @@
-﻿using Imi.Project.Api.Core.Enums;
+﻿using Imi.Project.Common.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

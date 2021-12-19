@@ -1,11 +1,8 @@
-﻿
-
-using Imi.Project.Api.Core.Dtos.Users;
-using Imi.Project.Api.Core.Entities;
+﻿using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Core.Entities.Pagination;
 using Imi.Project.Api.Core.Helper;
 using Imi.Project.Api.Core.Interfaces.Services;
-using Microsoft.AspNetCore.Authorization;
+using Imi.Project.Common.Dtos.ApplicationUsers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -16,7 +13,6 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Controllers
 {
-    [Authorize(Policy = "AdministratorRole")]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -144,7 +140,7 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(UserRequestDto newUser)
+        public async Task<IActionResult> Post(ApplicationUserRequestDto newUser)
         {
             if (!ModelState.IsValid)
             {
@@ -162,7 +158,7 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put(UserRequestDto updatedUser)
+        public async Task<IActionResult> Put(ApplicationUserRequestDto updatedUser)
         {
             if (!ModelState.IsValid)
             {
@@ -181,7 +177,7 @@ namespace Imi.Project.Api.Controllers
 
 
         [HttpDelete]
-        public async Task<IActionResult> Delete(UserRequestDto userToDelete)
+        public async Task<IActionResult> Delete(ApplicationUserRequestDto userToDelete)
         {
             var user = await _userService.GetUserByIdAsync(userToDelete.Id);
             if (user == null)

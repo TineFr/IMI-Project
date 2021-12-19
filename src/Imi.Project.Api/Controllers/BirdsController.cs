@@ -1,4 +1,4 @@
-﻿using Imi.Project.Api.Core.Dtos.Birds;
+﻿
 using Imi.Project.Api.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,10 +11,12 @@ using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Core.Entities.Pagination;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Authorization;
+using Imi.Project.Common.Dtos.Birds;
+using System.Security.Claims;
 
 namespace Imi.Project.Api.Controllers
 {
-    [Authorize]
+    [Authorize] 
     [Route("api/[controller]")]
     [ApiController]
     public class BirdsController : ControllerBase
@@ -37,7 +39,7 @@ namespace Imi.Project.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] PaginationParameters parameters)
         {
-
+            //string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             var birds = await _birdService.ListAllBirdsAsync();         
             var paginationData = new PaginationMetaData(parameters.Page, birds.Count(), parameters.ItemsPerPage);
             Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
