@@ -39,7 +39,9 @@ namespace Imi.Project.WPF
         private void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpClient();
+            services.AddScoped<IBaseApiService, BaseApiService>();
             services.AddScoped<IBirdApiService, BirdApiService>();
+            services.AddScoped<ISpeciesApiService, SpeciesApiService>();
             services.AddTransient(typeof(Login));
         }
     }

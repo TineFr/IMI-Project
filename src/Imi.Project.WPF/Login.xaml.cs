@@ -20,11 +20,13 @@ namespace Imi.Project.WPF
     /// </summary>
     public partial class Login : Window
     {
-        private readonly IBirdApiService _apiService;
-        public Login(IBirdApiService apiService)
+        private readonly IBirdApiService birdApiService;
+        private readonly ISpeciesApiService speciesApiService;
+        public Login(IBirdApiService birdApiService, ISpeciesApiService speciesApiService)
         {
             InitializeComponent();
-            _apiService = apiService;    
+            this.birdApiService = birdApiService;
+            this.speciesApiService = speciesApiService;
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -33,8 +35,8 @@ namespace Imi.Project.WPF
         }
         private void btnSignIn_Click(object sender, RoutedEventArgs e)
         {
-            _apiService.Authenticate(txtEmail.Text, txtPassword.Text);
-            Window window = new MainWindow(_apiService);
+            birdApiService.Authenticate(txtEmail.Text, txtPassword.Text);
+            Window window = new MainWindow(speciesApiService, birdApiService);
             window.Show();
             this.Close();
         }

@@ -1,5 +1,6 @@
 ﻿using Imi.Project.WPF.Interfaces;
 using Imi.Project.WPF.Models.Birds;
+using Imi.Project.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,11 +20,14 @@ namespace Imi.Project.WPF
     /// </summary>
     public partial class AddBird : Window
     {
-        private readonly IBirdApiService _apiService;
-        public AddBird(IBirdApiService apiService)
+        private readonly IBirdApiService _birdApiService;
+        private readonly ISpeciesApiService _speciesApiService;
+        public AddBird(IBirdApiService apiService, ISpeciesApiService speciesApiService)
         {
             InitializeComponent();
-            _apiService = apiService;
+            _birdApiService = apiService;
+            _speciesApiService = speciesApiService;
+            DataContext = new AddBirdViewModel(_birdApiService, _speciesApiService);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -37,7 +41,7 @@ namespace Imi.Project.WPF
                 SpeciesId = Guid.Parse("00000000-0000-0000-0000-000000000002")
             };
 
-            _apiService.AddBird(newBird);
+            _birdApiService.AddBird(newBird);
         }
     }
 }

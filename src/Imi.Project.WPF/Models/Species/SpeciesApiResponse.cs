@@ -7,6 +7,10 @@ namespace Imi.Project.WPF.Models.Species
 {
     public class SpeciesApiResponse
     {
+
+        [JsonPropertyName("id")]
+        public string Id { get; set; }
+
         [JsonPropertyName("name")]
         public string Name { get; set; }
 

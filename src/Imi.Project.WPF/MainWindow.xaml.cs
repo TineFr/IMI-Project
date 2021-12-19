@@ -26,13 +26,14 @@ namespace Imi.Project.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly IBirdApiService _apiService;
-        public MainWindow(IBirdApiService apiService)
+        private readonly IBirdApiService _birdApiService;
+        private readonly ISpeciesApiService _speciesApiService;
+        public MainWindow(ISpeciesApiService speciesApiService, IBirdApiService birdApiService)
         {
             InitializeComponent();
-            _apiService = apiService;
-            this.DataContext = new MainViewModel(_apiService);
-
+            _speciesApiService = speciesApiService;
+            _birdApiService = birdApiService;
+            this.DataContext = new MainViewModel(_birdApiService);
 
         }
 
@@ -50,7 +51,7 @@ namespace Imi.Project.WPF
 
         private void btnAddBird_Click(object sender, RoutedEventArgs e)
         {
-            Window addBird = new AddBird(_apiService);
+            Window addBird = new AddBird(_birdApiService, _speciesApiService);
             addBird.Show();
         }
     }

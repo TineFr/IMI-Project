@@ -15,18 +15,12 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.WPF.Services
 {
-    public class BirdApiService : IBirdApiService
+    public class BirdApiService : BaseApiService, IBirdApiService
     {
-
-        private readonly HttpClient _httpClient;
-        private readonly IHttpClientFactory _httpClientFactory;
         private string token;
-
-        public BirdApiService(IHttpClientFactory clientFactory)
+        public BirdApiService(IHttpClientFactory clientFactory) : base(clientFactory)
         {
-            _httpClientFactory = clientFactory;
-            _httpClient = _httpClientFactory.CreateClient();
-            _httpClient.BaseAddress = new Uri("https://localhost:5001/api/");
+            //this.token = token;
         }
 
         public async void Authenticate(string email, string password)
@@ -36,6 +30,7 @@ namespace Imi.Project.WPF.Services
                 Email = email,
                 Password = password
             };
+            //var response = GetClient().PostAsJsonAsync("Auth/login", dto).Result;
             var response = _httpClient.PostAsJsonAsync("Auth/login", dto).Result;
             using var responseStream = await response.Content.ReadAsStreamAsync();
             var loginresponse = await System.Text.Json.JsonSerializer.DeserializeAsync<LogInApiResponse>(responseStream);
@@ -45,8 +40,8 @@ namespace Imi.Project.WPF.Services
 
         public async Task<IEnumerable<BirdApiResponse>> GetBirds()
         {
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var response = await _httpClient.GetAsync("me/birds");
+            SetHeader(token);
+            var response = await GetClient().GetAsync("me/birds");
 
             if (response.IsSuccessStatusCode)
             {
@@ -60,24 +55,26 @@ namespace Imi.Project.WPF.Services
             }
         }
 
-        public async Task<IEnumerable<BirdApiResponse>> GetSpecies()
-        {
-            var response = await _httpClient.GetAsync("species");
+        //public async Task<IEnumerable<BirdApiResponse>> GetSpecies()
+        //{
+        //    SetHeader(token);
+        //    var response = await GetClient().GetAsync("species");
 
-            if (response.IsSuccessStatusCode)
-            {
-                using var responseStream = await response.Content.ReadAsStreamAsync();
-                var birdresponse = await System.Text.Json.JsonSerializer.DeserializeAsync<IEnumerable<BirdApiResponse>>(responseStream);
-                return birdresponse;
-            }
-            else
-            {
-                return new List<BirdApiResponse>();
-            }
-        }
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        using var responseStream = await response.Content.ReadAsStreamAsync();
+        //        var birdresponse = await System.Text.Json.JsonSerializer.DeserializeAsync<IEnumerable<BirdApiResponse>>(responseStream);
+        //        return birdresponse;
+        //    }
+        //    else
+        //    {
+        //        return new List<BirdApiResponse>();
+        //    }
+        //}
 
         public async Task AddBird(Bird newBird)
         {
+            SetHeader(token);
             using (var content = new MultipartFormDataContent())
                 {
                     content.Add(new StringContent(newBird.Name), "Name");
@@ -85,8 +82,23 @@ namespace Imi.Project.WPF.Services
                     content.Add(new StringContent(newBird.UserId.ToString("d")), "UserId");
                     content.Add(new StringContent(newBird.UserId.ToString("d")), "CageId");
                     content.Add(new StringContent(newBird.SpeciesId.ToString("d")), "SpeciesId");
-                    var response =  _httpClient.PostAsync("birds", content).Result;
+                    var action = await GetClient().PostAsync("birds", content);
                 }
         }
+
+        public async Task EditBird(Bird newBird)
+        {
+            SetHeader(token);
+            using (var content = new MultipartFormDataContent())
+            {
+                content.Add(new StringContent(newBird.Name), "Name");
+                content.Add(new StringContent(newBird.Id.ToString("d")), "Id");
+                content.Add(new StringContent(newBird.UserId.ToString("d")), "UserId");
+                content.Add(new StringContent(newBird.UserId.ToString("d")), "CageId");
+                content.Add(new StringContent(newBird.SpeciesId.ToString("d")), "SpeciesId");
+                var action = await GetClient().PostAsync("birds", content);
+            }
+        }
+
     }
 }
