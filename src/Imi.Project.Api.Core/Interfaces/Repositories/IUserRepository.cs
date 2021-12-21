@@ -8,14 +8,8 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Core.Interfaces.Repositories
 {
-    public interface IUserRepository 
+    public interface IUserRepository : IBaseRepository<ApplicationUser>
     {
-        IQueryable<ApplicationUser> GetAll();
-        Task<IEnumerable<ApplicationUser>> ListAllAsync();
-        Task<ApplicationUser> GetByIdAsync(Guid id);
-        Task<ApplicationUser> UpdateAsync(ApplicationUser user);
-        Task<ApplicationUser> AddAsync(ApplicationUser user);
-        Task DeleteAsync(ApplicationUser user);
-        Task DeleteMultipleAsync(List<ApplicationUser> users);
+
     }
 }

@@ -23,9 +23,6 @@ namespace Imi.Project.Api.Infrastructure.Repositories
                                    .Include(c => c.Birds)
                                    .ThenInclude(b => b.Species)
                                    .Include(c => c.Birds);
-
-
-
         }
 
         public async override Task<IEnumerable<Cage>> ListAllAsync()
@@ -37,11 +34,10 @@ namespace Imi.Project.Api.Infrastructure.Repositories
             return await GetAll().SingleOrDefaultAsync(b => b.Id.Equals(id));
         }
 
-        public async Task<IEnumerable<Cage>> GetCagesByUserIdAsync(Guid id)
+        public async Task<IEnumerable<Cage>> GetByUserIdAsync(Guid id)
         {
             var cages = await GetAll().Where(p => p.UserId.Equals(id)).OrderBy(c => c.Name).ToListAsync();
             return cages;
         }
-
     }
 }

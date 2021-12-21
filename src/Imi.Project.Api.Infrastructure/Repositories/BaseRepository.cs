@@ -1,5 +1,6 @@
 ﻿using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Core.Entities.Pagination;
+using Imi.Project.Api.Core.Interfaces.Entities;
 using Imi.Project.Api.Core.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Infrastructure.Repositories
 {
-    public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
+    public class BaseRepository<T> : IBaseRepository<T> where T : class, IBaseEntity
     {
         protected readonly MyAviaryDbContext _dbContext;
 
