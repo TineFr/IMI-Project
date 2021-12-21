@@ -31,7 +31,7 @@ namespace Imi.Project.WPF.Services
                 Password = password
             };
             //var response = GetClient().PostAsJsonAsync("Auth/login", dto).Result;
-            var response = _httpClient.PostAsJsonAsync("Auth/login", dto).Result;
+            var response = GetClient().PostAsJsonAsync("Auth/login", dto).Result;
             using var responseStream = await response.Content.ReadAsStreamAsync();
             var loginresponse = await System.Text.Json.JsonSerializer.DeserializeAsync<LogInApiResponse>(responseStream);
             token = loginresponse.JWT;
