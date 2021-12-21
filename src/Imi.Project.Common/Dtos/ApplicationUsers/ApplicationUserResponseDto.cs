@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Imi.Project.Common.Dtos.ApplicationUsers
+namespace Imi.Project.Common.Dtos
 {
     public class ApplicationUserResponseDto : BaseEntityDto
     {

@@ -1,12 +1,7 @@
-﻿
-using Imi.Project.Common.Dtos;
-using Imi.Project.Common.Dtos.Cages;
-using Imi.Project.Common.Dtos.Species;
+﻿using Imi.Project.Common.Dtos.Species;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Imi.Project.Api.Core.Dtos.Birds
+namespace Imi.Project.Common.Dtos
 {
     public class BirdResponseDto : BaseEntityDto
     {

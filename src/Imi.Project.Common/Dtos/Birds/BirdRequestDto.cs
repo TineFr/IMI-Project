@@ -1,11 +1,9 @@
 ﻿using Imi.Project.Common.Enums;
 using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
-namespace Imi.Project.Common.Dtos.Birds
+namespace Imi.Project.Common.Dtos
 {
     public class BirdRequestDto : BaseEntityDto
     {

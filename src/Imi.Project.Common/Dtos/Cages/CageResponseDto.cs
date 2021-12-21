@@ -2,9 +2,8 @@
 using Imi.Project.Common.Dtos.DailyTasks;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Imi.Project.Common.Dtos.Cages
+namespace Imi.Project.Common.Dtos
 {
     public class CageResponseDto : BaseEntityDto
     {

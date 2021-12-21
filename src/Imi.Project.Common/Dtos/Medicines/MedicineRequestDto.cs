@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
-namespace Imi.Project.Common.Dtos.Medicines
-{
+namespace Imi.Project.Common.Dtos
+{ 
     public class MedicineRequestDto : BaseEntityDto
     {
         [Required(ErrorMessage = "{0} is required")]
@@ -13,7 +11,5 @@ namespace Imi.Project.Common.Dtos.Medicines
         public string Usage { get; set; }
         [Required(ErrorMessage = "{0} is required")]
         public Guid UserId { get; set; }
-
-
     }
 }

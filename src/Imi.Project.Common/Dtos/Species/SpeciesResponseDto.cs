@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Imi.Project.Common.Dtos.Species
+﻿namespace Imi.Project.Common.Dtos
 {
     public class SpeciesResponseDto : BaseEntityDto
     {

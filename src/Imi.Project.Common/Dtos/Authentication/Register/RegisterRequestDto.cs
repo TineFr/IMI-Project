@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
-namespace Imi.Project.Common.Dtos.Authentication.Register
+namespace Imi.Project.Common.Dtos
 {
     public class RegisterRequestDto
     {
