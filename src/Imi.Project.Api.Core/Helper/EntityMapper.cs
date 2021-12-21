@@ -1,14 +1,6 @@
 ﻿using Imi.Project.Api.Core.Entities;
-using Imi.Project.Common.Dtos.ApplicationUsers;
-using Imi.Project.Common.Dtos.Birds;
-using Imi.Project.Common.Dtos.Cages;
-using Imi.Project.Common.Dtos.DailyTasks;
-using Imi.Project.Common.Dtos.Medicines;
-using Imi.Project.Common.Dtos.Prescriptions;
-using Imi.Project.Common.Dtos.Species;
-using System;
+using Imi.Project.Common.Dtos;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Imi.Project.Api.Core.Helper
 {
@@ -17,14 +9,14 @@ namespace Imi.Project.Api.Core.Helper
         public static ApplicationUser MapToEntity(this ApplicationUserRequestDto userDto)
         {
 
-           var user = new ApplicationUser
+            var user = new ApplicationUser
             {
-               Id = userDto.Id,
+                Id = userDto.Id,
                 UserName = userDto.Name
             };
             return user;
         }
-    
+
         public static Bird MapToEntity(this BirdRequestDto birdDto)
         {
             var bird = new Bird

@@ -1,22 +1,18 @@
-﻿
-using Imi.Project.Api.Core.Interfaces.Services;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Imi.Project.Api.Core.Helper;
-using System.Threading.Tasks;
-using Imi.Project.Api.Core.Entities;
+﻿using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Core.Entities.Pagination;
-using Newtonsoft.Json;
+using Imi.Project.Api.Core.Helper;
+using Imi.Project.Api.Core.Interfaces.Services;
+using Imi.Project.Common.Dtos;
 using Microsoft.AspNetCore.Authorization;
-using Imi.Project.Common.Dtos.Birds;
-using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Controllers
 {
-    [Authorize] 
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class BirdsController : ControllerBase
@@ -40,7 +36,7 @@ namespace Imi.Project.Api.Controllers
         public async Task<IActionResult> Get([FromQuery] PaginationParameters parameters)
         {
             //string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
-            var birds = await _birdService.ListAllBirdsAsync();         
+            var birds = await _birdService.ListAllBirdsAsync();
             var paginationData = new PaginationMetaData(parameters.Page, birds.Count(), parameters.ItemsPerPage);
             Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
             var birdsPaginated = Pagination.AddPagination<Bird>(birds, parameters);
@@ -99,7 +95,7 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put([FromForm]  BirdRequestDto updatedBird)
+        public async Task<IActionResult> Put([FromForm] BirdRequestDto updatedBird)
         {
             if (!ModelState.IsValid)
             {
@@ -110,7 +106,7 @@ namespace Imi.Project.Api.Controllers
             {
                 return NotFound($"Bird with id {updatedBird.Id} does not exist");
             }
-            var updatedBirdEntity =  bird.Update(updatedBird);
+            var updatedBirdEntity = bird.Update(updatedBird);
 
             if (updatedBird.Image != null)
             {

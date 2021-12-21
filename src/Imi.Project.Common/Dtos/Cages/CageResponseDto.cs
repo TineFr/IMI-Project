@@ -1,6 +1,4 @@
-﻿
-using Imi.Project.Common.Dtos.DailyTasks;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Imi.Project.Common.Dtos

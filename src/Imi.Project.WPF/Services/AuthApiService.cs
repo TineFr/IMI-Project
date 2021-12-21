@@ -1,9 +1,7 @@
-﻿using Imi.Project.Common.Dtos.Authentication.Login;
+﻿using Imi.Project.Common.Dtos;
 using Imi.Project.WPF.Models;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 
 namespace Imi.Project.WPF.Services
 {

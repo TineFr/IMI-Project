@@ -1,8 +1,6 @@
-﻿using Imi.Project.Api.Core.Dtos.Birds;
-using Imi.Project.Api.Core.Entities;
+﻿using Imi.Project.Api.Core.Entities;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Core.Interfaces.Services
@@ -13,7 +11,7 @@ namespace Imi.Project.Api.Core.Interfaces.Services
         Task<Bird> GetBirdByIdAsync(Guid id);
         Task<Bird> AddBirdAsync(Bird bird);
         Task<Bird> UpdateBirdAsync(Bird bird);
-        Task DeleteMultiple (List<Bird> birds);
+        Task DeleteMultiple(List<Bird> birds);
         Task DeleteBirdAsync(Bird bird);
         Task<IEnumerable<Bird>> GetBirdsByUserIdAsync(Guid id);
         Task<IEnumerable<Bird>> GetBirdsByCageIdAsync(Guid id);

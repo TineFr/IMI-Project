@@ -1,23 +1,20 @@
-﻿using Imi.Project.Api.Core.Interfaces;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Imi.Project.Api.Core.Entities;
+using Imi.Project.Api.Core.Entities.Pagination;
 using Imi.Project.Api.Core.Helper;
 using Imi.Project.Api.Core.Interfaces.Services;
-using Imi.Project.Api.Core.Entities;
-using Imi.Project.Api.Core.Entities.Pagination;
+using Imi.Project.Common.Dtos;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Imi.Project.Common.Dtos.Cages;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
 
-   
+
     public class CagesController : ControllerBase
     {
         protected readonly ICageService _cageService;
@@ -38,7 +35,7 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get( [FromQuery] PaginationParameters parameters)
+        public async Task<IActionResult> Get([FromQuery] PaginationParameters parameters)
         {
             var cages = await _cageService.ListAllCagesAsync();
             var paginationData = new PaginationMetaData(parameters.Page, cages.Count(), parameters.ItemsPerPage);
@@ -72,7 +69,7 @@ namespace Imi.Project.Api.Controllers
             var paginationData = new PaginationMetaData(parameters.Page, birds.Count(), parameters.ItemsPerPage);
             Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
             var birdsPaginated = Pagination.AddPagination<Bird>(birds, parameters);
-            var result = birdsPaginated.MapToDtoList(); 
+            var result = birdsPaginated.MapToDtoList();
             return Ok(result);
         }
 
@@ -121,7 +118,7 @@ namespace Imi.Project.Api.Controllers
                 }
                 else return BadRequest("Uploaded file should be an image");
             }
-           
+
             var result = await _cageService.AddCageAsync(newCageEntity);
             var resultDto = result.MapToDto();
             return Ok(resultDto);

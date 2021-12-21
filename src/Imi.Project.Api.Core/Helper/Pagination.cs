@@ -1,18 +1,16 @@
-﻿using Imi.Project.Api.Core.Entities;
-using Imi.Project.Api.Core.Entities.Pagination;
-using System;
+﻿using Imi.Project.Api.Core.Entities.Pagination;
+using Imi.Project.Api.Core.Interfaces.Entities;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Imi.Project.Api.Core.Helper
 {
     public static class Pagination
     {
 
-        public static IEnumerable<T> AddPagination<T>(IEnumerable<T> list, PaginationParameters parameters) /*where T : BaseEntity*/
+        public static IEnumerable<T> AddPagination<T>(IEnumerable<T> list, PaginationParameters parameters) where T : class, IBaseEntity
         {
-            return  list.Skip((parameters.Page - 1) * parameters.ItemsPerPage)
+            return list.Skip((parameters.Page - 1) * parameters.ItemsPerPage)
                                              .Take(parameters.ItemsPerPage)
                                              .ToList();
         }
