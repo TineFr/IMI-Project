@@ -1,10 +1,10 @@
-﻿using Imi.Project.Api.Core.Interfaces.Services;
+﻿using Imi.Project.Api.Core.Exceptions;
+using Imi.Project.Api.Core.Interfaces.Services;
+using Imi.Project.Common.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Core.Services
@@ -20,9 +20,9 @@ namespace Imi.Project.Api.Core.Services
 
         public async Task<string> AddOrUpdateImageAsync<T>(Guid entityId, IFormFile image)
         {
-            
-            var pathForDatabase = Path.Combine("images", typeof(T).Name.ToLower()); 
-            var folderPathForImages = Path.Combine( _env.ContentRootPath, "wwwroot", pathForDatabase);
+
+            var pathForDatabase = Path.Combine("images", typeof(T).Name.ToLower());
+            var folderPathForImages = Path.Combine(_env.ContentRootPath, "wwwroot", pathForDatabase);
 
             if (!Directory.Exists(folderPathForImages))
             {
@@ -35,14 +35,22 @@ namespace Imi.Project.Api.Core.Services
             var fullFilePath = Path.Combine(folderPathForImages, newFileName);
             if (image.Length > 0)
             {
-               using (var newfileStream = new FileStream(fullFilePath, FileMode.Create))
-               {
+                using (var newfileStream = new FileStream(fullFilePath, FileMode.Create))
+                {
                     await image.CopyToAsync(newfileStream);
-               }
+                }
             }
 
             var filePathForDatabase = Path.Combine(pathForDatabase, newFileName);
             return filePathForDatabase;
+        }
+
+        public void ValidateImage(IHasImage dto)
+        {
+            if (!dto.Image.ContentType.Contains("image"))
+            {
+                throw new BadRequestException("Uploaded file should be an image");
+            }
         }
     }
 }

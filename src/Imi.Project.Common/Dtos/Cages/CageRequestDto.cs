@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Imi.Project.Common.Interfaces;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Imi.Project.Common.Dtos
 
 {
-    public class CageRequestDto : BaseEntityDto
+    public class CageRequestDto : BaseEntityDto, IHasImage
     {
         [Required(ErrorMessage = "{0} is required")]
         public string Name { get; set; }

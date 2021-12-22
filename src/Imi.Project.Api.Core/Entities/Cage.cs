@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Imi.Project.Api.Core.Interfaces.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
