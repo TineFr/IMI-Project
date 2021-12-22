@@ -1,17 +1,15 @@
 ﻿
-using Imi.Project.Api.Core.Interfaces.Services;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Imi.Project.Api.Core.Helper;
-using System.Threading.Tasks;
-using Imi.Project.Api.Core.Entities.Pagination;
-using Newtonsoft.Json;
 using Imi.Project.Api.Core.Entities;
+using Imi.Project.Api.Core.Entities.Pagination;
+using Imi.Project.Api.Core.Helper;
+using Imi.Project.Api.Core.Interfaces.Services;
+using Imi.Project.Common.Dtos;
 using Microsoft.AspNetCore.Authorization;
-using Imi.Project.Common.Dtos.DailyTasks;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Controllers
 {
@@ -42,7 +40,7 @@ namespace Imi.Project.Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-           
+
             var task = await _dailyTaskService.GetDailyTaskByIdAsync(id);
             if (task == null)
             {

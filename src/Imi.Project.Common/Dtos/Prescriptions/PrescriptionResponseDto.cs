@@ -1,11 +1,7 @@
-﻿
-using Imi.Project.Api.Core.Dtos.Birds;
-using Imi.Project.Common.Dtos.Medicines;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Imi.Project.Common.Dtos.Prescriptions
+namespace Imi.Project.Common.Dtos
 {
     public class PrescriptionResponseDto : BaseEntityDto
     {

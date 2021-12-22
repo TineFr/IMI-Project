@@ -1,19 +1,11 @@
 ﻿using Imi.Project.Api.Core.Entities;
-using Imi.Project.Common.Dtos.ApplicationUsers;
-using Imi.Project.Common.Dtos.Birds;
-using Imi.Project.Common.Dtos.Cages;
-using Imi.Project.Common.Dtos.DailyTasks;
-using Imi.Project.Common.Dtos.Medicines;
-using Imi.Project.Common.Dtos.Prescriptions;
-using Imi.Project.Common.Dtos.Species;
+using Imi.Project.Common.Dtos;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Imi.Project.Api.Core.Helper
 {
-   public static class UpdateMapper
+    public static class UpdateMapper
     {
         public static ApplicationUser Update(this ApplicationUser user, ApplicationUserRequestDto dto)
         {
@@ -30,7 +22,7 @@ namespace Imi.Project.Api.Core.Helper
             bird.SpeciesId = birdDto.SpeciesId;
             return bird;
         }
-        
+
         public static Cage Update(this Cage cage, CageRequestDto cageDto)
         {
 
@@ -71,28 +63,28 @@ namespace Imi.Project.Api.Core.Helper
 
         public static Prescription Update(this Prescription prescription, PrescriptionRequestDto prescriptionDto)
         {
- 
-                prescription.Id = prescriptionDto.Id;
-                prescription.EndDate = prescriptionDto.EndDate;
-                prescription.StartDate = prescriptionDto.StartDate;
-                prescription.MedicineId = prescriptionDto.Medicine;
-                prescription.UserId = prescriptionDto.UserId;
 
-                foreach (var bird in prescriptionDto.Birds)
+            prescription.Id = prescriptionDto.Id;
+            prescription.EndDate = prescriptionDto.EndDate;
+            prescription.StartDate = prescriptionDto.StartDate;
+            prescription.MedicineId = prescriptionDto.Medicine;
+            prescription.UserId = prescriptionDto.UserId;
+
+            foreach (var bird in prescriptionDto.Birds)
+            {
+                if (!prescription.BirdPrescriptions.Select(bp => bp.BirdId).ToList().Contains(bird))
                 {
-                       if (!prescription.BirdPrescriptions.Select(bp => bp.BirdId).ToList().Contains(bird))
-                       {
-                            var birdprescription = new BirdPrescription
-                            {
-                                BirdId = bird,
-                                PrescriptionId = prescriptionDto.Id
-                            };
-                            prescription.BirdPrescriptions.Add(birdprescription);
-                       }
+                    var birdprescription = new BirdPrescription
+                    {
+                        BirdId = bird,
+                        PrescriptionId = prescriptionDto.Id
+                    };
+                    prescription.BirdPrescriptions.Add(birdprescription);
                 }
-                var toDelete =  prescription.BirdPrescriptions.Select(s => s.BirdId).ToList().Except(prescriptionDto.Birds).ToList();
-                toDelete.ForEach(b => prescription.BirdPrescriptions.Remove(prescription.BirdPrescriptions.FirstOrDefault(c => c.BirdId.Equals(b))));
-                return prescription;
+            }
+            var toDelete = prescription.BirdPrescriptions.Select(s => s.BirdId).ToList().Except(prescriptionDto.Birds).ToList();
+            toDelete.ForEach(b => prescription.BirdPrescriptions.Remove(prescription.BirdPrescriptions.FirstOrDefault(c => c.BirdId.Equals(b))));
+            return prescription;
 
 
         }

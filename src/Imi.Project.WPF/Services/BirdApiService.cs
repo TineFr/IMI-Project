@@ -1,16 +1,9 @@
-﻿using Imi.Project.Common.Dtos.Authentication.Login;
-using Imi.Project.Common.Dtos.Birds;
+﻿using Imi.Project.Common.Dtos;
 using Imi.Project.WPF.Interfaces;
 using Imi.Project.WPF.Models;
 using Imi.Project.WPF.Models.Birds;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Imi.Project.WPF.Services
@@ -31,7 +24,7 @@ namespace Imi.Project.WPF.Services
                 Password = password
             };
             //var response = GetClient().PostAsJsonAsync("Auth/login", dto).Result;
-            var response = _httpClient.PostAsJsonAsync("Auth/login", dto).Result;
+            var response = GetClient().PostAsJsonAsync("Auth/login", dto).Result;
             using var responseStream = await response.Content.ReadAsStreamAsync();
             var loginresponse = await System.Text.Json.JsonSerializer.DeserializeAsync<LogInApiResponse>(responseStream);
             token = loginresponse.JWT;
@@ -76,14 +69,14 @@ namespace Imi.Project.WPF.Services
         {
             SetHeader(token);
             using (var content = new MultipartFormDataContent())
-                {
-                    content.Add(new StringContent(newBird.Name), "Name");
-                    content.Add(new StringContent(newBird.Id.ToString("d")), "Id");
-                    content.Add(new StringContent(newBird.UserId.ToString("d")), "UserId");
-                    content.Add(new StringContent(newBird.UserId.ToString("d")), "CageId");
-                    content.Add(new StringContent(newBird.SpeciesId.ToString("d")), "SpeciesId");
-                    var action = await GetClient().PostAsync("birds", content);
-                }
+            {
+                content.Add(new StringContent(newBird.Name), "Name");
+                content.Add(new StringContent(newBird.Id.ToString("d")), "Id");
+                content.Add(new StringContent(newBird.UserId.ToString("d")), "UserId");
+                content.Add(new StringContent(newBird.UserId.ToString("d")), "CageId");
+                content.Add(new StringContent(newBird.SpeciesId.ToString("d")), "SpeciesId");
+                var action = await GetClient().PostAsync("birds", content);
+            }
         }
 
         public async Task EditBird(Bird newBird)

@@ -1,16 +1,14 @@
-﻿using Imi.Project.Api.Core.Interfaces.Services;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Imi.Project.Api.Core.Entities;
+using Imi.Project.Api.Core.Entities.Pagination;
 using Imi.Project.Api.Core.Helper;
+using Imi.Project.Api.Core.Interfaces.Services;
+using Imi.Project.Common.Dtos;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Imi.Project.Api.Core.Entities.Pagination;
-using Newtonsoft.Json;
-using Imi.Project.Api.Core.Entities;
-using Microsoft.AspNetCore.Authorization;
-using Imi.Project.Common.Dtos.Species;
 
 namespace Imi.Project.Api.Controllers
 {
@@ -26,7 +24,6 @@ namespace Imi.Project.Api.Controllers
             _speciesService = speciesService;
         }
 
-        [AllowAnonymous] // change this back
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] PaginationParameters parameters)
         {

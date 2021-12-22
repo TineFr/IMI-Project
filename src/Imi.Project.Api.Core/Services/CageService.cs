@@ -44,7 +44,7 @@ namespace Imi.Project.Api.Core.Services
 
         public async Task<IEnumerable<Cage>> GetCagesByUserIdAsync(Guid id)
         {
-            var cages = await _cageRepository.GetCagesByUserIdAsync(id);
+            var cages = await _cageRepository.GetByUserIdAsync(id);
             return cages;
         }
 

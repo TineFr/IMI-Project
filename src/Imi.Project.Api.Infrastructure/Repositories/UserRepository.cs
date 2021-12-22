@@ -9,37 +9,14 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Infrastructure.Repositories
 {
-    public class UserRepository : IUserRepository
-
-       
+    public class UserRepository : BaseRepository<ApplicationUser>, IUserRepository 
     {
-        protected readonly MyAviaryDbContext _dbContext;
-
-        public UserRepository(MyAviaryDbContext dbContext)
+        public UserRepository(MyAviaryDbContext dbContext) : base(dbContext)
         {
-            _dbContext = dbContext;
+
         }
 
-        public async Task<ApplicationUser> AddAsync(ApplicationUser user)
-        {
-            await _dbContext.Users.AddAsync(user);
-            await _dbContext.SaveChangesAsync();
-            return user;
-        }
-
-        public async Task DeleteAsync(ApplicationUser user)
-        {
-            _dbContext.Users.Remove(user);
-            await _dbContext.SaveChangesAsync();
-        }
-
-        public async Task DeleteMultipleAsync(List<ApplicationUser> users)
-        {
-            _dbContext.Users.RemoveRange(users);
-            await _dbContext.SaveChangesAsync();
-
-        }
-        public IQueryable<ApplicationUser> GetAll()
+        public override IQueryable<ApplicationUser> GetAll()
         {
             return _dbContext.Users.Include(u => u.Cages)
                                    .ThenInclude(c => c.DailyTasks)
@@ -50,20 +27,15 @@ namespace Imi.Project.Api.Infrastructure.Repositories
                                    .ThenInclude(u => u.BirdPrescriptions);
         }
 
-        public async Task<ApplicationUser> GetByIdAsync(Guid id)
+        public override async Task<ApplicationUser> GetByIdAsync(Guid id)
         {
              return await GetAll().SingleOrDefaultAsync(u => u.Id.Equals(id));
         }
 
-        public async  Task<IEnumerable<ApplicationUser>> ListAllAsync()
+        public override async  Task<IEnumerable<ApplicationUser>> ListAllAsync()
         {
             return await GetAll().OrderBy(u => u.UserName).ToListAsync();
         }
-        public async Task<ApplicationUser> UpdateAsync(ApplicationUser user)
-        {
-            _dbContext.Users.Update(user);
-            await _dbContext.SaveChangesAsync();
-            return user;
-        }
+
     }
 }

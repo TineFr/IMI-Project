@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Imi.Project.Common.Dtos.ApplicationUsers
+namespace Imi.Project.Common.Dtos
 {
-    public class ApplicationUserRequestDto: BaseEntityDto
+    public class ApplicationUserRequestDto : BaseEntityDto
     {
 
         [Required(ErrorMessage = "{0} is required")]

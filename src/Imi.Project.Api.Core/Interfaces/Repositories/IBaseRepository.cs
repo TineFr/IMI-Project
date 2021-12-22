@@ -1,5 +1,6 @@
 ﻿using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Core.Entities.Pagination;
+using Imi.Project.Api.Core.Interfaces.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Core.Interfaces.Repositories
 {
-    public interface IBaseRepository<T> where T : BaseEntity
+    public interface IBaseRepository<T> where T : class, IBaseEntity
     {
         IQueryable<T> GetAll();
         Task<IEnumerable<T>> ListAllAsync();

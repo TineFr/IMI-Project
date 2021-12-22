@@ -1,16 +1,14 @@
-﻿using Imi.Project.Api.Core.Interfaces.Services;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Imi.Project.Api.Core.Helper;
-using System.Threading.Tasks;
+﻿using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Core.Entities.Pagination;
-using Newtonsoft.Json;
-using Imi.Project.Api.Core.Entities;
+using Imi.Project.Api.Core.Helper;
+using Imi.Project.Api.Core.Interfaces.Services;
+using Imi.Project.Common.Dtos;
 using Microsoft.AspNetCore.Authorization;
-using Imi.Project.Common.Dtos.Medicines;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Controllers
 {

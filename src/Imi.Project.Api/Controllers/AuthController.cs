@@ -1,9 +1,6 @@
-﻿
-using Imi.Project.Api.Core.Entities;
-using Imi.Project.Common.Dtos.Authentication.Login;
-using Imi.Project.Common.Dtos.Authentication.Register;
+﻿using Imi.Project.Api.Core.Entities;
+using Imi.Project.Common.Dtos;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -11,7 +8,6 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,7 +37,7 @@ namespace Imi.Project.Api.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState); 
+                return BadRequest(ModelState);
             }
             ApplicationUser newUser = new ApplicationUser
             {
@@ -81,7 +77,7 @@ namespace Imi.Project.Api.Controllers
             }
             var applicationUser = await _userManager.FindByEmailAsync(login.Email);
             JwtSecurityToken token = await GenerateTokenAsync(applicationUser);
-            string serializedToken = new JwtSecurityTokenHandler().WriteToken(token); 
+            string serializedToken = new JwtSecurityTokenHandler().WriteToken(token);
             return Ok(new LoginResponseDto()
             {
                 JWT = serializedToken

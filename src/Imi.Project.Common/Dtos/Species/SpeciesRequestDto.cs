@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Imi.Project.Common.Dtos.Species
+namespace Imi.Project.Common.Dtos
 {
     public class SpeciesRequestDto : BaseEntityDto
     {
@@ -11,6 +8,6 @@ namespace Imi.Project.Common.Dtos.Species
         public string Name { get; set; }
         [Required(ErrorMessage = "{0} is required")]
         public string ScientificName { get; set; }
-       
+
     }
 }

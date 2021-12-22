@@ -1,17 +1,8 @@
-﻿using Imi.Project.Common.Dtos.Cages;
-using Imi.Project.Common.Dtos.DailyTasks;
-using Imi.Project.Common.Dtos.Species;
+﻿using Imi.Project.Api.Core.Entities;
 using Imi.Project.Common.Dtos;
-using Imi.Project.Common.Dtos.ApplicationUsers;
-using System;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Imi.Project.Common.Dtos.Medicines;
-using Imi.Project.Common.Dtos.Prescriptions;
-using Imi.Project.Api.Core.Entities;
-using Imi.Project.Api.Core.Dtos.Birds;
-using Microsoft.AspNetCore.Http;
 
 namespace Imi.Project.Api.Core.Helper
 {
@@ -114,7 +105,7 @@ namespace Imi.Project.Api.Core.Helper
             {
                 Id = medicine.Id,
                 Name = medicine.Name,
-                Usage = medicine.Usage,          
+                Usage = medicine.Usage,
             };
         }
 
@@ -125,7 +116,7 @@ namespace Imi.Project.Api.Core.Helper
 
         public static PrescriptionResponseDto MapToDto(this Prescription prescription)
         {
-            var  prescriptionDto =  new PrescriptionResponseDto
+            var prescriptionDto = new PrescriptionResponseDto
             {
                 Id = prescription.Id,
                 Medicine = prescription.Medicine.MapToDto(),
