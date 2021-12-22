@@ -13,11 +13,10 @@ namespace Imi.Project.Api.Infrastructure.Repositories
         {
 
         }
-
-        public async override Task<IEnumerable<Species>> ListAllAsync()
-        {
-            return await GetAll().OrderBy(s => s.Name).ToListAsync();
-        }
+        //public async override Task<IEnumerable<Species>> ListAllAsync()
+        //{
+        //    return await GetAll().OrderBy(s => s.Name).ToListAsync();
+        //}
     }
 
 }

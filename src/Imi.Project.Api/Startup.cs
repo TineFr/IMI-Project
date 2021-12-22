@@ -119,6 +119,12 @@ namespace Imi.Project.Api
             services.AddRouting(options => options.LowercaseUrls = true);
 
 
+
+            services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            services.AddScoped(typeof(IBaseRepository<ApplicationUser>), typeof(UserRepository));
+            services.AddScoped(typeof(IBaseRepository<Cage>), typeof(CageRepository));
+
+
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICageRepository, CageRepository>();
             services.AddScoped<IBirdRepository, BirdRepository>();
