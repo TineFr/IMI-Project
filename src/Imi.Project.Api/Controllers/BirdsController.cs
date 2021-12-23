@@ -71,7 +71,7 @@ namespace Imi.Project.Api.Controllers
             return Ok(result);
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<IActionResult> Put([FromRoute] Guid id, [FromForm] BirdRequestDto updatedBird)
         {
             if (!ModelState.IsValid)

@@ -60,6 +60,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
             return entity;
         }
 
+        [Obsolete]
         public Task<bool> EntityExistsForUser<E>(Guid userId, Guid id) where E : class, IHasUserId
         {
 
