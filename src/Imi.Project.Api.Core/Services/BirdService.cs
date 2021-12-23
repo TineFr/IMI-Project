@@ -73,6 +73,10 @@ namespace Imi.Project.Api.Core.Services
             {
                 throw new ItemNotFoundException($"User with id {dto.UserId} does not exist");
             }
+            if (!(await _birdRepository.EntityExists<Species>(dto.SpeciesId)))
+            {
+                throw new ItemNotFoundException($"Species with id {dto.UserId} does not exist");
+            }
             if (!(await _birdRepository.EntityExistsForUser<Cage>(dto.UserId, dto.CageId)))
             {
                 throw new ItemNotFoundException($"Cage with id {dto.CageId} does not exist for this user");
