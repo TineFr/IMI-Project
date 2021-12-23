@@ -1,8 +1,8 @@
 ﻿
 using Imi.Project.Api.Core.Entities;
+using Imi.Project.Common.Dtos;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Core.Interfaces.Services
@@ -10,12 +10,12 @@ namespace Imi.Project.Api.Core.Interfaces.Services
     public interface ICageService
     {
         Task<IEnumerable<Cage>> ListAllCagesAsync();
-        Task<Cage> GetCageByIdAsync(Guid id);
+        Task<CageResponseDto> GetCageByIdAsync(Guid id);
         Task<IEnumerable<Cage>> GetCagesByUserIdAsync(Guid id);
-        Task<Cage> AddCageAsync(Cage cage);
+        Task<CageResponseDto> AddCageAsync(CageRequestDto cage);
 
         Task DeleteMultiple(List<Cage> cages);
-        Task<Cage> UpdateCageAsync(Cage cage);
-        Task DeleteCageAsync(Cage cage);
+        Task<CageResponseDto> UpdateCageAsync(Guid id, CageRequestDto cage);
+        Task DeleteCageAsync(Guid id);
     }
 }

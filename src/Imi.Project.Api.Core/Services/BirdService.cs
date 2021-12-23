@@ -61,7 +61,7 @@ namespace Imi.Project.Api.Core.Services
                 updatedBirdEntity.Image = databasePath;
             }
 
-            var result = await _birdRepository.UpdateAsync(bird);
+            var result = await _birdRepository.UpdateAsync(updatedBirdEntity);
             var resultDto = result.MapToDto();
             return resultDto;
         }
