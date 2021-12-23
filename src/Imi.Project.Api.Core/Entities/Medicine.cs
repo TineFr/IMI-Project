@@ -11,7 +11,7 @@ namespace Imi.Project.Api.Core.Entities
         public string Name { get; set; }
         public ICollection<Prescription> Prescriptions { get; set; }
         public ApplicationUser User { get; set; }
-        public Guid UserId { get; set; }
+        public Guid? UserId { get; set; }
 
         [Required(ErrorMessage = "{0} is required")]
         public string Usage { get; set; }

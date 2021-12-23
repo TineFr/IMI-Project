@@ -6,6 +6,6 @@ namespace Imi.Project.Api.Core.Interfaces.Entities
 {
     public interface IHasUserId : IBaseEntity
     {
-        Guid UserId { get; set; }   
+        Guid? UserId { get; set; }   
     }
 }
