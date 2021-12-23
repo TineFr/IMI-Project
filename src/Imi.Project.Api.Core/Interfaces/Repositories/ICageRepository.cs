@@ -9,6 +9,5 @@ namespace Imi.Project.Api.Core.Interfaces.Repositories
     public interface ICageRepository : IBaseRepository<Cage>
     {
         Task<IEnumerable<Cage>> GetByUserIdAsync(Guid id);
-        Task<Cage> ExistsForUserId(Guid userId, Guid id);
     }
 }

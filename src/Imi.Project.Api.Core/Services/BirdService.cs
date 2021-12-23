@@ -16,22 +16,13 @@ namespace Imi.Project.Api.Core.Services
     public class BirdService : IBirdService
     {
         protected readonly IBirdRepository _birdRepository;
-        protected readonly IBaseRepository<ApplicationUser> _baseUserRepository;
-        protected readonly IBaseRepository<Cage> _baseCageRepository;
-        protected readonly ICageRepository _cageRepository;
         protected readonly IImageService _imageService;
 
         public BirdService(IBirdRepository birdRepository,
-                           IBaseRepository<ApplicationUser> baseUserRepository,
-                           IBaseRepository<Cage> baseCageRepository,
-                           IImageService imageService,
-                           ICageRepository cageRepository)
+                           IImageService imageService)
         {
             _birdRepository = birdRepository;
-            _baseUserRepository = baseUserRepository;
-            _baseCageRepository = baseCageRepository;
             _imageService = imageService;
-            _cageRepository = cageRepository;
         }
 
         public async Task<BirdResponseDto> GetBirdByIdAsync(Guid id)
@@ -56,14 +47,12 @@ namespace Imi.Project.Api.Core.Services
             var bird = await _birdRepository.GetByIdAsync(id);
             if (bird == null)
             {
-                throw new BadRequestException($"Bird with id {id} already exists");
+                throw new BadRequestException($"Bird with id {id} does not exist");
             }
-            var cage = (await _cageRepository.ExistsForUserId(dto.UserId, dto.CageId));
-            if (cage == null)
+            if ((await _birdRepository.EntityExistsForUser<Cage>(dto.UserId, dto.CageId)) == null)
             {
-                throw new ItemNotFoundException($"Cage with id {bird.CageId} does not exist for this user");
+                throw new ItemNotFoundException($"Cage with id {dto.CageId} does not exist for this user");
             }
-
             var updatedBirdEntity = bird.Update(dto);
 
             if (dto.Image != null)
@@ -80,13 +69,11 @@ namespace Imi.Project.Api.Core.Services
 
         public async Task<BirdResponseDto> AddBirdAsync(BirdRequestDto dto)
         {
-            var user = await _baseUserRepository.GetByIdAsync(dto.UserId);
-            if (user == null)
+            if (!(await _birdRepository.EntityExists<ApplicationUser>(dto.UserId)))
             {
                 throw new ItemNotFoundException($"User with id {dto.UserId} does not exist");
             }
-            var cage = (await _cageRepository.ExistsForUserId(dto.UserId, dto.CageId));
-            if (cage == null)
+            if (!(await _birdRepository.EntityExistsForUser<Cage>(dto.UserId, dto.CageId)))
             {
                 throw new ItemNotFoundException($"Cage with id {dto.CageId} does not exist for this user");
             }
@@ -131,5 +118,6 @@ namespace Imi.Project.Api.Core.Services
             var birds = await _birdRepository.GetByUserIdAsync(id);
             return birds;
         }
+
     }
 }
