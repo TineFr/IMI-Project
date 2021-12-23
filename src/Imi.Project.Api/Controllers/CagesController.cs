@@ -1,5 +1,6 @@
 ﻿using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Core.Entities.Pagination;
+using Imi.Project.Api.Core.Exceptions;
 using Imi.Project.Api.Core.Helper;
 using Imi.Project.Api.Core.Interfaces.Services;
 using Imi.Project.Common.Dtos;
@@ -48,12 +49,15 @@ namespace Imi.Project.Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            var cage = await _cageService.GetCageByIdAsync(id);
-            if (cage == null)
+            CageResponseDto result;
+            try
             {
-                return NotFound($"cage with id {id} does not exist");
+                result = await _cageService.GetCageByIdAsync(id);
             }
-            var result = cage.MapToDto();
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);
+            }
             return Ok(result);
         }
 
@@ -97,71 +101,48 @@ namespace Imi.Project.Api.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var cage = await _cageService.GetCageByIdAsync(newCage.Id);
-            if (cage != null)
+            CageResponseDto result;
+            try
             {
-                return BadRequest($"cage with id {newCage.Id} already exists");
+                result = await _cageService.AddCageAsync(newCage);
             }
-            var user = await _userService.GetUserByIdAsync(newCage.UserId);
-            if (user == null)
+            catch (BaseException ex)
             {
-                return NotFound($"User with id {newCage.UserId} does not exist");
+                return StatusCode((int)ex.StatusCode, ex.Message);
             }
-            var newCageEntity = newCage.MapToEntity();
-
-            if (newCage.Image != null)
-            {
-                if (newCage.Image.ContentType.Contains("image"))
-                {
-                    var databasePath = await _imageService.AddOrUpdateImageAsync<Cage>(newCage.Id, newCage.Image);
-                    newCageEntity.Image = databasePath;
-                }
-                else return BadRequest("Uploaded file should be an image");
-            }
-
-            var result = await _cageService.AddCageAsync(newCageEntity);
-            var resultDto = result.MapToDto();
-            return Ok(resultDto);
+            return Ok(result);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Put([FromForm] CageRequestDto updatedCage)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(Guid id,[FromForm] CageRequestDto updatedCage)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var cage = await _cageService.GetCageByIdAsync(updatedCage.Id);
-            if (cage == null)
+            CageResponseDto result;
+            try
             {
-                return NotFound($"cage with id {updatedCage.Id} does not exist");
+                result = await _cageService.UpdateCageAsync(id, updatedCage);
             }
-            var updatedCageEntity = cage.Update(updatedCage);
-            if (updatedCage.Image != null)
+            catch (BaseException ex)
             {
-                if (updatedCage.Image.ContentType.Contains("image"))
-                {
-                    var databasePath = await _imageService.AddOrUpdateImageAsync<Cage>(updatedCage.Id, updatedCage.Image);
-                    updatedCageEntity.Image = databasePath;
-                }
-                else return BadRequest("Uploaded file should be an image");
+                return StatusCode((int)ex.StatusCode, ex.Message);
             }
-            var result = await _cageService.UpdateCageAsync(updatedCageEntity);
-            var resultDto = result.MapToDto();
-            return Ok(resultDto);
+            return Ok(result);
         }
 
-
-
         [HttpDelete]
-        public async Task<IActionResult> Delete(CageRequestDto cageToDelete)
+        public async Task<IActionResult> Delete(Guid id)
         {
-            var cage = await _cageService.GetCageByIdAsync(cageToDelete.Id);
-            if (cage == null)
+            try
             {
-                return NotFound($"cage with id {cageToDelete.Id} does not exist");
+                await _cageService.DeleteCageAsync(id);
             }
-            await _cageService.DeleteCageAsync(cage);
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);
+            }
             return Ok();
         }
 
