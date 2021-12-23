@@ -4,6 +4,7 @@ using Imi.Project.Api.Core.Exceptions;
 using Imi.Project.Api.Core.Helper;
 using Imi.Project.Api.Core.Interfaces.Services;
 using Imi.Project.Common.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
 

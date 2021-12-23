@@ -13,8 +13,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Controllers
 {
-    //[Authorize]
-    [AllowAnonymous]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class BirdsController : ControllerBase
