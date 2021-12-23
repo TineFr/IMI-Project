@@ -11,7 +11,7 @@ namespace Imi.Project.Api.Core.Interfaces.Services
         Task<IEnumerable<Bird>> ListAllBirdsAsync();
         Task<BirdResponseDto> GetBirdByIdAsync(Guid id);
         Task<BirdResponseDto> AddBirdAsync(BirdRequestDto bird);
-        Task<BirdResponseDto> UpdateBirdAsync(BirdRequestDto bird);
+        Task<BirdResponseDto> UpdateBirdAsync(Guid id, BirdRequestDto bird);
         Task DeleteMultiple(List<Bird> birds);
         Task DeleteBirdAsync(Guid id);
         Task<IEnumerable<Bird>> GetBirdsByUserIdAsync(Guid id);

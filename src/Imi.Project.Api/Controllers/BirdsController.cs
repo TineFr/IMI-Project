@@ -72,7 +72,7 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put([FromForm] BirdRequestDto updatedBird)
+        public async Task<IActionResult> Put([FromRoute] Guid id, [FromForm] BirdRequestDto updatedBird)
         {
             if (!ModelState.IsValid)
             {
@@ -81,7 +81,7 @@ namespace Imi.Project.Api.Controllers
             BirdResponseDto result;
             try
             {
-                result = await _birdService.UpdateBirdAsync(updatedBird);
+                result = await _birdService.UpdateBirdAsync(id, updatedBird);
             }
             catch (BaseException ex)
             {
