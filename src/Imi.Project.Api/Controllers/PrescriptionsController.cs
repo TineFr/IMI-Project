@@ -1,5 +1,6 @@
 ﻿using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Core.Entities.Pagination;
+using Imi.Project.Api.Core.Exceptions;
 using Imi.Project.Api.Core.Helper;
 using Imi.Project.Api.Core.Interfaces.Services;
 using Imi.Project.Common.Dtos;
@@ -17,14 +18,10 @@ namespace Imi.Project.Api.Controllers
     [ApiController]
     public class PrescriptionsController : ControllerBase
     {
-        protected readonly IUserService _userService;
-        protected readonly IImageService _imageService;
         protected readonly IPrescriptionService _prescriptionService;
 
-        public PrescriptionsController(IUserService userService, IImageService imageService, IPrescriptionService prescriptionService)
+        public PrescriptionsController(IPrescriptionService prescriptionService)
         {
-            _userService = userService;
-            _imageService = imageService;
             _prescriptionService = prescriptionService;
         }
 
@@ -42,12 +39,15 @@ namespace Imi.Project.Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            var prescription = await _prescriptionService.GetPrescriptionByIdAsync(id);
-            if (prescription == null)
+            PrescriptionResponseDto result;
+            try
             {
-                return NotFound($"bird with id {id} does not exist");
+                result = await _prescriptionService.GetPrescriptionByIdAsync(id);
             }
-            var result = prescription.MapToDto();
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);
+            }
             return Ok(result);
         }
 
@@ -58,50 +58,49 @@ namespace Imi.Project.Api.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var prescription = await _prescriptionService.GetPrescriptionByIdAsync(newPrescription.Id);
-            if (prescription != null)
+            PrescriptionResponseDto result;
+            try
             {
-                return BadRequest($"Prescription with id {newPrescription.Id} already exists");
+                result = await _prescriptionService.AddPrescriptionAsync(newPrescription);
             }
-            var user = await _userService.GetUserByIdAsync(newPrescription.UserId);
-            if (user == null)
+            catch (BaseException ex)
             {
-                return NotFound($"User with id {prescription.UserId} does not exist");
+                return StatusCode((int)ex.StatusCode, ex.Message);
             }
-            var newPrescripptionEntity = newPrescription.MapToEntity();
-            var result = await _prescriptionService.AddPrescriptionAsync(newPrescripptionEntity);
-            var resultDto = result.MapToDto();
-            return Ok(resultDto);
+            return Ok(result);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Put(PrescriptionRequestDto updatedPrescription)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(Guid id, PrescriptionRequestDto updatedPrescription)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var prescription = await _prescriptionService.GetPrescriptionByIdAsync(updatedPrescription.Id);
-            if (prescription == null)
+            PrescriptionResponseDto result;
+            try
             {
-                return NotFound($"Prescription with id {updatedPrescription.Id} does not exist");
+                result = await _prescriptionService.UpdatePrescriptionAsync(id, updatedPrescription);
             }
-            var prescriptionEntity = prescription.Update(updatedPrescription);
-            var result = await _prescriptionService.UpdatePrescriptionAsync(prescriptionEntity);
-            var resultDto = result.MapToDto();
-            return Ok(resultDto);
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);
+            }
+            return Ok(result);
         }
 
 
-        [HttpDelete]
-        public async Task<IActionResult> Delete(PrescriptionRequestDto prescriptionToDelete)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
         {
-            var prescription = await _prescriptionService.GetPrescriptionByIdAsync(prescriptionToDelete.Id);
-            if (prescription == null)
+            try
             {
-                return NotFound($"Prescription with id {prescription.Id} does not exist");
+                await _prescriptionService.DeletePrescriptionAsync(id);
             }
-            await _prescriptionService.DeletePrescriptionAsync(prescription);
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);
+            }
             return Ok();
         }
 

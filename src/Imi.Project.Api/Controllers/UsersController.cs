@@ -156,7 +156,7 @@ namespace Imi.Project.Api.Controllers
             return Ok(result);
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<IActionResult> Put(Guid id, ApplicationUserRequestDto updatedUser)
         {
             if (!ModelState.IsValid)
@@ -176,7 +176,7 @@ namespace Imi.Project.Api.Controllers
         }
 
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
             try
