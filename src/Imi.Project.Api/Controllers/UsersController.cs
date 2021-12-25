@@ -1,5 +1,6 @@
 ﻿using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Core.Entities.Pagination;
+using Imi.Project.Api.Core.Exceptions;
 using Imi.Project.Api.Core.Helper;
 using Imi.Project.Api.Core.Interfaces.Services;
 using Imi.Project.Common.Dtos;
@@ -45,17 +46,16 @@ namespace Imi.Project.Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            if (id == null)
+            ApplicationUserResponseDto result;
+            try
             {
-                return NotFound();
+                result = await _userService.GetUserByIdAsync(id);
             }
-            var user = await _userService.GetUserByIdAsync(id);
-            if (user == null)
+            catch (BaseException ex)
             {
-                return NotFound($"User with id {id} does not exist");
+                return StatusCode((int)ex.StatusCode, ex.Message);
             }
-            var userDto = user.MapToDto();
-            return Ok(userDto);
+            return Ok(result);
         }
 
         [HttpGet("{id}/cages")]
@@ -144,45 +144,49 @@ namespace Imi.Project.Api.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var user = await _userService.GetUserByIdAsync(newUser.Id);
-            if (user != null)
+            ApplicationUserResponseDto result;
+            try
             {
-                return BadRequest($"User with id {newUser.Id} already exists");
+                result = await _userService.AddUserAsync(newUser);
             }
-            var newUserEntity = newUser.MapToEntity();
-            var result = await _userService.AddUserAsync(newUserEntity);
-            var resultDto = result.MapToDto();
-            return Ok(resultDto);
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);
+            }
+            return Ok(result);
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put(ApplicationUserRequestDto updatedUser)
+        public async Task<IActionResult> Put(Guid id, ApplicationUserRequestDto updatedUser)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var user = await _userService.GetUserByIdAsync(updatedUser.Id);
-            if (user == null)
+            ApplicationUserResponseDto result;
+            try
             {
-                return NotFound($"User with id {updatedUser.Id} does not exist");
+                result = await _userService.UpdateUserAsync(id, updatedUser);
             }
-            user.Update(updatedUser);
-            var result = await _userService.UpdateUserAsync(user);
-            var resultDto = result.MapToDto();
-            return Ok(resultDto);
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);
+            }
+            return Ok(result);
         }
 
 
         [HttpDelete]
-        public async Task<IActionResult> Delete(ApplicationUserRequestDto userToDelete)
+        public async Task<IActionResult> Delete(Guid id)
         {
-            var user = await _userService.GetUserByIdAsync(userToDelete.Id);
-            if (user == null)
+            try
             {
-                return NotFound($"User with id {userToDelete.Id} does not exist");
+                await _userService.DeleteUserAsync(id);
             }
-            await _userService.DeleteUserAsync(user);
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);
+            }
             return Ok();
         }
 
