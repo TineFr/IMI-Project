@@ -1,5 +1,6 @@
 ﻿using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Core.Entities.Pagination;
+using Imi.Project.Api.Core.Exceptions;
 using Imi.Project.Api.Core.Helper;
 using Imi.Project.Api.Core.Interfaces.Services;
 using Imi.Project.Common.Dtos;
@@ -36,72 +37,70 @@ namespace Imi.Project.Api.Controllers
             return Ok(result);
         }
 
-
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            var medicine = await _medicineService.GetMedicineByIdAsync(id);
-            if (medicine == null)
+            MedicineResponseDto result;
+            try
             {
-                return NotFound($"Medicine with id {id} does not exist");
+                result = await _medicineService.GetMedicineByIdAsync(id);
             }
-            var result = medicine.MapToDto();
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);
+            }
             return Ok(result);
         }
 
-
         [HttpPost]
-        public async Task<IActionResult> Post(MedicineRequestDto medicineRequestDto)
+        public async Task<IActionResult> Post(MedicineRequestDto newMedicine)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var medicine = await _medicineService.GetMedicineByIdAsync(medicineRequestDto.Id);
-            if (medicine != null)
+            MedicineResponseDto result;
+            try
             {
-                return BadRequest($"Medicine with id {medicineRequestDto.Id} already exists");
+                result = await _medicineService.AddMedicineAsync(newMedicine);
             }
-            var user = await _userService.GetUserByIdAsync(medicineRequestDto.UserId);
-            if (user == null)
+            catch (BaseException ex)
             {
-                return NotFound($"User with id {medicineRequestDto.UserId} does not exist");
+                return StatusCode((int)ex.StatusCode, ex.Message);
             }
-            var medicineRequestDtoEntity = medicineRequestDto.MapToEntity();
-            var result = await _medicineService.AddMedicineAsync(medicineRequestDtoEntity);
-            var resultDto = result.MapToDto();
-            return Ok(resultDto);
+            return Ok(result);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Put(MedicineRequestDto medicineRequestDto)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(Guid id, MedicineRequestDto updatedMedicine)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var medicine = await _medicineService.GetMedicineByIdAsync(medicineRequestDto.Id);
-            if (medicine == null)
+            MedicineResponseDto result;
+            try
             {
-                return NotFound($"Medicine with id {medicineRequestDto.Id} does not exist");
+                result = await _medicineService.UpdateMedicineAsync(id, updatedMedicine);
             }
-            medicine.Update(medicineRequestDto);
-            var result = await _medicineService.UpdateMedicineAsync(medicine);
-            var resultDto = result.MapToDto();
-            return Ok(resultDto);
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);
+            }
+            return Ok(result);
         }
 
-
-
-        [HttpDelete]
-        public async Task<IActionResult> Delete(MedicineRequestDto medicineRequestDto)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
         {
-            var medicine = await _medicineService.GetMedicineByIdAsync(medicineRequestDto.Id);
-            if (medicine == null)
+            try
             {
-                return NotFound($"Medicine with id {medicineRequestDto.Id} does not exist");
+                await _medicineService.DeleteMedicineAsync(id);
             }
-            await _medicineService.DeleteMedicineAsync(medicine);
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);
+            }
             return Ok();
         }
     }
