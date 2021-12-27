@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -30,11 +31,15 @@ namespace Imi.Project.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] PaginationParameters parameters)
         {
-            var tasks = await _dailyTaskService.ListAllDailyTasksAsync();
-            var paginationData = new PaginationMetaData(parameters.Page, tasks.Count(), parameters.ItemsPerPage);
-            Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
-            var tasksPaginated = Pagination.AddPagination<DailyTask>(tasks, parameters);
-            var result = tasksPaginated.MapToDtoList();
+            IEnumerable<DailyTaskResponseDto> result;
+            try
+            {
+                result = await _dailyTaskService.ListAllDailyTasksAsync(parameters);
+            }
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);
+            }
             return Ok(result);
         }
 

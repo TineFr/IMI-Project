@@ -1,4 +1,5 @@
 ﻿using Imi.Project.Api.Core.Entities;
+using Imi.Project.Api.Core.Entities.Pagination;
 using Imi.Project.Api.Core.Exceptions;
 using Imi.Project.Api.Core.Helper;
 using Imi.Project.Api.Core.Interfaces.Repositories;
@@ -15,18 +16,22 @@ namespace Imi.Project.Api.Core.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _applicationUserRepository;
-        private readonly ICageService _cageService;
-        private readonly IBirdService _birdService;
-        private readonly IMedicineService _medicineService;
-        private readonly IPrescriptionService _prescriptionService;
+        private readonly ICageRepository _cageRepository;
+        private readonly IBirdRepository _birdRepository;
+        private readonly IMedicineRepository _medicineRepository;
+        private readonly IPrescriptionRepository _prescriptionRepository;
 
-        public UserService(IUserRepository applicationUserRepository, ICageService cageService, IBirdService birdService, IMedicineService medicineService, IPrescriptionService prescriptionService)
+        public UserService(IUserRepository applicationUserRepository, 
+                           ICageRepository cageRepository, 
+                           IBirdRepository birdRepository,
+                           IMedicineRepository medicineRepository, 
+                           IPrescriptionRepository prescriptionRepository)
         {
             _applicationUserRepository = applicationUserRepository;
-            _cageService = cageService;
-            _birdService = birdService;
-            _medicineService = medicineService;
-            _prescriptionService = prescriptionService;
+            _cageRepository = cageRepository;
+            _birdRepository = birdRepository;
+            _medicineRepository = medicineRepository;
+            _prescriptionRepository = prescriptionRepository;
         }
 
         public async Task<ApplicationUserResponseDto> GetUserByIdAsync(Guid id)
@@ -41,10 +46,16 @@ namespace Imi.Project.Api.Core.Services
         }
 
 
-        public async Task<IEnumerable<ApplicationUser>> ListAllUsersAsync()
+        public async Task<IEnumerable<ApplicationUserResponseDto>> ListAllUsersAsync(PaginationParameters parameters)
         {
-            var ApplicationApplicationUserList = await _applicationUserRepository.ListAllAsync();
-            return ApplicationApplicationUserList;
+            var users = await _applicationUserRepository.ListAllAsync();
+            if (users.Count() == 0)
+            {
+                throw new ItemNotFoundException($"No users were found");
+            }
+            var usersPaginated = Pagination.AddPagination<ApplicationUser>(users, parameters);
+            var result = usersPaginated.MapToDtoList();
+            return result;
         }
 
         public async Task<ApplicationUserResponseDto> UpdateUserAsync(Guid id, ApplicationUserRequestDto dto)
@@ -67,17 +78,17 @@ namespace Imi.Project.Api.Core.Services
             {
                 throw new BadRequestException($"User with id {id} does not exist");
             }
-            var cages = await _cageService.GetCagesByUserIdAsync(id);
-            await _cageService.DeleteMultiple(cages.ToList());
+            var cages = await _cageRepository.GetByUserIdAsync(id);
+            await _cageRepository.DeleteMultipleAsync(cages.ToList());
 
-            var birds = await _birdService.GetBirdsByUserIdAsync(id);
-            await _birdService.DeleteMultiple(birds.ToList());
+            var birds = await _birdRepository.GetByUserIdAsync(id);
+            await _birdRepository.DeleteMultipleAsync(birds.ToList());
 
-            var medicines = await _medicineService.GetMedicinesByUserIdAsync(id);
-            await _medicineService.DeleteMultiple(medicines.ToList());
+            var medicines = await _medicineRepository.GetByUserIdAsync(id);
+            await _medicineRepository.DeleteMultipleAsync(medicines.ToList());
 
-            var prescriptions = await _prescriptionService.GetPrescriptionsByUserIdAsync(id);
-            await _prescriptionService.DeleteMultiple(prescriptions.ToList());
+            var prescriptions = await _prescriptionRepository.GetByUserIdAsync(id);
+            await _prescriptionRepository.DeleteMultipleAsync(prescriptions.ToList());
 
             await _applicationUserRepository.DeleteAsync(user);
         }

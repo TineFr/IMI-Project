@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -28,11 +29,15 @@ namespace Imi.Project.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] PaginationParameters parameters)
         {
-            var birds = await _birdService.ListAllBirdsAsync();
-            var paginationData = new PaginationMetaData(parameters.Page, birds.Count(), parameters.ItemsPerPage);
-            Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
-            var birdsPaginated = Pagination.AddPagination<Bird>(birds, parameters);
-            var result = birdsPaginated.MapToDtoList();
+            IEnumerable<BirdResponseDto> result;
+            try
+            {
+                result = await _birdService.ListAllBirdsAsync(parameters);
+            }
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);
+            }
             return Ok(result);
         }
 

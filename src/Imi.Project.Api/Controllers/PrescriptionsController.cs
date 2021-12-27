@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -28,11 +29,15 @@ namespace Imi.Project.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] PaginationParameters parameters)
         {
-            var prescriptions = await _prescriptionService.ListAllPrescriptionsAsync();
-            var paginationData = new PaginationMetaData(parameters.Page, prescriptions.Count(), parameters.ItemsPerPage);
-            Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
-            var prescriptionsPaginated = Pagination.AddPagination<Prescription>(prescriptions, parameters);
-            var result = prescriptionsPaginated.MapToDtoList();
+            IEnumerable<PrescriptionResponseDto> result;
+            try
+            {
+                result = await _prescriptionService.ListAllPrescriptionsAsync(parameters);
+            }
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);
+            }
             return Ok(result);
         }
 

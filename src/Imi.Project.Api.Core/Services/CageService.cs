@@ -1,4 +1,5 @@
 ﻿using Imi.Project.Api.Core.Entities;
+using Imi.Project.Api.Core.Entities.Pagination;
 using Imi.Project.Api.Core.Exceptions;
 using Imi.Project.Api.Core.Helper;
 using Imi.Project.Api.Core.Interfaces.Repositories;
@@ -6,6 +7,7 @@ using Imi.Project.Api.Core.Interfaces.Services;
 using Imi.Project.Common.Dtos;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,7 +35,17 @@ namespace Imi.Project.Api.Core.Services
             CageResponseDto result = cage.MapToDto();
             return result;
         }
-
+        public async Task<IEnumerable<CageResponseDto>> ListAllCagesAsync(PaginationParameters parameters)
+        {
+            var cages = await _cageRepository.ListAllAsync();
+            if (cages.Count() == 0)
+            {
+                throw new ItemNotFoundException($"No cages were found");
+            }
+            var cagesPaginated = Pagination.AddPagination<Cage>(cages, parameters);
+            var result = cagesPaginated.MapToDtoList();
+            return result;
+        }
         public async Task<CageResponseDto> AddCageAsync(CageRequestDto dto)
         {
             await ValidateRequest(dto);
@@ -51,7 +63,6 @@ namespace Imi.Project.Api.Core.Services
             var resultDto = result.MapToDto();
             return resultDto;
         }
-
         public async Task<CageResponseDto> UpdateCageAsync(Guid id, CageRequestDto dto)
         {
 
@@ -74,7 +85,6 @@ namespace Imi.Project.Api.Core.Services
             var resultDto = result.MapToDto();
             return resultDto;
         }
-
         public async Task DeleteCageAsync(Guid id)
         {
             var cage = await _cageRepository.GetByIdAsync(id);
@@ -85,12 +95,26 @@ namespace Imi.Project.Api.Core.Services
             await _cageRepository.DeleteAsync(cage);
 
         }
-
         public async Task DeleteMultiple(List<Cage> cages)
         {
             await _cageRepository.DeleteMultipleAsync(cages);
         }
+        public async Task<IEnumerable<CageResponseDto>> GetCagesByUserIdAsync(Guid id, PaginationParameters parameters)
+        {
+            if (await _cageRepository.EntityExists<ApplicationUser>(id))
+            {
+                var cages = await _cageRepository.GetByUserIdAsync(id);
+                if (cages.Count() == 0)
+                {
+                    throw new ItemNotFoundException($"No cages were found for user with id {id}");
+                }
+                var cagesPaginated = Pagination.AddPagination<Cage>(cages, parameters);
+                var result = cagesPaginated.MapToDtoList();
+                return result;
+            }
+            else throw new ItemNotFoundException($"User with id {id} does not exist");
 
+        }
         private async Task ValidateRequest(CageRequestDto dto)
         {
             if (!(await _cageRepository.EntityExists<ApplicationUser>(dto.UserId)))
@@ -98,35 +122,5 @@ namespace Imi.Project.Api.Core.Services
                 throw new ItemNotFoundException($"User with id {dto.UserId} does not exist");
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        public async Task<IEnumerable<Cage>> GetCagesByUserIdAsync(Guid id)
-        {
-            var cages = await _cageRepository.GetByUserIdAsync(id);
-            return cages;
-        }
-
-        public async Task<IEnumerable<Cage>> ListAllCagesAsync()
-        {
-            var cageList = await _cageRepository.ListAllAsync();
-            return cageList;
-        }
-
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Imi.Project.Api.Core.Entities;
+using Imi.Project.Api.Core.Entities.Pagination;
 using Imi.Project.Api.Core.Exceptions;
 using Imi.Project.Api.Core.Helper;
 using Imi.Project.Api.Core.Interfaces.Repositories;
@@ -6,6 +7,7 @@ using Imi.Project.Api.Core.Interfaces.Services;
 using Imi.Project.Common.Dtos;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -32,6 +34,18 @@ namespace Imi.Project.Api.Core.Services
                 throw new BadRequestException($"Daily task with id {id} does not exist");
             }
             DailyTaskResponseDto result = task.MapToDto();
+            return result;
+        }
+
+        public async Task<IEnumerable<DailyTaskResponseDto>> ListAllDailyTasksAsync(PaginationParameters parameters)
+        {
+            var tasks = await _dailyTaskRepository.ListAllAsync();
+            if (tasks.Count() == 0)
+            {
+                throw new ItemNotFoundException($"No tasks were found");
+            }
+            var tasksPaginated = Pagination.AddPagination<DailyTask>(tasks, parameters);
+            var result = tasksPaginated.MapToDtoList();
             return result;
         }
 
@@ -67,36 +81,21 @@ namespace Imi.Project.Api.Core.Services
             }
             await _dailyTaskRepository.DeleteAsync(task);
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        public async Task<IEnumerable<DailyTask>> GetDailyTasksByCageIdAsync(Guid id)
+        public async Task<IEnumerable<DailyTaskResponseDto>> GetDailyTasksByCageIdAsync(Guid id, PaginationParameters parameters)
         {
-            var tasks = await _dailyTaskRepository.GetByCageIdAsync(id);
-            return tasks;
+            if (await _dailyTaskRepository.EntityExists<Cage>(id))
+            {
+                var tasks = await _dailyTaskRepository.GetByCageIdAsync(id);
+                if (tasks.Count() == 0)
+                {
+                    throw new ItemNotFoundException($"No tasks were found for cage with id {id}");
+                }
+                var tasksPaginated = Pagination.AddPagination<DailyTask>(tasks, parameters);
+                var result = tasksPaginated.MapToDtoList();
+                return result;
+            }
+            else throw new ItemNotFoundException($"Cage with id {id} does not exist");
         }
-
-        public async Task<IEnumerable<DailyTask>> ListAllDailyTasksAsync()
-        {
-            var tasks = await _dailyTaskRepository.ListAllAsync();
-            return tasks;
-        }
-
-
-
-
 
         private async Task ValidateRequest(DailyTaskRequestDto dto)
         {
