@@ -1,4 +1,5 @@
 ﻿using Imi.Project.Api.Core.Entities;
+using Imi.Project.Api.Core.Entities.Pagination;
 using Imi.Project.Api.Core.Exceptions;
 using Imi.Project.Api.Core.Helper;
 using Imi.Project.Api.Core.Interfaces.Repositories;
@@ -6,6 +7,7 @@ using Imi.Project.Api.Core.Interfaces.Services;
 using Imi.Project.Common.Dtos;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,8 +21,6 @@ namespace Imi.Project.Api.Core.Services
         {
             _prescriptionRepository = prescriptionRepository;
         }
-
-
         public async Task<PrescriptionResponseDto> GetPrescriptionByIdAsync(Guid id)
         {
             var prescription = await _prescriptionRepository.GetByIdAsync(id);
@@ -29,6 +29,17 @@ namespace Imi.Project.Api.Core.Services
                 throw new BadRequestException($"Prescription with id {id} does not exist");
             }
             PrescriptionResponseDto result = prescription.MapToDto();
+            return result;
+        }
+        public async Task<IEnumerable<PrescriptionResponseDto>> ListAllPrescriptionsAsync(PaginationParameters parameters)
+        {
+            var prescriptions = await _prescriptionRepository.ListAllAsync();
+            if (prescriptions.Count() == 0)
+            {
+                throw new ItemNotFoundException($"No prescriptions were found");
+            }
+            var prescriptionsPaginated = Pagination.AddPagination<Prescription>(prescriptions, parameters);
+            var result = prescriptionsPaginated.MapToDtoList();
             return result;
         }
         public async Task<PrescriptionResponseDto> AddPrescriptionAsync(PrescriptionRequestDto dto)
@@ -61,7 +72,25 @@ namespace Imi.Project.Api.Core.Services
             }
             await _prescriptionRepository.DeleteAsync(prescription);
         }
-
+        public async Task DeleteMultiple(List<Prescription> prescriptions)
+        {
+            await _prescriptionRepository.DeleteMultipleAsync(prescriptions);
+        }
+        public async Task<IEnumerable<PrescriptionResponseDto>> GetPrescriptionsByUserIdAsync(Guid id, PaginationParameters parameters)
+        {
+            if (await _prescriptionRepository.EntityExists<ApplicationUser>(id))
+            {
+                var prescriptions = await _prescriptionRepository.GetByUserIdAsync(id);
+                if (prescriptions.Count() == 0)
+                {
+                    throw new ItemNotFoundException($"No medicines were found for user with id {id}");
+                }
+                var prescriptionsPaginated = Pagination.AddPagination<Prescription>(prescriptions, parameters);
+                var result = prescriptionsPaginated.MapToDtoList();
+                return result;
+            }
+            else throw new ItemNotFoundException($"User with id {id} does not exist");
+        }
         private async Task ValidateRequest(PrescriptionRequestDto dto)
         {
             if (!(await _prescriptionRepository.EntityExists<ApplicationUser>(dto.UserId)))
@@ -84,23 +113,5 @@ namespace Imi.Project.Api.Core.Services
                 throw new BadRequestException($"Start date can not be greater than enddate");
             }
         }
-
-        public async Task DeleteMultiple(List<Prescription> prescriptions)
-        {
-            await _prescriptionRepository.DeleteMultipleAsync(prescriptions);
-        }
-
-        public async Task<IEnumerable<Prescription>> GetPrescriptionsByUserIdAsync(Guid id)
-        {
-            var prescriptions = await _prescriptionRepository.GetByUserIdAsync(id);
-            return prescriptions;
-        }
-
-        public async Task<IEnumerable<Prescription>> ListAllPrescriptionsAsync()
-        {
-            var prescriptions = await _prescriptionRepository.ListAllAsync();
-            return prescriptions;
-        }
-
     }
 }

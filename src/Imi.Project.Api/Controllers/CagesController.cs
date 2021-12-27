@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,30 +22,27 @@ namespace Imi.Project.Api.Controllers
     public class CagesController : ControllerBase
     {
         protected readonly ICageService _cageService;
-        protected readonly IUserService _userService;
         protected readonly IBirdService _birdService;
         protected readonly IDailyTaskService _dailyTaskService;
-        protected readonly IImageService _imageService;
-
-
-
-        public CagesController(ICageService cageService, IBirdService birdService, IDailyTaskService dailyTaskService, IUserService userService, IImageService imageService)
+        public CagesController(ICageService cageService, IBirdService birdService, IDailyTaskService dailyTaskService)
         {
             _cageService = cageService;
             _birdService = birdService;
             _dailyTaskService = dailyTaskService;
-            _userService = userService;
-            _imageService = imageService;
         }
 
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] PaginationParameters parameters)
         {
-            var cages = await _cageService.ListAllCagesAsync();
-            var paginationData = new PaginationMetaData(parameters.Page, cages.Count(), parameters.ItemsPerPage);
-            Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
-            var cagesPaginated = Pagination.AddPagination<Cage>(cages, parameters);
-            var result = cagesPaginated.MapToDtoList();
+            IEnumerable<CageResponseDto> result;
+            try
+            {
+                result = await _cageService.ListAllCagesAsync(parameters);
+            }
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);
+            }
             return Ok(result);
         }
 
@@ -66,37 +64,34 @@ namespace Imi.Project.Api.Controllers
         [HttpGet("{id}/birds")]
         public async Task<IActionResult> GetBirdsByCageId(Guid id, [FromQuery] PaginationParameters parameters)
         {
-            var cage = await _cageService.GetCageByIdAsync(id);
-            if (cage == null)
+            IEnumerable<BirdResponseDto> result;
+            try
             {
-                return NotFound($"cage with id {id} does not exist");
+                result = await _birdService.GetBirdsByUserIdAsync(id, parameters);
             }
-            var birds = await _birdService.GetBirdsByCageIdAsync(id);
-            var paginationData = new PaginationMetaData(parameters.Page, birds.Count(), parameters.ItemsPerPage);
-            Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
-            var birdsPaginated = Pagination.AddPagination<Bird>(birds, parameters);
-            var result = birdsPaginated.MapToDtoList();
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);
+            }
             return Ok(result);
         }
 
         [HttpGet("{id}/dailytasks")]
         public async Task<IActionResult> GetDailyTasksByCageId(Guid id, [FromQuery] PaginationParameters parameters)
         {
-            var cage = await _cageService.GetCageByIdAsync(id);
-            if (cage == null)
+            IEnumerable<DailyTaskResponseDto> result;
+            try
             {
-                return NotFound($"cage with id {id} does not exist");
+                result = await _dailyTaskService.GetDailyTasksByCageIdAsync(id, parameters);
             }
-            var tasks = await _dailyTaskService.GetDailyTasksByCageIdAsync(id);
-            var paginationData = new PaginationMetaData(parameters.Page, tasks.Count(), parameters.ItemsPerPage);
-            Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
-            var tasksPaginated = Pagination.AddPagination<DailyTask>(tasks, parameters);
-            var result = tasksPaginated.MapToDtoList();
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);
+            }
             return Ok(result);
         }
 
         [HttpPost]
-
         public async Task<IActionResult> Post([FromForm] CageRequestDto newCage)
         {
             if (!ModelState.IsValid)

@@ -1,4 +1,5 @@
 ﻿using Imi.Project.Api.Core.Entities;
+using Imi.Project.Api.Core.Entities.Pagination;
 using Imi.Project.Api.Core.Exceptions;
 using Imi.Project.Api.Core.Helper;
 using Imi.Project.Api.Core.Interfaces.Repositories;
@@ -6,6 +7,7 @@ using Imi.Project.Api.Core.Interfaces.Services;
 using Imi.Project.Common.Dtos;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Core.Services
@@ -29,7 +31,17 @@ namespace Imi.Project.Api.Core.Services
             SpeciesResponseDto result = species.MapToDto();
             return result;
         }
-
+        public async Task<IEnumerable<SpeciesResponseDto>> ListAllSpeciessAsync(PaginationParameters parameters)
+        {
+            var species = await _speciesRepository.ListAllAsync();
+            if (species.Count() == 0)
+            {
+                throw new ItemNotFoundException($"No tasks were found");
+            }
+            var speciesPaginated = Pagination.AddPagination<Species>(species, parameters);
+            var result = speciesPaginated.MapToDtoList();
+            return result;
+        }
         public async Task<SpeciesResponseDto> AddSpeciesAsync(SpeciesRequestDto dto)
         {
             var newSpeciesEntity = dto.MapToEntity();
@@ -37,7 +49,6 @@ namespace Imi.Project.Api.Core.Services
             var resultDto = result.MapToDto();
             return resultDto;
         }
-
         public async Task DeleteSpeciesAsync(Guid id)
         {
             var species = await _speciesRepository.GetByIdAsync(id);
@@ -47,13 +58,6 @@ namespace Imi.Project.Api.Core.Services
             }
             await _speciesRepository.DeleteAsync(species);
         }
-
-        public async Task<IEnumerable<Species>> ListAllSpeciessAsync()
-        {
-            var species = await _speciesRepository.ListAllAsync();
-            return species;
-        }
-
         public async Task<SpeciesResponseDto> UpdateSpeciesAsync(Guid id, SpeciesRequestDto dto)
         {
             var species = await _speciesRepository.GetByIdAsync(id);
