@@ -40,8 +40,10 @@ namespace Imi.Project.WPF
         {
             services.AddHttpClient();
             services.AddScoped<IBaseApiService, BaseApiService>();
+            services.AddScoped<IAuthApiService, AuthApiService>();
             services.AddScoped<IBirdApiService, BirdApiService>();
             services.AddScoped<ISpeciesApiService, SpeciesApiService>();
+            services.AddScoped<ICageApiService, CageApiService>();
             services.AddTransient(typeof(Login));
         }
     }

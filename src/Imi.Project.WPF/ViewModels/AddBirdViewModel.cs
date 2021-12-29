@@ -1,10 +1,9 @@
 ﻿
 using Imi.Project.WPF.Interfaces;
+using Imi.Project.WPF.Models.Cages;
 using Imi.Project.WPF.Models.Species;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
 
 namespace Imi.Project.WPF.ViewModels
 {
@@ -12,17 +11,21 @@ namespace Imi.Project.WPF.ViewModels
     {
         private readonly IBirdApiService _birdApiService;
         private readonly ISpeciesApiService _speciesApiService;
-        public AddBirdViewModel(IBirdApiService apiService, ISpeciesApiService speciesApiService)
+        private readonly ICageApiService _cageApiService;
+        public AddBirdViewModel(IBirdApiService apiService, ISpeciesApiService speciesApiService, ICageApiService cageApiService)
         {
             _birdApiService = apiService;
             _speciesApiService = speciesApiService;
+            _cageApiService = cageApiService;
             InitData();
         }
 
         private async void InitData()
         {
             Species = null;
-            Species =  await _speciesApiService.GetSpecies();
+            Species = await _speciesApiService.GetSpecies();
+            Cages = null;
+            Cages = await _cageApiService.GetCages();
         }
 
         private IEnumerable<SpeciesApiResponse> species;
@@ -37,6 +40,17 @@ namespace Imi.Project.WPF.ViewModels
             }
         }
 
+        private IEnumerable<CageApiResponse> cages;
+
+        public IEnumerable<CageApiResponse> Cages
+        {
+            get { return cages; }
+            set
+            {
+                cages = value;
+                RaisePropertyChanged(nameof(Cages));
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

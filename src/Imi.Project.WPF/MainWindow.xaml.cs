@@ -28,11 +28,13 @@ namespace Imi.Project.WPF
     {
         private readonly IBirdApiService _birdApiService;
         private readonly ISpeciesApiService _speciesApiService;
-        public MainWindow(ISpeciesApiService speciesApiService, IBirdApiService birdApiService)
+        private readonly ICageApiService _cageApiService;
+        public MainWindow(ISpeciesApiService speciesApiService, IBirdApiService birdApiService, ICageApiService cageApiService)
         {
             InitializeComponent();
             _speciesApiService = speciesApiService;
             _birdApiService = birdApiService;
+            _cageApiService = cageApiService;
             this.DataContext = new MainViewModel(_birdApiService);
 
         }
@@ -51,7 +53,7 @@ namespace Imi.Project.WPF
 
         private void btnAddBird_Click(object sender, RoutedEventArgs e)
         {
-            Window addBird = new AddBird(_birdApiService, _speciesApiService);
+            Window addBird = new AddBird(_birdApiService, _speciesApiService, _cageApiService);
             addBird.Show();
         }
     }

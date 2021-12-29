@@ -10,30 +10,15 @@ namespace Imi.Project.WPF.Services
 {
     public class BirdApiService : BaseApiService, IBirdApiService
     {
-        private string token;
+
         public BirdApiService(IHttpClientFactory clientFactory) : base(clientFactory)
         {
-            //this.token = token;
-        }
-
-        public async void Authenticate(string email, string password)
-        {
-            LoginRequestDto dto = new LoginRequestDto
-            {
-                Email = email,
-                Password = password
-            };
-            //var response = GetClient().PostAsJsonAsync("Auth/login", dto).Result;
-            var response = GetClient().PostAsJsonAsync("Auth/login", dto).Result;
-            using var responseStream = await response.Content.ReadAsStreamAsync();
-            var loginresponse = await System.Text.Json.JsonSerializer.DeserializeAsync<LogInApiResponse>(responseStream);
-            token = loginresponse.JWT;
 
         }
 
         public async Task<IEnumerable<BirdApiResponse>> GetBirds()
         {
-            SetHeader(token);
+            SetHeader();
             var response = await GetClient().GetAsync("me/birds");
 
             if (response.IsSuccessStatusCode)
@@ -47,27 +32,31 @@ namespace Imi.Project.WPF.Services
                 return new List<BirdApiResponse>();
             }
         }
-
-        //public async Task<IEnumerable<BirdApiResponse>> GetSpecies()
-        //{
-        //    SetHeader(token);
-        //    var response = await GetClient().GetAsync("species");
-
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        using var responseStream = await response.Content.ReadAsStreamAsync();
-        //        var birdresponse = await System.Text.Json.JsonSerializer.DeserializeAsync<IEnumerable<BirdApiResponse>>(responseStream);
-        //        return birdresponse;
-        //    }
-        //    else
-        //    {
-        //        return new List<BirdApiResponse>();
-        //    }
-        //}
-
-        public async Task AddBird(Bird newBird)
+        public async Task<string> AddBird(Bird newBird)
         {
-            SetHeader(token);
+            SetHeader();
+            HttpResponseMessage action;
+            using (var content = new MultipartFormDataContent())
+            {
+                content.Add(new StringContent(newBird.Name), "Name");
+                content.Add(new StringContent(newBird.Food), "Food");
+                content.Add(new StringContent(newBird.Gender.ToString()), "Gender");
+                content.Add(new StringContent(newBird.HatchDate.ToString()), "HatchDate");
+                content.Add(new StringContent(newBird.CageId.ToString("d")), "CageId");
+                content.Add(new StringContent(newBird.SpeciesId.ToString("d")), "SpeciesId");
+                action = await GetClient().PostAsync("birds", content);
+            }
+
+            return ValidateResponse(action);
+
+
+
+
+        }
+
+        public async Task EditBird(Bird newBird)
+        {
+            SetHeader();
             using (var content = new MultipartFormDataContent())
             {
                 content.Add(new StringContent(newBird.Name), "Name");
@@ -79,18 +68,14 @@ namespace Imi.Project.WPF.Services
             }
         }
 
-        public async Task EditBird(Bird newBird)
+        private string ValidateResponse(HttpResponseMessage response)
         {
-            SetHeader(token);
-            using (var content = new MultipartFormDataContent())
+            if (!response.IsSuccessStatusCode)
             {
-                content.Add(new StringContent(newBird.Name), "Name");
-                content.Add(new StringContent(newBird.Id.ToString("d")), "Id");
-                content.Add(new StringContent(newBird.UserId.ToString("d")), "UserId");
-                content.Add(new StringContent(newBird.UserId.ToString("d")), "CageId");
-                content.Add(new StringContent(newBird.SpeciesId.ToString("d")), "SpeciesId");
-                var action = await GetClient().PostAsync("birds", content);
+                var errorMessage = response.Content.ReadAsStringAsync().Result;
+                return errorMessage;
             }
+            return null;
         }
 
     }
