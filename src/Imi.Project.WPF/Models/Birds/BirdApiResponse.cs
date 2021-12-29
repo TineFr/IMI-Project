@@ -9,6 +9,10 @@ namespace Imi.Project.WPF.Models.Birds
 {
     public class BirdApiResponse
     {
+
+        [JsonPropertyName("id")]
+        public Guid Id { get; set; }
+
         [JsonPropertyName("name")]
         public string Name { get; set; }
         [JsonPropertyName("hatchDate")]

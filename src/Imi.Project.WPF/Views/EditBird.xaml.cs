@@ -3,8 +3,6 @@ using Imi.Project.WPF.Interfaces;
 using Imi.Project.WPF.Models.Birds;
 using Imi.Project.WPF.Models.Cages;
 using Imi.Project.WPF.Models.Species;
-using Imi.Project.WPF.ViewModels;
-using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,22 +15,27 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Imi.Project.WPF
+namespace Imi.Project.WPF.Views
 {
     /// <summary>
-    /// Interaction logic for AddBird.xaml
+    /// Interaction logic for EditBird.xaml
     /// </summary>
-    public partial class AddBird : Window
+    public partial class EditBird : Window
     {
         private readonly IBirdApiService _birdApiService;
         private readonly ISpeciesApiService _speciesApiService;
         private readonly ICageApiService _cageApiService;
-        public AddBird(IBirdApiService apiService, ISpeciesApiService speciesApiService, ICageApiService cageApiService)
+        private readonly BirdApiResponse _birdToUpdate;
+        public EditBird(IBirdApiService apiService,
+                       ISpeciesApiService speciesApiService,
+                       ICageApiService cageApiService,
+                       BirdApiResponse birdToUpdate)
         {
             InitializeComponent();
             _birdApiService = apiService;
             _speciesApiService = speciesApiService;
             _cageApiService = cageApiService;
+            _birdToUpdate = birdToUpdate;
             SetData();
         }
 
@@ -41,11 +44,18 @@ namespace Imi.Project.WPF
             cmbSpecies.ItemsSource = await _speciesApiService.GetSpecies();
             cmbCages.ItemsSource = await _cageApiService.GetCages();
             cmbGender.ItemsSource = Enum.GetValues(typeof(Gender));
+
+            txtName.Text = _birdToUpdate.Name;
+            txtFood.Text = _birdToUpdate.Food;
+            cmbCages.Text = _birdToUpdate.Cage.Name;
+            cmbSpecies.Text = _birdToUpdate.Species.Name;
+            cmbGender.Text = _birdToUpdate.Gender.ToString();
+            pkrDate.Text = _birdToUpdate.HatchDate.ToString();
         }
 
-        private async void btnAdd_Click(object sender, RoutedEventArgs e)
+        private async void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            var newBird = new Bird
+            var editedBird = new Bird
             {
                 Name = txtName.Text,
                 HatchDate = DateTime.Parse(pkrDate.Text),
@@ -55,30 +65,14 @@ namespace Imi.Project.WPF
                 Food = txtFood.Text,
             };
 
-            var result = await _birdApiService.AddBird(newBird);
+            var result = await _birdApiService.EditBird(_birdToUpdate.Id, editedBird);
             if (!ReferenceEquals(result, null)) MessageBox.Show($"Something went wrong\n{result}", null,
                                                                      MessageBoxButton.OK, MessageBoxImage.Exclamation);
             else
             {
-                MessageBox.Show("Bird was succesfully added!", "Success", MessageBoxButton.OKCancel, MessageBoxImage.Information);
-                ClearBoxes();
+                MessageBox.Show("Bird was succesfully updated!", "Success", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+                this.Close();
             }
-        }
-
-        private void btnAddImage_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.ShowDialog();  
-        }
-
-        private void ClearBoxes()
-        {
-            txtName.Text = "";
-            txtFood.Text = "";
-            pkrDate.Text = DateTime.Now.ToString();
-            cmbCages.SelectedIndex = -1;
-            cmbGender.SelectedIndex = -1;
-            cmbSpecies.SelectedIndex = -1;
         }
     }
 }

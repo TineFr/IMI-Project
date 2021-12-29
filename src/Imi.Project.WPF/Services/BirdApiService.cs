@@ -2,6 +2,7 @@
 using Imi.Project.WPF.Interfaces;
 using Imi.Project.WPF.Models;
 using Imi.Project.WPF.Models.Birds;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -32,6 +33,7 @@ namespace Imi.Project.WPF.Services
                 return new List<BirdApiResponse>();
             }
         }
+
         public async Task<string> AddBird(Bird newBird)
         {
             SetHeader();
@@ -46,26 +48,24 @@ namespace Imi.Project.WPF.Services
                 content.Add(new StringContent(newBird.SpeciesId.ToString("d")), "SpeciesId");
                 action = await GetClient().PostAsync("birds", content);
             }
-
             return ValidateResponse(action);
-
-
-
-
         }
 
-        public async Task EditBird(Bird newBird)
+        public async Task<string> EditBird(Guid id, Bird editedBird)
         {
             SetHeader();
+            HttpResponseMessage action;
             using (var content = new MultipartFormDataContent())
             {
-                content.Add(new StringContent(newBird.Name), "Name");
-                content.Add(new StringContent(newBird.Id.ToString("d")), "Id");
-                content.Add(new StringContent(newBird.UserId.ToString("d")), "UserId");
-                content.Add(new StringContent(newBird.UserId.ToString("d")), "CageId");
-                content.Add(new StringContent(newBird.SpeciesId.ToString("d")), "SpeciesId");
-                var action = await GetClient().PostAsync("birds", content);
+                content.Add(new StringContent(editedBird.Name), "Name");
+                content.Add(new StringContent(editedBird.Food), "Food");
+                content.Add(new StringContent(editedBird.Gender.ToString()), "Gender");
+                content.Add(new StringContent(editedBird.HatchDate.ToString()), "HatchDate");
+                content.Add(new StringContent(editedBird.CageId.ToString("d")), "CageId");
+                content.Add(new StringContent(editedBird.SpeciesId.ToString("d")), "SpeciesId");
+                action = await GetClient().PutAsync($"birds/{id}", content);
             }
+            return ValidateResponse(action);
         }
 
         private string ValidateResponse(HttpResponseMessage response)

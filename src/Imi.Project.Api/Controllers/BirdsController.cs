@@ -81,6 +81,8 @@ namespace Imi.Project.Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put([FromRoute] Guid id, [FromForm] BirdRequestDto updatedBird)
         {
+            Guid userId = Guid.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            updatedBird.UserId = userId;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

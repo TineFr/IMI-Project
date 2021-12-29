@@ -2,6 +2,7 @@
 using Imi.Project.WPF.Models.Birds;
 using Imi.Project.WPF.Services;
 using Imi.Project.WPF.ViewModels;
+using Imi.Project.WPF.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,6 +55,12 @@ namespace Imi.Project.WPF
         private void btnAddBird_Click(object sender, RoutedEventArgs e)
         {
             Window addBird = new AddBird(_birdApiService, _speciesApiService, _cageApiService);
+            addBird.Show();
+        }
+
+        private void btnEditBird_Click(object sender, RoutedEventArgs e)
+        {
+            Window addBird = new EditBird(_birdApiService, _speciesApiService, _cageApiService, (BirdApiResponse)lstBirds.SelectedItem);
             addBird.Show();
         }
     }
