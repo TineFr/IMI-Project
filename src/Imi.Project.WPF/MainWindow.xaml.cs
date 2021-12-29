@@ -57,8 +57,10 @@ namespace Imi.Project.WPF
 
         private void btnEditBird_Click(object sender, RoutedEventArgs e)
         {
-            Window addBird = new EditBird(_birdApiService, _speciesApiService, _cageApiService, (BirdApiResponse)lstBirds.SelectedItem);
-            addBird.Show();
+            EditBird editBird = new EditBird(_birdApiService, _speciesApiService, _cageApiService, (BirdApiResponse)lstBirds.SelectedItem);
+            RefreshListEvent += new RefreshList(RefreshBirdList);
+            editBird.BirdEdited = RefreshListEvent;
+            editBird.Show();
         }
 
         private async void btnDeleteBird_Click(object sender, RoutedEventArgs e)

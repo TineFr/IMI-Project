@@ -26,6 +26,8 @@ namespace Imi.Project.WPF.Views
         private readonly ISpeciesApiService _speciesApiService;
         private readonly ICageApiService _cageApiService;
         private readonly BirdApiResponse _birdToUpdate;
+
+        public Delegate BirdEdited;
         public EditBird(IBirdApiService apiService,
                        ISpeciesApiService speciesApiService,
                        ICageApiService cageApiService,
@@ -71,6 +73,7 @@ namespace Imi.Project.WPF.Views
             else
             {
                 MessageBox.Show("Bird was succesfully updated!", "Success", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+                BirdEdited.DynamicInvoke();
                 this.Close();
             }
         }
