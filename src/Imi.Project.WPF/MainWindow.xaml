@@ -62,6 +62,13 @@
                     <TextBlock Text="{Binding Bird.Date}" Padding="5"></TextBlock>
                 </StackPanel>
             </StackPanel>
+            <Button x:Name="btnDeleteBird" Foreground="White" Content="Delete" Width="60" Height="40" FontSize="10"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="IndianRed" BorderThickness="0" HorizontalAlignment="right" Margin="0,0,10,0" Click="btnDeleteBird_Click" >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="20"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
         </StackPanel>
     </Grid>
 </Window>

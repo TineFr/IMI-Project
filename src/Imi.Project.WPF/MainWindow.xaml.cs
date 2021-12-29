@@ -1,24 +1,9 @@
 ﻿using Imi.Project.WPF.Interfaces;
 using Imi.Project.WPF.Models.Birds;
-using Imi.Project.WPF.Services;
 using Imi.Project.WPF.ViewModels;
 using Imi.Project.WPF.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Imi.Project.WPF
 {
@@ -30,14 +15,24 @@ namespace Imi.Project.WPF
         private readonly IBirdApiService _birdApiService;
         private readonly ISpeciesApiService _speciesApiService;
         private readonly ICageApiService _cageApiService;
+
+
+        public delegate void RefreshList();
+        public event RefreshList RefreshListEvent;
+
         public MainWindow(ISpeciesApiService speciesApiService, IBirdApiService birdApiService, ICageApiService cageApiService)
         {
             InitializeComponent();
             _speciesApiService = speciesApiService;
             _birdApiService = birdApiService;
             _cageApiService = cageApiService;
-            this.DataContext = new MainViewModel(_birdApiService);
+            SetData();
 
+        }
+
+        private async void SetData()
+        {
+            lstBirds.ItemsSource = await _birdApiService.GetBirds();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -54,7 +49,9 @@ namespace Imi.Project.WPF
 
         private void btnAddBird_Click(object sender, RoutedEventArgs e)
         {
-            Window addBird = new AddBird(_birdApiService, _speciesApiService, _cageApiService);
+            AddBird addBird = new AddBird(_birdApiService, _speciesApiService, _cageApiService);
+            RefreshListEvent += new RefreshList(RefreshBirdList); 
+            addBird.BirdAdded = RefreshListEvent;
             addBird.Show();
         }
 
@@ -62,6 +59,26 @@ namespace Imi.Project.WPF
         {
             Window addBird = new EditBird(_birdApiService, _speciesApiService, _cageApiService, (BirdApiResponse)lstBirds.SelectedItem);
             addBird.Show();
+        }
+
+        private async void btnDeleteBird_Click(object sender, RoutedEventArgs e)
+        {
+            var birdToDelete = (BirdApiResponse)lstBirds.SelectedItem;
+            var result = await _birdApiService.DeleteBird(birdToDelete.Id);
+            if (!ReferenceEquals(result, null)) MessageBox.Show($"Something went wrong\n{result}", null,
+                                                         MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            else
+            {
+                MessageBox.Show("Bird was succesfully deleted!", "Success", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+                SetData();
+                lstBirds.SelectedIndex = -1;
+                stkDetails.Visibility = Visibility.Hidden;
+            }
+
+        }
+        private void RefreshBirdList()
+        {
+            SetData();
         }
     }
 }

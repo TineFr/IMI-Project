@@ -68,6 +68,12 @@ namespace Imi.Project.WPF.Services
             return ValidateResponse(action);
         }
 
+        public async Task<string> DeleteBird(Guid id)
+        {
+            SetHeader();
+            HttpResponseMessage action = await GetClient().DeleteAsync($"birds/{id}");
+            return ValidateResponse(action);
+        }
         private string ValidateResponse(HttpResponseMessage response)
         {
             if (!response.IsSuccessStatusCode)

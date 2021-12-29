@@ -27,6 +27,8 @@ namespace Imi.Project.WPF
         private readonly IBirdApiService _birdApiService;
         private readonly ISpeciesApiService _speciesApiService;
         private readonly ICageApiService _cageApiService;
+
+        public Delegate BirdAdded;
         public AddBird(IBirdApiService apiService, 
                        ISpeciesApiService speciesApiService, 
                        ICageApiService cageApiService)
@@ -63,6 +65,7 @@ namespace Imi.Project.WPF
             else
             {
                 MessageBox.Show("Bird was succesfully added!", "Success", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+                BirdAdded.DynamicInvoke();
                 ClearBoxes();
             }
         }
