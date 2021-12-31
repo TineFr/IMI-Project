@@ -4,6 +4,7 @@ using Imi.Project.Common.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -47,10 +48,21 @@ namespace Imi.Project.Api.Core.Services
 
         public void ValidateImage(IHasImage dto)
         {
-            if (!dto.Image.ContentType.Contains("image"))
+
+            List<string> extensions = new List<string>()
+            {
+              ".jpg", ".png", ".jpeg", ".gif", ".tif"
+            };
+            if (!extensions.Contains( Path.GetExtension(dto.Image.FileName)))
             {
                 throw new BadRequestException("Uploaded file should be an image");
             }
+
+
+            //if (!dto.Image.ContentType.Contains("image"))
+            //{
+            //    throw new BadRequestException("Uploaded file should be an image");
+            //}
         }
     }
 }

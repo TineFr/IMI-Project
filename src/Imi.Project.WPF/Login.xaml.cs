@@ -13,7 +13,10 @@ namespace Imi.Project.WPF
         private readonly ISpeciesApiService _speciesApiService;
         private readonly ICageApiService _cageApiService;
         private readonly IAuthApiService _authApiService;
-        public Login(IBirdApiService birdApiService, ISpeciesApiService speciesApiService, IAuthApiService authApiService, ICageApiService cageApiService)
+        public Login(IBirdApiService birdApiService, 
+                     ISpeciesApiService speciesApiService, 
+                     IAuthApiService authApiService, 
+                     ICageApiService cageApiService)
         {
             InitializeComponent();
             _birdApiService = birdApiService;
@@ -23,13 +26,12 @@ namespace Imi.Project.WPF
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.DataContext = new LoginViewModel();
-
+            txtEmail.Text = "tine.franchois@gmail.com";
+            txtPassword.Password = "Pa$$w0rd";
         }
         private void btnSignIn_Click(object sender, RoutedEventArgs e)
         {
-
-            _authApiService.Authenticate(txtEmail.Text, txtPassword.Text);
+            _authApiService.Authenticate(txtEmail.Text, txtPassword.Password);
             Window window = new MainWindow(_speciesApiService, _birdApiService, _cageApiService);
             window.Show();
             this.Close();

@@ -1,21 +1,15 @@
 ﻿using Imi.Project.Common.Enums;
+using Imi.Project.WPF.Events;
 using Imi.Project.WPF.Interfaces;
 using Imi.Project.WPF.Models.Birds;
 using Imi.Project.WPF.Models.Cages;
 using Imi.Project.WPF.Models.Species;
-using Imi.Project.WPF.ViewModels;
 using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.IO;
+using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
 
 namespace Imi.Project.WPF
 {
@@ -28,9 +22,12 @@ namespace Imi.Project.WPF
         private readonly ISpeciesApiService _speciesApiService;
         private readonly ICageApiService _cageApiService;
 
-        public Delegate BirdAdded;
-        public AddBird(IBirdApiService apiService, 
-                       ISpeciesApiService speciesApiService, 
+        public delegate void RefreshList(object sender, BirdAddedOrEditedArgs e);
+        public event RefreshList BirdAdded;
+        private Stream image;
+        private string _imagePath;
+        public AddBird(IBirdApiService apiService,
+                       ISpeciesApiService speciesApiService,
                        ICageApiService cageApiService)
         {
             InitializeComponent();
@@ -49,6 +46,7 @@ namespace Imi.Project.WPF
 
         private async void btnAdd_Click(object sender, RoutedEventArgs e)
         {
+
             var newBird = new Bird
             {
                 Name = txtName.Text,
@@ -56,6 +54,8 @@ namespace Imi.Project.WPF
                 CageId = ((CageApiResponse)cmbCages.SelectedItem).Id,
                 SpeciesId = ((SpeciesApiResponse)cmbSpecies.SelectedItem).Id,
                 Gender = (Gender)cmbGender.SelectedValue,
+                Image = image,
+                FileName = _imagePath,
                 Food = txtFood.Text,
             };
 
@@ -65,25 +65,28 @@ namespace Imi.Project.WPF
             else
             {
                 MessageBox.Show("Bird was succesfully added!", "Success", MessageBoxButton.OKCancel, MessageBoxImage.Information);
-                BirdAdded.DynamicInvoke();
-                ClearBoxes();
+                BirdAdded?.Invoke(this, new BirdAddedOrEditedArgs(newBird.Name));
+                this.Close();
             }
         }
 
         private void btnAddImage_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.ShowDialog();  
+            string path = "";
+            string fileName = "";
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.tif;..."; ;
+            if (openFileDialog.ShowDialog() == true)
+            {
+                path = openFileDialog.FileName;
+                _imagePath = openFileDialog.FileName;
+                fileName = Path.GetFileName(path);
+                txtImage.Text = fileName;
+            }
+
+            var stream = new MemoryStream(File.ReadAllBytes(path).ToArray());
+            image = stream;
         }
 
-        private void ClearBoxes()
-        {
-            txtName.Text = "";
-            txtFood.Text = "";
-            pkrDate.Text = DateTime.Now.ToString();
-            cmbCages.SelectedIndex = -1;
-            cmbGender.SelectedIndex = -1;
-            cmbSpecies.SelectedIndex = -1;
-        }
     }
 }

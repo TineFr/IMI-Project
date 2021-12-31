@@ -40,6 +40,8 @@ namespace Imi.Project.WPF.ViewModels
             }
         }
 
+
+
         private IEnumerable<CageApiResponse> cages;
 
         public IEnumerable<CageApiResponse> Cages

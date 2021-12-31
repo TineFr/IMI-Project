@@ -1,19 +1,15 @@
-﻿using Imi.Project.Common.Enums;
+﻿using Imi.Project.Common.Dtos;
+using Imi.Project.Common.Enums;
+using Imi.Project.WPF.Events;
 using Imi.Project.WPF.Interfaces;
 using Imi.Project.WPF.Models.Birds;
 using Imi.Project.WPF.Models.Cages;
 using Imi.Project.WPF.Models.Species;
+using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.IO;
+using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Imi.Project.WPF.Views
 {
@@ -27,7 +23,11 @@ namespace Imi.Project.WPF.Views
         private readonly ICageApiService _cageApiService;
         private readonly BirdApiResponse _birdToUpdate;
 
-        public Delegate BirdEdited;
+        private Stream image;
+        private string _imagePath;
+
+        public delegate void RefreshList(object sender, BirdAddedOrEditedArgs e);
+        public event RefreshList BirdEdited;
         public EditBird(IBirdApiService apiService,
                        ISpeciesApiService speciesApiService,
                        ICageApiService cageApiService,
@@ -67,15 +67,49 @@ namespace Imi.Project.WPF.Views
                 Food = txtFood.Text,
             };
 
+            if (image == null)
+            {
+
+            }
+            else
+            {
+                editedBird.Image = image;
+                editedBird.FileName = _imagePath;
+            }
+
+
+
+
             var result = await _birdApiService.EditBird(_birdToUpdate.Id, editedBird);
             if (!ReferenceEquals(result, null)) MessageBox.Show($"Something went wrong\n{result}", null,
                                                                      MessageBoxButton.OK, MessageBoxImage.Exclamation);
             else
             {
                 MessageBox.Show("Bird was succesfully updated!", "Success", MessageBoxButton.OKCancel, MessageBoxImage.Information);
-                BirdEdited.DynamicInvoke();
+                _birdToUpdate.Name = txtName.Text;
+                BirdEdited?.Invoke(this, new BirdAddedOrEditedArgs(editedBird.Name));
                 this.Close();
             }
+
+        }
+
+
+        private void btnChangeImage_Click(object sender, RoutedEventArgs e)
+        {
+            string path = "";
+            string fileName = "";
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.tif;..."; ;
+            if (openFileDialog.ShowDialog() == true)
+            {
+                path = openFileDialog.FileName;
+                _imagePath = openFileDialog.FileName;
+                fileName = Path.GetFileName(path);
+                txtImage.Text = fileName;
+            }
+
+            var stream = new MemoryStream(File.ReadAllBytes(path).ToArray());
+            image = stream;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Imi.Project.Common.Enums;
 using System;
+using System.IO;
 
 namespace Imi.Project.WPF.Models.Birds
 {
@@ -13,5 +14,7 @@ namespace Imi.Project.WPF.Models.Birds
         public Guid UserId { get; set; }
         public Guid CageId { get; set; }
         public Guid SpeciesId { get; set; }
+        public Stream Image { get; set; }
+        public string FileName { get; set; }
     }
 }

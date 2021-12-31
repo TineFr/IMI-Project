@@ -45,6 +45,7 @@ namespace Imi.Project.WPF
             services.AddScoped<ISpeciesApiService, SpeciesApiService>();
             services.AddScoped<ICageApiService, CageApiService>();
             services.AddTransient(typeof(Login));
+            services.AddTransient(typeof(MainWindow));
         }
     }
 }
