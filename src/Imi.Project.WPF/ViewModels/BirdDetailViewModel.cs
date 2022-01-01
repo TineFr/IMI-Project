@@ -16,9 +16,9 @@ namespace Imi.Project.WPF.ViewModels
             set { bird = value; }
         }
 
-        private BitmapImage image;
+        private string image;
 
-        public BitmapImage Image
+        public string Image
         {
             get { return image; }
             set { image = value; }
@@ -28,6 +28,7 @@ namespace Imi.Project.WPF.ViewModels
         {
             Bird = bird;
             Image = null;
+            Image = Bird?.Image;
         }
 
 

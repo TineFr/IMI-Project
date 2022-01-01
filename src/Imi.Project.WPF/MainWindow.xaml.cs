@@ -42,8 +42,13 @@ namespace Imi.Project.WPF
 
         private void lstBirds_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            stkDetails.Visibility = Visibility.Visible;
-            stkDetails.DataContext = new BirdDetailViewModel(lstBirds.SelectedItem as BirdApiResponse);
+            if (lstBirds.SelectedItem != null)
+            {
+                stkDetails.Visibility = Visibility.Visible;
+                stkDetails.DataContext = new BirdDetailViewModel(lstBirds.SelectedItem as BirdApiResponse);
+            }
+            else stkDetails.Visibility = Visibility.Hidden;
+
 
         }
 
@@ -87,7 +92,6 @@ namespace Imi.Project.WPF
         private void RefreshBirdList(object sender, BirdAddedOrEditedArgs e)
         {
             SetData();
-            if (e.Bird != null) lstBirds.SelectedItem = e.Bird;
         }
     }
 }

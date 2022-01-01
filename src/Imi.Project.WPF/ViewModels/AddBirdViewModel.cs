@@ -15,16 +15,33 @@ namespace Imi.Project.WPF.ViewModels
         private readonly ICageApiService _cageApiService;
         public AddBirdViewModel()
         {
+            HatchDate = DateTime.Now;
+            CanAdd = true;
+
         }
 
-        private int canAdd;
+        private bool canAdd;
 
-        public int CanAdd
+        public bool CanAdd
         {
             get { return canAdd; }
             set 
-            { 
-                canAdd = value; 
+            {
+
+                 canAdd = value; 
+            }
+        }
+
+        private DateTime hatchDate;
+
+        public DateTime HatchDate
+        {
+            get { return hatchDate; }
+            set
+            {
+
+                hatchDate = value;
+                RaisePropertyChanged(nameof(HatchDate));
             }
         }
 
@@ -50,12 +67,25 @@ namespace Imi.Project.WPF.ViewModels
         {
             get
             {
+                string test = null;
                 if (columnName == "Name")
                 {
                     if (string.IsNullOrEmpty(Name))
-                        return "Name is Required";
+                        test =  "Name is Required";
                 }
-                return null;
+                if (columnName == "CanAdd")
+                {
+                    if (test != null)
+                    {
+                        CanAdd = false;
+                    }
+                }
+                if (columnName == "HatchDate")
+                {
+                    if (HatchDate.Date > DateTime.Now.Date)
+                        return "Hatch date can not be greater than today";
+                }
+                return test;
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;

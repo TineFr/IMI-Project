@@ -71,6 +71,7 @@ namespace Imi.Project.WPF
             {
                 MessageBox.Show($"Something went wrong.\n{result}", null,
                                                      MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                if (openFileDialog != null)
                 image = new MemoryStream(File.ReadAllBytes(openFileDialog.FileName).ToArray());
             }
                 
