@@ -1,5 +1,4 @@
-﻿using Imi.Project.Common.Dtos;
-using Imi.Project.WPF.Interfaces;
+﻿using Imi.Project.WPF.Interfaces;
 using Imi.Project.WPF.Models.Birds;
 using System;
 using System.Collections.Generic;
@@ -45,7 +44,10 @@ namespace Imi.Project.WPF.Services
                 content.Add(new StringContent(newBird.HatchDate.ToString()), "HatchDate");
                 content.Add(new StringContent(newBird.CageId.ToString("d")), "CageId");
                 content.Add(new StringContent(newBird.SpeciesId.ToString("d")), "SpeciesId");
-                content.Add(new StreamContent(newBird.Image), "Image", newBird.FileName);
+                if (newBird.Image != null)
+                {
+                    content.Add(new StreamContent(newBird.Image), "Image", newBird.FileName);
+                }
                 action = await GetClient().PostAsync("birds", content);
             }
             return ValidateResponse(action);
@@ -66,7 +68,7 @@ namespace Imi.Project.WPF.Services
                 if (editedBird.Image != null)
                 {
                     content.Add(new StreamContent(editedBird.Image), "Image", editedBird.FileName);
-                }  
+                }
                 action = await GetClient().PutAsync($"birds/{id}", content);
             }
             return ValidateResponse(action);
@@ -83,6 +85,11 @@ namespace Imi.Project.WPF.Services
             if (!response.IsSuccessStatusCode)
             {
                 var errorMessage = response.Content.ReadAsStringAsync().Result;
+                if (errorMessage.StartsWith("{"))
+                {
+                   errorMessage =  errorMessage.Split(":[\"")[1].Split("\"]}}")[0] + ".";
+                   return errorMessage;
+                }
                 return errorMessage;
             }
             return null;

@@ -25,6 +25,8 @@ namespace Imi.Project.WPF
 
         public delegate void RefreshList(object sender, BirdAddedOrEditedArgs e);
         public event RefreshList BirdAdded;
+
+        private OpenFileDialog openFileDialog;
         private Stream image;
         private string _imagePath;
         public AddBird(IBirdApiService apiService,
@@ -58,14 +60,20 @@ namespace Imi.Project.WPF
                 CageId = ((CageApiResponse)cmbCages.SelectedItem).Id,
                 SpeciesId = ((SpeciesApiResponse)cmbSpecies.SelectedItem).Id,
                 Gender = (Gender)cmbGender.SelectedValue,
-                Image = image,
-                FileName = _imagePath,
                 Food = txtFood.Text,
             };
 
+            newBird.Image = image;
+            newBird.FileName = _imagePath;
+
             var result = await _birdApiService.AddBird(newBird);
-            if (!ReferenceEquals(result, null)) MessageBox.Show($"Something went wrong\n{result}", null,
-                                                                     MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            if (!ReferenceEquals(result, null))
+            {
+                MessageBox.Show($"Something went wrong.\n{result}", null,
+                                                     MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                image = new MemoryStream(File.ReadAllBytes(openFileDialog.FileName).ToArray());
+            }
+                
             else
             {
                 MessageBox.Show("Bird was succesfully added!", "Success", MessageBoxButton.OKCancel, MessageBoxImage.Information);
@@ -78,7 +86,7 @@ namespace Imi.Project.WPF
         {
             string path = "";
             string fileName = "";
-            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.tif;..."; ;
             if (openFileDialog.ShowDialog() == true)
             {
@@ -88,8 +96,12 @@ namespace Imi.Project.WPF
                 txtImage.Text = fileName;
             }
 
-            var stream = new MemoryStream(File.ReadAllBytes(path).ToArray());
-            image = stream;
+            if (path != "")
+            {
+                var stream = new MemoryStream(File.ReadAllBytes(path).ToArray());
+                image = stream;
+            }
+
         }
 
     }

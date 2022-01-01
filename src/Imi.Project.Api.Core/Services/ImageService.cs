@@ -53,16 +53,10 @@ namespace Imi.Project.Api.Core.Services
             {
               ".jpg", ".png", ".jpeg", ".gif", ".tif"
             };
-            if (!extensions.Contains( Path.GetExtension(dto.Image.FileName)))
+            if (!extensions.Contains( Path.GetExtension(dto.Image.FileName).ToLower()))
             {
                 throw new BadRequestException("Uploaded file should be an image");
             }
-
-
-            //if (!dto.Image.ContentType.Contains("image"))
-            //{
-            //    throw new BadRequestException("Uploaded file should be an image");
-            //}
         }
     }
 }
