@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Imi.Project.Api.Core.Interfaces.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Imi.Project.Api.Core.Entities
 {
-    public class Prescription : BaseEntity
+    public class Prescription : BaseEntity, IHasUserId
     {
 
         public ICollection<BirdPrescription> BirdPrescriptions { get; set; }

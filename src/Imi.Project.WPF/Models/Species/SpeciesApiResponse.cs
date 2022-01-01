@@ -9,7 +9,7 @@ namespace Imi.Project.WPF.Models.Species
     {
 
         [JsonPropertyName("id")]
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
         [JsonPropertyName("name")]
         public string Name { get; set; }

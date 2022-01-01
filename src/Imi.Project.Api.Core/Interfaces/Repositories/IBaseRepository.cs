@@ -18,5 +18,7 @@ namespace Imi.Project.Api.Core.Interfaces.Repositories
         Task<T> AddAsync(T entity);
         Task DeleteAsync(T entity);
         Task DeleteMultipleAsync(List<T> entities);
+        Task<bool> EntityExists<E>(Guid id) where E : class, IBaseEntity;
+        Task<bool> EntityExistsForUser<E>(Guid userId, Guid id) where E : class, IHasUserId;
     }
 }

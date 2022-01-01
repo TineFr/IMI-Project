@@ -1,11 +1,12 @@
-﻿using Imi.Project.Common.Enums;
+﻿using Imi.Project.Api.Core.Interfaces.Entities;
+using Imi.Project.Common.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Imi.Project.Api.Core.Entities
 {
-    public class Bird : BaseEntity
+    public class Bird : BaseEntity, IHasUserId
     {
 
         [Required(ErrorMessage = "{0} is required")]

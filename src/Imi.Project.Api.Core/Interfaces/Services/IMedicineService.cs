@@ -1,7 +1,8 @@
 ﻿using Imi.Project.Api.Core.Entities;
+using Imi.Project.Api.Core.Entities.Pagination;
+using Imi.Project.Common.Dtos;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Core.Interfaces.Services
@@ -9,13 +10,13 @@ namespace Imi.Project.Api.Core.Interfaces.Services
     public interface IMedicineService
 
     {
-        Task<IEnumerable<Medicine>> ListAllMedicinesAsync();
-        Task<Medicine> GetMedicineByIdAsync(Guid id);
-        Task<Medicine> AddMedicineAsync(Medicine medicine);
-        Task<Medicine> UpdateMedicineAsync(Medicine medicine);
-        Task DeleteMedicineAsync(Medicine medicine);
+        Task<IEnumerable<MedicineResponseDto>> ListAllMedicinesAsync(PaginationParameters parameters);
+        Task<MedicineResponseDto> GetMedicineByIdAsync(Guid id);
+        Task<MedicineResponseDto> AddMedicineAsync(MedicineRequestDto medicine);
+        Task<MedicineResponseDto> UpdateMedicineAsync(Guid id, MedicineRequestDto medicine);
+        Task DeleteMedicineAsync(Guid id);
         Task DeleteMultiple(List<Medicine> medicines);
-        Task<IEnumerable<Medicine>> GetMedicinesByUserIdAsync(Guid id);
-     
+        Task<IEnumerable<MedicineResponseDto>> GetMedicinesByUserIdAsync(Guid id, PaginationParameters parameters);
+
     }
 }

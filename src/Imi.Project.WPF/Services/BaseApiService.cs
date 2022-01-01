@@ -11,25 +11,19 @@ namespace Imi.Project.WPF.Services
     {
         private readonly HttpClient _httpClient;
         private readonly IHttpClientFactory _httpClientFactory;
-
+        protected static string token;
         public BaseApiService(IHttpClientFactory clientFactory)
         {
             _httpClientFactory = clientFactory;
             _httpClient = _httpClientFactory.CreateClient();
             _httpClient.BaseAddress = new Uri("https://localhost:5001/api/");
         }
-
-        //public void Authenticate(string email, string password)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
         public HttpClient GetClient()
         {
             return _httpClient;
         }
 
-        public void SetHeader(string token)
+        public void SetHeader()
         {
              GetClient().DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
         }

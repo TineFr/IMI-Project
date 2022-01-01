@@ -1,11 +1,12 @@
 ﻿using Imi.Project.Common.Enums;
+using Imi.Project.Common.Interfaces;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Imi.Project.Common.Dtos
 {
-    public class BirdRequestDto : BaseEntityDto
+    public class BirdRequestDto : BaseEntityDto, IHasImage
     {
         [Required(ErrorMessage = "{0} is required")]
         public string Name { get; set; }

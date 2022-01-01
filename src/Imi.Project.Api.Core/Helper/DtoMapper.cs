@@ -158,8 +158,8 @@ namespace Imi.Project.Api.Core.Helper
 
             HttpContextAccessor httpContextAccessor = new HttpContextAccessor();
 
-            var scheme = httpContextAccessor.HttpContext.Request.Scheme; // example: https or http
-            var url = httpContextAccessor.HttpContext.Request.Host.Value; // example: localhost:5001, howest.be, steam.com, localhost:44785, ...
+            var scheme = httpContextAccessor.HttpContext.Request.Scheme; 
+            var url = httpContextAccessor.HttpContext.Request.Host.Value; 
 
             var fullImageUrl = $"{scheme}://{url}/{image.Replace("\\", "/")}";
 

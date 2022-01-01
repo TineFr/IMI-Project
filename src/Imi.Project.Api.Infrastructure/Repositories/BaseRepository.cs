@@ -37,7 +37,6 @@ namespace Imi.Project.Api.Infrastructure.Repositories
             await _dbContext.SaveChangesAsync();
 
         }
-
         public virtual IQueryable<T> GetAll()
         {
             return _dbContext.Set<T>().AsQueryable();
@@ -59,6 +58,18 @@ namespace Imi.Project.Api.Infrastructure.Repositories
             _dbContext.Set<T>().Update(entity);
             await _dbContext.SaveChangesAsync();
             return entity;
+        }
+
+        [Obsolete]
+        public Task<bool> EntityExistsForUser<E>(Guid userId, Guid id) where E : class, IHasUserId
+        {
+
+          return Task.FromResult(_dbContext.Set<E>().Where(c => c.UserId.Equals(userId) && c.Id.Equals(id)).Any());
+        }
+
+        public Task<bool> EntityExists<E>(Guid id) where E : class, IBaseEntity
+        {
+           return Task.FromResult( _dbContext.Set<E>().Where(c => c.Id.Equals(id)).Any());
         }
     }
 }

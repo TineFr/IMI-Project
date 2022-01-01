@@ -1,4 +1,6 @@
 ﻿using Imi.Project.Api.Core.Entities;
+using Imi.Project.Api.Core.Entities.Pagination;
+using Imi.Project.Common.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,10 +10,10 @@ namespace Imi.Project.Api.Core.Interfaces.Services
 {
     public interface ISpeciesService
     {
-        Task<IEnumerable<Species>> ListAllSpeciessAsync();
-        Task<Species> GetSpeciesByIdAsync(Guid id);
-        Task<Species> AddSpeciesAsync(Species species);
-        Task<Species> UpdateSpeciesAsync(Species species);
-        Task DeleteSpeciesAsync(Species species);
+        Task<IEnumerable<SpeciesResponseDto>> ListAllSpeciessAsync(PaginationParameters parameters);
+        Task<SpeciesResponseDto> GetSpeciesByIdAsync(Guid id);
+        Task<SpeciesResponseDto> AddSpeciesAsync(SpeciesRequestDto species);
+        Task<SpeciesResponseDto> UpdateSpeciesAsync(Guid id, SpeciesRequestDto species);
+        Task DeleteSpeciesAsync(Guid id);
     }
 }

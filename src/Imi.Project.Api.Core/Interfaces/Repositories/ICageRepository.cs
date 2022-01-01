@@ -10,5 +10,6 @@ namespace Imi.Project.Api.Core.Interfaces.Repositories
     {
         Task<IEnumerable<Cage>> GetByUserIdAsync(Guid id);
 
+        Task<Cage> ExsistsForUserId(Guid userId, Guid id);
     }
 }
