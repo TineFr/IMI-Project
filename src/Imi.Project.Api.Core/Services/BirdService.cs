@@ -9,8 +9,6 @@ using Imi.Project.Common.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Core.Services
@@ -21,7 +19,7 @@ namespace Imi.Project.Api.Core.Services
         protected readonly IImageService _imageService;
         protected readonly ICageRepository _cageRepository;
         public BirdService(IBirdRepository birdRepository,
-                           IImageService imageService, 
+                           IImageService imageService,
                            ICageRepository cageRepository)
         {
             _birdRepository = birdRepository;
@@ -101,7 +99,7 @@ namespace Imi.Project.Api.Core.Services
             {
                 throw new BadRequestException($"Bird with id {id} does not exist");
             }
-            await _birdRepository.DeleteAsync(bird);   
+            await _birdRepository.DeleteAsync(bird);
         }
 
         public async Task DeleteMultiple(List<Bird> birds)
@@ -156,7 +154,7 @@ namespace Imi.Project.Api.Core.Services
             {
                 throw new ItemNotFoundException($"Species with id {dto.UserId} does not exist");
             }
-            if (dto.HatchDate != new DateTime())   //make validator?
+            if (dto.HatchDate != new DateTime())
             {
                 if (dto.HatchDate > DateTime.Today)
                 {

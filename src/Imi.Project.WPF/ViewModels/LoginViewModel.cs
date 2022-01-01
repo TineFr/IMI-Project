@@ -32,6 +32,14 @@ namespace Imi.Project.WPF.ViewModels
             }
         }
 
+        public LoginViewModel()
+        {
+            Email = "tine.franchois@gmail.com";
+            Password = "Pa$$w0rd";
+        }
+
+
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void RaisePropertyChanged(string propertyName)

@@ -25,6 +25,10 @@ namespace Imi.Project.Api.Infrastructure
 
         }
 
+  
+
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             IdentityRoleSeeding.Seeding(modelBuilder);

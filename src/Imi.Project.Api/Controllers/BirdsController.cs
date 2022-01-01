@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Controllers
@@ -59,6 +60,8 @@ namespace Imi.Project.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromForm] BirdRequestDto newBird)
         {
+            Guid userId = Guid.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            newBird.UserId = userId;    
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -78,6 +81,8 @@ namespace Imi.Project.Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put([FromRoute] Guid id, [FromForm] BirdRequestDto updatedBird)
         {
+            Guid userId = Guid.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            updatedBird.UserId = userId;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

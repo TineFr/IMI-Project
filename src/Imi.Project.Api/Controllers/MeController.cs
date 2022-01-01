@@ -1,11 +1,8 @@
-﻿using Imi.Project.Api.Core.Entities;
-using Imi.Project.Api.Core.Entities.Pagination;
+﻿using Imi.Project.Api.Core.Entities.Pagination;
 using Imi.Project.Api.Core.Exceptions;
-using Imi.Project.Api.Core.Helper;
 using Imi.Project.Api.Core.Interfaces.Services;
 using Imi.Project.Common.Dtos;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,10 +22,10 @@ namespace Imi.Project.Api.Controllers
         protected readonly IMedicineService _medicineService;
 
 
-        public MeController(IUserService userService, 
-                            ICageService cageService, 
-                            IBirdService birdService, 
-                            IMedicineService medicineService, 
+        public MeController(IUserService userService,
+                            ICageService cageService,
+                            IBirdService birdService,
+                            IMedicineService medicineService,
                             IPrescriptionService prescriptionService)
         {
             _userService = userService;

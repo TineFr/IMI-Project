@@ -1,21 +1,16 @@
 ﻿using Imi.Project.Common.Dtos;
+using Imi.Project.WPF.Interfaces;
 using Imi.Project.WPF.Models;
 using System;
 using System.Net.Http;
 
 namespace Imi.Project.WPF.Services
 {
-    public class AuthApiService
+    public class AuthApiService : BaseApiService, IAuthApiService
     {
-        private readonly HttpClient _httpClient;
-        private readonly IHttpClientFactory _httpClientFactory;
-        private string token;
-
-        public AuthApiService(IHttpClientFactory clientFactory)
+        public AuthApiService(IHttpClientFactory clientFactory) : base(clientFactory)
         {
-            _httpClientFactory = clientFactory;
-            _httpClient = _httpClientFactory.CreateClient();
-            _httpClient.BaseAddress = new Uri("https://localhost:5001/api/");
+
         }
 
         public async void Authenticate(string email, string password)
@@ -25,11 +20,10 @@ namespace Imi.Project.WPF.Services
                 Email = email,
                 Password = password
             };
-            var response = _httpClient.PostAsJsonAsync("Auth/login", dto).Result;
+            var response = GetClient().PostAsJsonAsync("Auth/login", dto).Result;
             using var responseStream = await response.Content.ReadAsStreamAsync();
             var loginresponse = await System.Text.Json.JsonSerializer.DeserializeAsync<LogInApiResponse>(responseStream);
             token = loginresponse.JWT;
-
         }
     }
 }

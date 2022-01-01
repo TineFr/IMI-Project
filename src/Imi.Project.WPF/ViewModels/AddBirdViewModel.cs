@@ -1,43 +1,93 @@
 ﻿
 using Imi.Project.WPF.Interfaces;
+using Imi.Project.WPF.Models.Cages;
 using Imi.Project.WPF.Models.Species;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
 
 namespace Imi.Project.WPF.ViewModels
 {
-    public class AddBirdViewModel : INotifyPropertyChanged
+    public class AddBirdViewModel : INotifyPropertyChanged, IDataErrorInfo
     {
         private readonly IBirdApiService _birdApiService;
         private readonly ISpeciesApiService _speciesApiService;
-        public AddBirdViewModel(IBirdApiService apiService, ISpeciesApiService speciesApiService)
+        private readonly ICageApiService _cageApiService;
+        public AddBirdViewModel()
         {
-            _birdApiService = apiService;
-            _speciesApiService = speciesApiService;
-            InitData();
+            HatchDate = DateTime.Now;
+            CanAdd = true;
+
         }
 
-        private async void InitData()
+        private bool canAdd;
+
+        public bool CanAdd
         {
-            Species = null;
-            Species =  await _speciesApiService.GetSpecies();
+            get { return canAdd; }
+            set 
+            {
+
+                 canAdd = value; 
+            }
         }
 
-        private IEnumerable<SpeciesApiResponse> species;
+        private DateTime hatchDate;
 
-        public IEnumerable<SpeciesApiResponse> Species
+        public DateTime HatchDate
         {
-            get { return species; }
+            get { return hatchDate; }
             set
             {
-                species = value;
-                RaisePropertyChanged(nameof(Species));
+
+                hatchDate = value;
+                RaisePropertyChanged(nameof(HatchDate));
             }
         }
 
 
+        private string name;
+
+        public string Name
+        {
+            get { return name; }
+            set
+            {
+
+                name = value;
+                RaisePropertyChanged(nameof(Name));
+            }
+        }
+        string IDataErrorInfo.Error
+        {
+            get { return null; }
+        }
+
+        string IDataErrorInfo.this[string columnName]
+        {
+            get
+            {
+                string test = null;
+                if (columnName == "Name")
+                {
+                    if (string.IsNullOrEmpty(Name))
+                        test =  "Name is Required";
+                }
+                if (columnName == "CanAdd")
+                {
+                    if (test != null)
+                    {
+                        CanAdd = false;
+                    }
+                }
+                if (columnName == "HatchDate")
+                {
+                    if (HatchDate.Date > DateTime.Now.Date)
+                        return "Hatch date can not be greater than today";
+                }
+                return test;
+            }
+        }
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void RaisePropertyChanged(string propertyName)
