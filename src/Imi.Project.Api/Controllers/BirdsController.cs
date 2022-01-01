@@ -1,138 +1,115 @@
-﻿using Imi.Project.Api.Core.Dtos.Birds;
+﻿using Imi.Project.Api.Core.Entities;
+using Imi.Project.Api.Core.Entities.Pagination;
+using Imi.Project.Api.Core.Exceptions;
+using Imi.Project.Api.Core.Helper;
 using Imi.Project.Api.Core.Interfaces.Services;
-using Microsoft.AspNetCore.Http;
+using Imi.Project.Common.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Imi.Project.Api.Core.Helper;
+using System.Security.Claims;
 using System.Threading.Tasks;
-using Imi.Project.Api.Core.Entities;
-using Imi.Project.Api.Core.Entities.Pagination;
-using Newtonsoft.Json;
 
 namespace Imi.Project.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class BirdsController : ControllerBase
     {
         protected readonly IBirdService _birdService;
-        protected readonly ICageService _cageService;
-        protected readonly IMedicineService _medicineService;
-        protected readonly IUserService _userService;
-        protected readonly IImageService _imageService;
 
-        public BirdsController(IBirdService birdService, ICageService cageService, IUserService userService, IImageService imageService, IMedicineService medicineService)
+        public BirdsController(IBirdService birdService)
         {
             _birdService = birdService;
-            _cageService = cageService;
-            _userService = userService;
-            _imageService = imageService;
-            _medicineService = medicineService;
         }
 
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] PaginationParameters parameters)
         {
-
-            var birds = await _birdService.ListAllBirdsAsync();         
-            var paginationData = new PaginationMetaData(parameters.Page, birds.Count(), parameters.ItemsPerPage);
-            Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
-            var birdsPaginated = Pagination.AddPagination<Bird>(birds, parameters);
-            var result = birdsPaginated.MapToDtoList();
+            IEnumerable<BirdResponseDto> result;
+            try
+            {
+                result = await _birdService.ListAllBirdsAsync(parameters);
+            }
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);
+            }
             return Ok(result);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            var bird = await _birdService.GetBirdByIdAsync(id);
-            if (bird == null)
+            BirdResponseDto result;
+            try
             {
-                return NotFound($"bird with id {id} does not exist");
+                result = await _birdService.GetBirdByIdAsync(id);
             }
-            var result = bird.MapToDto();
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);  
+            }
             return Ok(result);
         }
 
         [HttpPost]
         public async Task<IActionResult> Post([FromForm] BirdRequestDto newBird)
         {
+            Guid userId = Guid.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            newBird.UserId = userId;    
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var Bird = await _birdService.GetBirdByIdAsync(newBird.Id);
-            if (Bird != null)
+            BirdResponseDto result;
+            try
             {
-                return BadRequest($"Bird with id {newBird.Id} already exists");
+                result = await _birdService.AddBirdAsync(newBird);
             }
-            var user = await _userService.GetUserByIdAsync(newBird.UserId);
-            if (user == null)
+            catch (BaseException ex)
             {
-                return NotFound($"User with id {newBird.UserId} does not exist");
+                return StatusCode((int)ex.StatusCode, ex.Message);
             }
-            var cage = await _cageService.GetCageByIdAsync(newBird.CageId);
-            if (cage == null)
-            {
-                return NotFound($"Cage with id {newBird.CageId} does not exist");
-            }
-            var newBirdEntity = newBird.MapToEntity();
-
-            if (newBird.Image != null)
-            {
-                if (newBird.Image.ContentType.Contains("image"))
-                {
-                    var databasePath = await _imageService.AddOrUpdateImageAsync<Bird>(newBird.Id, newBird.Image);
-                    newBirdEntity.Image = databasePath;
-                }
-                else return BadRequest("Uploaded file should be an image");
-            }
-            var result = await _birdService.AddBirdAsync(newBirdEntity);
-            var resultDto = result.MapToDto();
-            return Ok(resultDto);
+            return Ok(result);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Put([FromForm]  BirdRequestDto updatedBird)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put([FromRoute] Guid id, [FromForm] BirdRequestDto updatedBird)
         {
+            Guid userId = Guid.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            updatedBird.UserId = userId;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var bird = await _birdService.GetBirdByIdAsync(updatedBird.Id);
-            if (bird == null)
+            BirdResponseDto result;
+            try
             {
-                return NotFound($"Bird with id {updatedBird.Id} does not exist");
+                result = await _birdService.UpdateBirdAsync(id, updatedBird);
             }
-            var updatedBirdEntity =  bird.Update(updatedBird);
-
-            if (updatedBird.Image != null)
+            catch (BaseException ex)
             {
-                if (updatedBird.Image.ContentType.Contains("image"))
-                {
-                    var databasePath = await _imageService.AddOrUpdateImageAsync<Bird>(updatedBird.Id, updatedBird.Image);
-                    updatedBirdEntity.Image = databasePath;
-                }
-                else return BadRequest("Uploaded file should be an image");
+                return StatusCode((int)ex.StatusCode, ex.Message);
             }
-
-            var result = await _birdService.UpdateBirdAsync(bird);
-            var resultDto = result.MapToDto();
-            return Ok(resultDto);
+            return Ok(result);
         }
 
-
-        [HttpDelete]
-        public async Task<IActionResult> Delete(BirdRequestDto birdToDelete)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
         {
-            var bird = await _birdService.GetBirdByIdAsync(birdToDelete.Id);
-            if (bird == null)
+            try
             {
-                return NotFound($"Bird with id {birdToDelete.Id} does not exist");
+                await _birdService.DeleteBirdAsync(id);
             }
-            await _birdService.DeleteBirdAsync(bird);
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);
+            }
             return Ok();
         }
 

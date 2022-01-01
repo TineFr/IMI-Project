@@ -1,18 +1,22 @@
-﻿using Imi.Project.Api.Core.Dtos.DailyTasks;
+﻿
+using Imi.Project.Api.Core.Entities;
+using Imi.Project.Api.Core.Entities.Pagination;
+using Imi.Project.Api.Core.Exceptions;
+using Imi.Project.Api.Core.Helper;
 using Imi.Project.Api.Core.Interfaces.Services;
-using Microsoft.AspNetCore.Http;
+using Imi.Project.Common.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Imi.Project.Api.Core.Helper;
 using System.Threading.Tasks;
-using Imi.Project.Api.Core.Entities.Pagination;
-using Newtonsoft.Json;
-using Imi.Project.Api.Core.Entities;
 
 namespace Imi.Project.Api.Controllers
 {
+    //[Authorize]
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class DailyTasksController : ControllerBase
@@ -27,67 +31,83 @@ namespace Imi.Project.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] PaginationParameters parameters)
         {
-            var tasks = await _dailyTaskService.ListAllDailyTasksAsync();
-            var paginationData = new PaginationMetaData(parameters.Page, tasks.Count(), parameters.ItemsPerPage);
-            Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
-            var tasksPaginated = Pagination.AddPagination<DailyTask>(tasks, parameters);
-            var result = tasksPaginated.MapToDtoList();
+            IEnumerable<DailyTaskResponseDto> result;
+            try
+            {
+                result = await _dailyTaskService.ListAllDailyTasksAsync(parameters);
+            }
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);
+            }
             return Ok(result);
         }
-
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-           
-            var task = await _dailyTaskService.GetDailyTaskByIdAsync(id);
-            if (task == null)
+            DailyTaskResponseDto result;
+            try
             {
-                return NotFound($"Daily task with id {id} does not exist");
+                result = await _dailyTaskService.GetDailyTaskByIdAsync(id);
             }
-            var result = task.MapToDto();
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);
+            }
             return Ok(result);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(DailyTaskRequestDto dailyTaskRequestDto)
+        public async Task<IActionResult> Post(DailyTaskRequestDto newDailyTask)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var dailyTaskEntity = dailyTaskRequestDto.MapToEntity();
-            var result = await _dailyTaskService.AddDailyTaskAsync(dailyTaskEntity);
+            DailyTaskResponseDto result;
+            try
+            {
+                result = await _dailyTaskService.AddDailyTaskAsync(newDailyTask);
+            }
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);
+            }
             return Ok(result);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Put(DailyTaskRequestDto dailyTaskRequestDto)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(Guid id, DailyTaskRequestDto updateDailyTask)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var task = await _dailyTaskService.GetDailyTaskByIdAsync(dailyTaskRequestDto.Id);
-            if (task == null)
+            DailyTaskResponseDto result;
+            try
             {
-                return NotFound($"Bird with id {dailyTaskRequestDto.Id} does not exist");
+                result = await _dailyTaskService.UpdateDailyTaskAsync(id, updateDailyTask);
             }
-            task.Update(dailyTaskRequestDto);
-            var result = await _dailyTaskService.UpdateDailyTaskAsync(task);
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);
+            }
             return Ok(result);
 
         }
 
         [HttpDelete]
-        public async Task<IActionResult> Delete(DailyTaskRequestDto dailyTaskRequestDto)
+        public async Task<IActionResult> Delete(Guid id)
         {
-            var task = await _dailyTaskService.GetDailyTaskByIdAsync(dailyTaskRequestDto.Id);
-            if (task == null)
+            try
             {
-                return NotFound($"Daily task with id {dailyTaskRequestDto.Id} does not exist");
+                await _dailyTaskService.DeleteDailyTaskAsync(id);
             }
-            await _dailyTaskService.DeleteDailyTaskAsync(task);
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);
+            }
             return Ok();
         }
     }

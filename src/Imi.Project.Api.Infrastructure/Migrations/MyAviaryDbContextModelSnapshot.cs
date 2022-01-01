@@ -15,9 +15,276 @@ namespace Imi.Project.Api.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.20")
+                .HasAnnotation("ProductVersion", "3.1.21")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Imi.Project.Api.Core.Entities.ApplicationUser", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000001"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "6ce3ae53-2557-4d74-beab-2ef1e1e7e68f",
+                            DateOfBirth = new DateTime(1997, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "tine.franchois@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Tine",
+                            LockoutEnabled = false,
+                            Name = "Franchois",
+                            NormalizedEmail = "TINE.FRANCHOIS@GMAIL.COM",
+                            NormalizedUserName = "TINE.FRANCHOIS@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOEtVkGmvzH1zFZhIi87LTj28nKHAo6ivHwqIxcM7/voub6QQzKph+ScZpvIAeufoQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "6b711716-2ea3-4a69-9890-40de1dc95cc2",
+                            TwoFactorEnabled = false,
+                            UserName = "tine.franchois@gmail.com"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000002"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "f60d13ec-93e0-414a-a209-54a44a07f322",
+                            DateOfBirth = new DateTime(1997, 12, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "deq.claire@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Claire",
+                            LockoutEnabled = false,
+                            Name = "Dequinnemaere",
+                            NormalizedEmail = "DEQ.CLAIRE@GMAIL.COM",
+                            NormalizedUserName = "DEQ.CLAIRE@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPbvOTDf7fYhTefa8M4ua59hPyfs8gMd2lEyR7bjZoteCK/TKrlt88CjUUcdouVExw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "4fb585c5-f972-4e80-9712-d7dcbade4114",
+                            TwoFactorEnabled = false,
+                            UserName = "deq.claire@gmail.com"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000003"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "e6e38722-399c-4c6c-9174-2e9c4ac80571",
+                            DateOfBirth = new DateTime(1995, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "depotter.sander@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Sander",
+                            LockoutEnabled = false,
+                            Name = "Depotter",
+                            NormalizedEmail = "DEPOTTER.SANDER@GMAIL.COM",
+                            NormalizedUserName = "DEPOTTER.SANDER@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAENZ0TMbokjlJe65KHCdDiNjioPrgMi42p8JiVu/sGYy6EAKr2oKzwPJV7v2AfAH8Gw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "01647cb8-c96f-47c5-8271-17a8d45fb26c",
+                            TwoFactorEnabled = false,
+                            UserName = "depotter.sander@gmail.com"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000004"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "da713a85-ff35-4944-9e67-a18af8f0ecea",
+                            DateOfBirth = new DateTime(1997, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "haenebalcke.niels@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Niels",
+                            LockoutEnabled = false,
+                            Name = "Haenebalcke",
+                            NormalizedEmail = "HAENEBALCKE.NIELS@GMAIL.COM",
+                            NormalizedUserName = "HAENEBALCKE.NIELS@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJSXKs2zzZXjybTtZN7vh3VLNYRwhV3vuFSNxaCY32hc+JmFTJgvyDM/sKBI621hsA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "95505f4b-30b2-4665-b28d-037165d045cd",
+                            TwoFactorEnabled = false,
+                            UserName = "haenebalcke.niels@gmail.com"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000005"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "f872155b-3e36-4ede-b014-0f0a13de6178",
+                            DateOfBirth = new DateTime(1996, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "jochem.dewandel@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Jochem",
+                            LockoutEnabled = false,
+                            Name = "Dewandel",
+                            NormalizedEmail = "JOCHEM.DEWANDEL@GMAIL.COM",
+                            NormalizedUserName = "JOCHEM.DEWANDEL@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAECIyprTooksirX8Bunuov0GZAtOOBN1IRcjFrorzJ5HOWqr7FyeSQQmJSblQk44w6g==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "a350280c-876a-4429-bcf1-dcccd8cdb88c",
+                            TwoFactorEnabled = false,
+                            UserName = "jochem.dewandel@gmail.com"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000006"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "3e6b9518-3b5e-4a2a-963b-253a4e9a7d09",
+                            DateOfBirth = new DateTime(1997, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "jonas.desmet@telenet.be",
+                            EmailConfirmed = false,
+                            FirstName = "Jonas",
+                            LockoutEnabled = false,
+                            Name = "DeSmet",
+                            NormalizedEmail = "JONAS.DESMET@TELENET.BE",
+                            NormalizedUserName = "JONAS.DESMET@TELENET.BE",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAR93hCTZjh5vd/at1bgWFwVvMUoWraVIbVWfCjYK8y5JxjN1MIOqQU5WynXJ4ujNw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "23a7ec73-8002-4909-be81-3c82a5bda7eb",
+                            TwoFactorEnabled = false,
+                            UserName = "jonas.desmet@telenet.be"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000007"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "cfe74847-3951-43a9-8b5a-b4256ed751eb",
+                            DateOfBirth = new DateTime(1997, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "niels.verbeke@hotmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Niels",
+                            LockoutEnabled = false,
+                            Name = "Verbeke",
+                            NormalizedEmail = "NIELS.VERBEKE@HOTMAIL.COM",
+                            NormalizedUserName = "NIELS.VERBEKE@HOTMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIvvJ8tRoTQG4r9ZwFVElurXgn9T4YLcuyZiwFyCW/s7yCoYhlLinTpGBdgVh0e7Cw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "4f11f8c2-787c-417b-bd70-da8b32b28b90",
+                            TwoFactorEnabled = false,
+                            UserName = "niels.verbeke@hotmail.com"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000008"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "917b6b97-3f67-4531-a814-65c476b44f40",
+                            DateOfBirth = new DateTime(1970, 7, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "ann.meerpoel@skynet.be",
+                            EmailConfirmed = false,
+                            FirstName = "Ann",
+                            LockoutEnabled = false,
+                            Name = "Meerpoel",
+                            NormalizedEmail = "ANN.MEERPOEL@SKYNET.BE",
+                            NormalizedUserName = "ANN.MEERPOEL@SKYNET.BE",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGgg6d4LzjFQmlQftHPwvvVE0JFoPp9yLam03LjGtsVkg/YgaUu9QpaKcivMMxFj8A==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "a10fc7df-98a2-4612-97b7-887d865db507",
+                            TwoFactorEnabled = false,
+                            UserName = "ann.meerpoel@skynet.be"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000009"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "af08deae-83bd-4677-9e99-2221b0e8cbda",
+                            DateOfBirth = new DateTime(1972, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "lotens.jurgen@hotmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Jurgen",
+                            LockoutEnabled = false,
+                            Name = "Lotens",
+                            NormalizedEmail = "LOTENS.JURGEN@HOTMAIL.COM",
+                            NormalizedUserName = "LOTENS.JURGEN@HOTMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAJ6cHgybsYYzRftsNJjKhuLoxd+MU1zQK6NIbya2ZsRxe78Fw+2cRohCrknE6ESXw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "16bf35af-0095-4286-92ee-c4e9cac3bf1a",
+                            TwoFactorEnabled = false,
+                            UserName = "lotens.jurgen@hotmail.com"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000010"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "f96d6f6e-3852-4271-9860-8328e1228769",
+                            DateOfBirth = new DateTime(2010, 9, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "janne.vhl@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Janne",
+                            LockoutEnabled = false,
+                            Name = "Van Horelbeke",
+                            NormalizedEmail = "JANNE.VHL@GMAIL.COM",
+                            NormalizedUserName = "JANNE.VHL@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEA+bCye6I+Y8RAgkkd4tjf/i41/r+Aq1tDcnTj8fvyGvJdqoJkdDNGVwtEoRweEjFg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "f42d1cb4-07e4-47d8-9a97-4fdba7b8f32b",
+                            TwoFactorEnabled = false,
+                            UserName = "janne.vhl@gmail.com"
+                        });
+                });
 
             modelBuilder.Entity("Imi.Project.Api.Core.Entities.Bird", b =>
                 {
@@ -828,105 +1095,105 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
-                            EndDate = new DateTime(2021, 11, 10, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8487),
+                            EndDate = new DateTime(2021, 12, 30, 13, 25, 33, 206, DateTimeKind.Local).AddTicks(6640),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000001"),
-                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 257, DateTimeKind.Local).AddTicks(6502),
+                            StartDate = new DateTime(2021, 12, 23, 13, 25, 33, 202, DateTimeKind.Local).AddTicks(6095),
                             UserId = new Guid("00000000-0000-0000-0000-000000000001")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000002"),
-                            EndDate = new DateTime(2021, 11, 7, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8862),
+                            EndDate = new DateTime(2021, 12, 27, 13, 25, 33, 206, DateTimeKind.Local).AddTicks(6949),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000002"),
-                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8845),
+                            StartDate = new DateTime(2021, 12, 23, 13, 25, 33, 206, DateTimeKind.Local).AddTicks(6934),
                             UserId = new Guid("00000000-0000-0000-0000-000000000001")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000003"),
-                            EndDate = new DateTime(2021, 11, 10, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8882),
+                            EndDate = new DateTime(2021, 12, 30, 13, 25, 33, 206, DateTimeKind.Local).AddTicks(7020),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000003"),
-                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8879),
+                            StartDate = new DateTime(2021, 12, 23, 13, 25, 33, 206, DateTimeKind.Local).AddTicks(7017),
                             UserId = new Guid("00000000-0000-0000-0000-000000000002")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000004"),
-                            EndDate = new DateTime(2021, 11, 7, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8891),
+                            EndDate = new DateTime(2021, 12, 27, 13, 25, 33, 206, DateTimeKind.Local).AddTicks(7029),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000004"),
-                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8889),
+                            StartDate = new DateTime(2021, 12, 23, 13, 25, 33, 206, DateTimeKind.Local).AddTicks(7026),
                             UserId = new Guid("00000000-0000-0000-0000-000000000002")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000005"),
-                            EndDate = new DateTime(2021, 11, 9, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8900),
+                            EndDate = new DateTime(2021, 12, 29, 13, 25, 33, 206, DateTimeKind.Local).AddTicks(7039),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000005"),
-                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8897),
+                            StartDate = new DateTime(2021, 12, 23, 13, 25, 33, 206, DateTimeKind.Local).AddTicks(7036),
                             UserId = new Guid("00000000-0000-0000-0000-000000000003")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000006"),
-                            EndDate = new DateTime(2021, 11, 7, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8961),
+                            EndDate = new DateTime(2021, 12, 27, 13, 25, 33, 206, DateTimeKind.Local).AddTicks(7048),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000006"),
-                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8958),
+                            StartDate = new DateTime(2021, 12, 23, 13, 25, 33, 206, DateTimeKind.Local).AddTicks(7045),
                             UserId = new Guid("00000000-0000-0000-0000-000000000003")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000007"),
-                            EndDate = new DateTime(2021, 11, 5, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8970),
+                            EndDate = new DateTime(2021, 12, 25, 13, 25, 33, 206, DateTimeKind.Local).AddTicks(7056),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000007"),
-                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8967),
+                            StartDate = new DateTime(2021, 12, 23, 13, 25, 33, 206, DateTimeKind.Local).AddTicks(7054),
                             UserId = new Guid("00000000-0000-0000-0000-000000000004")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000008"),
-                            EndDate = new DateTime(2021, 11, 14, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8978),
+                            EndDate = new DateTime(2022, 1, 3, 13, 25, 33, 206, DateTimeKind.Local).AddTicks(7065),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000008"),
-                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8976),
+                            StartDate = new DateTime(2021, 12, 23, 13, 25, 33, 206, DateTimeKind.Local).AddTicks(7062),
                             UserId = new Guid("00000000-0000-0000-0000-000000000004")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000009"),
-                            EndDate = new DateTime(2021, 11, 8, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8987),
+                            EndDate = new DateTime(2021, 12, 28, 13, 25, 33, 206, DateTimeKind.Local).AddTicks(7074),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000009"),
-                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8984),
+                            StartDate = new DateTime(2021, 12, 23, 13, 25, 33, 206, DateTimeKind.Local).AddTicks(7071),
                             UserId = new Guid("00000000-0000-0000-0000-000000000005")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000010"),
-                            EndDate = new DateTime(2021, 11, 7, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8995),
+                            EndDate = new DateTime(2021, 12, 27, 13, 25, 33, 206, DateTimeKind.Local).AddTicks(7083),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000010"),
-                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8993),
+                            StartDate = new DateTime(2021, 12, 23, 13, 25, 33, 206, DateTimeKind.Local).AddTicks(7080),
                             UserId = new Guid("00000000-0000-0000-0000-000000000005")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000011"),
-                            EndDate = new DateTime(2021, 11, 7, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(9005),
+                            EndDate = new DateTime(2021, 12, 27, 13, 25, 33, 206, DateTimeKind.Local).AddTicks(7093),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000011"),
-                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(9002),
+                            StartDate = new DateTime(2021, 12, 23, 13, 25, 33, 206, DateTimeKind.Local).AddTicks(7090),
                             UserId = new Guid("00000000-0000-0000-0000-000000000006")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000012"),
-                            EndDate = new DateTime(2021, 11, 10, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(9014),
+                            EndDate = new DateTime(2021, 12, 30, 13, 25, 33, 206, DateTimeKind.Local).AddTicks(7121),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000012"),
-                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(9012),
+                            StartDate = new DateTime(2021, 12, 23, 13, 25, 33, 206, DateTimeKind.Local).AddTicks(7118),
                             UserId = new Guid("00000000-0000-0000-0000-000000000010")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000013"),
-                            EndDate = new DateTime(2021, 11, 7, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(9023),
+                            EndDate = new DateTime(2021, 12, 27, 13, 25, 33, 206, DateTimeKind.Local).AddTicks(7129),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000013"),
-                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(9020),
+                            StartDate = new DateTime(2021, 12, 23, 13, 25, 33, 206, DateTimeKind.Local).AddTicks(7127),
                             UserId = new Guid("00000000-0000-0000-0000-000000000007")
                         });
                 });
@@ -1012,71 +1279,211 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Imi.Project.Api.Core.Entities.User", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedName")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles");
 
                     b.HasData(
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
-                            Name = "Franchois"
+                            ConcurrencyStamp = "0b767bd1-c8b3-4174-b040-b64f7161b7e3",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000002"),
-                            Name = "Dequinnemaere"
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000003"),
-                            Name = "Depotter"
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000004"),
-                            Name = "Haenebalcke"
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000005"),
-                            Name = "De Wandel"
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000006"),
-                            Name = "De Smet"
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000007"),
-                            Name = "Verbeke"
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000008"),
-                            Name = "Meerpoel"
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000009"),
-                            Name = "Lootens"
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000010"),
-                            Name = "Van De Sompel"
+                            ConcurrencyStamp = "c04f7a13-64e9-4b24-95e2-5aea9a709c59",
+                            Name = "BaseUser",
+                            NormalizedName = "BASEUSER"
                         });
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("00000000-0000-0000-0000-000000000001"),
+                            RoleId = new Guid("00000000-0000-0000-0000-000000000001")
+                        },
+                        new
+                        {
+                            UserId = new Guid("00000000-0000-0000-0000-000000000002"),
+                            RoleId = new Guid("00000000-0000-0000-0000-000000000001")
+                        },
+                        new
+                        {
+                            UserId = new Guid("00000000-0000-0000-0000-000000000001"),
+                            RoleId = new Guid("00000000-0000-0000-0000-000000000002")
+                        },
+                        new
+                        {
+                            UserId = new Guid("00000000-0000-0000-0000-000000000002"),
+                            RoleId = new Guid("00000000-0000-0000-0000-000000000002")
+                        },
+                        new
+                        {
+                            UserId = new Guid("00000000-0000-0000-0000-000000000003"),
+                            RoleId = new Guid("00000000-0000-0000-0000-000000000002")
+                        },
+                        new
+                        {
+                            UserId = new Guid("00000000-0000-0000-0000-000000000004"),
+                            RoleId = new Guid("00000000-0000-0000-0000-000000000002")
+                        },
+                        new
+                        {
+                            UserId = new Guid("00000000-0000-0000-0000-000000000005"),
+                            RoleId = new Guid("00000000-0000-0000-0000-000000000002")
+                        },
+                        new
+                        {
+                            UserId = new Guid("00000000-0000-0000-0000-000000000006"),
+                            RoleId = new Guid("00000000-0000-0000-0000-000000000002")
+                        },
+                        new
+                        {
+                            UserId = new Guid("00000000-0000-0000-0000-000000000007"),
+                            RoleId = new Guid("00000000-0000-0000-0000-000000000002")
+                        },
+                        new
+                        {
+                            UserId = new Guid("00000000-0000-0000-0000-000000000008"),
+                            RoleId = new Guid("00000000-0000-0000-0000-000000000002")
+                        },
+                        new
+                        {
+                            UserId = new Guid("00000000-0000-0000-0000-000000000009"),
+                            RoleId = new Guid("00000000-0000-0000-0000-000000000002")
+                        },
+                        new
+                        {
+                            UserId = new Guid("00000000-0000-0000-0000-000000000010"),
+                            RoleId = new Guid("00000000-0000-0000-0000-000000000002")
+                        });
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens");
                 });
 
             modelBuilder.Entity("Imi.Project.Api.Core.Entities.Bird", b =>
@@ -1091,7 +1498,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .HasForeignKey("SpeciesId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("Imi.Project.Api.Core.Entities.User", "User")
+                    b.HasOne("Imi.Project.Api.Core.Entities.ApplicationUser", "User")
                         .WithMany("Birds")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.SetNull);
@@ -1114,7 +1521,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
 
             modelBuilder.Entity("Imi.Project.Api.Core.Entities.Cage", b =>
                 {
-                    b.HasOne("Imi.Project.Api.Core.Entities.User", "User")
+                    b.HasOne("Imi.Project.Api.Core.Entities.ApplicationUser", "User")
                         .WithMany("Cages")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.SetNull);
@@ -1131,7 +1538,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
 
             modelBuilder.Entity("Imi.Project.Api.Core.Entities.Medicine", b =>
                 {
-                    b.HasOne("Imi.Project.Api.Core.Entities.User", "User")
+                    b.HasOne("Imi.Project.Api.Core.Entities.ApplicationUser", "User")
                         .WithMany("Medicines")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.SetNull);
@@ -1145,9 +1552,60 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Imi.Project.Api.Core.Entities.User", "User")
+                    b.HasOne("Imi.Project.Api.Core.Entities.ApplicationUser", "User")
                         .WithMany("Prescriptions")
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
+                {
+                    b.HasOne("Imi.Project.Api.Core.Entities.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
+                {
+                    b.HasOne("Imi.Project.Api.Core.Entities.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Imi.Project.Api.Core.Entities.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
+                {
+                    b.HasOne("Imi.Project.Api.Core.Entities.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

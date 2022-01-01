@@ -1,31 +1,22 @@
-﻿
-using Imi.Project.Api.Core.Dtos.Birds;
-using Imi.Project.Api.Core.Dtos.Cages;
-using Imi.Project.Api.Core.Dtos.DailyTasks;
-using Imi.Project.Api.Core.Dtos.Medicines;
-using Imi.Project.Api.Core.Dtos.Prescriptions;
-using Imi.Project.Api.Core.Dtos.Species;
-using Imi.Project.Api.Core.Dtos.Users;
-using Imi.Project.Api.Core.Entities;
-using System;
+﻿using Imi.Project.Api.Core.Entities;
+using Imi.Project.Common.Dtos;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Imi.Project.Api.Core.Helper
 {
     public static class EntityMapper
     {
-        public static User MapToEntity(this UserRequestDto userDto)
+        public static ApplicationUser MapToEntity(this ApplicationUserRequestDto userDto)
         {
 
-           var user = new User
+            var user = new ApplicationUser
             {
-               Id = userDto.Id,
-                Name = userDto.Name
+                Id = userDto.Id,
+                UserName = userDto.Name
             };
             return user;
         }
-    
+
         public static Bird MapToEntity(this BirdRequestDto birdDto)
         {
             var bird = new Bird
