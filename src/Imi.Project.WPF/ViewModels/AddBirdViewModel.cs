@@ -2,58 +2,62 @@
 using Imi.Project.WPF.Interfaces;
 using Imi.Project.WPF.Models.Cages;
 using Imi.Project.WPF.Models.Species;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace Imi.Project.WPF.ViewModels
 {
-    public class AddBirdViewModel : INotifyPropertyChanged
+    public class AddBirdViewModel : INotifyPropertyChanged, IDataErrorInfo
     {
         private readonly IBirdApiService _birdApiService;
         private readonly ISpeciesApiService _speciesApiService;
         private readonly ICageApiService _cageApiService;
-        public AddBirdViewModel(IBirdApiService apiService, ISpeciesApiService speciesApiService, ICageApiService cageApiService)
+        public AddBirdViewModel()
         {
-            _birdApiService = apiService;
-            _speciesApiService = speciesApiService;
-            _cageApiService = cageApiService;
-            InitData();
         }
 
-        private async void InitData()
-        {
-            Species = null;
-            Species = await _speciesApiService.GetSpecies();
-            Cages = null;
-            Cages = await _cageApiService.GetCages();
-        }
+        private int canAdd;
 
-        private IEnumerable<SpeciesApiResponse> species;
-
-        public IEnumerable<SpeciesApiResponse> Species
+        public int CanAdd
         {
-            get { return species; }
-            set
-            {
-                species = value;
-                RaisePropertyChanged(nameof(Species));
+            get { return canAdd; }
+            set 
+            { 
+                canAdd = value; 
             }
         }
 
 
+        private string name;
 
-        private IEnumerable<CageApiResponse> cages;
-
-        public IEnumerable<CageApiResponse> Cages
+        public string Name
         {
-            get { return cages; }
+            get { return name; }
             set
             {
-                cages = value;
-                RaisePropertyChanged(nameof(Cages));
+
+                name = value;
+                RaisePropertyChanged(nameof(Name));
             }
         }
+        string IDataErrorInfo.Error
+        {
+            get { return null; }
+        }
 
+        string IDataErrorInfo.this[string columnName]
+        {
+            get
+            {
+                if (columnName == "Name")
+                {
+                    if (string.IsNullOrEmpty(Name))
+                        return "Name is Required";
+                }
+                return null;
+            }
+        }
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void RaisePropertyChanged(string propertyName)

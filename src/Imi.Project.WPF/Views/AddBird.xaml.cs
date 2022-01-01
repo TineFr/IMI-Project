@@ -4,6 +4,7 @@ using Imi.Project.WPF.Interfaces;
 using Imi.Project.WPF.Models.Birds;
 using Imi.Project.WPF.Models.Cages;
 using Imi.Project.WPF.Models.Species;
+using Imi.Project.WPF.ViewModels;
 using Microsoft.Win32;
 using System;
 using System.IO;
@@ -34,19 +35,22 @@ namespace Imi.Project.WPF
             _birdApiService = apiService;
             _speciesApiService = speciesApiService;
             _cageApiService = cageApiService;
+            this.DataContext = new AddBirdViewModel();
             SetData();
         }
 
         private async void SetData()
         {
             cmbSpecies.ItemsSource = await _speciesApiService.GetSpecies();
+            cmbSpecies.SelectedIndex = 0;
             cmbCages.ItemsSource = await _cageApiService.GetCages();
+            cmbCages.SelectedIndex = 0;
             cmbGender.ItemsSource = Enum.GetValues(typeof(Gender));
+            cmbGender.SelectedIndex = 0;
         }
 
         private async void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-
             var newBird = new Bird
             {
                 Name = txtName.Text,

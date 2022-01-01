@@ -30,7 +30,9 @@ namespace Imi.Project.WPF
 
         private async void SetData()
         {
+       
             lstBirds.ItemsSource = await _birdApiService.GetBirds();
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

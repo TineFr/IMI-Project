@@ -1,6 +1,4 @@
-﻿using Imi.Project.Common.Dtos;
-using Imi.Project.WPF.Models.Birds;
-using System;
+﻿using System;
 
 namespace Imi.Project.WPF.Events
 {

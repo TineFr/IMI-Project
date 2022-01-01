@@ -11,7 +11,6 @@ namespace Imi.Project.WPF.Models.Birds
         public DateTime HatchDate { get; set; }
         public Gender Gender { get; set; }
         public string Food { get; set; }
-        public Guid UserId { get; set; }
         public Guid CageId { get; set; }
         public Guid SpeciesId { get; set; }
         public Stream Image { get; set; }

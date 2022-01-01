@@ -1,8 +1,6 @@
 ﻿using Imi.Project.WPF.Models.Cages;
 using Imi.Project.WPF.Models.Species;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.Json.Serialization;
 
 namespace Imi.Project.WPF.Models.Birds
@@ -16,7 +14,7 @@ namespace Imi.Project.WPF.Models.Birds
         [JsonPropertyName("name")]
         public string Name { get; set; }
         [JsonPropertyName("hatchDate")]
-        public DateTime HatchDate { get; set; } 
+        public DateTime HatchDate { get; set; }
         [JsonPropertyName("gender")]
         public string Gender { get; set; }
 
