@@ -40,7 +40,6 @@
                     <Validation.ErrorTemplate>
                         <ControlTemplate>
                             <StackPanel>
-                                <!-- Placeholder for the TextBox itself -->
                                 <AdornedElementPlaceholder x:Name="textBox"/>
                                 <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
                             </StackPanel>
