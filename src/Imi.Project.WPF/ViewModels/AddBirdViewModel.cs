@@ -1,9 +1,6 @@
 ﻿
 using Imi.Project.WPF.Interfaces;
-using Imi.Project.WPF.Models.Cages;
-using Imi.Project.WPF.Models.Species;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace Imi.Project.WPF.ViewModels
@@ -25,10 +22,10 @@ namespace Imi.Project.WPF.ViewModels
         public bool CanAdd
         {
             get { return canAdd; }
-            set 
+            set
             {
 
-                 canAdd = value; 
+                canAdd = value;
             }
         }
 
@@ -71,7 +68,7 @@ namespace Imi.Project.WPF.ViewModels
                 if (columnName == "Name")
                 {
                     if (string.IsNullOrEmpty(Name))
-                        test =  "Name is Required";
+                        test = "Name is Required";
                 }
                 if (columnName == "CanAdd")
                 {
