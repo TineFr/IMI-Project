@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Imi.Project.Mobile.Pages.Birds.BirdDetailPage">
+    <ContentPage.Content>
+        <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
+              RowDefinitions="{StaticResource MainGridRows}">
+            <Frame Style="{StaticResource MainFrame}" BackgroundColor="{StaticResource Green}">
+                <StackLayout VerticalOptions="End">
+                    <FlexLayout JustifyContent="Center">
+                    <Label Text="{Binding Bird.Name}" Style="{StaticResource MainLabel}"></Label>
+                    <Image Source="{Binding Bird.GenderImage}" HeightRequest="20"></Image>
+                </FlexLayout>
+                </StackLayout>
+            </Frame>
+            <AbsoluteLayout Grid.Row="0" Grid.RowSpan="4">
+                <ImageButton x:Name="btnBack" Style="{StaticResource BackArrow}"  Command="{Binding BackCommand}"></ImageButton>
+                <Image Style="{StaticResource Logo}" ></Image>
+            </AbsoluteLayout>
+            <StackLayout Grid.Row="1">
+                <Button  x:Name="btnEditBird" Text="Edit" HorizontalOptions="EndAndExpand" WidthRequest="100" Margin="10" Command="{Binding EditBirdCommand}" CommandParameter="{Binding Bird}"></Button>
+            </StackLayout>
+            <ScrollView Grid.Row="2" Grid.RowSpan="2">
+                <StackLayout Grid.Row="1">
+                <Image Source="{Binding Bird.Image}" WidthRequest="340"></Image>
+                <Frame WidthRequest="300" HeightRequest="80" HorizontalOptions="Center">
+                    <StackLayout>
+                        <Label Text="Species:"></Label>
+                        <Label HeightRequest="200" HorizontalOptions="Center" Text="{Binding Bird.Species.Name}" FontSize="20"></Label>
+                        <Label HeightRequest="200" HorizontalOptions="Center" Text="{Binding Bird.Species.ScientificName}" FontSize="10" FontAttributes="Italic"></Label>
+                    </StackLayout>
+                </Frame>
+                    <Frame WidthRequest="300"  HeightRequest="80" HorizontalOptions="Center">
+                    <StackLayout>
+                        <Label Text="Location:"></Label>
+                        <Label HeightRequest="200" HorizontalOptions="Center" Text="{Binding Bird.Cage.Name}" FontSize="20"></Label>
+                    </StackLayout>
+                </Frame>
+                    <Frame WidthRequest="300"  HeightRequest="80" HorizontalOptions="Center">
+                        <StackLayout>
+                            <Label Text="Date of hatching:"></Label>
+                            <Label HeightRequest="200" HorizontalOptions="Center" Text="{Binding Bird.Date}" FontSize="20"></Label>
+                        </StackLayout>
+                    </Frame>
+                    <Frame WidthRequest="300"  HeightRequest="80" HorizontalOptions="Center">
+                        <StackLayout>
+                            <Label Text="Food:"></Label>
+                            <Label HeightRequest="200" HorizontalOptions="Center" Text="{Binding Bird.Food}" FontSize="20"></Label>
+                        </StackLayout>
+                    </Frame>
+                    <Frame >
+
+                    </Frame>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
