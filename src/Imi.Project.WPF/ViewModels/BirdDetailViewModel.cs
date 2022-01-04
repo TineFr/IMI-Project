@@ -1,4 +1,5 @@
-﻿using Imi.Project.WPF.Models.Birds;
+﻿using Imi.Project.WPF.Core.Models;
+using Imi.Project.WPF.Models.Birds;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,9 +9,9 @@ namespace Imi.Project.WPF.ViewModels
 {
     public class BirdDetailViewModel
     {
-        private BirdApiResponse bird;
+        private BirdModel bird;
 
-        public BirdApiResponse Bird
+        public BirdModel Bird
         {
             get { return bird; }
             set { bird = value; }
@@ -24,7 +25,7 @@ namespace Imi.Project.WPF.ViewModels
             set { image = value; }
         }
 
-        public BirdDetailViewModel(BirdApiResponse bird)
+        public BirdDetailViewModel(BirdModel bird)
         {
             Bird = bird;
             Image = null;

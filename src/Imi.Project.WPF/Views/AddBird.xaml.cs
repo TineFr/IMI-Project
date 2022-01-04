@@ -1,9 +1,8 @@
 ﻿using Imi.Project.Common.Enums;
+using Imi.Project.WPF.Core.Interfaces;
+using Imi.Project.WPF.Core.Models;
 using Imi.Project.WPF.Events;
-using Imi.Project.WPF.Interfaces;
 using Imi.Project.WPF.Models.Birds;
-using Imi.Project.WPF.Models.Cages;
-using Imi.Project.WPF.Models.Species;
 using Imi.Project.WPF.ViewModels;
 using Microsoft.Win32;
 using System;
@@ -19,9 +18,10 @@ namespace Imi.Project.WPF
     /// </summary>
     public partial class AddBird : Window
     {
-        private readonly IBirdApiService _birdApiService;
-        private readonly ISpeciesApiService _speciesApiService;
-        private readonly ICageApiService _cageApiService;
+
+        private readonly IBaseApiService<BirdModel, BirdModel> _birdApiService;
+        private readonly IBaseApiService<SpeciesModel, SpeciesModel> _speciesApiService;
+        private readonly IBaseApiService<CageModel, CageModel> _cageApiService;
 
         public delegate void RefreshList(object sender, BirdAddedOrEditedArgs e);
         public event RefreshList BirdAdded;
@@ -29,23 +29,24 @@ namespace Imi.Project.WPF
         private OpenFileDialog openFileDialog;
         private Stream image;
         private string _imagePath;
-        public AddBird(IBirdApiService apiService,
-                       ISpeciesApiService speciesApiService,
-                       ICageApiService cageApiService)
+        public AddBird(IBaseApiService<BirdModel, BirdModel> birdApiService, 
+                       IBaseApiService<SpeciesModel, SpeciesModel> speciesApiService, 
+                       IBaseApiService<CageModel, CageModel> cageApiService)
         {
             InitializeComponent();
-            _birdApiService = apiService;
+
+            this.DataContext = new AddBirdViewModel();
+            _birdApiService = birdApiService;
             _speciesApiService = speciesApiService;
             _cageApiService = cageApiService;
-            this.DataContext = new AddBirdViewModel();
             SetData();
         }
 
         private async void SetData()
         {
-            cmbSpecies.ItemsSource = await _speciesApiService.GetSpecies();
+            cmbSpecies.ItemsSource = await _speciesApiService.GetAllAsync("species");
             cmbSpecies.SelectedIndex = 0;
-            cmbCages.ItemsSource = await _cageApiService.GetCages();
+            cmbCages.ItemsSource = await _cageApiService.GetAllAsync("me/cages");
             cmbCages.SelectedIndex = 0;
             cmbGender.ItemsSource = Enum.GetValues(typeof(Gender));
             cmbGender.SelectedIndex = 0;
@@ -53,28 +54,28 @@ namespace Imi.Project.WPF
 
         private async void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            var newBird = new Bird
+            var newBird = new BirdModel
             {
-                Name = txtName.Text,
-                HatchDate = DateTime.Parse(pkrDate.Text),
-                CageId = ((CageApiResponse)cmbCages.SelectedItem).Id,
-                SpeciesId = ((SpeciesApiResponse)cmbSpecies.SelectedItem).Id,
-                Gender = (Gender)cmbGender.SelectedValue,
-                Food = txtFood.Text,
+                //Name = txtName.Text,
+                //HatchDate = DateTime.Parse(pkrDate.Text),
+                //CageId= ((CageModel)cmbCages.SelectedItem).Id,
+                //SpeciesId = ((SpeciesModel)cmbSpecies.SelectedItem).Id,
+                //Gender = (Gender)cmbGender.SelectedValue,
+                //Food = txtFood.Text,
             };
 
-            newBird.Image = image;
-            newBird.FileName = _imagePath;
+            //newBird.Image = image;
+            //newBird.FileName = _imagePath;
 
-            var result = await _birdApiService.AddBird(newBird);
+            var result = await _birdApiService.AddAsync("birds", newBird);
             if (!ReferenceEquals(result, null))
             {
                 MessageBox.Show($"Something went wrong.\n{result}", null,
                                                      MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 if (openFileDialog != null)
-                image = new MemoryStream(File.ReadAllBytes(openFileDialog.FileName).ToArray());
+                    image = new MemoryStream(File.ReadAllBytes(openFileDialog.FileName).ToArray());
             }
-                
+
             else
             {
                 MessageBox.Show("Bird was succesfully added!", "Success", MessageBoxButton.OKCancel, MessageBoxImage.Information);

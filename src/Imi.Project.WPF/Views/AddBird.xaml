@@ -26,7 +26,7 @@
                 <Label Content="Cage:" Margin="0,5,0,5" Padding="5"></Label>
                 <Label Content="Food:" Margin="0,10,0,10"  Padding="5" ></Label>
                 <Label Content="Hatchdate:" Padding="5"></Label>
-                <Button x:Name="btnAddImage" HorizontalAlignment="Left" Width="60" Height="40" FontSize="10" Foreground="white" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="Add image" Margin="10" Click="btnAddImage_Click" Background="#D4E7C0" BorderThickness="0">
+                <Button x:Name="btnAddImage" HorizontalAlignment="Left" Width="60" Height="40" FontSize="10" Foreground="white" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="Add image" Margin="10" Background="#D4E7C0" BorderThickness="0">
                     <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="20"></Setter>
@@ -66,7 +66,7 @@
         </Grid>
 
 
-        <Button x:Name="btnAdd" IsEnabled="{Binding CanAdd}" HorizontalAlignment="Right" Width="40" Height="40" Content="Add" Margin="10" BorderThickness="0" Background="LightBlue" Foreground="white" Click="btnAdd_Click">
+        <Button x:Name="btnAdd" IsEnabled="{Binding CanAdd}" HorizontalAlignment="Right" Width="40" Height="40" Content="Add" Margin="10" BorderThickness="0" Background="LightBlue" Foreground="white">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="20"></Setter>

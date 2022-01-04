@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30907.101
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Imi.Project.Api", "Imi.Project.Api\Imi.Project.Api.csproj", "{0C0D90B3-A6D9-4669-AA79-171E2D63EE12}"
 EndProject
@@ -35,7 +35,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Imi.Project.Common", "Imi.P
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Imi.Project.Vue", "Imi.Project.Vue\Imi.Project.Vue.csproj", "{44AF898A-23F0-4435-A3D6-DCE16BF97922}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imi.Project.WPF", "Imi.Project.WPF\Imi.Project.WPF.csproj", "{8403F7B6-1D1D-4538-A5A0-E89282ACDE69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Imi.Project.WPF", "Imi.Project.WPF\Imi.Project.WPF.csproj", "{8403F7B6-1D1D-4538-A5A0-E89282ACDE69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imi.Project.WPF.Core", "Imi.Project.WPF.Core\Imi.Project.WPF.Core.csproj", "{D7182BD8-0864-41C7-8DC0-CC9A108C1DDC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -371,6 +373,30 @@ Global
 		{8403F7B6-1D1D-4538-A5A0-E89282ACDE69}.Release|x64.Build.0 = Release|Any CPU
 		{8403F7B6-1D1D-4538-A5A0-E89282ACDE69}.Release|x86.ActiveCfg = Release|Any CPU
 		{8403F7B6-1D1D-4538-A5A0-E89282ACDE69}.Release|x86.Build.0 = Release|Any CPU
+		{D7182BD8-0864-41C7-8DC0-CC9A108C1DDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7182BD8-0864-41C7-8DC0-CC9A108C1DDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7182BD8-0864-41C7-8DC0-CC9A108C1DDC}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{D7182BD8-0864-41C7-8DC0-CC9A108C1DDC}.Debug|ARM.Build.0 = Debug|Any CPU
+		{D7182BD8-0864-41C7-8DC0-CC9A108C1DDC}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{D7182BD8-0864-41C7-8DC0-CC9A108C1DDC}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{D7182BD8-0864-41C7-8DC0-CC9A108C1DDC}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{D7182BD8-0864-41C7-8DC0-CC9A108C1DDC}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{D7182BD8-0864-41C7-8DC0-CC9A108C1DDC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D7182BD8-0864-41C7-8DC0-CC9A108C1DDC}.Debug|x64.Build.0 = Debug|Any CPU
+		{D7182BD8-0864-41C7-8DC0-CC9A108C1DDC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D7182BD8-0864-41C7-8DC0-CC9A108C1DDC}.Debug|x86.Build.0 = Debug|Any CPU
+		{D7182BD8-0864-41C7-8DC0-CC9A108C1DDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7182BD8-0864-41C7-8DC0-CC9A108C1DDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7182BD8-0864-41C7-8DC0-CC9A108C1DDC}.Release|ARM.ActiveCfg = Release|Any CPU
+		{D7182BD8-0864-41C7-8DC0-CC9A108C1DDC}.Release|ARM.Build.0 = Release|Any CPU
+		{D7182BD8-0864-41C7-8DC0-CC9A108C1DDC}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{D7182BD8-0864-41C7-8DC0-CC9A108C1DDC}.Release|iPhone.Build.0 = Release|Any CPU
+		{D7182BD8-0864-41C7-8DC0-CC9A108C1DDC}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{D7182BD8-0864-41C7-8DC0-CC9A108C1DDC}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{D7182BD8-0864-41C7-8DC0-CC9A108C1DDC}.Release|x64.ActiveCfg = Release|Any CPU
+		{D7182BD8-0864-41C7-8DC0-CC9A108C1DDC}.Release|x64.Build.0 = Release|Any CPU
+		{D7182BD8-0864-41C7-8DC0-CC9A108C1DDC}.Release|x86.ActiveCfg = Release|Any CPU
+		{D7182BD8-0864-41C7-8DC0-CC9A108C1DDC}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -389,6 +415,7 @@ Global
 		{A8584E32-5D0F-457A-904B-B8F1564CAFD3} = {C37B001D-F570-4336-9E66-13DA018A06E7}
 		{44AF898A-23F0-4435-A3D6-DCE16BF97922} = {0DFFB23F-E612-408C-9C52-B85765DEF4DB}
 		{8403F7B6-1D1D-4538-A5A0-E89282ACDE69} = {0DFFB23F-E612-408C-9C52-B85765DEF4DB}
+		{D7182BD8-0864-41C7-8DC0-CC9A108C1DDC} = {0DFFB23F-E612-408C-9C52-B85765DEF4DB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {00764200-1BAC-4357-904A-BA870FD3DA7B}

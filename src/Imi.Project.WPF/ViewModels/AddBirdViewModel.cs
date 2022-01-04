@@ -1,15 +1,11 @@
-﻿
-using Imi.Project.WPF.Interfaces;
-using System;
+﻿using System;
 using System.ComponentModel;
 
 namespace Imi.Project.WPF.ViewModels
 {
     public class AddBirdViewModel : INotifyPropertyChanged, IDataErrorInfo
     {
-        private readonly IBirdApiService _birdApiService;
-        private readonly ISpeciesApiService _speciesApiService;
-        private readonly ICageApiService _cageApiService;
+
         public AddBirdViewModel()
         {
             HatchDate = DateTime.Now;

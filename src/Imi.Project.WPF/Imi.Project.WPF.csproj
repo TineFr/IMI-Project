@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Imi.Project.Common\Imi.Project.Common.csproj" />
+    <ProjectReference Include="..\Imi.Project.WPF.Core\Imi.Project.WPF.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
