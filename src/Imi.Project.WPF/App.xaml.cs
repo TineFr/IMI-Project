@@ -1,6 +1,7 @@
 ﻿using Imi.Project.WPF.Core.Interfaces;
 using Imi.Project.WPF.Core.Models;
 using Imi.Project.WPF.Core.Services;
+using Imi.Project.WPF.Views;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -41,7 +42,7 @@ namespace Imi.Project.WPF
         {
             services.AddHttpClient();
             services.AddScoped<IAuthApiService, AuthApiService>();
-            services.AddScoped(typeof(IBaseApiService<BirdModel, BirdModel>), typeof(BaseApiService<BirdModel, BirdModel>));
+            services.AddScoped(typeof(IBaseApiService<BirdRequestModel, BirdModel>), typeof(BirdApiService));
             services.AddScoped(typeof(IBaseApiService<CageModel, CageModel>), typeof(BaseApiService<CageModel, CageModel>));
             services.AddScoped(typeof(IBaseApiService<SpeciesModel, SpeciesModel>), typeof(BaseApiService<SpeciesModel, SpeciesModel>));
             services.AddScoped(typeof(IBaseApiService<LogInApiResponse, LogInApiResponse>), typeof(BaseApiService<LogInApiResponse, LogInApiResponse>));

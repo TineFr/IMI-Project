@@ -2,7 +2,7 @@
 using Imi.Project.WPF.Core.Models;
 using System.Windows;
 
-namespace Imi.Project.WPF
+namespace Imi.Project.WPF.Views
 {
     /// <summary>
     /// Interaction logic for Login.xaml
@@ -10,13 +10,13 @@ namespace Imi.Project.WPF
     public partial class Login : Window
     {
 
-        private readonly IBaseApiService<BirdModel, BirdModel> _birdApiService;
+        private readonly IBaseApiService<BirdRequestModel, BirdModel> _birdApiService;
         private readonly IBaseApiService<CageModel, CageModel> _cageApiService;
         private readonly IBaseApiService<SpeciesModel, SpeciesModel> _speciesApiService;
         private readonly IAuthApiService _authApiService;
 
         public Login(IAuthApiService authApiService, 
-                     IBaseApiService<BirdModel, BirdModel> birdApiService, 
+                     IBaseApiService<BirdRequestModel, BirdModel> birdApiService, 
                      IBaseApiService<CageModel, CageModel> cageApiService, 
                      IBaseApiService<SpeciesModel, SpeciesModel> speciesApiService)
         {
@@ -31,10 +31,10 @@ namespace Imi.Project.WPF
             txtEmail.Text = "tine.franchois@gmail.com";
             txtPassword.Password = "Pa$$w0rd";
         }
-        private void btnSignIn_Click(object sender, RoutedEventArgs e)
+        private void BtnSignIn_Click(object sender, RoutedEventArgs e)
         {
             _authApiService.Authenticate(txtEmail.Text, txtPassword.Password);
-            Window window = new MainWindow(_birdApiService, _speciesApiService, _cageApiService);
+            Window window = new MainWindow(_speciesApiService, _cageApiService, _birdApiService);
             window.Show();
             this.Close();
         }

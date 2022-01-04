@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Imi.Project.WPF.Core.Models
 {
-    public class CageModel : BaseModel
+    public class SpeciesModel : BaseModel
     {
         public string Name { get; set; }
-        public Guid Id { get; set; }
+        public string ScientificName { get; set; }
     }
 }

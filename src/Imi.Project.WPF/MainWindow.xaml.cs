@@ -2,6 +2,7 @@
 using Imi.Project.WPF.Core.Models;
 using Imi.Project.WPF.Events;
 using Imi.Project.WPF.ViewModels;
+using Imi.Project.WPF.Views;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,18 +15,20 @@ namespace Imi.Project.WPF
     public partial class MainWindow : Window
     {
 
-        private readonly IBaseApiService<BirdModel, BirdModel> _birdApiService;
+        private readonly IBaseApiService<BirdRequestModel, BirdModel> _birdApiService;
         private readonly IBaseApiService<SpeciesModel, SpeciesModel> _speciesApiService;
         private readonly IBaseApiService<CageModel, CageModel> _cageApiService;
-        public MainWindow(IBaseApiService<BirdModel, BirdModel> birdApiService, 
-                          IBaseApiService<SpeciesModel, SpeciesModel> speciesApiService, 
-                          IBaseApiService<CageModel, CageModel> cageApiService)
+        public MainWindow(
+                          IBaseApiService<SpeciesModel, SpeciesModel> speciesApiService,
+                          IBaseApiService<CageModel, CageModel> cageApiService, 
+                          IBaseApiService<BirdRequestModel, BirdModel> birdApiService)
         {
             InitializeComponent();
             _birdApiService = birdApiService;
             _speciesApiService = speciesApiService;
             _cageApiService = cageApiService;
             SetData();
+
         }
 
         private async void SetData()
@@ -38,7 +41,7 @@ namespace Imi.Project.WPF
             stkDetails.Visibility = Visibility.Hidden;
         }
 
-        private void lstBirds_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void LstBirds_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (lstBirds.SelectedItem != null)
             {
@@ -46,27 +49,24 @@ namespace Imi.Project.WPF
                 stkDetails.DataContext = new BirdDetailViewModel(lstBirds.SelectedItem as BirdModel);
             }
             else stkDetails.Visibility = Visibility.Hidden;
-
-
         }
 
-        private void btnAddBird_Click(object sender, RoutedEventArgs e)
+        private void BtnAddBird_Click(object sender, RoutedEventArgs e)
         {
             AddBird addBird = new AddBird(_birdApiService, _speciesApiService, _cageApiService);
             addBird.BirdAdded += RefreshBirdList;
             addBird.Show();
         }
 
-        private void btnEditBird_Click(object sender, RoutedEventArgs e)
+        private void BtnEditBird_Click(object sender, RoutedEventArgs e)
         {
-            //EditBird editBird = new EditBird(_birdApiService, _speciesApiService, _cageApiService, 
-            //                                                (BirdApiResponse)lstBirds.SelectedItem);
-
-            //editBird.BirdEdited += RefreshBirdList;
-            //editBird.Show();
+            EditBird editBird = new EditBird(_birdApiService, _speciesApiService, _cageApiService,
+                                                            (BirdModel)lstBirds.SelectedItem);
+            editBird.BirdEdited += RefreshBirdList;
+            editBird.Show();
         }
 
-        private async void btnDeleteBird_Click(object sender, RoutedEventArgs e)
+        private async void BtnDeleteBird_Click(object sender, RoutedEventArgs e)
         {
             var action = MessageBox.Show($"Are you sure you want to delete this bird?", "Hold!",
                                                          MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);

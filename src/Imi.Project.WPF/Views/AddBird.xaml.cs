@@ -1,8 +1,8 @@
 ﻿using Imi.Project.Common.Enums;
+using Imi.Project.WPF.Core.Entities;
 using Imi.Project.WPF.Core.Interfaces;
 using Imi.Project.WPF.Core.Models;
 using Imi.Project.WPF.Events;
-using Imi.Project.WPF.Models.Birds;
 using Imi.Project.WPF.ViewModels;
 using Microsoft.Win32;
 using System;
@@ -19,7 +19,7 @@ namespace Imi.Project.WPF
     public partial class AddBird : Window
     {
 
-        private readonly IBaseApiService<BirdModel, BirdModel> _birdApiService;
+        private readonly IBaseApiService<BirdRequestModel, BirdModel> _birdApiService;
         private readonly IBaseApiService<SpeciesModel, SpeciesModel> _speciesApiService;
         private readonly IBaseApiService<CageModel, CageModel> _cageApiService;
 
@@ -27,10 +27,10 @@ namespace Imi.Project.WPF
         public event RefreshList BirdAdded;
 
         private OpenFileDialog openFileDialog;
-        private Stream image;
-        private string _imagePath;
-        public AddBird(IBaseApiService<BirdModel, BirdModel> birdApiService, 
-                       IBaseApiService<SpeciesModel, SpeciesModel> speciesApiService, 
+        private ImageInfo imageInfo;
+
+        public AddBird(IBaseApiService<BirdRequestModel, BirdModel> birdApiService,
+                       IBaseApiService<SpeciesModel, SpeciesModel> speciesApiService,
                        IBaseApiService<CageModel, CageModel> cageApiService)
         {
             InitializeComponent();
@@ -52,30 +52,26 @@ namespace Imi.Project.WPF
             cmbGender.SelectedIndex = 0;
         }
 
-        private async void btnAdd_Click(object sender, RoutedEventArgs e)
+        private async void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            var newBird = new BirdModel
+            var newBird = new BirdRequestModel
             {
-                //Name = txtName.Text,
-                //HatchDate = DateTime.Parse(pkrDate.Text),
-                //CageId= ((CageModel)cmbCages.SelectedItem).Id,
-                //SpeciesId = ((SpeciesModel)cmbSpecies.SelectedItem).Id,
-                //Gender = (Gender)cmbGender.SelectedValue,
-                //Food = txtFood.Text,
+                Name = txtName.Text,
+                HatchDate = DateTime.Parse(pkrDate.Text),
+                CageId = ((CageModel)cmbCages.SelectedItem).Id,
+                SpeciesId = ((SpeciesModel)cmbSpecies.SelectedItem).Id,
+                Gender = (Gender)cmbGender.SelectedValue,
+                Food = txtFood.Text,
+                ImageInfo = imageInfo
             };
-
-            //newBird.Image = image;
-            //newBird.FileName = _imagePath;
-
             var result = await _birdApiService.AddAsync("birds", newBird);
-            if (!ReferenceEquals(result, null))
+            if (result.ErrorMessage is object)
             {
-                MessageBox.Show($"Something went wrong.\n{result}", null,
+                MessageBox.Show(result.ErrorMessage, null,
                                                      MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 if (openFileDialog != null)
-                    image = new MemoryStream(File.ReadAllBytes(openFileDialog.FileName).ToArray());
+                    imageInfo.Image = new MemoryStream(File.ReadAllBytes(openFileDialog.FileName).ToArray());
             }
-
             else
             {
                 MessageBox.Show("Bird was succesfully added!", "Success", MessageBoxButton.OKCancel, MessageBoxImage.Information);
@@ -84,26 +80,25 @@ namespace Imi.Project.WPF
             }
         }
 
-        private void btnAddImage_Click(object sender, RoutedEventArgs e)
+        private void BtnAddImage_Click(object sender, RoutedEventArgs e)
         {
-            string path = "";
-            string fileName = "";
-            openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.tif;..."; ;
+            openFileDialog = new OpenFileDialog
+            {
+                Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.tif;..."
+            };
             if (openFileDialog.ShowDialog() == true)
             {
-                path = openFileDialog.FileName;
-                _imagePath = openFileDialog.FileName;
-                fileName = Path.GetFileName(path);
-                txtImage.Text = fileName;
+                string path = openFileDialog.FileName;
+                if (!String.IsNullOrEmpty(path))
+                {
+                    imageInfo = new ImageInfo
+                    {
+                        Image = new MemoryStream(File.ReadAllBytes(path).ToArray()),
+                        FileName = Path.GetFileName(path)
+                    };
+                    txtImage.Text = imageInfo.FileName;
+                }
             }
-
-            if (path != "")
-            {
-                var stream = new MemoryStream(File.ReadAllBytes(path).ToArray());
-                image = stream;
-            }
-
         }
 
     }

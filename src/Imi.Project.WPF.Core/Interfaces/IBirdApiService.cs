@@ -1,16 +1,12 @@
-﻿using Imi.Project.Common.Dtos;
-using Imi.Project.WPF.Models.Birds;
-using System;
-using System.Collections.Generic;
+﻿using Imi.Project.WPF.Core.Models;
 using System.Threading.Tasks;
 
 namespace Imi.Project.WPF.Core.Interfaces
 {
     public interface IBirdApiService
     {
-        //Task<IEnumerable<BirdApiResponse>> GetBirds();
-        //Task<string> AddBird(Bird bird);
-        //Task<string> EditBird(Guid id, Bird bird);
-        //Task<string> DeleteBird(Guid id);
+        //Task<BirdModel> AddAsync(string requestUri, BirdModel bird, byte[] image);
+        //Task<BirdModel> UpdateAsync(string requestUri, BirdModel bird, byte[] image);
+
     }
 }

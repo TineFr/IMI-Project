@@ -6,6 +6,7 @@ namespace Imi.Project.WPF.Core.Models
 {
     public class BaseModel
     {
+        public Guid Id { get; set; }
         public string ErrorMessage { get; set; }
     }
 }

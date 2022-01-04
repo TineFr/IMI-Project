@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.WPF.Core.Interfaces
 {
-    public interface IBaseApiService<T, resp> where T : BaseModel where resp : BaseModel, new()
+    public interface IBaseApiService<T, resp> where T : class where resp : BaseModel, new()
     {
         Task<IEnumerable<resp>> GetAllAsync(string requestUri);
         Task<resp> AddAsync(string requestUri, T model);

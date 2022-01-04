@@ -31,8 +31,6 @@ namespace Imi.Project.WPF.Core.Services
                 _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", loginresponse.JWT);
                 Token.JWT = loginresponse.JWT;
             }
-            
-
         }
     }
 }

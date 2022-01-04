@@ -1,9 +1,4 @@
 ﻿using Imi.Project.WPF.Core.Models;
-using Imi.Project.WPF.Models.Birds;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Media.Imaging;
 
 namespace Imi.Project.WPF.ViewModels
 {
