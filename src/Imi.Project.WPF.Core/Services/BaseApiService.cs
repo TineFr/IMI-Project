@@ -71,7 +71,7 @@ namespace Imi.Project.WPF.Core.Services
         {
             if (message.StartsWith("{"))
             {
-                message = message.Split(":[\"")[1].Split("\"]}}")[0] + ".";
+                message = message.Split(":[\"")[1].Split("\"]}}")[0];
                 return $"Something went wrong.\n{message}.";
             }
             return $"Something went wrong.\n{message}";

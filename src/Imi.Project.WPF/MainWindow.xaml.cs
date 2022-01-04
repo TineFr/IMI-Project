@@ -74,16 +74,16 @@ namespace Imi.Project.WPF
             {
                 var birdToDelete = (BirdModel)lstBirds.SelectedItem;
                 var result = await _birdApiService.DeleteAsync($"birds/{birdToDelete.Id}");
-                //if (String.IsNullOrEmpty(result.ErrorMessage)) MessageBox.Show(result.ErrorMessage, null,
-                //                             MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                //else
-                //{
+                if (result is object) MessageBox.Show(result.ErrorMessage, null,
+                                             MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                else
+                {
                     MessageBox.Show("Bird was succesfully deleted!", "Success",
                                          MessageBoxButton.OKCancel, MessageBoxImage.Information);
                     SetData();
                     lstBirds.SelectedIndex = -1;
                     stkDetails.Visibility = Visibility.Hidden;
-                //}
+                }
             }
         }
         private void RefreshBirdList(object sender, BirdAddedOrEditedArgs e)

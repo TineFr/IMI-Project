@@ -76,13 +76,13 @@ namespace Imi.Project.WPF.Views
             }
             else
             {
-                MessageBox.Show("Bird was succesfully added!", "Success", MessageBoxButton.OKCancel, MessageBoxImage.Information);
-                BirdAdded?.Invoke(this, new BirdAddedOrEditedArgs(editedBird.Name));
+                MessageBox.Show("Bird was succesfully updated!", "Success", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+                BirdEdited?.Invoke(this, new BirdAddedOrEditedArgs(editedBird.Name));
                 this.Close();
             }
         }
 
-        private void BtnAddImage_Click(object sender, RoutedEventArgs e)
+        private void BtnChangeImage_Click(object sender, RoutedEventArgs e)
         {
             openFileDialog = new OpenFileDialog
             {
