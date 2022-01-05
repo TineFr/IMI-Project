@@ -80,9 +80,12 @@ namespace Imi.Project.Mobile.ViewModels
                 mainPage.AddTab<SpeciesViewModel>("guide", "guide24.png");
                 Application.Current.MainPage = mainPage;
             }
-
-
-
         });
+
+        public ICommand ShowRegisterCommand => new Command(
+                async () =>
+                {
+                    await CoreMethods.PushPageModel<RegisterViewModel>();
+                });
     }
 }
