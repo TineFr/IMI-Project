@@ -93,10 +93,18 @@ namespace Imi.Project.WPF
             SetData();
         }
 
-        private void btnLogOut_Click(object sender, RoutedEventArgs e)
+        private void BtnLogOut_Click(object sender, RoutedEventArgs e)
         {
-            _authApiService.LogOut();
-            this.Close();
+            var action = MessageBox.Show($"Do you wish to log out?", "Hold!",
+                                             MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+            if (action == MessageBoxResult.Yes)
+            {
+                _authApiService.LogOut();
+                Login window = new Login(_authApiService, _birdApiService, _cageApiService, _speciesApiService);
+                window.Show();
+                this.Close();
+            }
+
         }
     }
 }

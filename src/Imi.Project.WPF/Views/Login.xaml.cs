@@ -45,7 +45,7 @@ namespace Imi.Project.WPF.Views
             }
             else
             {
-                Window window = new MainWindow(_speciesApiService, _cageApiService, _birdApiService);
+                Window window = new MainWindow(_speciesApiService, _cageApiService, _birdApiService, _authApiService);
                 window.Show();
                 this.Close();
             }
