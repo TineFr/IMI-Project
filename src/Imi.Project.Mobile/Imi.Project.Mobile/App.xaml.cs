@@ -13,6 +13,9 @@ using Xamarin.Forms.PlatformConfiguration;
 using Imi.Project.Mobile.Customs;
 using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
+using Imi.Project.Mobile.Core.Interfaces;
+using Imi.Project.Mobile.Core.Services.Api;
+using Imi.Project.Mobile.Core.Models;
 
 namespace Imi.Project.Mobile
 {
@@ -22,12 +25,29 @@ namespace Imi.Project.Mobile
         {
             InitializeComponent();
 
+            // mock services
+
             FreshIOC.Container.Register<IBirdService, MockBirdService>();
             FreshIOC.Container.Register<ISpeciesService, MockSpeciesService>();
             FreshIOC.Container.Register<ICageService, MockCageService>();
             FreshIOC.Container.Register<IMedicationService, MockMedicationService>();
             FreshIOC.Container.Register<IPrescriptionService, MockPrescriptionService>();
             FreshIOC.Container.Register<IDailyTaskService, MockDailyTaskService>();
+
+            // api services
+
+            FreshIOC.Container.Register<IAuthApiService, AuthApiService>();
+            //FreshIOC.Container.Register(typeof(IBaseApiService<BirdRequestModel, BirdRequestModel>), typeof(BirdApiService));
+            //FreshIOC.Container.Register(typeof(IBaseApiService<CageModel, CageModel>), typeof(BaseApiService<CageModel, CageModel>));
+            //FreshIOC.Container.Register(typeof(IBaseApiService<SpeciesModel, SpeciesModel>), typeof(BaseApiService<SpeciesModel, SpeciesModel>));
+            //FreshIOC.Container.Register(typeof(IBaseApiService<LogInApiResponse, LogInApiResponse>), typeof(BaseApiService<LogInApiResponse, LogInApiResponse>));
+
+            FreshIOC.Container.Register<IBaseApiService<BirdRequestModel, BirdModel>, BirdApiService>();
+            FreshIOC.Container.Register<IBaseApiService<CageModel, CageModel>, BaseApiService<CageModel, CageModel>>();
+            FreshIOC.Container.Register<IBaseApiService<SpeciesModel, SpeciesModel>, BaseApiService<SpeciesModel, SpeciesModel>>();
+            FreshIOC.Container.Register<IBaseApiService<LogInApiResponse, LogInApiResponse>, BaseApiService<LogInApiResponse, LogInApiResponse>>();
+
+
 
             //var mainPage = new CustomContainer();
             //mainPage.FixedMode = true;
