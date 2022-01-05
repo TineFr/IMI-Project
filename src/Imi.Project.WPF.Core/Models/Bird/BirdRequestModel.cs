@@ -1,8 +1,6 @@
 ﻿using Imi.Project.Common.Enums;
 using Imi.Project.WPF.Core.Entities;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Imi.Project.WPF.Core.Models
 {
