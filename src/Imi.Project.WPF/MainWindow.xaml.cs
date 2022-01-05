@@ -1,8 +1,10 @@
-﻿using Imi.Project.WPF.Events;
-using Imi.Project.WPF.Interfaces;
-using Imi.Project.WPF.Models.Birds;
+﻿using Imi.Project.WPF.Core.Interfaces;
+using Imi.Project.WPF.Core.Models;
+using Imi.Project.WPF.Events;
 using Imi.Project.WPF.ViewModels;
 using Imi.Project.WPF.Views;
+using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -13,26 +15,34 @@ namespace Imi.Project.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly IBirdApiService _birdApiService;
-        private readonly ISpeciesApiService _speciesApiService;
-        private readonly ICageApiService _cageApiService;
-
-        public MainWindow(ISpeciesApiService speciesApiService, 
-                          IBirdApiService birdApiService, 
-                          ICageApiService cageApiService)
+        private readonly IAuthApiService _authApiService;
+        private readonly IBaseApiService<BirdRequestModel, BirdModel> _birdApiService;
+        private readonly IBaseApiService<SpeciesModel, SpeciesModel> _speciesApiService;
+        private readonly IBaseApiService<CageModel, CageModel> _cageApiService;
+        public MainWindow(
+                          IBaseApiService<SpeciesModel, SpeciesModel> speciesApiService,
+                          IBaseApiService<CageModel, CageModel> cageApiService,
+                          IBaseApiService<BirdRequestModel, BirdModel> birdApiService, 
+                          IAuthApiService authApiService)
         {
             InitializeComponent();
-            _speciesApiService = speciesApiService;
             _birdApiService = birdApiService;
+            _speciesApiService = speciesApiService;
             _cageApiService = cageApiService;
+            _authApiService = authApiService;
             SetData();
+
         }
 
         private async void SetData()
         {
-       
-            lstBirds.ItemsSource = await _birdApiService.GetBirds();
-
+            var result = await _birdApiService.GetAllAsync("me/birds");
+            if (result.ToList()[0].ErrorMessage is object)
+            {
+                MessageBox.Show(result.ToList()[0].ErrorMessage, null,
+                                             MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+            else lstBirds.ItemsSource = result;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -40,48 +50,44 @@ namespace Imi.Project.WPF
             stkDetails.Visibility = Visibility.Hidden;
         }
 
-        private void lstBirds_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void LstBirds_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (lstBirds.SelectedItem != null)
             {
                 stkDetails.Visibility = Visibility.Visible;
-                stkDetails.DataContext = new BirdDetailViewModel(lstBirds.SelectedItem as BirdApiResponse);
+                stkDetails.DataContext = new BirdDetailViewModel(lstBirds.SelectedItem as BirdModel);
             }
             else stkDetails.Visibility = Visibility.Hidden;
-
-
         }
 
-        private void btnAddBird_Click(object sender, RoutedEventArgs e)
+        private void BtnAddBird_Click(object sender, RoutedEventArgs e)
         {
             AddBird addBird = new AddBird(_birdApiService, _speciesApiService, _cageApiService);
-
             addBird.BirdAdded += RefreshBirdList;
             addBird.Show();
         }
 
-        private void btnEditBird_Click(object sender, RoutedEventArgs e)
+        private void BtnEditBird_Click(object sender, RoutedEventArgs e)
         {
-            EditBird editBird = new EditBird(_birdApiService, _speciesApiService, _cageApiService, 
-                                                            (BirdApiResponse)lstBirds.SelectedItem);
-
+            EditBird editBird = new EditBird(_birdApiService, _speciesApiService, _cageApiService,
+                                                            (BirdModel)lstBirds.SelectedItem);
             editBird.BirdEdited += RefreshBirdList;
             editBird.Show();
         }
 
-        private async void btnDeleteBird_Click(object sender, RoutedEventArgs e)
+        private async void BtnDeleteBird_Click(object sender, RoutedEventArgs e)
         {
             var action = MessageBox.Show($"Are you sure you want to delete this bird?", "Hold!",
                                                          MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
             if (action == MessageBoxResult.Yes)
             {
-                var birdToDelete = (BirdApiResponse)lstBirds.SelectedItem;
-                var result = await _birdApiService.DeleteBird(birdToDelete.Id);
-                if (!ReferenceEquals(result, null)) MessageBox.Show($"Something went wrong\n{result}", null,
+                var birdToDelete = (BirdModel)lstBirds.SelectedItem;
+                var result = await _birdApiService.DeleteAsync($"birds/{birdToDelete.Id}");
+                if (result is object) MessageBox.Show(result.ErrorMessage, null,
                                              MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 else
                 {
-                    MessageBox.Show("Bird was succesfully deleted!", "Success", 
+                    MessageBox.Show("Bird was succesfully deleted!", "Success",
                                          MessageBoxButton.OKCancel, MessageBoxImage.Information);
                     SetData();
                     lstBirds.SelectedIndex = -1;
@@ -92,6 +98,20 @@ namespace Imi.Project.WPF
         private void RefreshBirdList(object sender, BirdAddedOrEditedArgs e)
         {
             SetData();
+        }
+
+        private void BtnLogOut_Click(object sender, RoutedEventArgs e)
+        {
+            var action = MessageBox.Show($"Do you wish to log out?", "Hold!",
+                                             MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+            if (action == MessageBoxResult.Yes)
+            {
+                _authApiService.LogOut();
+                Login window = new Login(_authApiService, _birdApiService, _cageApiService, _speciesApiService);
+                window.Show();
+                this.Close();
+            }
+
         }
     }
 }

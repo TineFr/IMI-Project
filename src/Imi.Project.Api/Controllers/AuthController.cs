@@ -73,7 +73,7 @@ namespace Imi.Project.Api.Controllers
             lockoutOnFailure: false);
             if (!result.Succeeded)
             {
-                return Unauthorized();
+                return Unauthorized("Password and or username are incorrect");
             }
             var applicationUser = await _userManager.FindByEmailAsync(login.Email);
             JwtSecurityToken token = await GenerateTokenAsync(applicationUser);

@@ -1,34 +1,21 @@
-﻿using Imi.Project.WPF.Models.Birds;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Media.Imaging;
+﻿using Imi.Project.WPF.Core.Models;
 
 namespace Imi.Project.WPF.ViewModels
 {
     public class BirdDetailViewModel
     {
-        private BirdApiResponse bird;
+        private BirdModel bird;
 
-        public BirdApiResponse Bird
+        public BirdModel Bird
         {
             get { return bird; }
             set { bird = value; }
         }
 
-        private string image;
-
-        public string Image
-        {
-            get { return image; }
-            set { image = value; }
-        }
-
-        public BirdDetailViewModel(BirdApiResponse bird)
+        public BirdDetailViewModel(BirdModel bird)
         {
             Bird = bird;
-            Image = null;
-            Image = Bird?.Image;
+
         }
 
 

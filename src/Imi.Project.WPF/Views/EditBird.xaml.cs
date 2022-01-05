@@ -1,10 +1,8 @@
-﻿using Imi.Project.Common.Dtos;
-using Imi.Project.Common.Enums;
+﻿using Imi.Project.Common.Enums;
+using Imi.Project.WPF.Core.Entities;
+using Imi.Project.WPF.Core.Interfaces;
+using Imi.Project.WPF.Core.Models;
 using Imi.Project.WPF.Events;
-using Imi.Project.WPF.Interfaces;
-using Imi.Project.WPF.Models.Birds;
-using Imi.Project.WPF.Models.Cages;
-using Imi.Project.WPF.Models.Species;
 using Microsoft.Win32;
 using System;
 using System.IO;
@@ -18,24 +16,24 @@ namespace Imi.Project.WPF.Views
     /// </summary>
     public partial class EditBird : Window
     {
-        private readonly IBirdApiService _birdApiService;
-        private readonly ISpeciesApiService _speciesApiService;
-        private readonly ICageApiService _cageApiService;
-        private readonly BirdApiResponse _birdToUpdate;
-
-        private OpenFileDialog openFileDialog;
-        private Stream image;
-        private string _imagePath;
+        private readonly IBaseApiService<BirdRequestModel, BirdModel> _birdApiService;
+        private readonly IBaseApiService<SpeciesModel, SpeciesModel> _speciesApiService;
+        private readonly IBaseApiService<CageModel, CageModel> _cageApiService;
+        private readonly BirdModel _birdToUpdate;
 
         public delegate void RefreshList(object sender, BirdAddedOrEditedArgs e);
         public event RefreshList BirdEdited;
-        public EditBird(IBirdApiService apiService,
-                       ISpeciesApiService speciesApiService,
-                       ICageApiService cageApiService,
-                       BirdApiResponse birdToUpdate)
+
+        private OpenFileDialog openFileDialog;
+        private ImageInfo imageInfo;
+
+        public EditBird(IBaseApiService<BirdRequestModel, BirdModel> birdApiService,
+                       IBaseApiService<SpeciesModel, SpeciesModel> speciesApiService,
+                       IBaseApiService<CageModel, CageModel> cageApiService,
+                       BirdModel birdToUpdate)
         {
             InitializeComponent();
-            _birdApiService = apiService;
+            _birdApiService = birdApiService;
             _speciesApiService = speciesApiService;
             _cageApiService = cageApiService;
             _birdToUpdate = birdToUpdate;
@@ -44,8 +42,8 @@ namespace Imi.Project.WPF.Views
 
         private async void SetData()
         {
-            cmbSpecies.ItemsSource = await _speciesApiService.GetSpecies();
-            cmbCages.ItemsSource = await _cageApiService.GetCages();
+            cmbSpecies.ItemsSource = await _speciesApiService.GetAllAsync("species");
+            cmbCages.ItemsSource = await _cageApiService.GetAllAsync("me/cages");
             cmbGender.ItemsSource = Enum.GetValues(typeof(Gender));
 
             txtName.Text = _birdToUpdate.Name;
@@ -56,53 +54,53 @@ namespace Imi.Project.WPF.Views
             pkrDate.Text = _birdToUpdate.HatchDate.ToString();
         }
 
-        private async void btnEdit_Click(object sender, RoutedEventArgs e)
+        private async void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
-            var editedBird = new Bird
+            var editedBird = new BirdRequestModel
             {
                 Name = txtName.Text,
                 HatchDate = DateTime.Parse(pkrDate.Text),
-                CageId = ((CageApiResponse)cmbCages.SelectedItem).Id,
-                SpeciesId = ((SpeciesApiResponse)cmbSpecies.SelectedItem).Id,
+                CageId = ((CageModel)cmbCages.SelectedItem).Id,
+                SpeciesId = ((SpeciesModel)cmbSpecies.SelectedItem).Id,
                 Gender = (Gender)cmbGender.SelectedValue,
                 Food = txtFood.Text,
+                ImageInfo = imageInfo
             };
-
-            editedBird.Image = image;
-            editedBird.FileName = _imagePath;
-
-            var result = await _birdApiService.EditBird(_birdToUpdate.Id, editedBird);
-            if (!ReferenceEquals(result, null))
+            var result = await _birdApiService.UpdateAsync($"birds/{_birdToUpdate.Id}", editedBird);
+            if (result.ErrorMessage is object)
             {
-                MessageBox.Show($"Something went wrong.\n{result}", null,
+                MessageBox.Show(result.ErrorMessage, null,
                                                      MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                image = new MemoryStream(File.ReadAllBytes(openFileDialog.FileName).ToArray());
+                if (openFileDialog != null)
+                    imageInfo.Image = new MemoryStream(File.ReadAllBytes(openFileDialog.FileName).ToArray());
             }
             else
             {
                 MessageBox.Show("Bird was succesfully updated!", "Success", MessageBoxButton.OKCancel, MessageBoxImage.Information);
-                _birdToUpdate.Name = txtName.Text;
                 BirdEdited?.Invoke(this, new BirdAddedOrEditedArgs(editedBird.Name));
                 this.Close();
             }
         }
-        
-        private void btnChangeImage_Click(object sender, RoutedEventArgs e)
+
+        private void BtnChangeImage_Click(object sender, RoutedEventArgs e)
         {
-            string path = "";
-            string fileName = "";
-            openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.tif;..."; ;
+            openFileDialog = new OpenFileDialog
+            {
+                Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.tif;..."
+            };
             if (openFileDialog.ShowDialog() == true)
             {
-                path = openFileDialog.FileName;
-                _imagePath = openFileDialog.FileName;
-                fileName = Path.GetFileName(path);
-                txtImage.Text = fileName;
+                string path = openFileDialog.FileName;
+                if (!String.IsNullOrEmpty(path))
+                {
+                    imageInfo = new ImageInfo
+                    {
+                        Image = new MemoryStream(File.ReadAllBytes(path).ToArray()),
+                        FileName = Path.GetFileName(path)
+                    };
+                    txtImage.Text = imageInfo.FileName;
+                }
             }
-
-            var stream = new MemoryStream(File.ReadAllBytes(path).ToArray());
-            image = stream;
         }
     }
 }

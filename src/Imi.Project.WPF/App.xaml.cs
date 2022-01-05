@@ -1,5 +1,7 @@
-﻿using Imi.Project.WPF.Interfaces;
-using Imi.Project.WPF.Services;
+﻿using Imi.Project.WPF.Core.Interfaces;
+using Imi.Project.WPF.Core.Models;
+using Imi.Project.WPF.Core.Services;
+using Imi.Project.WPF.Views;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -39,11 +41,11 @@ namespace Imi.Project.WPF
         private void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpClient();
-            services.AddScoped<IBaseApiService, BaseApiService>();
             services.AddScoped<IAuthApiService, AuthApiService>();
-            services.AddScoped<IBirdApiService, BirdApiService>();
-            services.AddScoped<ISpeciesApiService, SpeciesApiService>();
-            services.AddScoped<ICageApiService, CageApiService>();
+            services.AddScoped(typeof(IBaseApiService<BirdRequestModel, BirdModel>), typeof(BirdApiService));
+            services.AddScoped(typeof(IBaseApiService<CageModel, CageModel>), typeof(BaseApiService<CageModel, CageModel>));
+            services.AddScoped(typeof(IBaseApiService<SpeciesModel, SpeciesModel>), typeof(BaseApiService<SpeciesModel, SpeciesModel>));
+            services.AddScoped(typeof(IBaseApiService<LogInApiResponse, LogInApiResponse>), typeof(BaseApiService<LogInApiResponse, LogInApiResponse>));
             services.AddTransient(typeof(Login));
             services.AddTransient(typeof(MainWindow));
         }

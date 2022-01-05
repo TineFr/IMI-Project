@@ -12,30 +12,43 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="2*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Button  Grid.Column="1" Grid.Row="0" x:Name="btnLogOut" Foreground="White" Content="Log out" Width="60" Height="40" FontSize="10"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#DEC5E1" BorderThickness="0" HorizontalAlignment="Right" Margin="0,10,10,0" Click="BtnLogOut_Click" >
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20"></Setter>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+        <StackPanel Grid.Column="0" Grid.Row="1">
             <Label   Content="My Birds" HorizontalContentAlignment="Center" Background="#D4E7C0" Foreground="White" FontSize="30" Margin ="10, 50, 10, 20" />
-            <Button x:Name="btnAddBird" Foreground="White" Content="+ add" Width="40" Height="40" FontSize="10"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#DEC5E1" BorderThickness="0" HorizontalAlignment="right" Margin="0,0,10,0" Click="btnAddBird_Click" >
+            <Button x:Name="btnAddBird" Foreground="White" Content="+ add" Width="40" Height="40" FontSize="10"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#DEC5E1" BorderThickness="0" HorizontalAlignment="right" Margin="0,0,10,0" Click="BtnAddBird_Click" >
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="20"></Setter>
                     </Style>
                 </Button.Resources>
             </Button>
-            <ListBox x:Name="lstBirds" ItemsSource="{Binding MyBirds}" DisplayMemberPath="Name" BorderThickness="0" Height="200" Margin="10,20,10,40" SelectionChanged="lstBirds_SelectionChanged">
+            <ListBox x:Name="lstBirds" ItemsSource="{Binding MyBirds}" DisplayMemberPath="Name" BorderThickness="0" Height="200" Margin="10,20,10,40" SelectionChanged="LstBirds_SelectionChanged">
                 
                 
             </ListBox>
         </StackPanel>
-        <StackPanel Grid.Column="1" Grid.ColumnSpan="2" x:Name="stkDetails" Margin="80,0,80,0">
+        <StackPanel Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" x:Name="stkDetails" Margin="80,0,80,0">
             <Label  Content="Details" HorizontalContentAlignment="Center" Background="#B7D7F0" Foreground="White" FontSize="30" Margin ="5, 50, 5, 20" />
-            <Button x:Name="btnEditBird" Foreground="White" Content="edit" Width="40" Height="40" FontSize="10"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#DEC5E1" BorderThickness="0" HorizontalAlignment="right" Margin="0,0,10,0" Click="btnEditBird_Click">
+            <Button x:Name="btnEditBird" Foreground="White" Content="edit" Width="40" Height="40" FontSize="10"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#DEC5E1" BorderThickness="0" HorizontalAlignment="right" Margin="0,0,10,0" Click="BtnEditBird_Click">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="20"></Setter>
                     </Style>
                 </Button.Resources>
             </Button>
-            <Image Height="200" Source="{Binding Image}"></Image>
+            <Image Height="200" Source="{Binding Bird.Image}"></Image>
             <StackPanel Margin="50,10,50,0">
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Name:"></Label>
@@ -62,7 +75,7 @@
                     <TextBlock Text="{Binding Bird.Date}" Padding="5"></TextBlock>
                 </StackPanel>
             </StackPanel>
-            <Button x:Name="btnDeleteBird" Foreground="White" Content="Delete" Width="60" Height="40" FontSize="10"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="IndianRed" BorderThickness="0" HorizontalAlignment="right" Margin="0,0,10,0" Click="btnDeleteBird_Click" >
+            <Button x:Name="btnDeleteBird" Foreground="White" Content="Delete" Width="60" Height="40" FontSize="10"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="IndianRed" BorderThickness="0" HorizontalAlignment="right" Margin="0,0,10,0" Click="BtnDeleteBird_Click" >
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="20"></Setter>
