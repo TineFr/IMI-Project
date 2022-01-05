@@ -28,7 +28,7 @@
                                  SelectionChangedCommand="{Binding ViewBirdCommand}"
                                  SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference cvBirds}}">
                     <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models1:Bird" >
+                        <DataTemplate x:DataType="models1:BirdModel" >
                             <StackLayout Style="{StaticResource CollectionSelection}">
 
                                 <Frame Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="Center" Margin="10,5,10,5"  BackgroundColor="#EEEEEE"
