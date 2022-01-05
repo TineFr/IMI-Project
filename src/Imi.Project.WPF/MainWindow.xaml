@@ -12,7 +12,20 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="2*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Button  Grid.Column="1" Grid.Row="0" x:Name="btnLogOut" Foreground="White" Content="Log out" Width="60" Height="40" FontSize="10"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#DEC5E1" BorderThickness="0" HorizontalAlignment="Right" Margin="0,10,10,0" Click="BtnLogOut_Click" >
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20"></Setter>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+        <StackPanel Grid.Column="0" Grid.Row="1">
             <Label   Content="My Birds" HorizontalContentAlignment="Center" Background="#D4E7C0" Foreground="White" FontSize="30" Margin ="10, 50, 10, 20" />
             <Button x:Name="btnAddBird" Foreground="White" Content="+ add" Width="40" Height="40" FontSize="10"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#DEC5E1" BorderThickness="0" HorizontalAlignment="right" Margin="0,0,10,0" Click="BtnAddBird_Click" >
                 <Button.Resources>
@@ -26,7 +39,7 @@
                 
             </ListBox>
         </StackPanel>
-        <StackPanel Grid.Column="1" Grid.ColumnSpan="2" x:Name="stkDetails" Margin="80,0,80,0">
+        <StackPanel Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" x:Name="stkDetails" Margin="80,0,80,0">
             <Label  Content="Details" HorizontalContentAlignment="Center" Background="#B7D7F0" Foreground="White" FontSize="30" Margin ="5, 50, 5, 20" />
             <Button x:Name="btnEditBird" Foreground="White" Content="edit" Width="40" Height="40" FontSize="10"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#DEC5E1" BorderThickness="0" HorizontalAlignment="right" Margin="0,0,10,0" Click="BtnEditBird_Click">
                 <Button.Resources>

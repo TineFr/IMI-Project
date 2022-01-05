@@ -14,19 +14,21 @@ namespace Imi.Project.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        private readonly IAuthApiService _authApiService;
         private readonly IBaseApiService<BirdRequestModel, BirdModel> _birdApiService;
         private readonly IBaseApiService<SpeciesModel, SpeciesModel> _speciesApiService;
         private readonly IBaseApiService<CageModel, CageModel> _cageApiService;
         public MainWindow(
                           IBaseApiService<SpeciesModel, SpeciesModel> speciesApiService,
-                          IBaseApiService<CageModel, CageModel> cageApiService, 
-                          IBaseApiService<BirdRequestModel, BirdModel> birdApiService)
+                          IBaseApiService<CageModel, CageModel> cageApiService,
+                          IBaseApiService<BirdRequestModel, BirdModel> birdApiService, 
+                          IAuthApiService authApiService)
         {
             InitializeComponent();
             _birdApiService = birdApiService;
             _speciesApiService = speciesApiService;
             _cageApiService = cageApiService;
+            _authApiService = authApiService;
             SetData();
 
         }
@@ -89,6 +91,12 @@ namespace Imi.Project.WPF
         private void RefreshBirdList(object sender, BirdAddedOrEditedArgs e)
         {
             SetData();
+        }
+
+        private void btnLogOut_Click(object sender, RoutedEventArgs e)
+        {
+            _authApiService.LogOut();
+            this.Close();
         }
     }
 }

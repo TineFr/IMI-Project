@@ -25,7 +25,6 @@ namespace Imi.Project.WPF.Core.Services
                 { new StringContent(model.HatchDate.ToString()), "HatchDate" },
                 { new StringContent(model.CageId.ToString("d")), "CageId" },
                 { new StringContent(model.SpeciesId.ToString("d")), "SpeciesId" },
-                //{ new ByteArrayContent(model.Image), "Image", "" }
             };
 
             if (model.ImageInfo != null)
@@ -59,9 +58,3 @@ namespace Imi.Project.WPF.Core.Services
 
     }
 }
-
-
-//if (editedBird.Image != null)
-//{
-//    content.Add(new StreamContent(editedBird.Image), "Image", editedBird.FileName);
-//}

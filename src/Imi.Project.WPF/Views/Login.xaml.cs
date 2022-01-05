@@ -28,15 +28,28 @@ namespace Imi.Project.WPF.Views
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            SetData();
+        }
+
+        private void SetData()
+        {
             txtEmail.Text = "tine.franchois@gmail.com";
             txtPassword.Password = "Pa$$w0rd";
         }
-        private void BtnSignIn_Click(object sender, RoutedEventArgs e)
+        private async void BtnSignIn_Click(object sender, RoutedEventArgs e)
         {
-            _authApiService.Authenticate(txtEmail.Text, txtPassword.Password);
-            Window window = new MainWindow(_speciesApiService, _cageApiService, _birdApiService);
-            window.Show();
-            this.Close();
+            string response = await _authApiService.Authenticate(txtEmail.Text, txtPassword.Password);
+            if (response is object)
+            {
+                tbkMessage.Text = response;
+            }
+            else
+            {
+                Window window = new MainWindow(_speciesApiService, _cageApiService, _birdApiService);
+                window.Show();
+                this.Close();
+            }
+
         }
     }
 }
