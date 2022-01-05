@@ -12,19 +12,10 @@ namespace Imi.Project.WPF.ViewModels
             set { bird = value; }
         }
 
-        private string image;
-
-        public string Image
-        {
-            get { return image; }
-            set { image = value; }
-        }
-
         public BirdDetailViewModel(BirdModel bird)
         {
             Bird = bird;
-            Image = null;
-            Image = Bird?.Image;
+
         }
 
 

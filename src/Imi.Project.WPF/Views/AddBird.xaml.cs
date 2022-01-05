@@ -34,8 +34,6 @@ namespace Imi.Project.WPF
                        IBaseApiService<CageModel, CageModel> cageApiService)
         {
             InitializeComponent();
-
-            this.DataContext = new AddBirdViewModel();
             _birdApiService = birdApiService;
             _speciesApiService = speciesApiService;
             _cageApiService = cageApiService;
@@ -50,6 +48,7 @@ namespace Imi.Project.WPF
             cmbCages.SelectedIndex = 0;
             cmbGender.ItemsSource = Enum.GetValues(typeof(Gender));
             cmbGender.SelectedIndex = 0;
+            pkrDate.Text = DateTime.Today.ToString();
         }
 
         private async void BtnAdd_Click(object sender, RoutedEventArgs e)

@@ -48,7 +48,7 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <Image Height="200" Source="{Binding Image}"></Image>
+            <Image Height="200" Source="{Binding Bird.Image}"></Image>
             <StackPanel Margin="50,10,50,0">
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Name:"></Label>

@@ -4,6 +4,7 @@ using Imi.Project.WPF.Events;
 using Imi.Project.WPF.ViewModels;
 using Imi.Project.WPF.Views;
 using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -35,7 +36,13 @@ namespace Imi.Project.WPF
 
         private async void SetData()
         {
-            lstBirds.ItemsSource = await _birdApiService.GetAllAsync("me/birds");
+            var result = await _birdApiService.GetAllAsync("me/birds");
+            if (result.ToList()[0].ErrorMessage is object)
+            {
+                MessageBox.Show(result.ToList()[0].ErrorMessage, null,
+                                             MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+            else lstBirds.ItemsSource = result;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
