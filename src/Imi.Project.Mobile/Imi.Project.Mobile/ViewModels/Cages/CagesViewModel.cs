@@ -65,8 +65,8 @@ namespace Imi.Project.Mobile.ViewModels.Cages
              Cages = new ObservableCollection<CageModel>( await _cageService.GetAllAsync("me/cages"));
          });
 
-        public ICommand ViewCageCommand => new Command<Cage>(
-            async (Cage cage) =>
+        public ICommand ViewCageCommand => new Command<CageModel>(
+            async (CageModel cage) =>
             {
                 await CoreMethods.PushPageModel<CageDetailViewModel>(cage);
             });

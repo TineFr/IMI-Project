@@ -37,15 +37,11 @@ namespace Imi.Project.Mobile
             // api services
 
             FreshIOC.Container.Register<IAuthApiService, AuthApiService>();
-            //FreshIOC.Container.Register(typeof(IBaseApiService<BirdRequestModel, BirdRequestModel>), typeof(BirdApiService));
-            //FreshIOC.Container.Register(typeof(IBaseApiService<CageModel, CageModel>), typeof(BaseApiService<CageModel, CageModel>));
-            //FreshIOC.Container.Register(typeof(IBaseApiService<SpeciesModel, SpeciesModel>), typeof(BaseApiService<SpeciesModel, SpeciesModel>));
-            //FreshIOC.Container.Register(typeof(IBaseApiService<LogInApiResponse, LogInApiResponse>), typeof(BaseApiService<LogInApiResponse, LogInApiResponse>));
-
             FreshIOC.Container.Register<IBaseApiService<BirdRequestModel, BirdModel>, BirdApiService>();
             FreshIOC.Container.Register<IBaseApiService<CageModel, CageModel>, BaseApiService<CageModel, CageModel>>();
             FreshIOC.Container.Register<IBaseApiService<SpeciesModel, SpeciesModel>, BaseApiService<SpeciesModel, SpeciesModel>>();
-            FreshIOC.Container.Register<IBaseApiService<LogInApiResponse, LogInApiResponse>, BaseApiService<LogInApiResponse, LogInApiResponse>>();
+            FreshIOC.Container.Register<IBaseApiService<DailyTaskModel, DailyTaskModel>, BaseApiService<DailyTaskModel, DailyTaskModel>>();
+
 
 
 

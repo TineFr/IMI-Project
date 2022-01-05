@@ -1,4 +1,5 @@
 ﻿using FreshMvvm;
+using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
 using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
@@ -15,16 +16,16 @@ namespace Imi.Project.Mobile.ViewModels.Cages
     public class CageDetailViewModel : FreshBasePageModel
     {
 
-        private readonly IDailyTaskService dailyTaskService;
+        private readonly IBaseApiService<DailyTaskModel, DailyTaskModel> _dailyTaskService;
 
-        public CageDetailViewModel(IDailyTaskService dailyTaskService)
+        public CageDetailViewModel(IBaseApiService<DailyTaskModel, DailyTaskModel> dailyTaskService)
         {
-            this.dailyTaskService = dailyTaskService;
+            _dailyTaskService = dailyTaskService;
         }
 
-        private ObservableCollection<DailyTask> tasks;
+        private ObservableCollection<DailyTaskModel> tasks;
 
-        public ObservableCollection<DailyTask> Tasks
+        public ObservableCollection<DailyTaskModel> Tasks
         {
             get { return tasks; }
             set
@@ -35,8 +36,8 @@ namespace Imi.Project.Mobile.ViewModels.Cages
         }
 
 
-        private Cage cage;
-        public Cage Cage
+        private CageModel cage;
+        public CageModel Cage
         {
             get { return cage; }
             set
@@ -54,20 +55,20 @@ namespace Imi.Project.Mobile.ViewModels.Cages
 
         private async Task RefreshTasks()
         {
-            var tasks = await dailyTaskService.GetDailyTaskByCageId(Cage.Id);
+            var tasks = await _dailyTaskService.GetAllAsync($"cages/{Cage.Id}/dailytasks");
             Tasks = null;
-            Tasks = new ObservableCollection<DailyTask>(tasks);
+            Tasks = new ObservableCollection<DailyTaskModel>(tasks);
         }
 
         public async override void Init(object initData)
         {
-            Cage = initData as Cage;
+            Cage = initData as CageModel;
             await RefreshTasks();
             base.Init(initData);
         }
         public override void ReverseInit(object value)
         {
-            var updatedCage = value as Cage;
+            var updatedCage = value as CageModel;
             Cage = updatedCage;
         }
 
@@ -82,46 +83,47 @@ namespace Imi.Project.Mobile.ViewModels.Cages
              {
                  await CoreMethods.PopPageModel();
              });
-        public ICommand EditTaskCommand => new Command<DailyTask>(
-             async (DailyTask dailyTask) =>
+
+        public ICommand EditTaskCommand => new Command<DailyTaskModel>(
+             async (DailyTaskModel dailyTask) =>
              {
                  if (dailyTask == null) return;
-                 var edit = await Application.Current.MainPage.DisplayPromptAsync("Edit Task", null, "Save", "Cancel", null, 50, null, dailyTask.Name);
+                 var edit = await Application.Current.MainPage.DisplayPromptAsync("Edit Task", null, "Save", "Cancel", null, 50, null, dailyTask.Description);
 
                  if (edit != null)
                  {
-                     var taskToUpdate = await dailyTaskService.GetDailyTaskById(dailyTask.Id);
-                     taskToUpdate.Name = edit;
-                     await dailyTaskService.UpdateDailyTask(taskToUpdate);
+                     dailyTask.Description = edit;
+                     dailyTask.CageId = Cage.Id;
+                     var result = await _dailyTaskService.UpdateAsync($"dailytasks/{dailyTask.Id}", dailyTask);
                      await RefreshTasks();
                  }
              });
-        public ICommand DeleteTaskCommand => new Command<DailyTask>(
-             async (DailyTask dailyTask) =>
+        public ICommand DeleteTaskCommand => new Command<DailyTaskModel>(
+             async (DailyTaskModel dailyTask) =>
              {
                  var action = await Application.Current.MainPage.DisplayAlert("Do you wish to delete this task?", null, "YES", "CANCEL");
                  if (action)
                  {
-                     await dailyTaskService.DeleteDailyTask(dailyTask.Id);
+                     await _dailyTaskService.DeleteAsync($"dailytasks/{dailyTask.Id}");
                      await RefreshTasks();
                  }
              });
 
-        public ICommand AddTaskCommand => new Command<DailyTask>(
-             async (DailyTask dailyTask) =>
+        public ICommand AddTaskCommand => new Command(
+             async () =>
              {
                  var add = await Application.Current.MainPage.DisplayPromptAsync("Add Task", null, "Save", "Cancel", "ex:Refill water");
 
                  if (add != null)
                  {
-                     DailyTask newTask = new DailyTask
+                     DailyTaskModel newTask = new DailyTaskModel
                      {
                          Id = new Guid(),
-                         Name = add,
+                         Description = add,
                          IsDone = false,
                          CageId = Cage.Id
                      };
-                     await dailyTaskService.AddDailyTask(newTask);
+                     await _dailyTaskService.AddAsync("dailytasks", newTask);
                      await RefreshTasks();
                  };
              });
