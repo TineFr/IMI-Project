@@ -31,6 +31,7 @@ namespace Imi.Project.Mobile.ViewModels.Birds
         public override void ReverseInit(object value)
         {
             var updatedBird = value as BirdModel;
+            Bird = null;
             Bird = updatedBird;
         }
         
