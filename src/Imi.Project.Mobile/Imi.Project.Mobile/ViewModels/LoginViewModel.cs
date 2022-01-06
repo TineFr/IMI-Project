@@ -70,7 +70,6 @@ namespace Imi.Project.Mobile.ViewModels
             else
             {
                 var mainPage = new CustomContainer();
-                mainPage.FixedMode = true;
                 mainPage.BarBackgroundColor = Color.White;
                 mainPage.BarTextColor = Color.Black;
                 mainPage.AddTab<HomeViewModel>("home", "home24.png");
