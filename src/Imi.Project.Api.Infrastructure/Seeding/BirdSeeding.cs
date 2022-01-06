@@ -222,8 +222,6 @@ namespace Imi.Project.Api.Infrastructure.Seeding
                            UserId = Guid.Parse("00000000-0000-0000-0000-000000000009")
                         },
 
-
-
                         new Bird
                         {
                            Id = Guid.Parse("00000000-0000-0000-0000-000000000016"),
@@ -235,7 +233,35 @@ namespace Imi.Project.Api.Infrastructure.Seeding
                            SpeciesId = Guid.Parse("00000000-0000-0000-0000-000000000010"),
                            Food = "Birdseed",
                            UserId = Guid.Parse("00000000-0000-0000-0000-000000000010")
-                        }
+                        },
+
+                        new Bird
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000017"),
+                            Name = "Blue",
+                            CageId = Guid.Parse("00000000-0000-0000-0000-000000000011"),
+                            Gender = Common.Enums.Gender.Female,
+                            HatchDate = new DateTime(2016, 09, 02),
+                            Image = "images/bird/budgie6.jpg",
+                            SpeciesId = Guid.Parse("00000000-0000-0000-0000-000000000002"),
+                            Food = "Parakeet mix",
+                            UserId = Guid.Parse("00000000-0000-0000-0000-000000000001")
+                        },
+
+                        new Bird
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000018"),
+                            Name = "Joey",
+                            CageId = Guid.Parse("00000000-0000-0000-0000-000000000011"),
+                            Gender = Common.Enums.Gender.Male,
+                            HatchDate = new DateTime(2017, 09, 08),
+                            Image = "images/bird/budgie7.jpg",
+                            SpeciesId = Guid.Parse("00000000-0000-0000-0000-000000000002"),
+                            Food = "Parakeet mix",
+                            UserId = Guid.Parse("00000000-0000-0000-0000-000000000001")
+                        },
+
+
 
 
                 });

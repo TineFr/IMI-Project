@@ -59,7 +59,7 @@ namespace Imi.Project.Api.Controllers
 
         [HttpPost]
         [Authorize(Policy = "AdministratorRole")]
-        public async Task<IActionResult> Post(SpeciesRequestDto newSpecies)
+        public async Task<IActionResult> Post([FromForm] SpeciesRequestDto newSpecies)
         {
             if (!ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace Imi.Project.Api.Controllers
 
         [HttpPut("{id}")]
         [Authorize(Policy = "AdministratorRole")]
-        public async Task<IActionResult> Put(Guid id, SpeciesRequestDto updatedSpecies)
+        public async Task<IActionResult> Put(Guid id, [FromForm] SpeciesRequestDto updatedSpecies)
         {
             if (!ModelState.IsValid)
             {

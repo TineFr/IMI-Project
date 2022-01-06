@@ -157,7 +157,7 @@ namespace Imi.Project.Api
             }
 
             app.UseStaticFiles();
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
 
             app.UseRouting();
 

@@ -16,7 +16,9 @@ namespace Imi.Project.Api.Core.Helper
             {
                 Id = species.Id,
                 Name = species.Name,
-                ScientificName = species.ScientificName
+                ScientificName = species.ScientificName,
+                Image = GetFullImageUrl(species.Image),
+                Description = species.Description
             };
         }
         public static IEnumerable<SpeciesResponseDto> MapToDtoList(this IEnumerable<Species> species)
