@@ -98,7 +98,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7153f222-58c9-49fa-994c-8c824e3d2958",
+                            ConcurrencyStamp = "c3bf187f-3034-44b5-a263-9de222d5f252",
                             DateOfBirth = new DateTime(1997, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "tine.franchois@gmail.com",
                             EmailConfirmed = false,
@@ -107,9 +107,9 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                             Name = "Franchois",
                             NormalizedEmail = "TINE.FRANCHOIS@GMAIL.COM",
                             NormalizedUserName = "TINE.FRANCHOIS@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAOaXdiP6v+EKaXeZhYilq0v78PncSXJ+ORJfOdy65A5ouy+3v4qDzPyneUimWX8BA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEErY+FvzST/UGxGH81Th4gGh45SzbOtlRW0MDCP2WuKYP+zHzvXxrWTST8mk6Yyoqw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "02f1c0a3-f9aa-4d4d-8ad3-f3ff0c7d0a2b",
+                            SecurityStamp = "26e300bd-11e0-4c20-86b6-8cca84f0ddad",
                             TwoFactorEnabled = false,
                             UserName = "tine.franchois@gmail.com"
                         },
@@ -117,7 +117,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000002"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1b006016-3496-4be5-80ed-4a42f60be957",
+                            ConcurrencyStamp = "7f7c0922-2894-4d46-911e-6e858990f972",
                             DateOfBirth = new DateTime(1997, 12, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "deq.claire@gmail.com",
                             EmailConfirmed = false,
@@ -126,9 +126,9 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                             Name = "Dequinnemaere",
                             NormalizedEmail = "DEQ.CLAIRE@GMAIL.COM",
                             NormalizedUserName = "DEQ.CLAIRE@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAELqVNYtpSgR/QSdd//05hZeAUcUGgv7G0PJQbHKKNHyNr5VS1oHe3qjhI9gY6uxxvQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKTLcKvVgFD61ZfFPlvgrT3AxVMlUMwUra8XjbaoPRmDhQbNC25xMV7vKpob7S2CyA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "14afa922-3777-4872-90bc-6674258bd807",
+                            SecurityStamp = "63c16213-4f42-449a-ba54-33ab01792903",
                             TwoFactorEnabled = false,
                             UserName = "deq.claire@gmail.com"
                         },
@@ -136,7 +136,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000003"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b768c267-1eba-4356-8c8a-61876c99b1d2",
+                            ConcurrencyStamp = "8eccb39a-6223-4ce5-afb4-a7b2fe945038",
                             DateOfBirth = new DateTime(1995, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "depotter.sander@gmail.com",
                             EmailConfirmed = false,
@@ -145,9 +145,9 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                             Name = "Depotter",
                             NormalizedEmail = "DEPOTTER.SANDER@GMAIL.COM",
                             NormalizedUserName = "DEPOTTER.SANDER@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOZYbtxJ2Zr5p00Jo1HgitBNogW7aAk5n2HK7PRi4vrphgJBK49GIHisatw+fwS/sQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELVnSUO7rmYw2K+OaCCJ6Z5ev0f6X4g6al6HJwNzSqQWZUhqV45poHkjWSKa/yVXNw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "573672a7-6498-479d-89d1-481f01c89661",
+                            SecurityStamp = "b020dab1-3595-43ca-acaf-531eab7fd89f",
                             TwoFactorEnabled = false,
                             UserName = "depotter.sander@gmail.com"
                         },
@@ -155,7 +155,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000004"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "31913528-6351-4fb5-ab50-bac22e2c2aad",
+                            ConcurrencyStamp = "9d44cc82-a120-47ee-9040-54d88057042a",
                             DateOfBirth = new DateTime(1997, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "haenebalcke.niels@gmail.com",
                             EmailConfirmed = false,
@@ -164,9 +164,9 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                             Name = "Haenebalcke",
                             NormalizedEmail = "HAENEBALCKE.NIELS@GMAIL.COM",
                             NormalizedUserName = "HAENEBALCKE.NIELS@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAECKxN3yig16BqCRYhwTzgzkDSNau3nOpX8+BQXm+cbIPeuJEQ9mqTfNh5wt97uu2+g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEE5LpWSSquqq2RLrkaDpjxHtPGrQKJhkQlC072KNKuqyobDeRmb5Hd5FKnxoFwSvlQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "39979abf-c144-4050-8f64-bb419a9705c9",
+                            SecurityStamp = "93bd7486-1597-49c2-a5cc-ac36b2d13dcd",
                             TwoFactorEnabled = false,
                             UserName = "haenebalcke.niels@gmail.com"
                         },
@@ -174,7 +174,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000005"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6e83ebba-115e-48c6-ab39-1766359d7794",
+                            ConcurrencyStamp = "6262e118-bff6-45af-b70b-65540e8163da",
                             DateOfBirth = new DateTime(1996, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "jochem.dewandel@gmail.com",
                             EmailConfirmed = false,
@@ -183,9 +183,9 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                             Name = "Dewandel",
                             NormalizedEmail = "JOCHEM.DEWANDEL@GMAIL.COM",
                             NormalizedUserName = "JOCHEM.DEWANDEL@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBy6ZtOVx/YBpV0RltGKS68VpB7h7i8PI8LfEZs47GKZKG10qtPzxTZmSB3Np6In8g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEArE69s2wvF7GhWdvqQVetiiRi94oZMX6i1eHNypvvIZ3rP7eStS8n8qiG5wTMGesg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "51524ace-5c1b-421e-915e-328010e2714b",
+                            SecurityStamp = "4e31bf6d-91b8-4e5b-9577-ac2cdd93e1f5",
                             TwoFactorEnabled = false,
                             UserName = "jochem.dewandel@gmail.com"
                         },
@@ -193,7 +193,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000006"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "127498c4-7fdf-45c3-ad2a-9e0c1976c7c3",
+                            ConcurrencyStamp = "3d533cb8-f40f-468f-bf25-2699e5144de8",
                             DateOfBirth = new DateTime(1997, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "jonas.desmet@telenet.be",
                             EmailConfirmed = false,
@@ -202,9 +202,9 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                             Name = "DeSmet",
                             NormalizedEmail = "JONAS.DESMET@TELENET.BE",
                             NormalizedUserName = "JONAS.DESMET@TELENET.BE",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEztoq0ybPolDeUnOnbj088MJ119ZbkdpBrmT7Lx+BaVpiNvUiIcDkJUzeb7q1fzkg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKTRmw2A9oywjSWOZt5YDRe3PPa/N3fU8MfmJ7rVMlphnYkyl0h8hmh13CbcZ7N8+w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3c7815fd-ffdc-4587-9caa-03ed9706ab73",
+                            SecurityStamp = "f08eca78-1fe3-468b-9875-362dda44fb2e",
                             TwoFactorEnabled = false,
                             UserName = "jonas.desmet@telenet.be"
                         },
@@ -212,7 +212,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000007"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4ca7ccba-a568-41d1-8067-fed5e2cd6043",
+                            ConcurrencyStamp = "c9690325-464c-4844-8bd4-39023abbe01c",
                             DateOfBirth = new DateTime(1997, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "niels.verbeke@hotmail.com",
                             EmailConfirmed = false,
@@ -221,9 +221,9 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                             Name = "Verbeke",
                             NormalizedEmail = "NIELS.VERBEKE@HOTMAIL.COM",
                             NormalizedUserName = "NIELS.VERBEKE@HOTMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIQbUAh+XL3dTYhGITchBKQviMqIoZSMOy666kGNP5IiUcd845lGoTW4jzXVh0hh4w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIDOmisLtMgovtWD+Gy0MczBq4bmJ0+q7VLvofXExyNa+fvTC5hdA1C8QwiY2w9mwA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b0e38ef4-fcff-4f2d-9c7a-b9b2383da764",
+                            SecurityStamp = "922e0689-bc67-4c59-be4b-40031f65aabf",
                             TwoFactorEnabled = false,
                             UserName = "niels.verbeke@hotmail.com"
                         },
@@ -231,7 +231,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000008"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1838d1f7-b280-4280-8d68-ce5dde4117ab",
+                            ConcurrencyStamp = "4c7cdc91-d0e0-45be-82c2-38884b40115a",
                             DateOfBirth = new DateTime(1970, 7, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "ann.meerpoel@skynet.be",
                             EmailConfirmed = false,
@@ -240,9 +240,9 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                             Name = "Meerpoel",
                             NormalizedEmail = "ANN.MEERPOEL@SKYNET.BE",
                             NormalizedUserName = "ANN.MEERPOEL@SKYNET.BE",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBi2xI6KwqifJS6RHgCfaofJ+kBgjcRZTwJxb2q6mDweb2da/zKl0DN91PJ7F0UTSA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMIxvhkqIr/lwhrb9/KzlVGJugq5J+sVaok4nbFUv9VPFPm6BWw8vR+Fb6QW0ifAxQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a362abd6-efa5-4201-b443-f0e31edcdfd5",
+                            SecurityStamp = "755c3b3e-3fc0-4d33-84aa-9f7054ce7bcf",
                             TwoFactorEnabled = false,
                             UserName = "ann.meerpoel@skynet.be"
                         },
@@ -250,7 +250,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000009"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b441f845-daa9-441b-82fa-0dbec56397f6",
+                            ConcurrencyStamp = "6b61947b-e1e9-49b1-992d-2f2fc2a07248",
                             DateOfBirth = new DateTime(1972, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "lotens.jurgen@hotmail.com",
                             EmailConfirmed = false,
@@ -259,9 +259,9 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                             Name = "Lotens",
                             NormalizedEmail = "LOTENS.JURGEN@HOTMAIL.COM",
                             NormalizedUserName = "LOTENS.JURGEN@HOTMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEE7SFw7142fvEQwKy1+qetBAJN+NYbrUkDNhidMcitXW5BfegnJGj8xHEooQ1HfWVg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEM+zzs64hYjcumlFlPbEXmdeyNEZX1wgwVrxDZCHAemkgHlbOHEN2AOC6ArLv3OTRg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7610cbdc-d6ad-4e48-a915-c16f9415c18c",
+                            SecurityStamp = "8d69b3a7-7042-4c3c-bef1-c6a219c73d77",
                             TwoFactorEnabled = false,
                             UserName = "lotens.jurgen@hotmail.com"
                         },
@@ -269,7 +269,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000010"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "34c09c27-ea0d-4d17-a5cd-1581a880584a",
+                            ConcurrencyStamp = "071a17be-abe0-47d6-b737-603738c4d931",
                             DateOfBirth = new DateTime(2010, 9, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "janne.vhl@gmail.com",
                             EmailConfirmed = false,
@@ -278,9 +278,9 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                             Name = "Van Horelbeke",
                             NormalizedEmail = "JANNE.VHL@GMAIL.COM",
                             NormalizedUserName = "JANNE.VHL@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMrDQIdykY5cy7gUk0F8vG46O6S3Z2kyQI4/7A5Okf79+74jxrBX74tmWXh5pb1kSQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEC4FF0xGKC5QyEC0x8+LjEONQwN0VV9/bTX62Qy0fEWUnuh1Z/YIxhzz01vu+CMMMA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c1cdb347-20ee-492f-a75d-c6c2ca786823",
+                            SecurityStamp = "c9e707c0-3ea1-4045-bc25-76af90dd651a",
                             TwoFactorEnabled = false,
                             UserName = "janne.vhl@gmail.com"
                         });
@@ -1127,105 +1127,105 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
-                            EndDate = new DateTime(2022, 1, 14, 0, 26, 25, 299, DateTimeKind.Local).AddTicks(3413),
+                            EndDate = new DateTime(2022, 1, 14, 0, 33, 46, 487, DateTimeKind.Local).AddTicks(9677),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000001"),
-                            StartDate = new DateTime(2022, 1, 7, 0, 26, 25, 296, DateTimeKind.Local).AddTicks(3819),
+                            StartDate = new DateTime(2022, 1, 7, 0, 33, 46, 485, DateTimeKind.Local).AddTicks(2342),
                             UserId = new Guid("00000000-0000-0000-0000-000000000001")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000002"),
-                            EndDate = new DateTime(2022, 1, 11, 0, 26, 25, 299, DateTimeKind.Local).AddTicks(3718),
+                            EndDate = new DateTime(2022, 1, 11, 0, 33, 46, 487, DateTimeKind.Local).AddTicks(9999),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000002"),
-                            StartDate = new DateTime(2022, 1, 7, 0, 26, 25, 299, DateTimeKind.Local).AddTicks(3704),
+                            StartDate = new DateTime(2022, 1, 7, 0, 33, 46, 487, DateTimeKind.Local).AddTicks(9986),
                             UserId = new Guid("00000000-0000-0000-0000-000000000001")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000003"),
-                            EndDate = new DateTime(2022, 1, 14, 0, 26, 25, 299, DateTimeKind.Local).AddTicks(3737),
+                            EndDate = new DateTime(2022, 1, 14, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(16),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000003"),
-                            StartDate = new DateTime(2022, 1, 7, 0, 26, 25, 299, DateTimeKind.Local).AddTicks(3734),
+                            StartDate = new DateTime(2022, 1, 7, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(13),
                             UserId = new Guid("00000000-0000-0000-0000-000000000002")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000004"),
-                            EndDate = new DateTime(2022, 1, 11, 0, 26, 25, 299, DateTimeKind.Local).AddTicks(3748),
+                            EndDate = new DateTime(2022, 1, 11, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(26),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000004"),
-                            StartDate = new DateTime(2022, 1, 7, 0, 26, 25, 299, DateTimeKind.Local).AddTicks(3745),
+                            StartDate = new DateTime(2022, 1, 7, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(23),
                             UserId = new Guid("00000000-0000-0000-0000-000000000002")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000005"),
-                            EndDate = new DateTime(2022, 1, 13, 0, 26, 25, 299, DateTimeKind.Local).AddTicks(3757),
+                            EndDate = new DateTime(2022, 1, 13, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(34),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000005"),
-                            StartDate = new DateTime(2022, 1, 7, 0, 26, 25, 299, DateTimeKind.Local).AddTicks(3754),
+                            StartDate = new DateTime(2022, 1, 7, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(32),
                             UserId = new Guid("00000000-0000-0000-0000-000000000003")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000006"),
-                            EndDate = new DateTime(2022, 1, 11, 0, 26, 25, 299, DateTimeKind.Local).AddTicks(3766),
+                            EndDate = new DateTime(2022, 1, 11, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(43),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000006"),
-                            StartDate = new DateTime(2022, 1, 7, 0, 26, 25, 299, DateTimeKind.Local).AddTicks(3763),
+                            StartDate = new DateTime(2022, 1, 7, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(40),
                             UserId = new Guid("00000000-0000-0000-0000-000000000003")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000007"),
-                            EndDate = new DateTime(2022, 1, 9, 0, 26, 25, 299, DateTimeKind.Local).AddTicks(3774),
+                            EndDate = new DateTime(2022, 1, 9, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(52),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000007"),
-                            StartDate = new DateTime(2022, 1, 7, 0, 26, 25, 299, DateTimeKind.Local).AddTicks(3771),
+                            StartDate = new DateTime(2022, 1, 7, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(49),
                             UserId = new Guid("00000000-0000-0000-0000-000000000004")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000008"),
-                            EndDate = new DateTime(2022, 1, 18, 0, 26, 25, 299, DateTimeKind.Local).AddTicks(3783),
+                            EndDate = new DateTime(2022, 1, 18, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(60),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000008"),
-                            StartDate = new DateTime(2022, 1, 7, 0, 26, 25, 299, DateTimeKind.Local).AddTicks(3780),
+                            StartDate = new DateTime(2022, 1, 7, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(58),
                             UserId = new Guid("00000000-0000-0000-0000-000000000004")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000009"),
-                            EndDate = new DateTime(2022, 1, 12, 0, 26, 25, 299, DateTimeKind.Local).AddTicks(3792),
+                            EndDate = new DateTime(2022, 1, 12, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(69),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000009"),
-                            StartDate = new DateTime(2022, 1, 7, 0, 26, 25, 299, DateTimeKind.Local).AddTicks(3789),
+                            StartDate = new DateTime(2022, 1, 7, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(67),
                             UserId = new Guid("00000000-0000-0000-0000-000000000005")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000010"),
-                            EndDate = new DateTime(2022, 1, 11, 0, 26, 25, 299, DateTimeKind.Local).AddTicks(3801),
+                            EndDate = new DateTime(2022, 1, 11, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(79),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000010"),
-                            StartDate = new DateTime(2022, 1, 7, 0, 26, 25, 299, DateTimeKind.Local).AddTicks(3799),
+                            StartDate = new DateTime(2022, 1, 7, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(77),
                             UserId = new Guid("00000000-0000-0000-0000-000000000005")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000011"),
-                            EndDate = new DateTime(2022, 1, 11, 0, 26, 25, 299, DateTimeKind.Local).AddTicks(3812),
+                            EndDate = new DateTime(2022, 1, 11, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(90),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000011"),
-                            StartDate = new DateTime(2022, 1, 7, 0, 26, 25, 299, DateTimeKind.Local).AddTicks(3809),
+                            StartDate = new DateTime(2022, 1, 7, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(88),
                             UserId = new Guid("00000000-0000-0000-0000-000000000006")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000012"),
-                            EndDate = new DateTime(2022, 1, 14, 0, 26, 25, 299, DateTimeKind.Local).AddTicks(3820),
+                            EndDate = new DateTime(2022, 1, 14, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(100),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000012"),
-                            StartDate = new DateTime(2022, 1, 7, 0, 26, 25, 299, DateTimeKind.Local).AddTicks(3818),
+                            StartDate = new DateTime(2022, 1, 7, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(97),
                             UserId = new Guid("00000000-0000-0000-0000-000000000010")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000013"),
-                            EndDate = new DateTime(2022, 1, 11, 0, 26, 25, 299, DateTimeKind.Local).AddTicks(3829),
+                            EndDate = new DateTime(2022, 1, 11, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(108),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000013"),
-                            StartDate = new DateTime(2022, 1, 7, 0, 26, 25, 299, DateTimeKind.Local).AddTicks(3826),
+                            StartDate = new DateTime(2022, 1, 7, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(106),
                             UserId = new Guid("00000000-0000-0000-0000-000000000007")
                         });
                 });
@@ -1258,7 +1258,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
-                            Description = "The cockatiel (Nymphicus hollandicus), also known as weiro bird, or quarrion, is a medium sized parrot that is a member of its own branch of the cockatoo family endemic to Australia. They are prized as household pets and companion parrots throughout the world and are relatively easy to breed. As a caged bird, cockatiels are second in popularity only to the budgerigar.",
+                            Description = "The cockatiel (Nymphicus hollandicus), also known as weiro bird, or quarrion, is a medium sized parrot that is a member of its own branch of the cockatoo family endemic to Australia. They are prized as household pets and companion parrots throughout the world and are relatively easy to breed. As a caged bird, cockatiels are second in popularity only to the budgerigar. Source:The Spruce Pets",
                             Image = "images/species/cockatiel.jpg",
                             Name = "Cockatiel",
                             ScientificName = "Nymphicus hollandicuss"
@@ -1266,7 +1266,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000002"),
-                            Description = "The budgerigar , also known as the common parakeet or shell parakeet, is a small, long-tailed, seed-eating parrot usually nicknamed the budgie, or in American English, the parakeet. Budgies are the only species in the genus Melopsittacus. Naturally, the species is green and yellow with black, scalloped markings on the nape, back, and wings. Budgies are bred in captivity with colouring of blues, whites, yellows, greys, and even with small crests.",
+                            Description = "The budgerigar , also known as the common parakeet or shell parakeet, is a small, long-tailed, seed-eating parrot usually nicknamed the budgie, or in American English, the parakeet.Budgies are the only species in the genus Melopsittacus. Naturally, the species is green and yellow with black, scalloped markings on the nape, back, and wings. Budgies are bred in captivity with colouring of blues, whites, yellows, greys, and even with small crests. Source:The Spruce Pets",
                             Image = "images/species/budgie.jpg",
                             Name = "Budgerigar",
                             ScientificName = "Melopsittacus undulatus"
@@ -1274,50 +1274,65 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000003"),
+                            Description = "Perhaps the most popular finch due to its availability and price, the zebra finch has been kept in captivity for more than a 100 years.Zebra finches breed readily, and are a good beginner’s bird, easy to care for and requiring a minimal time commitment. Source:The Spruce Pets",
                             Image = "images/species/zebrafinch.jpg",
-                            Name = "Zebra finch",
+                            Name = "Zebra Finch",
                             ScientificName = "Taeniopygia guttata"
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000004"),
+                            Description = "A canary is an undemanding little charmer that is usually a beginner's cana bird. This small finch has the power to turn most people into lifelong canary enthusiasts. It is a pleasant companion bird with a cheerful disposition. It communicates its content with a melodious song that is soft and pleasant. The canary has been carefully bred to be available in a variety of colors, sizes, and singing varieties. Source:The Spruce Pets",
+                            Image = "images/species/canary.jpg",
                             Name = "Canary",
                             ScientificName = "Serinus canaria forma domestica"
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000005"),
-                            Name = "Pacific parrotlet",
+                            Description = "Colorful, charming, and intelligent, Pacific parrotlets are the smallest members of the parrot family. Nicknamed pocket parrots for one of their favorite hiding spots, they have become increasingly popular pets. Their small size and quiet nature make them an ideal choice for people who live in apartments or condos or those who do not have the space to house a larger bird. Some can learn to talk quite well, although it is not known for being a big talker. They make perfectly affectionate and adorable pets. Source:The Spruce Pets",
+                            Image = "images/species/pacificparrotlet.jpg",
+                            Name = "Pacific Parrotlet",
                             ScientificName = "Forpus coelestis"
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000006"),
-                            Name = "Bourke’s parrot",
+                            Description = "Bourke's parakeets are an excellent introductory bird for those new to hookbills or parrots; they have a calm demeanor and can entertain themselves. They are quiet birds that are ideal apartment dwellers and are equally suited for individual cages or small aviaries, where they are excellent partners for finches and cockatiels as well as other Bourke's parakeets. Keep gentle Bourke's parakeets away from larger, aggressive birds. Source:The Spruce Pets",
+                            Image = "images/species/bourkesparakeet.jpg",
+                            Name = "Bourke’s Parrot",
                             ScientificName = "Neopsephotus bourkii"
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000007"),
-                            Name = "Rosy-faced lovebrid",
+                            Description = "Lovebirds are so named because of their strong pair bonds. Lovebirds range in size from just over 5 inches to just over 6½ inches, which makes them among the smaller parrot species. Lovebirds have short, blunt tail feathers, unlike budgies (“parakeets”), which have long pointed tails, and lovebirds are also stockier. Source:The Spruce Pets",
+                            Image = "images/species/lovebird.jpg",
+                            Name = "Rosy-faced Lovebird",
                             ScientificName = "Agapornis roseicollis"
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000008"),
+                            Description = "Popular as pets due to their small size, beauty, and intelligence, green-cheeked conures have stolen many bird lover's hearts. Their curiosity, spunk, and playful nature are great characteristics in a pet bird. Mischievous and engaging, green-cheeked conures pack a lot of personality into a small package. The fact that they are less noisy than most other parrots—and more affordable—adds to their appeal. Source:The Spruce Pets",
+                            Image = "images/species/greencheekedconure.jpg",
                             Name = "Green-Cheeked Conure",
                             ScientificName = "Pyrrhura molinae"
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000009"),
-                            Name = "Gouldian finch",
+                            Description = "The Gouldian finch is one of the most beautiful of all pet bird species. It is a brilliant, multicolored bird with vibrant plumage. Its shyness with humans makes it a favorite bird for those who enjoy looking at birds but do not want to handle them. This finch is very social with birds of its kind. A small group of these diminutive birds makes for an excellent display in a large enclosure. Source:The Spruce Pets",
+                            Image = "images/species/gouldianfinch.jpg",
+                            Name = "Gouldian Finch",
                             ScientificName = "Chloebia gouldiae"
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000010"),
-                            Name = "Society finch",
+                            Description = "Society finches are not the kind of bird that one would choose if they want an avian friend that talks and plays with them, but they do make wonderful pets for those that prefer to be spectators. Society finches are not birds that are easily handled, but that is because of their small size and not because they are aggressive. Society finches may be easily startled and fly around their enclosures when they aren't nesting or eating, but they are typically peaceful.",
+                            Image = "images/species/societyfinch.jpg",
+                            Name = "Society Finch",
                             ScientificName = "Lonchura striata domestica"
                         });
                 });
@@ -1353,14 +1368,14 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
-                            ConcurrencyStamp = "7c8e110a-2b33-41b9-83a0-b2450dabdabe",
+                            ConcurrencyStamp = "1df97595-a1b0-4af8-b43d-b3fbe7810e67",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000002"),
-                            ConcurrencyStamp = "3f496e18-ea14-423b-b4cc-38da5721dded",
+                            ConcurrencyStamp = "9abc7dd0-c673-4439-a0d1-ee59543f57da",
                             Name = "BaseUser",
                             NormalizedName = "BASEUSER"
                         });
