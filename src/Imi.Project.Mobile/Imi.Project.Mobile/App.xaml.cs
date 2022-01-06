@@ -38,7 +38,7 @@ namespace Imi.Project.Mobile
 
             FreshIOC.Container.Register<IAuthApiService, AuthApiService>();
             FreshIOC.Container.Register<IBaseApiService<BirdRequestModel, BirdModel>, BirdApiService>();
-            FreshIOC.Container.Register<IBaseApiService<CageModel, CageModel>, BaseApiService<CageModel, CageModel>>();
+            FreshIOC.Container.Register<IBaseApiService<CageRequestModel, CageModel>, CageApiService>();
             FreshIOC.Container.Register<IBaseApiService<SpeciesModel, SpeciesModel>, BaseApiService<SpeciesModel, SpeciesModel>>();
             FreshIOC.Container.Register<IBaseApiService<DailyTaskModel, DailyTaskModel>, BaseApiService<DailyTaskModel, DailyTaskModel>>();
 

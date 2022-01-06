@@ -20,6 +20,7 @@
     <None Remove="icons\filter.png" />
     <None Remove="icons\guide.png" />
     <None Remove="icons\home.png" />
+    <None Remove="icons\imageplaceholder.png" />
     <None Remove="icons\leftarrow.png" />
     <None Remove="icons\logolight.png" />
     <None Remove="icons\logolightwhite.png" />
@@ -39,6 +40,7 @@
     <EmbeddedResource Include="icons\filter.png" />
     <EmbeddedResource Include="icons\guide.png" />
     <EmbeddedResource Include="icons\home.png" />
+    <EmbeddedResource Include="icons\imageplaceholder.png" />
     <EmbeddedResource Include="icons\leftarrow.png" />
     <EmbeddedResource Include="icons\logolight.png" />
     <EmbeddedResource Include="icons\logolightwhite.png" />

@@ -34,7 +34,11 @@
                                 <Frame Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="Center" Margin="10,5,10,5"  BackgroundColor="#EEEEEE"
                                            CornerRadius="20">
                                     <FlexLayout JustifyContent="SpaceBetween">
-                                        <Image Grid.Column="0" Source="{Binding Image}" HeightRequest="60"></Image>
+                                        <Grid HeightRequest="60" WidthRequest="70">
+                                            <Grid>
+                                                <Image Grid.Column="0" Source="{Binding Image}" HeightRequest="60"></Image>
+                                            </Grid>
+                                            </Grid>
                                         <StackLayout HorizontalOptions="Center">
                                             <Label  Text="{Binding Name}" FontSize="20" />
                                             <Label  Text="{Binding Species.ScientificName}" FontAttributes="italic" />

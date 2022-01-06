@@ -16,15 +16,12 @@ namespace Imi.Project.Mobile.ViewModels.Cages
 {
     public class CagesViewModel : FreshBasePageModel
     {
-        private readonly IBaseApiService<CageModel, CageModel> _cageService;
+        private readonly IBaseApiService<CageRequestModel, CageModel> _cageService;
 
-        public CagesViewModel(IBaseApiService<CageModel, CageModel> cageService)
+        public CagesViewModel(IBaseApiService<CageRequestModel, CageModel> cageService)
         {
             _cageService = cageService;
         }
-
-
-
         #region properties
 
 

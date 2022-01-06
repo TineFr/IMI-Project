@@ -1,4 +1,5 @@
-﻿using Imi.Project.Api.Core.Entities;
+﻿using Imi.Project.Api.Core.Defaults;
+using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Core.Entities.Pagination;
 using Imi.Project.Api.Core.Exceptions;
 using Imi.Project.Api.Core.Helper;
@@ -68,6 +69,7 @@ namespace Imi.Project.Api.Core.Services
                 var databasePath = await _imageService.AddOrUpdateImageAsync<Bird>(id, dto.Image);
                 updatedBirdEntity.Image = databasePath;
             }
+            //else updatedBirdEntity.Image = databasePath;
 
             var result = await _birdRepository.UpdateAsync(updatedBirdEntity);
             var resultDto = result.MapToDto();
@@ -86,6 +88,8 @@ namespace Imi.Project.Api.Core.Services
                 var databasePath = await _imageService.AddOrUpdateImageAsync<Bird>(newBirdEntity.Id, dto.Image);
                 newBirdEntity.Image = databasePath;
             }
+
+            else newBirdEntity.Image = ImageConstant.defaultImagePath;
 
             var result = await _birdRepository.AddAsync(newBirdEntity);
             var resultDto = result.MapToDto();

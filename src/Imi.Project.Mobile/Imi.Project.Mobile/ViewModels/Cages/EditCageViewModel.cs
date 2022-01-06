@@ -1,4 +1,5 @@
 ﻿using FreshMvvm;
+using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
 using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
@@ -12,14 +13,14 @@ namespace Imi.Project.Mobile.ViewModels.Cages
 {
     public class EditCageViewModel : FreshBasePageModel
     {
-        private readonly ICageService cageService;
+        private readonly IBaseApiService<CageRequestModel, CageModel> _cageService;
 
-        public EditCageViewModel(ICageService cageService)
+        public EditCageViewModel(IBaseApiService<CageRequestModel, CageModel> cageService)
         {
-            this.cageService = cageService;
+            _cageService = cageService;
         }
 
-        private Cage cageToEdit;
+        private CageModel cageToEdit;
 
         #region properties
 
@@ -60,7 +61,7 @@ namespace Imi.Project.Mobile.ViewModels.Cages
         #endregion
         public override void Init(object initData)
         {
-            cageToEdit = initData as Cage;
+            cageToEdit = initData as CageModel;
             Name = cageToEdit.Name;
             Location = cageToEdit.Location;
             Image = cageToEdit.Image;
@@ -74,19 +75,30 @@ namespace Imi.Project.Mobile.ViewModels.Cages
                  var action = await CoreMethods.DisplayAlert("Do you wish to delete this cage?", null, "YES", "NO");
                  if (action)
                  {
-                     await cageService.DeleteCage(cageToEdit.Id);
-                     await CoreMethods.PopToRoot(true);
+                    var response =  await _cageService.DeleteAsync($"cages/{cageToEdit.Id}");
+                     if (response is object)
+                     {
+                         await CoreMethods.DisplayAlert("Error", response.ErrorMessage, "OK");
+                     }
+                     else await CoreMethods.PopToRoot(true);
                  }
              });
 
         public ICommand SaveCommand => new Command(
              async () =>
              {
-                 cageToEdit.Name = Name;
-                 cageToEdit.Location = Location;
-                 cageToEdit.Image = Image;
-                 await cageService.UpdateCage(cageToEdit);
-                 await CoreMethods.PopPageModel(cageToEdit);
+                 CageRequestModel model = new CageRequestModel
+                 {
+                     Name = Name,
+                     Location = Location,
+                 };
+                 //cageToEdit.Image = Image;
+                 var response = await _cageService.AddAsync("cages", model);
+                 if (response.ErrorMessage is object)
+                 {
+                     await CoreMethods.DisplayAlert("Error", response.ErrorMessage, "OK");
+                 }
+                 await CoreMethods.PopPageModel(response);
              });
 
         public ICommand BackCommand => new Command(

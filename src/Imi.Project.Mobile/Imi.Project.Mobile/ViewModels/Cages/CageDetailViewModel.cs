@@ -1,12 +1,9 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
-using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
-using Imi.Project.Mobile.Core.Services.Mocking.Services;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -29,7 +26,7 @@ namespace Imi.Project.Mobile.ViewModels.Cages
         {
             get { return tasks; }
             set
-            { 
+            {
                 tasks = value;
                 RaisePropertyChanged(nameof(Tasks));
             }
@@ -55,9 +52,9 @@ namespace Imi.Project.Mobile.ViewModels.Cages
 
         private async Task RefreshTasks()
         {
-            var tasks = await _dailyTaskService.GetAllAsync($"cages/{Cage.Id}/dailytasks");
             Tasks = null;
-            Tasks = new ObservableCollection<DailyTaskModel>(tasks);
+            var tasks = await _dailyTaskService.GetAllAsync($"cages/{Cage.Id}/dailytasks");
+            if (!(tasks.ToList()[0].ErrorMessage is object)) Tasks = new ObservableCollection<DailyTaskModel>(tasks);
         }
 
         public async override void Init(object initData)
@@ -72,8 +69,8 @@ namespace Imi.Project.Mobile.ViewModels.Cages
             Cage = updatedCage;
         }
 
-        public ICommand EditCageCommand => new Command<Cage>(
-         async (Cage cage) =>
+        public ICommand EditCageCommand => new Command<CageModel>(
+         async (CageModel cage) =>
          {
              await CoreMethods.PushPageModel<EditCageViewModel>(cage);
          });
@@ -118,9 +115,7 @@ namespace Imi.Project.Mobile.ViewModels.Cages
                  {
                      DailyTaskModel newTask = new DailyTaskModel
                      {
-                         Id = new Guid(),
                          Description = add,
-                         IsDone = false,
                          CageId = Cage.Id
                      };
                      await _dailyTaskService.AddAsync("dailytasks", newTask);

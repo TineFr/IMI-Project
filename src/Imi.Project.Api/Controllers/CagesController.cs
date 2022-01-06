@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Controllers
@@ -94,6 +95,8 @@ namespace Imi.Project.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromForm] CageRequestDto newCage)
         {
+            Guid userId = Guid.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            newCage.UserId = userId;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -113,6 +116,8 @@ namespace Imi.Project.Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(Guid id,[FromForm] CageRequestDto updatedCage)
         {
+            Guid userId = Guid.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            updatedCage.UserId = userId;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -129,7 +134,7 @@ namespace Imi.Project.Api.Controllers
             return Ok(result);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
             try
