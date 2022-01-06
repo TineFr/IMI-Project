@@ -14,7 +14,7 @@
                 
             </Frame>
             <AbsoluteLayout Grid.Row="0" Grid.RowSpan="4">
-                <ImageButton x:Name="btnBack" Style="{StaticResource BackArrow}"></ImageButton>
+                <ImageButton x:Name="btnBack" Style="{StaticResource BackArrow}" Command="{Binding BackCommand}"></ImageButton>
                 <Image Style="{StaticResource Logo}"></Image>
             </AbsoluteLayout>
             <ScrollView Grid.Row="1" Grid.RowSpan="3" >
@@ -37,13 +37,13 @@
                             <Picker  x:Name="pkrCage" ItemsSource="{Binding CagesList}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding Cage}" Title="Select cage"></Picker>
                         </StackLayout>
                 </Frame>
-                <Frame Style="{StaticResource EditFrame}">
-                    <StackLayout>
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
                             <Label Text="Gender"  FontAttributes="Bold"></Label>
-                            <Picker  x:Name="pkrGender" Title="Select gender"  ItemsSource="{Binding Genders}"  ItemDisplayBinding="{Binding .}" SelectedItem="{Binding Gender}"></Picker>
+                            <Picker  x:Name="pkrGender" Title="Select gender"  ItemsSource="{Binding Genders}" SelectedItem="{Binding Gender}"></Picker>
                         </StackLayout>
-                </Frame>
-                <Frame Style="{StaticResource EditFrame}">
+                    </Frame>
+                    <Frame Style="{StaticResource EditFrame}">
                     <StackLayout>
                             <Label Text="Select date of hatching"  FontAttributes="Bold"></Label>
                             <DatePicker  Date="{Binding HatchDate}"></DatePicker>

@@ -49,6 +49,7 @@ namespace Imi.Project.Mobile.ViewModels.Birds
             set
             {
                 genders = value;
+                RaisePropertyChanged(nameof(Genders));
             }
         }
 
@@ -143,7 +144,7 @@ namespace Imi.Project.Mobile.ViewModels.Birds
         public ICommand SaveCommand => new Command(
              async () =>
              {
-                 var test = Enum.TryParse(Gender, out Gender myStatus);
+                 var test = (Gender)Enum.Parse(typeof(Gender), Gender);
                  BirdRequestModel newBird = new BirdRequestModel
                  {
                      Name = this.Name,
@@ -151,10 +152,16 @@ namespace Imi.Project.Mobile.ViewModels.Birds
                      CageId = Cage.Id,
                      SpeciesId = Species.Id,
                      Food = this.Food,
-                     //Gender = Enum.Parse(typeof(Gender), this.Gender, true)
-                     //Image = "birds/budgie2.png" //later nog veranderen
+                     Gender = (Gender)Enum.Parse(typeof(Gender), Gender)
+                 //Image = "birds/budgie2.png" //later nog veranderen
                  };
-                 await _birdService.AddAsync("birds", newBird);
+                 var response = await _birdService.AddAsync("birds", newBird);
+                 if (response.ErrorMessage is object)
+                 {
+                     await CoreMethods.DisplayAlert("Error", response.ErrorMessage, "Ok");
+                 }
+                 else await CoreMethods.PopPageModel();
+
                  await CoreMethods.PopPageModel();
              });
 
