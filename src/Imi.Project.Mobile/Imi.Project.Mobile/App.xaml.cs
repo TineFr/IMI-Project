@@ -1,21 +1,11 @@
 ﻿using FreshMvvm;
-using Imi.Project.Mobile.Core.Services;
-using Imi.Project.Mobile.ViewModels;
-using Imi.Project.Mobile.Pages;
-using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using Imi.Project.Mobile.ViewModels.Cages;
-using Imi.Project.Mobile.ViewModels.Birds;
-using Imi.Project.Mobile.ViewModels.Prescriptions;
-using Imi.Project.Mobile.ViewModels.SpeciesGuide;
-using Xamarin.Forms.PlatformConfiguration;
-using Imi.Project.Mobile.Customs;
+using Imi.Project.Mobile.Core.Interfaces;
+using Imi.Project.Mobile.Core.Models;
+using Imi.Project.Mobile.Core.Services.Api;
 using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
-using Imi.Project.Mobile.Core.Interfaces;
-using Imi.Project.Mobile.Core.Services.Api;
-using Imi.Project.Mobile.Core.Models;
+using Imi.Project.Mobile.ViewModels;
+using Xamarin.Forms;
 
 namespace Imi.Project.Mobile
 {

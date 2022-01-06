@@ -1,14 +1,8 @@
 ﻿using FreshMvvm;
+using Imi.Project.Mobile.Containers;
 using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models.Api.Authentication;
-using Imi.Project.Mobile.Customs;
-using Imi.Project.Mobile.ViewModels.Birds;
-using Imi.Project.Mobile.ViewModels.Cages;
-using Imi.Project.Mobile.ViewModels.Prescriptions;
-using Imi.Project.Mobile.ViewModels.SpeciesGuide;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -34,10 +28,11 @@ namespace Imi.Project.Mobile.ViewModels
         public string Name
         {
             get { return name; }
-            set { 
+            set
+            {
                 name = value;
                 RaisePropertyChanged(nameof(name));
-            }     
+            }
         }
 
         private string firstName;
@@ -128,7 +123,8 @@ namespace Imi.Project.Mobile.ViewModels
             var response = await _authApiService.Register(model);
             if (response is object)
             {
-                Message = response;
+                await CoreMethods.DisplayAlert("Error", response, "OK");
+
             }
             else
             {
@@ -139,21 +135,9 @@ namespace Imi.Project.Mobile.ViewModels
                 }
                 else
                 {
-                    var mainPage = new CustomContainer
-                    {
-                        BarBackgroundColor = Color.White,
-                        BarTextColor = Color.Black
-                    };
-                    mainPage.AddTab<HomeViewModel>("home", "home24.png");
-                    mainPage.AddTab<CagesViewModel>("cages", "cage24.png");
-                    mainPage.AddTab<BirdsViewModel>("birds", "bird24.png");
-                    mainPage.AddTab<PrescriptionsViewModel>("meds", "medication24.png");
-                    mainPage.AddTab<SpeciesViewModel>("guide", "guide24.png");
-                    Application.Current.MainPage = mainPage;
+                    Application.Current.MainPage = MainContainer.Get();
                 }
             }
-
-            //Application.Current.MainPage = new FreshNavigationContainer(FreshPageModelResolver.ResolvePageModel<MainViewModel>());
         });
 
         public ICommand BackCommand => new Command(async () =>

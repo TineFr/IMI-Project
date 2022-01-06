@@ -1,34 +1,29 @@
-﻿using BottomBar.XamarinForms;
-using FreshMvvm;
+﻿using FreshMvvm;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Imi.Project.Mobile.Customs
 {
-    public class CustomContainer : NavigationPage , IFreshNavigationService
+    public class CustomContainer : NavigationPage, IFreshNavigationService
     {
-        readonly BottomBarPage _innerTabbedPage;
-        public BottomBarPage FirstTabbedPage { get { return _innerTabbedPage; } }
+        readonly CustomTabbedPage _innerTabbedPage;
+        public CustomTabbedPage FirstTabbedPage { get { return _innerTabbedPage; } }
 
         readonly List<Page> _tabs = new List<Page>();
         public IEnumerable<Page> TabbedPages { get { return _tabs; } }
 
         public CustomContainer() : this(Constants.DefaultNavigationServiceName)
         {
-
         }
 
-        public CustomContainer(string navigationServiceName) : base(new BottomBarPage())
+        public CustomContainer(string navigationServiceName) : base(new CustomTabbedPage())
         {
             NavigationServiceName = navigationServiceName;
             RegisterNavigation();
-            _innerTabbedPage = (BottomBarPage)this.CurrentPage;
+            _innerTabbedPage = (CustomTabbedPage)this.CurrentPage;
             SetHasNavigationBar(_innerTabbedPage, false);
-            _innerTabbedPage.FixedMode = true;
         }
 
         protected void RegisterNavigation()
@@ -60,9 +55,6 @@ namespace Imi.Project.Mobile.Customs
 
         protected virtual Page CreateNavigationPage(Page page)
         {
-            ////return new NavigationPage(page);
-            //var navpage = new NavigationPage(page);
-            //NavigationPage.SetHasNavigationBar(navpage, false);
             return page;
         }
 
