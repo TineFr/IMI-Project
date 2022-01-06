@@ -11,7 +11,7 @@ namespace Imi.Project.Mobile.Customs
 {
     public class CustomContainer : NavigationPage , IFreshNavigationService
     {
-        BottomBarPage _innerTabbedPage;
+        readonly BottomBarPage _innerTabbedPage;
         public BottomBarPage FirstTabbedPage { get { return _innerTabbedPage; } }
 
         readonly List<Page> _tabs = new List<Page>();

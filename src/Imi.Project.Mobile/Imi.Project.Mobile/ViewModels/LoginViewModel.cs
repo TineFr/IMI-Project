@@ -69,9 +69,11 @@ namespace Imi.Project.Mobile.ViewModels
             }
             else
             {
-                var mainPage = new CustomContainer();
-                mainPage.BarBackgroundColor = Color.White;
-                mainPage.BarTextColor = Color.Black;
+                var mainPage = new CustomContainer
+                {
+                    BarBackgroundColor = Color.White,
+                    BarTextColor = Color.Black
+                };
                 mainPage.AddTab<HomeViewModel>("home", "home24.png");
                 mainPage.AddTab<CagesViewModel>("cages", "cage24.png");
                 mainPage.AddTab<BirdsViewModel>("birds", "bird24.png");
