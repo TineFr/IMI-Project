@@ -63,8 +63,8 @@ namespace Imi.Project.Mobile.ViewModels.Birds
              Birds = new ObservableCollection<BirdModel>(await _birdApiService.GetAllAsync("birds"));
          });
 
-        public ICommand ViewBirdCommand => new Command<Bird>(
-            async (Bird bird) =>
+        public ICommand ViewBirdCommand => new Command<BirdModel>(
+            async (BirdModel bird) =>
             {
                 await CoreMethods.PushPageModel<BirdDetailViewModel>(bird);
             });
