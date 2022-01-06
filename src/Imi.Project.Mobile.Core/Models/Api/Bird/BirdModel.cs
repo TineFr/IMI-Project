@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Imi.Project.Common.Enums;
+using System;
 
 namespace Imi.Project.Mobile.Core.Models
 {

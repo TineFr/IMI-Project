@@ -1,4 +1,6 @@
 ﻿using FreshMvvm;
+using Imi.Project.Common.Enums;
+using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
 using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
@@ -14,21 +16,23 @@ namespace Imi.Project.Mobile.ViewModels.Birds
 {
     public class AddBirdViewModel : FreshBasePageModel
     {
-        private readonly IBirdService birdService;
-        private readonly ICageService cageService;
-        private readonly ISpeciesService speciesService;
-        public AddBirdViewModel(IBirdService birdService, ICageService cageService, ISpeciesService speciesService)
+        private readonly IBaseApiService<CageRequestModel, CageModel> _cageService;
+        private readonly IBaseApiService<SpeciesModel, SpeciesModel> _speciesService;
+        private readonly IBaseApiService<BirdRequestModel, BirdModel> _birdService;
+        public AddBirdViewModel(IBaseApiService<CageRequestModel, CageModel> cageService, 
+                                IBaseApiService<SpeciesModel, SpeciesModel> speciesService, 
+                                IBaseApiService<BirdRequestModel, BirdModel> birdService)
         {
-            this.birdService = birdService;
-            this.cageService = cageService;
-            this.speciesService = speciesService;
+            _cageService = cageService;
+            _speciesService = speciesService;
+            _birdService = birdService;
         }
 
 
         #region properties
 
-        private ObservableCollection<Cage> cagesList;
-        public ObservableCollection<Cage> CagesList
+        private ObservableCollection<CageModel> cagesList;
+        public ObservableCollection<CageModel> CagesList
         {
             get { return cagesList; }
             set
@@ -48,8 +52,8 @@ namespace Imi.Project.Mobile.ViewModels.Birds
             }
         }
 
-        private ObservableCollection<Species> speciesList;
-        public ObservableCollection<Species> SpeciesList
+        private ObservableCollection<SpeciesModel> speciesList;
+        public ObservableCollection<SpeciesModel> SpeciesList
         {
             get { return speciesList; }
             set
@@ -79,8 +83,8 @@ namespace Imi.Project.Mobile.ViewModels.Birds
             }
         }
 
-        private Gender gender;
-        public Gender Gender
+        private string gender;
+        public string Gender
         {
             get { return gender; }
             set
@@ -101,8 +105,8 @@ namespace Imi.Project.Mobile.ViewModels.Birds
             }
         }
 
-        private Cage cage;
-        public Cage Cage
+        private CageModel cage;
+        public CageModel Cage
         {
             get { return cage; }
             set
@@ -111,8 +115,8 @@ namespace Imi.Project.Mobile.ViewModels.Birds
                 RaisePropertyChanged(nameof(Cage));
             }
         }
-        private Species species;
-        public Species Species
+        private SpeciesModel species;
+        public SpeciesModel Species
         {
             get { return species; }
             set
@@ -139,20 +143,18 @@ namespace Imi.Project.Mobile.ViewModels.Birds
         public ICommand SaveCommand => new Command(
              async () =>
              {
-                 Bird newBird = new Bird
+                 var test = Enum.TryParse(Gender, out Gender myStatus);
+                 BirdRequestModel newBird = new BirdRequestModel
                  {
-                     Id = new Guid(),
                      Name = this.Name,
-                     Gender = this.Gender.ToString(),
                      HatchDate = this.HatchDate,
-                     Cage = this.Cage,
                      CageId = Cage.Id,
                      SpeciesId = Species.Id,
-                     Species = this.Species,
                      Food = this.Food,
-                     Image = "birds/budgie2.png" //later nog veranderen
+                     //Gender = Enum.Parse(typeof(Gender), this.Gender, true)
+                     //Image = "birds/budgie2.png" //later nog veranderen
                  };
-                 await birdService.AddBird(newBird);
+                 await _birdService.AddAsync("birds", newBird);
                  await CoreMethods.PopPageModel();
              });
 
@@ -165,10 +167,10 @@ namespace Imi.Project.Mobile.ViewModels.Birds
 
         public async override void Init(object initData)
         {
-            var species = await speciesService.GetAllSpecies();
-            SpeciesList = new ObservableCollection<Species>(species);
-            var cages = await cageService.GetAllCages();
-            cagesList = new ObservableCollection<Cage>(cages);
+            var species = await _speciesService.GetAllAsync("species");
+            SpeciesList = new ObservableCollection<SpeciesModel>(species);
+            var cages = await _cageService.GetAllAsync("me/cages");
+            CagesList = new ObservableCollection<CageModel>(cages);
 
             Genders = Enum.GetValues(typeof(Gender)).Cast<Gender>()
                                                     .Select(g => g.ToString())

@@ -1,4 +1,5 @@
 ﻿using FreshMvvm;
+using Imi.Project.Common.Enums;
 using Imi.Project.Mobile.Core.Models;
 using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
