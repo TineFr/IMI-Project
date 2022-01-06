@@ -1,18 +1,11 @@
 ﻿using FreshMvvm;
-using Imi.Project.Mobile.Core.Services;
-using Imi.Project.Mobile.ViewModels;
-using Imi.Project.Mobile.Pages;
-using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using Imi.Project.Mobile.ViewModels.Cages;
-using Imi.Project.Mobile.ViewModels.Birds;
-using Imi.Project.Mobile.ViewModels.Prescriptions;
-using Imi.Project.Mobile.ViewModels.SpeciesGuide;
-using Xamarin.Forms.PlatformConfiguration;
-using Imi.Project.Mobile.Customs;
+using Imi.Project.Mobile.Core.Interfaces;
+using Imi.Project.Mobile.Core.Models;
+using Imi.Project.Mobile.Core.Services.Api;
 using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
+using Imi.Project.Mobile.ViewModels;
+using Xamarin.Forms;
 
 namespace Imi.Project.Mobile
 {
@@ -22,12 +15,25 @@ namespace Imi.Project.Mobile
         {
             InitializeComponent();
 
+            // mock services
+
             FreshIOC.Container.Register<IBirdService, MockBirdService>();
             FreshIOC.Container.Register<ISpeciesService, MockSpeciesService>();
             FreshIOC.Container.Register<ICageService, MockCageService>();
             FreshIOC.Container.Register<IMedicationService, MockMedicationService>();
             FreshIOC.Container.Register<IPrescriptionService, MockPrescriptionService>();
             FreshIOC.Container.Register<IDailyTaskService, MockDailyTaskService>();
+
+            // api services
+
+            FreshIOC.Container.Register<IAuthApiService, AuthApiService>();
+            FreshIOC.Container.Register<IBaseApiService<BirdRequestModel, BirdModel>, BirdApiService>();
+            FreshIOC.Container.Register<IBaseApiService<CageRequestModel, CageModel>, CageApiService>();
+            FreshIOC.Container.Register<IBaseApiService<SpeciesModel, SpeciesModel>, BaseApiService<SpeciesModel, SpeciesModel>>();
+            FreshIOC.Container.Register<IBaseApiService<DailyTaskModel, DailyTaskModel>, BaseApiService<DailyTaskModel, DailyTaskModel>>();
+
+
+
 
             //var mainPage = new CustomContainer();
             //mainPage.FixedMode = true;

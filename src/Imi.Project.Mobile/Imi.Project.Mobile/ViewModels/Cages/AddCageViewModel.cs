@@ -1,4 +1,5 @@
 ﻿using FreshMvvm;
+using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
 using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
@@ -12,11 +13,11 @@ namespace Imi.Project.Mobile.ViewModels.Cages
 {
     public class AddCageViewModel : FreshBasePageModel
     {
-        private readonly ICageService cageService;
+        private readonly IBaseApiService<CageRequestModel, CageModel> _cageService;
 
-        public AddCageViewModel(ICageService cageService)
+        public AddCageViewModel(IBaseApiService<CageRequestModel, CageModel> cageService)
         {
-            this.cageService = cageService;
+            _cageService = cageService;
         }
 
         #region properties
@@ -62,15 +63,18 @@ namespace Imi.Project.Mobile.ViewModels.Cages
         public ICommand SaveCommand => new Command(
              async () =>
              {
-                 Cage newCage = new Cage
+                 CageRequestModel newCage = new CageRequestModel
                  {
-                     Id = new Guid(),
                      Name = this.Name,
                      Location = this.Location,
-                     Image = "cage1.png" //later aan te passen
+                     //Image = "cage1.png" //later aan te passen
                  };
-                 await cageService.AddCage(newCage);
-                 await CoreMethods.PopPageModel();
+                 var response = await _cageService.AddAsync("cages", newCage);  
+                 if (response.ErrorMessage is object)
+                 {
+                     await CoreMethods.DisplayAlert("Error", response.ErrorMessage, "Ok");
+                 }
+                 else await CoreMethods.PopPageModel();
              });
 
         public ICommand BackCommand => new Command(

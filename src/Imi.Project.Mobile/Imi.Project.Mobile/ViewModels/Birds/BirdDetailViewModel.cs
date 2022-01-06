@@ -12,8 +12,8 @@ namespace Imi.Project.Mobile.ViewModels.Birds
     public class BirdDetailViewModel : FreshBasePageModel
     {
 
-        private Bird bird;
-        public Bird Bird
+        private BirdModel bird;
+        public BirdModel Bird
         {
             get { return bird; }
             set
@@ -25,17 +25,18 @@ namespace Imi.Project.Mobile.ViewModels.Birds
 
         public override void Init(object initData)
         {
-            Bird = initData as Bird;
+            Bird = initData as BirdModel;
             base.Init(initData);
         }
         public override void ReverseInit(object value)
         {
-            var updatedBird = value as Bird;
+            var updatedBird = value as BirdModel;
+            Bird = null;
             Bird = updatedBird;
         }
         
-        public ICommand EditBirdCommand => new Command<Bird>(
-         async (Bird bird) =>
+        public ICommand EditBirdCommand => new Command<BirdModel>(
+         async (BirdModel bird) =>
          {
              await CoreMethods.PushPageModel<EditBirdViewModel>(bird);
          });

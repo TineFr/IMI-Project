@@ -18,22 +18,5 @@ namespace Imi.Project.Mobile.Pages
             InitializeComponent();
         }
 
-        private void btnTest_Clicked(object sender, EventArgs e)
-        {
-
-
-        }
-
-        private async void btnSettings_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new SettingsPage());
-        }
-
-        private async void btnAccount_Clicked(object sender, EventArgs e)
-        {
-
-            await Navigation.PushAsync(new AccountPage());
-
-        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Imi.Project.Api.Core.Entities;
+﻿using Imi.Project.Api.Core.Defaults;
+using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Core.Entities.Pagination;
 using Imi.Project.Api.Core.Exceptions;
 using Imi.Project.Api.Core.Helper;
@@ -58,6 +59,7 @@ namespace Imi.Project.Api.Core.Services
                 var databasePath = await _imageService.AddOrUpdateImageAsync<Cage>(newCageEntity.Id, dto.Image);
                 newCageEntity.Image = databasePath;
             }
+            else newCageEntity.Image = ImageConstant.defaultImagePath;
 
             var result = await _cageRepository.AddAsync(newCageEntity);
             var resultDto = result.MapToDto();

@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:models1="clr-namespace:Imi.Project.Mobile.Core.Models;assembly=Imi.Project.Mobile.Core"
              x:Class="Imi.Project.Mobile.Pages.Birds.BirdsPage"
-             xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions">
+             xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom">
     <ContentPage.Content>
         <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
               RowDefinitions="{StaticResource MainGridRows}">
@@ -28,13 +30,17 @@
                                  SelectionChangedCommand="{Binding ViewBirdCommand}"
                                  SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference cvBirds}}">
                     <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models1:Bird" >
+                        <DataTemplate x:DataType="models1:BirdModel" >
                             <StackLayout Style="{StaticResource CollectionSelection}">
 
                                 <Frame Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="Center" Margin="10,5,10,5"  BackgroundColor="#EEEEEE"
                                            CornerRadius="20">
                                     <FlexLayout JustifyContent="SpaceBetween">
-                                        <Image Grid.Column="0" Source="{Binding Image}" HeightRequest="60"></Image>
+                                        <Grid HeightRequest="60" WidthRequest="70">
+                                            <Grid>
+                                                <Image Grid.Column="0" Source="{Binding Image}" HeightRequest="60"></Image>
+                                            </Grid>
+                                            </Grid>
                                         <StackLayout HorizontalOptions="Center">
                                             <Label  Text="{Binding Name}" FontSize="20" />
                                             <Label  Text="{Binding Species.ScientificName}" FontAttributes="italic" />

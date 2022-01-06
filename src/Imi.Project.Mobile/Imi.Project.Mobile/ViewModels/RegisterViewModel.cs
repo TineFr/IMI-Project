@@ -1,7 +1,8 @@
 ﻿using FreshMvvm;
+using Imi.Project.Mobile.Containers;
+using Imi.Project.Mobile.Core.Interfaces;
+using Imi.Project.Mobile.Core.Models.Api.Authentication;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -9,21 +10,34 @@ namespace Imi.Project.Mobile.ViewModels
 {
     public class RegisterViewModel : FreshBasePageModel
     {
-        #region Properties
-        private int name;
+        private readonly IAuthApiService _authApiService;
 
-        public int Name
+        public RegisterViewModel(IAuthApiService authApiService)
         {
-            get { return name; }
-            set { 
-                name = value;
-                RaisePropertyChanged(nameof(name));
-            }     
+            _authApiService = authApiService;
         }
 
-        private int firstName;
+        public override void Init(object initData)
+        {
+            base.Init(initData);
+            DateOfBirth = DateTime.Today;
+        }
+        #region Properties
+        private string name;
 
-        public int FirstName
+        public string Name
+        {
+            get { return name; }
+            set
+            {
+                name = value;
+                RaisePropertyChanged(nameof(name));
+            }
+        }
+
+        private string firstName;
+
+        public string FirstName
         {
             get { return firstName; }
             set
@@ -33,9 +47,9 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
-        private int email;
+        private string email;
 
-        public int Email
+        public string Email
         {
             get { return email; }
             set
@@ -45,9 +59,20 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
-        private int password;
+        private DateTime dateOfBirth;
 
-        public int PassWord
+        public DateTime DateOfBirth
+        {
+            get { return dateOfBirth; }
+            set
+            {
+                dateOfBirth = value;
+                RaisePropertyChanged(nameof(DateOfBirth));
+            }
+        }
+        private string password;
+
+        public string Password
         {
             get { return password; }
             set
@@ -56,9 +81,9 @@ namespace Imi.Project.Mobile.ViewModels
                 RaisePropertyChanged(nameof(password));
             }
         }
-        private int confirmPassword;
+        private string confirmPassword;
 
-        public int ConfirmPassword
+        public string ConfirmPassword
         {
             get { return confirmPassword; }
             set
@@ -68,11 +93,52 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
+
+
+        private string message;
+
+        public string Message
+        {
+            get { return message; }
+            set
+            {
+                message = value;
+                RaisePropertyChanged(nameof(Message));
+            }
+        }
+
         #endregion
-        //public ICommand RegisterCommand => new Command(() =>
-        //{
-        //    Application.Current.MainPage = new FreshNavigationContainer(FreshPageModelResolver.ResolvePageModel<MainViewModel>());
-        //});
+        public ICommand RegisterCommand => new Command(async () =>
+        {
+            RegisterModel model = new RegisterModel
+            {
+                Name = name,
+                FirstName = firstName,
+                Email = email,
+                Password = password,
+                ConfirmPassword = confirmPassword,
+                DateOfBirth = DateOfBirth
+            };
+
+            var response = await _authApiService.Register(model);
+            if (response is object)
+            {
+                await CoreMethods.DisplayAlert("Error", response, "OK");
+
+            }
+            else
+            {
+                var loginResponse = await _authApiService.Authenticate(model.Email, model.Password);  // automatically login after registering
+                if (loginResponse is object)
+                {
+                    await CoreMethods.PopPageModel(); // goes back to login page to try again
+                }
+                else
+                {
+                    Application.Current.MainPage = MainContainer.Get();
+                }
+            }
+        });
 
         public ICommand BackCommand => new Command(async () =>
         {

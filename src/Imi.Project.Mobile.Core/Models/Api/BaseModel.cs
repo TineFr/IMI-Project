@@ -4,8 +4,9 @@ using System.Text;
 
 namespace Imi.Project.Mobile.Core.Models
 {
-    public enum Gender
+    public class BaseModel
     {
-        Male, Female
+        public Guid Id { get; set; }
+        public string ErrorMessage { get; set; }
     }
 }

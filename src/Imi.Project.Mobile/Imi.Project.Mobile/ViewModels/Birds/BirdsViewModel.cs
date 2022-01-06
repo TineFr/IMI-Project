@@ -1,4 +1,5 @@
 ﻿using FreshMvvm;
+using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
 using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
@@ -14,18 +15,19 @@ namespace Imi.Project.Mobile.ViewModels.Birds
 {
     public class BirdsViewModel :FreshBasePageModel  
     {
-        private readonly IBirdService birdService;
+        private readonly IBaseApiService<BirdRequestModel, BirdModel> _birdApiService;
 
-        public BirdsViewModel(IBirdService birdService)
+        public BirdsViewModel(IBaseApiService<BirdRequestModel, BirdModel> birdApiService)
         {
-            this.birdService = birdService;
+            _birdApiService = birdApiService;
         }
+
 
         #region properties
 
 
-        private ObservableCollection<Bird> birds;
-        public ObservableCollection<Bird> Birds
+        private ObservableCollection<BirdModel> birds;
+        public ObservableCollection<BirdModel> Birds
         {
             get { return birds; }
             set
@@ -50,19 +52,19 @@ namespace Imi.Project.Mobile.ViewModels.Birds
 
         private async Task RefreshBirds()
         {
-            var birds = await birdService.GetAllBirds();
+            var birds = await _birdApiService.GetAllAsync("me/birds");
             Birds = null;
-            Birds = new ObservableCollection<Bird>(birds);
+            Birds = new ObservableCollection<BirdModel>(birds);
         }
 
         #region commands
         public ICommand ShowBirdsCommand => new Command(
          async () => {
-             Birds = await birdService.GetAllBirds();
+             Birds = new ObservableCollection<BirdModel>(await _birdApiService.GetAllAsync("birds"));
          });
 
-        public ICommand ViewBirdCommand => new Command<Bird>(
-            async (Bird bird) =>
+        public ICommand ViewBirdCommand => new Command<BirdModel>(
+            async (BirdModel bird) =>
             {
                 await CoreMethods.PushPageModel<BirdDetailViewModel>(bird);
             });

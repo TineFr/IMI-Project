@@ -1,4 +1,6 @@
 ﻿using FreshMvvm;
+using Imi.Project.Common.Enums;
+using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
 using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
@@ -14,22 +16,24 @@ namespace Imi.Project.Mobile.ViewModels.Birds
 {
     public class EditBirdViewModel : FreshBasePageModel
     {
-        private readonly IBirdService birdService;
-        private readonly ICageService cageService;
-        private readonly ISpeciesService speciesService;
-        public EditBirdViewModel(IBirdService birdService, ICageService cageService, ISpeciesService speciesService)
+        private readonly IBaseApiService<CageRequestModel, CageModel> _cageService;
+        private readonly IBaseApiService<SpeciesModel, SpeciesModel> _speciesService;
+        private readonly IBaseApiService<BirdRequestModel, BirdModel> _birdService;
+        public EditBirdViewModel(IBaseApiService<CageRequestModel, CageModel> cageService, 
+                                IBaseApiService<SpeciesModel, SpeciesModel> speciesService, 
+                                IBaseApiService<BirdRequestModel, BirdModel> birdService)
         {
-            this.birdService = birdService;
-            this.cageService = cageService;
-            this.speciesService = speciesService;
+            _cageService = cageService;
+            _speciesService = speciesService;
+            _birdService = birdService;
         }
 
 
-        private Bird birdToEdit;
+        private BirdModel birdToEdit;
         #region properties
 
-        private ObservableCollection<Cage> cagesList;
-        public ObservableCollection<Cage> CagesList
+        private ObservableCollection<CageModel> cagesList;
+        public ObservableCollection<CageModel> CagesList
         {
             get { return cagesList; }
             set
@@ -46,11 +50,12 @@ namespace Imi.Project.Mobile.ViewModels.Birds
             set
             {
                 genders = value;
+                RaisePropertyChanged(nameof(Genders));
             }
         }
 
-        private ObservableCollection<Species> speciesList;
-        public ObservableCollection<Species> SpeciesList
+        private ObservableCollection<SpeciesModel> speciesList;
+        public ObservableCollection<SpeciesModel> SpeciesList
         {
             get { return speciesList; }
             set
@@ -102,8 +107,8 @@ namespace Imi.Project.Mobile.ViewModels.Birds
             }
         }
 
-        private Cage cage;
-        public Cage Cage
+        private CageModel cage;
+        public CageModel Cage
         {
             get { return cage; }
             set
@@ -112,8 +117,8 @@ namespace Imi.Project.Mobile.ViewModels.Birds
                 RaisePropertyChanged(nameof(Cage));
             }
         }
-        private Species species;
-        public Species Species
+        private SpeciesModel species;
+        public SpeciesModel Species
         {
             get { return species; }
             set
@@ -139,15 +144,25 @@ namespace Imi.Project.Mobile.ViewModels.Birds
         public ICommand SaveCommand => new Command(
              async () =>
              {
-                 birdToEdit.Name = Name;
-                 birdToEdit.Gender = Gender;
-                 birdToEdit.HatchDate = HatchDate;
-                 birdToEdit.Species = Species;
-                 birdToEdit.Cage = Cage;
-                 birdToEdit.Food = Food;
-                 birdToEdit.Image = Image;
-                 await birdService.UpdateBird(birdToEdit);
-                 await CoreMethods.PopPageModel(birdToEdit);
+                 BirdRequestModel model = new BirdRequestModel
+                 {
+                     Name = this.Name,
+                     HatchDate = this.HatchDate,
+                     CageId = Cage.Id,
+                     SpeciesId = Species.Id,
+                     Food = this.Food,
+                     Gender = (Gender)Enum.Parse(typeof(Gender), Gender)
+                 };
+
+                 var response = await _birdService.UpdateAsync($"birds/{birdToEdit.Id}", model);
+                 if (response.ErrorMessage is object)
+                 {
+                     await CoreMethods.DisplayAlert("Error", response.ErrorMessage, "Ok");
+                 }
+                 else await CoreMethods.PopPageModel(response);
+
+
+
              });
         public ICommand DeleteCommand => new Command(
              async () =>
@@ -155,8 +170,12 @@ namespace Imi.Project.Mobile.ViewModels.Birds
                  var action = await CoreMethods.DisplayAlert("Do you wish to delete this bird?", null, "YES", "NO");
                  if (action)
                  {
-                     await birdService.DeleteBird(birdToEdit.Id);
-                     await CoreMethods.PopToRoot(true);
+                     var response = await _cageService.DeleteAsync($"birds/{birdToEdit.Id}");
+                     if (response is object)
+                     {
+                         await CoreMethods.DisplayAlert("Error", response.ErrorMessage, "OK");
+                     }
+                     else await CoreMethods.PopToRoot(true);
                  }
              });
 
@@ -170,22 +189,22 @@ namespace Imi.Project.Mobile.ViewModels.Birds
 
         public async override void Init(object initData)
         {
-            var species = await speciesService.GetAllSpecies();
-            SpeciesList = new ObservableCollection<Species>(species);
-            var cages = await cageService.GetAllCages();
-            CagesList = new ObservableCollection<Cage>(cages);
+            var species = await _speciesService.GetAllAsync("species");
+            SpeciesList = new ObservableCollection<SpeciesModel>(species);
+            var cages = await _cageService.GetAllAsync("me/cages");
+            CagesList = new ObservableCollection<CageModel>(cages);
 
             Genders = Enum.GetValues(typeof(Gender)).Cast<Gender>()
                                                     .Select(g => g.ToString())
                                                     .ToList();
 
 
-            birdToEdit = initData as Bird;
+            birdToEdit = initData as BirdModel;
             Name = birdToEdit.Name;
-            Gender = birdToEdit.Gender;
+            Gender = birdToEdit.Gender.ToString();
             HatchDate = birdToEdit.HatchDate;
-            Cage = birdToEdit.Cage;
-            Species = birdToEdit.Species;
+            Cage = CagesList.Where(c => c.Name == birdToEdit.Cage.Name).FirstOrDefault();
+            Species = SpeciesList.Where(c => c.Name == birdToEdit.Species.Name).FirstOrDefault();
             Food = birdToEdit.Food;
             Image = "birds/budgie2.png";
             base.Init(initData);
