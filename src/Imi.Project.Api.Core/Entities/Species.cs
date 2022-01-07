@@ -10,6 +10,8 @@ namespace Imi.Project.Api.Core.Entities
 
         [Required(ErrorMessage = "{0} is required")]
         public string ScientificName { get; set; }
+        public string Description { get; set; }
+        public string Image { get; set; }
         public List<Bird> Birds { get; set; }
     }
 }

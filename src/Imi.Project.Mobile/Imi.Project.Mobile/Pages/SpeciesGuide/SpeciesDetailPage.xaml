@@ -17,7 +17,7 @@
                     <FlexLayout Grid.Row="1" Grid.RowSpan="3" Direction="Column" WidthRequest="1000" HorizontalOptions="Center">
                 <StackLayout>
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                        <Label HeightRequest="50" HorizontalTextAlignment="Center" Text="{Binding Species.ScientificName}" FontAttributes="Italic" FontSize="30"></Label>
+                        <Label HeightRequest="90" HorizontalTextAlignment="Center" Text="{Binding Species.ScientificName}" FontAttributes="Italic" FontSize="30"></Label>
                     </StackLayout>
                 </StackLayout>
                 <Frame>

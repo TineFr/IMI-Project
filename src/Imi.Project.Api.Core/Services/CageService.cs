@@ -82,6 +82,7 @@ namespace Imi.Project.Api.Core.Services
                 var databasePath = await _imageService.AddOrUpdateImageAsync<Bird>(id, dto.Image);
                 updatedCageEntity.Image = databasePath;
             }
+            else if (cage.Image != null) updatedCageEntity.Image = cage.Image;
 
             var result = await _cageRepository.UpdateAsync(updatedCageEntity);
             var resultDto = result.MapToDto();
