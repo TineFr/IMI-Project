@@ -27,8 +27,8 @@
                         </Entry.Behaviors>
                     </Entry>
                 </Frame>
-                <Label x:Name="passwordValidation" TextColor="IndianRed" Text="{Binding PasswordMessage}" Margin="0" HorizontalOptions="Center" WidthRequest="300"></Label>
-                <Label HorizontalOptions="Center" WidthRequest="300" Text="{Binding Message}" TextColor="IndianRed"></Label>
+                <Label x:Name="passwordValidation" TextColor="IndianRed" Text="{Binding PasswordMessage}" Margin="0" HorizontalOptions="Center" WidthRequest="300" IsVisible="{Binding IsVisible[1], Mode=TwoWay}"></Label>
+                <Label HorizontalOptions="Center" WidthRequest="300" Text="{Binding FailedMessage}" TextColor="IndianRed"></Label>
                 <Button HorizontalOptions="Center" WidthRequest="300" TextColor="White" Text="Sign in" BackgroundColor="{StaticResource Purple}" Command="{Binding LoginCommand}" IsEnabled="{Binding IsEnabled}"></Button>
             <FlexLayout HorizontalOptions="Center" Padding="0" WidthRequest="320" Margin="0" JustifyContent="SpaceBetween">
                 <Button BackgroundColor="Transparent" Text="Forgot Password?" TextColor="{StaticResource Purple}"></Button>

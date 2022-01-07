@@ -5,8 +5,6 @@ using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models.Api.Authentication;
 using Imi.Project.Mobile.Validators;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -20,29 +18,19 @@ namespace Imi.Project.Mobile.ViewModels
         public LoginViewModel(IAuthApiService authApiService)
         {
             _authApiService = authApiService;
-            Email = "tine.franchois@gmail.com";
-            Password = "Pa$$w0rd";
             _loginModelValidator = new LoginModelValidator();
+            Email = "tine.franchois@gmail.com";     // hardcoded for ease
+            Password = "Pa$$w0rd";
         }
-
 
         public override void Init(object initData)
         {
             base.Init(initData);
             IsVisible = new List<bool> { false, false };
         }
-        private List<bool> isVisible;
 
-        public List<bool> IsVisible
-        {
-            get { return isVisible; }
-            set 
-            {
-                isVisible = value;
-                RaisePropertyChanged(nameof(IsVisible));
-            }
-        }
 
+        #region Properties
         private string email;
 
         public string Email
@@ -54,17 +42,6 @@ namespace Imi.Project.Mobile.ViewModels
                 RaisePropertyChanged(nameof(Email));
             }
         }
-        private string emailMessage;
-
-        public string EmailMessage
-        {
-            get { return emailMessage; }
-            set
-            {
-                emailMessage = value;
-                RaisePropertyChanged(nameof(EmailMessage));
-            }
-        }
         private string password;
 
         public string Password
@@ -74,6 +51,35 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 password = value;
                 RaisePropertyChanged(nameof(Password));
+            }
+        }
+
+
+        #endregion
+
+        #region ValidationProperties
+
+        private List<bool> isVisible;
+
+        public List<bool> IsVisible
+        {
+            get { return isVisible; }
+            set
+            {
+                isVisible = value;
+                RaisePropertyChanged(nameof(IsVisible));
+            }
+        }
+
+        private string emailMessage;
+
+        public string EmailMessage
+        {
+            get { return emailMessage; }
+            set
+            {
+                emailMessage = value;
+                RaisePropertyChanged(nameof(EmailMessage));
             }
         }
 
@@ -89,41 +95,42 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
-        private string message;
+        private string failedMessage;
 
-        public string Message
+        public string FailedMessage
         {
-            get { return message; }
+            get { return failedMessage; }
             set
             {
-                message = value;
-                RaisePropertyChanged(nameof(Message));
+                failedMessage = value;
+                RaisePropertyChanged(nameof(FailedMessage));
             }
         }
 
-
+        #endregion
 
         public ICommand LoginCommand => new Command(async () =>
         {
+            if (!string.IsNullOrEmpty(FailedMessage)) FailedMessage = "";
             LoginRequestModel model = new LoginRequestModel
             {
                 Email = Email,
                 Password = Password,
             };
             var isValid = Validate(model);
-
             if (isValid)
             {
                 var response = await _authApiService.Authenticate(model);
                 if (response is object)
                 {
-                    Message = response;
+                    FailedMessage = response;
                 }
                 else
                 {
                     Application.Current.MainPage = MainContainer.Get();
                 }
             }
+
         });
 
         public ICommand ShowRegisterCommand => new Command(
@@ -143,7 +150,7 @@ namespace Imi.Project.Mobile.ViewModels
                 {
                     IsVisible[0] = true;
                     EmailMessage = error.ErrorMessage;
-                } 
+                }
                 if (error.PropertyName == nameof(model.Password))
                 {
                     IsVisible[1] = true;
