@@ -12,7 +12,7 @@ namespace Imi.Project.Mobile.ViewModels.Cages
 {
     public class CageDetailViewModel : FreshBasePageModel
     {
-
+        private const string taksMessage = "There are no tasks yet. Add a new task!";
         private readonly IBaseApiService<DailyTaskModel, DailyTaskModel> _dailyTaskService;
 
         public CageDetailViewModel(IBaseApiService<DailyTaskModel, DailyTaskModel> dailyTaskService)
@@ -31,6 +31,19 @@ namespace Imi.Project.Mobile.ViewModels.Cages
                 RaisePropertyChanged(nameof(Tasks));
             }
         }
+
+        private string noTasksMessage;
+
+        public string NoTasksMessage
+        {
+            get { return noTasksMessage; }
+            set 
+            { 
+                noTasksMessage = value;
+                RaisePropertyChanged(nameof(NoTasksMessage));
+            }
+        }
+
 
 
         private CageModel cage;
@@ -53,8 +66,10 @@ namespace Imi.Project.Mobile.ViewModels.Cages
         private async Task RefreshTasks()
         {
             Tasks = null;
+            NoTasksMessage = null;
             var tasks = await _dailyTaskService.GetAllAsync($"cages/{Cage.Id}/dailytasks");
             if (!(tasks.ToList()[0].ErrorMessage is object)) Tasks = new ObservableCollection<DailyTaskModel>(tasks);
+            else NoTasksMessage = taksMessage;
         }
 
         public async override void Init(object initData)
