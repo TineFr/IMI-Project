@@ -128,15 +128,15 @@ namespace Imi.Project.Mobile.ViewModels
             }
             else
             {
-                var loginResponse = await _authApiService.Authenticate(model.Email, model.Password);  // automatically login after registering
-                if (loginResponse is object)
-                {
-                    await CoreMethods.PopPageModel(); // goes back to login page to try again
-                }
-                else
-                {
-                    Application.Current.MainPage = MainContainer.Get();
-                }
+          /*      var loginResponse = await _authApiService.Authenticate(model.Email, model.Password);*/  // automatically login after registering
+                //if (loginResponse is object)
+                //{
+                //    await CoreMethods.PopPageModel(); // goes back to login page to try again
+                //}
+                //else
+                //{
+                //    Application.Current.MainPage = MainContainer.Get();
+                //}
             }
         });
 

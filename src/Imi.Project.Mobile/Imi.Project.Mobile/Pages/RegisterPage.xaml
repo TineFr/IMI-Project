@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Imi.Project.Mobile.Pages.RegisterPage"
              xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions"
-             xmlns:behaviours="clr-namespace:Imi.Project.Mobile.Behaviors">
+             xmlns:behaviors="clr-namespace:Imi.Project.Mobile.Behaviors">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
@@ -18,7 +18,7 @@
             <Frame Padding="0" Margin="10" HorizontalOptions="Center" WidthRequest="300">
                     <Entry Placeholder="Email" Text="{Binding Email}">
                         <Entry.Behaviors>
-                            <behaviours:EmailValidationBehavior/>
+                            <behaviors:EmailValidationBehavior/>
                         </Entry.Behaviors>
                     </Entry>
             </Frame>

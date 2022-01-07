@@ -51,7 +51,10 @@ namespace Imi.Project.Api
             {
                 options.User.RequireUniqueEmail = true;
                 options.Password.RequiredLength = 8;
-                options.Password.RequiredUniqueChars = 3;
+                options.Password.RequireDigit = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = true;
+
             }).AddEntityFrameworkStores<MyAviaryDbContext>();
 
             //authentication

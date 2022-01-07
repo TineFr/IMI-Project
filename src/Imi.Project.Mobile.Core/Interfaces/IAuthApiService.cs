@@ -5,8 +5,8 @@ namespace Imi.Project.Mobile.Core.Interfaces
 {
     public interface IAuthApiService
     {
-        Task<string> Authenticate(string email, string password);
-
+        Task<string> Authenticate(LoginRequestModel model);
+        
         Task<string> Register(RegisterModel model);
         void LogOut();
     }

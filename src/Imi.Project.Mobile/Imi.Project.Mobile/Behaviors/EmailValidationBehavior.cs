@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Mail;
 using System.Text;
+using System.Text.RegularExpressions;
 using Xamarin.Forms;
 
 namespace Imi.Project.Mobile.Behaviors
@@ -12,33 +13,26 @@ namespace Imi.Project.Mobile.Behaviors
         {
             base.OnAttachedTo(bindable);
 
-            bindable.TextChanged += OnTextChanged;
+            bindable.Unfocused += OnLeave;
         }
 
         protected override void OnDetachingFrom(Entry bindable)
         {
             base.OnDetachingFrom(bindable);
-            bindable.TextChanged -= OnTextChanged;  
+            bindable.Unfocused -= OnLeave;  
         }
 
-        private void OnTextChanged(object sender, TextChangedEventArgs e)
+        private void OnLeave(object sender, FocusEventArgs e)
         {
-            var email = e.NewTextValue;
             var emailEntry = sender as Entry;
-            bool isValid;
-            try
-            {
-                MailAddress m = new MailAddress(email);
-                isValid =  true;
-            }
-            catch (FormatException)
-            {
-                isValid =  false;
-            }
-            if (!isValid)
+            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            Match match = regex.Match(emailEntry.Text);
+            if (!match.Success)
             {
                 emailEntry.TextColor = Color.IndianRed;
             }
+            else emailEntry.TextColor = Color.Black;  
+
         }
     }
 }

@@ -2,20 +2,34 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Imi.Project.Mobile.Pages.LoginPage"
-             xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions">
+             xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions"
+             xmlns:behaviors="clr-namespace:Imi.Project.Mobile.Behaviors">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
                 <Image Source="{extensions:ImageResource Imi.Project.Mobile.icons.logolight.png}" HorizontalOptions="Center" HeightRequest="150" Margin="0,40,0,0"></Image>
             <Label HorizontalOptions="Center" WidthRequest="300"  Text="LOG IN" FontSize="30" Margin ="0, 30, 0, 0"  FontAttributes="Bold" TextColor="Black"></Label>
             <Frame Padding="0" Margin="10" HorizontalOptions="Center" WidthRequest="300">
-                    <Entry Placeholder="Email" Text="{Binding Email}"></Entry>
-            </Frame>
-                <Frame Padding="0" Margin="10"  HorizontalOptions="Center" WidthRequest="300">
-                    <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}"></Entry>
+                    <StackLayout>
+                        <Entry Placeholder="Email" Text="{Binding Email}">
+                            <Entry.Behaviors>
+                                 <behaviors:EmailValidationBehavior/>
+                            </Entry.Behaviors>
+                        </Entry>
+                    </StackLayout>
                 </Frame>
+                <Label x:Name="emailValidation" TextColor="IndianRed" Text="{Binding EmailMessage}" Margin="0" HorizontalOptions="Center" WidthRequest="300" IsVisible="{Binding IsVisible[0], Mode=TwoWay}"></Label>
+
+                <Frame Padding="0" Margin="10"  HorizontalOptions="Center" WidthRequest="300">
+                    <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}">
+                        <Entry.Behaviors>
+                            <behaviors:PasswordValidationBehavior/>
+                        </Entry.Behaviors>
+                    </Entry>
+                </Frame>
+                <Label x:Name="passwordValidation" TextColor="IndianRed" Text="{Binding PasswordMessage}" Margin="0" HorizontalOptions="Center" WidthRequest="300"></Label>
                 <Label HorizontalOptions="Center" WidthRequest="300" Text="{Binding Message}" TextColor="IndianRed"></Label>
-                <Button HorizontalOptions="Center" WidthRequest="300" TextColor="White" Text="Sign in" BackgroundColor="{StaticResource Purple}" Command="{Binding LoginCommand}"></Button>
+                <Button HorizontalOptions="Center" WidthRequest="300" TextColor="White" Text="Sign in" BackgroundColor="{StaticResource Purple}" Command="{Binding LoginCommand}" IsEnabled="{Binding IsEnabled}"></Button>
             <FlexLayout HorizontalOptions="Center" Padding="0" WidthRequest="320" Margin="0" JustifyContent="SpaceBetween">
                 <Button BackgroundColor="Transparent" Text="Forgot Password?" TextColor="{StaticResource Purple}"></Button>
                     <Button x:Name="btnSignUp" BackgroundColor="Transparent" Text="Sign up" TextColor="Black" Command="{Binding ShowRegisterCommand}"></Button>

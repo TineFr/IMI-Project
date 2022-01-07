@@ -16,16 +16,11 @@ namespace Imi.Project.Mobile.Core.Services.Api
 
         }
 
-        public async Task<string> Authenticate(string email, string password)
+        public async Task<string> Authenticate(LoginRequestModel model)
         {
-            LoginRequestDto dto = new LoginRequestDto
-            {
-                Email = email,
-                Password = password
-            };
             try
             {
-                var response = await _httpClient.PostAsJsonAsync("Auth/login", dto);
+                var response = await _httpClient.PostAsJsonAsync("Auth/login", model);
                 if (response.IsSuccessStatusCode)
                 {
                     var responseStream = await response.Content.ReadAsStreamAsync();
