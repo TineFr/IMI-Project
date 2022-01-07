@@ -1,4 +1,5 @@
 ﻿using FreshMvvm;
+using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
 using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
@@ -14,18 +15,18 @@ namespace Imi.Project.Mobile.ViewModels.SpeciesGuide
 {
     public class SpeciesViewModel : FreshBasePageModel
     {
-        private readonly ISpeciesService speciesService;
+        private readonly IBaseApiService<SpeciesModel, SpeciesModel> _speciesService;
 
-        public SpeciesViewModel(ISpeciesService speciesService)
+        public SpeciesViewModel(IBaseApiService<SpeciesModel, SpeciesModel> speciesService)
         {
-            this.speciesService = speciesService;
+            _speciesService = speciesService;
         }
 
         #region properties
 
 
-        private ObservableCollection<Species> species;
-        public ObservableCollection<Species> Species
+        private ObservableCollection<SpeciesModel> species;
+        public ObservableCollection<SpeciesModel> Species
         {
             get { return species; }
             set
@@ -59,11 +60,11 @@ namespace Imi.Project.Mobile.ViewModels.SpeciesGuide
         #region commands
         public ICommand ShowSpeciesCommand => new Command(
          async () => {
-             Species = await speciesService.GetAllSpecies();
+             Species = new ObservableCollection<SpeciesModel> ( await _speciesService.GetAllAsync("species"));
          });
 
-        public ICommand ViewSpeciesCommand => new Command<Species>(
-            async (Species species) =>
+        public ICommand ViewSpeciesCommand => new Command<SpeciesModel>(
+            async (SpeciesModel species) =>
             {
                 await CoreMethods.PushPageModel<SpeciesDetailViewModel>(species);
             });

@@ -10,8 +10,8 @@ namespace Imi.Project.Mobile.ViewModels.SpeciesGuide
 {
     public class SpeciesDetailViewModel : FreshBasePageModel
     {
-        private Species species;
-        public Species Species
+        private SpeciesModel species;
+        public SpeciesModel Species
         {
             get { return species; }
             set
@@ -22,7 +22,7 @@ namespace Imi.Project.Mobile.ViewModels.SpeciesGuide
         }
         public override void Init(object initData)
         {
-            Species = initData as Species;
+            Species = initData as SpeciesModel;
             base.Init(initData);
         }
 

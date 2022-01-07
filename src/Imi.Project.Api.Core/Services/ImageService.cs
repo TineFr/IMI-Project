@@ -30,7 +30,10 @@ namespace Imi.Project.Api.Core.Services
             {
                 Directory.CreateDirectory(folderPathForImages);
             }
+            if (image != null)
+            {
 
+            }
             var fileExtension = Path.GetExtension(image.FileName);
 
             var newFileName = $"{entityId}{fileExtension}";

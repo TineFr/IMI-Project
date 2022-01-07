@@ -93,7 +93,7 @@ namespace Imi.Project.Mobile.ViewModels.Cages
                      Location = Location,
                  };
                  //cageToEdit.Image = Image;
-                 var response = await _cageService.AddAsync("cages", model);
+                 var response = await _cageService.UpdateAsync($"cages/{cageToEdit.Id}", model);
                  if (response.ErrorMessage is object)
                  {
                      await CoreMethods.DisplayAlert("Error", response.ErrorMessage, "OK");
