@@ -1,8 +1,6 @@
-﻿using Imi.Project.Common.Dtos;
-using Imi.Project.Mobile.Core.Constants;
+﻿using Imi.Project.Mobile.Core.Constants;
 using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
-using Imi.Project.Mobile.Core.Models.Api.Authentication;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;

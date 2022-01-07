@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Imi.Project.Mobile.Core.Models.Api.Authentication
+namespace Imi.Project.Mobile.Core.Models
 {
     public class RegisterModel
     {

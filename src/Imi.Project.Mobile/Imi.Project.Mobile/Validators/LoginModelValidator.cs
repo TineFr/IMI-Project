@@ -1,8 +1,5 @@
 ﻿using FluentValidation;
-using Imi.Project.Mobile.Core.Models.Api.Authentication;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Imi.Project.Mobile.Core.Models;
 
 namespace Imi.Project.Mobile.Validators
 {

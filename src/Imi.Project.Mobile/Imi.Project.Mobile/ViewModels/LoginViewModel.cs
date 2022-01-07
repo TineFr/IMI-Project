@@ -2,7 +2,7 @@
 using FreshMvvm;
 using Imi.Project.Mobile.Containers;
 using Imi.Project.Mobile.Core.Interfaces;
-using Imi.Project.Mobile.Core.Models.Api.Authentication;
+using Imi.Project.Mobile.Core.Models;
 using Imi.Project.Mobile.Validators;
 using System.Collections.Generic;
 using System.Windows.Input;
@@ -26,7 +26,6 @@ namespace Imi.Project.Mobile.ViewModels
         public override void Init(object initData)
         {
             base.Init(initData);
-            IsVisible = new List<bool> { false, false };
         }
 
 
@@ -59,19 +58,7 @@ namespace Imi.Project.Mobile.ViewModels
 
         #region ValidationProperties
 
-        private List<bool> isVisible;
-
-        public List<bool> IsVisible
-        {
-            get { return isVisible; }
-            set
-            {
-                isVisible = value;
-                RaisePropertyChanged(nameof(IsVisible));
-            }
-        }
-
-        private string emailMessage;
+       private string emailMessage;
 
         public string EmailMessage
         {
@@ -109,6 +96,9 @@ namespace Imi.Project.Mobile.ViewModels
 
         #endregion
 
+
+
+
         public ICommand LoginCommand => new Command(async () =>
         {
             if (!string.IsNullOrEmpty(FailedMessage)) FailedMessage = "";
@@ -143,23 +133,18 @@ namespace Imi.Project.Mobile.ViewModels
         {
             var context = new ValidationContext<object>(model);
             var validationResult = _loginModelValidator.Validate(context);
-            IsVisible = new List<bool> { false, false };
             foreach (var error in validationResult.Errors)
             {
                 if (error.PropertyName == nameof(model.Email))
                 {
-                    IsVisible[0] = true;
                     EmailMessage = error.ErrorMessage;
                 }
                 if (error.PropertyName == nameof(model.Password))
                 {
-                    IsVisible[1] = true;
                     PasswordMessage = error.ErrorMessage;
                 }
             }
-            RaisePropertyChanged(nameof(IsVisible));
             return validationResult.IsValid;
-
         }
     }
 }

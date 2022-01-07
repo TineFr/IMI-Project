@@ -2,10 +2,11 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions"
+             xmlns:converters="clr-namespace:Imi.Project.Mobile.Converters"
              x:Class="Imi.Project.Mobile.App">
     <Application.Resources>
 
-        
+        <converters:TextToVisibilityConverter x:Key="VisibilityConverter" />
 
 
         <!--navbar color-->
@@ -41,6 +42,14 @@
         <Color x:Key="Blue">#B7D7F0</Color>
         <Color x:Key="Yellow">LightYellow</Color>
         <Color x:Key="Pink">#E7C0D2</Color>
+        <Color x:Key="Red">#CD5C5C</Color>
+
+        <!--error label-->
+        <Style x:Key="Error" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource Red}" ></Setter>
+            <Setter Property="HorizontalOptions" Value="Center"></Setter>
+            <Setter Property="WidthRequest" Value="300"></Setter>
+        </Style>
 
 
         <!-- back arrow style-->

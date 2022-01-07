@@ -1,7 +1,6 @@
 ﻿using FreshMvvm;
-using Imi.Project.Mobile.Containers;
 using Imi.Project.Mobile.Core.Interfaces;
-using Imi.Project.Mobile.Core.Models.Api.Authentication;
+using Imi.Project.Mobile.Core.Models;
 using System;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -21,6 +20,11 @@ namespace Imi.Project.Mobile.ViewModels
         {
             base.Init(initData);
             DateOfBirth = DateTime.Today;
+            //IsVisible = new Dictionary<string, bool>
+            //{
+            //     {"Name", false},
+
+            //}
         }
         #region Properties
         private string name;
@@ -108,6 +112,85 @@ namespace Imi.Project.Mobile.ViewModels
         }
 
         #endregion
+
+        //#region ValidationProperties
+
+
+
+
+
+        //private string nameMessage;
+
+        //public string NameMessage
+        //{
+        //    get { return nameMessage; }
+        //    set
+        //    {
+        //        nameMessage = value;
+        //        RaisePropertyChanged(nameof(NameMessage));
+        //    }
+        //}
+
+        //private string firstNameMessage;
+
+        //public string FirstNameMessage
+        //{
+        //    get { return firstNameMessage; }
+        //    set
+        //    {
+        //        firstNameMessage = value;
+        //        RaisePropertyChanged(nameof(FirstNameMessage));
+        //    }
+        //}
+
+        //private string emailMessage;
+
+        //public string EmailMessage
+        //{
+        //    get { return emailMessage; }
+        //    set
+        //    {
+        //        emailMessage = value;
+        //        RaisePropertyChanged(nameof(EmailMessage));
+        //    }
+        //}
+
+        //private string dateOfBirthMessage;
+
+        //public string DateOfBirthMessage
+        //{
+        //    get { return dateOfBirthMessage; }
+        //    set
+        //    {
+        //        dateOfBirthMessage = value;
+        //        RaisePropertyChanged(nameof(DateOfBirthMessage));
+        //    }
+        //}
+        //private string passwordMessage;
+
+        //public string PasswordMessage
+        //{
+        //    get { return passwordMessage; }
+        //    set
+        //    {
+        //        passwordMessage = value;
+        //        RaisePropertyChanged(nameof(PasswordMessage));
+        //    }
+        //}
+        //private string confirmPassword;
+
+        //public string ConfirmPassword
+        //{
+        //    get { return confirmPassword; }
+        //    set
+        //    {
+        //        confirmPassword = value;
+        //        RaisePropertyChanged(nameof(confirmPassword));
+        //    }
+        //}
+
+
+        //#endregion
         public ICommand RegisterCommand => new Command(async () =>
         {
             RegisterModel model = new RegisterModel
@@ -128,15 +211,15 @@ namespace Imi.Project.Mobile.ViewModels
             }
             else
             {
-          /*      var loginResponse = await _authApiService.Authenticate(model.Email, model.Password);*/  // automatically login after registering
-                //if (loginResponse is object)
-                //{
-                //    await CoreMethods.PopPageModel(); // goes back to login page to try again
-                //}
-                //else
-                //{
-                //    Application.Current.MainPage = MainContainer.Get();
-                //}
+                /*      var loginResponse = await _authApiService.Authenticate(model.Email, model.Password);*/  // automatically login after registering
+                                                                                                                //if (loginResponse is object)
+                                                                                                                //{
+                                                                                                                //    await CoreMethods.PopPageModel(); // goes back to login page to try again
+                                                                                                                //}
+                                                                                                                //else
+                                                                                                                //{
+                                                                                                                //    Application.Current.MainPage = MainContainer.Get();
+                                                                                                                //}
             }
         });
 

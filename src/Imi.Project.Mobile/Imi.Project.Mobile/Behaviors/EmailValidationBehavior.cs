@@ -19,7 +19,7 @@ namespace Imi.Project.Mobile.Behaviors
         protected override void OnDetachingFrom(Entry bindable)
         {
             base.OnDetachingFrom(bindable);
-            bindable.Unfocused -= OnLeave;  
+            bindable.Unfocused -= ONtEST;  
         }
 
         private void OnLeave(object sender, FocusEventArgs e)
@@ -32,6 +32,19 @@ namespace Imi.Project.Mobile.Behaviors
                 emailEntry.TextColor = Color.IndianRed;
             }
             else emailEntry.TextColor = Color.Black;  
+
+        }
+
+        private void ONtEST(object sender, FocusEventArgs e)
+        {
+            var emailEntry = sender as Entry;
+            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            Match match = regex.Match(emailEntry.Text);
+            if (!match.Success)
+            {
+                emailEntry.TextColor = Color.IndianRed;
+            }
+            else emailEntry.TextColor = Color.Black;
 
         }
     }
