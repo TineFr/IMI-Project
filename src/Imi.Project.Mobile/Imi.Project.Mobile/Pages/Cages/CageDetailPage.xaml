@@ -31,7 +31,10 @@
                     <Frame>
                     <StackLayout>
                     <Label Text="Daily Tasks" HorizontalTextAlignment="Center" FontSize="30"></Label>
-                        <Button x:Name="btnAddTask" Text="+" HorizontalOptions="End" BackgroundColor="{StaticResource Green}" Command="{Binding AddTaskCommand}" HeightRequest="40"  WidthRequest="40" ></Button>
+                        <FlexLayout FlowDirection="RightToLeft" JustifyContent="SpaceBetween" >
+                            <Label Text="{Binding NoTasksMessage}" HorizontalOptions="Start" Margin="15, 10, 0, 0"></Label>
+                            <Button x:Name="btnAddTask" Text="+" HorizontalOptions="End" BackgroundColor="{StaticResource Green}" Command="{Binding AddTaskCommand}" HeightRequest="40"  WidthRequest="40" ></Button>
+                        </FlexLayout>
                         <ListView x:Name="lstTasks" SelectionMode="None" ItemsSource="{Binding Tasks}">
                         <ListView.ItemTemplate>
                                 <DataTemplate>
