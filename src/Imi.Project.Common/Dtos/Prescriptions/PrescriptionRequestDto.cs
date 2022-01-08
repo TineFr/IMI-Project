@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Imi.Project.Common.Dtos
 {
-    public class PrescriptionRequestDto : BaseEntityDto
+    public class PrescriptionRequestDto
     {
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }

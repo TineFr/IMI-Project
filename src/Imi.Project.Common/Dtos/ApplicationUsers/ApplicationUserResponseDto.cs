@@ -3,8 +3,9 @@ using System.Collections.Generic;
 
 namespace Imi.Project.Common.Dtos
 {
-    public class ApplicationUserResponseDto : BaseEntityDto
+    public class ApplicationUserResponseDto
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string FirstName { get; set; }
         public string Email { get; set; }

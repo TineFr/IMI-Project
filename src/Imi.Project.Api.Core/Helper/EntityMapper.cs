@@ -11,7 +11,7 @@ namespace Imi.Project.Api.Core.Helper
 
             var user = new ApplicationUser
             {
-                Id = userDto.Id,
+                //Id = userDto.Id,
                 UserName = userDto.Name
             };
             return user;
@@ -21,7 +21,7 @@ namespace Imi.Project.Api.Core.Helper
         {
             var bird = new Bird
             {
-                Id = birdDto.Id,
+                //Id = birdDto.Id,
                 Name = birdDto.Name,
                 CageId = birdDto.CageId,
                 Gender = birdDto.Gender,
@@ -38,7 +38,7 @@ namespace Imi.Project.Api.Core.Helper
         {
             var cage = new Cage
             {
-                Id = cageDto.Id,
+                //Id = cageDto.Id,
                 Name = cageDto.Name,
                 Location = cageDto.Location,
                 UserId = cageDto.UserId
@@ -50,7 +50,7 @@ namespace Imi.Project.Api.Core.Helper
         {
             var medicine = new Medicine
             {
-                Id = medicineDto.Id,
+                //Id = medicineDto.Id,
                 Name = medicineDto.Name,
                 Usage = medicineDto.Usage,
                 UserId = medicineDto.UserId
@@ -62,7 +62,7 @@ namespace Imi.Project.Api.Core.Helper
         {
             var task = new DailyTask
             {
-                Id = taskDto.Id,
+                //Id = taskDto.Id,
                 Description = taskDto.Description,
                 CageId = taskDto.CageId,
                 IsDone = taskDto.IsDone
@@ -74,7 +74,7 @@ namespace Imi.Project.Api.Core.Helper
         {
             var species = new Species
             {
-                Id = speciesDto.Id,
+                //Id = speciesDto.Id,
                 Name = speciesDto.Name,
                 ScientificName = speciesDto.ScientificName
 
@@ -87,7 +87,7 @@ namespace Imi.Project.Api.Core.Helper
         {
             var prescription = new Prescription
             {
-                Id = prescriptionDto.Id,
+                //Id = prescriptionDto.Id,
                 EndDate = prescriptionDto.EndDate,
                 StartDate = prescriptionDto.StartDate,
                 MedicineId = prescriptionDto.Medicine,
@@ -99,7 +99,7 @@ namespace Imi.Project.Api.Core.Helper
                 var birdprescription = new BirdPrescription
                 {
                     BirdId = bird,
-                    PrescriptionId = prescriptionDto.Id
+                    //PrescriptionId = prescriptionDto.Id
                 };
 
                 prescription.BirdPrescriptions.Add(birdprescription);

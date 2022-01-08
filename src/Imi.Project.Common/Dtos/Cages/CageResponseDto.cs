@@ -4,8 +4,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Imi.Project.Common.Dtos
 {
-    public class CageResponseDto : BaseEntityDto
+    public class CageResponseDto
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public IEnumerable<Guid> Birds { get; set; }
         public IEnumerable<DailyTaskResponseDto> DailyTasks { get; set; }

@@ -10,6 +10,8 @@ namespace Imi.Project.Api.Core.Interfaces.Repositories
     {
         Task<IEnumerable<Medicine>> GetByUserIdAsync(Guid id);
 
+        Task<Medicine> ExsistsForUserId(Guid userId, Guid id);
+
 
     }
 }

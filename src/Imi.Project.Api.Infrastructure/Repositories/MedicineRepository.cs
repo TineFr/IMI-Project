@@ -36,5 +36,11 @@ namespace Imi.Project.Api.Infrastructure.Repositories
             return await GetAll().Where(m => m.UserId.Equals(id)).OrderBy(b => b.Name).ToListAsync();
         }
 
+        public async Task<Medicine> ExsistsForUserId(Guid userId, Guid id)
+        {
+            var medicine = (await GetByUserIdAsync(userId)).ToList().FirstOrDefault(c => c.Id.Equals(id));
+            return medicine;
+        }
+
     }
 }

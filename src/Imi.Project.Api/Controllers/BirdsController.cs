@@ -55,6 +55,7 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "AdministratorRole")]
         public async Task<IActionResult> Post([FromForm] BirdRequestDto newBird)
         {
             newBird.UserId = User.GetUser();

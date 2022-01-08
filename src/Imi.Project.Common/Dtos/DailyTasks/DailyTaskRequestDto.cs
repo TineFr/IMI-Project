@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Imi.Project.Common.Dtos
 {
-    public class DailyTaskRequestDto : BaseEntityDto
+    public class DailyTaskRequestDto 
     {
         [Required(ErrorMessage = "{0} is required")]
         public string Description { get; set; }

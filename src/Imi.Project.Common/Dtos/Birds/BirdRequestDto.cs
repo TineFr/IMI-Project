@@ -6,19 +6,20 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Imi.Project.Common.Dtos
 {
-    public class BirdRequestDto : BaseEntityDto, IHasImage
+    public class BirdRequestDto : IHasImage
     {
         [Required(ErrorMessage = "{0} is required")]
         public string Name { get; set; }
         [DataType(DataType.Date)]
-        public DateTime HatchDate { get; set; }
-        public Gender Gender { get; set; }
-        public string Food { get; set; }
-        [Required(ErrorMessage = "{0} is required")]
-        public Guid UserId { get; set; }
-        public Guid CageId { get; set; }
 
         [Required(ErrorMessage = "{0} is required")]
+        public DateTime HatchDate { get; set; }
+
+        [Required(ErrorMessage = "{0} is required")]
+        public Gender Gender { get; set; }
+        public string Food { get; set; }
+        public Guid UserId { get; set; }
+        public Guid CageId { get; set; }
         public Guid SpeciesId { get; set; }
         public IFormFile Image { get; set; }
 
