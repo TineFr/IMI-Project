@@ -22,6 +22,7 @@
                             <Entry x:Name="entrName" Text="{Binding Name}"></Entry>
                         </StackLayout>
                     </Frame>
+                    <Label Text="{Binding NameMessage}" Style="{StaticResource Error}" IsVisible="{Binding NameMessage, Converter={StaticResource VisibilityConverter}}"></Label>
                     <Frame Style="{StaticResource EditFrame}">
                         <StackLayout>
                             <Label Text="Species"  FontAttributes="Bold"></Label>
@@ -40,18 +41,21 @@
                             <Picker  x:Name="pkrGender" Title="Select gender" ItemsSource="{Binding Genders}" SelectedItem="{Binding Gender}"></Picker>
                         </StackLayout>
                     </Frame>
+                    <Label Text="{Binding GenderMessage}" Style="{StaticResource Error}" IsVisible="{Binding GenderMessage, Converter={StaticResource VisibilityConverter}}"></Label>
                     <Frame Style="{StaticResource EditFrame}">
                         <StackLayout>
                             <Label Text="Select date of hatching"  FontAttributes="Bold"></Label>
                             <DatePicker x:Name="dpkHatchDate" Date="{Binding HatchDate}"></DatePicker>
                         </StackLayout>
                     </Frame>
+                    <Label Text="{Binding HatchDateMessage}" Style="{StaticResource Error}" IsVisible="{Binding HatchDateMessage, Converter={StaticResource VisibilityConverter}}"></Label>
                     <Frame Style="{StaticResource EditFrame}">
                         <StackLayout>
                             <Label Text="Food"  FontAttributes="Bold"></Label>
                             <Entry  x:Name="entrFood" Placeholder="Enter food" Text="{Binding Food}"></Entry>
                         </StackLayout>
                     </Frame>
+                    <Label Text="{Binding FoodMessage}" Style="{StaticResource Error}" IsVisible="{Binding FoodMessage, Converter={StaticResource VisibilityConverter}}"></Label>
                     <Frame Style="{StaticResource EditFrame}">
                         <StackLayout>
                             <Label Text="Change image"  FontAttributes="Bold"></Label>
