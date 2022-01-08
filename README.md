@@ -7,7 +7,6 @@ Beschrijf hier je project
 Plaats hier de nodig informatie om het
 project te kunnen uitvoeren:
 
-### API keys of nodige secrets
 ###  Login gegevens
 
 #### Administrator 
@@ -28,7 +27,3 @@ Users jonger dan 15 jaar hebben geen toegang tot medicines- en prescriptions end
 Email : janne.vhl@gmail.com\
 Paswoord: =UtyVmn8/NP
 
-
-
-### Database configuraties
-- ...
