@@ -1,11 +1,9 @@
-# Naam van jouw project
+# My Aviary
 
 ## Project
 Beschrijf hier je project
 
 ## Extra info
-Plaats hier de nodig informatie om het
-project te kunnen uitvoeren:
 
 ###  Login gegevens
 
