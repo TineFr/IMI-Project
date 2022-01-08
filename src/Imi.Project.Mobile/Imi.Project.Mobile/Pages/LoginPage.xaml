@@ -2,8 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Imi.Project.Mobile.Pages.LoginPage"
-             xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions">
-
+             xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions"
+             xmlns:behaviors="clr-namespace:Imi.Project.Mobile.Behaviors"
+             xmlns:converters="clr-namespace:Imi.Project.Mobile.Converters">
+    <ContentPage.Resources>
+        <converters:TextToVisibilityConverter x:Key="VisibilityConverter" />
+    </ContentPage.Resources>
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>

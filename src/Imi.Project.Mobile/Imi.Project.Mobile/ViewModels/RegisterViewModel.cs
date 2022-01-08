@@ -1,6 +1,8 @@
-﻿using FreshMvvm;
+﻿using FluentValidation;
+using FreshMvvm;
 using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
+using Imi.Project.Mobile.Validators;
 using System;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -10,21 +12,19 @@ namespace Imi.Project.Mobile.ViewModels
     public class RegisterViewModel : FreshBasePageModel
     {
         private readonly IAuthApiService _authApiService;
+        private IValidator _registerModelValidator;
 
         public RegisterViewModel(IAuthApiService authApiService)
         {
             _authApiService = authApiService;
+            _registerModelValidator = new RegisterModelValidator();
         }
 
         public override void Init(object initData)
         {
             base.Init(initData);
             DateOfBirth = DateTime.Today;
-            //IsVisible = new Dictionary<string, bool>
-            //{
-            //     {"Name", false},
 
-            //}
         }
         #region Properties
         private string name;
@@ -113,84 +113,80 @@ namespace Imi.Project.Mobile.ViewModels
 
         #endregion
 
-        //#region ValidationProperties
+        #region ValidationProperties
+
+        private string nameMessage;
+
+        public string NameMessage
+        {
+            get { return nameMessage; }
+            set
+            {
+                nameMessage = value;
+                RaisePropertyChanged(nameof(NameMessage));
+            }
+        }
+
+        private string firstNameMessage;
+
+        public string FirstNameMessage
+        {
+            get { return firstNameMessage; }
+            set
+            {
+                firstNameMessage = value;
+                RaisePropertyChanged(nameof(FirstNameMessage));
+            }
+        }
+
+        private string emailMessage;
+
+        public string EmailMessage
+        {
+            get { return emailMessage; }
+            set
+            {
+                emailMessage = value;
+                RaisePropertyChanged(nameof(EmailMessage));
+            }
+        }
+
+        private string dateOfBirthMessage;
+
+        public string DateOfBirthMessage
+        {
+            get { return dateOfBirthMessage; }
+            set
+            {
+                dateOfBirthMessage = value;
+                RaisePropertyChanged(nameof(DateOfBirthMessage));
+            }
+        }
+        private string passwordMessage;
+
+        public string PasswordMessage
+        {
+            get { return passwordMessage; }
+            set
+            {
+                passwordMessage = value;
+                RaisePropertyChanged(nameof(PasswordMessage));
+            }
+        }
+        private string confirmPasswordMessage;
+
+        public string ConfirmPasswordMessage
+        {
+            get { return confirmPasswordMessage; }
+            set
+            {
+                confirmPasswordMessage = value;
+                RaisePropertyChanged(nameof(ConfirmPasswordMessage));
+            }
+        }
 
 
-
-
-
-        //private string nameMessage;
-
-        //public string NameMessage
-        //{
-        //    get { return nameMessage; }
-        //    set
-        //    {
-        //        nameMessage = value;
-        //        RaisePropertyChanged(nameof(NameMessage));
-        //    }
-        //}
-
-        //private string firstNameMessage;
-
-        //public string FirstNameMessage
-        //{
-        //    get { return firstNameMessage; }
-        //    set
-        //    {
-        //        firstNameMessage = value;
-        //        RaisePropertyChanged(nameof(FirstNameMessage));
-        //    }
-        //}
-
-        //private string emailMessage;
-
-        //public string EmailMessage
-        //{
-        //    get { return emailMessage; }
-        //    set
-        //    {
-        //        emailMessage = value;
-        //        RaisePropertyChanged(nameof(EmailMessage));
-        //    }
-        //}
-
-        //private string dateOfBirthMessage;
-
-        //public string DateOfBirthMessage
-        //{
-        //    get { return dateOfBirthMessage; }
-        //    set
-        //    {
-        //        dateOfBirthMessage = value;
-        //        RaisePropertyChanged(nameof(DateOfBirthMessage));
-        //    }
-        //}
-        //private string passwordMessage;
-
-        //public string PasswordMessage
-        //{
-        //    get { return passwordMessage; }
-        //    set
-        //    {
-        //        passwordMessage = value;
-        //        RaisePropertyChanged(nameof(PasswordMessage));
-        //    }
-        //}
-        //private string confirmPassword;
-
-        //public string ConfirmPassword
-        //{
-        //    get { return confirmPassword; }
-        //    set
-        //    {
-        //        confirmPassword = value;
-        //        RaisePropertyChanged(nameof(confirmPassword));
-        //    }
-        //}
-
-
-        //#endregion
+        #endregion
         public ICommand RegisterCommand => new Command(async () =>
         {
             RegisterModel model = new RegisterModel
@@ -203,24 +199,23 @@ namespace Imi.Project.Mobile.ViewModels
                 DateOfBirth = DateOfBirth
             };
 
-            var response = await _authApiService.Register(model);
-            if (response is object)
-            {
-                await CoreMethods.DisplayAlert("Error", response, "OK");
+            var isValid = Validate(model);
 
-            }
-            else
+            if (isValid)
             {
-                /*      var loginResponse = await _authApiService.Authenticate(model.Email, model.Password);*/  // automatically login after registering
-                                                                                                                //if (loginResponse is object)
-                                                                                                                //{
-                                                                                                                //    await CoreMethods.PopPageModel(); // goes back to login page to try again
-                                                                                                                //}
-                                                                                                                //else
-                                                                                                                //{
-                                                                                                                //    Application.Current.MainPage = MainContainer.Get();
-                                                                                                                //}
+                var response = await _authApiService.Register(model);
+                if (response is object)
+                {
+                    await CoreMethods.DisplayAlert("Error", response, "OK");
+
+                }
+                else
+                {
+                    await CoreMethods.DisplayAlert("Succes", "You were successfully registered", "OK");
+                    await CoreMethods.PopPageModel(model); // goes back to login page to log in
+                }
             }
+
         });
 
         public ICommand BackCommand => new Command(async () =>
@@ -228,6 +223,51 @@ namespace Imi.Project.Mobile.ViewModels
             await CoreMethods.PopPageModel();
         });
 
+
+        private bool Validate(RegisterModel model)
+        {
+            ResetErrorMessages();
+            var context = new ValidationContext<object>(model);
+            var validationResult = _registerModelValidator.Validate(context);
+            foreach (var error in validationResult.Errors)
+            {
+                if (error.PropertyName == nameof(model.Email))
+                {
+                    EmailMessage = error.ErrorMessage;
+                }
+                if (error.PropertyName == nameof(model.Password))
+                {
+                    PasswordMessage = error.ErrorMessage;
+                }
+                if (error.PropertyName == nameof(model.ConfirmPassword))
+                {
+                    ConfirmPasswordMessage = error.ErrorMessage;
+                }
+                if (error.PropertyName == nameof(model.Name))
+                {
+                    NameMessage = error.ErrorMessage;
+                }
+                if (error.PropertyName == nameof(model.FirstName))
+                {
+                    FirstNameMessage = error.ErrorMessage;
+                }
+                if (error.PropertyName == nameof(model.DateOfBirth))
+                {
+                    DateOfBirthMessage = error.ErrorMessage;
+                }
+            }
+            return validationResult.IsValid;
+        }
+
+        private void ResetErrorMessages()
+        {
+            EmailMessage = "";
+            PasswordMessage = "";
+            ConfirmPasswordMessage = "";
+            NameMessage = "";
+            FirstNameMessage = "";
+            DateOfBirthMessage = "";
+        }
 
     }
 }

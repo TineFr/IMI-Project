@@ -6,9 +6,9 @@ using System.Text;
 
 namespace Imi.Project.Mobile.Validators
 {
-    public class RegisterModelValidatior : AbstractValidator<RegisterModel>
+    public class RegisterModelValidator : AbstractValidator<RegisterModel>
     {
-        public RegisterModelValidatior()
+        public RegisterModelValidator()
         {
             RuleFor(model => model.Email)
                 .NotEmpty()
@@ -35,7 +35,7 @@ namespace Imi.Project.Mobile.Validators
             RuleFor(model => model.DateOfBirth)
                 .NotNull()
                 .WithMessage("Date of birth is required")
-                .GreaterThan(b => DateTime.Now.Date)
+                .LessThan(b => DateTime.Now.Date)
                 .WithMessage("Date of birth cannot be a future date");
 
             RuleFor(model => model.Name)

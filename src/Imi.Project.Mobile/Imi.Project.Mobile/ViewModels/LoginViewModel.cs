@@ -4,7 +4,7 @@ using Imi.Project.Mobile.Containers;
 using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
 using Imi.Project.Mobile.Validators;
-using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -18,14 +18,23 @@ namespace Imi.Project.Mobile.ViewModels
         public LoginViewModel(IAuthApiService authApiService)
         {
             _authApiService = authApiService;
-            _loginModelValidator = new LoginModelValidator();
+
             Email = "tine.franchois@gmail.com";     // hardcoded for ease
             Password = "Pa$$w0rd";
+            _loginModelValidator = new LoginModelValidator();
         }
 
         public override void Init(object initData)
         {
             base.Init(initData);
+        }
+
+        public override void ReverseInit(object returnedData)
+        {
+            var model = returnedData as RegisterModel;
+            Email = model.Email;
+            Password = model.Password;
+            base.ReverseInit(returnedData);
         }
 
 
@@ -58,7 +67,7 @@ namespace Imi.Project.Mobile.ViewModels
 
         #region ValidationProperties
 
-       private string emailMessage;
+        private string emailMessage;
 
         public string EmailMessage
         {
@@ -131,12 +140,15 @@ namespace Imi.Project.Mobile.ViewModels
 
         private bool Validate(LoginRequestModel model)
         {
+            ResetErrorMessages();
             var context = new ValidationContext<object>(model);
             var validationResult = _loginModelValidator.Validate(context);
             foreach (var error in validationResult.Errors)
             {
+
                 if (error.PropertyName == nameof(model.Email))
                 {
+
                     EmailMessage = error.ErrorMessage;
                 }
                 if (error.PropertyName == nameof(model.Password))
@@ -145,6 +157,12 @@ namespace Imi.Project.Mobile.ViewModels
                 }
             }
             return validationResult.IsValid;
+        }
+
+        private void ResetErrorMessages()
+        {
+            EmailMessage = "";
+            PasswordMessage = "";
         }
     }
 }
