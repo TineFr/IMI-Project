@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Imi.Project.Api.Infrastructure.Migrations
 {
     [DbContext(typeof(MyAviaryDbContext))]
-    [Migration("20220106233346_InitialMigration")]
+    [Migration("20220108021118_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -100,7 +100,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c3bf187f-3034-44b5-a263-9de222d5f252",
+                            ConcurrencyStamp = "bbcf7ec4-9890-4d6a-9e4d-67080ea5d1de",
                             DateOfBirth = new DateTime(1997, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "tine.franchois@gmail.com",
                             EmailConfirmed = false,
@@ -109,9 +109,9 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                             Name = "Franchois",
                             NormalizedEmail = "TINE.FRANCHOIS@GMAIL.COM",
                             NormalizedUserName = "TINE.FRANCHOIS@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEErY+FvzST/UGxGH81Th4gGh45SzbOtlRW0MDCP2WuKYP+zHzvXxrWTST8mk6Yyoqw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMVmzvbblXNKsYSy7lHw3JbJEr1SHHPZWRg0OOXi9ZV1yRKl6sEV0hEeyHD4uc2vWg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "26e300bd-11e0-4c20-86b6-8cca84f0ddad",
+                            SecurityStamp = "cce64a70-235f-4915-b8de-3da31ea76412",
                             TwoFactorEnabled = false,
                             UserName = "tine.franchois@gmail.com"
                         },
@@ -119,7 +119,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000002"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7f7c0922-2894-4d46-911e-6e858990f972",
+                            ConcurrencyStamp = "70a2a304-49c5-4606-8e2f-5c22c7bfc22a",
                             DateOfBirth = new DateTime(1997, 12, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "deq.claire@gmail.com",
                             EmailConfirmed = false,
@@ -128,9 +128,9 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                             Name = "Dequinnemaere",
                             NormalizedEmail = "DEQ.CLAIRE@GMAIL.COM",
                             NormalizedUserName = "DEQ.CLAIRE@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKTLcKvVgFD61ZfFPlvgrT3AxVMlUMwUra8XjbaoPRmDhQbNC25xMV7vKpob7S2CyA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDRfu5V5zSNzvCPgbKJTzOs8W/JfcsQHoteqSlzgBQagTVIPrGHCVHBFTxsyV4EzHQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "63c16213-4f42-449a-ba54-33ab01792903",
+                            SecurityStamp = "c677e5db-480a-4940-8774-0c28c32dd8dc",
                             TwoFactorEnabled = false,
                             UserName = "deq.claire@gmail.com"
                         },
@@ -138,7 +138,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000003"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8eccb39a-6223-4ce5-afb4-a7b2fe945038",
+                            ConcurrencyStamp = "768fee07-1cbf-4bbe-92c2-c205b0b875af",
                             DateOfBirth = new DateTime(1995, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "depotter.sander@gmail.com",
                             EmailConfirmed = false,
@@ -147,9 +147,9 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                             Name = "Depotter",
                             NormalizedEmail = "DEPOTTER.SANDER@GMAIL.COM",
                             NormalizedUserName = "DEPOTTER.SANDER@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAELVnSUO7rmYw2K+OaCCJ6Z5ev0f6X4g6al6HJwNzSqQWZUhqV45poHkjWSKa/yVXNw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEP2TWlzu8drwOEO5UBpEPuYmU3DO6x/8qOhCIFlyu8b/aZ5lRyin5i+YE7A/shJAPw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b020dab1-3595-43ca-acaf-531eab7fd89f",
+                            SecurityStamp = "fdf725e1-cdb6-4150-880e-55b52e70d947",
                             TwoFactorEnabled = false,
                             UserName = "depotter.sander@gmail.com"
                         },
@@ -157,7 +157,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000004"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9d44cc82-a120-47ee-9040-54d88057042a",
+                            ConcurrencyStamp = "54efb674-9fd8-4cb2-83a8-33db5eaac0f5",
                             DateOfBirth = new DateTime(1997, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "haenebalcke.niels@gmail.com",
                             EmailConfirmed = false,
@@ -166,9 +166,9 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                             Name = "Haenebalcke",
                             NormalizedEmail = "HAENEBALCKE.NIELS@GMAIL.COM",
                             NormalizedUserName = "HAENEBALCKE.NIELS@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEE5LpWSSquqq2RLrkaDpjxHtPGrQKJhkQlC072KNKuqyobDeRmb5Hd5FKnxoFwSvlQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEQdffFHubflkS2/K3TKuTfNBYPKH4RMAZ79iledvpNwlf9PlmtJeDYow0Lsi2HcLg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "93bd7486-1597-49c2-a5cc-ac36b2d13dcd",
+                            SecurityStamp = "16ab8c6f-b5d1-4c98-bd59-d96e34291c65",
                             TwoFactorEnabled = false,
                             UserName = "haenebalcke.niels@gmail.com"
                         },
@@ -176,7 +176,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000005"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6262e118-bff6-45af-b70b-65540e8163da",
+                            ConcurrencyStamp = "530b03e5-5da6-4dae-8667-b7871ec9e18a",
                             DateOfBirth = new DateTime(1996, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "jochem.dewandel@gmail.com",
                             EmailConfirmed = false,
@@ -185,9 +185,9 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                             Name = "Dewandel",
                             NormalizedEmail = "JOCHEM.DEWANDEL@GMAIL.COM",
                             NormalizedUserName = "JOCHEM.DEWANDEL@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEArE69s2wvF7GhWdvqQVetiiRi94oZMX6i1eHNypvvIZ3rP7eStS8n8qiG5wTMGesg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKX86KB/Xw1R7T7Yytvwy5DbhrQ6UMCNMhw0jL/pSgKcICp9ydOPNdZm0rIMaJbcVA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4e31bf6d-91b8-4e5b-9577-ac2cdd93e1f5",
+                            SecurityStamp = "6ba01646-ae22-4ca5-9396-36c4aef70853",
                             TwoFactorEnabled = false,
                             UserName = "jochem.dewandel@gmail.com"
                         },
@@ -195,7 +195,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000006"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3d533cb8-f40f-468f-bf25-2699e5144de8",
+                            ConcurrencyStamp = "e7f965fb-56c6-4609-9044-b66c9f57ea15",
                             DateOfBirth = new DateTime(1997, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "jonas.desmet@telenet.be",
                             EmailConfirmed = false,
@@ -204,9 +204,9 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                             Name = "DeSmet",
                             NormalizedEmail = "JONAS.DESMET@TELENET.BE",
                             NormalizedUserName = "JONAS.DESMET@TELENET.BE",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKTRmw2A9oywjSWOZt5YDRe3PPa/N3fU8MfmJ7rVMlphnYkyl0h8hmh13CbcZ7N8+w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDWugQerxn6sue+YVvzniNPmrK59Aw+1o6FYQtfhLbPFWtzhfxHQL+1SKwDxV1kHcQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f08eca78-1fe3-468b-9875-362dda44fb2e",
+                            SecurityStamp = "ea731109-0da9-4179-971f-76dabdeb0965",
                             TwoFactorEnabled = false,
                             UserName = "jonas.desmet@telenet.be"
                         },
@@ -214,7 +214,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000007"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c9690325-464c-4844-8bd4-39023abbe01c",
+                            ConcurrencyStamp = "7c79f5b9-54ae-4674-b2e7-8b8ca763ba93",
                             DateOfBirth = new DateTime(1997, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "niels.verbeke@hotmail.com",
                             EmailConfirmed = false,
@@ -223,9 +223,9 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                             Name = "Verbeke",
                             NormalizedEmail = "NIELS.VERBEKE@HOTMAIL.COM",
                             NormalizedUserName = "NIELS.VERBEKE@HOTMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIDOmisLtMgovtWD+Gy0MczBq4bmJ0+q7VLvofXExyNa+fvTC5hdA1C8QwiY2w9mwA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFI7HbIdvhqbIvSQWLnOtZmdJRA/C3OFmgN2P9cFf1Grym6REgVz6/J7Ef7jpEI1xA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "922e0689-bc67-4c59-be4b-40031f65aabf",
+                            SecurityStamp = "e8f4b346-bfdf-4de2-a6a9-c6d7a00b7665",
                             TwoFactorEnabled = false,
                             UserName = "niels.verbeke@hotmail.com"
                         },
@@ -233,7 +233,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000008"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4c7cdc91-d0e0-45be-82c2-38884b40115a",
+                            ConcurrencyStamp = "0ade404d-888a-490e-80f5-f4ca5ac9a112",
                             DateOfBirth = new DateTime(1970, 7, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "ann.meerpoel@skynet.be",
                             EmailConfirmed = false,
@@ -242,9 +242,9 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                             Name = "Meerpoel",
                             NormalizedEmail = "ANN.MEERPOEL@SKYNET.BE",
                             NormalizedUserName = "ANN.MEERPOEL@SKYNET.BE",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMIxvhkqIr/lwhrb9/KzlVGJugq5J+sVaok4nbFUv9VPFPm6BWw8vR+Fb6QW0ifAxQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECdLxFHNdUivooqK0g11H3qwiR1WycrVw2DD+kYIFO176lBhY7qI+RLXXI26AiAxuw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "755c3b3e-3fc0-4d33-84aa-9f7054ce7bcf",
+                            SecurityStamp = "c087c4b4-2b02-469a-a2f0-637f82c6f7f5",
                             TwoFactorEnabled = false,
                             UserName = "ann.meerpoel@skynet.be"
                         },
@@ -252,7 +252,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000009"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6b61947b-e1e9-49b1-992d-2f2fc2a07248",
+                            ConcurrencyStamp = "bb6a48d0-d649-4363-935d-5a8085e98c7d",
                             DateOfBirth = new DateTime(1972, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "lotens.jurgen@hotmail.com",
                             EmailConfirmed = false,
@@ -261,9 +261,9 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                             Name = "Lotens",
                             NormalizedEmail = "LOTENS.JURGEN@HOTMAIL.COM",
                             NormalizedUserName = "LOTENS.JURGEN@HOTMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEM+zzs64hYjcumlFlPbEXmdeyNEZX1wgwVrxDZCHAemkgHlbOHEN2AOC6ArLv3OTRg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEI1B7AWJID4LyXw/LJSJnMx6u+qj4+qjnXz87SgsA/DgIc6CI5SSQinmkSA453/yOg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8d69b3a7-7042-4c3c-bef1-c6a219c73d77",
+                            SecurityStamp = "6262e507-9f9b-484b-bf46-07525b5a42de",
                             TwoFactorEnabled = false,
                             UserName = "lotens.jurgen@hotmail.com"
                         },
@@ -271,7 +271,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000010"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "071a17be-abe0-47d6-b737-603738c4d931",
+                            ConcurrencyStamp = "d6a0e11a-255c-4b39-aaee-3c8b216b5379",
                             DateOfBirth = new DateTime(2010, 9, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "janne.vhl@gmail.com",
                             EmailConfirmed = false,
@@ -280,9 +280,9 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                             Name = "Van Horelbeke",
                             NormalizedEmail = "JANNE.VHL@GMAIL.COM",
                             NormalizedUserName = "JANNE.VHL@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEC4FF0xGKC5QyEC0x8+LjEONQwN0VV9/bTX62Qy0fEWUnuh1Z/YIxhzz01vu+CMMMA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKAvwZO+Ta18aKf8L+/MGGRBA/JLiUIgi/WkJaZ0rlpNmzjEl5u1wJg53LCGb1JQ3Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c9e707c0-3ea1-4045-bc25-76af90dd651a",
+                            SecurityStamp = "2f3de5bb-f603-434e-be5d-8bc0edea4cc0",
                             TwoFactorEnabled = false,
                             UserName = "janne.vhl@gmail.com"
                         });
@@ -432,7 +432,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                             Food = "Canary Seed",
                             Gender = 1,
                             HatchDate = new DateTime(2015, 11, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Image = "images/bird/canary1.jpg",
+                            Image = "images/bird/canary1.png",
                             Name = "Connie",
                             SpeciesId = new Guid("00000000-0000-0000-0000-000000000004"),
                             UserId = new Guid("00000000-0000-0000-0000-000000000004")
@@ -1129,105 +1129,105 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
-                            EndDate = new DateTime(2022, 1, 14, 0, 33, 46, 487, DateTimeKind.Local).AddTicks(9677),
+                            EndDate = new DateTime(2022, 1, 15, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(451),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000001"),
-                            StartDate = new DateTime(2022, 1, 7, 0, 33, 46, 485, DateTimeKind.Local).AddTicks(2342),
+                            StartDate = new DateTime(2022, 1, 8, 3, 11, 17, 916, DateTimeKind.Local).AddTicks(506),
                             UserId = new Guid("00000000-0000-0000-0000-000000000001")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000002"),
-                            EndDate = new DateTime(2022, 1, 11, 0, 33, 46, 487, DateTimeKind.Local).AddTicks(9999),
+                            EndDate = new DateTime(2022, 1, 12, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(907),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000002"),
-                            StartDate = new DateTime(2022, 1, 7, 0, 33, 46, 487, DateTimeKind.Local).AddTicks(9986),
+                            StartDate = new DateTime(2022, 1, 8, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(890),
                             UserId = new Guid("00000000-0000-0000-0000-000000000001")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000003"),
-                            EndDate = new DateTime(2022, 1, 14, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(16),
+                            EndDate = new DateTime(2022, 1, 15, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(934),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000003"),
-                            StartDate = new DateTime(2022, 1, 7, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(13),
+                            StartDate = new DateTime(2022, 1, 8, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(930),
                             UserId = new Guid("00000000-0000-0000-0000-000000000002")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000004"),
-                            EndDate = new DateTime(2022, 1, 11, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(26),
+                            EndDate = new DateTime(2022, 1, 12, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(947),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000004"),
-                            StartDate = new DateTime(2022, 1, 7, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(23),
+                            StartDate = new DateTime(2022, 1, 8, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(943),
                             UserId = new Guid("00000000-0000-0000-0000-000000000002")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000005"),
-                            EndDate = new DateTime(2022, 1, 13, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(34),
+                            EndDate = new DateTime(2022, 1, 14, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(959),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000005"),
-                            StartDate = new DateTime(2022, 1, 7, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(32),
+                            StartDate = new DateTime(2022, 1, 8, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(956),
                             UserId = new Guid("00000000-0000-0000-0000-000000000003")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000006"),
-                            EndDate = new DateTime(2022, 1, 11, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(43),
+                            EndDate = new DateTime(2022, 1, 12, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(973),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000006"),
-                            StartDate = new DateTime(2022, 1, 7, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(40),
+                            StartDate = new DateTime(2022, 1, 8, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(969),
                             UserId = new Guid("00000000-0000-0000-0000-000000000003")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000007"),
-                            EndDate = new DateTime(2022, 1, 9, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(52),
+                            EndDate = new DateTime(2022, 1, 10, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(986),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000007"),
-                            StartDate = new DateTime(2022, 1, 7, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(49),
+                            StartDate = new DateTime(2022, 1, 8, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(982),
                             UserId = new Guid("00000000-0000-0000-0000-000000000004")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000008"),
-                            EndDate = new DateTime(2022, 1, 18, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(60),
+                            EndDate = new DateTime(2022, 1, 19, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(999),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000008"),
-                            StartDate = new DateTime(2022, 1, 7, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(58),
+                            StartDate = new DateTime(2022, 1, 8, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(995),
                             UserId = new Guid("00000000-0000-0000-0000-000000000004")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000009"),
-                            EndDate = new DateTime(2022, 1, 12, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(69),
+                            EndDate = new DateTime(2022, 1, 13, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(1010),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000009"),
-                            StartDate = new DateTime(2022, 1, 7, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(67),
+                            StartDate = new DateTime(2022, 1, 8, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(1007),
                             UserId = new Guid("00000000-0000-0000-0000-000000000005")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000010"),
-                            EndDate = new DateTime(2022, 1, 11, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(79),
+                            EndDate = new DateTime(2022, 1, 12, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(1024),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000010"),
-                            StartDate = new DateTime(2022, 1, 7, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(77),
+                            StartDate = new DateTime(2022, 1, 8, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(1020),
                             UserId = new Guid("00000000-0000-0000-0000-000000000005")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000011"),
-                            EndDate = new DateTime(2022, 1, 11, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(90),
+                            EndDate = new DateTime(2022, 1, 12, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(1040),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000011"),
-                            StartDate = new DateTime(2022, 1, 7, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(88),
+                            StartDate = new DateTime(2022, 1, 8, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(1037),
                             UserId = new Guid("00000000-0000-0000-0000-000000000006")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000012"),
-                            EndDate = new DateTime(2022, 1, 14, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(100),
+                            EndDate = new DateTime(2022, 1, 15, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(1053),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000012"),
-                            StartDate = new DateTime(2022, 1, 7, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(97),
+                            StartDate = new DateTime(2022, 1, 8, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(1049),
                             UserId = new Guid("00000000-0000-0000-0000-000000000010")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000013"),
-                            EndDate = new DateTime(2022, 1, 11, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(108),
+                            EndDate = new DateTime(2022, 1, 12, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(1065),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000013"),
-                            StartDate = new DateTime(2022, 1, 7, 0, 33, 46, 488, DateTimeKind.Local).AddTicks(106),
+                            StartDate = new DateTime(2022, 1, 8, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(1061),
                             UserId = new Guid("00000000-0000-0000-0000-000000000007")
                         });
                 });
@@ -1285,7 +1285,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000004"),
                             Description = "A canary is an undemanding little charmer that is usually a beginner's cana bird. This small finch has the power to turn most people into lifelong canary enthusiasts. It is a pleasant companion bird with a cheerful disposition. It communicates its content with a melodious song that is soft and pleasant. The canary has been carefully bred to be available in a variety of colors, sizes, and singing varieties. Source:The Spruce Pets",
-                            Image = "images/species/canary.jpg",
+                            Image = "images/species/canary.png",
                             Name = "Canary",
                             ScientificName = "Serinus canaria forma domestica"
                         },
@@ -1370,14 +1370,14 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
-                            ConcurrencyStamp = "1df97595-a1b0-4af8-b43d-b3fbe7810e67",
+                            ConcurrencyStamp = "d79548c2-1a24-4b0c-8a80-a6756afbfb69",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000002"),
-                            ConcurrencyStamp = "9abc7dd0-c673-4439-a0d1-ee59543f57da",
+                            ConcurrencyStamp = "907b5996-b000-4ec5-9dba-f304e3dce0f2",
                             Name = "BaseUser",
                             NormalizedName = "BASEUSER"
                         });

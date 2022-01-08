@@ -128,7 +128,7 @@ namespace Imi.Project.Api.Infrastructure.Seeding
                            CageId=Guid.Parse("00000000-0000-0000-0000-000000000004"),
                            Gender = Common.Enums.Gender.Female,
                            HatchDate = new DateTime(2015, 11, 02),
-                           Image = "images/bird/canary1.jpg",
+                           Image = "images/bird/canary1.png",
                            SpeciesId = Guid.Parse("00000000-0000-0000-0000-000000000004"),
                            Food = "Canary Seed",
                            UserId = Guid.Parse("00000000-0000-0000-0000-000000000004")

@@ -52,7 +52,7 @@ namespace Imi.Project.Api.Infrastructure.Seeding
                         Id = Guid.Parse("00000000-0000-0000-0000-000000000004"),
                         Name = "Canary",
                         ScientificName = "Serinus canaria forma domestica",
-                        Image = "images/species/canary.jpg",
+                        Image = "images/species/canary.png",
                         Description = "A canary is an undemanding little charmer that is usually a beginner's cana bird. This small finch has the power to turn most people into lifelong canary enthusiasts. It is a pleasant companion bird with a cheerful disposition. It communicates its content with a melodious song that is soft and pleasant. " +
                         "The canary has been carefully bred to be available in a variety of colors, sizes, and singing varieties. Source:The Spruce Pets"
                     },

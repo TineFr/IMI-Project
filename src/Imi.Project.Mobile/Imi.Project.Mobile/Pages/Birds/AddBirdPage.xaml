@@ -4,14 +4,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Imi.Project.Mobile.Pages.Birds.AddBirdPage">
-    
-    
+
+
     <ContentPage.Content>
         <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
               RowDefinitions="{StaticResource MainGridRows}">
             <Frame Style="{StaticResource MainFrame}" BackgroundColor="{StaticResource Blue}">
                 <Label Text="Add Bird" Style="{StaticResource MainLabel}"></Label>
-                
+
             </Frame>
             <AbsoluteLayout Grid.Row="0" Grid.RowSpan="4">
                 <ImageButton x:Name="btnBack" Style="{StaticResource BackArrow}" Command="{Binding BackCommand}"></ImageButton>
@@ -19,42 +19,47 @@
             </AbsoluteLayout>
             <ScrollView Grid.Row="1" Grid.RowSpan="3" >
                 <StackLayout Grid.Row="1" Grid.RowSpan="2">
-                <Frame Style="{StaticResource EditFrame}">
-                    <StackLayout>
-                        <Label Text="Name" FontAttributes="Bold"></Label>
-                        <Entry x:Name="entrName" Placeholder="Enter name" Text="{Binding Name }"></Entry>
-                    </StackLayout>
-                </Frame>
-                <Frame Style="{StaticResource EditFrame}">
-                    <StackLayout>
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
+                            <Label Text="Name" FontAttributes="Bold"></Label>
+                            <Entry x:Name="entrName" Placeholder="Enter name" Text="{Binding Name }"></Entry>
+                        </StackLayout>
+                    </Frame>
+                    <Label Text="{Binding NameMessage}" Style="{StaticResource Error}" IsVisible="{Binding NameMessage, Converter={StaticResource VisibilityConverter}}"></Label>
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
                             <Label Text="Species"  FontAttributes="Bold"></Label>
                             <Picker  x:Name="pkrSpecies" ItemsSource="{Binding SpeciesList}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding Species}" Title="Select species"></Picker>
                         </StackLayout>
-                </Frame>
-                <Frame Style="{StaticResource EditFrame}">
-                    <StackLayout>
+                    </Frame>
+
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
                             <Label Text="Cage"  FontAttributes="Bold"></Label>
                             <Picker  x:Name="pkrCage" ItemsSource="{Binding CagesList}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding Cage}" Title="Select cage"></Picker>
                         </StackLayout>
-                </Frame>
+                    </Frame>
                     <Frame Style="{StaticResource EditFrame}">
                         <StackLayout>
                             <Label Text="Gender"  FontAttributes="Bold"></Label>
                             <Picker  x:Name="pkrGender" Title="Select gender"  ItemsSource="{Binding Genders}" SelectedItem="{Binding Gender}"></Picker>
                         </StackLayout>
                     </Frame>
+                    <Label Text="{Binding GenderMessage}" Style="{StaticResource Error}" IsVisible="{Binding GenderMessage, Converter={StaticResource VisibilityConverter}}"></Label>
                     <Frame Style="{StaticResource EditFrame}">
-                    <StackLayout>
+                        <StackLayout>
                             <Label Text="Select date of hatching"  FontAttributes="Bold"></Label>
                             <DatePicker  Date="{Binding HatchDate}"></DatePicker>
-                    </StackLayout>
-                </Frame>
+                        </StackLayout>
+                    </Frame>
+                    <Label Text="{Binding HatchDateMessage}" Style="{StaticResource Error}" IsVisible="{Binding HatchDateMessage, Converter={StaticResource VisibilityConverter}}"></Label>
                     <Frame Style="{StaticResource EditFrame}">
                         <StackLayout>
                             <Label Text="Food"  FontAttributes="Bold"></Label>
                             <Entry  x:Name="entrFood" Placeholder="Enter food" Text="{Binding Food}"></Entry>
                         </StackLayout>
                     </Frame>
+                    <Label Text="{Binding FoodMessage}" Style="{StaticResource Error}" IsVisible="{Binding FoodMessage, Converter={StaticResource VisibilityConverter}}"></Label>
                     <Frame Style="{StaticResource EditFrame}">
                         <StackLayout>
                             <Label Text="Add image"  FontAttributes="Bold"></Label>
@@ -63,7 +68,7 @@
                         </StackLayout>
                     </Frame>
                     <Button x:Name="btnSave" Text="Save" HorizontalOptions="End" Command="{Binding SaveCommand}" Margin="20"></Button>
-            </StackLayout>
+                </StackLayout>
             </ScrollView>
         </Grid>
     </ContentPage.Content>

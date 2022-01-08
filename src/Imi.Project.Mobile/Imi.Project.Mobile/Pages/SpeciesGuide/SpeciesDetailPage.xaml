@@ -6,7 +6,7 @@
         <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
               RowDefinitions="{StaticResource MainGridRows}">
             <Frame Style="{StaticResource MainFrame}" BackgroundColor="{StaticResource Green}">
-                <Label Text="{Binding Species.Name}" Style="{StaticResource MainLabel}"></Label>
+                <Label Text="{Binding Species.Name}" Style="{StaticResource MainLabel}" FontSize="26"></Label>
             </Frame>
             <AbsoluteLayout Grid.Row="0" Grid.RowSpan="4">
                 <ImageButton x:Name="btnBack" Style="{StaticResource BackArrow}" Command="{Binding BackCommand}"></ImageButton>
@@ -17,7 +17,7 @@
                     <FlexLayout Grid.Row="1" Grid.RowSpan="3" Direction="Column" WidthRequest="1000" HorizontalOptions="Center">
                 <StackLayout>
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                        <Label HeightRequest="90" HorizontalTextAlignment="Center" Text="{Binding Species.ScientificName}" FontAttributes="Italic" FontSize="30"></Label>
+                        <Label HeightRequest="70" HorizontalTextAlignment="Center" Text="{Binding Species.ScientificName}" FontAttributes="Italic" FontSize="20"></Label>
                     </StackLayout>
                 </StackLayout>
                 <Frame>

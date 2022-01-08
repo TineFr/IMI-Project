@@ -19,7 +19,7 @@ namespace Imi.Project.Mobile.Validators
                 .NotNull()
                 .WithMessage("Hatchdate is required")
                 .LessThan(b => DateTime.Now.Date)
-                .WithMessage("HatchDate cannot be a future date");
+                .WithMessage("Hatch Date cannot be a future date");
 
             RuleFor(model => model.Gender)
                 .NotNull()
@@ -27,7 +27,7 @@ namespace Imi.Project.Mobile.Validators
 
             RuleFor(model => model.Food)
                 .MaximumLength(25)
-                .WithMessage("Name cannot be longer than 25 characters")
+                .WithMessage("Food cannot be longer than 25 characters")
                 .When(model => model.Food != null);
 
         }

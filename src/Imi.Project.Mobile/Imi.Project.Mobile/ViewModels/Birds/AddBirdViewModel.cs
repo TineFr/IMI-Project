@@ -1,9 +1,11 @@
-﻿using FreshMvvm;
+﻿using FluentValidation;
+using FreshMvvm;
 using Imi.Project.Common.Enums;
 using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
 using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
+using Imi.Project.Mobile.Validators;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,13 +21,15 @@ namespace Imi.Project.Mobile.ViewModels.Birds
         private readonly IBaseApiService<CageRequestModel, CageModel> _cageService;
         private readonly IBaseApiService<SpeciesModel, SpeciesModel> _speciesService;
         private readonly IBaseApiService<BirdRequestModel, BirdModel> _birdService;
-        public AddBirdViewModel(IBaseApiService<CageRequestModel, CageModel> cageService, 
-                                IBaseApiService<SpeciesModel, SpeciesModel> speciesService, 
+        private readonly IValidator _birdRequestModelValidator;
+        public AddBirdViewModel(IBaseApiService<CageRequestModel, CageModel> cageService,
+                                IBaseApiService<SpeciesModel, SpeciesModel> speciesService,
                                 IBaseApiService<BirdRequestModel, BirdModel> birdService)
         {
             _cageService = cageService;
             _speciesService = speciesService;
             _birdService = birdService;
+            _birdRequestModelValidator = new BirdRequestModelValidator();
         }
 
 
@@ -139,6 +143,53 @@ namespace Imi.Project.Mobile.ViewModels.Birds
 
         #endregion
 
+        #region ValidationProperties
+
+
+        private string nameMessage;
+        public string NameMessage
+        {
+            get { return nameMessage; }
+            set
+            {
+                nameMessage = value;
+                RaisePropertyChanged(nameof(NameMessage));
+            }
+        }
+        private string foodMessage;
+        public string FoodMessage
+        {
+            get { return foodMessage; }
+            set
+            {
+                foodMessage = value;
+                RaisePropertyChanged(nameof(FoodMessage));
+            }
+        }
+
+        private string genderMessage;
+        public string GenderMessage
+        {
+            get { return genderMessage; }
+            set
+            {
+                genderMessage = value;
+                RaisePropertyChanged(nameof(GenderMessage));
+            }
+        }
+
+        private string hatchDateMessage;
+        public string HatchDateMessage
+        {
+            get { return hatchDateMessage; }
+            set
+            {
+                hatchDateMessage = value;
+                RaisePropertyChanged(nameof(HatchDateMessage));
+            }
+        }
+
+        #endregion
 
         #region commands
         public ICommand SaveCommand => new Command(
@@ -153,16 +204,22 @@ namespace Imi.Project.Mobile.ViewModels.Birds
                      SpeciesId = Species.Id,
                      Food = this.Food,
                      Gender = (Gender)Enum.Parse(typeof(Gender), Gender)
-                 //Image = "birds/budgie2.png" //later nog veranderen
+                     //Image = "birds/budgie2.png" //later nog veranderen
                  };
-                 var response = await _birdService.AddAsync("birds", newBird);
-                 if (response.ErrorMessage is object)
-                 {
-                     await CoreMethods.DisplayAlert("Error", response.ErrorMessage, "Ok");
-                 }
-                 else await CoreMethods.PopPageModel();
 
-                 await CoreMethods.PopPageModel();
+                 bool isValid = Validate(newBird);
+                 if (isValid)
+                 {
+                     var response = await _birdService.AddAsync("birds", newBird);
+                     if (response.ErrorMessage is object)
+                     {
+                         await CoreMethods.DisplayAlert("Error", response.ErrorMessage, "Ok");
+                     }
+                     else await CoreMethods.PopPageModel();
+
+                     await CoreMethods.PopPageModel();
+                 }
+
              });
 
         public ICommand BackCommand => new Command(
@@ -184,6 +241,44 @@ namespace Imi.Project.Mobile.ViewModels.Birds
                                                     .ToList();
 
             base.Init(initData);
+        }
+
+
+
+        private bool Validate(BirdRequestModel model)
+        {
+            ResetErrorMessages();
+            var context = new ValidationContext<object>(model);
+            var validationResult = _birdRequestModelValidator.Validate(context);
+            foreach (var error in validationResult.Errors)
+            {
+
+                if (error.PropertyName == nameof(model.Name))
+                {
+                    NameMessage = error.ErrorMessage;
+                }
+                if (error.PropertyName == nameof(model.HatchDate))
+                {
+                    HatchDateMessage = error.ErrorMessage;
+                }
+                if (error.PropertyName == nameof(model.Gender))
+                {
+                    GenderMessage = error.ErrorMessage;
+                }
+                if (error.PropertyName == nameof(model.Food))
+                {
+                    FoodMessage = error.ErrorMessage;
+                }
+            }
+            return validationResult.IsValid;
+        }
+
+        private void ResetErrorMessages()
+        {
+            NameMessage = "";
+            FoodMessage = "";
+            HatchDateMessage = "";
+            GenderMessage = "";
         }
 
     }
