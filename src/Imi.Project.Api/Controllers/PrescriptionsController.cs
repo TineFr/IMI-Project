@@ -1,15 +1,12 @@
-﻿using Imi.Project.Api.Core.Entities;
-using Imi.Project.Api.Core.Entities.Pagination;
+﻿using Imi.Project.Api.Core.Entities.Pagination;
 using Imi.Project.Api.Core.Exceptions;
-using Imi.Project.Api.Core.Helper;
 using Imi.Project.Api.Core.Interfaces.Services;
+using Imi.Project.Api.Extensions;
 using Imi.Project.Common.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Controllers
@@ -27,6 +24,7 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "AdministratorRole")]
         public async Task<IActionResult> Get([FromQuery] PaginationParameters parameters)
         {
             IEnumerable<PrescriptionResponseDto> result;
@@ -59,6 +57,10 @@ namespace Imi.Project.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(PrescriptionRequestDto newPrescription)
         {
+            if (newPrescription.UserId == null)
+            {
+                newPrescription.UserId = User.GetUser();
+            }
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -78,6 +80,10 @@ namespace Imi.Project.Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(Guid id, PrescriptionRequestDto updatedPrescription)
         {
+            if (updatedPrescription.UserId == null)
+            {
+                updatedPrescription.UserId = User.GetUser();
+            }
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -108,9 +114,5 @@ namespace Imi.Project.Api.Controllers
             }
             return Ok();
         }
-
-
-
-
     }
 }

@@ -1,13 +1,12 @@
 ﻿using Imi.Project.Api.Core.Entities.Pagination;
 using Imi.Project.Api.Core.Exceptions;
 using Imi.Project.Api.Core.Interfaces.Services;
+using Imi.Project.Api.Extensions;
 using Imi.Project.Common.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Controllers
@@ -60,10 +59,8 @@ namespace Imi.Project.Api.Controllers
         {
             if (newBird.UserId == null)
             {
-                Guid userId = Guid.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
-                newBird.UserId = userId;
+                newBird.UserId = User.GetUser();
             }
-
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -83,11 +80,9 @@ namespace Imi.Project.Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put([FromRoute] Guid id, [FromForm] BirdRequestDto updatedBird)
         {
-
             if (updatedBird.UserId == null)
             {
-                Guid userId = Guid.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
-                updatedBird.UserId = userId;
+                updatedBird.UserId = User.GetUser();
             }
             if (!ModelState.IsValid)
             {

@@ -3,6 +3,7 @@ using Imi.Project.Api.Core.Entities.Pagination;
 using Imi.Project.Api.Core.Exceptions;
 using Imi.Project.Api.Core.Helper;
 using Imi.Project.Api.Core.Interfaces.Services;
+using Imi.Project.Api.Extensions;
 using Imi.Project.Common.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +26,9 @@ namespace Imi.Project.Api.Controllers
         protected readonly ICageService _cageService;
         protected readonly IBirdService _birdService;
         protected readonly IDailyTaskService _dailyTaskService;
-        public CagesController(ICageService cageService, IBirdService birdService, IDailyTaskService dailyTaskService)
+        public CagesController(ICageService cageService, 
+                               IBirdService birdService, 
+                               IDailyTaskService dailyTaskService)
         {
             _cageService = cageService;
             _birdService = birdService;
@@ -33,6 +36,7 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "AdministratorRole")]
         public async Task<IActionResult> Get([FromQuery] PaginationParameters parameters)
         {
             IEnumerable<CageResponseDto> result;
@@ -95,8 +99,10 @@ namespace Imi.Project.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromForm] CageRequestDto newCage)
         {
-            Guid userId = Guid.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
-            newCage.UserId = userId;
+            if (newCage.UserId == null)
+            {
+                newCage.UserId = User.GetUser();
+            }
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -116,8 +122,10 @@ namespace Imi.Project.Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(Guid id,[FromForm] CageRequestDto updatedCage)
         {
-            Guid userId = Guid.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
-            updatedCage.UserId = userId;
+            if (updatedCage.UserId == null)
+            {
+                updatedCage.UserId = User.GetUser();
+            }
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
