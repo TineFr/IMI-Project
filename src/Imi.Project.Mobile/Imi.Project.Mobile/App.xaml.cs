@@ -1,9 +1,11 @@
-﻿using FreshMvvm;
+﻿using FluentValidation;
+using FreshMvvm;
 using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
 using Imi.Project.Mobile.Core.Services.Api;
 using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
+using Imi.Project.Mobile.Validators;
 using Imi.Project.Mobile.ViewModels;
 using Xamarin.Forms;
 
@@ -33,23 +35,10 @@ namespace Imi.Project.Mobile
             FreshIOC.Container.Register<IBaseApiService<DailyTaskModel, DailyTaskModel>, BaseApiService<DailyTaskModel, DailyTaskModel>>();
 
 
+            // validators
+            FreshIOC.Container.Register<IValidator<LoginRequestModel>, LoginModelValidator>();
+            FreshIOC.Container.Register<IValidator<RegisterModel>, RegisterModelValidator>();
 
-
-            //var mainPage = new CustomContainer();
-            //mainPage.FixedMode = true;
-            //mainPage.BarBackgroundColor = Color.White;
-            //mainPage.BarTextColor = Color.Black;
-            //mainPage.AddTab<HomeViewModel>("home", "home24.png");
-            //mainPage.AddTab<CagesViewModel>("cages", "cage24.png");
-            //mainPage.AddTab<BirdsViewModel>("birds", "bird24.png");
-            //mainPage.AddTab<PrescriptionsViewModel>("meds", "medication24.png");
-            //mainPage.AddTab<SpeciesViewModel>("guide", "guide24.png");
-            //MainPage = mainPage;
-
-
-
-
-            //new FreshNavigationContainer(FreshPageModelResolver.ResolvePageModel<LoginViewModel>());
             MainPage = new FreshNavigationContainer(FreshPageModelResolver.ResolvePageModel<LoginViewModel>());
         }
         protected override void OnStart()

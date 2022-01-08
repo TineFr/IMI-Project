@@ -1,11 +1,8 @@
-﻿using FreshMvvm;
+﻿using FluentValidation;
+using FreshMvvm;
 using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
-using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
-using Imi.Project.Mobile.Core.Services.Mocking.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Imi.Project.Mobile.Validators;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -14,10 +11,12 @@ namespace Imi.Project.Mobile.ViewModels.Cages
     public class AddCageViewModel : FreshBasePageModel
     {
         private readonly IBaseApiService<CageRequestModel, CageModel> _cageService;
+        private readonly IValidator _cageRequestModelValidator;
 
         public AddCageViewModel(IBaseApiService<CageRequestModel, CageModel> cageService)
         {
             _cageService = cageService;
+            _cageRequestModelValidator = new CageRequestModelValidator();
         }
 
         #region properties
@@ -58,6 +57,34 @@ namespace Imi.Project.Mobile.ViewModels.Cages
 
         #endregion
 
+        #region ValidationProperties
+
+        private string nameMessage;
+        public string NameMessage
+        {
+            get { return nameMessage; }
+            set
+            {
+                nameMessage = value;
+                RaisePropertyChanged(nameof(NameMessage));
+            }
+        }
+
+
+        private string locationMessage;
+        public string LocationMessage
+        {
+            get { return locationMessage; }
+            set
+            {
+                locationMessage = value;
+                RaisePropertyChanged(nameof(LocationMessage));
+            }
+        }
+
+        #endregion
+
+
         #region commands
 
         public ICommand SaveCommand => new Command(
@@ -69,12 +96,20 @@ namespace Imi.Project.Mobile.ViewModels.Cages
                      Location = this.Location,
                      //Image = "cage1.png" //later aan te passen
                  };
-                 var response = await _cageService.AddAsync("cages", newCage);  
-                 if (response.ErrorMessage is object)
+
+                 var isValid = Validate(newCage);
+
+                 if (isValid)
                  {
-                     await CoreMethods.DisplayAlert("Error", response.ErrorMessage, "Ok");
+                     var response = await _cageService.AddAsync("cages", newCage);
+                     if (response.ErrorMessage is object)
+                     {
+                         await CoreMethods.DisplayAlert("Error", response.ErrorMessage, "Ok");
+                     }
+                     else await CoreMethods.PopPageModel();
+
                  }
-                 else await CoreMethods.PopPageModel();
+
              });
 
         public ICommand BackCommand => new Command(
@@ -83,5 +118,34 @@ namespace Imi.Project.Mobile.ViewModels.Cages
                  await CoreMethods.PopPageModel();
              });
         #endregion
+
+
+
+        private bool Validate(CageRequestModel model)
+        {
+            ResetErrorMessages();
+            var context = new ValidationContext<object>(model);
+            var validationResult = _cageRequestModelValidator.Validate(context);
+            foreach (var error in validationResult.Errors)
+            {
+
+                if (error.PropertyName == nameof(model.Name))
+                {
+
+                    NameMessage = error.ErrorMessage;
+                }
+                if (error.PropertyName == nameof(model.Location))
+                {
+                    LocationMessage = error.ErrorMessage;
+                }
+            }
+            return validationResult.IsValid;
+        }
+
+        private void ResetErrorMessages()
+        {
+            NameMessage = "";
+            LocationMessage = "";
+        }
     }
 }

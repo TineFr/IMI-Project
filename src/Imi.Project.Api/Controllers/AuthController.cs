@@ -73,7 +73,7 @@ namespace Imi.Project.Api.Controllers
             lockoutOnFailure: false);
             if (!result.Succeeded)
             {
-                return Unauthorized("Password and or username are incorrect");
+                return Unauthorized("Password and/or username are incorrect.\nNote the capitalization (lowercase/uppercase)");
             }
             var applicationUser = await _userManager.FindByEmailAsync(login.Email);
             JwtSecurityToken token = await GenerateTokenAsync(applicationUser);
