@@ -1,16 +1,12 @@
-﻿using Imi.Project.Api.Core.Entities;
-using Imi.Project.Api.Core.Entities.Pagination;
+﻿using Imi.Project.Api.Core.Entities.Pagination;
 using Imi.Project.Api.Core.Exceptions;
-using Imi.Project.Api.Core.Helper;
 using Imi.Project.Api.Core.Interfaces.Services;
+using Imi.Project.Api.Extensions;
 using Imi.Project.Common.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Controllers
@@ -28,6 +24,7 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "AdministratorRole")]
         public async Task<IActionResult> Get([FromQuery] PaginationParameters parameters)
         {
             IEnumerable<BirdResponseDto> result;
@@ -52,16 +49,16 @@ namespace Imi.Project.Api.Controllers
             }
             catch (BaseException ex)
             {
-                return StatusCode((int)ex.StatusCode, ex.Message);  
+                return StatusCode((int)ex.StatusCode, ex.Message);
             }
             return Ok(result);
         }
 
         [HttpPost]
+        [Authorize(Policy = "AdministratorRole")]
         public async Task<IActionResult> Post([FromForm] BirdRequestDto newBird)
         {
-            Guid userId = Guid.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
-            newBird.UserId = userId;    
+            newBird.UserId = User.GetUser();
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -81,8 +78,7 @@ namespace Imi.Project.Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put([FromRoute] Guid id, [FromForm] BirdRequestDto updatedBird)
         {
-            Guid userId = Guid.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
-            updatedBird.UserId = userId;
+            updatedBird.UserId = User.GetUser();
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

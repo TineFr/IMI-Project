@@ -2,9 +2,9 @@
 
 namespace Imi.Project.Common.Dtos
 {
-    public class BirdResponseDto : BaseEntityDto
+    public class BirdResponseDto 
     {
-
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public DateTime? HatchDate { get; set; }
         public string Gender { get; set; }

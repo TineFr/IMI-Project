@@ -67,9 +67,9 @@ namespace Imi.Project.Api.Infrastructure.Repositories
           return Task.FromResult(_dbContext.Set<E>().Where(c => c.UserId.Equals(userId) && c.Id.Equals(id)).Any());
         }
 
-        public Task<bool> EntityExists<E>(Guid id) where E : class, IBaseEntity
+        public Task<bool> EntityExists<E>(Guid? id) where E : class, IBaseEntity
         {
-           return Task.FromResult( _dbContext.Set<E>().Where(c => c.Id.Equals(id)).Any());
+            return Task.FromResult(_dbContext.Set<E>().Where(c => c.Id.Equals(id)).Any());
         }
     }
 }

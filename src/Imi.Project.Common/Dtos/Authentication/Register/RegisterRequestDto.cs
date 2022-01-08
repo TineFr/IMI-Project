@@ -5,6 +5,7 @@ namespace Imi.Project.Common.Dtos
 {
     public class RegisterRequestDto
     {
+
         [Required(ErrorMessage = "{0} is required")]
         [EmailAddress]
         public string Email { get; set; }
@@ -21,5 +22,14 @@ namespace Imi.Project.Common.Dtos
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Passwords must be the same")]
         public string ConfirmPassword { get; set; }
+
+        [DataType(DataType.PhoneNumber)]
+        public string PhoneNumber { get; set; }
+
+
+
+
+
+
     }
 }

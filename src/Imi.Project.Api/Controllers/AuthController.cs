@@ -94,6 +94,7 @@ namespace Imi.Project.Api.Controllers
                 claims.Add(new Claim(ClaimTypes.Role, roleClaim));
             }
             claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
+            claims.Add(new Claim(ClaimTypes.DateOfBirth, user.DateOfBirth.ToString()));
             var expirationDays = _configuration.GetValue<int>("JWTConfig:TokenExpirationDays");
             var siginingKey = Encoding.UTF8.GetBytes(_configuration.GetValue<string>("JWTConfig:SigningKey"));
             var token = new JwtSecurityToken

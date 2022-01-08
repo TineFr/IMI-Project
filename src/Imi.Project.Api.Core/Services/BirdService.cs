@@ -46,8 +46,6 @@ namespace Imi.Project.Api.Core.Services
             {
                 throw new ItemNotFoundException($"No birds were found");
             }
-            //var paginationData = new PaginationMetaData(parameters.Page, birds.Count(), parameters.ItemsPerPage);
-            //Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
             var birdsPaginated = Pagination.AddPagination<Bird>(birds, parameters);
             var result = birdsPaginated.MapToDtoList();
             return result;
@@ -145,19 +143,30 @@ namespace Imi.Project.Api.Core.Services
 
         private async Task ValidateRequest(BirdRequestDto dto)
         {
-            if (!(await _birdRepository.EntityExists<ApplicationUser>(dto.UserId)))
+            if ( !(await _birdRepository.EntityExists<ApplicationUser>(dto.UserId)))
             {
                 throw new ItemNotFoundException($"User with id {dto.UserId} does not exist");
             }
-            var cage = await _cageRepository.ExsistsForUserId(dto.UserId, dto.CageId);
-            if (cage == null)
+
+            if (dto.CageId != null)
             {
-                throw new ItemNotFoundException($"Cage with id {dto.CageId} does not exist for this user");
+                var cage = await _cageRepository.ExsistsForUserId(dto.UserId, dto.CageId);
+                if (cage == null)
+                {
+                    throw new ItemNotFoundException($"Cage with id {dto.CageId} does not exist for this user");
+                }
             }
-            if (!(await _birdRepository.EntityExists<Species>(dto.SpeciesId)))
+
+            if (dto.SpeciesId != null)
             {
-                throw new ItemNotFoundException($"Species with id {dto.UserId} does not exist");
+                if (dto.CageId != new Guid())
+                    if (!(await _birdRepository.EntityExists<Species>(dto.SpeciesId)))
+                    {
+                        throw new ItemNotFoundException($"Species with id {dto.UserId} does not exist");
+                    }
             }
+
+
             if (dto.HatchDate != new DateTime())
             {
                 if (dto.HatchDate > DateTime.Today)

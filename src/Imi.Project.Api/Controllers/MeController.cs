@@ -1,7 +1,9 @@
 ﻿using Imi.Project.Api.Core.Entities.Pagination;
 using Imi.Project.Api.Core.Exceptions;
 using Imi.Project.Api.Core.Interfaces.Services;
+using Imi.Project.Api.Extensions;
 using Imi.Project.Common.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class MeController : ControllerBase
@@ -38,7 +41,7 @@ namespace Imi.Project.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetCurrentUserInfo()
         {
-            Guid userId = Guid.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            Guid userId = User.GetUser();
             ApplicationUserResponseDto result;
             try
             {
@@ -55,7 +58,7 @@ namespace Imi.Project.Api.Controllers
         [HttpGet("cages")]
         public async Task<IActionResult> GetCagesFromUser([FromQuery] PaginationParameters parameters)
         {
-            Guid userId = Guid.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            Guid userId = User.GetUser();
             IEnumerable<CageResponseDto> result;
             try
             {
@@ -71,7 +74,7 @@ namespace Imi.Project.Api.Controllers
         [HttpGet("birds")]
         public async Task<IActionResult> GetBirdsFromUser([FromQuery] PaginationParameters parameters)
         {
-            Guid userId = Guid.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            Guid userId = User.GetUser();
             IEnumerable<BirdResponseDto> result;
             try
             {
@@ -87,7 +90,7 @@ namespace Imi.Project.Api.Controllers
         [HttpGet("medicines")]
         public async Task<IActionResult> GetMedicinesFromUser([FromQuery] PaginationParameters parameters)
         {
-            Guid userId = Guid.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            Guid userId = User.GetUser();
             IEnumerable<MedicineResponseDto> result;
             try
             {
@@ -103,7 +106,7 @@ namespace Imi.Project.Api.Controllers
         [HttpGet("prescriptions")]
         public async Task<IActionResult> GetPrescriptionsFromUser([FromQuery] PaginationParameters parameters)
         {
-            Guid userId = Guid.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            Guid userId = User.GetUser();
             IEnumerable<PrescriptionResponseDto> result;
             try
             {

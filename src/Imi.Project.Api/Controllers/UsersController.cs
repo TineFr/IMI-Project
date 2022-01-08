@@ -1,18 +1,16 @@
-﻿using Imi.Project.Api.Core.Entities;
-using Imi.Project.Api.Core.Entities.Pagination;
+﻿using Imi.Project.Api.Core.Entities.Pagination;
 using Imi.Project.Api.Core.Exceptions;
-using Imi.Project.Api.Core.Helper;
 using Imi.Project.Api.Core.Interfaces.Services;
 using Imi.Project.Common.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Controllers
 {
+    [Authorize(Policy = "AdministratorRole")]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -24,10 +22,10 @@ namespace Imi.Project.Api.Controllers
         protected readonly IMedicineService _medicineService;
 
 
-        public UsersController(IUserService userService, 
-                               ICageService cageService, 
+        public UsersController(IUserService userService,
+                               ICageService cageService,
                                IBirdService birdService,
-                               IMedicineService medicineService, 
+                               IMedicineService medicineService,
                                IPrescriptionService prescriptionService)
         {
             _userService = userService;
@@ -163,7 +161,6 @@ namespace Imi.Project.Api.Controllers
             }
             return Ok(result);
         }
-
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)

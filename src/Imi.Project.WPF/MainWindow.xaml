@@ -4,9 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Imi.Project.WPF"
+        xmlns:converters="clr-namespace:Imi.Project.WPF.Converters"
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1100" Loaded="Window_Loaded"
         WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <converters:EmptyToStringConverter x:Key="TextConverter" />
+    </Window.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -48,31 +54,31 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <Image Height="200" Source="{Binding Bird.Image}"></Image>
+            <Image Height="200" Source="{Binding Image}"></Image>
             <StackPanel Margin="50,10,50,0">
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Name:"></Label>
-                    <TextBlock Text="{Binding Bird.Name}" Padding="5"></TextBlock>
+                    <TextBlock Text="{Binding Name}" Padding="5"></TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Gender:"></Label>
-                    <TextBlock Text="{Binding Bird.Gender}" Padding="5"></TextBlock>
+                    <TextBlock Text="{Binding Gender}" Padding="5"></TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Species:"></Label>
-                    <TextBlock Text="{Binding Bird.Species.Name}" Padding="5"></TextBlock>
+                    <TextBlock Text="{Binding Species, Converter={StaticResource TextConverter}}" Padding="5"></TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Cage:"></Label>
-                    <TextBlock Text="{Binding Bird.Cage.Name}" Padding="5"></TextBlock>
+                    <TextBlock Text="{Binding Cage, Converter={StaticResource TextConverter}}" Padding="5"></TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Food:"></Label>
-                    <TextBlock Text="{Binding Bird.Food}" Padding="5"></TextBlock>
+                    <TextBlock Text="{Binding Food, Converter={StaticResource TextConverter}}" Padding="5"></TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Hatch date:"></Label>
-                    <TextBlock Text="{Binding Bird.Date}" Padding="5"></TextBlock>
+                    <TextBlock Text="{Binding HatchDate}" Padding="5"></TextBlock>
                 </StackPanel>
             </StackPanel>
             <Button x:Name="btnDeleteBird" Foreground="White" Content="Delete" Width="60" Height="40" FontSize="10"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="IndianRed" BorderThickness="0" HorizontalAlignment="right" Margin="0,0,10,0" Click="BtnDeleteBird_Click" >

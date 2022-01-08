@@ -200,12 +200,11 @@ namespace Imi.Project.Mobile.ViewModels.Birds
                  {
                      Name = this.Name,
                      HatchDate = this.HatchDate,
-                     CageId = Cage.Id,
-                     SpeciesId = Species.Id,
+                     CageId = Cage?.Id,
+                     SpeciesId = Species?.Id,
                      Food = this.Food,
-                     Gender = (Gender)Enum.Parse(typeof(Gender), Gender)
                  };
-
+                 if (Gender != null) model.Gender = (Gender)Enum.Parse(typeof(Gender), Gender);
                  var isValid = Validate(model);
                  if (isValid)
                  {

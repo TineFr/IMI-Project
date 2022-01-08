@@ -30,6 +30,7 @@ namespace Imi.Project.Mobile.ViewModels.Birds
             _speciesService = speciesService;
             _birdService = birdService;
             _birdRequestModelValidator = new BirdRequestModelValidator();
+
         }
 
 
@@ -195,17 +196,16 @@ namespace Imi.Project.Mobile.ViewModels.Birds
         public ICommand SaveCommand => new Command(
              async () =>
              {
-                 var test = (Gender)Enum.Parse(typeof(Gender), Gender);
                  BirdRequestModel newBird = new BirdRequestModel
                  {
                      Name = this.Name,
                      HatchDate = this.HatchDate,
-                     CageId = Cage.Id,
-                     SpeciesId = Species.Id,
+                     CageId = Cage?.Id,
+                     SpeciesId = Species?.Id,
                      Food = this.Food,
-                     Gender = (Gender)Enum.Parse(typeof(Gender), Gender)
-                     //Image = "birds/budgie2.png" //later nog veranderen
-                 };
+                 //Image = "birds/budgie2.png"//later nog veranderen
+             };
+                 if (Gender != null) newBird.Gender = (Gender)Enum.Parse(typeof(Gender), Gender);
 
                  bool isValid = Validate(newBird);
                  if (isValid)
@@ -219,6 +219,8 @@ namespace Imi.Project.Mobile.ViewModels.Birds
 
                      await CoreMethods.PopPageModel();
                  }
+
+                 else await CoreMethods.DisplayAlert("Hold!", "One or more inputs are not valid.\nCheck again.", "Ok");
 
              });
 
