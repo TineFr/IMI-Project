@@ -13,7 +13,7 @@ namespace Imi.Project.Mobile.ViewModels
     public class LoginViewModel : FreshBasePageModel
     {
         private readonly IAuthApiService _authApiService;
-        private IValidator _loginModelValidator;
+        private readonly IValidator _loginModelValidator;
 
         public LoginViewModel(IAuthApiService authApiService)
         {

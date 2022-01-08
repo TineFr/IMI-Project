@@ -22,12 +22,14 @@
                             <Entry x:Name="entrName" Text="{Binding Name}"></Entry>
                         </StackLayout>
                     </Frame>
+                    <Label Text="{Binding NameMessage}" Style="{StaticResource Error}" IsVisible="{Binding NameMessage, Converter={StaticResource VisibilityConverter}}"></Label>
                     <Frame Style="{StaticResource EditFrame}">
                         <StackLayout>
                             <Label Text="Location"  FontAttributes="Bold"></Label>
                             <Entry x:Name="entrSpecies" Text="{Binding Location}"></Entry>
                         </StackLayout>
                     </Frame>
+                    <Label Text="{Binding LocationMessage}" Style="{StaticResource Error}" IsVisible="{Binding LocationMessage, Converter={StaticResource VisibilityConverter}}"></Label>
                     <Frame Style="{StaticResource EditFrame}">
                         <StackLayout>
                             <Label Text="Change image"  FontAttributes="Bold"></Label>

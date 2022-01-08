@@ -12,7 +12,7 @@ namespace Imi.Project.Mobile.ViewModels
     public class RegisterViewModel : FreshBasePageModel
     {
         private readonly IAuthApiService _authApiService;
-        private IValidator _registerModelValidator;
+        private readonly IValidator _registerModelValidator;
 
         public RegisterViewModel(IAuthApiService authApiService)
         {
