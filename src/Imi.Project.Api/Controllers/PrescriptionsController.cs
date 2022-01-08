@@ -57,10 +57,7 @@ namespace Imi.Project.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(PrescriptionRequestDto newPrescription)
         {
-            if (newPrescription.UserId == null)
-            {
-                newPrescription.UserId = User.GetUser();
-            }
+            newPrescription.UserId = User.GetUser();
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -80,10 +77,7 @@ namespace Imi.Project.Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(Guid id, PrescriptionRequestDto updatedPrescription)
         {
-            if (updatedPrescription.UserId == null)
-            {
-                updatedPrescription.UserId = User.GetUser();
-            }
+            updatedPrescription.UserId = User.GetUser();
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

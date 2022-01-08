@@ -57,10 +57,7 @@ namespace Imi.Project.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromForm] BirdRequestDto newBird)
         {
-            if (newBird.UserId == null)
-            {
-                newBird.UserId = User.GetUser();
-            }
+            newBird.UserId = User.GetUser();
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -80,10 +77,7 @@ namespace Imi.Project.Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put([FromRoute] Guid id, [FromForm] BirdRequestDto updatedBird)
         {
-            if (updatedBird.UserId == null)
-            {
-                updatedBird.UserId = User.GetUser();
-            }
+            updatedBird.UserId = User.GetUser();
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

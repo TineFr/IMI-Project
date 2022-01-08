@@ -99,10 +99,7 @@ namespace Imi.Project.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromForm] CageRequestDto newCage)
         {
-            if (newCage.UserId == null)
-            {
-                newCage.UserId = User.GetUser();
-            }
+            newCage.UserId = User.GetUser();
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -122,10 +119,7 @@ namespace Imi.Project.Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(Guid id,[FromForm] CageRequestDto updatedCage)
         {
-            if (updatedCage.UserId == null)
-            {
-                updatedCage.UserId = User.GetUser();
-            }
+            updatedCage.UserId = User.GetUser();
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
