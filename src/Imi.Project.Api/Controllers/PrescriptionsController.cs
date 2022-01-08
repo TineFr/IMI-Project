@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "IsOfAge")]
     [Route("api/[controller]")]
     [ApiController]
     public class PrescriptionsController : ControllerBase

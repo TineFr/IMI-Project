@@ -3,9 +3,12 @@ using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Core.Interfaces.Repositories;
 using Imi.Project.Api.Core.Interfaces.Services;
 using Imi.Project.Api.Core.Services;
+using Imi.Project.Api.Handlers;
 using Imi.Project.Api.Infrastructure;
 using Imi.Project.Api.Infrastructure.Repositories;
+using Imi.Project.Api.Requirements;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -79,12 +82,20 @@ namespace Imi.Project.Api
 
             //authorization
             services.AddAuthorization(options =>
-
+            {
                 options.AddPolicy("AdministratorRole", policy =>
                 {
                     policy.RequireRole("Administrator");
-                }));
+                });
 
+                options.AddPolicy("IsOfAge", policy =>
+                {
+                    policy.Requirements.Add(new AgeRequirement(15));
+                });
+
+            });
+
+            services.AddSingleton<IAuthorizationHandler, AgeRequirementHandler>();
 
             //swagger
 
@@ -121,7 +132,7 @@ namespace Imi.Project.Api
 
             services.AddRouting(options => options.LowercaseUrls = true);
 
-
+            // repositories
 
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             services.AddScoped(typeof(IBaseRepository<ApplicationUser>), typeof(UserRepository));
@@ -135,6 +146,9 @@ namespace Imi.Project.Api
             services.AddScoped<IMedicineRepository, MedicineRepository>();
             services.AddScoped<IDailyTaskRepository, DailyTaskRepository>();
             services.AddScoped<IPrescriptionRepository, PrescriptionRepository>();
+
+            // services
+
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICageService, CageService>();
             services.AddScoped<IBirdService, BirdService>();
