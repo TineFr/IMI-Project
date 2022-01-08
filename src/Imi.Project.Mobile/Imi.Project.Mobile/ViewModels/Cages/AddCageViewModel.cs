@@ -70,17 +70,6 @@ namespace Imi.Project.Mobile.ViewModels.Cages
             }
         }
 
-        private string imageMessage;
-
-        public string ImageMessage
-        {
-            get { return image; }
-            set
-            {
-                image = value;
-                RaisePropertyChanged(nameof(ImageMessage));
-            }
-        }
 
         private string locationMessage;
         public string LocationMessage
@@ -157,7 +146,6 @@ namespace Imi.Project.Mobile.ViewModels.Cages
         {
             NameMessage = "";
             LocationMessage = "";
-            ImageMessage = "";
         }
     }
 }
