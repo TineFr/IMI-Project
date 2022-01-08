@@ -19,8 +19,8 @@ namespace Imi.Project.Common.Dtos
         public Gender Gender { get; set; }
         public string Food { get; set; }
         public Guid UserId { get; set; }
-        public Guid CageId { get; set; }
-        public Guid SpeciesId { get; set; }
+        public Guid? CageId { get; set; }
+        public Guid? SpeciesId { get; set; }
         public IFormFile Image { get; set; }
 
     }

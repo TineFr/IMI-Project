@@ -39,7 +39,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
             return cages;
         }
 
-        public async Task<Cage> ExsistsForUserId(Guid userId, Guid id)
+        public async Task<Cage> ExsistsForUserId(Guid userId, Guid? id)
         {
             var cage = (await GetByUserIdAsync(userId)).ToList().FirstOrDefault(c => c.Id.Equals(id));
             return cage;
