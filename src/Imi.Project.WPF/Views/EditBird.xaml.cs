@@ -60,8 +60,8 @@ namespace Imi.Project.WPF.Views
             {
                 Name = txtName.Text,
                 HatchDate = DateTime.Parse(pkrDate.Text),
-                CageId = ((CageModel)cmbCages.SelectedItem).Id,
-                SpeciesId = ((SpeciesModel)cmbSpecies.SelectedItem).Id,
+                CageId = ((CageModel)cmbCages.SelectedItem)?.Id,
+                SpeciesId = ((SpeciesModel)cmbSpecies.SelectedItem)?.Id,
                 Gender = (Gender)cmbGender.SelectedValue,
                 Food = txtFood.Text,
                 ImageInfo = imageInfo
