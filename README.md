@@ -13,7 +13,7 @@ project te kunnen uitvoeren:
 #### Administrator 
 heeft toegang tot user endpoints en crud endpoints van species
 
-Email: tine.franchois@gmail.com
+Email: tine.franchois@gmail.com\
 Paswoord: Pa$$w0rd
 
 #### Meerderjarige user  (>=15j)
