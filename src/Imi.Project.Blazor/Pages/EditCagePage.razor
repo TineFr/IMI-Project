@@ -1,0 +1,10 @@
+﻿@page "/editcage/{id}"
+
+<EditCageView Id="Guid.Parse(Id)"></EditCageView>
+
+@code {
+
+
+    [Parameter]
+    public string Id { get; set; }
+}

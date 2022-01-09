@@ -1,0 +1,34 @@
+﻿
+
+<EditForm Model="@Cage">
+    <h3>Edit cage</h3>
+    <div class="">
+        <label class="" for="Name">Name:</label>
+        <InputText id=Name @bind-Value="Cage.Name"/>
+    </div>
+
+    <div class="">
+        <label class="" for="Location">Location:</label>
+        <InputText id=Location @bind-Value="Cage.Location"/>
+    </div>
+
+
+</EditForm>
+
+@code {
+
+
+    [Inject]
+    public ICageService cageService { get; set; }
+
+    [Parameter]
+    public Guid Id { get; set; }
+
+    [Parameter]
+    public Cage Cage { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        Cage = await cageService.GetByIdAsync(Id);
+    }
+}
