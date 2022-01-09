@@ -188,6 +188,11 @@ h2 {
     color: white
 }
 
+.edit {
+    background-color: #B5DEF0;
+    color: white
+}
+
 /*My Cages*/
 
 
@@ -229,7 +234,7 @@ font-style:italic;
     margin: 10px;
     border-radius: 20px;
     cursor: pointer;
-    min-width: 450px;
+    min-width: 600px;
 }
 
     .flexitem:hover {

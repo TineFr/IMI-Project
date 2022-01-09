@@ -64,14 +64,15 @@ namespace Imi.Project.Blazor.Services
 
         public Task<Bird> AddAsync(Bird bird)
         {
-            birdrepository.ToList().Add(bird);
+            bird.Image = "images/budgie4.jpg"; // images toevoegen nog niet geimplementeerd
+            birdrepository.Add(bird);
             return Task.FromResult(bird);
         }
 
         public Task<bool> DeleteAsync(Guid id)
         {
             var bird = birdrepository.FirstOrDefault(b => b.Id.Equals(id));
-            bool IsRemoved = birdrepository.ToList().Remove(bird);
+            bool IsRemoved = birdrepository.Remove(bird);
             return Task.FromResult(IsRemoved);
         }
 

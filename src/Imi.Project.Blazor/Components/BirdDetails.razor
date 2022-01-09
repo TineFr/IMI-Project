@@ -1,6 +1,7 @@
 ﻿
-<h1 class="green">@Bird.Name</h1>
+<h1 class="blue">@Bird.Name</h1>
 <a href="@($"editbird/{Bird.Id}")" type="button" class="btn btn-primary blue">Edit</a>
+<a type="button" class="btn alert-danger m-1" @onclick="() => DeleteBird(Bird.Id)">Delete</a>
 <div class="detailscontainer">
     <div class="detailsflex">
 
@@ -18,6 +19,7 @@
 
 @code {
 
+    @inject NavigationManager NavManager;
     [Parameter]
     public Bird Bird { get; set; }
 
@@ -37,5 +39,11 @@
         string imageSource = "";
         imageSource = gender.ToLower() == "male" ? "images/male.png" : "images/female.png";
         return imageSource;
+    }
+
+        private async void DeleteBird(Guid id)
+    {
+          var result =  await birdService.DeleteAsync(id);
+          if (result) NavManager.NavigateTo("birds");
     }
 }

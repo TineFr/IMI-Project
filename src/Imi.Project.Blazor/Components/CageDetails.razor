@@ -11,7 +11,7 @@
         </div>
         <div class="d-xl-inline-flex">
             <a href="@($"editcage/{Cage.Id}")" type="button" class="btn alert-light m-1  blue">Edit</a>
-            <a href="@($"editcage/{Cage.Id}")" type="button" class="btn alert-danger m-1" @onclick="() => DeleteCage(Cage.Id)">Delete</a>
+            <a type="button" class="btn alert-danger m-1" @onclick="() => DeleteCage(Cage.Id)">Delete</a>
         </div>
     </div>
 
