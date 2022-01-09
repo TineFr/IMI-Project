@@ -1,7 +1,5 @@
 ﻿
-<h1 class="blue">@Bird.Name</h1>
-<a href="@($"editbird/{Bird.Id}")" type="button" class="btn btn-primary blue">Edit</a>
-<a type="button" class="btn alert-danger m-1" @onclick="() => DeleteBird(Bird.Id)">Delete</a>
+<h1 class="purple">@Bird.Name</h1>
 <div class="detailscontainer">
     <div class="detailsflex">
 
@@ -12,9 +10,14 @@
             <p> Location: @Bird.Cage</p>
             <img class="genderimage" src="@SetGenderImage(Bird.Gender)" />
         </div>
+          <div class="d-xl-inline-flex">
+            <a href="@($"editbird/{Bird.Id}")" type="button" class="btn edit  m-1">Edit</a>
+            <a type="button" class="btn alert-danger m-1" @onclick="() => DeleteBird(Bird.Id)">Delete</a>
+        </div>
     </div>
 
 </div>
+
 
 
 @code {
