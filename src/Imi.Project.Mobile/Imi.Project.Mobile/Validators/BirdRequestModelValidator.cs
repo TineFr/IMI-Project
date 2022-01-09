@@ -18,7 +18,7 @@ namespace Imi.Project.Mobile.Validators
             RuleFor(model => model.HatchDate)
                 .NotNull()
                 .WithMessage("Hatchdate is required")
-                .LessThan(b => DateTime.Now.Date)
+                .LessThanOrEqualTo(b => DateTime.Now.Date)
                 .WithMessage("Hatch Date cannot be a future date");
 
             RuleFor(model => model.Gender)

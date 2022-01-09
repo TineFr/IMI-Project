@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -16,6 +17,7 @@ namespace Imi.Project.Mobile.ViewModels.Cages
 {
     public class CagesViewModel : FreshBasePageModel
     {
+        private const string cagesMessage = "There are no cages yet. Add a new cage!";
         private readonly IBaseApiService<CageRequestModel, CageModel> _cageService;
 
         public CagesViewModel(IBaseApiService<CageRequestModel, CageModel> cageService)
@@ -35,6 +37,19 @@ namespace Imi.Project.Mobile.ViewModels.Cages
                 RaisePropertyChanged(nameof(Cages));
             }
         }
+
+        private string noCagesMessage;
+
+        public string NoCagesMessage
+        {
+            get { return noCagesMessage; }
+            set 
+            { 
+                noCagesMessage = value;
+                RaisePropertyChanged(nameof(NoCagesMessage));
+            }
+        }
+
         #endregion
         public override void Init(object initData)
         {
@@ -45,21 +60,25 @@ namespace Imi.Project.Mobile.ViewModels.Cages
         protected async override void ViewIsAppearing(object sender, EventArgs e)
         {
             base.ViewIsAppearing(sender, e);
+            NoCagesMessage = null;
             await RefreshCages();
         }
 
  
         private async Task RefreshCages()
         {
+            Cages = null;
             var cages = await _cageService.GetAllAsync("me/cages");
-            Cages = null;    
-            Cages = new ObservableCollection<CageModel>(cages);
+            if (cages.ToList()[0].ErrorMessage is object) NoCagesMessage = cagesMessage;
+            else Cages = new ObservableCollection<CageModel>(cages);
+
         }
 
         #region commands
         public ICommand ShowCagesCommand => new Command(
          async () => {
-             Cages = new ObservableCollection<CageModel>( await _cageService.GetAllAsync("me/cages"));
+
+            await RefreshCages();
          });
 
         public ICommand ViewCageCommand => new Command<CageModel>(
