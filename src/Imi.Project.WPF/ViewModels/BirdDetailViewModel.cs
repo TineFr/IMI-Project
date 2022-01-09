@@ -6,14 +6,6 @@ namespace Imi.Project.WPF.ViewModels
 {
     public class BirdDetailViewModel : INotifyPropertyChanged
     {
-        //private BirdModel bird;
-
-        //public BirdModel Bird
-        //{
-        //    get { return bird; }
-        //    set { bird = value; }
-        //}
-
         private string name;
         public string Name
         {
@@ -47,7 +39,7 @@ namespace Imi.Project.WPF.ViewModels
         }
         private string image;
 
-        public string Image
+        public string Image 
         {
             get { return image; }
             set
