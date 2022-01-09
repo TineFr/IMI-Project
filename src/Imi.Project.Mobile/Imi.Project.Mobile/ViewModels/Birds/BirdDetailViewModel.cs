@@ -11,7 +11,6 @@ namespace Imi.Project.Mobile.ViewModels.Birds
 {
     public class BirdDetailViewModel : FreshBasePageModel
     {
-
         private BirdModel bird;
         public BirdModel Bird
         {

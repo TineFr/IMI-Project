@@ -1,20 +1,18 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
-using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
-using Imi.Project.Mobile.Core.Services.Mocking.Services;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Imi.Project.Mobile.ViewModels.Birds
 {
-    public class BirdsViewModel :FreshBasePageModel  
+    public class BirdsViewModel : FreshBasePageModel
     {
+        private const string birdsMessage = "There are no birds yet. Add a new bird!";
         private readonly IBaseApiService<BirdRequestModel, BirdModel> _birdApiService;
 
         public BirdsViewModel(IBaseApiService<BirdRequestModel, BirdModel> birdApiService)
@@ -36,6 +34,18 @@ namespace Imi.Project.Mobile.ViewModels.Birds
                 RaisePropertyChanged(nameof(Birds));
             }
         }
+
+        private string noBirdsMessage;
+
+        public string NoBirdsMessage
+        {
+            get { return noBirdsMessage; }
+            set
+            {
+                noBirdsMessage = value;
+                RaisePropertyChanged(nameof(NoBirdsMessage));
+            }
+        }
         #endregion
         public override void Init(object initData)
         {
@@ -52,15 +62,18 @@ namespace Imi.Project.Mobile.ViewModels.Birds
 
         private async Task RefreshBirds()
         {
-            var birds = await _birdApiService.GetAllAsync("me/birds");
             Birds = null;
-            Birds = new ObservableCollection<BirdModel>(birds);
+            NoBirdsMessage = null;
+            var birds = await _birdApiService.GetAllAsync("me/birds");
+            if (birds.ToList()[0].ErrorMessage is object) NoBirdsMessage = birdsMessage;
+            else Birds = new ObservableCollection<BirdModel>(birds);
         }
 
         #region commands
         public ICommand ShowBirdsCommand => new Command(
-         async () => {
-             Birds = new ObservableCollection<BirdModel>(await _birdApiService.GetAllAsync("birds"));
+         async () =>
+         {
+             await RefreshBirds();
          });
 
         public ICommand ViewBirdCommand => new Command<BirdModel>(
