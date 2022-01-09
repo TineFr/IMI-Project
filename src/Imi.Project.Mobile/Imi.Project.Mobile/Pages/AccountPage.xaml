@@ -20,7 +20,7 @@
                     </TableSection>
                 </TableRoot>
             </TableView>
-            <Button Text="LOG OUT"></Button>
+            <Button Text="LOG OUT" Command="{Binding LogoutCommand}"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

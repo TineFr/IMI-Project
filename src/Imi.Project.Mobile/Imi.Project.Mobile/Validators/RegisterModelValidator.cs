@@ -24,7 +24,8 @@ namespace Imi.Project.Mobile.Validators
                 .WithMessage("Password must be at least 8 characters")
                 .Matches(@"[A-Z]+").WithMessage("Password must contain at least one uppercase letter.")
                 .Matches(@"[a-z]+").WithMessage("Password must contain at least one lowercase letter.")
-                .Matches(@"[0-9]+").WithMessage("Password must contain at least one number.");
+                .Matches(@"[0-9]+").WithMessage("Password must contain at least one number.")
+                .Matches(@"[][""!@$%^&*(){}:;<>,.?/+_=|'~\\-]").WithMessage("Password must contain at least one special character. Ex: !@$%^&*(){}... ");
 
 
             RuleFor(model => model.ConfirmPassword)
@@ -35,7 +36,7 @@ namespace Imi.Project.Mobile.Validators
             RuleFor(model => model.DateOfBirth)
                 .NotNull()
                 .WithMessage("Date of birth is required")
-                .LessThan(b => DateTime.Now.Date)
+                .LessThanOrEqualTo(b => DateTime.Now.Date)
                 .WithMessage("Date of birth cannot be a future date");
 
             RuleFor(model => model.Name)

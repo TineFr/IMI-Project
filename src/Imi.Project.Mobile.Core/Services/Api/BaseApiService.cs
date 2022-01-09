@@ -65,15 +65,7 @@ namespace Imi.Project.Mobile.Core.Services.Api
                 return model;
             }
         }
-        //public string GetErrorMessage(string message)
-        //{
-        //    if (message.StartsWith("{"))
-        //    {
-        //        message = message.Split(":[\"")[1].Split("\"]}}")[0];
-        //        return $"Something went wrong.\n{message}.";
-        //    }
-        //    return $"Something went wrong.\n{message}";
-        //}
+
         public async Task<resp> ValidateResponse(HttpResponseMessage response)
         {
             if (response.IsSuccessStatusCode)
@@ -96,15 +88,8 @@ namespace Imi.Project.Mobile.Core.Services.Api
         }
 
 
-
-
-        public string GetErrorMessage(string message)
+        public virtual string GetErrorMessage(string message)
         {
-            //if (message.StartsWith("{"))
-            //{
-            //    message = message.Split(":[\"")[1].Split("\"]}}")[0];
-            //    return $"Something went wrong.\n{message}.";
-            //}
             return $"Something went wrong.\n{message}";
         }
     }

@@ -13,7 +13,8 @@
                 <ImageButton Style="{StaticResource Filter}"></ImageButton>
                 <Image Style="{StaticResource Logo}" ></Image>
             </AbsoluteLayout>
-            <StackLayout Grid.Row="1">
+            <StackLayout Grid.Row="1" Orientation="Horizontal">
+                <Label Text="{Binding NoCagesMessage}" IsVisible="{Binding NoCagesMessage, Converter={StaticResource VisibilityConverter}}" Margin="5, 10, 5, 10"  HorizontalOptions="StartAndExpand"></Label>
                 <Button  x:Name="btnAddCage" Text="Add new" HorizontalOptions="EndAndExpand" WidthRequest="100" Margin="10" Command="{Binding AddCageCommand}"></Button>
             </StackLayout>
             <CollectionView      Grid.Row="2" 

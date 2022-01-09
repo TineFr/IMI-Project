@@ -39,8 +39,9 @@ namespace Imi.Project.Mobile.Core.Services.Api
             try
             {
                 var response = _httpClient.PostAsJsonAsync("auth/register", model).Result;
+
                 if (response.IsSuccessStatusCode) return null;
-                else return await response.Content.ReadAsStringAsync();
+                else return  GetErrorMessage(await response.Content.ReadAsStringAsync());
             }
             catch (Exception)
             {
@@ -48,9 +49,23 @@ namespace Imi.Project.Mobile.Core.Services.Api
             }
         }
 
+
+        public override string GetErrorMessage(string message)
+        {
+            if (message.StartsWith("{\"DuplicateEmail"))
+            {
+                message = "This e-mail is already in use";
+                return $"Something went wrong.\n{message}.";
+            }
+            else return base.GetErrorMessage(message);
+        }
+
+
         public void LogOut()
         {
             Token.JWT = null;
         }
     }
 }
+
+

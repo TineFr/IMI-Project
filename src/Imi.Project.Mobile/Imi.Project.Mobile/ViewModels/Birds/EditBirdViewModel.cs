@@ -255,8 +255,8 @@ namespace Imi.Project.Mobile.ViewModels.Birds
             Name = birdToEdit.Name;
             Gender = birdToEdit.Gender.ToString();
             HatchDate = birdToEdit.HatchDate;
-            Cage = CagesList.Where(c => c.Name == birdToEdit.Cage.Name).FirstOrDefault();
-            Species = SpeciesList.Where(c => c.Name == birdToEdit.Species.Name).FirstOrDefault();
+            Cage = CagesList.Where(c => c.Name == birdToEdit.Cage?.Name).FirstOrDefault();
+            Species = SpeciesList.Where(c => c.Name == birdToEdit.Species?.Name).FirstOrDefault();
             Food = birdToEdit.Food;
             Image = "birds/budgie2.png";
             base.Init(initData);
