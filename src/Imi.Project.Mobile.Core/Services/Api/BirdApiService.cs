@@ -19,17 +19,13 @@ namespace Imi.Project.Mobile.Core.Services.Api
             var content = new MultipartFormDataContent
             {
                 { new StringContent(model.Name), "Name" },
-                { new StringContent(model.Food), "Food" },
                 { new StringContent(model.Gender.ToString()), "Gender" },
                 { new StringContent(model.HatchDate.ToString()), "HatchDate" },
-                { new StringContent(model.CageId.ToString("d")), "CageId" },
-                { new StringContent(model.SpeciesId.ToString("d")), "SpeciesId" },
             };
-
-            if (model.ImageInfo != null)
-            {
-                content.Add(new StreamContent(model.ImageInfo.Image), "Image", model.ImageInfo.FileName);
-            }
+            if (model.Food is object) content.Add(new StringContent(model.Food), "Food");
+            if (model.CageId is object) content.Add(new StringContent(model.CageId?.ToString("d")), "CageId");
+            if (model.SpeciesId is object) content.Add(new StringContent(model.SpeciesId?.ToString("d")), "SpeciesId");
+            if (model.ImageInfo != null) content.Add(new StreamContent(model.ImageInfo.Image), "Image", model.ImageInfo.FileName);
             action = await _httpClient.PostAsync(requestUri, content);
             return await ValidateResponse(action);
         }
@@ -40,17 +36,13 @@ namespace Imi.Project.Mobile.Core.Services.Api
             var content = new MultipartFormDataContent
             {
                 { new StringContent(model.Name), "Name" },
-                { new StringContent(model.Food), "Food" },
                 { new StringContent(model.Gender.ToString()), "Gender" },
                 { new StringContent(model.HatchDate.ToString()), "HatchDate" },
-                { new StringContent(model.CageId.ToString("d")), "CageId" },
-                { new StringContent(model.SpeciesId.ToString("d")), "SpeciesId" },
             };
-
-            if (model.ImageInfo != null)
-            {
-                content.Add(new StreamContent(model.ImageInfo.Image), "Image", model.ImageInfo.FileName);
-            }
+            if (model.Food is object) content.Add(new StringContent(model.Food), "Food");
+            if (model.CageId is object) content.Add(new StringContent(model.CageId?.ToString("d")), "CageId");
+            if (model.SpeciesId is object) content.Add(new StringContent(model.SpeciesId?.ToString("d")), "SpeciesId");
+            if (model.ImageInfo != null) content.Add(new StreamContent(model.ImageInfo.Image), "Image", model.ImageInfo.FileName);
             action = await _httpClient.PutAsync(requestUri, content);
             return await ValidateResponse(action);
         }

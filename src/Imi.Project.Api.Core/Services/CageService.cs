@@ -67,7 +67,6 @@ namespace Imi.Project.Api.Core.Services
         }
         public async Task<CageResponseDto> UpdateCageAsync(Guid id, CageRequestDto dto)
         {
-
             var cage = await _cageRepository.GetByIdAsync(id);
             if (cage == null)
             {

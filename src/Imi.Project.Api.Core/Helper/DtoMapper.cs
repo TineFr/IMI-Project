@@ -44,21 +44,39 @@ namespace Imi.Project.Api.Core.Helper
         public static BirdResponseDto MapToDto(this Bird bird)
         {
 
-            return new BirdResponseDto
+            var responseDto =  new BirdResponseDto
             {
                 Id = bird.Id,
                 Name = bird.Name,
-                Species = bird.Species?.MapToDto(),
                 Food = bird.Food,
                 Gender = bird.Gender.ToString(),
                 HatchDate = bird.HatchDate,
                 Image = GetFullImageUrl(bird.Image),
-                Cage = new CageResponseDto
+            };
+
+            if (bird.Cage != null)
+            {
+                var cageDto = new CageResponseDto
                 {
                     Id = bird.Cage.Id,
                     Name = bird.Cage.Name
-                }
-            };
+                };
+                responseDto.Cage = cageDto;
+            }
+            if (bird.Species != null)
+            {
+                var speciesDto = new SpeciesResponseDto
+                {
+                    Id = bird.Species.Id,
+                    Name = bird.Species.Name,
+                    ScientificName = bird.Species.ScientificName
+                };
+                responseDto.Species = speciesDto;
+            }
+
+            return responseDto;
+
+
         }
 
         public static IEnumerable<BirdResponseDto> MapToDtoList(this IEnumerable<Bird> birds)

@@ -15,8 +15,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Controllers
 {
-    //[Authorize]
-    [AllowAnonymous]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class DailyTasksController : ControllerBase
@@ -29,6 +28,7 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "AdministratorRole")]
         public async Task<IActionResult> Get([FromQuery] PaginationParameters parameters)
         {
             IEnumerable<DailyTaskResponseDto> result;

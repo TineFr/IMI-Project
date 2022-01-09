@@ -2,7 +2,7 @@
 
 namespace Imi.Project.Common.Dtos
 {
-    public class ApplicationUserRequestDto : BaseEntityDto
+    public class ApplicationUserRequestDto 
     {
 
         [Required(ErrorMessage = "{0} is required")]

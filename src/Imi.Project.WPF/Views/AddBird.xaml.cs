@@ -43,9 +43,7 @@ namespace Imi.Project.WPF
         private async void SetData()
         {
             cmbSpecies.ItemsSource = await _speciesApiService.GetAllAsync("species");
-            cmbSpecies.SelectedIndex = 0;
             cmbCages.ItemsSource = await _cageApiService.GetAllAsync("me/cages");
-            cmbCages.SelectedIndex = 0;
             cmbGender.ItemsSource = Enum.GetValues(typeof(Gender));
             cmbGender.SelectedIndex = 0;
             pkrDate.Text = DateTime.Today.ToString();
@@ -57,8 +55,8 @@ namespace Imi.Project.WPF
             {
                 Name = txtName.Text,
                 HatchDate = DateTime.Parse(pkrDate.Text),
-                CageId = ((CageModel)cmbCages.SelectedItem).Id,
-                SpeciesId = ((SpeciesModel)cmbSpecies.SelectedItem).Id,
+                CageId = ((CageModel)cmbCages.SelectedItem)?.Id,
+                SpeciesId = ((SpeciesModel)cmbSpecies.SelectedItem)?.Id,
                 Gender = (Gender)cmbGender.SelectedValue,
                 Food = txtFood.Text,
                 ImageInfo = imageInfo

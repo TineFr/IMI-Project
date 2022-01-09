@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Imi.Project.Common.Dtos
 
 {
-    public class CageRequestDto : BaseEntityDto, IHasImage
+    public class CageRequestDto : IHasImage
     {
         [Required(ErrorMessage = "{0} is required")]
         public string Name { get; set; }

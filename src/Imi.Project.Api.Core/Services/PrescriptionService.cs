@@ -16,10 +16,15 @@ namespace Imi.Project.Api.Core.Services
     public class PrescriptionService : IPrescriptionService
     {
         protected readonly IPrescriptionRepository _prescriptionRepository;
-
-        public PrescriptionService(IPrescriptionRepository prescriptionRepository)
+        protected readonly IMedicineRepository _medicineRepository;
+        protected readonly IBirdRepository _birdRepository;
+        public PrescriptionService(IPrescriptionRepository prescriptionRepository,
+                                   IMedicineRepository medicineRepository, 
+                                   IBirdRepository birdRepository)
         {
             _prescriptionRepository = prescriptionRepository;
+            _medicineRepository = medicineRepository;
+            _birdRepository = birdRepository;
         }
         public async Task<PrescriptionResponseDto> GetPrescriptionByIdAsync(Guid id)
         {
@@ -97,18 +102,20 @@ namespace Imi.Project.Api.Core.Services
             {
                 throw new ItemNotFoundException($"User with id {dto.UserId} does not exist");
             }
-            if (!(await _prescriptionRepository.EntityExists<Medicine>(dto.Medicine)))
+            var medecine = await _medicineRepository.ExsistsForUserId(dto.UserId, dto.Medicine);
+            if (medecine == null)
             {
-                throw new ItemNotFoundException($"Medicine with id {dto.UserId} does not exist");
+                throw new ItemNotFoundException($"Medicine with id {dto.Medicine} does not exist for this user");
             }
             foreach (var id in dto.Birds)
             {
-                if (!(await _prescriptionRepository.EntityExists<Bird>(id)))
+                var bird = await _birdRepository.ExsistsForUserId(dto.UserId, id);
+                if (bird == null)
                 {
-                    throw new ItemNotFoundException($"Bird with id {id} does not exist");
+                    throw new ItemNotFoundException($"Bird with id {dto.Medicine} does not exist for this user");
                 }
             }
-            if (dto.StartDate > dto.EndDate)
+            if (dto.StartDate.Date > dto.EndDate.Date)
             {
                 throw new BadRequestException($"Start date can not be greater than enddate");
             }
