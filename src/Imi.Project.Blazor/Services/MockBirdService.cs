@@ -21,7 +21,6 @@ namespace Imi.Project.Blazor.Services
                     HatchDate = new DateTime(2015, 12, 25),
                     Image = "images/budgie1.jpg",
                     Species = "Budgerigar",
-                    ScientificName ="Melopsittacus undulatus",
                     Food = "Parakeet mix"
                     },
 
@@ -34,7 +33,6 @@ namespace Imi.Project.Blazor.Services
                     HatchDate = new DateTime(2017, 07, 13),
                     Image = "images/budgie4.jpg",
                     Species = "Budgerigar",
-                    ScientificName ="Melopsittacus undulatus",
                     Food = "Parakeet mix"
                     },
 
@@ -47,7 +45,6 @@ namespace Imi.Project.Blazor.Services
                     HatchDate = new DateTime(2012, 09, 03),
                     Image = "images/cockatiel1.jpg",
                     Species = "Cockatiel",
-                    ScientificName = "Nymphicus hollandicuss",
                     Food = "Parakeet mix"
                     },
 
@@ -60,7 +57,6 @@ namespace Imi.Project.Blazor.Services
                     HatchDate = new DateTime(2017, 07, 13),
                     Image = "images/cockatiel3.jpg",
                     Species = "Cockatiel",
-                    ScientificName = "Nymphicus hollandicuss",
                     Food = "Parakeet mix"
                     }
 

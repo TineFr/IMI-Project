@@ -1,0 +1,10 @@
+﻿@page "/editbird/{id}"
+
+<EditBirdView Id="Guid.Parse(Id)"></EditBirdView>
+
+@code {
+
+
+    [Parameter]
+    public string Id { get; set; }
+}

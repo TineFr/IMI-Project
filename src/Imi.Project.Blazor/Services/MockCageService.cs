@@ -44,7 +44,7 @@ namespace Imi.Project.Blazor.Services
         public Task<bool> DeleteAsync(Guid id)
         {
             var cage = Cagerepository.FirstOrDefault(b => b.Id.Equals(id));
-            var IsRemoved = Cagerepository.ToList().Remove(cage);
+            var IsRemoved = Cagerepository.Remove(cage);
             return Task.FromResult(IsRemoved); 
         }
 

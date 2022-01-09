@@ -1,5 +1,117 @@
-﻿<h3>EditBirdView</h3>
+﻿<h3>Edit bird</h3>
+
+<EditForm Model="@Bird" OnSubmit="@EditBird">
+    <DataAnnotationsValidator />
+    <div class="form-group">
+        <label>Name :</label>
+        <div>
+            <InputText @bind-Value="Bird.Name" class="form-control col-sm-3" />
+            <ValidationMessage For="@(() => Bird.Name)" />
+        </div>
+    </div>
+        <div class="form-group">
+        <label>Hatch date :</label>
+        <div>
+            <InputDate @bind-Value="Bird.HatchDate" class="form-control col-sm-3" />
+            <ValidationMessage For="@(() => Bird.HatchDate)" />
+        </div>
+    </div>
+
+         <div class="form-group">
+        <label>Species :</label>
+        <div>
+            <InputSelect @bind-Value="Bird.Species">
+                @foreach (var species in Species)
+                {
+                   <option>@species.Name</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => Bird.Species)" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Gender :</label>
+        <div>
+            <InputSelect @bind-Value="Bird.Gender">
+                @foreach (var gender in Genders)
+                {
+                   <option value="@gender">@gender</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => Bird.Gender)" />
+        </div>
+    </div>
+
+     <div class="form-group">
+        <label>Cage :</label>
+        <div>
+            <InputSelect @bind-Value="Bird.Cage">
+                @foreach (var cage in Cages)
+                {
+                   <option value="@cage.Name">@cage.Name</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => Bird.Cage)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Food :</label>
+        <div>
+            <InputText @bind-Value="Bird.Food" class="form-control col-sm-3" />
+            <ValidationMessage For="@(() => Bird.Food)" />
+        </div>
+    </div>
+    <button type="submit" class="btn submit w-25 p-3">Save</button>
+</EditForm>
 
 @code {
+
+
+    [Inject]
+    public IBirdService birdService { get; set; }
+    [Inject]
+    public ICageService cageService { get; set; }
+    [Inject]
+    public ISpeciesService speciesService { get; set; }
+    @inject NavigationManager NavManager;
+
+    [Parameter]
+    public Guid Id { get; set; }
+
+    [Parameter]
+    public Bird Bird { get; set; }
+
+    [Parameter]
+    public List<Cage> Cages { get; set; }   
+    [Parameter]
+
+    public List<Species> Species { get; set; } 
+
+    [Parameter]
+    public List<string> Genders { get; set; } 
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        Bird = await birdService.GetByIdAsync(Id);
+        Cages = await cageService.GetAllAsync();
+        Species = await speciesService.GetAllAsync();
+        Genders = Enum.GetNames(typeof(Common.Enums.Gender)).ToList();
+    }
+
+
+    private async void EditBird()
+    {
+
+        var result =  await birdService.UpdateAsync(Bird);
+        if (result is object)
+        {
+
+          NavManager.NavigateTo($"birddetails/{Bird.Id}");
+        }
+    }
+ 
+  
 
 }

@@ -10,7 +10,6 @@
                     <img class="itemimage" src="@item.Image" />
                     <div>
                         <h2>@item.Name</h2>
-                        <p class="scientific">@item.ScientificName</p>
                         <p>@item.Cage</p>
                     </div>
                     <img class="genderimage" src="@SetGenderImage(item.Gender)" />
@@ -42,9 +41,4 @@
         Birds = await birdService.GetAllAsync();
     }
 
-
-    private void ShowDetails(Bird bird)
-    {
-
-    }
 }

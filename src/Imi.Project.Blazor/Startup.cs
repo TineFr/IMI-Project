@@ -25,6 +25,7 @@ namespace Imi.Project.Blazor
             services.AddServerSideBlazor();
             services.AddTransient<IBirdService, MockBirdService>();
             services.AddTransient<ICageService, MockCageService>();
+            services.AddTransient<ISpeciesService, MockSpeciesService>();
             services.AddTransient<IQuizService, QuizService>();
         }
 

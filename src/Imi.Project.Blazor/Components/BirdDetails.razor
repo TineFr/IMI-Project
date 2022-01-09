@@ -1,6 +1,6 @@
 ﻿
 <h1 class="green">@Bird.Name</h1>
-
+<a href="@($"editbird/{Bird.Id}")" type="button" class="btn btn-primary blue">Edit</a>
 <div class="detailscontainer">
     <div class="detailsflex">
 
@@ -8,15 +8,12 @@
         <div>
             <h2>@Bird.Name</h2>
             <p> Species: @Bird.Species</p>
-            <p class="scientific"> Scientific name: @Bird.ScientificName</p>
-            <p> Locatin: @Bird.Cage</p>
+            <p> Location: @Bird.Cage</p>
             <img class="genderimage" src="@SetGenderImage(Bird.Gender)" />
         </div>
     </div>
 
 </div>
-
-
 
 
 @code {
