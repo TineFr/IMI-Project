@@ -7,7 +7,7 @@
     <Application.Resources>
 
         <converters:TextToVisibilityConverter x:Key="VisibilityConverter" />
-
+        <converters:ModelToVisibilityConverter x:Key="ModelVisibilityConverter" />
 
         <!--navbar color-->
         <Style TargetType="NavigationPage">

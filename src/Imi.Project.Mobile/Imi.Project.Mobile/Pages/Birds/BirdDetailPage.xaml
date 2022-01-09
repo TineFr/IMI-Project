@@ -23,14 +23,14 @@
             <ScrollView Grid.Row="2" Grid.RowSpan="2">
                 <StackLayout Grid.Row="1">
                 <Image Source="{Binding Bird.Image}" WidthRequest="340"></Image>
-                <Frame WidthRequest="300" HeightRequest="80" HorizontalOptions="Center">
+                    <Frame WidthRequest="300" HeightRequest="80" HorizontalOptions="Center" IsVisible="{Binding Bird.Species, Converter={StaticResource ModelVisibilityConverter}}">
                     <StackLayout>
                         <Label Text="Species:"></Label>
                         <Label HeightRequest="200" HorizontalOptions="Center" Text="{Binding Bird.Species.Name}" FontSize="20"></Label>
                         <Label HeightRequest="200" HorizontalOptions="Center" Text="{Binding Bird.Species.ScientificName}" FontSize="10" FontAttributes="Italic"></Label>
                     </StackLayout>
                 </Frame>
-                    <Frame WidthRequest="300"  HeightRequest="80" HorizontalOptions="Center">
+                    <Frame WidthRequest="300"  HeightRequest="80" HorizontalOptions="Center" IsVisible="{Binding Bird.Cage, Converter={StaticResource ModelVisibilityConverter}}">
                     <StackLayout>
                         <Label Text="Location:"></Label>
                         <Label HeightRequest="200" HorizontalOptions="Center" Text="{Binding Bird.Cage.Name}" FontSize="20"></Label>
@@ -42,7 +42,7 @@
                             <Label HeightRequest="200" HorizontalOptions="Center" Text="{Binding Bird.Date}" FontSize="20"></Label>
                         </StackLayout>
                     </Frame>
-                    <Frame WidthRequest="300"  HeightRequest="80" HorizontalOptions="Center">
+                    <Frame WidthRequest="300"  HeightRequest="80" HorizontalOptions="Center" IsVisible="{Binding Bird.Food, Converter={StaticResource VisibilityConverter}}">
                         <StackLayout>
                             <Label Text="Food:"></Label>
                             <Label HeightRequest="200" HorizontalOptions="Center" Text="{Binding Bird.Food}" FontSize="20"></Label>
