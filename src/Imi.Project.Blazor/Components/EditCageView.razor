@@ -1,7 +1,7 @@
 ﻿
 <h3>Edit cage</h3>
 
-<EditForm Model="@Cage">
+<EditForm Model="@Cage" OnValidSubmit="@EditCage">
     <DataAnnotationsValidator />
     <div class="form-group">
         <label>Name :</label>
@@ -17,7 +17,7 @@
             <ValidationMessage For="@(() => Cage.Location)" />
         </div>
     </div>
-    <button type="submit" class="btn btn-success w-25 p-3" @onclick="() => EditCage(Cage)" >Save</button>
+    <button type="submit" class="btn submit w-25 p-3">Save</button>
 </EditForm>
 
 @code {
@@ -39,15 +39,18 @@
         Cage = await cageService.GetByIdAsync(Id);
     }
 
-    private async void EditCage(Cage cage)
+
+    private async void EditCage()
     {
 
-        var result =  await cageService.UpdateAsync(cage);
+        var result =  await cageService.UpdateAsync(Cage);
         if (result is object)
         {
 
           NavManager.NavigateTo($"cagedetails/{Cage.Id}");
         }
     }
+ 
+  
 
 }
