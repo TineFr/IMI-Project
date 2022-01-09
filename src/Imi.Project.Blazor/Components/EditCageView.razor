@@ -1,18 +1,23 @@
 ﻿
+<h3>Edit cage</h3>
 
-<EditForm Model="@Cage">
-    <h3>Edit cage</h3>
-    <div class="">
-        <label class="" for="Name">Name:</label>
-        <InputText id=Name @bind-Value="Cage.Name"/>
+<EditForm Model="@Cage" OnSubmit=@Submit>
+    <DataAnnotationsValidator />
+    <div class="form-group">
+        <label>Name :</label>
+        <div>
+            <InputText @bind-Value="Cage.Name" class="form-control col-sm-3" />
+            <ValidationMessage For="@(() => Cage.Name)" />
+        </div>
     </div>
-
-    <div class="">
-        <label class="" for="Location">Location:</label>
-        <InputText id=Location @bind-Value="Cage.Location"/>
+    <div class="form-group">
+        <label>Location :</label>
+        <div>
+            <InputText @bind-Value="Cage.Location" class="form-control col-sm-3" />
+            <ValidationMessage For="@(() => Cage.Location)" />
+        </div>
     </div>
-
-
+    <button type="submit" class="btn btn-success w-25 p-3" @onclick="() => EditCage(Cage)" >Save</button>
 </EditForm>
 
 @code {
@@ -20,6 +25,7 @@
 
     [Inject]
     public ICageService cageService { get; set; }
+    @inject NavigationManager NavManager;
 
     [Parameter]
     public Guid Id { get; set; }
@@ -27,8 +33,21 @@
     [Parameter]
     public Cage Cage { get; set; }
 
+
     protected async override Task OnInitializedAsync()
     {
         Cage = await cageService.GetByIdAsync(Id);
     }
+
+    private async void EditCage(Cage cage)
+    {
+
+        var result =  await cageService.UpdateAsync(cage);
+        if (result is object)
+        {
+
+          NavManager.NavigateTo($"cagedetails/{Cage.Id}");
+        }
+    }
+
 }

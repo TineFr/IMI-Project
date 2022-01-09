@@ -7,6 +7,7 @@ namespace Imi.Project.Blazor.Models
 {
     public class Bird : BaseEntity
     {
+        public string Name { get; set; }
         public DateTime HatchDate { get; set; }
         public string Gender { get; set; }
         public string Species { get; set; }
