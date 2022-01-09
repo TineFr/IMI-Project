@@ -181,6 +181,18 @@ h2 {
 .purple {
     background-color: #EACFEF;
 }
+
+/*edit button*/
+.submit {
+    background-color: #D4E7C0;
+    color: white
+}
+
+.edit {
+    background-color: lightblue;
+    color: white
+}
+
 /*My Cages*/
 
 
@@ -222,6 +234,7 @@ font-style:italic;
     margin: 10px;
     border-radius: 20px;
     cursor: pointer;
+    min-width: 600px;
 }
 
     .flexitem:hover {

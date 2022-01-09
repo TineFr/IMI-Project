@@ -1,4 +1,4 @@
-﻿<h1 class="blue">@Cage.Name</h1>
+﻿<h1 class="purple">@Cage.Name</h1>
 
 <div class="detailscontainer">
     <div class="detailsflex">
@@ -9,12 +9,17 @@
             <p> Location: @Cage.Location</p>
 
         </div>
+        <div class="d-xl-inline-flex">
+            <a href="@($"editcage/{Cage.Id}")" type="button" class="btn alert-light m-1  blue">Edit</a>
+            <a type="button" class="btn alert-danger m-1" @onclick="() => DeleteCage(Cage.Id)">Delete</a>
+        </div>
     </div>
 
 </div>
 
 
 @code {
+    @inject NavigationManager NavManager;
 
     [Parameter]
     public Cage Cage { get; set; }
@@ -28,6 +33,12 @@
     protected async override Task OnInitializedAsync()
     {
         Cage = await cageService.GetByIdAsync(Id);
+    }
+
+    private async void DeleteCage(Guid id)
+    {
+          var result =  await cageService.DeleteAsync(id);
+          if (result) NavManager.NavigateTo("cages");
     }
 
 

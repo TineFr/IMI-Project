@@ -9,7 +9,7 @@ namespace Imi.Project.Blazor.Services
 {
     public class QuizService : IQuizService
     {
-        private static IEnumerable<QuizElement> questionsRepository = new List<QuizElement>
+        private static readonly IEnumerable<QuizElement> questionsRepository = new List<QuizElement>
         {
                     new QuizElement
                     {
@@ -62,8 +62,6 @@ namespace Imi.Project.Blazor.Services
                             new QuizAnswer("A Muster", false),
                         }
                     },
-
-
                     new QuizElement
                     {
                         Question = "Which birds did coal miners traditionally bring into the mines with them to detect dangerous levels of carbon monoxide?",
@@ -77,53 +75,55 @@ namespace Imi.Project.Blazor.Services
                         }
                     },
 
+                    new QuizElement
+                    {
+                        Question = "What color eggs does a gray catbird lay?",
+                        Image = "images/quiz/catbird.jfif",
+                        PossibleAnswers = new List<QuizAnswer>()
+                        {
+                            new QuizAnswer("White", false),
+                            new QuizAnswer("Green", false),
+                            new QuizAnswer("Gray", false),
+                            new QuizAnswer("Blue", true),
+                        }
+                    },
 
-                    //new QuizElement
-                    //{
-                    //    Question = "What color eggs does a gray catbird lay?",
-                    //    Image = "images/quiz/catbird.jfif",
-                    //    PossibleAnswers = new List<string>()
-                    //    {
-                    //        "White", "Blue", "Gray", "Green"
-                    //    },
-                    //    CorrectAnswer="Blue"
-
-                    //},
-
-                    //new QuizElement
-                    //{
-                    //    Question = "Pica pica is the scientific name for which bird?",
-                    //    Image = "images/quiz/pica.png",
-                    //    PossibleAnswers = new List<string>()
-                    //    {
-                    //        "Eurasian Magpie", "Laughing kookaburra", "Conure", "Cockatoo"
-                    //    },
-                    //    CorrectAnswer="Eurasian Magpie"
-
-                    //},
-
-                    //new QuizElement
-                    //{
-                    //    Question = "There is only one bird in the world which has nostrils at the end of its beak. Which is it?",
-                    //    Image = "images/quiz/nostrils.jpg",
-                    //    PossibleAnswers = new List<string>()
-                    //    {
-                    //        "Kiwi", "Ostrich", "Southern Cassowary", "Magpie Goose"
-                    //    },
-                    //    CorrectAnswer="Kiwi"
-
-                    //},
-                    //new QuizElement
-                    //{
-                    //    Question = "The kakapo bird is native to which country?",
-                    //    Image = "images/quiz/kakapo.jpg",
-                    //    PossibleAnswers = new List<string>()
-                    //    {
-                    //        "Tanzania", "Papua New Guinea", "India", "New Zealand"
-                    //    },
-                    //    CorrectAnswer="New Zealand"
-
-                    //},
+                    new QuizElement
+                    {
+                        Question = "Pica pica is the scientific name for which bird?",
+                        Image = "images/quiz/pica.png",
+                        PossibleAnswers = new List<QuizAnswer>()
+                        {
+                            new QuizAnswer("Eurasian Magpie", true),
+                            new QuizAnswer("Laughing kookaburra", false),
+                            new QuizAnswer("Conure", false),
+                            new QuizAnswer("Cockatoo", false),
+                        }
+                    },
+                    new QuizElement
+                    {
+                        Question = "There is only one bird in the world which has nostrils at the end of its beak. Which is it?",
+                        Image = "images/quiz/nostrils.jpg",
+                        PossibleAnswers = new List<QuizAnswer>()
+                        {
+                            new QuizAnswer("Ostrich", false),
+                            new QuizAnswer("Southern Cassowary", false),
+                            new QuizAnswer("Kiwi", true),
+                            new QuizAnswer("Magpie Goose", false),
+                        }
+                    },
+                    new QuizElement
+                    {
+                        Question = "The kakapo bird is native to which country?",
+                        Image = "images/quiz/kakapo.jpg",
+                        PossibleAnswers = new List<QuizAnswer>()
+                        {
+                            new QuizAnswer("Tanzania", false),
+                            new QuizAnswer("Papua New Guinea", false),
+                            new QuizAnswer("India", false),
+                            new QuizAnswer("New Zealand", true),
+                        }
+                    }
         };
 
 
