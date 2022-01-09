@@ -1,5 +1,5 @@
 ﻿
-<h3>Edit cage</h3>
+<h3>Add cage</h3>
 
 <EditForm Model="@Cage">
     <DataAnnotationsValidator />
@@ -17,7 +17,7 @@
             <ValidationMessage For="@(() => Cage.Location)" />
         </div>
     </div>
-    <button type="submit" class="btn btn-success w-25 p-3" @onclick="() => EditCage(Cage)" >Save</button>
+    <button type="submit" class="btn btn-success w-25 p-3" @onclick="() => AddCage(Cage)" >Save</button>
 </EditForm>
 
 @code {
@@ -36,17 +36,17 @@
 
     protected async override Task OnInitializedAsync()
     {
-        Cage = await cageService.GetByIdAsync(Id);
+        Cage = new Cage();
     }
 
-    private async void EditCage(Cage cage)
+    private async void AddCage(Cage cage)
     {
 
-        var result =  await cageService.UpdateAsync(cage);
+        var result =  await cageService.AddAsync(cage);
         if (result is object)
         {
 
-          NavManager.NavigateTo($"cagedetails/{Cage.Id}");
+          NavManager.NavigateTo($"cages");
         }
     }
 

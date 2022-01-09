@@ -37,7 +37,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Imi.Project.Vue", "Imi.Proj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Imi.Project.WPF", "Imi.Project.WPF\Imi.Project.WPF.csproj", "{8403F7B6-1D1D-4538-A5A0-E89282ACDE69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imi.Project.WPF.Core", "Imi.Project.WPF.Core\Imi.Project.WPF.Core.csproj", "{D7182BD8-0864-41C7-8DC0-CC9A108C1DDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Imi.Project.WPF.Core", "Imi.Project.WPF.Core\Imi.Project.WPF.Core.csproj", "{D7182BD8-0864-41C7-8DC0-CC9A108C1DDC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

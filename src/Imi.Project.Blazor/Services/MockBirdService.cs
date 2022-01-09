@@ -10,7 +10,7 @@ namespace Imi.Project.Blazor.Services
     public class MockBirdService : IBirdService
     {
 
-        private static IEnumerable<Bird> birdrepository = new List<Bird>
+        private static List<Bird> birdrepository = new List<Bird>
         {
                     new Bird
                     {
@@ -79,7 +79,7 @@ namespace Imi.Project.Blazor.Services
             return Task.FromResult(IsRemoved);
         }
 
-        public Task<IEnumerable<Bird>> GetAllAsync()
+        public Task<List<Bird>> GetAllAsync()
         {
             return Task.FromResult(birdrepository);
         }

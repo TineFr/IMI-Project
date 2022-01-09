@@ -9,7 +9,7 @@ namespace Imi.Project.Blazor.Services
 {
     public class MockCageService : ICageService
     {
-        private static IEnumerable<Cage> Cagerepository = new List<Cage>
+        private static List<Cage> Cagerepository = new List<Cage>
         {
                     new Cage
                     {
@@ -28,13 +28,14 @@ namespace Imi.Project.Blazor.Services
                     Location ="Outside",
                     Image = "images/cage2.png",
 
-
                     },
         };
 
         public Task<Cage> AddAsync(Cage cage)
         {
-            Cagerepository.ToList().Add(cage);
+            cage.Id = Guid.NewGuid();
+            cage.Image = "images/cage2.png"; // nog geen image functionaliteit
+            Cagerepository.Add(cage);
             return Task.FromResult(cage);
         }
 
@@ -47,7 +48,7 @@ namespace Imi.Project.Blazor.Services
             return Task.FromResult(IsRemoved); 
         }
 
-        public Task<IEnumerable<Cage>> GetAllAsync()
+        public Task<List<Cage>> GetAllAsync()
         {
             return Task.FromResult(Cagerepository);
         }
