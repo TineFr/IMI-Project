@@ -72,7 +72,7 @@ namespace Imi.Project.Api.Controllers
             IEnumerable<BirdResponseDto> result;
             try
             {
-                result = await _birdService.GetBirdsByUserIdAsync(id, parameters);
+                result = await _birdService.GetBirdsByCageIdAsync(id, parameters);
             }
             catch (BaseException ex)
             {

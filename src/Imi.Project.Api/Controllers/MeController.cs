@@ -72,13 +72,13 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpGet("birds")]
-        public async Task<IActionResult> GetBirdsFromUser([FromQuery] PaginationParameters parameters)
+        public async Task<IActionResult> GetFilteredBirdsFromUser([FromQuery] PaginationParameters parameters, [FromQuery] Guid speciesId, [FromQuery] Guid cageId)
         {
             Guid userId = User.GetUser();
             IEnumerable<BirdResponseDto> result;
             try
             {
-                result = await _birdService.GetBirdsByUserIdAsync(userId, parameters);
+                result = await _birdService.GetFilteredBirdsFromUser(userId, speciesId, cageId, parameters);
             }
             catch (BaseException ex)
             {
@@ -86,6 +86,8 @@ namespace Imi.Project.Api.Controllers
             }
             return Ok(result);
         }
+
+
 
         [HttpGet("medicines")]
         public async Task<IActionResult> GetMedicinesFromUser([FromQuery] PaginationParameters parameters)
