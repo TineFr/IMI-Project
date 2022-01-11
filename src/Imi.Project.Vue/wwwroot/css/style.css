@@ -1,0 +1,92 @@
+﻿.flexbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+a {
+    text-decoration: none;
+}
+
+#logo {
+    height: 150px;
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
+
+.center {
+    text-align: center;
+}
+
+#spMember {
+    font-size: small;
+    font-weight: initial;
+    margin-right: 20px;
+    display: inline-block;
+}
+
+h1, h2, label {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: black;
+}
+
+
+input {
+    width: 300px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 30px;
+}
+
+h1 {
+    font-size: 40px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #D6B2DC;
+}
+
+#divLogIn {
+    text-align: start;
+    padding: 10px;
+    padding-bottom: 15px;
+    border: 2px solid #D6B2DC;
+    border-radius: 10%;
+    background-color: white;
+}
+
+#divSignUp {
+    text-align: end;
+    margin: 10px;
+}
+
+#btnSignIn {
+    background-color: #D6B2DC;
+    color: white;
+    width: 307px;
+    height: 40px;
+    border: 0;
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+#btnSignUp {
+    font-weight: bold;
+    background-color: white;
+    border: 0;
+    padding: 0;
+    margin-top: 20px;
+    text-align: end;
+}
+
+
+.navbarVisibility {
+    visibility: collapse;
+}
