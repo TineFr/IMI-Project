@@ -28,7 +28,7 @@ namespace Imi.Project.Vue.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Register()
         {
             return View();
         }
