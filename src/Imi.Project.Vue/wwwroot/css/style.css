@@ -1,6 +1,14 @@
 ﻿
 /*Login & register view*/
 /*...........................................................................*/
+.logoDiv{
+    text-align: center;
+}
+
+
+
+
+
 .flexContainer {
     display: flex;
     justify-content: center;
@@ -122,3 +130,91 @@ input {
 /*birds index view*/
 /*...........................................................................*/
 
+.indexContainer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.indexItem {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 200px 120px 20px;
+    height: 170px;
+    color: rgba(37, 37, 37, 0.651);
+    background-color: #EEEEEE;
+    border-radius: 20px;
+    cursor: pointer;
+    width: 420px;
+    word-wrap: break-word;
+}
+
+.indexItem:hover {
+    background-color: #C4C4C4;
+}
+
+
+.itemImage {
+    height: 100px;
+    width: auto;
+    max-width: 200px;
+    margin: 10px;
+    grid-column: 1;
+}
+
+.genderImage {
+    height: 50px;
+    padding: 10px;
+    grid-row: 0;
+}
+
+.indexTitle {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 50px;
+    padding: 10px;
+    border-bottom: 5px solid lightblue;
+    color: rgba(0, 0, 0, 0.651);
+}
+
+.indexItem > h2, .indexItem > p {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin: 0;
+}
+
+.indexItem > h2 {
+    font-size: 30px;
+}
+
+a, a:hover {
+    text-decoration: none;
+}
+
+
+.mainContainer{
+    padding: 0 30px 20px 30px 
+}
+
+
+.paginationDiv {
+    height: 50px;
+}
+
+select {
+    height: 40px;
+    width: 200px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: white;
+    border: 0px;
+}
+
+
+.species {
+    background-color: lightblue;
+}
+
+.cage {
+    background-color: rgb(106, 195, 224);
+}
+
+.containerItem {
+    margin: 30px;
+}
