@@ -12,7 +12,7 @@ let app = new Vue({
 let layout = new Vue({
     el: 'header',
     data: {
-        isInVisible: true,
+        isInVisible: false,
     }
 })
 
