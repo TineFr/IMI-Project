@@ -1,19 +1,17 @@
 ﻿
 /*Login & register view*/
 /*...........................................................................*/
-.logoDiv{
-    text-align: center;
-}
-
-
-
-
 
 .flexContainer {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
+.logoDiv {
+    text-align: center;
+}
+
 
 #logo {
     height: 150px;
@@ -129,6 +127,65 @@ input {
 /*...........................................................................*/
 /*birds index view*/
 /*...........................................................................*/
+
+.btnAddNew {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    border-radius: 50%;
+    background-color: lightblue;
+    border: none;
+    color: white;
+}
+.arrowContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+}
+
+.paginationDiv{
+    position: relative;
+}
+.btnArrow {
+    background-color: grey;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    position: relative;
+    margin: 0px;
+    margin-left:3px;
+}
+
+.imgArrow {
+    height: 20px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.btnAddNew > p {
+    margin: 0;
+    font-size: 50px;
+    position: absolute;
+    top: -17px;
+    right: 8px
+}
+
+.btnAddNew:hover {
+    background-color: rgb(148, 203, 221);
+}
+
+.indexHeader{
+position: relative;
+}
 
 .indexContainer {
     display: flex;
