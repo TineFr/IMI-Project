@@ -39,8 +39,7 @@ namespace Imi.Project.Api.Core.Services
             {
                 throw new ItemNotFoundException($"No medicines were found");
             }
-            var medicinesPaginated = Pagination.AddPagination<Medicine>(medecines, parameters);
-            var result = medicinesPaginated.MapToDtoList();
+            var result = medecines.MapToDtoList();
             return result;
         }
         public async Task<MedicineResponseDto> AddMedicineAsync(MedicineRequestDto dto)
