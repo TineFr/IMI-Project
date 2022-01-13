@@ -3,36 +3,27 @@
 
 // Write your JavaScript code.
 
-var isInVisible  = true;
-
-const globalStore = new Vue({
-    data: {
-        isInVisible: true,
-    }
-})
 
 
 var login = new Vue({
     el: '#divLogIn',
     data: {
-        isInVisible,
+
     },
     methods: {
-        ToggleNavBarVisibility: function () {
-            var self = this;
-            self.isInVisible = true;
-        },
-    created: function () {
-        this.appName = "test worked";
-    }
+        //ToggleNavBarVisibility: function () {
+        //    var self = this;
+        //    self.isInVisible = true;
+        //},
+
     }});
 
-var layout = new Vue({
-    el: 'header',
-    data: {
-        isInVisible
-    }
-})
+//var layout = new Vue({
+//    el: 'header',
+//    data: {
+//        isInVisible
+//    }
+//})
 
 
 var selectionBoxes = new Vue({
