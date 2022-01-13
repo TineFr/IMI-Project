@@ -48,8 +48,8 @@ namespace Imi.Project.WPF.Views
 
             txtName.Text = _birdToUpdate.Name;
             txtFood.Text = _birdToUpdate.Food;
-            cmbCages.Text = _birdToUpdate.Cage.Name;
-            cmbSpecies.Text = _birdToUpdate.Species.Name;
+            cmbCages.Text = _birdToUpdate.Cage?.Name;
+            cmbSpecies.Text = _birdToUpdate.Species?.Name;
             cmbGender.Text = _birdToUpdate.Gender.ToString();
             pkrDate.Text = _birdToUpdate.HatchDate.ToString();
         }
