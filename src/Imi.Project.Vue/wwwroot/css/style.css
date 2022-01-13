@@ -56,9 +56,11 @@ input {
 #divLogIn {
     text-align: start;
     padding: 10px;
+    max-width: 332px;
     padding-bottom: 15px;
     border: 2px solid #D6B2DC;
     border-radius: 10%;
+    word-wrap: break-word;
 }
 
 #divSignUp {

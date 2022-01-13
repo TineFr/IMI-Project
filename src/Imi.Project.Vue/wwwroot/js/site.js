@@ -13,6 +13,7 @@ var login = new Vue({
             email : []
         },
         IsValid: true,
+        apiErrorMessage: null,
     },
     methods: {
 
@@ -58,6 +59,7 @@ var login = new Vue({
         //    }
 /*        },*/
         login: function () {
+            this.apiErrorMessage = null;
             this.validateRequest();
             if (this.IsValid) {
                 var url = "https://localhost:5001/api/auth/login";
@@ -68,26 +70,15 @@ var login = new Vue({
                             localStorage.setItem("token", response.data.jwt)
                         }
                     })
-
-
                     .catch((error) => {
-                        const response = error.response
-                        console.log(response.data)
+                        const response = error.response;
+                        console.log(response.data);
+                        this.apiErrorMessage = response.data;
                     })
-//                    .catch(function (error) {
-//                        var test = JSON.stringify(error.response).data;
-///*                        var test2 = JSON.stringify(error).response.data;*/
-//                        console.log(JSON.stringify(error.response).status) // 401
-///*                        console.log(JSON.stringify(error.response.data))*/ //Please Authenticate or whatever returned from server
-//                        //if (error.response.status == 401) {
-//                        //    //redirect to login
-//                        //}
-//                    })
             }
         }
     }
 });
-
 
 
 
