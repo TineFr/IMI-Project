@@ -109,8 +109,7 @@ namespace Imi.Project.Api.Core.Services
                 {
                     throw new ItemNotFoundException($"No cages were found for user with id {id}");
                 }
-                var cagesPaginated = Pagination.AddPagination<Cage>(cages, parameters);
-                var result = cagesPaginated.MapToDtoList();
+                var result = cages.MapToDtoList();
                 return result;
             }
             else throw new ItemNotFoundException($"User with id {id} does not exist");

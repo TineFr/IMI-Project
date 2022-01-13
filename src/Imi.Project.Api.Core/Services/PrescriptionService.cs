@@ -90,8 +90,7 @@ namespace Imi.Project.Api.Core.Services
                 {
                     throw new ItemNotFoundException($"No medicines were found for user with id {id}");
                 }
-                var prescriptionsPaginated = Pagination.AddPagination<Prescription>(prescriptions, parameters);
-                var result = prescriptionsPaginated.MapToDtoList();
+                var result = prescriptions.MapToDtoList();
                 return result;
             }
             else throw new ItemNotFoundException($"User with id {id} does not exist");
