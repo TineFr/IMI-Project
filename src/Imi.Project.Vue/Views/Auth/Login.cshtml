@@ -9,7 +9,7 @@
             </div>
             <div id="divLogIn">
                 <h2>Sign in</h2>
-                <form>
+                <form v-on:submit.prevent="login">
                     <div class="form-group">
                        <label>E-mail:</label><br>
                         <input placeholder="sample@gmail.com" v-model="loginRequest.email">
@@ -20,7 +20,7 @@
                         <input placeholder="Acser!99B" type="password" v-model="loginRequest.password">
                         <div class="error" v-if="errors.password != []">{{errors.password[0]}}</div> 
                     </div>
-                    <button type="button" id="btnSignIn" v-on:click="login">Sign in</button>
+                    <button id="btnSignIn" @*v-on:click="login"*@>Sign in</button>
                     
                     <div id="divSignUp"><span id="spMember">Not a member yet?</span><a id="btnSignUp" asp-controller="Auth" asp-action="Register">Sign up</a></div>
                     <div class="error" v-if="apiErrorMessage != null">{{apiErrorMessage}}</div> 

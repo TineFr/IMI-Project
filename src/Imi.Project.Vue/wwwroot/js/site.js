@@ -18,6 +18,7 @@ var login = new Vue({
     methods: {
 
         validateRequest: function () {
+            this.IsValid = true;
             this.errors.password = [];
             this.errors.email = [];
             if (!this.loginRequest.email) {
@@ -57,7 +58,7 @@ var login = new Vue({
         //        this.errors.password.push("Password must have a special character ex: !1/^]...");
         //        this.IsValid = false;
         //    }
-/*        },*/
+        //},
         login: function () {
             this.apiErrorMessage = null;
             this.validateRequest();
