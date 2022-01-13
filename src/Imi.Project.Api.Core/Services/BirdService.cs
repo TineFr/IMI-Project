@@ -46,8 +46,7 @@ namespace Imi.Project.Api.Core.Services
             {
                 throw new ItemNotFoundException($"No birds were found");
             }
-            var birdsPaginated = Pagination.AddPagination<Bird>(birds, parameters);
-            var result = birdsPaginated.MapToDtoList();
+            var result = birds.MapToDtoList();
             return result;
         }
 
