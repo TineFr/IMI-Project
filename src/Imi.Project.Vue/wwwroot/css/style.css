@@ -90,7 +90,7 @@ input {
 /*vue influensed properties*/
 
 .navbarVisibility {
-    visibility: collapse;
+    visibility: hidden;
 }
 
 /*...........................................................................*/
@@ -153,6 +153,24 @@ input {
 .paginationDiv{
     position: relative;
 }
+
+.btnShowSelections {
+    background-color: grey;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    position: relative;
+    margin: 0px;
+    margin-left: 3px;
+}
+
+.imgFilter {
+    height: 20px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
 .btnArrow {
     background-color: grey;
     text-align: center;
@@ -161,7 +179,7 @@ input {
     padding: 10px;
     position: relative;
     margin: 0px;
-    margin-left:3px;
+    margin-left: 3px;
 }
 
 .imgArrow {
@@ -233,7 +251,7 @@ position: relative;
 }
 
 .indexItem > h2, .indexItem > p {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+   
     margin: 0;
 }
 
