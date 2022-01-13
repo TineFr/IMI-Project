@@ -43,8 +43,7 @@ namespace Imi.Project.Api.Core.Services
             {
                 throw new ItemNotFoundException($"No cages were found");
             }
-            var cagesPaginated = Pagination.AddPagination<Cage>(cages, parameters);
-            var result = cagesPaginated.MapToDtoList();
+            var result = cages.MapToDtoList();
             return result;
         }
         public async Task<CageResponseDto> AddCageAsync(CageRequestDto dto)

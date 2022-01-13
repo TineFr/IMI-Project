@@ -1,5 +1,4 @@
-﻿using Imi.Project.Api.Core.Entities;
-using Imi.Project.Api.Core.Entities.Pagination;
+﻿using Imi.Project.Api.Core.Entities.Pagination;
 using Imi.Project.Api.Core.Exceptions;
 using Imi.Project.Api.Core.Helper;
 using Imi.Project.Api.Core.Interfaces.Services;

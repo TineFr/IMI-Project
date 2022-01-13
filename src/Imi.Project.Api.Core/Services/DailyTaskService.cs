@@ -90,8 +90,7 @@ namespace Imi.Project.Api.Core.Services
                 {
                     throw new ItemNotFoundException($"No tasks were found for cage with id {id}");
                 }
-                var tasksPaginated = Pagination.AddPagination<DailyTask>(tasks, parameters);
-                var result = tasksPaginated.MapToDtoList();
+                var result = tasks.MapToDtoList();
                 return result;
             }
             else throw new ItemNotFoundException($"Cage with id {id} does not exist");
