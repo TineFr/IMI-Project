@@ -10,9 +10,9 @@ namespace Imi.Project.Api.Core.Interfaces.Services
 {
     public interface ICageService
     {
-        Task<IEnumerable<CageResponseDto>> ListAllCagesAsync(PaginationParameters parameters);
+        Task<IEnumerable<CageResponseDto>> ListAllCagesAsync();
         Task<CageResponseDto> GetCageByIdAsync(Guid id);
-        Task<IEnumerable<CageResponseDto>> GetCagesByUserIdAsync(Guid id, PaginationParameters parameters);
+        Task<IEnumerable<CageResponseDto>> GetCagesByUserIdAsync(Guid id);
         Task<CageResponseDto> AddCageAsync(CageRequestDto cage);
         Task DeleteMultiple(List<Cage> cages);
         Task<CageResponseDto> UpdateCageAsync(Guid id, CageRequestDto cage);

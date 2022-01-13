@@ -34,7 +34,7 @@ namespace Imi.Project.Api.Controllers
             IEnumerable<MedicineResponseDto> paginatedResult;
             try
             {
-                var result = await _medicineService.ListAllMedicinesAsync(parameters);
+                var result = await _medicineService.ListAllMedicinesAsync();
                 var paginationData = new PaginationMetaData(parameters.Page, result.Count(), parameters.ItemsPerPage);
                 Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
                 paginatedResult = Pagination.AddPagination<MedicineResponseDto>(result, parameters);

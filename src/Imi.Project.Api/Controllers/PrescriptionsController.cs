@@ -33,7 +33,7 @@ namespace Imi.Project.Api.Controllers
             IEnumerable<PrescriptionResponseDto> paginatedResult;
             try
             {
-                var result = await _prescriptionService.ListAllPrescriptionsAsync(parameters);
+                var result = await _prescriptionService.ListAllPrescriptionsAsync();
                 var paginationData = new PaginationMetaData(parameters.Page, result.Count(), parameters.ItemsPerPage);
                 Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
                 paginatedResult = Pagination.AddPagination<PrescriptionResponseDto>(result, parameters);

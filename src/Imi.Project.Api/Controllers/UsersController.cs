@@ -41,16 +41,19 @@ namespace Imi.Project.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] PaginationParameters parameters)
         {
-            IEnumerable<ApplicationUserResponseDto> result;
+            IEnumerable<ApplicationUserResponseDto> paginatedResult;
             try
             {
-                result = await _userService.ListAllUsersAsync(parameters);
+                var result = await _userService.ListAllUsersAsync();
+                var paginationData = new PaginationMetaData(parameters.Page, result.Count(), parameters.ItemsPerPage);
+                Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
+                paginatedResult = Pagination.AddPagination<ApplicationUserResponseDto>(result, parameters);
             }
             catch (BaseException ex)
             {
                 return StatusCode((int)ex.StatusCode, ex.Message);
             }
-            return Ok(result);
+            return Ok(paginatedResult);
         }
 
         [HttpGet("{id}")]
@@ -74,7 +77,7 @@ namespace Imi.Project.Api.Controllers
             IEnumerable<CageResponseDto> paginatedResult;
             try
             {
-                var result = await _cageService.GetCagesByUserIdAsync(id, parameters);
+                var result = await _cageService.GetCagesByUserIdAsync(id);
                 var paginationData = new PaginationMetaData(parameters.Page, result.Count(), parameters.ItemsPerPage);
                 Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
                 paginatedResult = Pagination.AddPagination<CageResponseDto>(result, parameters);
@@ -92,7 +95,7 @@ namespace Imi.Project.Api.Controllers
             IEnumerable<BirdResponseDto> paginatedResult;
             try
             {
-                var result = await _birdService.GetBirdsByUserIdAsync(id, parameters);
+                var result = await _birdService.GetBirdsByUserIdAsync(id);
                 var paginationData = new PaginationMetaData(parameters.Page, result.Count(), parameters.ItemsPerPage);
                 Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
                 paginatedResult = Pagination.AddPagination<BirdResponseDto>(result, parameters);
@@ -109,7 +112,7 @@ namespace Imi.Project.Api.Controllers
             IEnumerable<MedicineResponseDto> paginatedResult;
             try
             {
-                var result = await _medicineService.GetMedicinesByUserIdAsync(id, parameters);
+                var result = await _medicineService.GetMedicinesByUserIdAsync(id);
                 var paginationData = new PaginationMetaData(parameters.Page, result.Count(), parameters.ItemsPerPage);
                 Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
                 paginatedResult = Pagination.AddPagination<MedicineResponseDto>(result, parameters);
@@ -127,7 +130,7 @@ namespace Imi.Project.Api.Controllers
             IEnumerable<PrescriptionResponseDto> paginatedResult;
             try
             {
-                var result = await _prescriptionService.GetPrescriptionsByUserIdAsync(id, parameters);
+                var result = await _prescriptionService.GetPrescriptionsByUserIdAsync(id);
                 var paginationData = new PaginationMetaData(parameters.Page, result.Count(), parameters.ItemsPerPage);
                 Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
                 paginatedResult = Pagination.AddPagination<PrescriptionResponseDto>(result, parameters);

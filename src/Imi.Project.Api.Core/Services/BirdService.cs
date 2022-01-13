@@ -39,7 +39,7 @@ namespace Imi.Project.Api.Core.Services
             return result;
         }
 
-        public async Task<IEnumerable<BirdResponseDto>> ListAllBirdsAsync(PaginationParameters parameters)
+        public async Task<IEnumerable<BirdResponseDto>> ListAllBirdsAsync()
         {
             var birds = await _birdRepository.ListAllAsync();
             if (birds.Count() == 0)
@@ -108,7 +108,7 @@ namespace Imi.Project.Api.Core.Services
             await _birdRepository.DeleteMultipleAsync(birds);
         }
 
-        public async Task<IEnumerable<BirdResponseDto>> GetBirdsByCageIdAsync(Guid id, PaginationParameters parameters)
+        public async Task<IEnumerable<BirdResponseDto>> GetBirdsByCageIdAsync(Guid id)
         {
             if (await _birdRepository.EntityExists<Cage>(id))
             {
@@ -123,7 +123,7 @@ namespace Imi.Project.Api.Core.Services
             else throw new ItemNotFoundException($"Cage with id {id} does not exist");
         }
 
-        public async Task<IEnumerable<BirdResponseDto>> GetBirdsByUserIdAsync(Guid id, PaginationParameters parameters)
+        public async Task<IEnumerable<BirdResponseDto>> GetBirdsByUserIdAsync(Guid id)
         {
             if (await _birdRepository.EntityExists<ApplicationUser>(id))
             {

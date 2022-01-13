@@ -46,15 +46,14 @@ namespace Imi.Project.Api.Core.Services
         }
 
 
-        public async Task<IEnumerable<ApplicationUserResponseDto>> ListAllUsersAsync(PaginationParameters parameters)
+        public async Task<IEnumerable<ApplicationUserResponseDto>> ListAllUsersAsync()
         {
             var users = await _applicationUserRepository.ListAllAsync();
             if (users.Count() == 0)
             {
                 throw new ItemNotFoundException($"No users were found");
             }
-            var usersPaginated = Pagination.AddPagination<ApplicationUser>(users, parameters);
-            var result = usersPaginated.MapToDtoList();
+            var result = users.MapToDtoList();
             return result;
         }
 

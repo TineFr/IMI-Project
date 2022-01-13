@@ -37,7 +37,7 @@ namespace Imi.Project.Api.Core.Services
             return result;
         }
 
-        public async Task<IEnumerable<DailyTaskResponseDto>> ListAllDailyTasksAsync(PaginationParameters parameters)
+        public async Task<IEnumerable<DailyTaskResponseDto>> ListAllDailyTasksAsync()
         {
             var tasks = await _dailyTaskRepository.ListAllAsync();
             if (tasks.Count() == 0)
@@ -80,7 +80,7 @@ namespace Imi.Project.Api.Core.Services
             }
             await _dailyTaskRepository.DeleteAsync(task);
         }
-        public async Task<IEnumerable<DailyTaskResponseDto>> GetDailyTasksByCageIdAsync(Guid id, PaginationParameters parameters)
+        public async Task<IEnumerable<DailyTaskResponseDto>> GetDailyTasksByCageIdAsync(Guid id)
         {
             if (await _dailyTaskRepository.EntityExists<Cage>(id))
             {

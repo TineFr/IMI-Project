@@ -35,7 +35,7 @@ namespace Imi.Project.Api.Core.Services
             SpeciesResponseDto result = species.MapToDto();
             return result;
         }
-        public async Task<IEnumerable<SpeciesResponseDto>> ListAllSpeciessAsync(PaginationParameters parameters)
+        public async Task<IEnumerable<SpeciesResponseDto>> ListAllSpeciessAsync()
         {
             var species = await _speciesRepository.ListAllAsync();
             if (species.Count() == 0)

@@ -64,7 +64,7 @@ namespace Imi.Project.Api.Controllers
             IEnumerable<CageResponseDto> paginatedResult;
             try
             {
-                var result = await _cageService.GetCagesByUserIdAsync(userId, parameters);
+                var result = await _cageService.GetCagesByUserIdAsync(userId);
                 var paginationData = new PaginationMetaData(parameters.Page, result.Count(), parameters.ItemsPerPage);
                 Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
                 paginatedResult = Pagination.AddPagination<CageResponseDto>(result, parameters);
@@ -83,7 +83,7 @@ namespace Imi.Project.Api.Controllers
             IEnumerable<BirdResponseDto> paginatedResult;
             try
             {
-                var result = await _birdService.GetBirdsByUserIdAsync(userId, parameters);
+                var result = await _birdService.GetBirdsByUserIdAsync(userId);
                 var paginationData = new PaginationMetaData(parameters.Page, result.Count(), parameters.ItemsPerPage);
                 Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
                 paginatedResult = Pagination.AddPagination<BirdResponseDto>(result, parameters);
@@ -102,7 +102,7 @@ namespace Imi.Project.Api.Controllers
             IEnumerable<MedicineResponseDto> paginatedResult;
             try
             {
-                var result = await _medicineService.GetMedicinesByUserIdAsync(userId, parameters);
+                var result = await _medicineService.GetMedicinesByUserIdAsync(userId);
                 var paginationData = new PaginationMetaData(parameters.Page, result.Count(), parameters.ItemsPerPage);
                 Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
                 paginatedResult = Pagination.AddPagination<MedicineResponseDto>(result, parameters);
@@ -121,7 +121,7 @@ namespace Imi.Project.Api.Controllers
             IEnumerable<PrescriptionResponseDto> paginatedResult;
             try
             {
-                var result = await _prescriptionService.GetPrescriptionsByUserIdAsync(userId, parameters);
+                var result = await _prescriptionService.GetPrescriptionsByUserIdAsync(userId);
                 var paginationData = new PaginationMetaData(parameters.Page, result.Count(), parameters.ItemsPerPage);
                 Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
                 paginatedResult = Pagination.AddPagination<PrescriptionResponseDto>(result, parameters);

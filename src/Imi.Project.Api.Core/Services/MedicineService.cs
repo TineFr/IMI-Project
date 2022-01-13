@@ -32,7 +32,7 @@ namespace Imi.Project.Api.Core.Services
             MedicineResponseDto result = medicine.MapToDto();
             return result;
         }
-        public async Task<IEnumerable<MedicineResponseDto>> ListAllMedicinesAsync(PaginationParameters parameters)
+        public async Task<IEnumerable<MedicineResponseDto>> ListAllMedicinesAsync()
         {
             var medecines = await _medicineRepository.ListAllAsync();
             if (medecines.Count() == 0)
@@ -77,7 +77,7 @@ namespace Imi.Project.Api.Core.Services
         {
             await _medicineRepository.DeleteMultipleAsync(medicines);
         }
-        public async  Task<IEnumerable<MedicineResponseDto>> GetMedicinesByUserIdAsync(Guid id, PaginationParameters parameters)
+        public async  Task<IEnumerable<MedicineResponseDto>> GetMedicinesByUserIdAsync(Guid id)
         {
             if (await _medicineRepository.EntityExists<ApplicationUser>(id))
             {

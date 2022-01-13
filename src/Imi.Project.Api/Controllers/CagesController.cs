@@ -42,7 +42,7 @@ namespace Imi.Project.Api.Controllers
             IEnumerable<CageResponseDto> paginatedResult;
             try
             {
-                var result = await _cageService.ListAllCagesAsync(parameters);
+                var result = await _cageService.ListAllCagesAsync();
                 var paginationData = new PaginationMetaData(parameters.Page, result.Count(), parameters.ItemsPerPage);
                 Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
                 paginatedResult = Pagination.AddPagination<CageResponseDto>(result, parameters);
@@ -75,7 +75,7 @@ namespace Imi.Project.Api.Controllers
             IEnumerable<BirdResponseDto> paginatedResult;
             try
             {
-                var result = await _birdService.GetBirdsByUserIdAsync(id, parameters);
+                var result = await _birdService.GetBirdsByUserIdAsync(id);
                 var paginationData = new PaginationMetaData(parameters.Page, result.Count(), parameters.ItemsPerPage);
                 Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
                 paginatedResult = Pagination.AddPagination<BirdResponseDto>(result, parameters);
@@ -93,7 +93,7 @@ namespace Imi.Project.Api.Controllers
             IEnumerable<DailyTaskResponseDto> paginatedResult;
             try
             {
-                var result = await _dailyTaskService.GetDailyTasksByCageIdAsync(id, parameters);
+                var result = await _dailyTaskService.GetDailyTasksByCageIdAsync(id);
                 var paginationData = new PaginationMetaData(parameters.Page, result.Count(), parameters.ItemsPerPage);
                 Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
                 paginatedResult = Pagination.AddPagination<DailyTaskResponseDto>(result, parameters);

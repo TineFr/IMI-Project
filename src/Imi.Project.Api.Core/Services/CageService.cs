@@ -36,7 +36,7 @@ namespace Imi.Project.Api.Core.Services
             CageResponseDto result = cage.MapToDto();
             return result;
         }
-        public async Task<IEnumerable<CageResponseDto>> ListAllCagesAsync(PaginationParameters parameters)
+        public async Task<IEnumerable<CageResponseDto>> ListAllCagesAsync()
         {
             var cages = await _cageRepository.ListAllAsync();
             if (cages.Count() == 0)
@@ -100,7 +100,7 @@ namespace Imi.Project.Api.Core.Services
         {
             await _cageRepository.DeleteMultipleAsync(cages);
         }
-        public async Task<IEnumerable<CageResponseDto>> GetCagesByUserIdAsync(Guid id, PaginationParameters parameters)
+        public async Task<IEnumerable<CageResponseDto>> GetCagesByUserIdAsync(Guid id)
         {
             if (await _cageRepository.EntityExists<ApplicationUser>(id))
             {

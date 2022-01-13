@@ -34,7 +34,7 @@ namespace Imi.Project.Api.Controllers
             IEnumerable<DailyTaskResponseDto> paginatedResult;
             try
             {
-                var result = await _dailyTaskService.ListAllDailyTasksAsync(parameters);
+                var result = await _dailyTaskService.ListAllDailyTasksAsync();
                 var paginationData = new PaginationMetaData(parameters.Page, result.Count(), parameters.ItemsPerPage);
                 Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
                 paginatedResult = Pagination.AddPagination<DailyTaskResponseDto>(result, parameters);

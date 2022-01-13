@@ -33,7 +33,7 @@ namespace Imi.Project.Api.Controllers
             IEnumerable<BirdResponseDto> paginatedResult;
             try
             {
-                var result = await _birdService.ListAllBirdsAsync(parameters);
+                var result = await _birdService.ListAllBirdsAsync();
                 var paginationData = new PaginationMetaData(parameters.Page, result.Count(), parameters.ItemsPerPage);
                 Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
                 paginatedResult = Pagination.AddPagination<BirdResponseDto>(result, parameters);

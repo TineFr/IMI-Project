@@ -31,7 +31,7 @@ namespace Imi.Project.Api.Controllers
             IEnumerable<SpeciesResponseDto> paginatedResult;
             try
             {
-                var result = await _speciesService.ListAllSpeciessAsync(parameters);
+                var result = await _speciesService.ListAllSpeciessAsync();
                 var paginationData = new PaginationMetaData(parameters.Page, result.Count(), parameters.ItemsPerPage);
                 Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
                 paginatedResult = Pagination.AddPagination<SpeciesResponseDto>(result, parameters);
