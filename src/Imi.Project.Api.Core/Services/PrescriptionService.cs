@@ -43,8 +43,7 @@ namespace Imi.Project.Api.Core.Services
             {
                 throw new ItemNotFoundException($"No prescriptions were found");
             }
-            var prescriptionsPaginated = Pagination.AddPagination<Prescription>(prescriptions, parameters);
-            var result = prescriptionsPaginated.MapToDtoList();
+            var result = prescriptions.MapToDtoList();
             return result;
         }
         public async Task<PrescriptionResponseDto> AddPrescriptionAsync(PrescriptionRequestDto dto)
