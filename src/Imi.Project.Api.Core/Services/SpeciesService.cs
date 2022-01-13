@@ -42,8 +42,7 @@ namespace Imi.Project.Api.Core.Services
             {
                 throw new ItemNotFoundException($"No species were found");
             }
-            var speciesPaginated = Pagination.AddPagination<Species>(species, parameters);
-            var result = speciesPaginated.MapToDtoList();
+            var result = species.MapToDtoList();
             return result;
         }
         public async Task<SpeciesResponseDto> AddSpeciesAsync(SpeciesRequestDto dto)

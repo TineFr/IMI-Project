@@ -1,11 +1,14 @@
 ﻿using Imi.Project.Api.Core.Entities.Pagination;
 using Imi.Project.Api.Core.Exceptions;
+using Imi.Project.Api.Core.Helper;
 using Imi.Project.Api.Core.Interfaces.Services;
 using Imi.Project.Common.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Controllers
@@ -25,16 +28,19 @@ namespace Imi.Project.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] PaginationParameters parameters)
         {
-            IEnumerable<SpeciesResponseDto> result;
+            IEnumerable<SpeciesResponseDto> paginatedResult;
             try
             {
-                result = await _speciesService.ListAllSpeciessAsync(parameters);
+                var result = await _speciesService.ListAllSpeciessAsync(parameters);
+                var paginationData = new PaginationMetaData(parameters.Page, result.Count(), parameters.ItemsPerPage);
+                Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
+                paginatedResult = Pagination.AddPagination<SpeciesResponseDto>(result, parameters);
             }
             catch (BaseException ex)
             {
                 return StatusCode((int)ex.StatusCode, ex.Message);
             }
-            return Ok(result);
+            return Ok(paginatedResult);
         }
 
 
