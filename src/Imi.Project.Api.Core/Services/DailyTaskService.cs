@@ -44,8 +44,7 @@ namespace Imi.Project.Api.Core.Services
             {
                 throw new ItemNotFoundException($"No tasks were found");
             }
-            var tasksPaginated = Pagination.AddPagination<DailyTask>(tasks, parameters);
-            var result = tasksPaginated.MapToDtoList();
+            var result = tasks.MapToDtoList();
             return result;
         }
 
