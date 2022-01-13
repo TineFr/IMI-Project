@@ -60,6 +60,8 @@ namespace Imi.Project.Api
 
             }).AddEntityFrameworkStores<MyAviaryDbContext>();
 
+
+
             //authentication
             services.AddAuthentication(option =>
             {
@@ -98,7 +100,7 @@ namespace Imi.Project.Api
             services.AddSingleton<IAuthorizationHandler, AgeRequirementHandler>();
 
             //swagger
-
+            services.AddCors();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "IMI API", Version = "v1" });
@@ -162,6 +164,7 @@ namespace Imi.Project.Api
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -178,6 +181,9 @@ namespace Imi.Project.Api
 
             app.UseRouting();
 
+            app.UseCors(builder => builder.AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod());
 
             app.UseAuthentication();
             app.UseAuthorization();

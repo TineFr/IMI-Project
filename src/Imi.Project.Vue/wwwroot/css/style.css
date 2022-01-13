@@ -1,4 +1,15 @@
 ﻿
+/*global*/
+
+.error{
+    color: indianred;
+    font-family: 'Trebuchet MS';
+}
+
+
+
+
+
 /*Login & register view*/
 /*...........................................................................*/
 
@@ -89,7 +100,7 @@ input {
 
 /*vue influensed properties*/
 
-.navbarVisibility {
+.isInVisible {
     visibility: hidden;
 }
 
