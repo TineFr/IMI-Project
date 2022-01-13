@@ -20,7 +20,7 @@ namespace Imi.Project.Mobile.Core.Services.Api
             {
                 { new StringContent(model.Name), "Name" },
                 { new StringContent(model.Gender.ToString()), "Gender" },
-                { new StringContent(model.HatchDate.ToString()), "HatchDate" },
+                { new StringContent(model.HatchDate.ToString("dd/MM/yyyy HH:mm:ss")), "HatchDate" },
             };
             if (model.Food is object) content.Add(new StringContent(model.Food), "Food");
             if (model.CageId is object) content.Add(new StringContent(model.CageId?.ToString("d")), "CageId");
@@ -37,7 +37,7 @@ namespace Imi.Project.Mobile.Core.Services.Api
             {
                 { new StringContent(model.Name), "Name" },
                 { new StringContent(model.Gender.ToString()), "Gender" },
-                { new StringContent(model.HatchDate.ToString()), "HatchDate" },
+                { new StringContent(model.HatchDate.ToString("dd/MM/yyyy HH:mm:ss")), "HatchDate" },
             };
             if (model.Food is object) content.Add(new StringContent(model.Food), "Food");
             if (model.CageId is object) content.Add(new StringContent(model.CageId?.ToString("d")), "CageId");
