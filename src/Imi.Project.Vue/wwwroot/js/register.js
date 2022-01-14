@@ -1,4 +1,6 @@
-﻿var register = new Vue({
+﻿
+
+var register = new Vue({
     el: '#divRegister',
     data: {
         registerRequest: {
@@ -75,31 +77,17 @@
             }
         },
         validatePassword: function (password) {
-            var upperCase = /[A-Z]/;
-            if (!upperCase.test(password)) {
-                this.errors.password.push("Password must have uppercase");
-                this.IsValid = false;
-            }
-            var lowerCase = /[a-z]/;
-            if (!lowerCase.test(password)) {
-                this.errors.password.push("Password must have lowercase");
-                this.IsValid = false;
-            }
-            var number = /[1-9]/;
-            if (!number.test(password)) {
-                this.errors.password.push("Password must have number");
-                this.IsValid = false;
-            }
-            var symbol = /[][""!@$%^&*(){}:;<>,.?/+_=|'~\\-]/;
-            if (!symbol.test(password)) {
-                this.errors.password.push("Password must have a special character ex: !1/^]...");
+
+            var test = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
+            if (!test.test(password)) {
+                this.errors.password.push("Password must at least have: 8 characters, one uppercase letter, one lowercase letter, one number and one special character:");
                 this.IsValid = false;
             }
         },
 
         validateConfirmPassword: function (password) {
-            if (password != this.loginRequest.password) {
-                this.errors.password.push("Confirm password must be equal to password");
+            if (password != this.registerRequest.password) {
+                this.errors.confirmPassword.push("Confirm password must be equal to password");
                 this.IsValid = false;
             }
         },
@@ -109,17 +97,22 @@
         register: function () {
             this.validateRequest();
             if (this.IsValid) {
-                var url = "https://localhost:5001/api/auth/login";
-                axios.post(url, this.loginRequest)
+                var url = "https://localhost:5001/api/auth/register";
+                axios.post(url, this.registerRequest)
                     .then(function (response) {
 
-                        if (reponse.data.errors == null) {
-                            localStorage.setItem("token", response.data.jwt)
-                        }
+                            //return to login 
+                       
                     })
                     .catch((error) => {
-                        const response = error?.response;
-                        this.apiErrorMessage = response.data;
+
+                            const response = error.response;
+                            var responseMessage = response.data;
+                            if (responseMessage.DuplicateEmail[0] != null) {
+                                responseMessage = responseMessage.DuplicateEmail[0];
+                            }
+                        
+                        this.apiErrorMessage = responseMessage;
                     })
             }
         },
@@ -133,6 +126,8 @@
             this.errors.name = [];
             this.errors.firstName = [];
             this.apiErrorMessage = null;
-        }
+        },
+
+        
     }
 });

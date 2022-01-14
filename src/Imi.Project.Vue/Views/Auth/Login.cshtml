@@ -12,7 +12,7 @@
                 <form v-on:submit.prevent="login">
                     <div class="form-group">
                        <label>E-mail:</label><br>
-                        <input placeholder="sample@gmail.com" v-model="loginRequest.email">
+                        <input type="email" placeholder="sample@gmail.com" v-model="loginRequest.email">
                          <div class="error" v-if="errors.email != []">{{errors.email[0]}}</div> 
                     </div>
                     <div>

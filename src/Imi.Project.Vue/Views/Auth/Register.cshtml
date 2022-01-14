@@ -42,6 +42,7 @@
                         <div class="error" v-if="errors.confirmPassword != []">{{errors.confirmPassword[0]}}</div> 
                     </div>
                     <button id="btnSave">Save</button>
+                    <div class="error" v-if="apiErrorMessage != null">{{apiErrorMessage}}</div> 
                 </form>
             </div>
         </div>
