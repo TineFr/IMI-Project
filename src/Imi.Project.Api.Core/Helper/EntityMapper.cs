@@ -1,36 +1,27 @@
-﻿
-using Imi.Project.Api.Core.Dtos.Birds;
-using Imi.Project.Api.Core.Dtos.Cages;
-using Imi.Project.Api.Core.Dtos.DailyTasks;
-using Imi.Project.Api.Core.Dtos.Medicines;
-using Imi.Project.Api.Core.Dtos.Prescriptions;
-using Imi.Project.Api.Core.Dtos.Species;
-using Imi.Project.Api.Core.Dtos.Users;
-using Imi.Project.Api.Core.Entities;
-using System;
+﻿using Imi.Project.Api.Core.Entities;
+using Imi.Project.Common.Dtos;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Imi.Project.Api.Core.Helper
 {
     public static class EntityMapper
     {
-        public static User MapToEntity(this UserRequestDto userDto)
+        public static ApplicationUser MapToEntity(this ApplicationUserRequestDto userDto)
         {
 
-           var user = new User
+            var user = new ApplicationUser
             {
-               Id = userDto.Id,
-                Name = userDto.Name
+                //Id = userDto.Id,
+                UserName = userDto.Name
             };
             return user;
         }
-    
+
         public static Bird MapToEntity(this BirdRequestDto birdDto)
         {
             var bird = new Bird
             {
-                Id = birdDto.Id,
+                //Id = birdDto.Id,
                 Name = birdDto.Name,
                 CageId = birdDto.CageId,
                 Gender = birdDto.Gender,
@@ -47,7 +38,7 @@ namespace Imi.Project.Api.Core.Helper
         {
             var cage = new Cage
             {
-                Id = cageDto.Id,
+                //Id = cageDto.Id,
                 Name = cageDto.Name,
                 Location = cageDto.Location,
                 UserId = cageDto.UserId
@@ -59,7 +50,7 @@ namespace Imi.Project.Api.Core.Helper
         {
             var medicine = new Medicine
             {
-                Id = medicineDto.Id,
+                //Id = medicineDto.Id,
                 Name = medicineDto.Name,
                 Usage = medicineDto.Usage,
                 UserId = medicineDto.UserId
@@ -71,7 +62,7 @@ namespace Imi.Project.Api.Core.Helper
         {
             var task = new DailyTask
             {
-                Id = taskDto.Id,
+                //Id = taskDto.Id,
                 Description = taskDto.Description,
                 CageId = taskDto.CageId,
                 IsDone = taskDto.IsDone
@@ -83,7 +74,7 @@ namespace Imi.Project.Api.Core.Helper
         {
             var species = new Species
             {
-                Id = speciesDto.Id,
+                //Id = speciesDto.Id,
                 Name = speciesDto.Name,
                 ScientificName = speciesDto.ScientificName
 
@@ -96,7 +87,7 @@ namespace Imi.Project.Api.Core.Helper
         {
             var prescription = new Prescription
             {
-                Id = prescriptionDto.Id,
+                //Id = prescriptionDto.Id,
                 EndDate = prescriptionDto.EndDate,
                 StartDate = prescriptionDto.StartDate,
                 MedicineId = prescriptionDto.Medicine,
@@ -108,7 +99,7 @@ namespace Imi.Project.Api.Core.Helper
                 var birdprescription = new BirdPrescription
                 {
                     BirdId = bird,
-                    PrescriptionId = prescriptionDto.Id
+                    //PrescriptionId = prescriptionDto.Id
                 };
 
                 prescription.BirdPrescriptions.Add(birdprescription);

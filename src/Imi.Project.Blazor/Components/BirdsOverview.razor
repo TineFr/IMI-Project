@@ -1,5 +1,5 @@
 ﻿
-
+<a href="@($"addbird")" type="button" class="btn submit">Add new</a>
 <div class="maincontainer">
     <div class="itemscontainer">
 
@@ -10,7 +10,6 @@
                     <img class="itemimage" src="@item.Image" />
                     <div>
                         <h2>@item.Name</h2>
-                        <p class="scientific">@item.ScientificName</p>
                         <p>@item.Cage</p>
                     </div>
                     <img class="genderimage" src="@SetGenderImage(item.Gender)" />
@@ -21,15 +20,12 @@
 </div>
 
 
-
 @code {
-
-
 
     private string SetGenderImage(string gender)
     {
         string imageSource = "";
-        imageSource = gender.ToLower() == "male" ? "images/male.png" : "images/female.png";
+        imageSource = gender?.ToLower() == "male" ? "images/male.png" : "images/female.png";
         return imageSource;
     }
 
@@ -45,9 +41,4 @@
         Birds = await birdService.GetAllAsync();
     }
 
-
-    private void ShowDetails(Bird bird)
-    {
-
-    }
 }

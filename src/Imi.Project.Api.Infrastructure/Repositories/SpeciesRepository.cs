@@ -1,10 +1,8 @@
 ﻿using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Core.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Infrastructure.Repositories
@@ -15,11 +13,10 @@ namespace Imi.Project.Api.Infrastructure.Repositories
         {
 
         }
-
-        public async override Task<IEnumerable<Species>> ListAllAsync()
-        {
-            return await GetAll().OrderBy(s => s.Name).ToListAsync();
-        }
+        //public async override Task<IEnumerable<Species>> ListAllAsync()
+        //{
+        //    return await GetAll().OrderBy(s => s.Name).ToListAsync();
+        //}
     }
 
 }

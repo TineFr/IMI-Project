@@ -15,9 +15,276 @@ namespace Imi.Project.Api.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.20")
+                .HasAnnotation("ProductVersion", "3.1.21")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Imi.Project.Api.Core.Entities.ApplicationUser", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000001"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "bbcf7ec4-9890-4d6a-9e4d-67080ea5d1de",
+                            DateOfBirth = new DateTime(1997, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "tine.franchois@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Tine",
+                            LockoutEnabled = false,
+                            Name = "Franchois",
+                            NormalizedEmail = "TINE.FRANCHOIS@GMAIL.COM",
+                            NormalizedUserName = "TINE.FRANCHOIS@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMVmzvbblXNKsYSy7lHw3JbJEr1SHHPZWRg0OOXi9ZV1yRKl6sEV0hEeyHD4uc2vWg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "cce64a70-235f-4915-b8de-3da31ea76412",
+                            TwoFactorEnabled = false,
+                            UserName = "tine.franchois@gmail.com"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000002"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "70a2a304-49c5-4606-8e2f-5c22c7bfc22a",
+                            DateOfBirth = new DateTime(1997, 12, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "deq.claire@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Claire",
+                            LockoutEnabled = false,
+                            Name = "Dequinnemaere",
+                            NormalizedEmail = "DEQ.CLAIRE@GMAIL.COM",
+                            NormalizedUserName = "DEQ.CLAIRE@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDRfu5V5zSNzvCPgbKJTzOs8W/JfcsQHoteqSlzgBQagTVIPrGHCVHBFTxsyV4EzHQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "c677e5db-480a-4940-8774-0c28c32dd8dc",
+                            TwoFactorEnabled = false,
+                            UserName = "deq.claire@gmail.com"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000003"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "768fee07-1cbf-4bbe-92c2-c205b0b875af",
+                            DateOfBirth = new DateTime(1995, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "depotter.sander@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Sander",
+                            LockoutEnabled = false,
+                            Name = "Depotter",
+                            NormalizedEmail = "DEPOTTER.SANDER@GMAIL.COM",
+                            NormalizedUserName = "DEPOTTER.SANDER@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEP2TWlzu8drwOEO5UBpEPuYmU3DO6x/8qOhCIFlyu8b/aZ5lRyin5i+YE7A/shJAPw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "fdf725e1-cdb6-4150-880e-55b52e70d947",
+                            TwoFactorEnabled = false,
+                            UserName = "depotter.sander@gmail.com"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000004"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "54efb674-9fd8-4cb2-83a8-33db5eaac0f5",
+                            DateOfBirth = new DateTime(1997, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "haenebalcke.niels@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Niels",
+                            LockoutEnabled = false,
+                            Name = "Haenebalcke",
+                            NormalizedEmail = "HAENEBALCKE.NIELS@GMAIL.COM",
+                            NormalizedUserName = "HAENEBALCKE.NIELS@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEQdffFHubflkS2/K3TKuTfNBYPKH4RMAZ79iledvpNwlf9PlmtJeDYow0Lsi2HcLg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "16ab8c6f-b5d1-4c98-bd59-d96e34291c65",
+                            TwoFactorEnabled = false,
+                            UserName = "haenebalcke.niels@gmail.com"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000005"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "530b03e5-5da6-4dae-8667-b7871ec9e18a",
+                            DateOfBirth = new DateTime(1996, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "jochem.dewandel@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Jochem",
+                            LockoutEnabled = false,
+                            Name = "Dewandel",
+                            NormalizedEmail = "JOCHEM.DEWANDEL@GMAIL.COM",
+                            NormalizedUserName = "JOCHEM.DEWANDEL@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKX86KB/Xw1R7T7Yytvwy5DbhrQ6UMCNMhw0jL/pSgKcICp9ydOPNdZm0rIMaJbcVA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "6ba01646-ae22-4ca5-9396-36c4aef70853",
+                            TwoFactorEnabled = false,
+                            UserName = "jochem.dewandel@gmail.com"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000006"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "e7f965fb-56c6-4609-9044-b66c9f57ea15",
+                            DateOfBirth = new DateTime(1997, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "jonas.desmet@telenet.be",
+                            EmailConfirmed = false,
+                            FirstName = "Jonas",
+                            LockoutEnabled = false,
+                            Name = "DeSmet",
+                            NormalizedEmail = "JONAS.DESMET@TELENET.BE",
+                            NormalizedUserName = "JONAS.DESMET@TELENET.BE",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDWugQerxn6sue+YVvzniNPmrK59Aw+1o6FYQtfhLbPFWtzhfxHQL+1SKwDxV1kHcQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "ea731109-0da9-4179-971f-76dabdeb0965",
+                            TwoFactorEnabled = false,
+                            UserName = "jonas.desmet@telenet.be"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000007"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "7c79f5b9-54ae-4674-b2e7-8b8ca763ba93",
+                            DateOfBirth = new DateTime(1997, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "niels.verbeke@hotmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Niels",
+                            LockoutEnabled = false,
+                            Name = "Verbeke",
+                            NormalizedEmail = "NIELS.VERBEKE@HOTMAIL.COM",
+                            NormalizedUserName = "NIELS.VERBEKE@HOTMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFI7HbIdvhqbIvSQWLnOtZmdJRA/C3OFmgN2P9cFf1Grym6REgVz6/J7Ef7jpEI1xA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "e8f4b346-bfdf-4de2-a6a9-c6d7a00b7665",
+                            TwoFactorEnabled = false,
+                            UserName = "niels.verbeke@hotmail.com"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000008"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "0ade404d-888a-490e-80f5-f4ca5ac9a112",
+                            DateOfBirth = new DateTime(1970, 7, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "ann.meerpoel@skynet.be",
+                            EmailConfirmed = false,
+                            FirstName = "Ann",
+                            LockoutEnabled = false,
+                            Name = "Meerpoel",
+                            NormalizedEmail = "ANN.MEERPOEL@SKYNET.BE",
+                            NormalizedUserName = "ANN.MEERPOEL@SKYNET.BE",
+                            PasswordHash = "AQAAAAEAACcQAAAAECdLxFHNdUivooqK0g11H3qwiR1WycrVw2DD+kYIFO176lBhY7qI+RLXXI26AiAxuw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "c087c4b4-2b02-469a-a2f0-637f82c6f7f5",
+                            TwoFactorEnabled = false,
+                            UserName = "ann.meerpoel@skynet.be"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000009"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "bb6a48d0-d649-4363-935d-5a8085e98c7d",
+                            DateOfBirth = new DateTime(1972, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "lotens.jurgen@hotmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Jurgen",
+                            LockoutEnabled = false,
+                            Name = "Lotens",
+                            NormalizedEmail = "LOTENS.JURGEN@HOTMAIL.COM",
+                            NormalizedUserName = "LOTENS.JURGEN@HOTMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEI1B7AWJID4LyXw/LJSJnMx6u+qj4+qjnXz87SgsA/DgIc6CI5SSQinmkSA453/yOg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "6262e507-9f9b-484b-bf46-07525b5a42de",
+                            TwoFactorEnabled = false,
+                            UserName = "lotens.jurgen@hotmail.com"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000010"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "d6a0e11a-255c-4b39-aaee-3c8b216b5379",
+                            DateOfBirth = new DateTime(2010, 9, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "janne.vhl@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Janne",
+                            LockoutEnabled = false,
+                            Name = "Van Horelbeke",
+                            NormalizedEmail = "JANNE.VHL@GMAIL.COM",
+                            NormalizedUserName = "JANNE.VHL@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKAvwZO+Ta18aKf8L+/MGGRBA/JLiUIgi/WkJaZ0rlpNmzjEl5u1wJg53LCGb1JQ3Q==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "2f3de5bb-f603-434e-be5d-8bc0edea4cc0",
+                            TwoFactorEnabled = false,
+                            UserName = "janne.vhl@gmail.com"
+                        });
+                });
 
             modelBuilder.Entity("Imi.Project.Api.Core.Entities.Bird", b =>
                 {
@@ -163,7 +430,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                             Food = "Canary Seed",
                             Gender = 1,
                             HatchDate = new DateTime(2015, 11, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Image = "images/bird/canary1.jpg",
+                            Image = "images/bird/canary1.png",
                             Name = "Connie",
                             SpeciesId = new Guid("00000000-0000-0000-0000-000000000004"),
                             UserId = new Guid("00000000-0000-0000-0000-000000000004")
@@ -251,6 +518,30 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                             Name = "Lily",
                             SpeciesId = new Guid("00000000-0000-0000-0000-000000000010"),
                             UserId = new Guid("00000000-0000-0000-0000-000000000010")
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000017"),
+                            CageId = new Guid("00000000-0000-0000-0000-000000000011"),
+                            Food = "Parakeet mix",
+                            Gender = 1,
+                            HatchDate = new DateTime(2016, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Image = "images/bird/budgie6.jpg",
+                            Name = "Blue",
+                            SpeciesId = new Guid("00000000-0000-0000-0000-000000000002"),
+                            UserId = new Guid("00000000-0000-0000-0000-000000000001")
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000018"),
+                            CageId = new Guid("00000000-0000-0000-0000-000000000011"),
+                            Food = "Parakeet mix",
+                            Gender = 0,
+                            HatchDate = new DateTime(2017, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Image = "images/bird/budgie7.jpg",
+                            Name = "Joey",
+                            SpeciesId = new Guid("00000000-0000-0000-0000-000000000002"),
+                            UserId = new Guid("00000000-0000-0000-0000-000000000001")
                         });
                 });
 
@@ -457,6 +748,14 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                             Location = "Outside",
                             Name = "Vintage Cage",
                             UserId = new Guid("00000000-0000-0000-0000-000000000010")
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000011"),
+                            Image = "images/cage/cage11.jpg",
+                            Location = "Living room",
+                            Name = "Little Home",
+                            UserId = new Guid("00000000-0000-0000-0000-000000000001")
                         });
                 });
 
@@ -828,105 +1127,105 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
-                            EndDate = new DateTime(2021, 11, 10, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8487),
+                            EndDate = new DateTime(2022, 1, 15, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(451),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000001"),
-                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 257, DateTimeKind.Local).AddTicks(6502),
+                            StartDate = new DateTime(2022, 1, 8, 3, 11, 17, 916, DateTimeKind.Local).AddTicks(506),
                             UserId = new Guid("00000000-0000-0000-0000-000000000001")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000002"),
-                            EndDate = new DateTime(2021, 11, 7, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8862),
+                            EndDate = new DateTime(2022, 1, 12, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(907),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000002"),
-                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8845),
+                            StartDate = new DateTime(2022, 1, 8, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(890),
                             UserId = new Guid("00000000-0000-0000-0000-000000000001")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000003"),
-                            EndDate = new DateTime(2021, 11, 10, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8882),
+                            EndDate = new DateTime(2022, 1, 15, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(934),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000003"),
-                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8879),
+                            StartDate = new DateTime(2022, 1, 8, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(930),
                             UserId = new Guid("00000000-0000-0000-0000-000000000002")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000004"),
-                            EndDate = new DateTime(2021, 11, 7, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8891),
+                            EndDate = new DateTime(2022, 1, 12, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(947),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000004"),
-                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8889),
+                            StartDate = new DateTime(2022, 1, 8, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(943),
                             UserId = new Guid("00000000-0000-0000-0000-000000000002")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000005"),
-                            EndDate = new DateTime(2021, 11, 9, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8900),
+                            EndDate = new DateTime(2022, 1, 14, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(959),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000005"),
-                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8897),
+                            StartDate = new DateTime(2022, 1, 8, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(956),
                             UserId = new Guid("00000000-0000-0000-0000-000000000003")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000006"),
-                            EndDate = new DateTime(2021, 11, 7, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8961),
+                            EndDate = new DateTime(2022, 1, 12, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(973),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000006"),
-                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8958),
+                            StartDate = new DateTime(2022, 1, 8, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(969),
                             UserId = new Guid("00000000-0000-0000-0000-000000000003")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000007"),
-                            EndDate = new DateTime(2021, 11, 5, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8970),
+                            EndDate = new DateTime(2022, 1, 10, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(986),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000007"),
-                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8967),
+                            StartDate = new DateTime(2022, 1, 8, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(982),
                             UserId = new Guid("00000000-0000-0000-0000-000000000004")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000008"),
-                            EndDate = new DateTime(2021, 11, 14, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8978),
+                            EndDate = new DateTime(2022, 1, 19, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(999),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000008"),
-                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8976),
+                            StartDate = new DateTime(2022, 1, 8, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(995),
                             UserId = new Guid("00000000-0000-0000-0000-000000000004")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000009"),
-                            EndDate = new DateTime(2021, 11, 8, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8987),
+                            EndDate = new DateTime(2022, 1, 13, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(1010),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000009"),
-                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8984),
+                            StartDate = new DateTime(2022, 1, 8, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(1007),
                             UserId = new Guid("00000000-0000-0000-0000-000000000005")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000010"),
-                            EndDate = new DateTime(2021, 11, 7, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8995),
+                            EndDate = new DateTime(2022, 1, 12, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(1024),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000010"),
-                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(8993),
+                            StartDate = new DateTime(2022, 1, 8, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(1020),
                             UserId = new Guid("00000000-0000-0000-0000-000000000005")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000011"),
-                            EndDate = new DateTime(2021, 11, 7, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(9005),
+                            EndDate = new DateTime(2022, 1, 12, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(1040),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000011"),
-                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(9002),
+                            StartDate = new DateTime(2022, 1, 8, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(1037),
                             UserId = new Guid("00000000-0000-0000-0000-000000000006")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000012"),
-                            EndDate = new DateTime(2021, 11, 10, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(9014),
+                            EndDate = new DateTime(2022, 1, 15, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(1053),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000012"),
-                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(9012),
+                            StartDate = new DateTime(2022, 1, 8, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(1049),
                             UserId = new Guid("00000000-0000-0000-0000-000000000010")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000013"),
-                            EndDate = new DateTime(2021, 11, 7, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(9023),
+                            EndDate = new DateTime(2022, 1, 12, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(1065),
                             MedicineId = new Guid("00000000-0000-0000-0000-000000000013"),
-                            StartDate = new DateTime(2021, 11, 3, 12, 11, 57, 260, DateTimeKind.Local).AddTicks(9020),
+                            StartDate = new DateTime(2022, 1, 8, 3, 11, 17, 919, DateTimeKind.Local).AddTicks(1061),
                             UserId = new Guid("00000000-0000-0000-0000-000000000007")
                         });
                 });
@@ -936,6 +1235,12 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -953,130 +1258,290 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
+                            Description = "The cockatiel (Nymphicus hollandicus), also known as weiro bird, or quarrion, is a medium sized parrot that is a member of its own branch of the cockatoo family endemic to Australia. They are prized as household pets and companion parrots throughout the world and are relatively easy to breed. As a caged bird, cockatiels are second in popularity only to the budgerigar. Source:The Spruce Pets",
+                            Image = "images/species/cockatiel.jpg",
                             Name = "Cockatiel",
                             ScientificName = "Nymphicus hollandicuss"
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000002"),
+                            Description = "The budgerigar , also known as the common parakeet or shell parakeet, is a small, long-tailed, seed-eating parrot usually nicknamed the budgie, or in American English, the parakeet.Budgies are the only species in the genus Melopsittacus. Naturally, the species is green and yellow with black, scalloped markings on the nape, back, and wings. Budgies are bred in captivity with colouring of blues, whites, yellows, greys, and even with small crests. Source:The Spruce Pets",
+                            Image = "images/species/budgie.jpg",
                             Name = "Budgerigar",
                             ScientificName = "Melopsittacus undulatus"
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000003"),
-                            Name = "Zebra finch",
+                            Description = "Perhaps the most popular finch due to its availability and price, the zebra finch has been kept in captivity for more than a 100 years.Zebra finches breed readily, and are a good beginner’s bird, easy to care for and requiring a minimal time commitment. Source:The Spruce Pets",
+                            Image = "images/species/zebrafinch.jpg",
+                            Name = "Zebra Finch",
                             ScientificName = "Taeniopygia guttata"
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000004"),
+                            Description = "A canary is an undemanding little charmer that is usually a beginner's cana bird. This small finch has the power to turn most people into lifelong canary enthusiasts. It is a pleasant companion bird with a cheerful disposition. It communicates its content with a melodious song that is soft and pleasant. The canary has been carefully bred to be available in a variety of colors, sizes, and singing varieties. Source:The Spruce Pets",
+                            Image = "images/species/canary.png",
                             Name = "Canary",
                             ScientificName = "Serinus canaria forma domestica"
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000005"),
-                            Name = "Pacific parrotlet",
+                            Description = "Colorful, charming, and intelligent, Pacific parrotlets are the smallest members of the parrot family. Nicknamed pocket parrots for one of their favorite hiding spots, they have become increasingly popular pets. Their small size and quiet nature make them an ideal choice for people who live in apartments or condos or those who do not have the space to house a larger bird. Some can learn to talk quite well, although it is not known for being a big talker. They make perfectly affectionate and adorable pets. Source:The Spruce Pets",
+                            Image = "images/species/pacificparrotlet.jpg",
+                            Name = "Pacific Parrotlet",
                             ScientificName = "Forpus coelestis"
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000006"),
-                            Name = "Bourke’s parrot",
+                            Description = "Bourke's parakeets are an excellent introductory bird for those new to hookbills or parrots; they have a calm demeanor and can entertain themselves. They are quiet birds that are ideal apartment dwellers and are equally suited for individual cages or small aviaries, where they are excellent partners for finches and cockatiels as well as other Bourke's parakeets. Keep gentle Bourke's parakeets away from larger, aggressive birds. Source:The Spruce Pets",
+                            Image = "images/species/bourkesparakeet.jpg",
+                            Name = "Bourke’s Parrot",
                             ScientificName = "Neopsephotus bourkii"
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000007"),
-                            Name = "Rosy-faced lovebrid",
+                            Description = "Lovebirds are so named because of their strong pair bonds. Lovebirds range in size from just over 5 inches to just over 6½ inches, which makes them among the smaller parrot species. Lovebirds have short, blunt tail feathers, unlike budgies (“parakeets”), which have long pointed tails, and lovebirds are also stockier. Source:The Spruce Pets",
+                            Image = "images/species/lovebird.jpg",
+                            Name = "Rosy-faced Lovebird",
                             ScientificName = "Agapornis roseicollis"
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000008"),
+                            Description = "Popular as pets due to their small size, beauty, and intelligence, green-cheeked conures have stolen many bird lover's hearts. Their curiosity, spunk, and playful nature are great characteristics in a pet bird. Mischievous and engaging, green-cheeked conures pack a lot of personality into a small package. The fact that they are less noisy than most other parrots—and more affordable—adds to their appeal. Source:The Spruce Pets",
+                            Image = "images/species/greencheekedconure.jpg",
                             Name = "Green-Cheeked Conure",
                             ScientificName = "Pyrrhura molinae"
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000009"),
-                            Name = "Gouldian finch",
+                            Description = "The Gouldian finch is one of the most beautiful of all pet bird species. It is a brilliant, multicolored bird with vibrant plumage. Its shyness with humans makes it a favorite bird for those who enjoy looking at birds but do not want to handle them. This finch is very social with birds of its kind. A small group of these diminutive birds makes for an excellent display in a large enclosure. Source:The Spruce Pets",
+                            Image = "images/species/gouldianfinch.jpg",
+                            Name = "Gouldian Finch",
                             ScientificName = "Chloebia gouldiae"
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000010"),
-                            Name = "Society finch",
+                            Description = "Society finches are not the kind of bird that one would choose if they want an avian friend that talks and plays with them, but they do make wonderful pets for those that prefer to be spectators. Society finches are not birds that are easily handled, but that is because of their small size and not because they are aggressive. Society finches may be easily startled and fly around their enclosures when they aren't nesting or eating, but they are typically peaceful.",
+                            Image = "images/species/societyfinch.jpg",
+                            Name = "Society Finch",
                             ScientificName = "Lonchura striata domestica"
                         });
                 });
 
-            modelBuilder.Entity("Imi.Project.Api.Core.Entities.User", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedName")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles");
 
                     b.HasData(
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
-                            Name = "Franchois"
+                            ConcurrencyStamp = "d79548c2-1a24-4b0c-8a80-a6756afbfb69",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000002"),
-                            Name = "Dequinnemaere"
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000003"),
-                            Name = "Depotter"
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000004"),
-                            Name = "Haenebalcke"
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000005"),
-                            Name = "De Wandel"
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000006"),
-                            Name = "De Smet"
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000007"),
-                            Name = "Verbeke"
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000008"),
-                            Name = "Meerpoel"
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000009"),
-                            Name = "Lootens"
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000010"),
-                            Name = "Van De Sompel"
+                            ConcurrencyStamp = "907b5996-b000-4ec5-9dba-f304e3dce0f2",
+                            Name = "BaseUser",
+                            NormalizedName = "BASEUSER"
                         });
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("00000000-0000-0000-0000-000000000001"),
+                            RoleId = new Guid("00000000-0000-0000-0000-000000000001")
+                        },
+                        new
+                        {
+                            UserId = new Guid("00000000-0000-0000-0000-000000000002"),
+                            RoleId = new Guid("00000000-0000-0000-0000-000000000001")
+                        },
+                        new
+                        {
+                            UserId = new Guid("00000000-0000-0000-0000-000000000001"),
+                            RoleId = new Guid("00000000-0000-0000-0000-000000000002")
+                        },
+                        new
+                        {
+                            UserId = new Guid("00000000-0000-0000-0000-000000000002"),
+                            RoleId = new Guid("00000000-0000-0000-0000-000000000002")
+                        },
+                        new
+                        {
+                            UserId = new Guid("00000000-0000-0000-0000-000000000003"),
+                            RoleId = new Guid("00000000-0000-0000-0000-000000000002")
+                        },
+                        new
+                        {
+                            UserId = new Guid("00000000-0000-0000-0000-000000000004"),
+                            RoleId = new Guid("00000000-0000-0000-0000-000000000002")
+                        },
+                        new
+                        {
+                            UserId = new Guid("00000000-0000-0000-0000-000000000005"),
+                            RoleId = new Guid("00000000-0000-0000-0000-000000000002")
+                        },
+                        new
+                        {
+                            UserId = new Guid("00000000-0000-0000-0000-000000000006"),
+                            RoleId = new Guid("00000000-0000-0000-0000-000000000002")
+                        },
+                        new
+                        {
+                            UserId = new Guid("00000000-0000-0000-0000-000000000007"),
+                            RoleId = new Guid("00000000-0000-0000-0000-000000000002")
+                        },
+                        new
+                        {
+                            UserId = new Guid("00000000-0000-0000-0000-000000000008"),
+                            RoleId = new Guid("00000000-0000-0000-0000-000000000002")
+                        },
+                        new
+                        {
+                            UserId = new Guid("00000000-0000-0000-0000-000000000009"),
+                            RoleId = new Guid("00000000-0000-0000-0000-000000000002")
+                        },
+                        new
+                        {
+                            UserId = new Guid("00000000-0000-0000-0000-000000000010"),
+                            RoleId = new Guid("00000000-0000-0000-0000-000000000002")
+                        });
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens");
                 });
 
             modelBuilder.Entity("Imi.Project.Api.Core.Entities.Bird", b =>
@@ -1091,7 +1556,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .HasForeignKey("SpeciesId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("Imi.Project.Api.Core.Entities.User", "User")
+                    b.HasOne("Imi.Project.Api.Core.Entities.ApplicationUser", "User")
                         .WithMany("Birds")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.SetNull);
@@ -1114,7 +1579,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
 
             modelBuilder.Entity("Imi.Project.Api.Core.Entities.Cage", b =>
                 {
-                    b.HasOne("Imi.Project.Api.Core.Entities.User", "User")
+                    b.HasOne("Imi.Project.Api.Core.Entities.ApplicationUser", "User")
                         .WithMany("Cages")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.SetNull);
@@ -1131,7 +1596,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
 
             modelBuilder.Entity("Imi.Project.Api.Core.Entities.Medicine", b =>
                 {
-                    b.HasOne("Imi.Project.Api.Core.Entities.User", "User")
+                    b.HasOne("Imi.Project.Api.Core.Entities.ApplicationUser", "User")
                         .WithMany("Medicines")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.SetNull);
@@ -1145,9 +1610,60 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Imi.Project.Api.Core.Entities.User", "User")
+                    b.HasOne("Imi.Project.Api.Core.Entities.ApplicationUser", "User")
                         .WithMany("Prescriptions")
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
+                {
+                    b.HasOne("Imi.Project.Api.Core.Entities.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
+                {
+                    b.HasOne("Imi.Project.Api.Core.Entities.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Imi.Project.Api.Core.Entities.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
+                {
+                    b.HasOne("Imi.Project.Api.Core.Entities.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

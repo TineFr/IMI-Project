@@ -1,16 +1,8 @@
-﻿using Imi.Project.Api.Core.Dtos.Birds;
-using Imi.Project.Api.Core.Dtos.Cages;
-using Imi.Project.Api.Core.Dtos.DailyTasks;
-using Imi.Project.Api.Core.Dtos.Medicines;
-using Imi.Project.Api.Core.Dtos.Prescriptions;
-using Imi.Project.Api.Core.Dtos.Species;
-using Imi.Project.Api.Core.Dtos.Users;
-using Imi.Project.Api.Core.Entities;
-using Imi.Project.Api.Core.Enums;
-using System;
+﻿using Imi.Project.Api.Core.Entities;
+using Imi.Project.Common.Dtos;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Core.Helper
 {
@@ -24,7 +16,9 @@ namespace Imi.Project.Api.Core.Helper
             {
                 Id = species.Id,
                 Name = species.Name,
-                ScientificName = species.ScientificName
+                ScientificName = species.ScientificName,
+                Image = GetFullImageUrl(species.Image),
+                Description = species.Description
             };
         }
         public static IEnumerable<SpeciesResponseDto> MapToDtoList(this IEnumerable<Species> species)
@@ -49,21 +43,40 @@ namespace Imi.Project.Api.Core.Helper
 
         public static BirdResponseDto MapToDto(this Bird bird)
         {
-            return new BirdResponseDto
+
+            var responseDto =  new BirdResponseDto
             {
                 Id = bird.Id,
                 Name = bird.Name,
-                Species = bird.Species?.MapToDto(),
                 Food = bird.Food,
                 Gender = bird.Gender.ToString(),
                 HatchDate = bird.HatchDate,
-                Image = bird.Image,
-                Cage = new CageResponseDto
+                Image = GetFullImageUrl(bird.Image),
+            };
+
+            if (bird.Cage != null)
+            {
+                var cageDto = new CageResponseDto
                 {
                     Id = bird.Cage.Id,
                     Name = bird.Cage.Name
-                }
-            };
+                };
+                responseDto.Cage = cageDto;
+            }
+            if (bird.Species != null)
+            {
+                var speciesDto = new SpeciesResponseDto
+                {
+                    Id = bird.Species.Id,
+                    Name = bird.Species.Name,
+                    ScientificName = bird.Species.ScientificName
+                };
+                responseDto.Species = speciesDto;
+            }
+
+            return responseDto;
+
+
         }
 
         public static IEnumerable<BirdResponseDto> MapToDtoList(this IEnumerable<Bird> birds)
@@ -77,7 +90,7 @@ namespace Imi.Project.Api.Core.Helper
             {
                 Id = cage.Id,
                 Name = cage.Name,
-                Image = cage.Image,
+                Image = GetFullImageUrl(cage.Image),
                 Location = cage.Location,
                 Birds = cage.Birds?.Select(b => b.Id).ToList(),
                 DailyTasks = cage.DailyTasks?.MapToDtoList()
@@ -89,19 +102,19 @@ namespace Imi.Project.Api.Core.Helper
             return cages.Select(c => c.MapToDto()).ToList();
         }
 
-        public static UserResponseDto MapToDto(this User user)
+        public static ApplicationUserResponseDto MapToDto(this ApplicationUser user)
         {
-            return new UserResponseDto
+            return new ApplicationUserResponseDto
             {
                 Id = user.Id,
-                Name = user.Name,
+                Name = user.UserName,
                 Birds = user.Birds?.Select(b => b.Id),
                 Cages = user.Cages?.Select(b => b.Id),
                 Medicines = user.Medicines?.Select(b => b.Id)
             };
         }
 
-        public static IEnumerable<UserResponseDto> MapToDtoList(this IEnumerable<User> users)
+        public static IEnumerable<ApplicationUserResponseDto> MapToDtoList(this IEnumerable<ApplicationUser> users)
         {
             return users.Select(u => u.MapToDto()).ToList();
         }
@@ -112,7 +125,7 @@ namespace Imi.Project.Api.Core.Helper
             {
                 Id = medicine.Id,
                 Name = medicine.Name,
-                Usage = medicine.Usage,          
+                Usage = medicine.Usage,
             };
         }
 
@@ -123,7 +136,7 @@ namespace Imi.Project.Api.Core.Helper
 
         public static PrescriptionResponseDto MapToDto(this Prescription prescription)
         {
-            var  prescriptionDto =  new PrescriptionResponseDto
+            var prescriptionDto = new PrescriptionResponseDto
             {
                 Id = prescription.Id,
                 Medicine = prescription.Medicine.MapToDto(),
@@ -143,7 +156,7 @@ namespace Imi.Project.Api.Core.Helper
                         Id = bird.Cage.Id,
                         Name = bird.Cage.Name
                     },
-                    Image = bird.Image
+                    Image = GetFullImageUrl(bird.Image)
                 };
                 birdlist.Add(newbirddto);
             }
@@ -154,6 +167,23 @@ namespace Imi.Project.Api.Core.Helper
         public static IEnumerable<PrescriptionResponseDto> MapToDtoList(this IEnumerable<Prescription> presciptions)
         {
             return presciptions.Select(u => u.MapToDto()).ToList();
+        }
+
+        private static string GetFullImageUrl(string image)
+        {
+            if (string.IsNullOrEmpty(image))
+            {
+                return null;
+            }
+
+            HttpContextAccessor httpContextAccessor = new HttpContextAccessor();
+
+            var scheme = httpContextAccessor.HttpContext.Request.Scheme; 
+            var url = httpContextAccessor.HttpContext.Request.Host.Value; 
+
+            var fullImageUrl = $"{scheme}://{url}/{image.Replace("\\", "/")}";
+
+            return fullImageUrl;
         }
 
     }

@@ -1,4 +1,5 @@
 ﻿using Imi.Project.Api.Core.Entities;
+using Imi.Project.Api.Core.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,17 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Imi.Project.Api.Core.Interfaces.Repositories;
 namespace Imi.Project.Api.Infrastructure.Repositories
 {
-    public class UserRepository : BaseRepository<User>, IUserRepository
+    public class UserRepository : BaseRepository<ApplicationUser>, IUserRepository 
     {
         public UserRepository(MyAviaryDbContext dbContext) : base(dbContext)
         {
 
         }
 
-        public override IQueryable<User> GetAll()
+        public override IQueryable<ApplicationUser> GetAll()
         {
             return _dbContext.Users.Include(u => u.Cages)
                                    .ThenInclude(c => c.DailyTasks)
@@ -27,14 +27,15 @@ namespace Imi.Project.Api.Infrastructure.Repositories
                                    .ThenInclude(u => u.BirdPrescriptions);
         }
 
-        public async override Task<IEnumerable<User>> ListAllAsync()
+        public override async Task<ApplicationUser> GetByIdAsync(Guid id)
         {
-            return await GetAll().OrderBy(u  => u.Name).ToListAsync();
+             return await GetAll().SingleOrDefaultAsync(u => u.Id.Equals(id));
         }
 
-        public async override Task<User> GetByIdAsync(Guid id)
+        public override async  Task<IEnumerable<ApplicationUser>> ListAllAsync()
         {
-            return await GetAll().SingleOrDefaultAsync(u => u.Id.Equals(id));
+            return await GetAll().OrderBy(u => u.UserName).ToListAsync();
         }
+
     }
 }

@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Imi.Project.Api.Core.Interfaces.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Imi.Project.Api.Core.Entities
 {
-    public class Cage : BaseEntity
+    public class Cage : BaseEntity, IHasUserId
     {
         [Required(ErrorMessage = "{0} is required")]
         public string Name { get; set; }
@@ -15,7 +15,7 @@ namespace Imi.Project.Api.Core.Entities
 
         [Required(ErrorMessage = "{0} is required")]
         public string Location { get; set; }
-        public User User { get; set; }
+        public ApplicationUser User { get; set; }
         public Guid? UserId { get; set; }
 
     }

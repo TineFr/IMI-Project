@@ -10,7 +10,7 @@ namespace Imi.Project.Blazor.Services
     public class MockBirdService : IBirdService
     {
 
-        private static IEnumerable<Bird> birdrepository = new List<Bird>
+        private static List<Bird> birdrepository = new List<Bird>
         {
                     new Bird
                     {
@@ -21,7 +21,6 @@ namespace Imi.Project.Blazor.Services
                     HatchDate = new DateTime(2015, 12, 25),
                     Image = "images/budgie1.jpg",
                     Species = "Budgerigar",
-                    ScientificName ="Melopsittacus undulatus",
                     Food = "Parakeet mix"
                     },
 
@@ -34,7 +33,6 @@ namespace Imi.Project.Blazor.Services
                     HatchDate = new DateTime(2017, 07, 13),
                     Image = "images/budgie4.jpg",
                     Species = "Budgerigar",
-                    ScientificName ="Melopsittacus undulatus",
                     Food = "Parakeet mix"
                     },
 
@@ -47,7 +45,6 @@ namespace Imi.Project.Blazor.Services
                     HatchDate = new DateTime(2012, 09, 03),
                     Image = "images/cockatiel1.jpg",
                     Species = "Cockatiel",
-                    ScientificName = "Nymphicus hollandicuss",
                     Food = "Parakeet mix"
                     },
 
@@ -60,7 +57,6 @@ namespace Imi.Project.Blazor.Services
                     HatchDate = new DateTime(2017, 07, 13),
                     Image = "images/cockatiel3.jpg",
                     Species = "Cockatiel",
-                    ScientificName = "Nymphicus hollandicuss",
                     Food = "Parakeet mix"
                     }
 
@@ -68,18 +64,19 @@ namespace Imi.Project.Blazor.Services
 
         public Task<Bird> AddAsync(Bird bird)
         {
-            birdrepository.ToList().Add(bird);
+            bird.Image = "images/budgie4.jpg"; // images toevoegen nog niet geimplementeerd
+            birdrepository.Add(bird);
             return Task.FromResult(bird);
         }
 
         public Task<bool> DeleteAsync(Guid id)
         {
             var bird = birdrepository.FirstOrDefault(b => b.Id.Equals(id));
-            bool IsRemoved = birdrepository.ToList().Remove(bird);
+            bool IsRemoved = birdrepository.Remove(bird);
             return Task.FromResult(IsRemoved);
         }
 
-        public Task<IEnumerable<Bird>> GetAllAsync()
+        public Task<List<Bird>> GetAllAsync()
         {
             return Task.FromResult(birdrepository);
         }

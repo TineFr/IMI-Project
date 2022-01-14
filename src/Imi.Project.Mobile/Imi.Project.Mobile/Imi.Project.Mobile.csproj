@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -20,6 +20,7 @@
     <None Remove="icons\filter.png" />
     <None Remove="icons\guide.png" />
     <None Remove="icons\home.png" />
+    <None Remove="icons\imageplaceholder.png" />
     <None Remove="icons\leftarrow.png" />
     <None Remove="icons\logolight.png" />
     <None Remove="icons\logolightwhite.png" />
@@ -39,6 +40,7 @@
     <EmbeddedResource Include="icons\filter.png" />
     <EmbeddedResource Include="icons\guide.png" />
     <EmbeddedResource Include="icons\home.png" />
+    <EmbeddedResource Include="icons\imageplaceholder.png" />
     <EmbeddedResource Include="icons\leftarrow.png" />
     <EmbeddedResource Include="icons\logolight.png" />
     <EmbeddedResource Include="icons\logolightwhite.png" />
@@ -49,6 +51,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="10.3.6" />
+    <PackageReference Include="FreshMvvm" Version="4.0.1" />
+    <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="19.3.0.54" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2125" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
   </ItemGroup>
@@ -58,70 +63,76 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Views\AccountPage.xaml">
+    <Compile Update="Pages\Medications\MedicationsPage.xaml.cs">
+      <DependentUpon>MedicationsPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Pages\AccountPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Birds\AddBirdPage.xaml">
+    <EmbeddedResource Update="Pages\Birds\AddBirdPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Birds\BirdDetailPage.xaml">
+    <EmbeddedResource Update="Pages\Birds\BirdDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Birds\BirdsPage.xaml">
+    <EmbeddedResource Update="Pages\Birds\BirdsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Birds\EditBirdPage.xaml">
+    <EmbeddedResource Update="Pages\Birds\EditBirdPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Cages\AddCagePage.xaml">
+    <EmbeddedResource Update="Pages\Cages\AddCagePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Cages\CageDetailPage.xaml">
+    <EmbeddedResource Update="Pages\Cages\CageDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Cages\CagesPage.xaml">
+    <EmbeddedResource Update="Pages\Cages\CagesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Cages\EditCagePage.xaml">
+    <EmbeddedResource Update="Pages\Cages\EditCagePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\HomePage.xaml">
+    <EmbeddedResource Update="Pages\HomePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="MainPage.xaml">
+    <EmbeddedResource Update="Pages\MainPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\LoginPage.xaml">
+    <EmbeddedResource Update="Pages\LoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Medications\AddMedicationPage.xaml">
+    <EmbeddedResource Update="Pages\Medications\AddMedicationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Medications\EditMedicationPage.xaml">
+    <EmbeddedResource Update="Pages\Medications\EditMedicationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Medications\MedicationPage.xaml">
+    <EmbeddedResource Update="Pages\Medications\MedicationsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Prescriptions\AddPrescriptionPage.xaml">
+    <EmbeddedResource Update="Pages\Prescriptions\AddPrescriptionPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Prescriptions\PrescriptionDetailPage.xaml">
+    <EmbeddedResource Update="Pages\Prescriptions\PrescriptionDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Prescriptions\PrescriptionsPage.xaml">
+    <EmbeddedResource Update="Pages\Prescriptions\PrescriptionsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\RegisterPage.xaml">
+    <EmbeddedResource Update="Pages\RegisterPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\SettingsPage.xaml">
+    <EmbeddedResource Update="Pages\SettingsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\SpeciesGuide\SpeciesDetailPage.xaml">
+    <EmbeddedResource Update="Pages\SpeciesGuide\SpeciesDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\SpeciesGuide\SpeciesPage.xaml">
+    <EmbeddedResource Update="Pages\SpeciesGuide\SpeciesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

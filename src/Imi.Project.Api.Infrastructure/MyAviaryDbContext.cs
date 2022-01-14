@@ -1,5 +1,7 @@
 ﻿using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Infrastructure.Seeding;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,9 +9,9 @@ using System.Text;
 
 namespace Imi.Project.Api.Infrastructure
 {
-    public class MyAviaryDbContext : DbContext
+    public class MyAviaryDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
     {
-        public DbSet<User> Users { get; set; }
+        //public DbSet<User> Users { get; set; }
         public DbSet<Cage> Cages { get; set; }
         public DbSet<Species> Species { get; set; }
         public DbSet<Bird> Birds { get; set; }
@@ -23,9 +25,15 @@ namespace Imi.Project.Api.Infrastructure
 
         }
 
+  
+
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            UserSeeding.Seeding(modelBuilder);
+            IdentityRoleSeeding.Seeding(modelBuilder);
+            ApplicationUserSeeding.Seeding(modelBuilder);
+            IdentityUserRoleSeeding.Seeding(modelBuilder);
             DailyTasksSeeding.Seeding(modelBuilder);
             CageSeeding.Seeding(modelBuilder);
             SpeciesSeeding.Seeding(modelBuilder);
@@ -43,8 +51,8 @@ namespace Imi.Project.Api.Infrastructure
                  .HasKey(c => c.Id);
             modelBuilder.Entity<Prescription>()
                  .HasKey(c => c.Id);
-            modelBuilder.Entity<User>()
-                  .HasKey(c => c.Id);
+            //modelBuilder.Entity<ApplicationUser>()
+            //      .HasKey(c => c.Id);
             modelBuilder.Entity<Bird>()
                   .HasKey(c => c.Id);
             modelBuilder.Entity<Medicine>()
@@ -72,19 +80,19 @@ namespace Imi.Project.Api.Infrastructure
                 .HasForeignKey(p => p.SpeciesId)
                 .OnDelete(DeleteBehavior.SetNull);
 
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<ApplicationUser>()
                 .HasMany(e => e.Birds)
                 .WithOne(e => e.User)
                 .HasForeignKey(p => p.UserId)
                 .OnDelete(DeleteBehavior.SetNull);
 
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<ApplicationUser>()
                 .HasMany(e => e.Medicines)
                 .WithOne(e => e.User)
                 .HasForeignKey(p => p.UserId)
                 .OnDelete(DeleteBehavior.SetNull);
 
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<ApplicationUser>()
                 .HasMany(e => e.Cages)
                 .WithOne(e => e.User)
                 .HasForeignKey(p => p.UserId)
