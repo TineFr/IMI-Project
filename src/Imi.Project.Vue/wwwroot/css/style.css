@@ -6,6 +6,9 @@
     font-family: 'Trebuchet MS';
 }
 
+button:disabled{
+    background-color: yellow;
+}
 
 
 

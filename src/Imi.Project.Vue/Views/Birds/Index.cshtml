@@ -7,7 +7,7 @@
 </div>
 
 <div class="paginationDiv">
-<div v-if="ShowSelectionBoxes">
+<div v-if="showSelectionBoxes">
     <select  class="species select" name="example" title="species"  v-on:selectionchange="FilterCages(this)">
         <option v-for="specimen in species" v-bind:value="specimen.id">{{specimen.name}}</option>
       </select>
@@ -20,8 +20,8 @@
     <div type="button" class="btnShowSelections" v-on:click="ToggleShowSelectionBoxes"><img class="imgFilter" src="~/images/filter.png"/></div>
 </div>
       <div class="arrowContainer">
-          <div type="button" class="btnArrow"><img class="imgArrow" src="~/images/left-arrow.png"/></div>
-          <div type="button" class="btnArrow"><img class="imgArrow" src="~/images/right-arrow.png"/></div>
+          <div v-if="hasPreviousPage" type="button" class="btnArrow"><img class="imgArrow" src="~/images/left-arrow.png"  v-on:click="onPreviousPageClicked"/></div>
+          <div v-if="hasNextPage" type="button" class="btnArrow"><img class="imgArrow" src="~/images/right-arrow.png"  v-on:click="onNextPageClicked"/></div>
       </div>
 </div>
     <div class="indexContainer" >

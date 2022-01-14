@@ -22,9 +22,10 @@ var login = new Vue({
             email: []
         },
         apiErrorMessage: null,
-        ShowSelectionBoxes: false,
-        CurrentPage: 1,
-        HasNextPage: false,
+        showSelectionBoxes: false,
+        page: 1,
+        hasNextPage: false,
+        hasPreviousPage: false,
 
     },
     created: function () {
@@ -36,13 +37,13 @@ var login = new Vue({
 
     methods: {
 
-        fetchBirds: function (page) {
+        fetchBirds: function () {
             var self = this;
             self.apiErrorMessage = null;
-            test.get(birdsUrl + page, config)
+            test.get(birdsUrl + self.page, config)
                 .then(function (response) {
                     self.birds = response.data;
-                    var test = response.request.getResponseHeader('pagination');
+                    self.ManagePagination(JSON.parse(response.headers.pagination))
                 })
                 .catch((error) => {
                     const response = error?.response;
@@ -81,19 +82,44 @@ var login = new Vue({
             this.ShowSelectionBoxes = !this.ShowSelectionBoxes;
         },
 
-        FilterCages: function (cage) {
+        //FilterCages: function (cage) {
+        //    var self = this;
+        //    this.CurrentPage = 1;
+        //    self.apiErrorMessage = null;
+        //    var url = birdsUrl + this.CurrentPage + "&cageId=" + cage ;
+        //    axios.get(url, config)
+        //        .then(function (response) {
+        //            self.cages = response.data;
+        //        })
+        //        .catch((error) => {
+        //            const response = error?.response;
+        //            this.apiErrorMessage = response.data;
+        //        })
+        //},
+
+        ManagePagination(data) {
             var self = this;
-            this.CurrentPage = 1;
-            self.apiErrorMessage = null;
-            var url = birdsUrl + this.CurrentPage + "&cageId=" + cage ;
-            axios.get(url, config)
-                .then(function (response) {
-                    self.cages = response.data;
-                })
-                .catch((error) => {
-                    const response = error?.response;
-                    this.apiErrorMessage = response.data;
-                })
+            self.page = 1;
+            self.hasNextPage = false;
+            self.hasPreviousPage = false;
+            if (data.HasPreviousPage == true) {
+                self.hasPreviousPage = true;
+            }
+            if (data.HasNextPage == true) {
+                self.hasNextPage = true;
+            }
+        },
+
+        onNextPageClicked() {
+            var self = this;
+            self.page += 1;
+            this.fetchBirds();
+        },
+
+        onPreviousPageClicked() {
+            var self = this;
+            self.page -= 1;
+            this.fetchBirds();
         }
 
     }
