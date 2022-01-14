@@ -8,5 +8,7 @@ namespace Imi.Project.Vue.Controllers
         {
             return View();
         }
+
+
     }
 }

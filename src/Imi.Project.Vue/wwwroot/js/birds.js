@@ -9,11 +9,13 @@ var test = axios.create({
 });
 
 
-
-var login = new Vue({
+var birds = new Vue({
     el: '#birdsIndex',
     data: {
+        overViewMode: true,
+        detailMode: false,
         birds: null,
+        mode: null,
         species: null,
         cages: null,
         selectedSpecies: null,
@@ -24,10 +26,16 @@ var login = new Vue({
         page: 1,
         hasNextPage: false,
         hasPreviousPage: false,
+        errors: {
+            name: [],
+            hatchDate: [],
+            gender: [],
+        },
 
     },
     created: function () {
         var self = this;
+        self.overViewMode = true;
         self.fetchBirds(this.CurrentPage);
         self.fetchSpecies();
         self.fetchCages();
@@ -77,9 +85,14 @@ var login = new Vue({
 
         },
 
-        toggleShowSelectionBoxes: function () {
-            this.showSelectionBoxes = !this.showSelectionBoxes;
+        fetchUrl: function () {
+            var self = this;
+            var baseUri = baseBirdsUrl + self.page;
+            if (self.selectedSpecies) baseUri += "&species=" + self.selectedSpecies;
+            if (self.selectedCage) baseUri += "&cage=" + self.selectedCage;
+            return baseUri
         },
+
 
         ManagePagination: function(data) {
             var self = this;
@@ -106,12 +119,8 @@ var login = new Vue({
             this.fetchBirds();
         },
 
-        fetchUrl: function () {
-            var self = this;
-            var baseUri = baseBirdsUrl + self.page;
-            if (self.selectedSpecies) baseUri += "&species=" + self.selectedSpecies;
-            if (self.selectedCage) baseUri += "&cage=" + self.selectedCage;
-            return baseUri
+        toggleShowSelectionBoxes: function () {
+            this.showSelectionBoxes = !this.showSelectionBoxes;
         },
 
         filterBirds: function () {
@@ -121,7 +130,40 @@ var login = new Vue({
             if (self.selectedCage == "All Cages")
                 self.selectedCage = null;
             self.fetchBirds();
+        },
+
+        toAddMode: function () {
+            var self = this;
+            this.mode = "Add new";
+            self.currentBird = {
+                name: "",
+                hatchDate: "",
+                food: "",
+                species: "",
+                cage: "",
+                gender: "",
+            }
+            this.detailMode = false
+            this.overViewMode = false;
+        },
+
+        todetailMode: function (bird) {
+            this.overViewMode = false;
+            this.detailMode = true
+            this.currentBird = bird;
+            this.mode = "Details";
+        },
+
+        refactorDate: function (date) {
+          var test = date.getYear();
         }
+
+
+        
+        
     }
 });
+
+
+
 

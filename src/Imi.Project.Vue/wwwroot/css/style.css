@@ -228,7 +228,7 @@ position: relative;
 
 .indexContainer {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     flex-wrap: wrap;
 }
 .indexItem {
@@ -313,4 +313,15 @@ select {
 
 .containerItem {
     margin: 30px;
+}
+
+
+.detailImage{
+    height: 160px;
+    width: auto;
+    margin: 20px;
+}
+
+.maxWidth{
+    max-width: 500px;
 }

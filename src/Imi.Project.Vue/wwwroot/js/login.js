@@ -13,6 +13,12 @@ var login = new Vue({
         IsValid: true,
         apiErrorMessage: null,
     },
+    created: function () {
+        if (localStorage.getItem('token')) {
+            window.location = '/birds/index';
+        }
+    },
+
     methods: {
 
         validateRequest: function () {
@@ -43,7 +49,9 @@ var login = new Vue({
                 axios.post(url, this.loginRequest)
                     .then(function (response) {
 
-                            localStorage.setItem("token", response.data.jwt)
+                        sessionStorage.setItem("token", response.data.jwt);
+                        sessionStorage.setItem("navbar", true);
+                        window.location = '/birds/index';
 
                     })
                     .catch((error) => {
