@@ -1,22 +1,22 @@
-﻿using Imi.Project.Api.Core.Dtos.Birds;
-using Imi.Project.Api.Core.Entities;
+﻿using Imi.Project.Api.Core.Entities;
+using Imi.Project.Api.Core.Entities.Pagination;
+using Imi.Project.Common.Dtos;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Core.Interfaces.Services
 {
     public interface IBirdService
     {
-        Task<IEnumerable<Bird>> ListAllBirdsAsync();
-        Task<Bird> GetBirdByIdAsync(Guid id);
-        Task<Bird> AddBirdAsync(Bird bird);
-        Task<Bird> UpdateBirdAsync(Bird bird);
-        Task DeleteMultiple (List<Bird> birds);
-        Task DeleteBirdAsync(Bird bird);
-        Task<IEnumerable<Bird>> GetBirdsByUserIdAsync(Guid id);
-        Task<IEnumerable<Bird>> GetBirdsByCageIdAsync(Guid id);
+        Task<IEnumerable<BirdResponseDto>> ListAllBirdsAsync(PaginationParameters parameters);
+        Task<BirdResponseDto> GetBirdByIdAsync(Guid id);
+        Task<BirdResponseDto> AddBirdAsync(BirdRequestDto bird);
+        Task<BirdResponseDto> UpdateBirdAsync(Guid id, BirdRequestDto bird);
+        Task DeleteMultiple(List<Bird> birds);
+        Task DeleteBirdAsync(Guid id);
+        Task<IEnumerable<BirdResponseDto>> GetBirdsByUserIdAsync(Guid id, PaginationParameters parameters);
+        Task<IEnumerable<BirdResponseDto>> GetBirdsByCageIdAsync(Guid id, PaginationParameters parameters);
 
 
     }

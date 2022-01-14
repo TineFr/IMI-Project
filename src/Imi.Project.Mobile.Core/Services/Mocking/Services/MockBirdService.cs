@@ -12,9 +12,9 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
    
     public class MockBirdService : IBirdService
     {
-        private static ICageService cageService = new MockCageService();
-        private static ISpeciesService speciesService = new MockSpeciesService();
-        private static ObservableCollection<Bird> birdrepository = new ObservableCollection<Bird>
+        private static readonly ICageService cageService = new MockCageService();
+        private static readonly ISpeciesService speciesService = new MockSpeciesService();
+        private static readonly ObservableCollection<Bird> birdrepository = new ObservableCollection<Bird>
         {
                     new Bird
                     {
@@ -48,7 +48,6 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
                     Food = "Parakeet mix",
                     Prescriptions = new List<Guid>
                     {
-
                         Guid.Parse("5206461d-3ba9-4701-a6a1-6a563ccceff2"),
                         Guid.Parse("bd2670bb-392c-44a9-b2d8-88e6e413c165"),
                         Guid.Parse("6cdff968-d2fb-45af-a916-957a00ff5fe1")

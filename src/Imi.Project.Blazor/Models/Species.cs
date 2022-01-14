@@ -7,6 +7,7 @@ namespace Imi.Project.Blazor.Models
 {
     public class Species : BaseEntity
     {
-        public string ScientifcName { get; set; }
+        public string Name { get; set; }
+        public string ScientificName { get; set; }
     }
 }

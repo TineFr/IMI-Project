@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Infrastructure.Repositories
@@ -15,13 +14,14 @@ namespace Imi.Project.Api.Infrastructure.Repositories
         {
 
         }
-        public  override IQueryable<Prescription> GetAll()
+        public override IQueryable<Prescription> GetAll()
         {
-            var prescriptions =    _dbContext.Prescriptions.Include(p => p.User)
+            var prescriptions = _dbContext.Prescriptions.Include(p => p.User)
+                                                           .Include(p => p.Medicine)
                                                            .Include(p => p.BirdPrescriptions)
                                                            .ThenInclude(p => p.Bird)
-                                                           .ThenInclude(b => b.Cage)
-                                                           .Include(p => p.Medicine);
+                                                           .ThenInclude(b => b.Cage);
+
             return prescriptions;
 
         }

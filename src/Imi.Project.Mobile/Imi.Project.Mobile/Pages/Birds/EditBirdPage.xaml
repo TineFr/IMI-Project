@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Imi.Project.Mobile.Pages.Birds.EditBirdPage">
+    <ContentPage.Content>
+        <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
+              RowDefinitions="{StaticResource MainGridRows}">
+            <Frame Style="{StaticResource MainFrame}" BackgroundColor="{StaticResource Blue}">
+                <Label Text="Edit Bird" Style="{StaticResource MainLabel}"></Label>
+
+            </Frame>
+            <AbsoluteLayout Grid.Row="0" Grid.RowSpan="4">
+                <ImageButton x:Name="btnBack" Style="{StaticResource BackArrow}" Command="{Binding BackCommand}"></ImageButton>
+                <Image Style="{StaticResource Logo}" ></Image>
+            </AbsoluteLayout>
+
+            <ScrollView Grid.Row="1" Grid.RowSpan="3" >
+                <StackLayout Grid.Row="1" Grid.RowSpan="2" >
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
+                            <Label Text="Name" FontAttributes="Bold"></Label>
+                            <Entry x:Name="entrName" Text="{Binding Name}"></Entry>
+                        </StackLayout>
+                    </Frame>
+                    <Label Text="{Binding NameMessage}" Style="{StaticResource Error}" IsVisible="{Binding NameMessage, Converter={StaticResource VisibilityConverter}}"></Label>
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
+                            <Label Text="Species"  FontAttributes="Bold"></Label>
+                            <Picker  x:Name="pkrSpecies" ItemsSource="{Binding SpeciesList}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding Species}" Title="Select species"></Picker>
+                        </StackLayout>
+                    </Frame>
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
+                            <Label Text="Cage"  FontAttributes="Bold"></Label>
+                            <Picker  x:Name="pkrCage" ItemsSource="{Binding CagesList}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding Cage}" Title="Select cage"></Picker>
+                        </StackLayout>
+                    </Frame>
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
+                            <Label Text="Gender"  FontAttributes="Bold"></Label>
+                            <Picker  x:Name="pkrGender" Title="Select gender" ItemsSource="{Binding Genders}" SelectedItem="{Binding Gender}"></Picker>
+                        </StackLayout>
+                    </Frame>
+                    <Label Text="{Binding GenderMessage}" Style="{StaticResource Error}" IsVisible="{Binding GenderMessage, Converter={StaticResource VisibilityConverter}}"></Label>
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
+                            <Label Text="Select date of hatching"  FontAttributes="Bold"></Label>
+                            <DatePicker x:Name="dpkHatchDate" Date="{Binding HatchDate}"></DatePicker>
+                        </StackLayout>
+                    </Frame>
+                    <Label Text="{Binding HatchDateMessage}" Style="{StaticResource Error}" IsVisible="{Binding HatchDateMessage, Converter={StaticResource VisibilityConverter}}"></Label>
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
+                            <Label Text="Food"  FontAttributes="Bold"></Label>
+                            <Entry  x:Name="entrFood" Placeholder="Enter food" Text="{Binding Food}"></Entry>
+                        </StackLayout>
+                    </Frame>
+                    <Label Text="{Binding FoodMessage}" Style="{StaticResource Error}" IsVisible="{Binding FoodMessage, Converter={StaticResource VisibilityConverter}}"></Label>
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
+                            <Label Text="Change image"  FontAttributes="Bold"></Label>
+                            <Image  Source="{Binding Image}" HeightRequest="30"></Image> 
+                            <Button Text="From Camera"></Button>
+                            <Button Text="From Gallery"></Button>
+                        </StackLayout>
+                    </Frame>
+                    <FlexLayout JustifyContent="SpaceBetween">
+                        <Button x:Name="btnRemove" Text="Delete" Margin="25" BackgroundColor="IndianRed" Command="{Binding DeleteCommand}" ></Button>
+                        <Button x:Name="btnSave" Text="Save"  Margin="25" BackgroundColor="{StaticResource Green}" Command="{Binding SaveCommand}"></Button>
+                    </FlexLayout>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

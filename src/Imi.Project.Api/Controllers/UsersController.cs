@@ -1,20 +1,16 @@
-﻿
-
-using Imi.Project.Api.Core.Dtos.Users;
-using Imi.Project.Api.Core.Entities;
-using Imi.Project.Api.Core.Entities.Pagination;
-using Imi.Project.Api.Core.Helper;
+﻿using Imi.Project.Api.Core.Entities.Pagination;
+using Imi.Project.Api.Core.Exceptions;
 using Imi.Project.Api.Core.Interfaces.Services;
-using Microsoft.AspNetCore.Http;
+using Imi.Project.Common.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Controllers
 {
+    [Authorize(Policy = "AdministratorRole")]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -26,7 +22,11 @@ namespace Imi.Project.Api.Controllers
         protected readonly IMedicineService _medicineService;
 
 
-        public UsersController(IUserService userService, ICageService cageService, IBirdService birdService, IMedicineService medicineService, IPrescriptionService prescriptionService)
+        public UsersController(IUserService userService,
+                               ICageService cageService,
+                               IBirdService birdService,
+                               IMedicineService medicineService,
+                               IPrescriptionService prescriptionService)
         {
             _userService = userService;
             _cageService = cageService;
@@ -38,155 +38,141 @@ namespace Imi.Project.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] PaginationParameters parameters)
         {
-            var users = await _userService.ListAllUsersAsync();
-            var paginationData = new PaginationMetaData(parameters.Page, users.Count(), parameters.ItemsPerPage);
-            Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
-            var usersPaginated = Pagination.AddPagination<User>(users, parameters);
-            var result = usersPaginated.MapToDtoList();
+            IEnumerable<ApplicationUserResponseDto> result;
+            try
+            {
+                result = await _userService.ListAllUsersAsync(parameters);
+            }
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);
+            }
             return Ok(result);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            if (id == null)
+            ApplicationUserResponseDto result;
+            try
             {
-                return NotFound();
+                result = await _userService.GetUserByIdAsync(id);
             }
-            var user = await _userService.GetUserByIdAsync(id);
-            if (user == null)
+            catch (BaseException ex)
             {
-                return NotFound($"User with id {id} does not exist");
+                return StatusCode((int)ex.StatusCode, ex.Message);
             }
-            var userDto = user.MapToDto();
-            return Ok(userDto);
+            return Ok(result);
         }
 
         [HttpGet("{id}/cages")]
         public async Task<IActionResult> GetCagesFromUser(Guid id, [FromQuery] PaginationParameters parameters)
         {
-            if (id == null)
+            IEnumerable<CageResponseDto> result;
+            try
             {
-                return NotFound();
+                result = await _cageService.GetCagesByUserIdAsync(id, parameters);
             }
-            var user = await _userService.GetUserByIdAsync(id);
-            if (user == null)
+            catch (BaseException ex)
             {
-                return NotFound($"User with id {id} does not exist");
+                return StatusCode((int)ex.StatusCode, ex.Message);
             }
-            var cages = await _cageService.GetCagesByUserIdAsync(id);
-            var paginationData = new PaginationMetaData(parameters.Page, cages.Count(), parameters.ItemsPerPage);
-            Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
-            var cagesPaginated = Pagination.AddPagination<Cage>(cages, parameters);
-            var result = cagesPaginated.MapToDtoList();
             return Ok(result);
         }
 
         [HttpGet("{id}/birds")]
         public async Task<IActionResult> GetBirdsFromUser(Guid id, [FromQuery] PaginationParameters parameters)
         {
-            if (id == null)
+            IEnumerable<BirdResponseDto> result;
+            try
             {
-                return NotFound();
+                result = await _birdService.GetBirdsByUserIdAsync(id, parameters);
             }
-            var user = await _userService.GetUserByIdAsync(id);
-            if (user == null)
+            catch (BaseException ex)
             {
-                return NotFound($"User with id {id} does not exist");
+                return StatusCode((int)ex.StatusCode, ex.Message);
             }
-            var birds = await _birdService.GetBirdsByUserIdAsync(id);
-            var paginationData = new PaginationMetaData(parameters.Page, birds.Count(), parameters.ItemsPerPage);
-            Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
-            var birdsPaginated = Pagination.AddPagination<Bird>(birds, parameters);
-            var result = birdsPaginated.MapToDtoList();
             return Ok(result);
         }
         [HttpGet("{id}/medicines")]
-        public async Task<IActionResult> GetMedicinesFromUser(Guid id, [FromQuery ]PaginationParameters parameters)
+        public async Task<IActionResult> GetMedicinesFromUser(Guid id, [FromQuery] PaginationParameters parameters)
         {
-            if (id == null)
+            IEnumerable<MedicineResponseDto> result;
+            try
             {
-                return NotFound();
+                result = await _medicineService.GetMedicinesByUserIdAsync(id, parameters);
             }
-            var user = await _userService.GetUserByIdAsync(id);
-            if (user == null)
+            catch (BaseException ex)
             {
-                return NotFound($"User with id {id} does not exist");
+                return StatusCode((int)ex.StatusCode, ex.Message);
             }
-            var medicines = await _medicineService.GetMedicinesByUserIdAsync(id);
-            var paginationData = new PaginationMetaData(parameters.Page, medicines.Count(), parameters.ItemsPerPage);
-            Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
-            var medicinesPaginated = Pagination.AddPagination<Medicine>(medicines, parameters);
-            var result = medicinesPaginated.MapToDtoList();
             return Ok(result);
         }
 
         [HttpGet("{id}/prescriptions")]
         public async Task<IActionResult> GetPrescriptionsFromUser(Guid id, [FromQuery] PaginationParameters parameters)
         {
-            if (id == null)
+            IEnumerable<PrescriptionResponseDto> result;
+            try
             {
-                return NotFound();
+                result = await _prescriptionService.GetPrescriptionsByUserIdAsync(id, parameters);
             }
-            var user = await _userService.GetUserByIdAsync(id);
-            if (user == null)
+            catch (BaseException ex)
             {
-                return NotFound($"User with id {id} does not exist");
+                return StatusCode((int)ex.StatusCode, ex.Message);
             }
-            var prescriptions = await _prescriptionService.GetPrescriptionsByUserIdAsync(id);
-            var paginationData = new PaginationMetaData(parameters.Page, prescriptions.Count(), parameters.ItemsPerPage);
-            Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
-            var prescriptionsPaginated = Pagination.AddPagination<Prescription>(prescriptions, parameters);
-            var result = prescriptionsPaginated.MapToDtoList();
             return Ok(result);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(UserRequestDto newUser)
+        public async Task<IActionResult> Post(ApplicationUserRequestDto newUser)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var user = await _userService.GetUserByIdAsync(newUser.Id);
-            if (user != null)
+            ApplicationUserResponseDto result;
+            try
             {
-                return BadRequest($"User with id {newUser.Id} already exists");
+                result = await _userService.AddUserAsync(newUser);
             }
-            var newUserEntity = newUser.MapToEntity();
-            var result = await _userService.AddUserAsync(newUserEntity);
-            var resultDto = result.MapToDto();
-            return Ok(resultDto);
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);
+            }
+            return Ok(result);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Put(UserRequestDto updatedUser)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(Guid id, ApplicationUserRequestDto updatedUser)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var user = await _userService.GetUserByIdAsync(updatedUser.Id);
-            if (user == null)
+            ApplicationUserResponseDto result;
+            try
             {
-                return NotFound($"User with id {updatedUser.Id} does not exist");
+                result = await _userService.UpdateUserAsync(id, updatedUser);
             }
-            user.Update(updatedUser);
-            var result = await _userService.UpdateUserAsync(user);
-            var resultDto = result.MapToDto();
-            return Ok(resultDto);
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);
+            }
+            return Ok(result);
         }
 
-
-        [HttpDelete]
-        public async Task<IActionResult> Delete(UserRequestDto userToDelete)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
         {
-            var user = await _userService.GetUserByIdAsync(userToDelete.Id);
-            if (user == null)
+            try
             {
-                return NotFound($"User with id {userToDelete.Id} does not exist");
+                await _userService.DeleteUserAsync(id);
             }
-            await _userService.DeleteUserAsync(user);
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);
+            }
             return Ok();
         }
 
@@ -194,5 +180,5 @@ namespace Imi.Project.Api.Controllers
     }
 
 }
-    
+
 
