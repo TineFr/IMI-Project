@@ -7,21 +7,17 @@
 </div>
 
 <div class="paginationDiv">
-<div @*v-if="ShowSelectionBoxes"*@>
-    <select  class="species select" name="example" title="species">
-        <option value="A">Cockatiel</option>
-        <option value="B">Budgeriar</option>
-        <option value="-">Society finch</option>
+<div v-if="ShowSelectionBoxes">
+    <select  class="species select" name="example" title="species"  v-on:selectionchange="FilterCages(this)">
+        <option v-for="specimen in species" v-bind:value="specimen.id">{{specimen.name}}</option>
       </select>
 
-      <select class="cage select" name="example">
-        <option value="A">Outside Cage</option>
-        <option value="B">Little Home</option>
-        <option value="-">Other</option>
+      <select class="cage select" name="example" v-on:onchange="FilterSpecies(this)">
+        <option v-for="cage in cages" v-bind:value="cage.id">{{cage.name}}</option>
       </select>
 </div>
-<div @*v-else*@>
-    <div type="button" class="btnShowSelections" @*v-on:click="ToggleShowSelectionBoxes"*@><img class="imgFilter" src="~/images/filter.png"/></div>
+<div v-else>
+    <div type="button" class="btnShowSelections" v-on:click="ToggleShowSelectionBoxes"><img class="imgFilter" src="~/images/filter.png"/></div>
 </div>
       <div class="arrowContainer">
           <div type="button" class="btnArrow"><img class="imgArrow" src="~/images/left-arrow.png"/></div>
@@ -37,7 +33,8 @@
                         <img class="itemImage" v-bind:src="bird.image"/>
                         <div>
                             <h2>{{bird.name}}</h2>
-                            <p>Cage 1</p>
+                            <p v-if="bird.species">{{bird.species.name}}</p>
+                            <p v-if="bird.cage">{{bird.cage.name}}</p>
                         </div>
 
                     <div v-if="bird.gender == 'Female'"><img class="genderImage" src="~/images/female.png" /></div>
@@ -47,6 +44,8 @@
                     </div>
 
             </div>
+
+    </div>
 
     </div>
 

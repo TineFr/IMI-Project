@@ -138,7 +138,7 @@ namespace Imi.Project.Api.Core.Services
             else throw new ItemNotFoundException($"User with id {id} does not exist");
         }
 
-        public async Task<IEnumerable<BirdResponseDto>> GetFilteredBirdsFromUser(Guid userId, Guid? speciesId, Guid? cageId, PaginationParameters parameters)
+        public async Task<IEnumerable<BirdResponseDto>> GetFilteredBirdsFromUser(Guid userId, Guid? speciesId, Guid? cageId)
         {
             if (await _birdRepository.EntityExists<ApplicationUser>(userId))
             {
@@ -163,8 +163,7 @@ namespace Imi.Project.Api.Core.Services
                         throw new ItemNotFoundException($"No birds were found");
                     }
                 }
-                var birdsPaginated = Pagination.AddPagination<Bird>(birds, parameters);
-                var result = birdsPaginated.MapToDtoList();
+                var result = birds.MapToDtoList();
                 return result;
             }
             else throw new ItemNotFoundException($"User with id {userId} does not exist");

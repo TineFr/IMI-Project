@@ -16,6 +16,7 @@ namespace Imi.Project.Api.Core.Interfaces.Services
         Task DeleteMultiple(List<Bird> birds);
         Task DeleteBirdAsync(Guid id);
         Task<IEnumerable<BirdResponseDto>> GetBirdsByUserIdAsync(Guid id);
+        Task<IEnumerable<BirdResponseDto>> GetFilteredBirdsFromUser(Guid id, Guid? species, Guid? cage);
         Task<IEnumerable<BirdResponseDto>> GetBirdsByCageIdAsync(Guid id);
 
 

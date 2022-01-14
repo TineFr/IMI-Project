@@ -181,9 +181,11 @@ namespace Imi.Project.Api
 
             app.UseRouting();
 
-            app.UseCors(builder => builder.AllowAnyOrigin()
+            app.UseCors(builder => builder
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
             .AllowAnyHeader()
-            .AllowAnyMethod());
+            .WithExposedHeaders("pagination"));
 
             app.UseAuthentication();
             app.UseAuthorization();

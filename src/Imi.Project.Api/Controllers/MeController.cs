@@ -5,6 +5,7 @@ using Imi.Project.Api.Core.Interfaces.Services;
 using Imi.Project.Api.Extensions;
 using Imi.Project.Common.Dtos;
 using Microsoft.AspNetCore.Authorization;
+
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
@@ -15,6 +16,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Controllers
 {
+
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
@@ -83,7 +85,7 @@ namespace Imi.Project.Api.Controllers
             IEnumerable<BirdResponseDto> paginatedResult;
             try
             {
-                var result = await _birdService.GetBirdsByUserIdAsync(userId);
+                var result = await _birdService.GetFilteredBirdsFromUser(userId, speciesId, cageId);
                 var paginationData = new PaginationMetaData(parameters.Page, result.Count(), parameters.ItemsPerPage);
                 Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
                 paginatedResult = Pagination.AddPagination<BirdResponseDto>(result, parameters);
