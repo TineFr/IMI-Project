@@ -8,16 +8,18 @@
 
 <div class="paginationDiv">
 <div v-if="showSelectionBoxes">
-    <select  class="species select" name="example" title="species"  v-on:selectionchange="FilterCages(this)">
-        <option v-for="specimen in species" v-bind:value="specimen.id">{{specimen.name}}</option>
+    <select  class="species select" name="select species" title="species" v-model="selectedSpecies"  v-on:change="filterBirds">
+         <option class="default">All Species</option>
+         <option v-for="specimen in species" v-bind:value="specimen.id">{{specimen.name}}</option>
       </select>
 
-      <select class="cage select" name="example" v-on:onchange="FilterSpecies(this)">
+      <select class="cage select" name="select cage" v-model="selectedCage" v-on:change="filterBirds">
+        <option class="default">All Cages</option>
         <option v-for="cage in cages" v-bind:value="cage.id">{{cage.name}}</option>
       </select>
 </div>
 <div v-else>
-    <div type="button" class="btnShowSelections" v-on:click="ToggleShowSelectionBoxes"><img class="imgFilter" src="~/images/filter.png"/></div>
+    <div type="button" class="btnShowSelections" v-on:click="toggleShowSelectionBoxes"><img class="imgFilter" src="~/images/filter.png"/></div>
 </div>
       <div class="arrowContainer">
           <div v-if="hasPreviousPage" type="button" class="btnArrow"><img class="imgArrow" src="~/images/left-arrow.png"  v-on:click="onPreviousPageClicked"/></div>
@@ -26,7 +28,8 @@
 </div>
     <div class="indexContainer" >
 
- 
+ <div v-if="apiErrorMessage">{{apiErrorMessage}}</div>
+
             <div class="containerItem" v-for="bird in birds">
 
                     <div class="indexItem">

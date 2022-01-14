@@ -1,5 +1,5 @@
 ﻿
-var birdsUrl = "https://localhost:5001/api/me/birds?ItemsPerPage=6&Page=";
+var baseBirdsUrl = "https://localhost:5001/api/me/birds?ItemsPerPage=6&Page=";
 var speciesUrl = "https://localhost:5001/api/species";
 var cagesUrl = "https://localhost:5001/api/me/cages";
 const config = { headers: { Authorization: `Bearer ${localStorage.token}` } };
@@ -16,11 +16,9 @@ var login = new Vue({
         birds: null,
         species: null,
         cages: null,
+        selectedSpecies: null,
+        selectedCage: null,
         currentBird : null,
-        errors: {
-            password: [],
-            email: []
-        },
         apiErrorMessage: null,
         showSelectionBoxes: false,
         page: 1,
@@ -39,8 +37,9 @@ var login = new Vue({
 
         fetchBirds: function () {
             var self = this;
+            self.birds = null;
             self.apiErrorMessage = null;
-            test.get(birdsUrl + self.page, config)
+            test.get(self.fetchUrl(), config)
                 .then(function (response) {
                     self.birds = response.data;
                     self.ManagePagination(JSON.parse(response.headers.pagination))
@@ -78,26 +77,11 @@ var login = new Vue({
 
         },
 
-        ToggleShowSelectionBoxes: function () {
-            this.ShowSelectionBoxes = !this.ShowSelectionBoxes;
+        toggleShowSelectionBoxes: function () {
+            this.showSelectionBoxes = !this.showSelectionBoxes;
         },
 
-        //FilterCages: function (cage) {
-        //    var self = this;
-        //    this.CurrentPage = 1;
-        //    self.apiErrorMessage = null;
-        //    var url = birdsUrl + this.CurrentPage + "&cageId=" + cage ;
-        //    axios.get(url, config)
-        //        .then(function (response) {
-        //            self.cages = response.data;
-        //        })
-        //        .catch((error) => {
-        //            const response = error?.response;
-        //            this.apiErrorMessage = response.data;
-        //        })
-        //},
-
-        ManagePagination(data) {
+        ManagePagination: function(data) {
             var self = this;
             self.page = 1;
             self.hasNextPage = false;
@@ -110,20 +94,34 @@ var login = new Vue({
             }
         },
 
-        onNextPageClicked() {
+        onNextPageClicked: function() {
             var self = this;
             self.page += 1;
             this.fetchBirds();
         },
 
-        onPreviousPageClicked() {
+        onPreviousPageClicked: function() {
             var self = this;
             self.page -= 1;
             this.fetchBirds();
+        },
+
+        fetchUrl: function () {
+            var self = this;
+            var baseUri = baseBirdsUrl + self.page;
+            if (self.selectedSpecies) baseUri += "&species=" + self.selectedSpecies;
+            if (self.selectedCage) baseUri += "&cage=" + self.selectedCage;
+            return baseUri
+        },
+
+        filterBirds: function () {
+            var self = this;
+            if (self.selectedSpecies == "All Species")
+                self.selectedSpecies = null;
+            if (self.selectedCage == "All Cages")
+                self.selectedCage = null;
+            self.fetchBirds();
         }
-
     }
-
 });
 
-/*https://localhost:5001/api/me/birds?ItemsPerPage=6&Page=1&speciesId=00000000-0000-0000-0000-000000000001&cageId=00000000-0000-0000-0000-000000000003*/

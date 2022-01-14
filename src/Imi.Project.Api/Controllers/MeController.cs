@@ -79,13 +79,13 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpGet("birds")]
-        public async Task<IActionResult> GetFilteredBirdsFromUser([FromQuery] PaginationParameters parameters, [FromQuery] Guid speciesId, [FromQuery] Guid cageId)
+        public async Task<IActionResult> GetFilteredBirdsFromUser([FromQuery] PaginationParameters parameters, [FromQuery] Guid species, [FromQuery] Guid cage)
         {
             Guid userId = User.GetUser();
             IEnumerable<BirdResponseDto> paginatedResult;
             try
             {
-                var result = await _birdService.GetFilteredBirdsFromUser(userId, speciesId, cageId);
+                var result = await _birdService.GetFilteredBirdsFromUser(userId, species, cage);
                 var paginationData = new PaginationMetaData(parameters.Page, result.Count(), parameters.ItemsPerPage);
                 Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
                 paginatedResult = Pagination.AddPagination<BirdResponseDto>(result, parameters);
