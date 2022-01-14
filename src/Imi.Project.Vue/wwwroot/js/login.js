@@ -43,9 +43,8 @@ var login = new Vue({
                 axios.post(url, this.loginRequest)
                     .then(function (response) {
 
-                        if (reponse.data.errors == null) {
                             localStorage.setItem("token", response.data.jwt)
-                        }
+
                     })
                     .catch((error) => {
                         const response = error?.response;
