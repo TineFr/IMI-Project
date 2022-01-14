@@ -35,15 +35,14 @@ namespace Imi.Project.Api.Core.Services
             SpeciesResponseDto result = species.MapToDto();
             return result;
         }
-        public async Task<IEnumerable<SpeciesResponseDto>> ListAllSpeciessAsync(PaginationParameters parameters)
+        public async Task<IEnumerable<SpeciesResponseDto>> ListAllSpeciessAsync()
         {
             var species = await _speciesRepository.ListAllAsync();
             if (species.Count() == 0)
             {
                 throw new ItemNotFoundException($"No species were found");
             }
-            var speciesPaginated = Pagination.AddPagination<Species>(species, parameters);
-            var result = speciesPaginated.MapToDtoList();
+            var result = species.MapToDtoList();
             return result;
         }
         public async Task<SpeciesResponseDto> AddSpeciesAsync(SpeciesRequestDto dto)

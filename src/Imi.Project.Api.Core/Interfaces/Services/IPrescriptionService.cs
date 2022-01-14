@@ -10,13 +10,13 @@ namespace Imi.Project.Api.Core.Interfaces.Services
 {
     public interface IPrescriptionService
     {
-        Task<IEnumerable<PrescriptionResponseDto>> ListAllPrescriptionsAsync(PaginationParameters parameters);
+        Task<IEnumerable<PrescriptionResponseDto>> ListAllPrescriptionsAsync();
         Task<PrescriptionResponseDto> GetPrescriptionByIdAsync(Guid id);
         Task<PrescriptionResponseDto> AddPrescriptionAsync(PrescriptionRequestDto prescription);
         Task<PrescriptionResponseDto> UpdatePrescriptionAsync(Guid id, PrescriptionRequestDto Pprescription);
         Task DeletePrescriptionAsync(Guid id);
         Task DeleteMultiple(List<Prescription> prescriptions);
-        Task<IEnumerable<PrescriptionResponseDto>> GetPrescriptionsByUserIdAsync(Guid id, PaginationParameters parameters);
+        Task<IEnumerable<PrescriptionResponseDto>> GetPrescriptionsByUserIdAsync(Guid id);
 
     }
 }

@@ -32,15 +32,14 @@ namespace Imi.Project.Api.Core.Services
             MedicineResponseDto result = medicine.MapToDto();
             return result;
         }
-        public async Task<IEnumerable<MedicineResponseDto>> ListAllMedicinesAsync(PaginationParameters parameters)
+        public async Task<IEnumerable<MedicineResponseDto>> ListAllMedicinesAsync()
         {
             var medecines = await _medicineRepository.ListAllAsync();
             if (medecines.Count() == 0)
             {
                 throw new ItemNotFoundException($"No medicines were found");
             }
-            var medicinesPaginated = Pagination.AddPagination<Medicine>(medecines, parameters);
-            var result = medicinesPaginated.MapToDtoList();
+            var result = medecines.MapToDtoList();
             return result;
         }
         public async Task<MedicineResponseDto> AddMedicineAsync(MedicineRequestDto dto)
@@ -78,7 +77,7 @@ namespace Imi.Project.Api.Core.Services
         {
             await _medicineRepository.DeleteMultipleAsync(medicines);
         }
-        public async  Task<IEnumerable<MedicineResponseDto>> GetMedicinesByUserIdAsync(Guid id, PaginationParameters parameters)
+        public async  Task<IEnumerable<MedicineResponseDto>> GetMedicinesByUserIdAsync(Guid id)
         {
             if (await _medicineRepository.EntityExists<ApplicationUser>(id))
             {
@@ -87,8 +86,7 @@ namespace Imi.Project.Api.Core.Services
                 {
                     throw new ItemNotFoundException($"No medicines were found for user with id {id}");
                 }
-                var medicinesPaginated = Pagination.AddPagination<Medicine>(medicines, parameters);
-                var result = medicinesPaginated.MapToDtoList();
+                var result = medicines.MapToDtoList();
                 return result;
             }
             else throw new ItemNotFoundException($"User with id {id} does not exist");

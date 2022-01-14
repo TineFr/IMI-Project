@@ -1,11 +1,14 @@
 ﻿using Imi.Project.Api.Core.Entities.Pagination;
 using Imi.Project.Api.Core.Exceptions;
+using Imi.Project.Api.Core.Helper;
 using Imi.Project.Api.Core.Interfaces.Services;
 using Imi.Project.Common.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Controllers
@@ -38,16 +41,19 @@ namespace Imi.Project.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] PaginationParameters parameters)
         {
-            IEnumerable<ApplicationUserResponseDto> result;
+            IEnumerable<ApplicationUserResponseDto> paginatedResult;
             try
             {
-                result = await _userService.ListAllUsersAsync(parameters);
+                var result = await _userService.ListAllUsersAsync();
+                var paginationData = new PaginationMetaData(parameters.Page, result.Count(), parameters.ItemsPerPage);
+                Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
+                paginatedResult = Pagination.AddPagination<ApplicationUserResponseDto>(result, parameters);
             }
             catch (BaseException ex)
             {
                 return StatusCode((int)ex.StatusCode, ex.Message);
             }
-            return Ok(result);
+            return Ok(paginatedResult);
         }
 
         [HttpGet("{id}")]
@@ -68,60 +74,72 @@ namespace Imi.Project.Api.Controllers
         [HttpGet("{id}/cages")]
         public async Task<IActionResult> GetCagesFromUser(Guid id, [FromQuery] PaginationParameters parameters)
         {
-            IEnumerable<CageResponseDto> result;
+            IEnumerable<CageResponseDto> paginatedResult;
             try
             {
-                result = await _cageService.GetCagesByUserIdAsync(id, parameters);
+                var result = await _cageService.GetCagesByUserIdAsync(id);
+                var paginationData = new PaginationMetaData(parameters.Page, result.Count(), parameters.ItemsPerPage);
+                Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
+                paginatedResult = Pagination.AddPagination<CageResponseDto>(result, parameters);
             }
             catch (BaseException ex)
             {
                 return StatusCode((int)ex.StatusCode, ex.Message);
             }
-            return Ok(result);
+            return Ok(paginatedResult);
         }
 
         [HttpGet("{id}/birds")]
         public async Task<IActionResult> GetBirdsFromUser(Guid id, [FromQuery] PaginationParameters parameters)
         {
-            IEnumerable<BirdResponseDto> result;
+            IEnumerable<BirdResponseDto> paginatedResult;
             try
             {
-                result = await _birdService.GetBirdsByUserIdAsync(id, parameters);
+                var result = await _birdService.GetBirdsByUserIdAsync(id);
+                var paginationData = new PaginationMetaData(parameters.Page, result.Count(), parameters.ItemsPerPage);
+                Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
+                paginatedResult = Pagination.AddPagination<BirdResponseDto>(result, parameters);
             }
             catch (BaseException ex)
             {
                 return StatusCode((int)ex.StatusCode, ex.Message);
             }
-            return Ok(result);
+            return Ok(paginatedResult);
         }
         [HttpGet("{id}/medicines")]
         public async Task<IActionResult> GetMedicinesFromUser(Guid id, [FromQuery] PaginationParameters parameters)
         {
-            IEnumerable<MedicineResponseDto> result;
+            IEnumerable<MedicineResponseDto> paginatedResult;
             try
             {
-                result = await _medicineService.GetMedicinesByUserIdAsync(id, parameters);
+                var result = await _medicineService.GetMedicinesByUserIdAsync(id);
+                var paginationData = new PaginationMetaData(parameters.Page, result.Count(), parameters.ItemsPerPage);
+                Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
+                paginatedResult = Pagination.AddPagination<MedicineResponseDto>(result, parameters);
             }
             catch (BaseException ex)
             {
                 return StatusCode((int)ex.StatusCode, ex.Message);
             }
-            return Ok(result);
+            return Ok(paginatedResult);
         }
 
         [HttpGet("{id}/prescriptions")]
         public async Task<IActionResult> GetPrescriptionsFromUser(Guid id, [FromQuery] PaginationParameters parameters)
         {
-            IEnumerable<PrescriptionResponseDto> result;
+            IEnumerable<PrescriptionResponseDto> paginatedResult;
             try
             {
-                result = await _prescriptionService.GetPrescriptionsByUserIdAsync(id, parameters);
+                var result = await _prescriptionService.GetPrescriptionsByUserIdAsync(id);
+                var paginationData = new PaginationMetaData(parameters.Page, result.Count(), parameters.ItemsPerPage);
+                Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
+                paginatedResult = Pagination.AddPagination<PrescriptionResponseDto>(result, parameters);
             }
             catch (BaseException ex)
             {
                 return StatusCode((int)ex.StatusCode, ex.Message);
             }
-            return Ok(result);
+            return Ok(paginatedResult);
         }
 
         [HttpPost]

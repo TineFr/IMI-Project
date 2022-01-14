@@ -39,15 +39,14 @@ namespace Imi.Project.Api.Core.Services
             return result;
         }
 
-        public async Task<IEnumerable<BirdResponseDto>> ListAllBirdsAsync(PaginationParameters parameters)
+        public async Task<IEnumerable<BirdResponseDto>> ListAllBirdsAsync()
         {
             var birds = await _birdRepository.ListAllAsync();
             if (birds.Count() == 0)
             {
                 throw new ItemNotFoundException($"No birds were found");
             }
-            var birdsPaginated = Pagination.AddPagination<Bird>(birds, parameters);
-            var result = birdsPaginated.MapToDtoList();
+            var result = birds.MapToDtoList();
             return result;
         }
 
@@ -109,7 +108,7 @@ namespace Imi.Project.Api.Core.Services
             await _birdRepository.DeleteMultipleAsync(birds);
         }
 
-        public async Task<IEnumerable<BirdResponseDto>> GetBirdsByCageIdAsync(Guid id, PaginationParameters parameters)
+        public async Task<IEnumerable<BirdResponseDto>> GetBirdsByCageIdAsync(Guid id)
         {
             if (await _birdRepository.EntityExists<Cage>(id))
             {
@@ -118,14 +117,13 @@ namespace Imi.Project.Api.Core.Services
                 {
                     throw new ItemNotFoundException($"No birds were found for cage with id {id}");
                 }
-                var birdsPaginated = Pagination.AddPagination<Bird>(birds, parameters);
-                var result = birdsPaginated.MapToDtoList();
+                var result = birds.MapToDtoList();
                 return result;
             }
             else throw new ItemNotFoundException($"Cage with id {id} does not exist");
         }
 
-        public async Task<IEnumerable<BirdResponseDto>> GetBirdsByUserIdAsync(Guid id, PaginationParameters parameters)
+        public async Task<IEnumerable<BirdResponseDto>> GetBirdsByUserIdAsync(Guid id)
         {
             if (await _birdRepository.EntityExists<ApplicationUser>(id))
             {
@@ -134,8 +132,7 @@ namespace Imi.Project.Api.Core.Services
                 {
                     throw new ItemNotFoundException($"No birds were found for user with id {id}");
                 }
-                var birdsPaginated = Pagination.AddPagination<Bird>(birds, parameters);
-                var result = birdsPaginated.MapToDtoList();
+                var result = birds.MapToDtoList();
                 return result;
             }
             else throw new ItemNotFoundException($"User with id {id} does not exist");

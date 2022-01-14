@@ -10,11 +10,11 @@ namespace Imi.Project.Api.Core.Interfaces.Services
 {
     public interface IDailyTaskService
     {
-        Task<IEnumerable<DailyTaskResponseDto>> ListAllDailyTasksAsync(PaginationParameters parameters);
+        Task<IEnumerable<DailyTaskResponseDto>> ListAllDailyTasksAsync();
         Task<DailyTaskResponseDto> GetDailyTaskByIdAsync(Guid id);
         Task<DailyTaskResponseDto> AddDailyTaskAsync(DailyTaskRequestDto dto);
         Task<DailyTaskResponseDto> UpdateDailyTaskAsync(Guid id, DailyTaskRequestDto dto);
         Task DeleteDailyTaskAsync(Guid id);
-        Task<IEnumerable<DailyTaskResponseDto>> GetDailyTasksByCageIdAsync(Guid id, PaginationParameters parameters);
+        Task<IEnumerable<DailyTaskResponseDto>> GetDailyTasksByCageIdAsync(Guid id);
     }
 }

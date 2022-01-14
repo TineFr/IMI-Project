@@ -37,15 +37,14 @@ namespace Imi.Project.Api.Core.Services
             return result;
         }
 
-        public async Task<IEnumerable<DailyTaskResponseDto>> ListAllDailyTasksAsync(PaginationParameters parameters)
+        public async Task<IEnumerable<DailyTaskResponseDto>> ListAllDailyTasksAsync()
         {
             var tasks = await _dailyTaskRepository.ListAllAsync();
             if (tasks.Count() == 0)
             {
                 throw new ItemNotFoundException($"No tasks were found");
             }
-            var tasksPaginated = Pagination.AddPagination<DailyTask>(tasks, parameters);
-            var result = tasksPaginated.MapToDtoList();
+            var result = tasks.MapToDtoList();
             return result;
         }
 
@@ -81,7 +80,7 @@ namespace Imi.Project.Api.Core.Services
             }
             await _dailyTaskRepository.DeleteAsync(task);
         }
-        public async Task<IEnumerable<DailyTaskResponseDto>> GetDailyTasksByCageIdAsync(Guid id, PaginationParameters parameters)
+        public async Task<IEnumerable<DailyTaskResponseDto>> GetDailyTasksByCageIdAsync(Guid id)
         {
             if (await _dailyTaskRepository.EntityExists<Cage>(id))
             {
@@ -90,8 +89,7 @@ namespace Imi.Project.Api.Core.Services
                 {
                     throw new ItemNotFoundException($"No tasks were found for cage with id {id}");
                 }
-                var tasksPaginated = Pagination.AddPagination<DailyTask>(tasks, parameters);
-                var result = tasksPaginated.MapToDtoList();
+                var result = tasks.MapToDtoList();
                 return result;
             }
             else throw new ItemNotFoundException($"Cage with id {id} does not exist");

@@ -31,16 +31,19 @@ namespace Imi.Project.Api.Controllers
         [Authorize(Policy = "AdministratorRole")]
         public async Task<IActionResult> Get([FromQuery] PaginationParameters parameters)
         {
-            IEnumerable<DailyTaskResponseDto> result;
+            IEnumerable<DailyTaskResponseDto> paginatedResult;
             try
             {
-                result = await _dailyTaskService.ListAllDailyTasksAsync(parameters);
+                var result = await _dailyTaskService.ListAllDailyTasksAsync();
+                var paginationData = new PaginationMetaData(parameters.Page, result.Count(), parameters.ItemsPerPage);
+                Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
+                paginatedResult = Pagination.AddPagination<DailyTaskResponseDto>(result, parameters);
             }
             catch (BaseException ex)
             {
                 return StatusCode((int)ex.StatusCode, ex.Message);
             }
-            return Ok(result);
+            return Ok(paginatedResult);
         }
 
         [HttpGet("{id}")]
