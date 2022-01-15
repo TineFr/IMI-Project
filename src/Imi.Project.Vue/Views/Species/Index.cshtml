@@ -1,6 +1,6 @@
-﻿<div id="cagesIndex">
+﻿<div id="speciesIndex">
         <div class="indexHeader">
-        <h1 class="indexTitle">My cages</h1>
+        <h1 class="indexTitle">Species</h1>
     <button v-if="overViewMode" class="btnAddNew" v-on:click="toAddMode"><p>+</p></button>
     </div>
 
@@ -18,13 +18,13 @@
 
              <div v-if="apiErrorMessage">{{apiErrorMessage}}</div>
 
-                    <div class="containerItem" v-for="cage in cages">
+                    <div class="containerItem" v-for="specimen in species">
                 
-                            <div class="indexItem" v-on:click="toDetailMode(cage)">
-                                <img class="itemImage" v-bind:src="cage.image"/>
+                            <div class="indexItem" v-on:click="toDetailMode(specimen)">
+
                                 <div>
-                                    <h2>{{cage.name}}</h2>
-                                    <p>{{cage.location}}</p>
+                                    <h2>{{specimen.name}}</h2>
+                                    <p>{{specimen.scientificName}}</p>
                                 </div>   
                            </div>
                     </div>
@@ -38,22 +38,29 @@
             <div class="detailView">
                 <div class="imageDiv">
                     <h1 class="detailTitle">{{mode}}</h1>
-                    <img class="detailImage" v-bind:src="currentCage.image"/>
+                    <img class="detailImage" v-bind:src="currentSpecies.image"/>
                </div>
                <div class="formDiv">
                  <form>
-                    <div v-if="currentCage">
+                    <div v-if="currentSpecies">
                         <div class="form-group">
                             <label>Name:</label><br>
-                            <input v-model="currentCage.name"  class="form-control col-sm-5" v-bind:readonly="detailMode" >
+                            <input v-model="currentSpecies.name"  class="form-control col-sm-5" v-bind:readonly="detailMode" >
                             <div class="error" v-if="errors.name != []">{{errors.name[0]}}</div> 
                         </div>
         
                         <div class="form-group">
-                            <label>Location:</label><br>
-                            <input v-model="currentCage.hatchDate"  class="form-control col-sm-5" v-bind:readonly="detailMode" >
-                            <div class="error" v-if="errors.location != []">{{errors.location[0]}}</div> 
+                            <label>Scientific name:</label><br>
+                            <input v-model="currentSpecies.scientificName"  class="form-control col-sm-5" v-bind:readonly="detailMode" >
+                            <div class="error" v-if="errors.scientificName != []">{{errors.scientificName[0]}}</div> 
                         </div>
+
+                        <div class="form-group">
+                            <label>Description:</label><br>
+                            <input v-model="currentSpecies.description"  class="form-control col-sm-5" v-bind:readonly="detailMode" >
+                            <div class="error" v-if="errors.description != []">{{errors.description[0]}}</div> 
+                        </div>
+
                         <div v-if="detailMode">       
                             <button type="button" v-on:click="toEditMode()" class="btnEdit">Edit</button>
                             <button type="button" class="btnDelete">Delete</button>
@@ -70,4 +77,7 @@
         </div>
 
     </div>
-<script src="~/js/cages.js" asp-append-version="true"></script>
+<script src="~/js/species.js" asp-append-version="true"></script>
+
+
+              

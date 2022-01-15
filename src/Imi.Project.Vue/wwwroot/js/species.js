@@ -1,4 +1,4 @@
-﻿var baseCagesUrl = "https://localhost:5001/api/me/cages?ItemsPerPage=6&Page=";
+﻿var baseSpeciesUrl = "https://localhost:5001/api/species?ItemsPerPage=6&Page=";
 
 const config = { headers: { Authorization: `Bearer ${localStorage.token}` } };
 
@@ -8,38 +8,39 @@ var test = axios.create({
 
 
 var cages = new Vue({
-    el: '#cagesIndex',
+    el: '#speciesIndex',
     data: {
         overViewMode: true,
         detailMode: false,
-        cages: null,
+        species: null,
         mode: null,
-        currentCage: null,
+        currentSpecies: null,
         apiErrorMessage: null,
         page: 1,
         hasNextPage: false,
         hasPreviousPage: false,
         errors: {
             name: [],
-            location: [],
+            description: [],
+            scientificName: [],
         },
 
     },
     created: function () {
         var self = this;
         self.overViewMode = true;
-        self.fetchCages(this.CurrentPage);
+        self.fetchSpecies(this.CurrentPage);
     },
 
     methods: {
 
-        fetchCages: function () {
+        fetchSpecies: function () {
             var self = this;
-            self.cages = null;
+            self.species = null;
             self.apiErrorMessage = null;
             test.get(self.fetchUrl(), config)
                 .then(function (response) {
-                    self.cages = response.data;
+                    self.species = response.data;
                     self.ManagePagination(JSON.parse(response.headers.pagination))
                 })
                 .catch((error) => {
@@ -49,13 +50,13 @@ var cages = new Vue({
         },
         fetchUrl: function () {
             var self = this;
-            var baseUri = baseCagesUrl + self.page;
+            var baseUri = baseSpeciesUrl + self.page;
             return baseUri
         },
 
         ManagePagination: function (data) {
             var self = this;
-            self.page = 1;
+            self.page = data.CurrentPage;
             self.hasNextPage = false;
             self.hasPreviousPage = false;
             if (data.HasPreviousPage == true) {
@@ -69,13 +70,13 @@ var cages = new Vue({
         onNextPageClicked: function () {
             var self = this;
             self.page += 1;
-            this.fetchCages();
+            this.fetchSpecies();
         },
 
         onPreviousPageClicked: function () {
             var self = this;
             self.page -= 1;
-            this.fetchCages();
+            this.fetchSpecies();
         },
 
         toAddMode: function () {
@@ -83,23 +84,24 @@ var cages = new Vue({
             this.mode = "Add new";
             self.currentCage = {
                 name: "",
-                location: "",
+                scientificName: "",
+                description: "",
 
             }
             this.detailMode = false
             this.overViewMode = false;
         },
 
-        toDetailMode: function (cage) {
+        toDetailMode: function (species) {
             this.overViewMode = false;
             this.detailMode = true
-            this.currentCage = cage;
+            this.currentSpecies = species;
             this.mode = "Details";
         },
         toEditMode: function () {
             this.overViewMode = false;
             this.detailMode = false
-            this.mode = "Edit cage";
+            this.mode = "Edit species";
         },
     }
 });
