@@ -384,6 +384,10 @@ paginationDiv > select {
     position: relative;
 }
 
+.form-group > p {
+    margin: 0;
+}
+
 .imageDiv {
     grid-column: 0;
 }

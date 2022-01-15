@@ -19,13 +19,15 @@ namespace Imi.Project.Api.Core.Services
         protected readonly IBirdRepository _birdRepository;
         protected readonly IImageService _imageService;
         protected readonly ICageRepository _cageRepository;
+        protected readonly ICageRepository _speciesRepository;
         public BirdService(IBirdRepository birdRepository,
                            IImageService imageService,
-                           ICageRepository cageRepository)
+                           ICageRepository cageRepository, ICageRepository speciesRepository)
         {
             _birdRepository = birdRepository;
             _imageService = imageService;
             _cageRepository = cageRepository;
+            _speciesRepository = speciesRepository;
         }
 
         public async Task<BirdResponseDto> GetBirdByIdAsync(Guid id)
@@ -187,11 +189,12 @@ namespace Imi.Project.Api.Core.Services
 
             if (dto.SpeciesId != null)
             {
-                if (dto.CageId != new Guid())
-                    if (!(await _birdRepository.EntityExists<Species>(dto.SpeciesId)))
-                    {
-                        throw new ItemNotFoundException($"Species with id {dto.UserId} does not exist");
-                    }
+                
+                var species = await _speciesRepository.GetByIdAsync((Guid)dto.SpeciesId);
+                if (species == null)
+                {
+                    throw new ItemNotFoundException($"Species with id {dto.SpeciesId} does not exist");
+                }
             }
 
 

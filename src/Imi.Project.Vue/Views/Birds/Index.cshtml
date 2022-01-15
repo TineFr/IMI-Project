@@ -53,12 +53,12 @@
 <div v-else>
 
      <div class="backButton" v-on:click="overViewMode = true" type="button"><img class="longArrow" src="~/images/long-arrow.png"/>Back to list</div>          
-        <div class="detailView">
+        <div class="detailView" v-bind:class="{greenBorder : !detailMode, pinkBorder : deleteMode}">
             <div class="imageDiv">
-                <h1 class="detailTitle">{{mode}}</h1>
+                <h1 class="detailTitle" v-bind:class="{greenBorder : !detailMode, pinkBorder : deleteMode}">{{mode}}</h1>
                 <img class="detailImage" v-bind:src="currentBird.image"/>
            </div>
-           <div class="formDiv">
+           <div class="formDiv" disabled>
              <form>
                 <div v-if="currentBird">
                     <div class="form-group">
@@ -69,15 +69,20 @@
         
                     <div class="form-group">
                         <label>HatchDate:</label><br>
-                        <input type="date" v-model="currentBird.hatchDate"  class="form-control col-sm-5" v-bind:readonly="detailMode" >
-                        <div class="error" v-if="errors.hatchDate != []">{{errors.hatchDate[0]}}</div> 
+                        <input v-if="detailMode"  v-model="currentBird.hatchDate.split('T')[0]"  class="form-control col-sm-5" v-bind:readonly="detailMode" >
+                        <div v-else>
+                            <label>{{currentBird.hatchDate.split('T')[0]}}</label>
+                            <input  type="date" v-model="currentBird.hatchDate" class="form-control col-sm-5" v-bind:readonly="detailMode" >
+                            <div class="error" v-if="errors.hatchDate != []">{{errors.hatchDate[0]}}</div> 
+                        </div>
                     </div>
-
 
                     <div v-if="!detailMode" class="form-group">
                         <label>Cage:</label><br>
+                        <p v-if="currentBird.cage">{{currentBird.cage.name}}</p><br>
                         <select class="browser-default custom-select col-sm-5"  name="select cage" v-model="currentBird.cage">
-                        <option v-for="cage in cages" v-bind:value="cage.id">{{cage.name}}</option>
+                            <option v-bind:value=null>None</option>
+                            <option v-for="cage in cages" v-bind:value="cage">{{cage.name}}</option>
                       </select>
                     </div>
                     <div v-else-if="currentBird.cage" class="form-group">
@@ -87,8 +92,10 @@
 
                     <div v-if="!detailMode" class="form-group">
                         <label>Species:</label><br>
+                        <p v-if="currentBird.species">{{currentBird.species.name}}</p><br>
                         <select class="browser-default custom-select col-sm-5"  name="select species" title="species" v-model="currentBird.species">
-                        <option v-for="specimen in species" v-bind:value="specimen.id">{{specimen.name}}</option>     
+                        <option v-bind:value=null>None</option>
+                        <option v-for="specimen in species" v-bind:value="specimen">{{specimen.name}}</option>     
                       </select>
                     </div>
                     <div v-else-if="currentBird.species" class="form-group">
@@ -101,15 +108,23 @@
                         <input v-model="currentBird.food" class="form-control col-sm-5" v-bind:readonly="detailMode">
                     </div>
 
-                    <div v-if="detailMode">       
-                        <button type="button" v-on:click="toEditMode()" class="btnEdit">Edit</button>
-                        <button type="button" class="btnDelete">Delete</button>
-                    </div> 
-
-                    <div v-else>
-                        <button>Save</button>
-                        <label class="error" v-if="apiErrorMessage != null">{{apiErrorMessage}}</label>
-                    </div>
+                        <div v-if="detailMode">       
+                            <button type="button" v-on:click="toEditMode()" class="btnEdit">Edit</button>
+                            <button type="button" v-on:click="toDeleteMode()" class="btnDelete">Delete</button>
+                        </div> 
+                        <div v-else-if="deleteMode">
+                            <div class="deleteDiv">
+                                <h3>Are you sure you want to delete this bird?</h3>
+                                <button class="btnSave" type="button" v-on:click="deleteBird()">YES</button>
+                                <button class="btnCancel" type="button" v-on:click="toDetailMode(currentBird)">Cancel</button><br />
+                                <label class="error" v-if="apiErrorMessage != null">{{apiErrorMessage}}</label>
+                            </div>
+                        </div>
+                       <div v-else>
+                            <button class="btnSave" type="button" v-on:click="editBird(editMode)">Save</button>
+                            <button class="btnCancel" type="button" v-on:click="toDetailMode(currentBird)">Cancel</button><br />
+                            <label class="error" v-if="apiErrorMessage != null">{{apiErrorMessage}}</label>
+                        </div>
                 </div>
             </form>
            </div>
