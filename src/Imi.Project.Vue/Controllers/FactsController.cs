@@ -2,9 +2,9 @@
 
 namespace Imi.Project.Vue.Controllers
 {
-    public class MedicinesController : Controller
+    public class FactsController : Controller
     {
-        [Route("/medicines")]
+        [Route("/facts")]
         public IActionResult Index()
         {
             return View();
