@@ -1,6 +1,12 @@
 ﻿var baseCagesUrl = "https://localhost:5001/api/me/cages?ItemsPerPage=6&Page=";
+var crudUrl = "https://localhost:5001/api/cages/";
 
-const config = { headers: { Authorization: `Bearer ${localStorage.token}` } };
+const config = {
+    headers: {
+        Authorization: `Bearer ${localStorage.token}`,
+       'Content-Type': 'multipart/form-data'
+    }
+};
 
 var test = axios.create({
     allowedHeaders: ['pagination'],
@@ -12,9 +18,11 @@ var cages = new Vue({
     data: {
         overViewMode: true,
         detailMode: false,
-        deleteMode : false,
+        deleteMode: false,
+        editMode : false,
         cages: null,
         mode: null,
+        cageRequest: null,
         currentCage: null,
         apiErrorMessage: null,
         page: 1,
@@ -38,7 +46,7 @@ var cages = new Vue({
             var self = this;
             self.cages = null;
             self.apiErrorMessage = null;
-            test.get(self.fetchUrl(), config)
+            test.get(self.fetchBaseUrl(), config)
                 .then(function (response) {
                     self.cages = response.data;
                     self.ManagePagination(JSON.parse(response.headers.pagination))
@@ -48,7 +56,7 @@ var cages = new Vue({
                     this.apiErrorMessage = response.data;
                 })
         },
-        fetchUrl: function () {
+        fetchBaseUrl: function () {
             var self = this;
             var baseUri = baseCagesUrl + self.page;
             return baseUri
@@ -92,14 +100,15 @@ var cages = new Vue({
 
         toDetailMode: function (cage) {
             this.overViewMode = false;
-            this.detailMode = true
+            this.detailMode = true;
+            this.deleteMode = false;
+            this.editMode = false;
             this.currentCage = cage;
             this.mode = "Details";
         },
         toEditMode: function () {
-            this.overViewMode = false;
-            this.detailMode = false
-            this.deleteMode = false;
+            this.editMode = true;
+            this.detailMode = false;
             this.mode = "Edit cage";
         },
         toDeleteMode: function () {
@@ -109,9 +118,64 @@ var cages = new Vue({
         },
 
         backToList: function () {
+            if (this.cages == null) {
+
+                this.apiErrorMessage = "No cages found";
+            }
             this.overViewMode = true;
             this.detailMode = false
             this.deleteMode = false;
-        }
+            this.editMode = false;
+        },
+
+        deleteCage: function () {
+            var self = this;
+            var url = crudUrl + self.currentCage.id;
+            axios.delete(url, config)
+                .then(function (response) {
+                    self.cages.forEach(function (cage, i) {
+                        if (cage.id === self.currentCage.id) {
+                            self.cages.splice(i, 1);
+                        }
+                    });
+                    self.backToList();
+                })
+                .catch((error) => {
+                    const response = error?.response;
+                    this.apiErrorMessage = response.data;
+                })
+            
+        },
+        editCage: function (isEditMode) {
+
+            var self = this;
+            const formData = new FormData();
+            formData.append("Name", self.currentCage.name);
+            formData.append("Location", self.currentCage.location);
+            if (isEditMode) {
+                var url = crudUrl + self.currentCage.id;
+                axios.put(url, formData, config)
+                    .then(function (response) {
+                        self.toDetailMode(response.data);
+                    })
+                    .catch((error) => {
+                        const response = error?.response;
+                        self.apiErrorMessage = response.data;
+                    })
+            } else this.addCage(formData);
+        },
+
+        addCage: function (data) {
+            var self = this;
+            var url = crudUrl;
+            axios.post(url, data, config)
+                .then(function (response) {
+                    self.cages.push(response.data);
+                })
+                .catch((error) => {
+                    const response = error?.response;
+                    self.apiErrorMessage = response.data;
+                })
+        },
     }
 });

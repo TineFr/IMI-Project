@@ -62,13 +62,13 @@
                             <div class="deleteDiv">
                                 <h3>Are you sure you want to delete this cage?</h3>
                                 <button class="btnSave" type="button" v-on:click="deleteCage()">YES</button>
-                                <button class="btnCancel" type="button">Cancel</button><br />
+                                <button class="btnCancel" type="button" v-on:click="toDetailMode(currentCage)">Cancel</button><br />
                                 <label class="error" v-if="apiErrorMessage != null">{{apiErrorMessage}}</label>
                             </div>
                         </div>
                        <div v-else>
-                            <button class="btnSave" type="button">Save</button>
-                            <button class="btnCancel" type="button">Cancel</button><br />
+                            <button class="btnSave" type="button" v-on:click="editCage(editMode)">Save</button>
+                            <button class="btnCancel" type="button" v-on:click="toDetailMode(currentCage)">Cancel</button><br />
                             <label class="error" v-if="apiErrorMessage != null">{{apiErrorMessage}}</label>
                         </div>
                     </div>
