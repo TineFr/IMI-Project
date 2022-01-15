@@ -12,6 +12,7 @@ var cages = new Vue({
     data: {
         overViewMode: true,
         detailMode: false,
+        deleteMode : false,
         cages: null,
         mode: null,
         currentCage: null,
@@ -55,7 +56,7 @@ var cages = new Vue({
 
         ManagePagination: function (data) {
             var self = this;
-            self.page = 1;
+            self.page = data.CurrentPage;
             self.hasNextPage = false;
             self.hasPreviousPage = false;
             if (data.HasPreviousPage == true) {
@@ -84,7 +85,6 @@ var cages = new Vue({
             self.currentCage = {
                 name: "",
                 location: "",
-
             }
             this.detailMode = false
             this.overViewMode = false;
@@ -99,7 +99,19 @@ var cages = new Vue({
         toEditMode: function () {
             this.overViewMode = false;
             this.detailMode = false
+            this.deleteMode = false;
             this.mode = "Edit cage";
         },
+        toDeleteMode: function () {
+            this.deleteMode = true;
+            this.detailMode = false;
+            this.mode = "Delete cage";
+        },
+
+        backToList: function () {
+            this.overViewMode = true;
+            this.detailMode = false
+            this.deleteMode = false;
+        }
     }
 });

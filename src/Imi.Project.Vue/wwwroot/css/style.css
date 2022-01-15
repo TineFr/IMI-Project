@@ -1,20 +1,58 @@
 ﻿
 /*global*/
 
-.error{
+
+.deleteDiv {
+    z-index: 20;
+    position: absolute;
+    bottom: 0;
+    right: 190px;
+    width: 500px;
+    text-align: center;
+    margin-bottom: 30px;
+    background-color: #EEEEEE;
+    height: 200px;
+}
+
+h3 {
+}
+
+.error {
     color: indianred;
     font-family: 'Trebuchet MS';
 }
 
-button:disabled{
+button:disabled {
     background-color: yellow;
 }
 
-.default{
+.default {
     color: black;
 }
 
 
+.btnEdit, .btnSave {
+    background-color: lightgreen;
+}
+
+.btnDelete, .btnEdit, .btnSave, .btnCancel {
+    width: 100px;
+    text-align: center;
+    color: white;
+    border: 0;
+}
+
+.btnDelete, .btnCancel {
+    background-color: indianred;
+}
+
+.greenBorder {
+    border-color: lightgreen !important;
+}
+
+.pinkBorder {
+    border-color: lightpink !important;
+}
 
 /*Login & register view*/
 /*...........................................................................*/
@@ -85,9 +123,9 @@ input {
     margin-top: 10px;
 }
 
-#btnSignIn:hover {
-    background-color: #d999e4;
-}
+    #btnSignIn:hover {
+        background-color: #d999e4;
+    }
 
 
 /*sign up button */
@@ -102,9 +140,9 @@ input {
     text-decoration: none;
 }
 
-#btnSignUp:hover {
-    color: darkgrey;
-}
+    #btnSignUp:hover {
+        color: darkgrey;
+    }
 
 /*vue influensed properties*/
 
@@ -124,12 +162,12 @@ input {
     word-wrap: break-word;
 }
 
-#divRegister > h2 {
-    font-size: 30px;
-    font-weight: bold;
-    margin: 5px;
-    color: lightblue;
-}
+    #divRegister > h2 {
+        font-size: 30px;
+        font-weight: bold;
+        margin: 5px;
+        color: lightblue;
+    }
 
 #registerLogo {
     height: 110px;
@@ -161,17 +199,17 @@ input {
     border: none;
     color: white;
 }
-.arrowContainer{
+
+.arrowContainer {
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: absolute;
     top: 0;
     right: 0;
-
 }
 
-.paginationDiv{
+.paginationDiv {
     position: relative;
 }
 
@@ -192,6 +230,7 @@ input {
     top: 10px;
     left: 10px;
 }
+
 .btnArrow {
     background-color: grey;
     text-align: center;
@@ -222,8 +261,8 @@ input {
     background-color: rgb(148, 203, 221);
 }
 
-.indexHeader{
-position: relative;
+.indexHeader {
+    position: relative;
 }
 
 .indexContainer {
@@ -231,6 +270,7 @@ position: relative;
     justify-content: start;
     flex-wrap: wrap;
 }
+
 .indexItem {
     padding: 20px;
     display: grid;
@@ -244,9 +284,9 @@ position: relative;
     word-wrap: break-word;
 }
 
-.indexItem:hover {
-    background-color: #C4C4C4;
-}
+    .indexItem:hover {
+        background-color: #C4C4C4;
+    }
 
 
 .itemImage {
@@ -272,7 +312,6 @@ position: relative;
 }
 
 .indexItem > h2, .indexItem > p {
-   
     margin: 0;
 }
 
@@ -285,8 +324,8 @@ a, a:hover {
 }
 
 
-.mainContainer{
-    padding: 0 30px 20px 30px 
+.mainContainer {
+    padding: 0 30px 20px 30px
 }
 
 
@@ -322,7 +361,7 @@ paginationDiv > select {
     margin: 20px;
 }*/
 
-.maxWidth{
+.maxWidth {
     max-width: 500px;
 }
 
@@ -333,8 +372,8 @@ paginationDiv > select {
     display: grid;
     grid-template-columns: 400px 600px;
     color: rgba(37, 37, 37, 0.651);
-    border: 2px solid lightpink;
-/*    background-color: #EEEEEE;*/
+    border: 2px solid lightblue;
+    /*    background-color: #EEEEEE;*/
     background-color: white;
     border-radius: 20px;
     word-wrap: break-word;
@@ -342,21 +381,21 @@ paginationDiv > select {
     margin: 20px;
     margin-left: 100px;
     margin-top: 30px;
+    position: relative;
 }
 
-.imageDiv{
+.imageDiv {
     grid-column: 0;
 }
 
 .detailImage {
- 
     height: 200px;
     width: auto;
     max-width: 400px;
     margin: 20px;
 }
 
-.formDiv{
+.formDiv {
     grid-column: 0;
     padding: 30px;
     margin-left: 40px;
@@ -367,41 +406,25 @@ paginationDiv > select {
 }
 
 
-.longArrow{
+.longArrow {
     width: 50px;
     margin: 5px;
 }
 
-.backButton{
-    font-family:"Trebuchet MS";
+.backButton {
+    font-family: "Trebuchet MS";
     font-size: 20px;
     color: grey;
-
 }
 
 .detailTitle {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 30px;
     padding: 10px;
-    border-bottom: 2px solid lightpink;
+    border-bottom: 2px solid lightblue;
     color: rgba(0, 0, 0, 0.651);
 }
 
-form > label{
+form > label {
     font-size: 40px;
 }
-
-.btnEdit {
-    background-color: lightgreen;
-}
-
-.btnDelete, .btnEdit {
-    width: 100px;
-    text-align: center;
-    color: white;
-    border: 0;
-}
-.btnDelete {
-    background-color: indianred;
-}
-

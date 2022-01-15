@@ -15,7 +15,7 @@ var login = new Vue({
     },
     created: function () {
         if (localStorage.getItem('token')) {
-            window.location = '/birds/index';
+            window.location = '/birds';
         }
     },
 
@@ -51,7 +51,7 @@ var login = new Vue({
 
                         sessionStorage.setItem("token", response.data.jwt);
                         sessionStorage.setItem("navbar", true);
-                        window.location = '/birds/index';
+                        window.location = '/birds';
 
                     })
                     .catch((error) => {

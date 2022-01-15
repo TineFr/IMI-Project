@@ -94,13 +94,13 @@ var cages = new Vue({
 
         toDetailMode: function (species) {
             this.overViewMode = false;
-            this.detailMode = true
+            this.detailMode = true;
             this.currentSpecies = species;
             this.mode = "Details";
         },
         toEditMode: function () {
             this.overViewMode = false;
-            this.detailMode = false
+            this.detailMode = false;
             this.mode = "Edit species";
         },
     }

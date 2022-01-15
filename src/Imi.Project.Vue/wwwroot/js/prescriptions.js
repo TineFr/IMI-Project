@@ -1,7 +1,7 @@
 ﻿
-var baseBirdsUrl = "https://localhost:5001/api/me/birds?ItemsPerPage=6&Page=";
-var speciesUrl = "https://localhost:5001/api/species";
-var cagesUrl = "https://localhost:5001/api/me/cages";
+var basePrescriptionsUrl = "https://localhost:5001/api/me/prescriptions?ItemsPerPage=6&Page=";
+var medicinesUrl = "https://localhost:5001/api/me/medicines";
+
 const config = { headers: { Authorization: `Bearer ${localStorage.token}` } };
 
 var test = axios.create({
@@ -10,19 +10,18 @@ var test = axios.create({
 
 
 var birds = new Vue({
-    el: '#birdsIndex',
+    el: '#prescriptionsIndex',
     data: {
         overViewMode: true,
         detailMode: false,
-        birds: null,
+        prescriptions: null,
         mode: null,
-        species: null,
-        cages: null,
-        selectedSpecies: null,
-        selectedCage: null,
-        currentBird : null,
+        medicines: null,
+        birds: null,
+        selectedMedicine: null,
+        selectedBirds: [],
+        currentPrescription: null,
         apiErrorMessage: null,
-        showSelectionBoxes: false,
         page: 1,
         hasNextPage: false,
         hasPreviousPage: false,
@@ -94,7 +93,7 @@ var birds = new Vue({
         },
 
 
-        ManagePagination: function(data) {
+        ManagePagination: function (data) {
             var self = this;
             self.page = data.CurrentPage;
             self.hasNextPage = false;
@@ -107,13 +106,13 @@ var birds = new Vue({
             }
         },
 
-        onNextPageClicked: function() {
+        onNextPageClicked: function () {
             var self = this;
             self.page += 1;
             this.fetchBirds();
         },
 
-        onPreviousPageClicked: function() {
+        onPreviousPageClicked: function () {
             var self = this;
             self.page -= 1;
             this.fetchBirds();
@@ -157,10 +156,6 @@ var birds = new Vue({
             this.overViewMode = false;
             this.detailMode = false
             this.mode = "Edit";
-        },      
+        },
     }
 });
-
-
-
-

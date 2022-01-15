@@ -35,9 +35,9 @@
     <div v-else>
 
          <div class="backButton" v-on:click="overViewMode = true" type="button"><img class="longArrow" src="~/images/long-arrow.png"/>Back to list</div>          
-            <div class="detailView">
+            <div class="detailView" v-bind:class="{greenBorder : !detailMode, pinkBorder : deleteMode}">
                 <div class="imageDiv">
-                    <h1 class="detailTitle">{{mode}}</h1>
+                    <h1 class="detailTitle" v-bind:class="{greenBorder : !detailMode, pinkBorder : deleteMode}">{{mode}}</h1>
                     <img class="detailImage" v-bind:src="currentSpecies.image"/>
                </div>
                <div class="formDiv">
@@ -67,7 +67,8 @@
                         </div> 
 
                         <div v-else>
-                            <button>Save</button>
+                            <button type="button">Save</button>
+                            <button type="button">Cancel</button>
                             <label class="error" v-if="apiErrorMessage != null">{{apiErrorMessage}}</label>
                         </div>
                     </div>
