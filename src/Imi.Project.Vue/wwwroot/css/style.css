@@ -294,7 +294,7 @@ a, a:hover {
     height: 50px;
 }
 
-select {
+paginationDiv > select {
     height: 40px;
     width: 200px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -316,12 +316,92 @@ select {
 }
 
 
-.detailImage{
+/*.detailImage{
     height: 160px;
     width: auto;
     margin: 20px;
-}
+}*/
 
 .maxWidth{
     max-width: 500px;
 }
+
+/*detailScreen*/
+
+.detailView {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 400px 600px;
+    color: rgba(37, 37, 37, 0.651);
+    border: 2px solid lightpink;
+/*    background-color: #EEEEEE;*/
+    background-color: white;
+    border-radius: 20px;
+    word-wrap: break-word;
+    width: 900px;
+    margin: 20px;
+    margin-left: 100px;
+    margin-top: 30px;
+}
+
+.imageDiv{
+    grid-column: 0;
+}
+
+.detailImage {
+ 
+    height: 200px;
+    width: auto;
+    max-width: 400px;
+    margin: 20px;
+}
+
+.formDiv{
+    grid-column: 0;
+    padding: 30px;
+    margin-left: 40px;
+}
+
+.form-group > label {
+    font-weight: bold;
+}
+
+
+.longArrow{
+    width: 50px;
+    margin: 5px;
+}
+
+.backButton{
+    font-family:"Trebuchet MS";
+    font-size: 20px;
+    color: grey;
+
+}
+
+.detailTitle {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 30px;
+    padding: 10px;
+    border-bottom: 2px solid lightpink;
+    color: rgba(0, 0, 0, 0.651);
+}
+
+form > label{
+    font-size: 40px;
+}
+
+.btnEdit {
+    background-color: lightgreen;
+}
+
+.btnDelete, .btnEdit {
+    width: 100px;
+    text-align: center;
+    color: white;
+    border: 0;
+}
+.btnDelete {
+    background-color: indianred;
+}
+

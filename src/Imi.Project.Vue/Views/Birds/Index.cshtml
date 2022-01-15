@@ -1,12 +1,10 @@
 ﻿<div id="birdsIndex">
-
-    <div v-if="overViewMode">
-
-
         <div class="indexHeader">
         <h1 class="indexTitle">My birds</h1>
-        <button class="btnAddNew" v-on:click="toAddMode"><p>+</p></button>
-        </div>
+    <button v-if="overViewMode" class="btnAddNew" v-on:click="toAddMode"><p>+</p></button>
+    </div>
+
+<div v-if="overViewMode">
 
         <div class="paginationDiv">
             <div v-if="showSelectionBoxes">
@@ -34,86 +32,88 @@
 
          <div v-if="apiErrorMessage">{{apiErrorMessage}}</div>
 
-                    <div class="containerItem" v-for="bird in birds">
+                <div class="containerItem" v-for="bird in birds">
                 
-                            <div class="indexItem" v-on:click="todetailMode(bird)">
-                                <img class="itemImage" v-bind:src="bird.image"/>
-                                <div>
-                                    <h2>{{bird.name}}</h2>
-                                    <p v-if="bird.species">{{bird.species.name}}</p>
-                                    <p v-if="bird.cage">{{bird.cage.name}}</p>
-                                </div>
+                        <div class="indexItem" v-on:click="toDetailMode(bird)">
+                            <img class="itemImage" v-bind:src="bird.image"/>
+                            <div>
+                                <h2>{{bird.name}}</h2>
+                                <p v-if="bird.species">{{bird.species.name}}</p>
+                                <p v-if="bird.cage">{{bird.cage.name}}</p>
+                            </div>
 
                             <div v-if="bird.gender == 'Female'"><img class="genderImage" src="~/images/female.png" /></div>
                             <div v-else><img class="genderImage" src="~/images/male.png" /></div>     
-                            </div>
+                       </div>
+                </div>
+         </div>
+</div>
+
+
+<div v-else>
+
+     <div class="backButton" v-on:click="overViewMode = true" type="button"><img class="longArrow" src="~/images/long-arrow.png"/>Back to list</div>          
+        <div class="detailView">
+            <div class="imageDiv">
+                <h1 class="detailTitle">{{mode}}</h1>
+                <img class="detailImage" v-bind:src="currentBird.image"/>
+           </div>
+           <div class="formDiv">
+             <form>
+                <div v-if="currentBird">
+                    <div class="form-group">
+                        <label>Name:</label><br>
+                        <input v-model="currentBird.name"  class="form-control col-sm-5" v-bind:readonly="detailMode" >
+                        <div class="error" v-if="errors.name != []">{{errors.name[0]}}</div> 
                     </div>
-            </div>
-
-        </div>
-
-
-    <div v-else>
-
-        <div class="indexHeader">
-            <h1 class="indexTitle">{{mode}}</h1>
-        </div>
-
-        <img class="detailImage" v-if="detailMode" v-bind:src="currentBird.image"/>
-
-        <form>
-            <div v-if="currentBird">
-            <div class="form-group">
-                <label>Name:</label><br>
-                <input v-model="currentBird.name">
-                <div class="error" v-if="errors.name != []">{{errors.name[0]}}</div> 
-            </div>
         
-            <div class="form-group">
-                <label>HatchDate:</label><br>
-                <input type="date" v-model="currentBird.hatchDate">
-                <div class="error" v-if="errors.hatchDate != []">{{errors.hatchDate[0]}}</div> 
-            </div>
+                    <div class="form-group">
+                        <label>HatchDate:</label><br>
+                        <input type="date" v-model="currentBird.hatchDate"  class="form-control col-sm-5" v-bind:readonly="detailMode" >
+                        <div class="error" v-if="errors.hatchDate != []">{{errors.hatchDate[0]}}</div> 
+                    </div>
 
 
-            <div v-if="!detailMode">
-                <label>Cage:</label><br>
-                <select class="select" name="select cage" v-model="currentBird.cage">
-                <option v-for="cage in cages" v-bind:value="cage.id">{{cage.name}}</option>
-              </select>
-            </div>
-            <div v-else-if="currentBird.cage">
-                <label>Cage:</label><br>
-                <input v-model="currentBird.cage.name"/> 
-            </div>
+                    <div v-if="!detailMode" class="form-group">
+                        <label>Cage:</label><br>
+                        <select class="browser-default custom-select col-sm-5"  name="select cage" v-model="currentBird.cage">
+                        <option v-for="cage in cages" v-bind:value="cage.id">{{cage.name}}</option>
+                      </select>
+                    </div>
+                    <div v-else-if="currentBird.cage" class="form-group">
+                        <label>Cage:</label><br>
+                        <input v-model="currentBird.cage.name" class="form-control col-sm-5" v-bind:readonly="detailMode"/> 
+                    </div>
 
-            <div v-if="!detailMode">
-                <label>Species:</label><br>
-                <select class="select" name="select species" title="species" v-model="currentBird.species">
-                <option v-for="specimen in species" v-bind:value="specimen.id">{{specimen.name}}</option>     
-              </select>
-            </div>
-            <div v-else-if="currentBird.species">
-                <label v-if="currentBird.species">Species:</label><br>
-                 <input v-model="currentBird.species.name"/> 
-            </div>
+                    <div v-if="!detailMode" class="form-group">
+                        <label>Species:</label><br>
+                        <select class="browser-default custom-select col-sm-5"  name="select species" title="species" v-model="currentBird.species">
+                        <option v-for="specimen in species" v-bind:value="specimen.id">{{specimen.name}}</option>     
+                      </select>
+                    </div>
+                    <div v-else-if="currentBird.species" class="form-group">
+                         <label v-if="currentBird.species">Species:</label><br>
+                         <input v-model="currentBird.species.name" class="form-control col-sm-5" v-bind:readonly="detailMode"/> 
+                    </div>
 
-            <div class="form-group">
-                <label>Food:</label><br>
-                <input v-model="currentBird.food">
-            </div>
+                    <div class="form-group">
+                        <label>Food:</label><br>
+                        <input v-model="currentBird.food" class="form-control col-sm-5" v-bind:readonly="detailMode">
+                    </div>
 
-            <div v-if="detailMode">       
-                <button>Edit</button>
-                <button>Delete</button>
-            </div> 
-            <div v-else>
-                <button>Save</button>
-                <label class="error" v-if="apiErrorMessage != null">{{apiErrorMessage}}</label>
-            </div>
+                    <div v-if="detailMode">       
+                        <button type="button" v-on:click="toEditMode()" class="btnEdit">Edit</button>
+                        <button type="button" class="btnDelete">Delete</button>
+                    </div> 
 
-            </div>
-        </form>
+                    <div v-else>
+                        <button>Save</button>
+                        <label class="error" v-if="apiErrorMessage != null">{{apiErrorMessage}}</label>
+                    </div>
+                </div>
+            </form>
+           </div>
+        </div>
     </div>
 
 </div>

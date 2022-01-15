@@ -147,16 +147,20 @@ var birds = new Vue({
             this.overViewMode = false;
         },
 
-        todetailMode: function (bird) {
+        toDetailMode: function (bird) {
             this.overViewMode = false;
             this.detailMode = true
             this.currentBird = bird;
             this.mode = "Details";
         },
+        toEditMode: function () {
+            this.overViewMode = false;
+            this.detailMode = false
+            this.mode = "Edit";
+        },
 
-        refactorDate: function (date) {
-          var test = date.getYear();
-        }
+
+
 
 
         
