@@ -157,14 +157,7 @@ var birds = new Vue({
             this.overViewMode = false;
             this.detailMode = false
             this.mode = "Edit";
-        },
-
-
-
-
-
-        
-        
+        },      
     }
 });
 
