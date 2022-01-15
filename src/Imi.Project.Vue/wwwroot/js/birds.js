@@ -44,7 +44,7 @@ var birds = new Vue({
     created: function () {
         var self = this;
         self.overViewMode = true;
-        self.fetchBirds(this.CurrentPage);
+        self.fetchBirds(this.page);
         self.fetchSpecies();
         self.fetchCages();
     },
@@ -174,10 +174,10 @@ var birds = new Vue({
         },
 
         backToList: function () {
-            if (this.birds == null) {
+            //if (this.birds == null) {
 
-                this.apiErrorMessage = "No birds found";
-            }
+            //    this.apiErrorMessage = "No birds found";
+            //}
             this.overViewMode = true;
             this.detailMode = false
             this.deleteMode = false;
@@ -233,7 +233,7 @@ var birds = new Vue({
             var url = crudUrl;
             axios.post(url, data, config)
                 .then(function (response) {
-                    self.birds.push(response.data);
+                    self.fetchBirds();
                     self.backToList();
                 })
                 .catch((error) => {

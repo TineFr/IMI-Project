@@ -1,11 +1,8 @@
-﻿var baseCagesUrl = "https://localhost:5001/api/me/cages?ItemsPerPage=6&Page=";
-var crudUrl = "https://localhost:5001/api/cages/";
+﻿var baseMedicinesUrl = "https://localhost:5001/api/me/medicines?ItemsPerPage=6&Page=";
+var crudUrl = "https://localhost:5001/api/medicines/";
 
 const config = {
-    headers: {
-        Authorization: `Bearer ${localStorage.token}`,
-       'Content-Type': 'multipart/form-data'
-    }
+    headers: { Authorization: `Bearer ${localStorage.token}`}
 };
 
 var test = axios.create({
@@ -13,16 +10,16 @@ var test = axios.create({
 });
 
 
-var cages = new Vue({
-    el: '#cagesIndex',
+var medicines = new Vue({
+    el: '#medicinesIndex',
     data: {
         overViewMode: true,
         detailMode: false,
         deleteMode: false,
-        editMode : false,
-        cages: null,
+        editMode: false,
+        medicines: null,
         mode: null,
-        cageRequest: null,
+        currentMedicine: null,
         apiErrorMessage: null,
         page: 1,
         hasNextPage: false,
@@ -30,25 +27,25 @@ var cages = new Vue({
         isValid: true,
         errors: {
             name: [],
-            location: [],
+            usage: [],
         },
 
     },
     created: function () {
         var self = this;
         self.overViewMode = true;
-        self.fetchCages(this.page);
+        self.fetchMedicines(this.page);
     },
 
     methods: {
 
-        fetchCages: function () {
+        fetchMedicines: function () {
             var self = this;
-            self.cages = null;
+            self.medicines = null;
             self.apiErrorMessage = null;
             test.get(self.fetchBaseUrl(), config)
                 .then(function (response) {
-                    self.cages = response.data;
+                    self.medicines = response.data;
                     self.ManagePagination(JSON.parse(response.headers.pagination))
                 })
                 .catch((error) => {
@@ -58,7 +55,7 @@ var cages = new Vue({
         },
         fetchBaseUrl: function () {
             var self = this;
-            var baseUri = baseCagesUrl + self.page;
+            var baseUri = baseMedicinesUrl + self.page;
             return baseUri
         },
 
@@ -78,64 +75,60 @@ var cages = new Vue({
         onNextPageClicked: function () {
             var self = this;
             self.page += 1;
-            this.fetchCages();
+            this.fetchMedicines();
         },
 
         onPreviousPageClicked: function () {
             var self = this;
             self.page -= 1;
-            this.fetchCages();
+            this.fetchMedicines();
         },
 
         toAddMode: function () {
             var self = this;
             this.mode = "Add new";
-            self.currentCage = {
+            self.currentMedicine = {
                 name: "",
-                location: "",
+                usage: "",
             }
             this.detailMode = false
             this.overViewMode = false;
         },
 
-        toDetailMode: function (cage) {
+        toDetailMode: function (medicine) {
             this.overViewMode = false;
             this.detailMode = true;
             this.deleteMode = false;
             this.editMode = false;
-            this.currentCage = cage;
+            this.currentMedicine = medicine;
             this.mode = "Details";
         },
         toEditMode: function () {
             this.editMode = true;
             this.detailMode = false;
-            this.mode = "Edit cage";
+            this.mode = "Edit medicine";
         },
         toDeleteMode: function () {
             this.deleteMode = true;
             this.detailMode = false;
-            this.mode = "Delete cage";
+            this.mode = "Delete medicine";
         },
 
         backToList: function () {
-            if (this.cages == null) {
-
-                this.apiErrorMessage = "No cages found";
-            }
             this.overViewMode = true;
             this.detailMode = false
             this.deleteMode = false;
             this.editMode = false;
         },
 
-        deleteCage: function () {
+        deleteMedicine: function () {
             var self = this;
-            var url = crudUrl + self.currentCage.id;
+            var url = crudUrl + self.currentMedicine.id;
             axios.delete(url, config)
                 .then(function (response) {
-                    self.cages.forEach(function (cage, i) {
-                        if (cage.id === self.currentCage.id) {
-                            self.cages.splice(i, 1);
+                    self.medicines.forEach(function (medicine, i) {
+                        if (medicine.id === self.currentMedicine.id) {
+                            self.medicines.splice(i, 1);
                         }
                     });
                     self.backToList();
@@ -144,20 +137,16 @@ var cages = new Vue({
                     const response = error?.response;
                     this.apiErrorMessage = response.data;
                 })
-            
+
         },
-        editCage: function (isEditMode) {
+        editMedicine: function (isEditMode) {
 
             var self = this;
             self.validateRequest();
             if (self.isValid) {
-                const formData = new FormData();
-                formData.append("Name", self.currentCage.name);
-                formData.append("Location", self.currentCage.location);
-
                 if (isEditMode) {
-                    var url = crudUrl + self.currentCage.id;
-                    axios.put(url, formData, config)
+                    var url = crudUrl + self.currentMedicine.id;
+                    axios.put(url, self.currentMedicine, config)
                         .then(function (response) {
                             self.toDetailMode(response.data);
                         })
@@ -165,17 +154,17 @@ var cages = new Vue({
                             const response = error?.response;
                             self.apiErrorMessage = response.data;
                         })
-                } else this.addCage(formData);
+                } else this.addMedicine();
 
             }
         },
 
-        addCage: function (data) {
+        addMedicine: function () {
             var self = this;
             var url = crudUrl;
-            axios.post(url, data, config)
+            axios.post(url, self.currentMedicine, config)
                 .then(function (response) {
-                    self.fetchCages();
+                    self.fetchMedicines();
                     self.backToList();
                 })
                 .catch((error) => {
@@ -189,28 +178,20 @@ var cages = new Vue({
             var self = this;
             self.resetErrors();
 
-            if (!self.currentCage.name) {
+            if (!self.currentMedicine.name) {
                 self.isValid = false;
                 self.errors.name.push("Name is required.");
             }
-            else if (self.currentCage.name.length > 20) {
+            if (!self.currentMedicine.usage) {
                 self.isValid = false;
-                self.errors.name.push("Name cannot be longer than 25 characters.");
-            }
-            if (!self.currentCage.location) {
-                self.isValid = false;
-                self.errors.location.push("Location is required.");
-            }
-            else if (self.currentCage.name.length > 20) {
-                self.isValid = false;
-                self.errors.location.push("Location cannot be longer than 25 characters.");
+                self.errors.location.push("Usage is required.");
             }
         },
 
         resetErrors: function () {
             this.isValid = true;
             this.errors.name = [];
-            this.errors.location = [];
+            this.errors.usage = [];
         }
     }
 });
