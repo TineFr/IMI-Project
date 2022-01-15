@@ -101,8 +101,7 @@ var register = new Vue({
                 axios.post(url, this.registerRequest)
                     .then(function (response) {
 
-                            //return to login 
-                       
+                            //return to login    
                     })
                     .catch((error) => {
 

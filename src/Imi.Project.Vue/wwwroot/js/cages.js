@@ -28,6 +28,7 @@ var cages = new Vue({
         page: 1,
         hasNextPage: false,
         hasPreviousPage: false,
+        isValid: true,
         errors: {
             name: [],
             location: [],
@@ -149,21 +150,25 @@ var cages = new Vue({
         editCage: function (isEditMode) {
 
             var self = this;
-            const formData = new FormData();
-            formData.append("Name", self.currentCage.name);
-            formData.append("Location", self.currentCage.location);
+            self.validateRequest();
+            if (self.isValid) {
+                const formData = new FormData();
+                formData.append("Name", self.currentCage.name);
+                formData.append("Location", self.currentCage.location);
 
-            if (isEditMode) {
-                var url = crudUrl + self.currentCage.id;
-                axios.put(url, formData, config)
-                    .then(function (response) {
-                        self.toDetailMode(response.data);
-                    })
-                    .catch((error) => {
-                        const response = error?.response;
-                        self.apiErrorMessage = response.data;
-                    })
-            } else this.addCage(formData);
+                if (isEditMode) {
+                    var url = crudUrl + self.currentCage.id;
+                    axios.put(url, formData, config)
+                        .then(function (response) {
+                            self.toDetailMode(response.data);
+                        })
+                        .catch((error) => {
+                            const response = error?.response;
+                            self.apiErrorMessage = response.data;
+                        })
+                } else this.addCage(formData);
+
+            }
         },
 
         addCage: function (data) {
@@ -179,5 +184,34 @@ var cages = new Vue({
                     self.apiErrorMessage = response.data;
                 })
         },
+
+        validateRequest: function () {
+
+            var self = this;
+            self.resetErrors();
+
+            if (!self.currentCage.name) {
+                self.isValid = false;
+                self.errors.name.push("Name is required.");
+            }
+            else if (self.currentCage.name.length > 20) {
+                self.isValid = false;
+                self.errors.name.push("Name cannot be longer than 25 characters.");
+            }
+            if (!self.currentCage.location) {
+                self.isValid = false;
+                self.errors.location.push("Location is required.");
+            }
+            else if (self.currentCage.name.length > 20) {
+                self.isValid = false;
+                self.errors.location.push("Location cannot be longer than 25 characters.");
+            }
+        },
+
+        resetErrors: function () {
+            this.isValid = true;
+            this.errors.name = [];
+            this.errors.location = [];
+        }
     }
 });
