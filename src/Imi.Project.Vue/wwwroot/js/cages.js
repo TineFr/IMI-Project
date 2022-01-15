@@ -152,6 +152,7 @@ var cages = new Vue({
             const formData = new FormData();
             formData.append("Name", self.currentCage.name);
             formData.append("Location", self.currentCage.location);
+
             if (isEditMode) {
                 var url = crudUrl + self.currentCage.id;
                 axios.put(url, formData, config)
@@ -171,6 +172,7 @@ var cages = new Vue({
             axios.post(url, data, config)
                 .then(function (response) {
                     self.cages.push(response.data);
+                    self.backToList();
                 })
                 .catch((error) => {
                     const response = error?.response;
