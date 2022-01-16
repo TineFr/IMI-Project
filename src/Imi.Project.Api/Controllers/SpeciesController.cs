@@ -1,18 +1,16 @@
-﻿using Imi.Project.Api.Core.Dtos.Species;
+﻿using Imi.Project.Api.Core.Entities.Pagination;
+using Imi.Project.Api.Core.Exceptions;
 using Imi.Project.Api.Core.Interfaces.Services;
-using Microsoft.AspNetCore.Http;
+using Imi.Project.Common.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Imi.Project.Api.Core.Helper;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Imi.Project.Api.Core.Entities.Pagination;
-using Newtonsoft.Json;
-using Imi.Project.Api.Core.Entities;
 
 namespace Imi.Project.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class SpeciesController : ControllerBase
@@ -27,11 +25,15 @@ namespace Imi.Project.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] PaginationParameters parameters)
         {
-            var species = await _speciesService.ListAllSpeciessAsync();
-            var paginationData = new PaginationMetaData(parameters.Page, species.Count(), parameters.ItemsPerPage);
-            Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
-            var speciesPaginated = Pagination.AddPagination<Species>(species, parameters);
-            var result = speciesPaginated.MapToDtoList();
+            IEnumerable<SpeciesResponseDto> result;
+            try
+            {
+                result = await _speciesService.ListAllSpeciessAsync(parameters);
+            }
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);
+            }
             return Ok(result);
         }
 
@@ -39,60 +41,70 @@ namespace Imi.Project.Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            var species = await _speciesService.GetSpeciesByIdAsync(id);
-            if (species == null)
+            SpeciesResponseDto result;
+            try
             {
-                return NotFound($"Species with id {id} does not exist");
+                result = await _speciesService.GetSpeciesByIdAsync(id);
             }
-            var result = species.MapToDto();
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);
+            }
             return Ok(result);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(SpeciesRequestDto newSpecies)
+        [Authorize(Policy = "AdministratorRole")]
+        public async Task<IActionResult> Post([FromForm] SpeciesRequestDto newSpecies)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var species = await _speciesService.GetSpeciesByIdAsync(newSpecies.Id);
-            if (species != null)
+            SpeciesResponseDto result;
+            try
             {
-                return BadRequest($"Species with id {species.Id} already exists");
+                result = await _speciesService.AddSpeciesAsync(newSpecies);
             }
-            var newSpeciesEntity = newSpecies.MapToEntity();
-            var result = await _speciesService.AddSpeciesAsync(newSpeciesEntity);
-            var resultDto = result.MapToDto();
-            return Ok(resultDto);
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);
+            }
+            return Ok(result);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Put(SpeciesRequestDto updatedSpecies)
+        [HttpPut("{id}")]
+        [Authorize(Policy = "AdministratorRole")]
+        public async Task<IActionResult> Put(Guid id, [FromForm] SpeciesRequestDto updatedSpecies)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var species = await _speciesService.GetSpeciesByIdAsync(updatedSpecies.Id);
-            if (species == null)
+            SpeciesResponseDto result;
+            try
             {
-                return NotFound($"Bird with id {updatedSpecies.Id} does not exist");
+                result = await _speciesService.UpdateSpeciesAsync(id, updatedSpecies);
             }
-            species.Update(updatedSpecies);
-            var result = await _speciesService.UpdateSpeciesAsync(species);
-            var resultDto = result.MapToDto();
-            return Ok(resultDto);
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);
+            }
+            return Ok(result);
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> Delete(SpeciesRequestDto speciesToDelete)
+        [HttpDelete("{id}")]
+        [Authorize(Policy = "AdministratorRole")]
+        public async Task<IActionResult> Delete(Guid id)
         {
-            var species = await _speciesService.GetSpeciesByIdAsync(speciesToDelete.Id);
-            if (species == null)
+            try
             {
-                return NotFound($"Bird with id {speciesToDelete.Id} does not exist");
+                await _speciesService.DeleteSpeciesAsync(id);
             }
-            await _speciesService.DeleteSpeciesAsync(species);
+            catch (BaseException ex)
+            {
+                return StatusCode((int)ex.StatusCode, ex.Message);
+            }
             return Ok();
         }
     }

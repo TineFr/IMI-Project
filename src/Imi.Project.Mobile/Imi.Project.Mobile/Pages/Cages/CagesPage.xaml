@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Imi.Project.Mobile.Pages.Cages.CagesPage"
+             xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions">
+    <ContentPage.Content>
+        <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
+              RowDefinitions="{StaticResource MainGridRows}">
+            <Frame Style="{StaticResource MainFrame}" BackgroundColor="{StaticResource Purple}">
+                <Label Text="My Cages" Style="{StaticResource MainLabel}"></Label>
+            </Frame>
+            <AbsoluteLayout Grid.Row="0" Grid.RowSpan="4">
+                <ImageButton Style="{StaticResource Filter}"></ImageButton>
+                <Image Style="{StaticResource Logo}" ></Image>
+            </AbsoluteLayout>
+            <StackLayout Grid.Row="1" Orientation="Horizontal">
+                <Label Text="{Binding NoCagesMessage}" IsVisible="{Binding NoCagesMessage, Converter={StaticResource VisibilityConverter}}" Margin="5, 10, 5, 10"  HorizontalOptions="StartAndExpand"></Label>
+                <Button  x:Name="btnAddCage" Text="Add new" HorizontalOptions="EndAndExpand" WidthRequest="100" Margin="10" Command="{Binding AddCageCommand}"></Button>
+            </StackLayout>
+            <CollectionView      Grid.Row="2" 
+                                 Grid.RowSpan="3"
+                                 x:Name="cvCages"
+                                 SelectionMode="Single"
+                                 ItemsSource="{Binding Cages}"
+                                 SelectionChangedCommand="{Binding ViewCageCommand}"
+                                 SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference cvCages}}"
+                                 VerticalOptions="Center"   
+                                 HorizontalOptions="Center"   
+                                 Margin="10">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="2"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Style="{StaticResource CollectionSelection}" Padding="5">
+                            <Frame CornerRadius="20" BackgroundColor="#EEEEEE">
+                                <StackLayout>
+                                    <Grid>
+                                        <Image Grid.Column="0" Source="{extensions:ImageResource Imi.Project.Mobile.icons.imageplaceholder.png}" HeightRequest="30"></Image>
+                                        <Image Grid.Column="0" Source="{Binding Image}" HeightRequest="100" Aspect="AspectFit"></Image>
+                                    </Grid>
+                                    <StackLayout HorizontalOptions="Center">
+                                        <Label  Text="{Binding Name}" FontSize="15" FontAttributes="Bold" />
+                                        <Label  Text="{Binding Location}" FontAttributes="italic" />
+                                    </StackLayout>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

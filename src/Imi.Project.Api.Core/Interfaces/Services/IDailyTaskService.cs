@@ -1,5 +1,6 @@
-﻿using Imi.Project.Api.Core.Dtos.DailyTasks;
-using Imi.Project.Api.Core.Entities;
+﻿using Imi.Project.Api.Core.Entities;
+using Imi.Project.Api.Core.Entities.Pagination;
+using Imi.Project.Common.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,13 +10,11 @@ namespace Imi.Project.Api.Core.Interfaces.Services
 {
     public interface IDailyTaskService
     {
-        Task<IEnumerable<DailyTask>> ListAllDailyTasksAsync();
-        Task<DailyTask> GetDailyTaskByIdAsync(Guid id);
-        Task<DailyTask> AddDailyTaskAsync(DailyTask dailyTask);
-        Task<DailyTask> UpdateDailyTaskAsync(DailyTask dailyTask);
-        Task DeleteDailyTaskAsync(DailyTask dailyTask);
-
-
-        Task<IEnumerable<DailyTask>> GetDailyTasksByCageIdAsync(Guid id);
+        Task<IEnumerable<DailyTaskResponseDto>> ListAllDailyTasksAsync(PaginationParameters parameters);
+        Task<DailyTaskResponseDto> GetDailyTaskByIdAsync(Guid id);
+        Task<DailyTaskResponseDto> AddDailyTaskAsync(DailyTaskRequestDto dto);
+        Task<DailyTaskResponseDto> UpdateDailyTaskAsync(Guid id, DailyTaskRequestDto dto);
+        Task DeleteDailyTaskAsync(Guid id);
+        Task<IEnumerable<DailyTaskResponseDto>> GetDailyTasksByCageIdAsync(Guid id, PaginationParameters parameters);
     }
 }

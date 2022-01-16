@@ -1,15 +1,92 @@
-﻿<h3>QuestionView</h3>
+﻿
+@if (!quizEnded)
+{
 
-<div class="outerQuestionContainer">
-    <h2>Here comes the question</h2>
-    <div class="innerQuestionContainer">
-        <div class="answser">Here come the answers</div>
-        <div class="answser">Here come the answers</div>
-        <div class="answser">Here come the answers</div>
-        <div class="answser">Here come the answers</div>
+    <div class="question"><h3>@question.Question</h3></div>
+    <img class="questionImage" src="@question.Image">
+    <div class="itemscontainer">
+
+        @foreach (var answer in question.PossibleAnswers)
+        {
+            <button @onclick="() => AnswerPicked(answer.IsCorrect)" class="answer @(AddColor ? answer.IsCorrect ? "green" : "red" : "")">
+                @answer.Text
+            </button>
+        }
     </div>
-</div>
+    <button @onclick="() =>  NextQuestion()" class="next @(Visibility ? "visible" : "invisible")" >Next</button>
+}
+
+else
+{
+    <QuizEndView Score="count"></QuizEndView>
+}
+
 
 @code {
 
+    public bool Visibility { get; set; }
+
+    public bool AddColor { get; set; }
+
+    public void AddClassName()
+    {
+        AddColor = true;
+    }
+    async void NextQuestion()
+    {
+        question = await ReturnQuestion();
+        AddColor = false;
+        Visibility = false;
+    }
+
+    private bool quizEnded = false;
+
+    private int count;
+
+    [Inject]
+    public IQuizService QuizService { get; set; }
+
+    public QuizElement question;
+
+    protected async override Task OnInitializedAsync()
+    {
+        question = await ReturnQuestion();
+        await base.OnInitializedAsync();
+
+    }
+
+    List<int> askedQuestions = new List<int>();
+
+    public async Task<QuizElement> ReturnQuestion()
+    {
+        int rndQuestion;
+        if (askedQuestions.Count < 5)
+        {
+            Random rnd = new Random();
+            var questions = await QuizService.GetAllAsync();
+            do
+            {
+                rndQuestion = rnd.Next(questions.Count());
+            } while (askedQuestions.Contains(rndQuestion));
+            askedQuestions.Add(rndQuestion);
+            return questions.ToArray()[rndQuestion];
+        }
+        else
+        {
+            quizEnded = true;
+            return null;
+        }
+    }
+
+
+    public void AnswerPicked(bool isCorrect)
+    {
+        AddClassName();
+        if (isCorrect) count += 1;
+        Visibility = true;
+    }
+
 }
+
+
+

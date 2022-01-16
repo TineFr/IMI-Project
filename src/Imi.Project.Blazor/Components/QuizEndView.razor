@@ -1,0 +1,41 @@
+﻿
+@if (!Restart)
+{
+    @if (Score >= 3)
+    {
+    <h3>Congratulations!</h3>
+    }
+
+    else
+    {
+    <h3>You've got some studying to do :) !</h3>
+    }
+
+    <h4>You have @Score out of 5! </h4>
+
+    <img class="questionImage" src="images/quiz/happyowl.jpg">
+
+    <div class="itemscontainer">
+
+    <div class="item">
+        <button @onclick="() => Restart = true">Play again!</button>
+    </div>
+        <div class="item">
+            <button>Statistics</button>
+        </div>
+
+    </div>
+}
+
+else
+{
+    <QuestionView></QuestionView>
+}
+
+
+@code {
+    [Parameter]
+    public int Score { get; set; }
+
+    private bool Restart { get; set; } = false;
+}

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Imi.Project.Mobile.Pages.RegisterPage"
+             xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Image Source="{extensions:ImageResource Imi.Project.Mobile.icons.budgieregister.png}" HorizontalOptions="Center" HeightRequest="100" Margin="0,0,0,0"></Image>
+            <Label HorizontalOptions="Center" Text="Register" FontSize="30" Margin ="0, 5, 0, 0"  FontAttributes="Bold" TextColor="{StaticResource Blue}"></Label>
+                
+                
+                
+                <Label Padding="0" Margin="0"  HorizontalOptions="Center" WidthRequest="300" Text="Name:"  FontAttributes="Bold" FontSize="15"></Label>
+                <Entry  Text="{Binding Name}" Placeholder="ex: Kong" HorizontalOptions="Center" WidthRequest="300"></Entry>
+                <Label  Text="{Binding NameMessage}" Style="{StaticResource Error}" IsVisible="{Binding NameMessage, Converter={StaticResource VisibilityConverter}}"></Label>
+
+                <Label Padding="0" Margin="0"  HorizontalOptions="Center" WidthRequest="300" Text="First name:"  FontAttributes="Bold" FontSize="15"></Label>
+                <Entry  Text="{Binding FirstName}" Placeholder="ex: King" HorizontalOptions="Center" WidthRequest="300" ></Entry>
+                <Label  Text="{Binding FirstNameMessage}" Style="{StaticResource Error}" IsVisible="{Binding FirstNameMessage, Converter={StaticResource VisibilityConverter}}"></Label>
+
+                <Label Padding="0" Margin="0"  HorizontalOptions="Center" WidthRequest="300" Text="E-mail:"  FontAttributes="Bold" FontSize="15"></Label>
+                <Entry  Text="{Binding Email}" Placeholder="ex: king.kong@gmail.com" HorizontalOptions="Center" WidthRequest="300" ></Entry>
+                <Label  Text="{Binding EmailMessage}" Style="{StaticResource Error}" IsVisible="{Binding EmailMessage, Converter={StaticResource VisibilityConverter}}"></Label>
+
+                <Label Padding="0" Margin="0"  HorizontalOptions="Center" WidthRequest="300" Text="Date of birth:"  FontAttributes="Bold" FontSize="15"></Label>
+                <DatePicker  Date="{Binding DateOfBirth}"  HorizontalOptions="Center" WidthRequest="300" ></DatePicker>
+                <Label  Text="{Binding DateOfBirthMessage}" Style="{StaticResource Error}" IsVisible="{Binding DateOfBirthMessage, Converter={StaticResource VisibilityConverter}}"></Label>
+
+                <Label Padding="0" Margin="0"  HorizontalOptions="Center" WidthRequest="300" Text="Password:"  FontAttributes="Bold" FontSize="15"></Label>
+                <Entry  Text="{Binding Password}" IsPassword="true"  HorizontalOptions="Center" WidthRequest="300" ></Entry>
+                <Label  Text="{Binding PasswordMessage}" Style="{StaticResource Error}" IsVisible="{Binding PasswordMessage, Converter={StaticResource VisibilityConverter}}"></Label>
+
+                <Label Padding="0" Margin="0"  HorizontalOptions="Center" WidthRequest="300" Text="Confirm password:"  FontAttributes="Bold" FontSize="15"></Label>
+                <Entry  Text="{Binding ConfirmPassword}" IsPassword="true" HorizontalOptions="Center" WidthRequest="300" ></Entry>
+                <Label  Text="{Binding ConfirmPasswordMessage}" Style="{StaticResource Error}" IsVisible="{Binding ConfirmPasswordMessage, Converter={StaticResource VisibilityConverter}}"></Label>
+
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" WidthRequest="350">
+                    <Button x:Name="btnBack" Margin="0" Padding="0"  BackgroundColor="Transparent" Text="BACK" HorizontalOptions="StartAndExpand" TextColor="Black" Command="{Binding BackCommand}"></Button>
+                    <Button x:Name="btnSave" BackgroundColor="Transparent" Text="SAVE" TextColor="{StaticResource Blue}" HorizontalOptions="EndAndExpand"  Command="{Binding RegisterCommand}"></Button>
+                </StackLayout>
+                <Label></Label>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
