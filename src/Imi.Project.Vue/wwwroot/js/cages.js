@@ -22,9 +22,10 @@ var cages = new Vue({
         editMode : false,
         cages: null,
         mode: null,
-        cageRequest: null,
+        currentCage: null,
         apiErrorMessage: null,
         page: 1,
+        newImage: null,
         hasNextPage: false,
         hasPreviousPage: false,
         isValid: true,
@@ -118,10 +119,7 @@ var cages = new Vue({
         },
 
         backToList: function () {
-            if (this.cages == null) {
-
-                this.apiErrorMessage = "No cages found";
-            }
+            this.fetchCages();
             this.overViewMode = true;
             this.detailMode = false
             this.deleteMode = false;
@@ -154,7 +152,7 @@ var cages = new Vue({
                 const formData = new FormData();
                 formData.append("Name", self.currentCage.name);
                 formData.append("Location", self.currentCage.location);
-
+                if (self.newImage) formData.append("Image", self.newImage);
                 if (isEditMode) {
                     var url = crudUrl + self.currentCage.id;
                     axios.put(url, formData, config)
@@ -211,6 +209,11 @@ var cages = new Vue({
             this.isValid = true;
             this.errors.name = [];
             this.errors.location = [];
+        },
+
+        uploadImage(e) {
+            const image = e.target.files[0];
+            this.newImage = image;
         }
     }
 });

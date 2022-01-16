@@ -23,7 +23,8 @@ var Species = new Vue({
         page: 1,
         hasNextPage: false,
         hasPreviousPage: false,
-        isValid : true,
+        isValid: true,
+        newImage : null,
         errors: {
             name: [],
             description: [],
@@ -153,6 +154,7 @@ var Species = new Vue({
                 formData.append("Name", self.currentSpecies.name);
                 formData.append("ScientificName", self.currentSpecies.scientificName);
                 formData.append("Description", self.currentSpecies.description);
+                if (self.newImage) formData.append("Image", self.newImage);
                 if (isEditMode) {
                     var url = crudUrl + self.currentSpecies.id;
                     axios.put(url, formData, config)
@@ -210,6 +212,11 @@ var Species = new Vue({
             this.errors.name = [];
             this.errors.scientificName = [];
             this.errors.description = [];
+        },
+
+        uploadImage(e) {
+            const image = e.target.files[0];
+            this.newImage = image;
         }
     }
 });

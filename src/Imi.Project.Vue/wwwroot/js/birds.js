@@ -34,6 +34,7 @@ var birds = new Vue({
         hasNextPage: false,
         hasPreviousPage: false,
         isValid: true,
+        newImage : null,
         errors: {
             name: [],
             hatchDate: [],
@@ -174,10 +175,7 @@ var birds = new Vue({
         },
 
         backToList: function () {
-            //if (this.birds == null) {
-
-            //    this.apiErrorMessage = "No birds found";
-            //}
+            this.fetchBirds();
             this.overViewMode = true;
             this.detailMode = false
             this.deleteMode = false;
@@ -213,6 +211,7 @@ var birds = new Vue({
                 if (self.currentBird.cage) formData.append("CageId", self.currentBird.cage.id);
                 if (self.currentBird.species) formData.append("SpeciesId", self.currentBird.species.id);
                 if (self.currentBird.food) formData.append("Food", self.currentBird.food);
+                if (self.newImage) formData.append("Image", self.newImage);
                 if (isEditMode) {
                     var url = crudUrl + self.currentBird.id;
                     axios.put(url, formData, config)
@@ -275,6 +274,11 @@ var birds = new Vue({
             this.errors.hatchDate = [];
             this.errors.gender = [];
         },
+
+        uploadImage(e) {
+            const image = e.target.files[0];
+            this.newImage = image;
+        }
     }
 });
 

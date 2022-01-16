@@ -103,9 +103,15 @@
                          <input v-model="currentBird.species.name" class="form-control col-sm-5" v-bind:readonly="detailMode"/> 
                     </div>
 
-                    <div class="form-group">
+                    <div  v-else-if="currentBird.food"  class="form-group">
                         <label>Food:</label><br>
                         <input v-model="currentBird.food" class="form-control col-sm-5" v-bind:readonly="detailMode">
+                    </div>
+
+
+                     <div v-if="!detailMode" class="form-group">
+                             <label>Image:</label><br>
+                             <input type="file" accept="image/*"  v-on:change="uploadImage"> 
                     </div>
 
                         <div v-if="detailMode">       

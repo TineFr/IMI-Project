@@ -54,6 +54,13 @@
                             <input v-model="currentCage.location"  class="form-control col-sm-5" v-bind:readonly="detailMode" >
                             <div class="error" v-if="errors.location != []">{{errors.location[0]}}</div> 
                         </div>
+
+
+                        <div v-if="!detailMode" class="form-group">
+                             <label>Image:</label><br>
+                             <input type="file" accept="image/*"  v-on:change="uploadImage"> 
+                         </div>
+
                         <div v-if="detailMode">       
                             <button type="button" v-on:click="toEditMode()" class="btnEdit">Edit</button>
                             <button type="button" v-on:click="toDeleteMode()" class="btnDelete">Delete</button>
