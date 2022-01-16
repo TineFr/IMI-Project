@@ -1,5 +1,5 @@
 ﻿
-var baseBirdsUrl = "https://localhost:5001/api/me/birds?ItemsPerPage=6&Page=";
+var baseUrl = "https://localhost:5001/api/me/birds?ItemsPerPage=6&Page=";
 var speciesUrl = "https://localhost:5001/api/species?ItemsPerPage=1000";
 var cagesUrl = "https://localhost:5001/api/me/cages?ItemsPerPage=1000";
 var crudUrl = "https://localhost:5001/api/birds/";
@@ -21,6 +21,9 @@ var birds = new Vue({
     data: {
         overViewMode: true,
         detailMode: false,
+        deleteMode: false,
+        editMode: false,
+        addMode: false,
         birds: null,
         mode: null,
         species: null,
@@ -45,7 +48,7 @@ var birds = new Vue({
     created: function () {
         var self = this;
         self.overViewMode = true;
-        self.fetchBirds(this.page);
+        self.fetchBirds(self.page);
         self.fetchSpecies();
         self.fetchCages();
     },
@@ -63,7 +66,10 @@ var birds = new Vue({
                 })
                 .catch((error) => {
                     const response = error?.response;
-                    this.apiErrorMessage = response.data;
+                    if (response.data.startsWith('No')) {
+                        self.apiErrorMessage = "No birds found";
+                    }
+                    else self.apiErrorMessage = response.data;
                 })
         },
 
@@ -74,11 +80,6 @@ var birds = new Vue({
                 .then(function (response) {
                     self.species = response.data;
                 })
-                .catch((error) => {
-                    const response = error?.response;
-                    this.apiErrorMessage = response.data;
-                })
-
         },
         fetchCages: function () {
             var self = this;
@@ -87,19 +88,14 @@ var birds = new Vue({
                 .then(function (response) {
                     self.cages = response.data;
                 })
-                .catch((error) => {
-                    const response = error?.response;
-                    this.apiErrorMessage = response.data;
-                })
-
         },
 
         fetchUrl: function () {
             var self = this;
-            var baseUri = baseBirdsUrl + self.page;
-            if (self.selectedSpecies) baseUri += "&species=" + self.selectedSpecies;
-            if (self.selectedCage) baseUri += "&cage=" + self.selectedCage;
-            return baseUri
+            var url = baseUrl + self.page;
+            if (self.selectedSpecies) url += "&species=" + self.selectedSpecies;
+            if (self.selectedCage) url += "&cage=" + self.selectedCage;
+            return url
         },
 
 
@@ -119,17 +115,17 @@ var birds = new Vue({
         onNextPageClicked: function() {
             var self = this;
             self.page += 1;
-            this.fetchBirds();
+            self.fetchBirds();
         },
 
         onPreviousPageClicked: function() {
             var self = this;
             self.page -= 1;
-            this.fetchBirds();
+            self.fetchBirds();
         },
 
         toggleShowSelectionBoxes: function () {
-            this.showSelectionBoxes = !this.showSelectionBoxes;
+            self.showSelectionBoxes = !self.showSelectionBoxes;
         },
 
         filterBirds: function () {
@@ -143,7 +139,11 @@ var birds = new Vue({
 
         toAddMode: function () {
             var self = this;
-            this.mode = "Add new";
+            self.apiErrorMessage = null;
+            self.addMode = true;
+            self.detailMode = false;
+            self.overViewMode = false;
+            self.mode = "Add new";
             self.currentBird = {
                 name: "",
                 hatchDate: "",
@@ -151,42 +151,49 @@ var birds = new Vue({
                 species : "",
                 cage : ""
             }
-            this.detailMode = false
-            this.overViewMode = false;
+
         },
 
         toDetailMode: function (bird) {
-            this.overViewMode = false;
-            this.detailMode = true;
-            this.deleteMode = false;
-            this.editMode = false;
-            this.currentBird = bird;
-            this.mode = "Details";
+            var self = this;
+            self.resetErrors();
+            self.apiErrorMessage = null;
+            self.overViewMode = false;
+            self.detailMode = true;
+            self.deleteMode = false;
+            self.editMode = false;
+            self.currentBird = bird;
+            self.mode = "Details";
         },
         toEditMode: function () {
-            this.editMode = true;
-            this.detailMode = false;
-            this.mode = "Edit bird";
+            var self = this;
+            self.editMode = true;
+            self.detailMode = false;
+            self.mode = "Edit bird";
         },
         toDeleteMode: function () {
-            this.deleteMode = true;
-            this.detailMode = false;
-            this.mode = "Delete bird";
+            var self = this;
+            self.deleteMode = true;
+            self.detailMode = false;
+            self.mode = "Delete bird";
         },
 
         backToList: function () {
-            this.fetchBirds();
-            this.overViewMode = true;
-            this.detailMode = false
-            this.deleteMode = false;
-            this.editMode = false;
+            var self = this;
+            self.addMode = false;
+            self.resetErrors();
+            self.fetchBirds();
+            self.overViewMode = true;
+            self.detailMode = false
+            self.deleteMode = false;
+            self.editMode = false;
         },
 
         deleteBird: function () {
             var self = this;
             var url = crudUrl + self.currentBird.id;
             axios.delete(url, config)
-                .then(function (response) {
+                .then(function () {
                     self.birds.forEach(function (bird, i) {
                         if (bird.id === self.currentBird.id) {
                             self.birds.splice(i, 1);
@@ -196,7 +203,7 @@ var birds = new Vue({
                 })
                 .catch((error) => {
                     const response = error?.response;
-                    this.apiErrorMessage = response.data;
+                    self.apiErrorMessage = response.data;
                 })
 
         },
@@ -222,7 +229,7 @@ var birds = new Vue({
                             const response = error?.response;
                             self.apiErrorMessage = response.data;
                         })
-                } else this.addBird(formData);
+                } else self.addBird(formData);
 
             }
         },
@@ -231,8 +238,7 @@ var birds = new Vue({
             var self = this;
             var url = crudUrl;
             axios.post(url, data, config)
-                .then(function (response) {
-                    self.fetchBirds();
+                .then(function () {
                     self.backToList();
                 })
                 .catch((error) => {
@@ -269,15 +275,24 @@ var birds = new Vue({
         },
 
         resetErrors: function () {
-            this.isValid = true;
-            this.errors.name = [];
-            this.errors.hatchDate = [];
-            this.errors.gender = [];
+            var self = this;
+            self.isValid = true;
+            self.errors.name = [];
+            self.errors.hatchDate = [];
+            self.errors.gender = [];
         },
 
-        uploadImage(e) {
+        uploadImage: function(e) {
             const image = e.target.files[0];
-            this.newImage = image;
+            self.newImage = image;
+        },
+
+        cancelClicked : function () {
+            var self = this
+            if (self.editMode || self.deleteMode) {
+                self.toDetailMode(self.currentBird);
+            }
+            else self.backToList();
         }
     }
 });

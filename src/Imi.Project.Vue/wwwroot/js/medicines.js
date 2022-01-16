@@ -1,13 +1,10 @@
-﻿var baseMedicinesUrl = "https://localhost:5001/api/me/medicines?ItemsPerPage=6&Page=";
+﻿
+var baseUrl = "https://localhost:5001/api/me/medicines?ItemsPerPage=6&Page=";
 var crudUrl = "https://localhost:5001/api/medicines/";
 
 const config = {
     headers: { Authorization: `Bearer ${localStorage.token}`}
 };
-
-var test = axios.create({
-    allowedHeaders: ['pagination'],
-});
 
 
 var medicines = new Vue({
@@ -33,8 +30,7 @@ var medicines = new Vue({
     },
     created: function () {
         var self = this;
-        self.overViewMode = true;
-        self.fetchMedicines(this.page);
+        self.fetchMedicines(self.page);
     },
 
     methods: {
@@ -43,20 +39,23 @@ var medicines = new Vue({
             var self = this;
             self.medicines = null;
             self.apiErrorMessage = null;
-            test.get(self.fetchBaseUrl(), config)
+            axios.get(self.fetchBaseUrl(), config)
                 .then(function (response) {
                     self.medicines = response.data;
                     self.ManagePagination(JSON.parse(response.headers.pagination))
                 })
                 .catch((error) => {
                     const response = error?.response;
-                    this.apiErrorMessage = response.data;
+                    if (response.data.startsWith('No')) {
+                        self.apiErrorMessage = "No medicines found";
+                    }
+                    else this.apiErrorMessage = response.data;
                 })
         },
         fetchBaseUrl: function () {
             var self = this;
-            var baseUri = baseMedicinesUrl + self.page;
-            return baseUri
+            var url = baseUrl + self.page;
+            return url
         },
 
         ManagePagination: function (data) {
@@ -75,57 +74,65 @@ var medicines = new Vue({
         onNextPageClicked: function () {
             var self = this;
             self.page += 1;
-            this.fetchMedicines();
+            self.fetchMedicines();
         },
 
         onPreviousPageClicked: function () {
             var self = this;
             self.page -= 1;
-            this.fetchMedicines();
+            self.fetchMedicines();
         },
 
         toAddMode: function () {
             var self = this;
-            this.mode = "Add new";
+            self.resetErrors();
+            self.apiErrorMessage = null;
+            self.overViewMode = false;
+            self.mode = "Add new";
             self.currentMedicine = {
                 name: "",
                 usage: "",
             }
-            this.detailMode = false
-            this.overViewMode = false;
         },
 
         toDetailMode: function (medicine) {
-            this.overViewMode = false;
-            this.detailMode = true;
-            this.deleteMode = false;
-            this.editMode = false;
-            this.currentMedicine = medicine;
-            this.mode = "Details";
+            var self = this;
+            self.resetErrors();
+            self.apiErrorMessage = null;
+            self.overViewMode = false;
+            self.detailMode = true;
+            self.deleteMode = false;
+            self.editMode = false;
+            self.currentMedicine = medicine;
+            self.mode = "Details";
         },
         toEditMode: function () {
-            this.editMode = true;
-            this.detailMode = false;
-            this.mode = "Edit medicine";
+            var self = this;
+            self.editMode = true;
+            self.detailMode = false;
+            self.mode = "Edit medicine";
         },
         toDeleteMode: function () {
-            this.deleteMode = true;
-            this.detailMode = false;
-            this.mode = "Delete medicine";
+            var self = this;
+            self.deleteMode = true;
+            self.detailMode = false;
+            self.mode = "Delete medicine";
         },
 
         backToList: function () {
-            this.overViewMode = true;
-            this.detailMode = false
-            this.deleteMode = false;
-            this.editMode = false;
+            var self = this;
+            self.fetchMedicines();
+            self.overViewMode = true;
+            self.detailMode = false
+            self.deleteMode = false;
+            self.editMode = false;
         },
 
         deleteMedicine: function () {
             var self = this;
             var url = crudUrl + self.currentMedicine.id;
             axios.delete(url, config)
-                .then(function (response) {
+                .then(function () {
                     self.medicines.forEach(function (medicine, i) {
                         if (medicine.id === self.currentMedicine.id) {
                             self.medicines.splice(i, 1);
@@ -135,7 +142,7 @@ var medicines = new Vue({
                 })
                 .catch((error) => {
                     const response = error?.response;
-                    this.apiErrorMessage = response.data;
+                    self.apiErrorMessage = response.data;
                 })
 
         },
@@ -154,7 +161,7 @@ var medicines = new Vue({
                             const response = error?.response;
                             self.apiErrorMessage = response.data;
                         })
-                } else this.addMedicine();
+                } else self.addMedicine();
 
             }
         },
@@ -163,8 +170,7 @@ var medicines = new Vue({
             var self = this;
             var url = crudUrl;
             axios.post(url, self.currentMedicine, config)
-                .then(function (response) {
-                    self.fetchMedicines();
+                .then(function () {
                     self.backToList();
                 })
                 .catch((error) => {
@@ -184,14 +190,23 @@ var medicines = new Vue({
             }
             if (!self.currentMedicine.usage) {
                 self.isValid = false;
-                self.errors.location.push("Usage is required.");
+                self.errors.usage.push("Usage is required.");
             }
         },
 
         resetErrors: function () {
-            this.isValid = true;
-            this.errors.name = [];
-            this.errors.usage = [];
+            var self = this;
+            self.isValid = true;
+            self.errors.name = [];
+            self.errors.usage = [];
+        },
+
+        cancelClicked: function () {
+            var self = this
+            if (self.editMode || self.deleteMode) {
+                self.toDetailMode(self.currentMedicine);
+            }
+            else self.backToList();
         }
     }
 });

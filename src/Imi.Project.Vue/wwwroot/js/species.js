@@ -1,4 +1,4 @@
-﻿var baseSpeciesUrl = "https://localhost:5001/api/species?ItemsPerPage=6&Page=";
+﻿var baseUrl = "https://localhost:5001/api/species?ItemsPerPage=6&Page=";
 var crudUrl = "https://localhost:5001/api/species/";
 
 const config = {
@@ -34,8 +34,7 @@ var Species = new Vue({
     },
     created: function () {
         var self = this;
-        self.overViewMode = true;
-        self.fetchSpecies(this.CurrentPage);
+        self.fetchSpecies(self.CurrentPage);
     },
 
     methods: {
@@ -51,13 +50,16 @@ var Species = new Vue({
                 })
                 .catch((error) => {
                     const response = error?.response;
-                    this.apiErrorMessage = response.data;
+                    if (response.data.startsWith('No')) {
+                        self.apiErrorMessage = "No species found";
+                    }
+                    else self.apiErrorMessage = response.data;
                 })
         },
         fetchUrl: function () {
             var self = this;
-            var baseUri = baseSpeciesUrl + self.page;
-            return baseUri
+            var url = baseUrl + self.page;
+            return url
         },
 
         ManagePagination: function (data) {
@@ -87,18 +89,21 @@ var Species = new Vue({
 
         toAddMode: function () {
             var self = this;
+            self.apiErrorMessage = null;
             self.mode = "Add new";
+            self.overViewMode = false;
             self.currentSpecies = {
                 name: "",
                 scientificName: "",
                 description: "",
             }
-            self.detailMode = false
-            self.overViewMode = false;
+
         },
 
         toDetailMode: function (species) {
             var self = this;
+            self.resetErrors();
+            self.apiErrorMessage = null;
             self.overViewMode = false;
             self.detailMode = true;
             self.deleteMode = false;
@@ -121,6 +126,8 @@ var Species = new Vue({
 
         backToList: function () {
             var self = this;
+            self.resetErrors();
+            self.fetchSpecies();
             self.overViewMode = true;
             self.detailMode = false
             self.deleteMode = false;
@@ -141,7 +148,7 @@ var Species = new Vue({
                 })
                 .catch((error) => {
                     const response = error?.response;
-                    this.apiErrorMessage = response.data;
+                    self.apiErrorMessage = response.data;
                 })
 
         },
@@ -175,7 +182,6 @@ var Species = new Vue({
             var url = crudUrl;
             axios.post(url, data, config)
                 .then(function () {
-                    self.fetchSpecies();
                     self.backToList();
                 })
                 .catch((error) => {
@@ -208,15 +214,26 @@ var Species = new Vue({
         },
 
         resetErrors: function () {
-            this.isValid = true;
-            this.errors.name = [];
-            this.errors.scientificName = [];
-            this.errors.description = [];
+            var self = this;
+            self.isValid = true;
+            self.errors.name = [];
+            self.errors.scientificName = [];
+            self.errors.description = [];
         },
 
         uploadImage(e) {
+            var self = this;
             const image = e.target.files[0];
-            this.newImage = image;
+            self.newImage = image;
+        },
+
+        cancelClicked: function () {
+            var self = this
+            if (self.editMode || self.deleteMode) {
+                self.toDetailMode(self.currentSpecies);
+            }
+            else self.backToList();
         }
+
     }
 });

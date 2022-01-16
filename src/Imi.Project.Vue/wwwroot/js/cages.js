@@ -1,4 +1,4 @@
-﻿var baseCagesUrl = "https://localhost:5001/api/me/cages?ItemsPerPage=6&Page=";
+﻿var baseUrl = "https://localhost:5001/api/me/cages?ItemsPerPage=6&Page=";
 var crudUrl = "https://localhost:5001/api/cages/";
 
 const config = {
@@ -37,7 +37,6 @@ var cages = new Vue({
     },
     created: function () {
         var self = this;
-        self.overViewMode = true;
         self.fetchCages(this.page);
     },
 
@@ -54,13 +53,16 @@ var cages = new Vue({
                 })
                 .catch((error) => {
                     const response = error?.response;
-                    this.apiErrorMessage = response.data;
+                    if (response.data.startsWith('No')) {
+                        self.apiErrorMessage = "No cages found";
+                    }
+                    else self.apiErrorMessage = response.data;
                 })
         },
         fetchBaseUrl: function () {
             var self = this;
-            var baseUri = baseCagesUrl + self.page;
-            return baseUri
+            var url = baseUrl + self.page;
+            return url
         },
 
         ManagePagination: function (data) {
@@ -79,51 +81,58 @@ var cages = new Vue({
         onNextPageClicked: function () {
             var self = this;
             self.page += 1;
-            this.fetchCages();
+            self.fetchCages();
         },
 
         onPreviousPageClicked: function () {
             var self = this;
             self.page -= 1;
-            this.fetchCages();
+            self.fetchCages();
         },
 
         toAddMode: function () {
             var self = this;
-            this.mode = "Add new";
+            self.mode = "Add new";
+            self.apiErrorMessage = null
+            self.overViewMode = false;
             self.currentCage = {
                 name: "",
                 location: "",
             }
-            this.detailMode = false
-            this.overViewMode = false;
         },
 
         toDetailMode: function (cage) {
-            this.overViewMode = false;
-            this.detailMode = true;
-            this.deleteMode = false;
-            this.editMode = false;
-            this.currentCage = cage;
-            this.mode = "Details";
+            var self = this;
+            self.resetErrors();
+            self.apiErrorMessage = null
+            self.overViewMode = false;
+            self.detailMode = true;
+            self.deleteMode = false;
+            self.editMode = false;
+            self.currentCage = cage;
+            self.mode = "Details";
         },
         toEditMode: function () {
-            this.editMode = true;
-            this.detailMode = false;
-            this.mode = "Edit cage";
+            var self = this;
+            self.editMode = true;
+            self.detailMode = false;
+            self.mode = "Edit cage";
         },
         toDeleteMode: function () {
-            this.deleteMode = true;
-            this.detailMode = false;
-            this.mode = "Delete cage";
+            var self = this;
+            self.deleteMode = true;
+            self.detailMode = false;
+            self.mode = "Delete cage";
         },
 
         backToList: function () {
-            this.fetchCages();
-            this.overViewMode = true;
-            this.detailMode = false
-            this.deleteMode = false;
-            this.editMode = false;
+            var self = this;
+            self.resetErrors();
+            self.fetchCages();
+            self.overViewMode = true;
+            self.detailMode = false
+            self.deleteMode = false;
+            self.editMode = false;
         },
 
         deleteCage: function () {
@@ -140,7 +149,7 @@ var cages = new Vue({
                 })
                 .catch((error) => {
                     const response = error?.response;
-                    this.apiErrorMessage = response.data;
+                    self.apiErrorMessage = response.data;
                 })
             
         },
@@ -163,7 +172,7 @@ var cages = new Vue({
                             const response = error?.response;
                             self.apiErrorMessage = response.data;
                         })
-                } else this.addCage(formData);
+                } else self.addCage(formData);
 
             }
         },
@@ -173,7 +182,6 @@ var cages = new Vue({
             var url = crudUrl;
             axios.post(url, data, config)
                 .then(function (response) {
-                    self.fetchCages();
                     self.backToList();
                 })
                 .catch((error) => {
@@ -206,14 +214,24 @@ var cages = new Vue({
         },
 
         resetErrors: function () {
-            this.isValid = true;
-            this.errors.name = [];
-            this.errors.location = [];
+            var self = this;
+            self.isValid = true;
+            self.errors.name = [];
+            self.errors.location = [];
         },
 
         uploadImage(e) {
+            var self = this;
             const image = e.target.files[0];
-            this.newImage = image;
+            self.newImage = image;
+        },
+
+        cancelClicked: function () {
+            var self = this
+            if (self.editMode || self.deleteMode) {
+                self.toDetailMode(self.currentCage);
+            }
+            else self.backToList();
         }
     }
 });

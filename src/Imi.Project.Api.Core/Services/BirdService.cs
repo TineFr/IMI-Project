@@ -19,10 +19,11 @@ namespace Imi.Project.Api.Core.Services
         protected readonly IBirdRepository _birdRepository;
         protected readonly IImageService _imageService;
         protected readonly ICageRepository _cageRepository;
-        protected readonly ICageRepository _speciesRepository;
+        protected readonly ISpeciesRepository _speciesRepository;
         public BirdService(IBirdRepository birdRepository,
                            IImageService imageService,
-                           ICageRepository cageRepository, ICageRepository speciesRepository)
+                           ICageRepository cageRepository, 
+                           ISpeciesRepository speciesRepository)
         {
             _birdRepository = birdRepository;
             _imageService = imageService;
