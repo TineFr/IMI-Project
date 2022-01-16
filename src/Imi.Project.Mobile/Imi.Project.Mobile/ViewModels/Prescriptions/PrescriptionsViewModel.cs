@@ -1,32 +1,36 @@
 ﻿using FreshMvvm;
+using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
 using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
+
 namespace Imi.Project.Mobile.ViewModels.Prescriptions
 {
     public class PrescriptionsViewModel : FreshBasePageModel
     {
-        private readonly IPrescriptionService prescriptionService;
+        private const string prescriptionsMessage = "There are no prescriptions yet. Add a new prescription!";
+        private readonly IBaseApiService<PrescriptionModel, PrescriptionModel> _prescriptionService;
 
-        public PrescriptionsViewModel(IPrescriptionService prescriptionService)
+        public PrescriptionsViewModel(IBaseApiService<PrescriptionModel, PrescriptionModel> prescriptionService)
         {
-            this.prescriptionService = prescriptionService;
+            _prescriptionService = prescriptionService;
         }
 
 
         #region properties
 
 
-        private ObservableCollection<Prescription> prescriptions;
-        public ObservableCollection<Prescription> Prescriptions
+        private ObservableCollection<PrescriptionModel> prescriptions;
+        public ObservableCollection<PrescriptionModel> Prescriptions
         {
             get { return prescriptions; }
             set
@@ -35,21 +39,20 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
                 RaisePropertyChanged(nameof(Prescriptions));
             }
         }
+
+        private string noPrescriptionsMessage;
+
+        public string NoPrescriptionsMessage
+        {
+            get { return noPrescriptionsMessage; }
+            set
+            {
+                noPrescriptionsMessage = value;
+                RaisePropertyChanged(nameof(NoPrescriptionsMessage));
+            }
+        }
         #endregion
 
-        protected async override void ViewIsAppearing(object sender, EventArgs e)
-        {
-            base.ViewIsAppearing(sender, e);
-            await RefreshPrescriptions();
-        }
-
-
-        private async Task RefreshPrescriptions()
-        {
-            var prescriptions = await prescriptionService.GetAllPrescriptions();
-            Prescriptions = null;
-            Prescriptions = new ObservableCollection<Prescription>(prescriptions);
-        }
 
         public override void Init(object initData)
         {
@@ -58,13 +61,32 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
         }
 
 
+
+        protected async override void ViewIsAppearing(object sender, EventArgs e)
+        {
+            base.ViewIsAppearing(sender, e);
+            NoPrescriptionsMessage = null;
+            await RefreshPrescriptions();
+        }
+
+
+        private async Task RefreshPrescriptions()
+        {
+            Prescriptions = null;
+            var prescriptions = await _prescriptionService.GetAllAsync("me/prescriptions/?Page=1&ItemsPerPage=100");
+            if (prescriptions.ToList()[0].ErrorMessage is object) NoPrescriptionsMessage = prescriptionsMessage;
+            else Prescriptions = new ObservableCollection<PrescriptionModel>(prescriptions);
+        }
+
+
         #region commands
         public ICommand ShowPrescriptionsCommand => new Command(
-             async () => {
-                 Prescriptions = await prescriptionService.GetAllPrescriptions();
-             });
-        public ICommand ViewPrescriptionCommand => new Command<Prescription>(
-             async (Prescription prescription) =>
+         async () => {
+
+             await RefreshPrescriptions();
+         });
+        public ICommand ViewPrescriptionCommand => new Command<PrescriptionModel>(
+             async (PrescriptionModel prescription) =>
              {
                  await CoreMethods.PushPageModel<PrescriptionDetailViewModel>(prescription);
              });

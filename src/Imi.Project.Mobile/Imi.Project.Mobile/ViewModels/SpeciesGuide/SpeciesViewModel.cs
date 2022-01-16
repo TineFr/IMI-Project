@@ -15,6 +15,7 @@ namespace Imi.Project.Mobile.ViewModels.SpeciesGuide
 {
     public class SpeciesViewModel : FreshBasePageModel
     {
+
         private readonly IBaseApiService<SpeciesModel, SpeciesModel> _speciesService;
 
         public SpeciesViewModel(IBaseApiService<SpeciesModel, SpeciesModel> speciesService)

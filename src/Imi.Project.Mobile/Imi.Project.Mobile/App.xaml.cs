@@ -2,6 +2,7 @@
 using FreshMvvm;
 using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
+using Imi.Project.Mobile.Core.Models.Api.Prescription;
 using Imi.Project.Mobile.Core.Services.Api;
 using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
@@ -33,7 +34,7 @@ namespace Imi.Project.Mobile
             FreshIOC.Container.Register<IBaseApiService<CageRequestModel, CageModel>, CageApiService>();
             FreshIOC.Container.Register<IBaseApiService<SpeciesModel, SpeciesModel>, BaseApiService<SpeciesModel, SpeciesModel>>();
             FreshIOC.Container.Register<IBaseApiService<DailyTaskModel, DailyTaskModel>, BaseApiService<DailyTaskModel, DailyTaskModel>>();
-
+            FreshIOC.Container.Register<IBaseApiService<PrescriptionModel, PrescriptionModel>, BaseApiService<PrescriptionModel, PrescriptionModel>>();
 
             // validators
             FreshIOC.Container.Register<IValidator<LoginRequestModel>, LoginModelValidator>();
