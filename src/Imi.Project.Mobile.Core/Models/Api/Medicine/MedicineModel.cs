@@ -4,8 +4,9 @@ using System.Text;
 
 namespace Imi.Project.Mobile.Core.Models
 {
-    public class Medication : BaseEntity
+    public class MedicineModel : BaseModel
     {
-       public string Usage { get; set; }
+        public string Name { get; set; }
+        public string Usage { get; set; }
     }
 }

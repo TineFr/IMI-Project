@@ -19,7 +19,7 @@ namespace Imi.Project.Mobile.ViewModels.Medications
             this.medicationService = medicationService;
         }
 
-        private Medication medicationToEdit;
+        private MedicineModel medicationToEdit;
 
         #region properties
 
@@ -49,7 +49,7 @@ namespace Imi.Project.Mobile.ViewModels.Medications
         #endregion
         public override void Init(object initData)
         {
-            medicationToEdit = initData as Medication;
+            medicationToEdit = initData as MedicineModel;
             Name = medicationToEdit.Name;
             Usage = medicationToEdit.Usage;
             base.Init(initData);

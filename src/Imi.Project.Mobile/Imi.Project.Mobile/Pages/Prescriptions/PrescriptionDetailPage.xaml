@@ -24,11 +24,11 @@
                     <FlexLayout Direction="Column" AlignItems="Center">
                         <StackLayout Orientation="Horizontal">
                             <Label  Text="From:" FontSize="15" FontAttributes="Bold" />
-                            <Label  Text="{Binding Prescription.StartDate}" FontSize="15" />
+                            <Label  Text="{Binding Prescription.StartDate, Converter={StaticResource DateTimeConverter}}" FontSize="15" />
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
                             <Label  Text="Till:" FontSize="15" FontAttributes="Bold" />
-                            <Label  Text="{Binding Prescription.EndDate}" FontSize="15" />
+                            <Label  Text="{Binding Prescription.EndDate, Converter={StaticResource DateTimeConverter}}" FontSize="15" />
                         </StackLayout>
                     </FlexLayout>
                 </Frame>

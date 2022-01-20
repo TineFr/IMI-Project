@@ -25,8 +25,8 @@ namespace Imi.Project.Mobile.ViewModels.Medications
         #region properties
 
 
-        private ObservableCollection<Medication> medications;
-        public ObservableCollection<Medication> Medications
+        private ObservableCollection<MedicineModel> medications;
+        public ObservableCollection<MedicineModel> Medications
         {
             get { return medications; }
             set
@@ -48,7 +48,7 @@ namespace Imi.Project.Mobile.ViewModels.Medications
         {
             var medications = await medicationService.GetAllMedications();
             Medications = null;
-            Medications = new ObservableCollection<Medication>(medications);
+            Medications = new ObservableCollection<MedicineModel>(medications);
         }
 
         public override void Init(object initData)
@@ -63,14 +63,14 @@ namespace Imi.Project.Mobile.ViewModels.Medications
              async () => {
                  Medications = await medicationService.GetAllMedications();
              });
-        public ICommand EditMeddicationCommand => new Command<Medication>(
-             async (Medication medication) =>
+        public ICommand EditMeddicationCommand => new Command<MedicineModel>(
+             async (MedicineModel medication) =>
              {
                  await CoreMethods.PushPageModel<EditMedicationViewModel>(medication);
              });
 
-        public ICommand DeleteMedicationCommand => new Command<Medication>(
-             async (Medication medication) =>
+        public ICommand DeleteMedicationCommand => new Command<MedicineModel>(
+             async (MedicineModel medication) =>
              {
                  var action = await Application.Current.MainPage.DisplayAlert("Do you wish to delete this medication?", null, "YES", "CANCEL");
                  if (action)
@@ -80,8 +80,8 @@ namespace Imi.Project.Mobile.ViewModels.Medications
                  }
              });
 
-        public ICommand AddMedicationCommand => new Command<Medication>(
-             async (Medication medication) =>
+        public ICommand AddMedicationCommand => new Command<MedicineModel>(
+             async (MedicineModel medication) =>
              {
                  await CoreMethods.PushPageModel<AddMedicationViewMode>(medication);
              });

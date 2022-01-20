@@ -103,7 +103,7 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Services
         }
 
 
-        public  Task<Medication> GetMedicationByPrescription(Prescription prescription)
+        public  Task<MedicineModel> GetMedicationByPrescription(Prescription prescription)
         {
             var medication =  medicationrepository.GetMedicationById(prescription.MedicationId);
             return medication;

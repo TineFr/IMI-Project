@@ -1,4 +1,5 @@
 ﻿using FreshMvvm;
+using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
 using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.ViewModels.Medications;
@@ -14,21 +15,22 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
 {
     public class AddPrescriptionViewModel : FreshBasePageModel
     {
-
-        private readonly IBirdService _birdService;
-        private readonly IMedicationService _medicationService;
-        private readonly IPrescriptionService _prescriptionService;
-        public AddPrescriptionViewModel(IBirdService birdService, IMedicationService medicationService, IPrescriptionService prescriptionService)
+        private readonly IBaseApiService<BirdRequestModel, BirdModel> _birdService;
+        private readonly IBaseApiService<MedicineModel, MedicineModel> _medicineService;
+        private readonly IBaseApiService<PrescriptionModel, PrescriptionModel> _prescriptionService;
+        public AddPrescriptionViewModel(IBaseApiService<PrescriptionModel, PrescriptionModel> prescriptionService,
+                                        IBaseApiService<MedicineModel, MedicineModel> medicineService,
+                                        IBaseApiService<BirdRequestModel, BirdModel> birdService)
         {
-            _birdService = birdService;
-            _medicationService = medicationService;
             _prescriptionService = prescriptionService;
+            _birdService = birdService; 
+            _medicineService = medicineService;
         }
         #region properties
 
-        private ObservableCollection<Bird> birds;
+        private ObservableCollection<BirdModel> birds;
 
-        public ObservableCollection<Bird> Birds
+        public ObservableCollection<BirdModel> Birds
         {
             get { return birds; }
             set
@@ -39,35 +41,35 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
         }
 
 
-        private ObservableCollection<Medication> medications;
+        private ObservableCollection<MedicineModel> medicines;
 
-        public ObservableCollection<Medication> Medications
+        public ObservableCollection<MedicineModel> Medicines
         {
-            get { return medications; }
+            get { return medicines; }
             set 
             {
-                medications = value;
-                RaisePropertyChanged(nameof(Medications));
+                medicines = value;
+                RaisePropertyChanged(nameof(Medicines));
             }
 
         }
 
 
-        private Medication medication;
+        private MedicineModel medicine;
 
-        public Medication Medication
+        public MedicineModel Medicine
         {
-            get { return medication; }
+            get { return medicine; }
             set
             {
-                medication = value;
-                RaisePropertyChanged(nameof(Medication));
+                medicine = value;
+                RaisePropertyChanged(nameof(Medicine));
             }
         }
 
-        private Bird bird;
+        private BirdModel bird;
 
-        public Bird Bird
+        public BirdModel Bird
         {
             get { return bird; }
             set
@@ -77,6 +79,17 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
             }
         }
 
+        //private object medecine;
+
+        //public object Medicine
+        //{
+        //    get { return medecine; }
+        //    set
+        //    {
+        //        medecine = value;
+        //        RaisePropertyChanged(nameof(Medicine));
+        //    }
+        //}
 
 
         private ObservableCollection<object> selectedBirds;
@@ -110,8 +123,8 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
         #endregion
         public async override void Init(object initData)
         {
-            Medications = await _medicationService.GetAllMedications();
-            Birds = await _birdService.GetAllBirds();
+            Medicines = new ObservableCollection<MedicineModel>(await _medicineService.GetAllAsync("me/medicines?ItemsPerPage=1000"));
+            Birds = new ObservableCollection<BirdModel>(await _birdService.GetAllAsync("me/birds?ItemsPerPage=1000"));
             base.Init(initData);
         }
 
@@ -120,23 +133,15 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
         public ICommand SaveCommand => new Command(
              async () =>
              {
-                 Prescription newPrescription = new Prescription
+                 PrescriptionModel newPrescription = new PrescriptionModel
                  {
-                     Id = new Guid(),
-                     StartDate = this.StartDate.ToString("d"),
-                     EndDate = this.EndDate.ToString("d"),
-                     MedicationId = this.Medication.Id,
-                     BirdIds = SelectedBirds.Select(b => b as Bird).Select(b => b.Id).ToList(),
-                     Birds = SelectedBirds.Select(b => b as Bird)
+                     StartDate = this.StartDate.ToString(),
+                     EndDate = this.EndDate.ToString(),
+                     MedicationId = this.Medicine.Id,
+                     BirdIds = SelectedBirds.Select(b => b as BirdModel).Select(b => b.Id).ToList(),
                  };
 
-                 await _prescriptionService.AddPrescription(newPrescription);
-                 var birds = await _birdService.GetAllBirds();
-                 foreach (var item in birds)
-                 {
-                     if (SelectedBirds.Select(b => b as Bird).Contains(item)) item.Prescriptions.Add(newPrescription.Id);
-                     await _birdService.UpdateBird(item);
-                 }
+                 await _prescriptionService.AddAsync("prescriptions", newPrescription);
                  await CoreMethods.PopPageModel();
              });
         public ICommand ShowMedicationsCommand => new Command(

@@ -9,10 +9,10 @@ namespace Imi.Project.Mobile.Core.Services.Mocking.Interfaces
 {
     public interface IMedicationService
     {
-        Task<ObservableCollection<Medication>> GetAllMedications();
-        Task<Medication> GetMedicationById(Guid id);
-        Task<Medication> AddMedication(Medication medication);
-        Task<Medication> UpdateMedication(Medication medication);
-        Task<Medication> DeleteMedication(Guid id);
+        Task<ObservableCollection<MedicineModel>> GetAllMedications();
+        Task<MedicineModel> GetMedicationById(Guid id);
+        Task<MedicineModel> AddMedication(MedicineModel medication);
+        Task<MedicineModel> UpdateMedication(MedicineModel medication);
+        Task<MedicineModel> DeleteMedication(Guid id);
     }
 }

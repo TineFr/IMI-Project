@@ -50,7 +50,7 @@ namespace Imi.Project.Mobile.ViewModels.Medications
         public ICommand SaveCommand => new Command(
              async () =>
              {
-                 Medication newMedication = new Medication
+                 MedicineModel newMedication = new MedicineModel
                  {
                      Id = new Guid(),
                      Name = this.Name,

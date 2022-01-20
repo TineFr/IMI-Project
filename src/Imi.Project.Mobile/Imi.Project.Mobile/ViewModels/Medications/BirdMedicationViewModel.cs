@@ -9,9 +9,9 @@ namespace Imi.Project.Mobile.ViewModels
     public class BirdMedicationViewModel : FreshBasePageModel
     {
 
-        public Medication Medication { get; set; }
+        public MedicineModel Medication { get; set; }
 
-        public BirdMedicationViewModel(Medication medication)
+        public BirdMedicationViewModel(MedicineModel medication)
         {
             Medication = medication;
 

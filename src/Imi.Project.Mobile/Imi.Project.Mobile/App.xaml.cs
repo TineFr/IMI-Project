@@ -35,6 +35,8 @@ namespace Imi.Project.Mobile
             FreshIOC.Container.Register<IBaseApiService<SpeciesModel, SpeciesModel>, BaseApiService<SpeciesModel, SpeciesModel>>();
             FreshIOC.Container.Register<IBaseApiService<DailyTaskModel, DailyTaskModel>, BaseApiService<DailyTaskModel, DailyTaskModel>>();
             FreshIOC.Container.Register<IBaseApiService<PrescriptionModel, PrescriptionModel>, BaseApiService<PrescriptionModel, PrescriptionModel>>();
+            FreshIOC.Container.Register<IBaseApiService<MedicineModel, MedicineModel>, BaseApiService<MedicineModel, MedicineModel>>();
+
 
             // validators
             FreshIOC.Container.Register<IValidator<LoginRequestModel>, LoginModelValidator>();

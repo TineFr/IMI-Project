@@ -15,8 +15,8 @@
                         <StackLayout>
                             <Label Text="Medicine:" FontAttributes="Bold"></Label>
                             <combobox:SfComboBox HeightRequest="40"  
-                                                 DataSource="{Binding Medications}" 
-                                                 SelectedItem="{Binding Medication}"
+                                                 DataSource="{Binding Medicines}" 
+                                                 SelectedItem="{Binding Medicine}"
 
                                                  DisplayMemberPath="Name" 
                                                  x:Name="cmbMedications"/>

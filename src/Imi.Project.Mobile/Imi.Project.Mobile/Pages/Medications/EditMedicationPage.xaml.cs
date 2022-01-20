@@ -15,7 +15,7 @@ namespace Imi.Project.Mobile.Pages.Medications
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EditMedicationPage : ContentPage
     {
-        public EditMedicationPage(Medication medication)
+        public EditMedicationPage(MedicineModel medication)
         {
             InitializeComponent();
         }
