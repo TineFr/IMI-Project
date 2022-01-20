@@ -11,13 +11,13 @@
                 <Button x:Name="btnRemove" Text="X" HorizontalOptions="End" WidthRequest="40" HeightRequest="40" BackgroundColor="IndianRed" Margin="5"  Command="{Binding DeleteCommand}"></Button>
                 <Frame Grid.Row="0" BackgroundColor="#EEEEEE">
                     <FlexLayout Direction="Row" JustifyContent="Center" AlignItems="Center">
-                        <Label  Text="{Binding Prescription.Medication.Name}" FontSize="30" FontAttributes="Bold" />
+                        <Label  Text="{Binding Prescription.Medicine.Name}" FontSize="30" FontAttributes="Bold" />
                     </FlexLayout>
                 </Frame>
                 <Frame Grid.Row="0" BackgroundColor="#EEEEEE">
                     <FlexLayout Direction="Column" AlignItems="Center">
                         <Label  Text="Usage:" FontSize="20" FontAttributes="Bold" />
-                        <Label  Text="{Binding Prescription.Medication.Usage}" FontSize="15" Margin="20" />
+                        <Label  Text="{Binding Prescription.Medicine.Usage}" FontSize="15" Margin="20" />
                     </FlexLayout>
                 </Frame>
                 <Frame Grid.Row="0" BackgroundColor="#EEEEEE">

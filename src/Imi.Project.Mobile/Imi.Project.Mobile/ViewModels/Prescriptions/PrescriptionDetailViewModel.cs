@@ -1,4 +1,5 @@
 ﻿using FreshMvvm;
+using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
 using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
@@ -13,18 +14,18 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
 {
     public class PrescriptionDetailViewModel : FreshBasePageModel
     {
-        private readonly IBirdService birdService;
-        private readonly IPrescriptionService prescriptionService;
+        private readonly IBaseApiService<BirdRequestModel, BirdModel> _birdService;
+        private readonly IBaseApiService<PrescriptionModel, PrescriptionModel> _prescriptionService;
 
-        public PrescriptionDetailViewModel(IPrescriptionService prescriptionService, IBirdService birdService)
+        public PrescriptionDetailViewModel(IBaseApiService<PrescriptionModel, PrescriptionModel> prescriptionService, IBaseApiService<BirdRequestModel, BirdModel> birdService)
         {
-            this.prescriptionService = prescriptionService;
-            this.birdService = birdService;
+            _prescriptionService = prescriptionService;
+            _birdService = birdService;
         }
 
         #region properties
-        public Prescription prescription { get; set; }
-        public Prescription Prescription
+        public PrescriptionModel prescription { get; set; }
+        public PrescriptionModel Prescription
         {
             get { return prescription; }
             set
@@ -34,36 +35,33 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
             }
         }
 
+        #endregion
+
         public override void Init(object initData)
         {
-            Prescription = initData as Prescription;
+            Prescription = initData as PrescriptionModel;
             base.Init(initData);
         }
 
-        #endregion
+        public override void ReverseInit(object value)
+        {
+            var updatedPrescription = value as PrescriptionModel;
+            Prescription = updatedPrescription;
+        }
 
         #region commands
 
-        public ICommand RemoveBirdCommand => new Command<Bird>(
-             async (Bird bird) =>
+        public ICommand RemoveBirdCommand => new Command<BirdModel>(
+             async (BirdModel bird) =>
              {
-                 var updateBird = await birdService.GetBirdById(bird.Id);
-                 updateBird.Prescriptions.Remove(Prescription.Id);
-                 await birdService.UpdateBird(updateBird);
 
-
-                 Prescription.Birds.ToList().Remove(bird);
-
-                 //var birdList = birdService.GetBirdsByPrescription(Prescription);
-                 //if (birdList.Count() == 0)
-                 //{
-                 //    await prescriptionService.DeletePrescription(Prescription.Id);
-                 //    await Navigation.PopAsync();
-                 //}
-                 //else
-                 //{
-                 //    colvBirds.ItemsSource = birdList;
-                 //}
+                 Prescription.BirdIds.ToList().Remove(bird.Id);
+                 var result = await _prescriptionService.UpdateAsync($"prescriptions/{Prescription.Id}", Prescription);
+                 if (result.BirdIds.Count() == 0)
+                 {
+                     await _prescriptionService.DeleteAsync($"prescriptions/{prescription.Id}");
+                     await CoreMethods.PopToRoot(true);
+                 }
              });
         public ICommand DeleteCommand => new Command(
              async () =>
@@ -71,7 +69,7 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
                  var action = await CoreMethods.DisplayAlert("Do you wish to delete this prescription?", null, "YES", "NO");
                  if (action)
                  {
-                     await prescriptionService.DeletePrescription(prescription.Id);
+                     await _prescriptionService.DeleteAsync($"prescriptions/{prescription.Id}");
                      await CoreMethods.PopToRoot(true);
                  }
              });
