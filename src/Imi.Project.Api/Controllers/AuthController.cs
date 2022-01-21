@@ -1,6 +1,7 @@
 ﻿using Imi.Project.Api.Core.Entities;
 using Imi.Project.Common.Dtos;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -14,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Controllers
 {
+    [EnableCors]
     [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
@@ -67,7 +69,7 @@ namespace Imi.Project.Api.Controllers
 
 
         [HttpPost("login")]
-        public async Task<ActionResult> Login([FromBody] LoginRequestDto login)
+        public async Task<ActionResult> Login( [FromBody] LoginRequestDto login)
         {
             var result = await _signInManager.PasswordSignInAsync(login.Email, login.Password, isPersistent: false,
             lockoutOnFailure: false);

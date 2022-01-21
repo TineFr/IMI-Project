@@ -19,13 +19,16 @@ namespace Imi.Project.Api.Core.Services
         protected readonly IBirdRepository _birdRepository;
         protected readonly IImageService _imageService;
         protected readonly ICageRepository _cageRepository;
+        protected readonly ISpeciesRepository _speciesRepository;
         public BirdService(IBirdRepository birdRepository,
                            IImageService imageService,
-                           ICageRepository cageRepository)
+                           ICageRepository cageRepository, 
+                           ISpeciesRepository speciesRepository)
         {
             _birdRepository = birdRepository;
             _imageService = imageService;
             _cageRepository = cageRepository;
+            _speciesRepository = speciesRepository;
         }
 
         public async Task<BirdResponseDto> GetBirdByIdAsync(Guid id)
@@ -39,15 +42,14 @@ namespace Imi.Project.Api.Core.Services
             return result;
         }
 
-        public async Task<IEnumerable<BirdResponseDto>> ListAllBirdsAsync(PaginationParameters parameters)
+        public async Task<IEnumerable<BirdResponseDto>> ListAllBirdsAsync()
         {
             var birds = await _birdRepository.ListAllAsync();
             if (birds.Count() == 0)
             {
                 throw new ItemNotFoundException($"No birds were found");
             }
-            var birdsPaginated = Pagination.AddPagination<Bird>(birds, parameters);
-            var result = birdsPaginated.MapToDtoList();
+            var result = birds.MapToDtoList();
             return result;
         }
 
@@ -109,7 +111,7 @@ namespace Imi.Project.Api.Core.Services
             await _birdRepository.DeleteMultipleAsync(birds);
         }
 
-        public async Task<IEnumerable<BirdResponseDto>> GetBirdsByCageIdAsync(Guid id, PaginationParameters parameters)
+        public async Task<IEnumerable<BirdResponseDto>> GetBirdsByCageIdAsync(Guid id)
         {
             if (await _birdRepository.EntityExists<Cage>(id))
             {
@@ -118,14 +120,13 @@ namespace Imi.Project.Api.Core.Services
                 {
                     throw new ItemNotFoundException($"No birds were found for cage with id {id}");
                 }
-                var birdsPaginated = Pagination.AddPagination<Bird>(birds, parameters);
-                var result = birdsPaginated.MapToDtoList();
+                var result = birds.MapToDtoList();
                 return result;
             }
             else throw new ItemNotFoundException($"Cage with id {id} does not exist");
         }
 
-        public async Task<IEnumerable<BirdResponseDto>> GetBirdsByUserIdAsync(Guid id, PaginationParameters parameters)
+        public async Task<IEnumerable<BirdResponseDto>> GetBirdsByUserIdAsync(Guid id)
         {
             if (await _birdRepository.EntityExists<ApplicationUser>(id))
             {
@@ -134,11 +135,41 @@ namespace Imi.Project.Api.Core.Services
                 {
                     throw new ItemNotFoundException($"No birds were found for user with id {id}");
                 }
-                var birdsPaginated = Pagination.AddPagination<Bird>(birds, parameters);
-                var result = birdsPaginated.MapToDtoList();
+                var result = birds.MapToDtoList();
                 return result;
             }
             else throw new ItemNotFoundException($"User with id {id} does not exist");
+        }
+
+        public async Task<IEnumerable<BirdResponseDto>> GetFilteredBirdsFromUser(Guid userId, Guid? speciesId, Guid? cageId)
+        {
+            if (await _birdRepository.EntityExists<ApplicationUser>(userId))
+            {
+                IEnumerable<Bird> birds = await _birdRepository.GetByUserIdAsync(userId);
+                if (birds.Count() == 0)
+                {
+                    throw new ItemNotFoundException($"No birds were found for user with id {userId}");
+                }
+                if (speciesId != new Guid())
+                {
+                    birds = birds.Where(b => b.Species != null).Where(b => b.Species.Id.Equals(speciesId)).ToList();
+                    if (birds.Count() == 0)
+                    {
+                        throw new ItemNotFoundException($"No birds were found");
+                    }
+                }
+                if (cageId != new Guid())
+                {
+                    birds = birds.Where(b => b.Cage != null).Where(b => b.Cage.Id.Equals(cageId)).ToList();
+                    if (birds.Count() == 0)
+                    {
+                        throw new ItemNotFoundException($"No birds were found");
+                    }
+                }
+                var result = birds.MapToDtoList();
+                return result;
+            }
+            else throw new ItemNotFoundException($"User with id {userId} does not exist");
         }
 
         private async Task ValidateRequest(BirdRequestDto dto)
@@ -159,11 +190,12 @@ namespace Imi.Project.Api.Core.Services
 
             if (dto.SpeciesId != null)
             {
-                if (dto.CageId != new Guid())
-                    if (!(await _birdRepository.EntityExists<Species>(dto.SpeciesId)))
-                    {
-                        throw new ItemNotFoundException($"Species with id {dto.UserId} does not exist");
-                    }
+                
+                var species = await _speciesRepository.GetByIdAsync((Guid)dto.SpeciesId);
+                if (species == null)
+                {
+                    throw new ItemNotFoundException($"Species with id {dto.SpeciesId} does not exist");
+                }
             }
 
 

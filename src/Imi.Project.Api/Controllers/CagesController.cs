@@ -39,16 +39,19 @@ namespace Imi.Project.Api.Controllers
         [Authorize(Policy = "AdministratorRole")]
         public async Task<IActionResult> Get([FromQuery] PaginationParameters parameters)
         {
-            IEnumerable<CageResponseDto> result;
+            IEnumerable<CageResponseDto> paginatedResult;
             try
             {
-                result = await _cageService.ListAllCagesAsync(parameters);
+                var result = await _cageService.ListAllCagesAsync();
+                var paginationData = new PaginationMetaData(parameters.Page, result.Count(), parameters.ItemsPerPage);
+                Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
+                paginatedResult = Pagination.AddPagination<CageResponseDto>(result, parameters);
             }
             catch (BaseException ex)
             {
                 return StatusCode((int)ex.StatusCode, ex.Message);
             }
-            return Ok(result);
+            return Ok(paginatedResult);
         }
 
         [HttpGet("{id}")]
@@ -69,31 +72,37 @@ namespace Imi.Project.Api.Controllers
         [HttpGet("{id}/birds")]
         public async Task<IActionResult> GetBirdsByCageId(Guid id, [FromQuery] PaginationParameters parameters)
         {
-            IEnumerable<BirdResponseDto> result;
+            IEnumerable<BirdResponseDto> paginatedResult;
             try
             {
-                result = await _birdService.GetBirdsByUserIdAsync(id, parameters);
+                var result = await _birdService.GetBirdsByUserIdAsync(id);
+                var paginationData = new PaginationMetaData(parameters.Page, result.Count(), parameters.ItemsPerPage);
+                Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
+                paginatedResult = Pagination.AddPagination<BirdResponseDto>(result, parameters);
             }
             catch (BaseException ex)
             {
                 return StatusCode((int)ex.StatusCode, ex.Message);
             }
-            return Ok(result);
+            return Ok(paginatedResult);
         }
 
         [HttpGet("{id}/dailytasks")]
         public async Task<IActionResult> GetDailyTasksByCageId(Guid id, [FromQuery] PaginationParameters parameters)
         {
-            IEnumerable<DailyTaskResponseDto> result;
+            IEnumerable<DailyTaskResponseDto> paginatedResult;
             try
             {
-                result = await _dailyTaskService.GetDailyTasksByCageIdAsync(id, parameters);
+                var result = await _dailyTaskService.GetDailyTasksByCageIdAsync(id);
+                var paginationData = new PaginationMetaData(parameters.Page, result.Count(), parameters.ItemsPerPage);
+                Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
+                paginatedResult = Pagination.AddPagination<DailyTaskResponseDto>(result, parameters);
             }
             catch (BaseException ex)
             {
                 return StatusCode((int)ex.StatusCode, ex.Message);
             }
-            return Ok(result);
+            return Ok(paginatedResult);
         }
 
         [HttpPost]

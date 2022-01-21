@@ -1,19 +1,15 @@
 ﻿using Imi.Project.Vue.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Imi.Project.Vue.Controllers
 {
-    public class HomeController : Controller
+    public class AuthController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<AuthController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public AuthController(ILogger<AuthController> logger)
         {
             _logger = logger;
         }
@@ -23,7 +19,12 @@ namespace Imi.Project.Vue.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        public IActionResult Register()
         {
             return View();
         }

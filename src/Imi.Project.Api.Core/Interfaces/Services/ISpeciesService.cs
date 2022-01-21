@@ -10,7 +10,7 @@ namespace Imi.Project.Api.Core.Interfaces.Services
 {
     public interface ISpeciesService
     {
-        Task<IEnumerable<SpeciesResponseDto>> ListAllSpeciessAsync(PaginationParameters parameters);
+        Task<IEnumerable<SpeciesResponseDto>> ListAllSpeciessAsync();
         Task<SpeciesResponseDto> GetSpeciesByIdAsync(Guid id);
         Task<SpeciesResponseDto> AddSpeciesAsync(SpeciesRequestDto species);
         Task<SpeciesResponseDto> UpdateSpeciesAsync(Guid id, SpeciesRequestDto species);

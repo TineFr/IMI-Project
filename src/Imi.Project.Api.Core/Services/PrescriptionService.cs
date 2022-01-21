@@ -36,15 +36,14 @@ namespace Imi.Project.Api.Core.Services
             PrescriptionResponseDto result = prescription.MapToDto();
             return result;
         }
-        public async Task<IEnumerable<PrescriptionResponseDto>> ListAllPrescriptionsAsync(PaginationParameters parameters)
+        public async Task<IEnumerable<PrescriptionResponseDto>> ListAllPrescriptionsAsync()
         {
             var prescriptions = await _prescriptionRepository.ListAllAsync();
             if (prescriptions.Count() == 0)
             {
                 throw new ItemNotFoundException($"No prescriptions were found");
             }
-            var prescriptionsPaginated = Pagination.AddPagination<Prescription>(prescriptions, parameters);
-            var result = prescriptionsPaginated.MapToDtoList();
+            var result = prescriptions.MapToDtoList();
             return result;
         }
         public async Task<PrescriptionResponseDto> AddPrescriptionAsync(PrescriptionRequestDto dto)
@@ -81,7 +80,7 @@ namespace Imi.Project.Api.Core.Services
         {
             await _prescriptionRepository.DeleteMultipleAsync(prescriptions);
         }
-        public async Task<IEnumerable<PrescriptionResponseDto>> GetPrescriptionsByUserIdAsync(Guid id, PaginationParameters parameters)
+        public async Task<IEnumerable<PrescriptionResponseDto>> GetPrescriptionsByUserIdAsync(Guid id)
         {
             if (await _prescriptionRepository.EntityExists<ApplicationUser>(id))
             {
@@ -90,8 +89,7 @@ namespace Imi.Project.Api.Core.Services
                 {
                     throw new ItemNotFoundException($"No medicines were found for user with id {id}");
                 }
-                var prescriptionsPaginated = Pagination.AddPagination<Prescription>(prescriptions, parameters);
-                var result = prescriptionsPaginated.MapToDtoList();
+                var result = prescriptions.MapToDtoList();
                 return result;
             }
             else throw new ItemNotFoundException($"User with id {id} does not exist");

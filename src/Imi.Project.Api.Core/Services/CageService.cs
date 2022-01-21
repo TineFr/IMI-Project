@@ -36,15 +36,14 @@ namespace Imi.Project.Api.Core.Services
             CageResponseDto result = cage.MapToDto();
             return result;
         }
-        public async Task<IEnumerable<CageResponseDto>> ListAllCagesAsync(PaginationParameters parameters)
+        public async Task<IEnumerable<CageResponseDto>> ListAllCagesAsync()
         {
             var cages = await _cageRepository.ListAllAsync();
             if (cages.Count() == 0)
             {
                 throw new ItemNotFoundException($"No cages were found");
             }
-            var cagesPaginated = Pagination.AddPagination<Cage>(cages, parameters);
-            var result = cagesPaginated.MapToDtoList();
+            var result = cages.MapToDtoList();
             return result;
         }
         public async Task<CageResponseDto> AddCageAsync(CageRequestDto dto)
@@ -78,7 +77,7 @@ namespace Imi.Project.Api.Core.Services
             if (dto.Image != null)
             {
                 _imageService.ValidateImage(dto);
-                var databasePath = await _imageService.AddOrUpdateImageAsync<Bird>(id, dto.Image);
+                var databasePath = await _imageService.AddOrUpdateImageAsync<Cage>(id, dto.Image);
                 updatedCageEntity.Image = databasePath;
             }
             else if (cage.Image != null) updatedCageEntity.Image = cage.Image;
@@ -101,7 +100,7 @@ namespace Imi.Project.Api.Core.Services
         {
             await _cageRepository.DeleteMultipleAsync(cages);
         }
-        public async Task<IEnumerable<CageResponseDto>> GetCagesByUserIdAsync(Guid id, PaginationParameters parameters)
+        public async Task<IEnumerable<CageResponseDto>> GetCagesByUserIdAsync(Guid id)
         {
             if (await _cageRepository.EntityExists<ApplicationUser>(id))
             {
@@ -110,8 +109,7 @@ namespace Imi.Project.Api.Core.Services
                 {
                     throw new ItemNotFoundException($"No cages were found for user with id {id}");
                 }
-                var cagesPaginated = Pagination.AddPagination<Cage>(cages, parameters);
-                var result = cagesPaginated.MapToDtoList();
+                var result = cages.MapToDtoList();
                 return result;
             }
             else throw new ItemNotFoundException($"User with id {id} does not exist");

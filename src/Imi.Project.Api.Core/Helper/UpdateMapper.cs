@@ -54,7 +54,7 @@ namespace Imi.Project.Api.Core.Helper
 
             species.Name = speciesDto.Name;
             species.ScientificName = speciesDto.ScientificName;
-
+            species.Description = speciesDto.Description;
             return species;
         }
 

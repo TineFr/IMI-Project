@@ -34,12 +34,18 @@ html {
     font-size: 16px;
   }
 }
-
+footer{
+    text-align: center;
+}
 .border-top {
   border-top: 1px solid #e5e5e5;
 }
 .border-bottom {
   border-bottom: 1px solid #e5e5e5;
+}
+
+.container{
+    text-align: center;
 }
 
 .box-shadow {
