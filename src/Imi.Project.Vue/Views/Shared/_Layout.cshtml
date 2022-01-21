@@ -29,13 +29,16 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Cages" asp-action="Index">Cages</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Species" asp-action="Index">Species</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Medicines" asp-action="Index">Medicines</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Species" asp-action="Index">Log out</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Species" asp-action="Index">Species</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Facts" asp-action="Index">Fun Facts!</a>
+                        </li>
+                        <li class="nav-item end-alignment">
+                            <div  type="button" class="nav-link text-dark" v-on:click="logOut">Log out</div>
                         </li>
                     </ul>
                 </div>

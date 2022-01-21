@@ -11,11 +11,6 @@ const config = {
     }
 };
 
-var test = axios.create({
-    allowedHeaders: ['pagination'],
-});
-
-
 var birds = new Vue({
     el: '#birdsIndex',
     data: {
@@ -59,7 +54,7 @@ var birds = new Vue({
             var self = this;
             self.birds = null;
             self.apiErrorMessage = null;
-            test.get(self.fetchUrl(), config)
+            axios.get(self.fetchUrl(), config)
                 .then(function (response) {
                     self.birds = response.data;
                     self.ManagePagination(JSON.parse(response.headers.pagination))

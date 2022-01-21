@@ -1,7 +1,14 @@
 ﻿
 /*global*/
 
+.end-alignment{
+    position: absolute;
+    right: 0;
+}
 
+.navbar-nav{
+    position: relative;
+}
 .deleteContainer {
     z-index: 20;
     position: absolute;
@@ -81,6 +88,7 @@ button:disabled {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 50px;
 }
 
 .logoDiv {
@@ -304,9 +312,9 @@ input {
     word-wrap: break-word;
 }
 
-    .indexItem:hover {
-        background-color: #C4C4C4;
-    }
+.indexItem:hover {
+    background-color: #C4C4C4;
+}
 
 
 .itemImage {
@@ -452,3 +460,91 @@ paginationDiv > select {
 form > label {
     font-size: 40px;
 }
+
+/*Facts view*/
+/*...........................................................................*/
+
+.factsTitle {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 90px;
+    padding: 10px;
+    color: rgba(0, 0, 0, 0.651);
+}
+
+.factContainer{
+    text-align: center;
+}
+
+.fact {
+    display: inline-block;
+    margin: 0;
+    width: 300px;
+    text-align: center;
+    word-break: break-word;
+    color: #495057;
+}
+
+.factImageContainer {
+    grid-column: 2;
+    margin-top: 30px;
+    border: 3px solid lightblue;
+    padding: 10px;
+}
+
+.factImage{
+    max-height: 400px;
+    min-height: 250px;
+    max-width: auto;
+}
+
+.arrow-left {
+    grid-column: 1;
+    width: 0;
+    height: 0;
+    border-top: 50px solid transparent;
+    border-bottom: 50px solid transparent;
+    border-right: 50px solid lightblue;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+
+.arrow-right {
+    grid-column: 3;
+    width: 0;
+    height: 0;
+    margin-left: 150px;
+    border-top: 50px solid transparent;
+    border-bottom: 50px solid transparent;
+    border-left: 50px solid lightblue;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.boxContainer {
+    display: grid;
+    grid-template-columns: 200px 900px 200px;
+    position: relative;
+}
+
+@media only screen and (max-width: 650px) {
+    .factsTitle {
+        font-size: 45px;
+    }
+
+    .boxContainer {
+        display: grid;
+        grid-template-columns: 10vw 30vw 10vw;
+        position: relative;
+    }
+}
+
+/*@media only screen and (max-width: 1300px) {
+    .boxContainer {
+        grid-template-columns: 10vw 50vw 10vw;
+    }
+}*/
