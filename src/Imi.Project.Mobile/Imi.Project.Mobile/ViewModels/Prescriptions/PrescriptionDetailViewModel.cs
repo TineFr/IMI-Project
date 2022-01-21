@@ -15,9 +15,9 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
     public class PrescriptionDetailViewModel : FreshBasePageModel
     {
         private readonly IBaseApiService<BirdRequestModel, BirdModel> _birdService;
-        private readonly IBaseApiService<PrescriptionModel, PrescriptionModel> _prescriptionService;
+        private readonly IBaseApiService<PrescriptionRequestModel, PrescriptionModel> _prescriptionService;
 
-        public PrescriptionDetailViewModel(IBaseApiService<PrescriptionModel, PrescriptionModel> prescriptionService, IBaseApiService<BirdRequestModel, BirdModel> birdService)
+        public PrescriptionDetailViewModel(IBaseApiService<PrescriptionRequestModel, PrescriptionModel> prescriptionService, IBaseApiService<BirdRequestModel, BirdModel> birdService)
         {
             _prescriptionService = prescriptionService;
             _birdService = birdService;

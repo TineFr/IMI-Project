@@ -1,7 +1,9 @@
-﻿using FreshMvvm;
+﻿using FluentValidation;
+using FreshMvvm;
 using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
 using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
+using Imi.Project.Mobile.Validators;
 using Imi.Project.Mobile.ViewModels.Medications;
 using System;
 using System.Collections.Generic;
@@ -17,14 +19,17 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
     {
         private readonly IBaseApiService<BirdRequestModel, BirdModel> _birdService;
         private readonly IBaseApiService<MedicineModel, MedicineModel> _medicineService;
-        private readonly IBaseApiService<PrescriptionModel, PrescriptionModel> _prescriptionService;
-        public AddPrescriptionViewModel(IBaseApiService<PrescriptionModel, PrescriptionModel> prescriptionService,
+        private readonly IBaseApiService<PrescriptionRequestModel, PrescriptionModel> _prescriptionService;
+        private readonly IValidator<PrescriptionRequestModel> _prescriptionRequestModelValidator;
+        public AddPrescriptionViewModel(IBaseApiService<PrescriptionRequestModel, PrescriptionModel> prescriptionService,
                                         IBaseApiService<MedicineModel, MedicineModel> medicineService,
-                                        IBaseApiService<BirdRequestModel, BirdModel> birdService)
+                                        IBaseApiService<BirdRequestModel, BirdModel> birdService,
+                                         IValidator<PrescriptionRequestModel> prescriptionRequestModelValidator)
         {
             _prescriptionService = prescriptionService;
             _birdService = birdService; 
             _medicineService = medicineService;
+            _prescriptionRequestModelValidator = prescriptionRequestModelValidator;
         }
         #region properties
 
@@ -79,19 +84,6 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
             }
         }
 
-        //private object medecine;
-
-        //public object Medicine
-        //{
-        //    get { return medecine; }
-        //    set
-        //    {
-        //        medecine = value;
-        //        RaisePropertyChanged(nameof(Medicine));
-        //    }
-        //}
-
-
         private ObservableCollection<object> selectedBirds;
 
         public ObservableCollection<object> SelectedBirds
@@ -133,15 +125,24 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
         public ICommand SaveCommand => new Command(
              async () =>
              {
-                 PrescriptionModel newPrescription = new PrescriptionModel
+                 PrescriptionRequestModel newPrescription = new PrescriptionRequestModel
                  {
-                     StartDate = this.StartDate.ToString(),
-                     EndDate = this.EndDate.ToString(),
-                     MedicationId = this.Medicine.Id,
-                     BirdIds = SelectedBirds.Select(b => b as BirdModel).Select(b => b.Id).ToList(),
+                     StartDate = this.StartDate,
+                     EndDate = this.EndDate,
+                     Medicine = this.Medicine.Id,
+                     Birds = SelectedBirds.Select(b => b as BirdModel).Select(b => b.Id).ToList(),
                  };
 
-                 await _prescriptionService.AddAsync("prescriptions", newPrescription);
+                 var response = await _prescriptionService.AddAsync("prescriptions", newPrescription);            
+                 if (response.ErrorMessage is object)
+                 {
+                     await CoreMethods.DisplayAlert("Error", response.ErrorMessage, "Ok");
+                 }
+                 else await CoreMethods.PopPageModel();
+
+                 await CoreMethods.PopPageModel();
+
+
                  await CoreMethods.PopPageModel();
              });
         public ICommand ShowMedicationsCommand => new Command(
@@ -151,5 +152,42 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
              });
 
         #endregion
+
+
+        private bool Validate(PrescriptionRequestModel model)
+        {
+            ResetErrorMessages();
+            var context = new ValidationContext<object>(model);
+            var validationResult = _prescriptionRequestModelValidator.Validate(context);
+            foreach (var error in validationResult.Errors)
+            {
+
+                if (error.PropertyName == nameof(model.Medicine))
+                {
+                    MedicineMessage = error.ErrorMessage;
+                }
+                if (error.PropertyName == nameof(model.Birds))
+                {
+                    BirdsMessage = error.ErrorMessage;
+                }
+                if (error.PropertyName == nameof(model.StartDate))
+                {
+                    StartDateMessage = error.ErrorMessage;
+                }
+                if (error.PropertyName == nameof(model.EndDate))
+                {
+                    EndDateMessage = error.ErrorMessage;
+                }
+            }
+            return validationResult.IsValid;
+        }
+
+        private void ResetErrorMessages()
+        {
+            MedicineMessage = "";
+            BirdsMessage = "";
+            StartDateMessage = "";
+            EndDateMessage = "";
+        }
     }
 }

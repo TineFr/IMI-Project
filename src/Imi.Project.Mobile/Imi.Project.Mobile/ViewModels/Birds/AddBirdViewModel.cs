@@ -21,7 +21,7 @@ namespace Imi.Project.Mobile.ViewModels.Birds
         private readonly IBaseApiService<CageRequestModel, CageModel> _cageService;
         private readonly IBaseApiService<SpeciesModel, SpeciesModel> _speciesService;
         private readonly IBaseApiService<BirdRequestModel, BirdModel> _birdService;
-        private readonly IValidator _birdRequestModelValidator;
+        private readonly IValidator<> _birdRequestModelValidator;
         public AddBirdViewModel(IBaseApiService<CageRequestModel, CageModel> cageService,
                                 IBaseApiService<SpeciesModel, SpeciesModel> speciesService,
                                 IBaseApiService<BirdRequestModel, BirdModel> birdService)

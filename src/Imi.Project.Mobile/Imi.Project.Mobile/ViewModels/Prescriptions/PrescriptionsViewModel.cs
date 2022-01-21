@@ -18,9 +18,9 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
     public class PrescriptionsViewModel : FreshBasePageModel
     {
         private const string prescriptionsMessage = "There are no prescriptions yet. Add a new prescription!";
-        private readonly IBaseApiService<PrescriptionModel, PrescriptionModel> _prescriptionService;
+        private readonly IBaseApiService<PrescriptionRequestModel, PrescriptionModel> _prescriptionService;
 
-        public PrescriptionsViewModel(IBaseApiService<PrescriptionModel, PrescriptionModel> prescriptionService)
+        public PrescriptionsViewModel(IBaseApiService<PrescriptionRequestModel, PrescriptionModel> prescriptionService)
         {
             _prescriptionService = prescriptionService;
         }
