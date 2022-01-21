@@ -4,7 +4,7 @@ using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
 using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Validators;
-using Imi.Project.Mobile.ViewModels.Medications;
+using Imi.Project.Mobile.ViewModels.Medicines;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -198,7 +198,7 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
         public ICommand ShowMedicationsCommand => new Command(
              async () =>
              {
-                 await CoreMethods.PushPageModel<MedicationsViewModel>();
+                 await CoreMethods.PushPageModel<MedicinesViewModel>();
              });
 
         #endregion

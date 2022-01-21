@@ -8,13 +8,13 @@ using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace Imi.Project.Mobile.ViewModels.Medications
+namespace Imi.Project.Mobile.ViewModels.Medicines
 {
-    class AddMedicationViewMode : FreshBasePageModel
+    class AddMedicineViewModel : FreshBasePageModel
     {
         private readonly IMedicationService medicationService;
 
-        public AddMedicationViewMode(IMedicationService medicationService)
+        public AddMedicineViewModel(IMedicationService medicationService)
         {
             this.medicationService = medicationService;
         }
@@ -53,8 +53,8 @@ namespace Imi.Project.Mobile.ViewModels.Medications
                  MedicineModel newMedication = new MedicineModel
                  {
                      Id = new Guid(),
-                     Name = this.Name,
-                     Usage = this.Usage
+                     Name = Name,
+                     Usage = Usage
 
                  };
                  await medicationService.AddMedication(newMedication);

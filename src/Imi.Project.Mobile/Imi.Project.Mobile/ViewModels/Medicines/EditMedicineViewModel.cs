@@ -8,13 +8,13 @@ using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace Imi.Project.Mobile.ViewModels.Medications
+namespace Imi.Project.Mobile.ViewModels.Medicines
 {
-    public class EditMedicationViewModel : FreshBasePageModel
+    public class EditMedicineViewModel : FreshBasePageModel
     {
         private readonly IMedicationService medicationService;
 
-        public EditMedicationViewModel(IMedicationService medicationService)
+        public EditMedicineViewModel(IMedicationService medicationService)
         {
             this.medicationService = medicationService;
         }

@@ -10,12 +10,12 @@ using Imi.Project.Mobile.Core.Services.Mocking.Services;
 using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Models;
 
-namespace Imi.Project.Mobile.Pages.Medications
+namespace Imi.Project.Mobile.Pages.Medicines
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MedicationsPage : ContentPage
+    public partial class MedicinesPage : ContentPage
     {
-        public MedicationsPage()
+        public MedicinesPage()
         {
             InitializeComponent();
         }

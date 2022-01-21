@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Imi.Project.Mobile.Pages.Medications
+namespace Imi.Project.Mobile.Pages.Medicines
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AddMedicationPage : ContentPage
+    public partial class AddMedicinePage : ContentPage
     {
-        public AddMedicationPage()
+        public AddMedicinePage()
         {
             InitializeComponent();
         }

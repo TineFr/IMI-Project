@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace Imi.Project.Mobile.ViewModels.Medications
+namespace Imi.Project.Mobile.ViewModels.Medicines
 {
-    public class MedicationsViewModel : FreshBasePageModel
+    public class MedicinesViewModel : FreshBasePageModel
     {
         private const string medicinesMessage = "There are no medicines yet. Add a new medicine!";
         private readonly IBaseApiService<MedicineModel, MedicineModel> _medicinesService;
 
-        public MedicationsViewModel(IBaseApiService<MedicineModel, MedicineModel> medicineService)
+        public MedicinesViewModel(IBaseApiService<MedicineModel, MedicineModel> medicineService)
         {
             _medicinesService = medicineService;
         }
@@ -40,7 +40,7 @@ namespace Imi.Project.Mobile.ViewModels.Medications
         public string NoMedicinessMessage
         {
             get { return noMedicinessMessage; }
-            set 
+            set
             {
                 noMedicinessMessage = value;
                 RaisePropertyChanged(nameof(NoMedicinessMessage));
@@ -78,13 +78,13 @@ namespace Imi.Project.Mobile.ViewModels.Medications
                  await RefreshMedicines();
              });
         public ICommand EditMeddicationCommand => new Command<MedicineModel>(
-             async (MedicineModel medication) =>
+             async (medication) =>
              {
-                 await CoreMethods.PushPageModel<EditMedicationViewModel>(medication);
+                 await CoreMethods.PushPageModel<EditMedicineViewModel>(medication);
              });
 
         public ICommand DeleteMedicationCommand => new Command<MedicineModel>(
-             async (MedicineModel medicine) =>
+             async (medicine) =>
              {
                  var action = await Application.Current.MainPage.DisplayAlert("Do you wish to delete this medication?", null, "YES", "CANCEL");
                  if (action)
@@ -95,9 +95,9 @@ namespace Imi.Project.Mobile.ViewModels.Medications
              });
 
         public ICommand AddMedicationCommand => new Command<MedicineModel>(
-             async (MedicineModel medication) =>
+             async (medication) =>
              {
-                 await CoreMethods.PushPageModel<AddMedicationViewMode>(medication);
+                 await CoreMethods.PushPageModel<AddMedicineViewModel>(medication);
              });
 
         #endregion

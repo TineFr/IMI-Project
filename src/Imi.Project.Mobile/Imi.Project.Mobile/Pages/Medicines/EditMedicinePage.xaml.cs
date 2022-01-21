@@ -10,12 +10,12 @@ using Imi.Project.Mobile.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Imi.Project.Mobile.Pages.Medications
+namespace Imi.Project.Mobile.Pages.Medicines
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class EditMedicationPage : ContentPage
+    public partial class EditMedicinePage : ContentPage
     {
-        public EditMedicationPage(MedicineModel medication)
+        public EditMedicinePage(MedicineModel medication)
         {
             InitializeComponent();
         }
