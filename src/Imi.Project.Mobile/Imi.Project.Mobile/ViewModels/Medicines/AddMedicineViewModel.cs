@@ -1,4 +1,6 @@
-﻿using FreshMvvm;
+﻿using FluentValidation;
+using FreshMvvm;
+using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
 using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
@@ -12,11 +14,14 @@ namespace Imi.Project.Mobile.ViewModels.Medicines
 {
     class AddMedicineViewModel : FreshBasePageModel
     {
-        private readonly IMedicationService medicationService;
+        private readonly IBaseApiService<MedicineModel, MedicineModel> _medicineService;
+        private readonly IValidator<MedicineModel> _medicineModelValidator;
 
-        public AddMedicineViewModel(IMedicationService medicationService)
+        public AddMedicineViewModel(IBaseApiService<MedicineModel, MedicineModel> medicationService,
+                                     IValidator<MedicineModel> validator)
         {
-            this.medicationService = medicationService;
+            _medicineService = medicationService;
+            _medicineModelValidator = validator;
         }
 
         #region properties
@@ -45,20 +50,52 @@ namespace Imi.Project.Mobile.ViewModels.Medicines
         }
         #endregion
 
+        #region validation properties
+
+        private string nameMessage;
+        public string NameMessage
+        {
+            get { return nameMessage; }
+            set
+            {
+                nameMessage = value;
+                RaisePropertyChanged(nameof(NameMessage));
+            }
+        }
+
+        private string usageMessage;
+        public string UsageMessage
+        {
+            get { return usageMessage; }
+            set
+            {
+                usageMessage = value;
+                RaisePropertyChanged(nameof(UsageMessage));
+            }
+        }
+
+        #endregion
+
         #region commands
 
         public ICommand SaveCommand => new Command(
              async () =>
              {
-                 MedicineModel newMedication = new MedicineModel
+                 MedicineModel model = new MedicineModel
                  {
-                     Id = new Guid(),
                      Name = Name,
                      Usage = Usage
-
                  };
-                 await medicationService.AddMedication(newMedication);
-                 await CoreMethods.PopPageModel();
+                 var isValid = Validate(model);
+                 if (isValid)
+                 {
+                     var response = await _medicineService.AddAsync($"medicines", model);
+                     if (response.ErrorMessage is object)
+                     {
+                         await CoreMethods.DisplayAlert("Error", response.ErrorMessage, "OK");
+                     }
+                     else await CoreMethods.PopPageModel(response);
+                 }
              });
 
         public ICommand BackCommand => new Command(
@@ -68,5 +105,32 @@ namespace Imi.Project.Mobile.ViewModels.Medicines
              });
 
         #endregion
+
+        private bool Validate(MedicineModel model)
+        {
+            ResetErrorMessages();
+            var context = new ValidationContext<object>(model);
+            var validationResult = _medicineModelValidator.Validate(context);
+            foreach (var error in validationResult.Errors)
+            {
+
+                if (error.PropertyName == nameof(model.Name))
+                {
+
+                    NameMessage = error.ErrorMessage;
+                }
+                if (error.PropertyName == nameof(model.Usage))
+                {
+                    UsageMessage = error.ErrorMessage;
+                }
+            }
+            return validationResult.IsValid;
+        }
+
+        private void ResetErrorMessages()
+        {
+            NameMessage = "";
+            UsageMessage = "";
+        }
     }
 }
