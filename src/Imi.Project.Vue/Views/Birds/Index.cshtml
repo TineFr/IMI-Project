@@ -78,6 +78,20 @@
                     </div>
 
                     <div v-if="addMode || editMode" class="form-group">
+                        <label>Gender:</label><br>
+                        <p v-if="currentBird.gender">{{currentBird.gender}}</p><br>
+                        <select class="browser-default custom-select col-sm-5"  name="select gender" v-model="currentBird.gender">
+                            <option  value="Male">Male</option>
+                            <option  value="Female">Female</option>
+                      </select>
+                     <div class="error" v-if="errors.gender != []">{{errors.gender[0]}}</div> 
+                    </div>
+                    <div v-else-if="currentBird.cage" class="form-group">
+                        <label>Gender:</label><br>
+                        <input v-model="currentBird.gender" class="form-control col-sm-5" v-bind:readonly="detailMode"/> 
+                    </div>
+
+                    <div v-if="addMode || editMode" class="form-group">
                         <label>Cage:</label><br>
                         <p v-if="currentBird.cage">{{currentBird.cage.name}}</p><br>
                         <select class="browser-default custom-select col-sm-5"  name="select cage" v-model="currentBird.cage">
