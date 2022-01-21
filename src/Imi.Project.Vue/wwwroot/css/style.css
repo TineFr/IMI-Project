@@ -1,7 +1,14 @@
 ﻿
 /*global*/
 
-.end-alignment{
+
+.non-option{
+    color: black;
+    font-weight: bold;  
+}
+
+
+.end-alignment {
     position: absolute;
     right: 0;
 }
