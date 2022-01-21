@@ -16,6 +16,7 @@
             </AbsoluteLayout>
             <StackLayout Grid.Row="1" Grid.RowSpan="3">
                 <StackLayout Grid.Row="2">
+                    <Label Text="{Binding NoPrescriptionsMessage}" IsVisible="{Binding NoPrescriptionsMessage, Converter={StaticResource VisibilityConverter}}" Margin="5, 10, 5, 10"  HorizontalOptions="StartAndExpand"></Label>
                     <Button  x:Name="btnAddPrescription" Text="Add new" HorizontalOptions="EndAndExpand" WidthRequest="100" Margin="10" Command="{Binding AddPrescriptionCommand }"></Button>
                 </StackLayout>
 

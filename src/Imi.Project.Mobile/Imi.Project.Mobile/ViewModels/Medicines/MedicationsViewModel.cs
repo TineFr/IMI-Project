@@ -1,12 +1,10 @@
 ﻿using FreshMvvm;
+using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
 using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
-using Imi.Project.Mobile.Core.Services.Mocking.Services;
-using Imi.Project.Mobile.ViewModels.Medications;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -15,40 +13,55 @@ namespace Imi.Project.Mobile.ViewModels.Medications
 {
     public class MedicationsViewModel : FreshBasePageModel
     {
-        private readonly IMedicationService medicationService;
+        private const string medicinesMessage = "There are no medicines yet. Add a new medicine!";
+        private readonly IBaseApiService<MedicineModel, MedicineModel> _medicinesService;
 
-        public MedicationsViewModel(IMedicationService medicationService)
+        public MedicationsViewModel(IBaseApiService<MedicineModel, MedicineModel> medicineService)
         {
-            this.medicationService = medicationService;
+            _medicinesService = medicineService;
         }
 
         #region properties
 
 
-        private ObservableCollection<MedicineModel> medications;
-        public ObservableCollection<MedicineModel> Medications
+        private ObservableCollection<MedicineModel> medicines;
+        public ObservableCollection<MedicineModel> Medicines
         {
-            get { return medications; }
+            get { return medicines; }
             set
             {
-                medications = value;
-                RaisePropertyChanged(nameof(Medications));
+                medicines = value;
+                RaisePropertyChanged(nameof(Medicines));
             }
         }
+
+        private string noMedicinessMessage;
+
+        public string NoMedicinessMessage
+        {
+            get { return noMedicinessMessage; }
+            set 
+            {
+                noMedicinessMessage = value;
+                RaisePropertyChanged(nameof(NoMedicinessMessage));
+            }
+        }
+
         #endregion
 
         protected async override void ViewIsAppearing(object sender, EventArgs e)
         {
             base.ViewIsAppearing(sender, e);
-            await RefreshMedications();
+            await RefreshMedicines();
         }
 
 
-        private async Task RefreshMedications()
+        private async Task RefreshMedicines()
         {
-            var medications = await medicationService.GetAllMedications();
-            Medications = null;
-            Medications = new ObservableCollection<MedicineModel>(medications);
+            Medicines = null;
+            var medicines = await _medicinesService.GetAllAsync("me/medicines?ItemsPerPage=100");
+            if (medicines.ToList()[0].ErrorMessage is object) NoMedicinessMessage = medicinesMessage;
+            else Medicines = new ObservableCollection<MedicineModel>(medicines);
         }
 
         public override void Init(object initData)
@@ -60,8 +73,9 @@ namespace Imi.Project.Mobile.ViewModels.Medications
 
         #region commands
         public ICommand ShowMedicationsCommand => new Command(
-             async () => {
-                 Medications = await medicationService.GetAllMedications();
+             async () =>
+             {
+                 await RefreshMedicines();
              });
         public ICommand EditMeddicationCommand => new Command<MedicineModel>(
              async (MedicineModel medication) =>
@@ -70,13 +84,13 @@ namespace Imi.Project.Mobile.ViewModels.Medications
              });
 
         public ICommand DeleteMedicationCommand => new Command<MedicineModel>(
-             async (MedicineModel medication) =>
+             async (MedicineModel medicine) =>
              {
                  var action = await Application.Current.MainPage.DisplayAlert("Do you wish to delete this medication?", null, "YES", "CANCEL");
                  if (action)
                  {
-                     await medicationService.DeleteMedication(medication.Id);
-                     await RefreshMedications();
+                     await _medicinesService.DeleteAsync($"medicines/{medicine.Id}");
+                     await RefreshMedicines();
                  }
              });
 

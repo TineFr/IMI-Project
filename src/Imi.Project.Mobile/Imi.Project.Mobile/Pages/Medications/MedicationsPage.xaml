@@ -21,7 +21,7 @@
                                  SelectionMode="Single"
                                  VerticalOptions="Center"   
                                  HorizontalOptions="Center"   
-                                 ItemsSource="{Binding Medications}"
+                                 ItemsSource="{Binding Medicines}"
                                  Margin="10">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical"/>
