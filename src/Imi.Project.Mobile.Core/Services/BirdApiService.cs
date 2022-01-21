@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Imi.Project.Mobile.Core.Services.Api
+namespace Imi.Project.Mobile.Core.Services
 {
     public class BirdApiService : BaseApiService<BirdRequestModel, BirdModel>
     {

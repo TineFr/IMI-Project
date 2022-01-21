@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
-namespace Imi.Project.Mobile.Core.Services.Api
+namespace Imi.Project.Mobile.Core.Services
 {
     public class BaseApiService<T, resp> : IBaseApiService<T, resp> where T : class where resp : BaseModel, new()
     {
@@ -16,7 +16,7 @@ namespace Imi.Project.Mobile.Core.Services.Api
         public BaseApiService()
         {
             _httpClient = HttpClientFactory.Create();
-            _httpClient.BaseAddress = new Uri("http://192.168.1.4:5000/api/");
+            _httpClient.BaseAddress = new Uri("http://192.168.0.131:5000/api/");
         }
         public async Task<IEnumerable<resp>> GetAllAsync(string requestUri)
         {

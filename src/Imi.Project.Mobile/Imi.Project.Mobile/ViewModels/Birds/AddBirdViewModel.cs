@@ -3,14 +3,10 @@ using FreshMvvm;
 using Imi.Project.Common.Enums;
 using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
-using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
-using Imi.Project.Mobile.Core.Services.Mocking.Services;
-using Imi.Project.Mobile.Validators;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -21,15 +17,16 @@ namespace Imi.Project.Mobile.ViewModels.Birds
         private readonly IBaseApiService<CageRequestModel, CageModel> _cageService;
         private readonly IBaseApiService<SpeciesModel, SpeciesModel> _speciesService;
         private readonly IBaseApiService<BirdRequestModel, BirdModel> _birdService;
-        private readonly IValidator _birdRequestModelValidator;
+        private readonly IValidator<BirdRequestModel> _birdRequestModelValidator;
         public AddBirdViewModel(IBaseApiService<CageRequestModel, CageModel> cageService,
                                 IBaseApiService<SpeciesModel, SpeciesModel> speciesService,
-                                IBaseApiService<BirdRequestModel, BirdModel> birdService)
+                                IBaseApiService<BirdRequestModel, BirdModel> birdService,
+                                IValidator<BirdRequestModel> validator)
         {
             _cageService = cageService;
             _speciesService = speciesService;
             _birdService = birdService;
-            _birdRequestModelValidator = new BirdRequestModelValidator();
+            _birdRequestModelValidator = validator;
 
         }
 
@@ -203,8 +200,8 @@ namespace Imi.Project.Mobile.ViewModels.Birds
                      CageId = Cage?.Id,
                      SpeciesId = Species?.Id,
                      Food = this.Food,
-                 //Image = "birds/budgie2.png"//later nog veranderen
-             };
+                     //Image = "birds/budgie2.png"//later nog veranderen
+                 };
                  if (Gender != null) newBird.Gender = (Gender)Enum.Parse(typeof(Gender), Gender);
 
                  bool isValid = Validate(newBird);

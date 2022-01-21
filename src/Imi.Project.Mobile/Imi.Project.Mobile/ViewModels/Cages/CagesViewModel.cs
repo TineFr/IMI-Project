@@ -1,14 +1,9 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
-using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
-using Imi.Project.Mobile.Core.Services.Mocking.Services;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -43,8 +38,8 @@ namespace Imi.Project.Mobile.ViewModels.Cages
         public string NoCagesMessage
         {
             get { return noCagesMessage; }
-            set 
-            { 
+            set
+            {
                 noCagesMessage = value;
                 RaisePropertyChanged(nameof(NoCagesMessage));
             }
@@ -64,7 +59,7 @@ namespace Imi.Project.Mobile.ViewModels.Cages
             await RefreshCages();
         }
 
- 
+
         private async Task RefreshCages()
         {
             Cages = null;
@@ -76,9 +71,10 @@ namespace Imi.Project.Mobile.ViewModels.Cages
 
         #region commands
         public ICommand ShowCagesCommand => new Command(
-         async () => {
+         async () =>
+         {
 
-            await RefreshCages();
+             await RefreshCages();
          });
 
         public ICommand ViewCageCommand => new Command<CageModel>(

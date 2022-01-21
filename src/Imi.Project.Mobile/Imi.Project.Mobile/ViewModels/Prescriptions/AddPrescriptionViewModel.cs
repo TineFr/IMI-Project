@@ -1,12 +1,11 @@
-﻿using FreshMvvm;
+﻿using FluentValidation;
+using FreshMvvm;
+using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
-using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
-using Imi.Project.Mobile.ViewModels.Medications;
+using Imi.Project.Mobile.ViewModels.Medicines;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -14,60 +13,64 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
 {
     public class AddPrescriptionViewModel : FreshBasePageModel
     {
-
-        private readonly IBirdService _birdService;
-        private readonly IMedicationService _medicationService;
-        private readonly IPrescriptionService _prescriptionService;
-        public AddPrescriptionViewModel(IBirdService birdService, IMedicationService medicationService, IPrescriptionService prescriptionService)
+        private readonly IBaseApiService<BirdRequestModel, BirdModel> _birdService;
+        private readonly IBaseApiService<MedicineModel, MedicineModel> _medicineService;
+        private readonly IBaseApiService<PrescriptionRequestModel, PrescriptionModel> _prescriptionService;
+        private readonly IValidator<PrescriptionRequestModel> _prescriptionRequestModelValidator;
+        public AddPrescriptionViewModel(IBaseApiService<PrescriptionRequestModel, PrescriptionModel> prescriptionService,
+                                        IBaseApiService<MedicineModel, MedicineModel> medicineService,
+                                        IBaseApiService<BirdRequestModel, BirdModel> birdService,
+                                         IValidator<PrescriptionRequestModel> prescriptionRequestModelValidator)
         {
-            _birdService = birdService;
-            _medicationService = medicationService;
             _prescriptionService = prescriptionService;
+            _birdService = birdService;
+            _medicineService = medicineService;
+            _prescriptionRequestModelValidator = prescriptionRequestModelValidator;
         }
         #region properties
 
-        private ObservableCollection<Bird> birds;
+        private ObservableCollection<BirdModel> birds;
 
-        public ObservableCollection<Bird> Birds
+        public ObservableCollection<BirdModel> Birds
         {
             get { return birds; }
             set
-            { 
+            {
                 birds = value;
                 RaisePropertyChanged(nameof(Birds));
             }
         }
 
 
-        private ObservableCollection<Medication> medications;
+        private ObservableCollection<MedicineModel> medicines;
 
-        public ObservableCollection<Medication> Medications
+        public ObservableCollection<MedicineModel> Medicines
         {
-            get { return medications; }
-            set 
-            {
-                medications = value;
-                RaisePropertyChanged(nameof(Medications));
-            }
-
-        }
-
-
-        private Medication medication;
-
-        public Medication Medication
-        {
-            get { return medication; }
+            get { return medicines; }
             set
             {
-                medication = value;
-                RaisePropertyChanged(nameof(Medication));
+                medicines = value;
+                RaisePropertyChanged(nameof(Medicines));
+            }
+
+        }
+
+
+        private MedicineModel medicine;
+
+        public MedicineModel Medicine
+        {
+            get { return medicine; }
+            set
+            {
+                medicine = value;
+                RaisePropertyChanged(nameof(Medicine));
             }
         }
 
-        private Bird bird;
+        private BirdModel bird;
 
-        public Bird Bird
+        public BirdModel Bird
         {
             get { return bird; }
             set
@@ -76,8 +79,6 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
                 RaisePropertyChanged(nameof(Bird));
             }
         }
-
-
 
         private ObservableCollection<object> selectedBirds;
 
@@ -108,10 +109,59 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
         }
 
         #endregion
+
+        #region Validation Properties
+
+        private string medicineMessage;
+        public string MedicineMessage
+        {
+            get { return medicineMessage; }
+            set
+            {
+                medicineMessage = value;
+                RaisePropertyChanged(nameof(MedicineMessage));
+            }
+        }
+        private string birdsMessage;
+
+        public string BirdsMessage
+        {
+            get { return birdsMessage; }
+            set
+            {
+                birdsMessage = value;
+                RaisePropertyChanged(nameof(BirdsMessage));
+            }
+        }
+
+        private string startDateMessage;
+
+        public string StartDateMessage
+        {
+            get { return startDateMessage; }
+            set
+            {
+                startDateMessage = value;
+                RaisePropertyChanged(nameof(StartDateMessage));
+            }
+        }
+
+        private string endDateMessage;
+
+        public string EndDateMessage
+        {
+            get { return endDateMessage; }
+            set
+            {
+                endDateMessage = value;
+                RaisePropertyChanged(nameof(EndDateMessage));
+            }
+        }
+        #endregion
         public async override void Init(object initData)
         {
-            Medications = await _medicationService.GetAllMedications();
-            Birds = await _birdService.GetAllBirds();
+            Medicines = new ObservableCollection<MedicineModel>(await _medicineService.GetAllAsync("me/medicines?ItemsPerPage=1000"));
+            Birds = new ObservableCollection<BirdModel>(await _birdService.GetAllAsync("me/birds?ItemsPerPage=1000"));
             base.Init(initData);
         }
 
@@ -120,31 +170,70 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
         public ICommand SaveCommand => new Command(
              async () =>
              {
-                 Prescription newPrescription = new Prescription
+                 PrescriptionRequestModel newPrescription = new PrescriptionRequestModel
                  {
-                     Id = new Guid(),
-                     StartDate = this.StartDate.ToString("d"),
-                     EndDate = this.EndDate.ToString("d"),
-                     MedicationId = this.Medication.Id,
-                     BirdIds = SelectedBirds.Select(b => b as Bird).Select(b => b.Id).ToList(),
-                     Birds = SelectedBirds.Select(b => b as Bird)
+                     StartDate = this.StartDate,
+                     EndDate = this.EndDate
                  };
 
-                 await _prescriptionService.AddPrescription(newPrescription);
-                 var birds = await _birdService.GetAllBirds();
-                 foreach (var item in birds)
+                 if (selectedBirds != null) newPrescription.Birds = SelectedBirds.Select(b => b as BirdModel).Select(b => b.Id).ToList();
+                 if (medicine != null) newPrescription.Medicine = this.Medicine.Id;
+                 bool isValid = Validate(newPrescription);
+                 if (isValid)
                  {
-                     if (SelectedBirds.Select(b => b as Bird).Contains(item)) item.Prescriptions.Add(newPrescription.Id);
-                     await _birdService.UpdateBird(item);
+                     var response = await _prescriptionService.AddAsync("prescriptions", newPrescription);
+                     if (response.ErrorMessage is object)
+                     {
+                         await CoreMethods.DisplayAlert("Error", response.ErrorMessage, "Ok");
+                     }
+                     else await CoreMethods.PopPageModel();
                  }
-                 await CoreMethods.PopPageModel();
+
+                 else await CoreMethods.DisplayAlert("Hold!", "One or more inputs are not valid.\nCheck again.", "Ok");
              });
         public ICommand ShowMedicationsCommand => new Command(
              async () =>
              {
-                 await CoreMethods.PushPageModel<MedicationsViewModel>();
+                 await CoreMethods.PushPageModel<MedicinesViewModel>();
              });
 
         #endregion
+
+
+        private bool Validate(PrescriptionRequestModel model)
+        {
+            ResetErrorMessages();
+            var context = new ValidationContext<object>(model);
+            var validationResult = _prescriptionRequestModelValidator.Validate(context);
+            foreach (var error in validationResult.Errors)
+            {
+
+                if (error.PropertyName == nameof(model.Medicine))
+                {
+                    MedicineMessage = error.ErrorMessage;
+                }
+                if (error.PropertyName == nameof(model.Birds))
+                {
+                    BirdsMessage = error.ErrorMessage;
+                }
+                if (error.PropertyName == nameof(model.StartDate))
+                {
+                    StartDateMessage = error.ErrorMessage;
+                }
+                if (error.PropertyName == nameof(model.EndDate))
+                {
+                    EndDateMessage = error.ErrorMessage;
+                }
+            }
+            return validationResult.IsValid;
+        }
+
+        private void ResetErrorMessages()
+        {
+            MedicineMessage = "";
+            BirdsMessage = "";
+            StartDateMessage = "";
+            EndDateMessage = "";
+        }
     }
 }

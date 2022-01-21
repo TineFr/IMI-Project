@@ -2,7 +2,6 @@
 using FreshMvvm;
 using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
-using Imi.Project.Mobile.Validators;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -11,12 +10,13 @@ namespace Imi.Project.Mobile.ViewModels.Cages
     public class AddCageViewModel : FreshBasePageModel
     {
         private readonly IBaseApiService<CageRequestModel, CageModel> _cageService;
-        private readonly IValidator _cageRequestModelValidator;
+        private readonly IValidator<CageRequestModel> _cageRequestModelValidator;
 
-        public AddCageViewModel(IBaseApiService<CageRequestModel, CageModel> cageService)
+        public AddCageViewModel(IBaseApiService<CageRequestModel, CageModel> cageService,
+                                IValidator<CageRequestModel> validator)
         {
             _cageService = cageService;
-            _cageRequestModelValidator = new CageRequestModelValidator();
+            _cageRequestModelValidator = validator;
         }
 
         #region properties

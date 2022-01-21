@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Imi.Project.Mobile.Core.Models
 {
-    public class DailyTask : BaseEntity
+    public class MedicineModel : BaseModel
     {
-        public Guid CageId { get; set; }
-        public bool IsDone { get; set; }
+        public string Name { get; set; }
+        public string Usage { get; set; }
     }
 }

@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Imi.Project.Mobile.Pages.Prescriptions.PrescriptionDetailPage"
-             xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions" xmlns:models1="clr-namespace:Imi.Project.Mobile.Core.Models;assembly=Imi.Project.Mobile.Core">
+             xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions"
+             x:Name="PageBinding">
     <ContentPage.Content>
         <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
               RowDefinitions="{StaticResource MainGridRows}">
@@ -11,24 +12,24 @@
                 <Button x:Name="btnRemove" Text="X" HorizontalOptions="End" WidthRequest="40" HeightRequest="40" BackgroundColor="IndianRed" Margin="5"  Command="{Binding DeleteCommand}"></Button>
                 <Frame Grid.Row="0" BackgroundColor="#EEEEEE">
                     <FlexLayout Direction="Row" JustifyContent="Center" AlignItems="Center">
-                        <Label  Text="{Binding Prescription.Medication.Name}" FontSize="30" FontAttributes="Bold" />
+                        <Label  Text="{Binding Prescription.Medicine.Name}" FontSize="30" FontAttributes="Bold" />
                     </FlexLayout>
                 </Frame>
                 <Frame Grid.Row="0" BackgroundColor="#EEEEEE">
                     <FlexLayout Direction="Column" AlignItems="Center">
                         <Label  Text="Usage:" FontSize="20" FontAttributes="Bold" />
-                        <Label  Text="{Binding Prescription.Medication.Usage}" FontSize="15" Margin="20" />
+                        <Label  Text="{Binding Prescription.Medicine.Usage}" FontSize="15" Margin="20" />
                     </FlexLayout>
                 </Frame>
                 <Frame Grid.Row="0" BackgroundColor="#EEEEEE">
                     <FlexLayout Direction="Column" AlignItems="Center">
                         <StackLayout Orientation="Horizontal">
                             <Label  Text="From:" FontSize="15" FontAttributes="Bold" />
-                            <Label  Text="{Binding Prescription.StartDate}" FontSize="15" />
+                            <Label  Text="{Binding Prescription.StartDate, Converter={StaticResource DateTimeConverter}}" FontSize="15" />
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
                             <Label  Text="Till:" FontSize="15" FontAttributes="Bold" />
-                            <Label  Text="{Binding Prescription.EndDate}" FontSize="15" />
+                            <Label  Text="{Binding Prescription.EndDate, Converter={StaticResource DateTimeConverter}}" FontSize="15" />
                         </StackLayout>
                     </FlexLayout>
                 </Frame>
@@ -50,7 +51,7 @@
                                             <Label  Text="{Binding Name}" FontSize="20" HorizontalTextAlignment="Start" />
                                             <Label  Text="{Binding Cage.Name}" FontAttributes="italic"  HorizontalTextAlignment="Start"/>
                                         </StackLayout>
-                                        <ImageButton x:Name="btnRemoveBird" Source="{extensions:ImageResource Imi.Project.Mobile.icons.delete.png}" BackgroundColor="Transparent" HeightRequest="15" Margin="20, 0, 0, 0" HorizontalOptions="End" Command="{Binding RemoveBirdCommand}"  CommandParameter="{Binding .}"></ImageButton>
+                                        <ImageButton x:Name="btnRemoveBird" Source="{extensions:ImageResource Imi.Project.Mobile.icons.delete.png}" BackgroundColor="Transparent" HeightRequest="15" Margin="20, 0, 0, 0" HorizontalOptions="End" Command="{Binding BindingContext.RemoveBirdCommand, Source={x:Reference PageBinding}}"  CommandParameter="{Binding .}"></ImageButton>
                                     </FlexLayout>
                                 </Frame>
                             </StackLayout>

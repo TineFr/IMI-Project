@@ -112,7 +112,7 @@ namespace Imi.Project.Api.Core.Services
                 var bird = await _birdRepository.ExsistsForUserId(dto.UserId, id);
                 if (bird == null)
                 {
-                    throw new ItemNotFoundException($"Bird with id {dto.Medicine} does not exist for this user");
+                    throw new ItemNotFoundException($"Bird with id {id} does not exist for this user");
                 }
             }
             if (dto.StartDate.Date > dto.EndDate.Date)

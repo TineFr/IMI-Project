@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Mobile.Core.Models
 {
-    public class Prescription : BaseEntity
+    public class PrescriptionModel : BaseModel
     {
         public Guid MedicationId { get; set; }
-        public Medication Medication { get; set; }
-        public IEnumerable<Guid> BirdIds { get; set; }
-        public IEnumerable<Bird> Birds { get; set; }
+        public MedicineModel Medicine { get; set; }
+        public List<Guid> BirdIds { get; set; }
+        public List<BirdModel> Birds { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
     }

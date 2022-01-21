@@ -16,6 +16,7 @@
             </AbsoluteLayout>
             <StackLayout Grid.Row="1" Grid.RowSpan="3">
                 <StackLayout Grid.Row="2">
+                    <Label Text="{Binding NoPrescriptionsMessage}" IsVisible="{Binding NoPrescriptionsMessage, Converter={StaticResource VisibilityConverter}}" Margin="5, 10, 5, 10"  HorizontalOptions="StartAndExpand"></Label>
                     <Button  x:Name="btnAddPrescription" Text="Add new" HorizontalOptions="EndAndExpand" WidthRequest="100" Margin="10" Command="{Binding AddPrescriptionCommand }"></Button>
                 </StackLayout>
 
@@ -35,18 +36,18 @@
                             <StackLayout Style="{StaticResource CollectionSelection}">
                                 <Frame CornerRadius="20" BackgroundColor="#EEEEEE" Margin="5">
                                     <FlexLayout Direction="Column" JustifyContent="Center" AlignItems="Center">
-                                        <Image  Source="{extensions:ImageResource Imi.Project.Mobile.icons.medication.png}" HeightRequest="50" HorizontalOptions="Center"></Image>
+                                        <Image  Source="{extensions:ImageResource Imi.Project.Mobile.icons.medication.png}" HeightRequest="50" HorizontalOptions="Center" Margin="7, 0, 0, 0"></Image>
     
                                         
-                                        <Label  Text="{Binding Medication.Name}" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                                        <Label  Text="{Binding Medicine.Name}" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Center" Margin="0, 5, 0, 0" />
 
                                         <StackLayout Orientation="Horizontal">
                                             <Label  Text="From:" FontSize="15" FontAttributes="Bold" HorizontalTextAlignment="Center" />
-                                            <Label  Text="{Binding StartDate}" FontSize="15" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                                            <Label  Text="{Binding StartDate, Converter={StaticResource DateTimeConverter}}" FontSize="15" FontAttributes="Bold" HorizontalTextAlignment="Center" />
                                         </StackLayout>
                                         <StackLayout Orientation="Horizontal">
                                             <Label  Text="Till:" FontSize="15" FontAttributes="Bold" HorizontalTextAlignment="Center" />
-                                            <Label  Text="{Binding EndDate}" FontSize="15" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                                            <Label  Text="{Binding EndDate, Converter={StaticResource DateTimeConverter}}" FontSize="15" FontAttributes="Bold" HorizontalTextAlignment="Center" />
                                         </StackLayout>
                                         <Button x:Name="btnShowBirds" Text="DETAILS" Command="{Binding BindingContext.ViewPrescriptionCommand, Source={x:Reference PageBinding}}" CommandParameter="{Binding .}"  CornerRadius="10" Margin="10"></Button>
                                     </FlexLayout>

@@ -2,16 +2,15 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Imi.Project.Mobile.Pages.Prescriptions
+namespace Imi.Project.Mobile.Pages.Medicines
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PrescriptionDetailPage : ContentPage
+    public partial class EditMedicinePage : ContentPage
     {
-        public PrescriptionDetailPage(PrescriptionModel prescription)
+        public EditMedicinePage()
         {
             InitializeComponent();
         }
 
     }
 }
-

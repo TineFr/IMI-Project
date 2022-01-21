@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Imi.Project.Mobile.Core.Services.Api
+namespace Imi.Project.Mobile.Core.Services
 {
     public class CageApiService : BaseApiService<CageRequestModel, CageModel>
     {

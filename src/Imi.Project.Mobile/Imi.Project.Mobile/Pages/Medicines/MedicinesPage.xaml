@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Imi.Project.Mobile.Pages.Medications.MedicationsPage"
+             x:Class="Imi.Project.Mobile.Pages.Medicines.MedicinesPage"
              xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions"
              x:Name="PageBinding">
     <NavigationPage.TitleView>
@@ -21,7 +21,7 @@
                                  SelectionMode="Single"
                                  VerticalOptions="Center"   
                                  HorizontalOptions="Center"   
-                                 ItemsSource="{Binding Medications}"
+                                 ItemsSource="{Binding Medicines}"
                                  Margin="10">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical"/>
@@ -37,7 +37,7 @@
                                             <Label  Text="{Binding Name}" FontSize="20" HorizontalTextAlignment="Center" />
                                         </StackLayout>
                                         <StackLayout Orientation="Horizontal">
-                                            <ImageButton x:Name="btnEditMedication" Command="{Binding BindingContext.EditMedicationCommand, Source={x:Reference PageBinding}}" CommandParameter="{Binding .}"  Source="{extensions:ImageResource Imi.Project.Mobile.icons.pencil.png}" WidthRequest="20" BackgroundColor="Transparent"></ImageButton>
+                                            <ImageButton x:Name="btnEditMedication" Command="{Binding BindingContext.EditMedicineCommand, Source={x:Reference PageBinding}}" CommandParameter="{Binding .}"  Source="{extensions:ImageResource Imi.Project.Mobile.icons.pencil.png}" WidthRequest="20" BackgroundColor="Transparent"></ImageButton>
                                             <ImageButton x:Name="btnDeleteMedication" Command="{Binding BindingContext.DeleteMedicationCommand, Source={x:Reference PageBinding}}" CommandParameter="{Binding .}"  Source="{extensions:ImageResource Imi.Project.Mobile.icons.delete.png}" WidthRequest="15" BackgroundColor="Transparent" Margin="5,0,10, 0"></ImageButton>
                                         </StackLayout>
                                     </FlexLayout>

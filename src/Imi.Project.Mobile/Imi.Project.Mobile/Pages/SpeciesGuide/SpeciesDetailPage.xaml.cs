@@ -15,7 +15,7 @@ namespace Imi.Project.Mobile.Pages.SpeciesGuide
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SpeciesDetailPage : ContentPage
     {
-        public SpeciesDetailPage(Species species)
+        public SpeciesDetailPage(SpeciesModel species)
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
