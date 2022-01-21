@@ -14,7 +14,7 @@ var login = new Vue({
         apiErrorMessage: null,
     },
     created: function () {
-        if (localStorage.getItem('token')) {
+        if (sessionStorage.getItem('token')) {
             window.location = '/birds';
         }
     },
