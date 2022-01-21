@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -14,13 +15,11 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
 {
     public class PrescriptionDetailViewModel : FreshBasePageModel
     {
-        private readonly IBaseApiService<BirdRequestModel, BirdModel> _birdService;
         private readonly IBaseApiService<PrescriptionRequestModel, PrescriptionModel> _prescriptionService;
 
         public PrescriptionDetailViewModel(IBaseApiService<PrescriptionRequestModel, PrescriptionModel> prescriptionService, IBaseApiService<BirdRequestModel, BirdModel> birdService)
         {
             _prescriptionService = prescriptionService;
-            _birdService = birdService;
         }
 
         #region properties
@@ -34,7 +33,6 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
                 RaisePropertyChanged(nameof(Prescription));
             }
         }
-
         #endregion
 
         public override void Init(object initData)
@@ -51,18 +49,29 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
 
         #region commands
 
-        //public ICommand RemoveBirdCommand => new Command<BirdModel>(
-        //     async (BirdModel bird) =>
-        //     {
+        public ICommand RemoveBirdCommand => new Command<BirdModel>(
+             async (BirdModel bird) =>
+             {
+                 Prescription.Birds.Remove(Prescription.Birds.FirstOrDefault(b => b.Id == bird.Id));
+                 if (prescription.Birds.Count() == 0)
+                 {
+                     await _prescriptionService.DeleteAsync($"prescriptions/{prescription.Id}");
+                     await CoreMethods.PopToRoot(true);
+                 }
+                 else
+                 {
+                     PrescriptionRequestModel model = new PrescriptionRequestModel
+                     {
+                         StartDate = Convert.ToDateTime(prescription.StartDate),
+                         EndDate = Convert.ToDateTime(prescription.EndDate),
+                         Birds = prescription.Birds.Select(b => b.Id).ToList(),
+                         Medicine = prescription.Medicine.Id
+                     };
+                     var result = await _prescriptionService.UpdateAsync($"prescriptions/{Prescription.Id}", model);
+                     Prescription = result;
+                 }
 
-        //         Prescription.BirdIds.ToList().Remove(bird.Id);
-        //         var result = await _prescriptionService.UpdateAsync($"prescriptions/{Prescription.Id}", Prescription);
-        //         if (result.BirdIds.Count() == 0)
-        //         {
-        //             await _prescriptionService.DeleteAsync($"prescriptions/{prescription.Id}");
-        //             await CoreMethods.PopToRoot(true);
-        //         }
-        //     });
+             });
         public ICommand DeleteCommand => new Command(
              async () =>
              {
@@ -75,27 +84,6 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
              });
 
         #endregion
-
-
-        //private async void btnRemoveBird_Clicked(object sender, EventArgs e)
-        //{
-        //    var selection = (ImageButton)sender;
-        //    var bird = selection.CommandParameter as Bird;
-        //    bird.Prescriptions.Remove(Prescription.Id);
-        //    var birdList = birdservice.GetBirdsByPrescription(Prescription);
-
-
-
-        //    if (birdList.Count() == 0)
-        //    {
-        //        await prescriptionservice.DeletePrescription(Prescription.Id);
-        //        await Navigation.PopAsync();
-        //    }
-        //    else
-        //    {
-        //        colvBirds.ItemsSource = birdList;
-        //    }
-        //}
 
 
     }

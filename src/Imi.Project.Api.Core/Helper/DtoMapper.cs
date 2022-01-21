@@ -150,6 +150,7 @@ namespace Imi.Project.Api.Core.Helper
             {
                 var newbirddto = new BirdResponseDto
                 {
+                    Id = bird.Id,
                     Name = bird.Name,
                     Cage = new CageResponseDto
                     {

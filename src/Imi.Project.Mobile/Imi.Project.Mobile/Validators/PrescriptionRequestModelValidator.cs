@@ -1,8 +1,6 @@
 ﻿using FluentValidation;
 using Imi.Project.Mobile.Core.Models;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Imi.Project.Mobile.Validators
 {
@@ -29,7 +27,7 @@ namespace Imi.Project.Mobile.Validators
                 .WithMessage("End date is required")
                 .GreaterThan(model => model.StartDate)
                 .WithMessage("End date must be greater than start date");
-                
+
 
 
         }

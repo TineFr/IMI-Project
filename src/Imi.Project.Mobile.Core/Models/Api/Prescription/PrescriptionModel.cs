@@ -9,8 +9,8 @@ namespace Imi.Project.Mobile.Core.Models
     {
         public Guid MedicationId { get; set; }
         public MedicineModel Medicine { get; set; }
-        public IEnumerable<Guid> BirdIds { get; set; }
-        public IEnumerable<BirdModel> Birds { get; set; }
+        public List<Guid> BirdIds { get; set; }
+        public List<BirdModel> Birds { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
     }
