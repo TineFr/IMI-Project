@@ -1,13 +1,9 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
-using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
-using Imi.Project.Mobile.Core.Services.Mocking.Services;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -81,7 +77,8 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
 
         #region commands
         public ICommand ShowPrescriptionsCommand => new Command(
-         async () => {
+         async () =>
+         {
 
              await RefreshPrescriptions();
          });

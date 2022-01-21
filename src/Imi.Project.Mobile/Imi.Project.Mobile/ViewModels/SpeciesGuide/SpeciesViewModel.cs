@@ -1,13 +1,7 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
-using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
-using Imi.Project.Mobile.Core.Services.Mocking.Services;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -60,8 +54,9 @@ namespace Imi.Project.Mobile.ViewModels.SpeciesGuide
 
         #region commands
         public ICommand ShowSpeciesCommand => new Command(
-         async () => {
-             Species = new ObservableCollection<SpeciesModel> ( await _speciesService.GetAllAsync("species"));
+         async () =>
+         {
+             Species = new ObservableCollection<SpeciesModel>(await _speciesService.GetAllAsync("species"));
          });
 
         public ICommand ViewSpeciesCommand => new Command<SpeciesModel>(

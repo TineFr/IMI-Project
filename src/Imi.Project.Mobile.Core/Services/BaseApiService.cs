@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
-namespace Imi.Project.Mobile.Core.Services.Api
+namespace Imi.Project.Mobile.Core.Services
 {
     public class BaseApiService<T, resp> : IBaseApiService<T, resp> where T : class where resp : BaseModel, new()
     {

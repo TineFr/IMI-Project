@@ -2,9 +2,7 @@
 using FreshMvvm;
 using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
-using Imi.Project.Mobile.Core.Services.Api;
-using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
-using Imi.Project.Mobile.Core.Services.Mocking.Services;
+using Imi.Project.Mobile.Core.Services;
 using Imi.Project.Mobile.Validators;
 using Imi.Project.Mobile.ViewModels;
 using Xamarin.Forms;
@@ -17,14 +15,7 @@ namespace Imi.Project.Mobile
         {
             InitializeComponent();
 
-            // mock services
 
-            FreshIOC.Container.Register<IBirdService, MockBirdService>();
-            FreshIOC.Container.Register<ISpeciesService, MockSpeciesService>();
-            FreshIOC.Container.Register<ICageService, MockCageService>();
-            FreshIOC.Container.Register<IMedicationService, MockMedicationService>();
-            FreshIOC.Container.Register<IPrescriptionService, MockPrescriptionService>();
-            FreshIOC.Container.Register<IDailyTaskService, MockDailyTaskService>();
 
             // api services
 

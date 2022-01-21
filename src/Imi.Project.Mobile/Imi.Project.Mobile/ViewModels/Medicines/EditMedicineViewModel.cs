@@ -2,12 +2,6 @@
 using FreshMvvm;
 using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
-using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
-using Imi.Project.Mobile.Core.Services.Mocking.Services;
-using Imi.Project.Mobile.Validators;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -22,7 +16,7 @@ namespace Imi.Project.Mobile.ViewModels.Medicines
                                      IValidator<MedicineModel> validator)
         {
             _medicineService = medicationService;
-            _medicineModelValidator =  validator;
+            _medicineModelValidator = validator;
         }
 
         private MedicineModel medicationToEdit;

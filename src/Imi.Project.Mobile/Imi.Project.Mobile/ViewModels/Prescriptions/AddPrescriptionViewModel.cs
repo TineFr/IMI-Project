@@ -2,14 +2,10 @@
 using FreshMvvm;
 using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
-using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
-using Imi.Project.Mobile.Validators;
 using Imi.Project.Mobile.ViewModels.Medicines;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -27,7 +23,7 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
                                          IValidator<PrescriptionRequestModel> prescriptionRequestModelValidator)
         {
             _prescriptionService = prescriptionService;
-            _birdService = birdService; 
+            _birdService = birdService;
             _medicineService = medicineService;
             _prescriptionRequestModelValidator = prescriptionRequestModelValidator;
         }
@@ -39,7 +35,7 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
         {
             get { return birds; }
             set
-            { 
+            {
                 birds = value;
                 RaisePropertyChanged(nameof(Birds));
             }
@@ -51,7 +47,7 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
         public ObservableCollection<MedicineModel> Medicines
         {
             get { return medicines; }
-            set 
+            set
             {
                 medicines = value;
                 RaisePropertyChanged(nameof(Medicines));

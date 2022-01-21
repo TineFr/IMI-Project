@@ -11,11 +11,5 @@ namespace Imi.Project.Mobile.Pages.Prescriptions
         {
             InitializeComponent();
         }
-
-        private void cmbBirds_SelectionChanged(object sender, Syncfusion.XForms.ComboBox.SelectionChangedEventArgs e)
-        {
-            var test = cmbBirds.SelectedItem;
-
-        }
     }
 }

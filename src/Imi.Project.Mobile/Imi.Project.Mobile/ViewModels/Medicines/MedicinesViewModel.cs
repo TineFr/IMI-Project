@@ -1,7 +1,6 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
-using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
