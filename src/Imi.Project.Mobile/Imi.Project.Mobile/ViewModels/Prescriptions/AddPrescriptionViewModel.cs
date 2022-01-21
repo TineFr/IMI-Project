@@ -113,6 +113,55 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
         }
 
         #endregion
+
+        #region Validation Properties
+
+        private string medicineMessage;
+        public string MedicineMessage
+        {
+            get { return medicineMessage; }
+            set
+            {
+                medicineMessage = value;
+                RaisePropertyChanged(nameof(MedicineMessage));
+            }
+        }
+        private string birdsMessage;
+
+        public string BirdsMessage
+        {
+            get { return birdsMessage; }
+            set
+            {
+                birdsMessage = value;
+                RaisePropertyChanged(nameof(BirdsMessage));
+            }
+        }
+
+        private string startDateMessage;
+
+        public string StartDateMessage
+        {
+            get { return startDateMessage; }
+            set
+            {
+                startDateMessage = value;
+                RaisePropertyChanged(nameof(StartDateMessage));
+            }
+        }
+
+        private string endDateMessage;
+
+        public string EndDateMessage
+        {
+            get { return endDateMessage; }
+            set
+            {
+                endDateMessage = value;
+                RaisePropertyChanged(nameof(EndDateMessage));
+            }
+        }
+        #endregion
         public async override void Init(object initData)
         {
             Medicines = new ObservableCollection<MedicineModel>(await _medicineService.GetAllAsync("me/medicines?ItemsPerPage=1000"));
@@ -128,22 +177,23 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
                  PrescriptionRequestModel newPrescription = new PrescriptionRequestModel
                  {
                      StartDate = this.StartDate,
-                     EndDate = this.EndDate,
-                     Medicine = this.Medicine.Id,
-                     Birds = SelectedBirds.Select(b => b as BirdModel).Select(b => b.Id).ToList(),
+                     EndDate = this.EndDate
                  };
 
-                 var response = await _prescriptionService.AddAsync("prescriptions", newPrescription);            
-                 if (response.ErrorMessage is object)
+                 if (selectedBirds != null) newPrescription.Birds = SelectedBirds.Select(b => b as BirdModel).Select(b => b.Id).ToList();
+                 if (medicine != null) newPrescription.Medicine = this.Medicine.Id;
+                 bool isValid = Validate(newPrescription);
+                 if (isValid)
                  {
-                     await CoreMethods.DisplayAlert("Error", response.ErrorMessage, "Ok");
+                     var response = await _prescriptionService.AddAsync("prescriptions", newPrescription);
+                     if (response.ErrorMessage is object)
+                     {
+                         await CoreMethods.DisplayAlert("Error", response.ErrorMessage, "Ok");
+                     }
+                     else await CoreMethods.PopPageModel();
                  }
-                 else await CoreMethods.PopPageModel();
 
-                 await CoreMethods.PopPageModel();
-
-
-                 await CoreMethods.PopPageModel();
+                 else await CoreMethods.DisplayAlert("Hold!", "One or more inputs are not valid.\nCheck again.", "Ok");
              });
         public ICommand ShowMedicationsCommand => new Command(
              async () =>

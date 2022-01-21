@@ -51,18 +51,18 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
 
         #region commands
 
-        public ICommand RemoveBirdCommand => new Command<BirdModel>(
-             async (BirdModel bird) =>
-             {
+        //public ICommand RemoveBirdCommand => new Command<BirdModel>(
+        //     async (BirdModel bird) =>
+        //     {
 
-                 Prescription.BirdIds.ToList().Remove(bird.Id);
-                 var result = await _prescriptionService.UpdateAsync($"prescriptions/{Prescription.Id}", Prescription);
-                 if (result.BirdIds.Count() == 0)
-                 {
-                     await _prescriptionService.DeleteAsync($"prescriptions/{prescription.Id}");
-                     await CoreMethods.PopToRoot(true);
-                 }
-             });
+        //         Prescription.BirdIds.ToList().Remove(bird.Id);
+        //         var result = await _prescriptionService.UpdateAsync($"prescriptions/{Prescription.Id}", Prescription);
+        //         if (result.BirdIds.Count() == 0)
+        //         {
+        //             await _prescriptionService.DeleteAsync($"prescriptions/{prescription.Id}");
+        //             await CoreMethods.PopToRoot(true);
+        //         }
+        //     });
         public ICommand DeleteCommand => new Command(
              async () =>
              {

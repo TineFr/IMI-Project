@@ -12,6 +12,8 @@ namespace Imi.Project.Mobile.Validators
         {
             RuleFor(model => model.Medicine)
                 .NotNull()
+                .WithMessage("Medicine is required")
+                .NotEqual(new Guid())
                 .WithMessage("Medicine is required");
 
             RuleFor(model => model.Birds)
