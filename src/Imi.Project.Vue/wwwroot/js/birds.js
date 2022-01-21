@@ -6,7 +6,7 @@ var crudUrl = "https://localhost:5001/api/birds/";
 
 const config = {
     headers: {
-        Authorization: `Bearer ${localStorage.token}`,
+        Authorization: `Bearer ${sessionStorage.token}`,
         'Content-Type': 'multipart/form-data'
     }
 };
@@ -125,6 +125,7 @@ var birds = new Vue({
         },
 
         toggleShowSelectionBoxes: function () {
+            var self = this;
             self.showSelectionBoxes = !self.showSelectionBoxes;
         },
 
@@ -282,7 +283,8 @@ var birds = new Vue({
             self.errors.gender = [];
         },
 
-        uploadImage: function(e) {
+        uploadImage(e) {
+            var self = this;
             const image = e.target.files[0];
             self.newImage = image;
         },

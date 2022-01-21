@@ -3,7 +3,7 @@ var crudUrl = "https://localhost:5001/api/species/";
 
 const config = {
     headers: {
-        Authorization: `Bearer ${localStorage.token}`,
+        Authorization: `Bearer ${sessionStorage.token}`,
         'Content-Type': 'multipart/form-data'
     }
 };

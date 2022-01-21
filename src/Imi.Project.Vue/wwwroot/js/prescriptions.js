@@ -2,7 +2,7 @@
 var basePrescriptionsUrl = "https://localhost:5001/api/me/prescriptions?ItemsPerPage=6&Page=";
 var medicinesUrl = "https://localhost:5001/api/me/medicines";
 
-const config = { headers: { Authorization: `Bearer ${localStorage.token}` } };
+const config = { headers: { Authorization: `Bearer ${sessionStorage.token}` } };
 
 var test = axios.create({
     allowedHeaders: ['pagination'],

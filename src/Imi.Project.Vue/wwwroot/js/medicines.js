@@ -3,7 +3,7 @@ var baseUrl = "https://localhost:5001/api/me/medicines?ItemsPerPage=6&Page=";
 var crudUrl = "https://localhost:5001/api/medicines/";
 
 const config = {
-    headers: { Authorization: `Bearer ${localStorage.token}`}
+    headers: { Authorization: `Bearer ${sessionStorage.token}`}
 };
 
 

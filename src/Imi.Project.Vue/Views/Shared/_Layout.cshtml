@@ -8,11 +8,11 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/style.css" />
     <script src="~/lib/vue/vue.js"></script>
-@*    <script src="~/lib/axios.min.js"></script>*@
+@*  <script src="~/lib/axios.min.js"></script>*@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
-    <header @*v-if="navBarIsVisible"*@>
+    <header v-if="navBarIsVisible">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <img class="navbar-brand" height="70px" src="~/images/logolight.png" />
@@ -42,7 +42,7 @@
             </div>
         </nav>
     </header>
-    <div class="mainContainer"@* class="container"*@>
+    <div class="mainContainer">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
