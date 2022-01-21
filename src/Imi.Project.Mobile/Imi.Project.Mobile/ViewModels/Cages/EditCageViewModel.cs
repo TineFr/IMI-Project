@@ -11,12 +11,13 @@ namespace Imi.Project.Mobile.ViewModels.Cages
     public class EditCageViewModel : FreshBasePageModel
     {
         private readonly IBaseApiService<CageRequestModel, CageModel> _cageService;
-        private readonly IValidator _cageRequestModelValidator;
+        private readonly IValidator<CageRequestModel> _cageRequestModelValidator;
 
-        public EditCageViewModel(IBaseApiService<CageRequestModel, CageModel> cageService)
+        public EditCageViewModel(IBaseApiService<CageRequestModel, CageModel> cageService,
+                                IValidator<CageRequestModel> validator)
         {
             _cageService = cageService;
-            _cageRequestModelValidator = new CageRequestModelValidator();
+            _cageRequestModelValidator = validator;
         }
 
         private CageModel cageToEdit;
@@ -126,7 +127,7 @@ namespace Imi.Project.Mobile.ViewModels.Cages
                      {
                          await CoreMethods.DisplayAlert("Error", response.ErrorMessage, "OK");
                      }
-                     await CoreMethods.PopPageModel(response);
+                     else await CoreMethods.PopPageModel(response);
                  }
              });
 

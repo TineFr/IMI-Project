@@ -42,6 +42,8 @@ namespace Imi.Project.Mobile
             FreshIOC.Container.Register<IValidator<RegisterModel>, RegisterModelValidator>();
             FreshIOC.Container.Register<IValidator<PrescriptionRequestModel>, PrescriptionRequestModelValidator>();
             FreshIOC.Container.Register<IValidator<BirdRequestModel>, BirdRequestModelValidator>();
+            FreshIOC.Container.Register<IValidator<CageRequestModel>, CageRequestModelValidator>();
+            FreshIOC.Container.Register<IValidator<MedicineModel>, MedicineModelValidator>();
 
             MainPage = new FreshNavigationContainer(FreshPageModelResolver.ResolvePageModel<LoginViewModel>());
         }

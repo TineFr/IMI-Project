@@ -77,10 +77,10 @@ namespace Imi.Project.Mobile.ViewModels.Medicines
              {
                  await RefreshMedicines();
              });
-        public ICommand EditMeddicationCommand => new Command<MedicineModel>(
-             async (medication) =>
+        public ICommand EditMedicineCommand => new Command<MedicineModel>(
+             async (medicine) =>
              {
-                 await CoreMethods.PushPageModel<EditMedicineViewModel>(medication);
+                 await CoreMethods.PushPageModel<EditMedicineViewModel>(medicine);
              });
 
         public ICommand DeleteMedicationCommand => new Command<MedicineModel>(

@@ -1,7 +1,10 @@
-﻿using FreshMvvm;
+﻿using FluentValidation;
+using FreshMvvm;
+using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
 using Imi.Project.Mobile.Core.Services.Mocking.Interfaces;
 using Imi.Project.Mobile.Core.Services.Mocking.Services;
+using Imi.Project.Mobile.Validators;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,11 +15,14 @@ namespace Imi.Project.Mobile.ViewModels.Medicines
 {
     public class EditMedicineViewModel : FreshBasePageModel
     {
-        private readonly IMedicationService medicationService;
+        private readonly IBaseApiService<MedicineModel, MedicineModel> _medicineService;
+        private readonly IValidator<MedicineModel> _medicineModelValidator;
 
-        public EditMedicineViewModel(IMedicationService medicationService)
+        public EditMedicineViewModel(IBaseApiService<MedicineModel, MedicineModel> medicationService,
+                                     IValidator<MedicineModel> validator)
         {
-            this.medicationService = medicationService;
+            _medicineService = medicationService;
+            _medicineModelValidator =  validator;
         }
 
         private MedicineModel medicationToEdit;
@@ -47,6 +53,33 @@ namespace Imi.Project.Mobile.ViewModels.Medicines
         }
 
         #endregion
+
+        #region validation properties
+
+        private string nameMessage;
+        public string NameMessage
+        {
+            get { return nameMessage; }
+            set
+            {
+                nameMessage = value;
+                RaisePropertyChanged(nameof(NameMessage));
+            }
+        }
+
+        private string usageMessage;
+        public string UsageMessage
+        {
+            get { return usageMessage; }
+            set
+            {
+                usageMessage = value;
+                RaisePropertyChanged(nameof(UsageMessage));
+            }
+        }
+
+        #endregion
+
         public override void Init(object initData)
         {
             medicationToEdit = initData as MedicineModel;
@@ -59,10 +92,22 @@ namespace Imi.Project.Mobile.ViewModels.Medicines
         public ICommand SaveCommand => new Command(
              async () =>
              {
-                 medicationToEdit.Name = Name;
-                 medicationToEdit.Usage = Usage;
-                 await medicationService.UpdateMedication(medicationToEdit);
-                 await CoreMethods.PopPageModel();
+                 MedicineModel model = new MedicineModel
+                 {
+                     Name = Name,
+                     Usage = Usage
+                 };
+                 var isValid = Validate(model);
+                 if (isValid)
+                 {
+                     var response = await _medicineService.UpdateAsync($"medicines/{medicationToEdit.Id}", model);
+                     if (response.ErrorMessage is object)
+                     {
+                         await CoreMethods.DisplayAlert("Error", response.ErrorMessage, "OK");
+                     }
+                     else await CoreMethods.PopPageModel(response);
+                 }
+
              });
 
         public ICommand BackCommand => new Command(
@@ -71,6 +116,33 @@ namespace Imi.Project.Mobile.ViewModels.Medicines
                  await CoreMethods.PopPageModel();
              });
         #endregion
+
+        private bool Validate(MedicineModel model)
+        {
+            ResetErrorMessages();
+            var context = new ValidationContext<object>(model);
+            var validationResult = _medicineModelValidator.Validate(context);
+            foreach (var error in validationResult.Errors)
+            {
+
+                if (error.PropertyName == nameof(model.Name))
+                {
+
+                    NameMessage = error.ErrorMessage;
+                }
+                if (error.PropertyName == nameof(model.Usage))
+                {
+                    UsageMessage = error.ErrorMessage;
+                }
+            }
+            return validationResult.IsValid;
+        }
+
+        private void ResetErrorMessages()
+        {
+            NameMessage = "";
+            UsageMessage = "";
+        }
 
     }
 }

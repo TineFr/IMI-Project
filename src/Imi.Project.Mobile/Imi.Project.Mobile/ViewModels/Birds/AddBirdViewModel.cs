@@ -24,12 +24,13 @@ namespace Imi.Project.Mobile.ViewModels.Birds
         private readonly IValidator<BirdRequestModel> _birdRequestModelValidator;
         public AddBirdViewModel(IBaseApiService<CageRequestModel, CageModel> cageService,
                                 IBaseApiService<SpeciesModel, SpeciesModel> speciesService,
-                                IBaseApiService<BirdRequestModel, BirdModel> birdService)
+                                IBaseApiService<BirdRequestModel, BirdModel> birdService,
+                                IValidator<BirdRequestModel> validator)
         {
             _cageService = cageService;
             _speciesService = speciesService;
             _birdService = birdService;
-            _birdRequestModelValidator = new BirdRequestModelValidator();
+            _birdRequestModelValidator = validator;
 
         }
 
