@@ -9,15 +9,16 @@
         <div class="paginationDiv">
             <div v-if="showSelectionBoxes">
 
-                <select v-if="species"  class="species select" name="select species" title="species" v-model="selectedSpecies"  v-on:change="filterBirds">
+                <select v-if="species"  class="species filterSelect" name="select species" title="species" v-model="selectedSpecies"  v-on:change="filterBirds">
                      <option  class="non-option" class="default">All Species</option>
                      <option v-for="specimen in species" v-bind:value="specimen.id">{{specimen.name}}</option>
                   </select>
 
-                  <select v-if="cages" class="cage select" name="select cage" v-model="selectedCage" v-on:change="filterBirds">
+                  <select v-if="cages" class="cage filterSelect" name="select cage" v-model="selectedCage" v-on:change="filterBirds">
                     <option  class="non-option" class="default">All Cages</option>
                     <option v-for="cage in cages" v-bind:value="cage.id">{{cage.name}}</option>
                   </select>
+                   <div type="button" class="btnArrowUp" ><img class="upArrow" src="~/images/black-up.png"  v-on:click="toggleShowSelectionBoxes"/></div>
             </div>
             <div v-else>
                 <div type="button" class="btnShowSelections" v-on:click="toggleShowSelectionBoxes"><img class="imgFilter" src="~/images/filter.png"/></div>

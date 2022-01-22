@@ -277,11 +277,25 @@ input {
     margin-left: 3px;
 }
 
+
+.btnArrowUp {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+}
+
 .imgArrow {
     height: 20px;
     position: absolute;
     top: 10px;
     right: 10px;
+}
+
+.upArrow {
+    position: absolute;
+    top: 10px;
+    height: 20px;
+    width: auto;
 }
 
 .btnAddNew > p {
@@ -368,7 +382,9 @@ a, a:hover {
     height: 50px;
 }
 
-paginationDiv > select {
+
+
+.filterSelect {
     height: 40px;
     width: 200px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
