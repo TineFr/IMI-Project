@@ -34,7 +34,7 @@
                         <StackLayout>
                             <Label Text="Add image"  FontAttributes="Bold"></Label>
                             <Button Text="From Camera"></Button>
-                            <Button Text="From Gallery"></Button>
+                            <Button Text="From Gallery" Command="{Binding SelectImageCommand}"></Button>
                         </StackLayout>
                     </Frame>
                     <Button x:Name="btnSave" Text="Save" HorizontalOptions="End" Command="{Binding SaveCommand}" Margin="20"></Button>

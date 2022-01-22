@@ -61,7 +61,7 @@
                             <Label Text="Change image"  FontAttributes="Bold"></Label>
                             <Image  Source="{Binding Image}" HeightRequest="30"></Image> 
                             <Button Text="From Camera"></Button>
-                            <Button Text="From Gallery"></Button>
+                            <Button Text="From Gallery" Command="{Binding SelectImageCommand}"></Button>
                         </StackLayout>
                     </Frame>
                     <FlexLayout JustifyContent="SpaceBetween">

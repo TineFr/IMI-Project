@@ -204,10 +204,9 @@ namespace Imi.Project.Mobile.ViewModels.Birds
                      CageId = Cage?.Id,
                      SpeciesId = Species?.Id,
                      Food = this.Food,
-                     //Image = "birds/budgie2.png"//later nog veranderen
                  };
                  if (Gender != null) newBird.Gender = (Gender)Enum.Parse(typeof(Gender), Gender);
-                 if (Image != null) newBird.ImageInfo = new ImageInfo { FileName = "test", Image = this.Image };
+                 if (Image != null) newBird.ImageInfo = new ImageInfo { FileName = "name.png", Image = this.Image };
                  bool isValid = Validate(newBird);
                  if (isValid)
                  {

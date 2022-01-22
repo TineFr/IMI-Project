@@ -36,7 +36,6 @@
                             <Frame CornerRadius="20" BackgroundColor="#EEEEEE">
                                 <StackLayout>
                                     <Grid>
-                                        <Image Grid.Column="0" Source="{extensions:ImageResource Imi.Project.Mobile.icons.imageplaceholder.png}" HeightRequest="30"></Image>
                                         <Image Grid.Column="0" Source="{Binding Image}" HeightRequest="100" Aspect="AspectFit"></Image>
                                     </Grid>
                                     <StackLayout HorizontalOptions="Center">
