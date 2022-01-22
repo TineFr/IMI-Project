@@ -46,6 +46,18 @@ namespace Imi.Project.Mobile.ViewModels.Cages
             }
         }
 
+        private ImageSource preview;
+
+        public ImageSource Preview
+        {
+            get { return preview; }
+            set
+            {
+                preview = value;
+                RaisePropertyChanged(nameof(Preview));
+            }
+        }
+
         private string location;
         public string Location
         {
@@ -129,7 +141,19 @@ namespace Imi.Project.Mobile.ViewModels.Cages
                    Image = stream;
                }
            });
+
+        public ICommand TakeImage => new Command(
+           async () =>
+           {
+               var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions() { });
+
+               if (photo != null)
+                   Preview = ImageSource.FromStream(() => { return photo.GetStream(); });
+               Image = photo.GetStream();
+           });
         #endregion
+
+
 
 
 
