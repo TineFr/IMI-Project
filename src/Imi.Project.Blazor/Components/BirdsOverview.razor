@@ -10,9 +10,9 @@
                     <img class="itemimage" src="@item.Image" />
                     <div>
                         <h2>@item.Name</h2>
-                        <p>@item.Cage</p>
+                        <p>@item.Cage?.Name</p>
                     </div>
-                    <img class="genderimage" src="@SetGenderImage(item.Gender)" />
+                    <img class="genderimage" src="@SetGenderImage(item.Gender.ToString())" />
                 </div>
             </a>
         }
@@ -30,15 +30,15 @@
     }
 
     [Parameter]
-    public IEnumerable<Bird> Birds { get; set; } = new List<Bird>();
+    public IEnumerable<BirdModel> Birds { get; set; } = new List<BirdModel>();
 
     [Inject]
-    public IBirdService birdService { get; set; }
+    public IBaseApiService<BirdRequestModel, BirdModel> _birdService { get; set; }
 
 
     protected async override Task OnInitializedAsync()
     {
-        Birds = await birdService.GetAllAsync();
+        Birds = await _birdService.GetAllAsync("me/birds?ItemsPerPage=1000");
     }
 
 }
