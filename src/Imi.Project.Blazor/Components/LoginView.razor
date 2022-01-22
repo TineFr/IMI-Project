@@ -18,12 +18,11 @@
                     <div class="form-group">
                         <label>Password :</label>
                         <div>
-                            <InputText @bind-Value="LoginModel.Password" class="form-control" />
+                            <InputText @bind-Value="LoginModel.Password" type="password" class="form-control" />
                             <ValidationMessage For="@(() => LoginModel.Password)" />
                         </div>
                     </div>
                     <button id="btnSignIn"  type="submit">Sign in</button>
-                    
                     <div id="divSignUp"><span id="spMember">Not a member yet?</span><a id="btnSignUp" asp-controller="Auth" asp-action="Register">Sign up</a></div>
                     <div class="error">@ApiMessage</div> 
                 </EditForm>
@@ -61,7 +60,7 @@
         }
         else
         {
-            NavManager.NavigateTo("/");
+             NavManager.NavigateTo("home", true);
         }
     }
  
