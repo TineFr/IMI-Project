@@ -25,6 +25,7 @@ var birds = new Vue({
         cages: null,
         selectedSpecies: null,
         selectedCage: null,
+        selectedGender: null,
         currentBird : null,
         apiErrorMessage: null,
         showSelectionBoxes: false,
@@ -211,6 +212,7 @@ var birds = new Vue({
                 const formData = new FormData();
                 formData.append("Name", self.currentBird.name);
                 formData.append("HatchDate", self.currentBird.hatchDate);
+                formData.append("Gender", self.currentBird.gender);
                 if (self.currentBird.cage) formData.append("CageId", self.currentBird.cage.id);
                 if (self.currentBird.species) formData.append("SpeciesId", self.currentBird.species.id);
                 if (self.currentBird.food) formData.append("Food", self.currentBird.food);
@@ -251,6 +253,10 @@ var birds = new Vue({
             if (!self.currentBird.name) {
                 self.isValid = false;
                 self.errors.name.push("Name is required.");
+            }
+            if (!self.currentBird.gender) {
+                self.isValid = false;
+                self.errors.gender.push("Gender is required.");
             }
             else if (self.currentBird.name.length > 15) {
                 self.isValid = false;

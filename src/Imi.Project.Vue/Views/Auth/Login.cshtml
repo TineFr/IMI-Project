@@ -15,7 +15,7 @@
                         <input type="email" placeholder="sample@gmail.com" v-model="loginRequest.email">
                          <div class="error" v-if="errors.email != []">{{errors.email[0]}}</div> 
                     </div>
-                    <div>
+                    <div class="form-group">
                         <label>Password:</label><br>
                         <input placeholder="Acser!99B" type="password" v-model="loginRequest.password">
                         <div class="error" v-if="errors.password != []">{{errors.password[0]}}</div> 

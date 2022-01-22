@@ -1,7 +1,14 @@
 ﻿
 /*global*/
 
-.end-alignment{
+
+.non-option{
+    color: black;
+    font-weight: bold;  
+}
+
+
+.end-alignment {
     position: absolute;
     right: 0;
 }
@@ -270,11 +277,25 @@ input {
     margin-left: 3px;
 }
 
+
+.btnArrowUp {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+}
+
 .imgArrow {
     height: 20px;
     position: absolute;
     top: 10px;
     right: 10px;
+}
+
+.upArrow {
+    position: absolute;
+    top: 10px;
+    height: 20px;
+    width: auto;
 }
 
 .btnAddNew > p {
@@ -361,7 +382,9 @@ a, a:hover {
     height: 50px;
 }
 
-paginationDiv > select {
+
+
+.filterSelect {
     height: 40px;
     width: 200px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -536,15 +559,35 @@ form > label {
         font-size: 45px;
     }
 
+    .factImage {
+        max-width: 45vw;
+        height: auto;
+    }
+
     .boxContainer {
         display: grid;
-        grid-template-columns: 10vw 30vw 10vw;
+        grid-template-columns: 20vw 50vw 20vw;
         position: relative;
+    }
+
+    .arrow-right{
+        margin-left: 10vw;
     }
 }
 
-/*@media only screen and (max-width: 1300px) {
-    .boxContainer {
-        grid-template-columns: 10vw 50vw 10vw;
+@media only screen and (max-width: 1300px) {
+    .factImage {
+        max-width: 45vw;
+        height: auto;
     }
-}*/
+
+    .boxContainer {
+        display: grid;
+        grid-template-columns: 20vw 50vw 20vw;
+        position: relative;
+    }
+
+    .arrow-right {
+        margin-left: 10vw;
+    }
+}

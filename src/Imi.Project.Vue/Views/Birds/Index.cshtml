@@ -9,15 +9,16 @@
         <div class="paginationDiv">
             <div v-if="showSelectionBoxes">
 
-                <select v-if="species"  class="species select" name="select species" title="species" v-model="selectedSpecies"  v-on:change="filterBirds">
-                     <option class="default">All Species</option>
+                <select v-if="species"  class="species filterSelect" name="select species" title="species" v-model="selectedSpecies"  v-on:change="filterBirds">
+                     <option  class="non-option" class="default">All Species</option>
                      <option v-for="specimen in species" v-bind:value="specimen.id">{{specimen.name}}</option>
                   </select>
 
-                  <select v-if="cages" class="cage select" name="select cage" v-model="selectedCage" v-on:change="filterBirds">
-                    <option class="default">All Cages</option>
+                  <select v-if="cages" class="cage filterSelect" name="select cage" v-model="selectedCage" v-on:change="filterBirds">
+                    <option  class="non-option" class="default">All Cages</option>
                     <option v-for="cage in cages" v-bind:value="cage.id">{{cage.name}}</option>
                   </select>
+                   <div type="button" class="btnArrowUp" ><img class="upArrow" src="~/images/black-up.png"  v-on:click="toggleShowSelectionBoxes"/></div>
             </div>
             <div v-else>
                 <div type="button" class="btnShowSelections" v-on:click="toggleShowSelectionBoxes"><img class="imgFilter" src="~/images/filter.png"/></div>
@@ -78,10 +79,24 @@
                     </div>
 
                     <div v-if="addMode || editMode" class="form-group">
+                        <label>Gender:</label><br>
+                        <p v-if="currentBird.gender">{{currentBird.gender}}</p><br>
+                        <select class="browser-default custom-select col-sm-5"  name="select gender" v-model="currentBird.gender">
+                            <option  value="Male">Male</option>
+                            <option  value="Female">Female</option>
+                      </select>
+                     <div class="error" v-if="errors.gender != []">{{errors.gender[0]}}</div> 
+                    </div>
+                    <div v-else-if="currentBird.cage" class="form-group">
+                        <label>Gender:</label><br>
+                        <input v-model="currentBird.gender" class="form-control col-sm-5" v-bind:readonly="detailMode"/> 
+                    </div>
+
+                    <div v-if="addMode || editMode" class="form-group">
                         <label>Cage:</label><br>
                         <p v-if="currentBird.cage">{{currentBird.cage.name}}</p><br>
                         <select class="browser-default custom-select col-sm-5"  name="select cage" v-model="currentBird.cage">
-                            <option v-bind:value=null>None</option>
+                            <option class="non-option" v-bind:value=null>None</option>
                             <option v-for="cage in cages" v-bind:value="cage">{{cage.name}}</option>
                       </select>
                     </div>
@@ -94,7 +109,7 @@
                         <label>Species:</label><br>
                         <p v-if="currentBird.species">{{currentBird.species.name}}</p><br>
                         <select class="browser-default custom-select col-sm-5"  name="select species" title="species" v-model="currentBird.species">
-                        <option v-bind:value=null>None</option>
+                        <option  class="non-option" v-bind:value=null>None</option>
                         <option v-for="specimen in species" v-bind:value="specimen">{{specimen.name}}</option>     
                       </select>
                     </div>
