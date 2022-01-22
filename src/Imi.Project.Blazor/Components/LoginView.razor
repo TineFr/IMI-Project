@@ -2,7 +2,7 @@
 <div class="flexContainer">
         <div>
             <div class="logoDiv">
-            <img id="logo" src="~/images/logolight.png" alt="logo">
+            <img id="logo" src="images/logolight.png" alt="logo">
             </div>
             <div id="divLogIn">
                 <h2>Sign in</h2>
@@ -11,18 +11,18 @@
                     <div class="form-group">
                         <label>Email :</label>
                         <div>
-                            <InputText @bind-Value="LoginModel.Email" class="form-control col-sm-3" />
+                            <InputText @bind-Value="LoginModel.Email" class="form-control" />
                             <ValidationMessage For="@(() => LoginModel.Email)" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Password :</label>
                         <div>
-                            <InputText @bind-Value="LoginModel.Password" class="form-control col-sm-3" />
+                            <InputText @bind-Value="LoginModel.Password" class="form-control" />
                             <ValidationMessage For="@(() => LoginModel.Password)" />
                         </div>
                     </div>
-                    <button id="btnSignIn" type="submit">Sign in</button>
+                    <button id="btnSignIn"  type="submit">Sign in</button>
                     
                     <div id="divSignUp"><span id="spMember">Not a member yet?</span><a id="btnSignUp" asp-controller="Auth" asp-action="Register">Sign up</a></div>
                     <div class="error">@ApiMessage</div> 

@@ -2,7 +2,7 @@
 {
     public static class Token
     {
-        public static string JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOlsiQWRtaW5pc3RyYXRvciIsIkJhc2VVc2VyIl0sImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiMDAwMDAwMDAtMDAwMC0wMDAwLTAwMDAtMDAwMDAwMDAwMDAxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZGF0ZW9mYmlydGgiOiIwMS8wOS8xOTk3IDAwOjAwOjAwIiwibmJmIjoxNjQyODgxMjM1LCJleHAiOjE2NDMzMTMyMzUsImlzcyI6Ik15IEF2aWFyeSIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMDEifQ.j2OjEKTZgkeo7s52_9zjGzfAnmUZzBkUJ2M8GgSj1HU";
+        public static string JWT = null;
     }
 
 }
