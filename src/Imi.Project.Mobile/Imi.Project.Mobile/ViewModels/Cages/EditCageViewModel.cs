@@ -1,8 +1,10 @@
 ﻿using FluentValidation;
 using FreshMvvm;
+using Imi.Project.Mobile.Core;
 using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
 using Imi.Project.Mobile.Validators;
+using System.IO;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -35,9 +37,9 @@ namespace Imi.Project.Mobile.ViewModels.Cages
             }
         }
 
-        private string image;
+        private Stream image;
 
-        public string Image
+        public Stream Image
         {
             get { return image; }
             set
@@ -90,7 +92,6 @@ namespace Imi.Project.Mobile.ViewModels.Cages
             cageToEdit = initData as CageModel;
             Name = cageToEdit.Name;
             Location = cageToEdit.Location;
-            Image = cageToEdit.Image;
             base.Init(initData);
         }
 
@@ -118,7 +119,7 @@ namespace Imi.Project.Mobile.ViewModels.Cages
                      Name = Name,
                      Location = Location,
                  };
-                 //cageToEdit.Image = Image;
+                 if (Image != null) model.ImageInfo = new ImageInfo { FileName = "name.png", Image = this.Image };
                  var isValid = Validate(model);
                  if (isValid)
                  {
@@ -136,6 +137,16 @@ namespace Imi.Project.Mobile.ViewModels.Cages
              {
                  await CoreMethods.PopPageModel();
              });
+
+        public ICommand SelectImageCommand => new Command(
+           async () =>
+           {
+               Stream stream = await DependencyService.Get<IImageService>().SelectImage();
+               if (stream != null)
+               {
+                   Image = stream;
+               }
+           });
         #endregion
 
 

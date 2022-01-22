@@ -1,11 +1,13 @@
 ﻿using FluentValidation;
 using FreshMvvm;
 using Imi.Project.Common.Enums;
+using Imi.Project.Mobile.Core;
 using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -96,9 +98,9 @@ namespace Imi.Project.Mobile.ViewModels.Birds
                 RaisePropertyChanged(nameof(Gender));
             }
         }
-        private string image;
+        private Stream image;
 
-        public string Image
+        public Stream Image
         {
             get { return image; }
             set
@@ -138,6 +140,8 @@ namespace Imi.Project.Mobile.ViewModels.Birds
                 RaisePropertyChanged(nameof(HatchDate));
             }
         }
+
+
 
         #endregion
 
@@ -200,10 +204,9 @@ namespace Imi.Project.Mobile.ViewModels.Birds
                      CageId = Cage?.Id,
                      SpeciesId = Species?.Id,
                      Food = this.Food,
-                     //Image = "birds/budgie2.png"//later nog veranderen
                  };
                  if (Gender != null) newBird.Gender = (Gender)Enum.Parse(typeof(Gender), Gender);
-
+                 if (Image != null) newBird.ImageInfo = new ImageInfo { FileName = "name.png", Image = this.Image };
                  bool isValid = Validate(newBird);
                  if (isValid)
                  {
@@ -226,6 +229,18 @@ namespace Imi.Project.Mobile.ViewModels.Birds
              {
                  await CoreMethods.PopPageModel();
              });
+
+
+        public ICommand SelectImageCommand => new Command(
+           async () =>
+            {
+                Stream stream = await DependencyService.Get<IImageService>().SelectImage();
+                if (stream != null)
+                {
+                    Image = stream;
+                }
+            });
+
         #endregion
 
         public async override void Init(object initData)

@@ -1,11 +1,13 @@
 ﻿using FluentValidation;
 using FreshMvvm;
 using Imi.Project.Common.Enums;
+using Imi.Project.Mobile.Core;
 using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -96,9 +98,9 @@ namespace Imi.Project.Mobile.ViewModels.Birds
                 RaisePropertyChanged(nameof(Gender));
             }
         }
-        private string image;
+        private Stream image;
 
-        public string Image
+        public Stream Image
         {
             get { return image; }
             set
@@ -202,6 +204,7 @@ namespace Imi.Project.Mobile.ViewModels.Birds
                      Food = this.Food,
                  };
                  if (Gender != null) model.Gender = (Gender)Enum.Parse(typeof(Gender), Gender);
+                 if (Image != null) model.ImageInfo = new ImageInfo { FileName = "name.png", Image = this.Image };
                  var isValid = Validate(model);
                  if (isValid)
                  {
@@ -233,7 +236,15 @@ namespace Imi.Project.Mobile.ViewModels.Birds
              {
                  await CoreMethods.PopPageModel();
              });
-
+        public ICommand SelectImageCommand => new Command(
+               async () =>
+               {
+                   Stream stream = await DependencyService.Get<IImageService>().SelectImage();
+                   if (stream != null)
+                   {
+                       Image = stream;
+                   }
+               });
         #endregion
 
         public async override void Init(object initData)
@@ -255,7 +266,6 @@ namespace Imi.Project.Mobile.ViewModels.Birds
             Cage = CagesList.Where(c => c.Name == birdToEdit.Cage?.Name).FirstOrDefault();
             Species = SpeciesList.Where(c => c.Name == birdToEdit.Species?.Name).FirstOrDefault();
             Food = birdToEdit.Food;
-            Image = "birds/budgie2.png";
             base.Init(initData);
 
         }
