@@ -26,13 +26,13 @@ namespace Imi.Project.Blazor
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            //services.AddSignalR();
+            services.AddSignalR();
             services.AddServerSideBlazor();
             services.AddTransient<IBirdService, MockBirdService>();
             services.AddTransient<ICageService, MockCageService>();
             services.AddTransient<ISpeciesService, MockSpeciesService>();
             services.AddTransient<IQuizService, QuizService>();
-
+            services.AddTransient<IRoomService, RoomService>();
             services.AddHttpClient();
             
 
@@ -63,8 +63,8 @@ namespace Imi.Project.Blazor
 
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapHub<QuizHub>("/multiplayer");
-                //endpoints.MapBlazorHub();
+                endpoints.MapHub<QuizHub>("/multiplayer");
+                endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });
         }

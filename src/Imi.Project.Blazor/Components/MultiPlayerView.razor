@@ -1,0 +1,56 @@
+﻿@using Microsoft.AspNetCore.SignalR.Client
+
+
+
+@if (!back){
+    <div class="quiztitle"><h3>Multiplayer</h3></div>
+<div><img src="images/quiz/multiplayer.jpg" height="300px" /></div>
+<div class="itemscontainer">
+
+    <div class="item">
+        <button @onclick="CreateRoom">Create Room</button>
+    </div>
+    <div class="item">
+        <button @onclick="JoinRoom" >Join Room</button>
+    </div>
+        <div class="item">
+        <button @onclick="() => back = true" >Back to menu</button>
+    </div>
+
+</div>
+
+}
+else{
+    
+    <QuizOverview></QuizOverview>
+}
+
+
+
+
+
+@code {
+    bool back;
+    HubConnection connection { get; set; }
+
+    List<string> rooms = new List<string>();
+
+    protected override void OnInitialized()
+    {
+        connection = new HubConnectionBuilder()
+       .WithUrl("https://localhost:44371/multiplayer")
+       .Build();
+    }
+
+    private async Task CreateRoom()
+    {
+        await connection.StartAsync();
+        string roomId = Guid.NewGuid().ToString();
+        await connection.SendAsync("JoinRoom", roomId);
+    }
+
+    private async Task JoinRoom()
+    {
+        <RoomOverview></RoomOverview>
+    }
+}
