@@ -43,30 +43,20 @@ namespace Imi.Project.Blazor.Services.Api
         public async Task<resp> GetByIdAsync(string requestUri)
         {
             SetHeader();
-
-            try
+            HttpResponseMessage action = await _httpClient.GetAsync(requestUri);
+            if (action.IsSuccessStatusCode)
             {
-                HttpResponseMessage action = await _httpClient.GetAsync(requestUri);
-                if (action.IsSuccessStatusCode)
-                {
-                    resp returnedModel = await action.Content.ReadAsAsync<resp>();
-                    return returnedModel;
-                }
-                else
-                {
-                    resp messagemodel = new resp
-                    {
-                        ErrorMessage = GetErrorMessage(action.Content.ReadAsStringAsync().Result)
-                    };
-                    return messagemodel;
-                }
+                resp returnedModel = await action.Content.ReadAsAsync<resp>();
+                return returnedModel;
             }
-            catch (Exception ex)
+            else
             {
-                return null;
+                resp messagemodel = new resp
+                {
+                    ErrorMessage = GetErrorMessage(action.Content.ReadAsStringAsync().Result)
+                };
+                return messagemodel;
             }
-
-
         }
 
         public async virtual Task<resp> AddAsync(string requestUri, T model)

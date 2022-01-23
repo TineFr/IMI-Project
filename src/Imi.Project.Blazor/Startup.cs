@@ -1,3 +1,4 @@
+using Imi.Project.Blazor.Hubs;
 using Imi.Project.Blazor.Models.Api;
 using Imi.Project.Blazor.Services;
 using Imi.Project.Blazor.Services.Api;
@@ -25,6 +26,7 @@ namespace Imi.Project.Blazor
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            //services.AddSignalR();
             services.AddServerSideBlazor();
             services.AddTransient<IBirdService, MockBirdService>();
             services.AddTransient<ICageService, MockCageService>();
@@ -32,6 +34,7 @@ namespace Imi.Project.Blazor
             services.AddTransient<IQuizService, QuizService>();
 
             services.AddHttpClient();
+            
 
             services.AddScoped<IAuthApiService, AuthApiService>();
             services.AddScoped(typeof(IBaseApiService<BirdRequestModel, BirdModel>), typeof(BirdApiService));
@@ -60,7 +63,8 @@ namespace Imi.Project.Blazor
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapBlazorHub();
+                //endpoints.MapHub<QuizHub>("/multiplayer");
+                //endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });
         }

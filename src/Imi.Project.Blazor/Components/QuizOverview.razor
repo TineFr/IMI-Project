@@ -1,5 +1,5 @@
-﻿
-
+﻿@*@using Microsoft.AspNetCore.SignalR.Client
+*@
 @if (!startQuiz)
 {
 
@@ -20,6 +20,7 @@
 
     </div>
 }
+
 else
 {
     <QuestionView></QuestionView>
@@ -29,7 +30,26 @@ else
 @code {
 
     bool startQuiz;
+    bool multiPlayer;
 
+    //HubConnection connection { get; set; }
+
+    //private async void CreateConnection()
+    //{
+    //    var test = 0;
+    //    connection = new HubConnectionBuilder()
+    //   .WithUrl("https://localhost:44371/multiplayer")
+    //   .Build();
+
+    //    await CreateRoom();
+    //}
+
+    //private async Task CreateRoom()
+    //{
+    //    await connection.StartAsync();
+    //    string roomId = Guid.NewGuid().ToString();
+    //    await connection.SendAsync("JoinRoom", roomId);
+    //}
 }
 
 
