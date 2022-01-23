@@ -1,4 +1,7 @@
+using Imi.Project.Blazor.Models.Api;
 using Imi.Project.Blazor.Services;
+using Imi.Project.Blazor.Services.Api;
+using Imi.Project.Blazor.Services.Api.Interfaces;
 using Imi.Project.Blazor.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,6 +30,13 @@ namespace Imi.Project.Blazor
             services.AddTransient<ICageService, MockCageService>();
             services.AddTransient<ISpeciesService, MockSpeciesService>();
             services.AddTransient<IQuizService, QuizService>();
+
+            services.AddHttpClient();
+
+            services.AddScoped<IAuthApiService, AuthApiService>();
+            services.AddScoped(typeof(IBaseApiService<BirdRequestModel, BirdModel>), typeof(BirdApiService));
+            services.AddScoped(typeof(IBaseApiService<CageRequestModel, CageModel>), typeof(CageApiService));
+            services.AddScoped(typeof(IBaseApiService<SpeciesModel, SpeciesModel>), typeof(BaseApiService<SpeciesModel, SpeciesModel>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,4 +1,8 @@
-﻿<h1 class="purple">@Cage.Name</h1>
+﻿
+
+@if (Cage != null)
+{
+   <h1 class="purple">@Cage.Name</h1>
 
 <div class="detailscontainer">
     <div class="detailsflex">
@@ -15,30 +19,39 @@
         </div>
     </div>
 
-</div>
+</div> 
+}
+
+
 
 
 @code {
     @inject NavigationManager NavManager;
 
     [Parameter]
-    public Cage Cage { get; set; }
+    public CageModel Cage { get; set; }
 
     [Inject]
-    public ICageService cageService { get; set; }
+    public IBaseApiService<CageRequestModel, CageModel> _cageService { get; set; }
 
     [Parameter]
     public Guid Id { get; set; }
 
     protected async override Task OnInitializedAsync()
     {
-        Cage = await cageService.GetByIdAsync(Id);
+        Cage =  await _cageService.GetByIdAsync($"cages/{Id}");
     }
 
     private async void DeleteCage(Guid id)
     {
-          var result =  await cageService.DeleteAsync(id);
-          if (result) NavManager.NavigateTo("cages");
+          var result =  await _cageService.DeleteAsync($"cages/{Id}");
+
+        if (result is object)
+        {
+
+
+        }
+        else NavManager.NavigateTo("cages");
     }
 
 

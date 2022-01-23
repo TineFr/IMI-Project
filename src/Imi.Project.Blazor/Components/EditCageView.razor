@@ -1,7 +1,10 @@
 ﻿
 <h3>Edit cage</h3>
 
-<EditForm Model="@Cage" OnValidSubmit="@EditCage">
+
+@if (Cage != null)
+{
+    <EditForm Model="@Cage" OnValidSubmit="@EditCage">
     <DataAnnotationsValidator />
     <div class="form-group">
         <label>Name :</label>
@@ -19,34 +22,42 @@
     </div>
     <button type="submit" class="btn submit w-25 p-3">Save</button>
 </EditForm>
+}
+
 
 @code {
 
+    @inject NavigationManager NavManager;
 
     [Inject]
-    public ICageService cageService { get; set; }
-    @inject NavigationManager NavManager;
+    public IBaseApiService<CageRequestModel, CageModel> _cageService { get; set; }
+
 
     [Parameter]
     public Guid Id { get; set; }
 
     [Parameter]
-    public Cage Cage { get; set; }
+    public CageModel Cage { get; set; }
 
 
     protected async override Task OnInitializedAsync()
     {
-        Cage = await cageService.GetByIdAsync(Id);
+        Cage =  await _cageService.GetByIdAsync($"cages/{Id}");
     }
 
 
     private async void EditCage()
     {
+        CageRequestModel model = new CageRequestModel
+        {
+            Name = Cage.Name,
+            Location = Cage.Location
 
-        var result =  await cageService.UpdateAsync(Cage);
+        };
+
+        var result =  await _cageService.UpdateAsync($"cages/{Cage.Id}", model);
         if (result is object)
         {
-
           NavManager.NavigateTo($"cagedetails/{Cage.Id}");
         }
     }

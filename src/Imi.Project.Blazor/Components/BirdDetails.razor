@@ -1,14 +1,17 @@
 ﻿
-<h1 class="purple">@Bird.Name</h1>
+
+@if (@Bird != null)
+{
+    <h1 class="purple">@Bird.Name</h1>
 <div class="detailscontainer">
     <div class="detailsflex">
 
         <img class="detailimage" src="@Bird.Image" />
         <div>
             <h2>@Bird.Name</h2>
-            <p> Species: @Bird.Species</p>
-            <p> Location: @Bird.Cage</p>
-            <img class="genderimage" src="@SetGenderImage(Bird.Gender)" />
+            <p> Species: @Bird.Species.Name</p>
+            <p> Location: @Bird.Cage?.Name</p>
+            <img class="genderimage" src="@SetGenderImage(Bird.Gender.ToString())" />
         </div>
           <div class="d-xl-inline-flex">
             <a href="@($"editbird/{Bird.Id}")" type="button" class="btn edit  m-1">Edit</a>
@@ -17,6 +20,8 @@
     </div>
 
 </div>
+}
+
 
 
 
@@ -24,17 +29,19 @@
 
     @inject NavigationManager NavManager;
     [Parameter]
-    public Bird Bird { get; set; }
+    public BirdModel Bird { get; set; } 
 
     [Inject]
-    public IBirdService birdService { get; set; }
+    public IBaseApiService<BirdRequestModel, BirdModel> _birdService { get; set; }
 
     [Parameter]
     public Guid Id { get; set; }
 
+
     protected async override Task OnInitializedAsync()
     {
-        Bird = await birdService.GetByIdAsync(Id);
+        Bird =  await _birdService.GetByIdAsync($"birds/{Id}");
+
     }
 
     private string SetGenderImage(string gender)
@@ -46,7 +53,14 @@
 
         private async void DeleteBird(Guid id)
     {
-          var result =  await birdService.DeleteAsync(id);
-          if (result) NavManager.NavigateTo("birds");
+          var result =  await _birdService.DeleteAsync($"birds/{Id}");
+
+        if (result is object)
+        {
+
+
+        }
+        else NavManager.NavigateTo("birds");
+
     }
 }
