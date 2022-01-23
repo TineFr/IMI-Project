@@ -1,6 +1,6 @@
 ﻿
 <a href="@($"addcage")" type="button" class="btn submit">Add new</a>
-<div class="maincontainer">
+@*<div class="maincontainer">
     <div class="itemscontainer">
 
         @foreach (var item in Cages)
@@ -17,21 +17,48 @@
         </a>
         }
     </div>
-</div>
+</div>*@
+
+    <div class="indexContainer" >
+
+        @if (Cages != null)
+        {
+            @foreach (var item in Cages)
+            {
+                <a href="@($"cagedetails/{item.Id}")">
+                    <div class="containerItem">
+                        <div class="indexItem">
+                            <img class="itemImage" src="@item.Image" />
+                            <div>
+                                <h2>@item.Name</h2>
+                                <p>@item.Location</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            }
+        
+        }
+        else
+        {
+           <div>Loading ...</div>
+        }
+
+
+        </div>
 
 @code {
 
 
     [Parameter]
-    public IEnumerable<Cage> Cages { get; set; } = new List<Cage>();
+    public IEnumerable<CageModel> Cages { get; set; } = new List<CageModel>();
 
     [Inject]
-    public ICageService cageService { get; set; }
+    public IBaseApiService<CageRequestModel, CageModel> _cageService { get; set; }
 
 
     protected async override Task OnInitializedAsync()
     {
-        Cages = await cageService.GetAllAsync();
-
+        Cages = await _cageService.GetAllAsync("me/cages?ItemsPerPage=1000");
     }
 }
