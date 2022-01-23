@@ -1,24 +1,5 @@
 ﻿
-<a href="@($"addcage")" type="button" class="btn submit">Add new</a>
-@*<div class="maincontainer">
-    <div class="itemscontainer">
-
-        @foreach (var item in Cages)
-        {
-        <a href="@($"cagedetails/{item.Id}")">
-            <div class="flexitem">
-                <img class="itemimage" src="@item.Image" />
-                <div>
-                    <h2>@item.Name</h2>
-                    <p>@item.Location</p>
-                </div>
-
-            </div>
-        </a>
-        }
-    </div>
-</div>*@
-
+<a href="@($"addcage")" type="button" class="btn submit add">Add new</a>
     <div class="indexContainer" >
 
         @if (Cages != null)
@@ -36,14 +17,12 @@
                         </div>
                     </div>
                 </a>
-            }
-        
+            }   
         }
         else
         {
            <div>Loading ...</div>
         }
-
 
         </div>
 
