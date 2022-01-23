@@ -26,12 +26,14 @@ namespace Imi.Project.Blazor.Services
             Rooms.Remove(room);
         }
 
-        public void AddPlayer(string roomId)
+        public bool AddPlayer(string roomId)
         {
             var room = Rooms.SingleOrDefault(r => r.Id == roomId);
             var newroom = room.playerAmount++;
             Rooms.Remove(room);
             Rooms.Add(room);
+            if (room.playerAmount == room.maxPlayerAmount) return true;
+            else return false;
         }
 
         public Task<List<Room>> ShowAllRooms()

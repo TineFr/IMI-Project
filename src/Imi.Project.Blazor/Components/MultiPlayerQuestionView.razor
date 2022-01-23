@@ -1,6 +1,34 @@
 ﻿@using Microsoft.AspNetCore.SignalR.Client
+@using Newtonsoft.Json
 
-@if (!quizEnded)
+
+
+@if (hasStarted)
+{
+        <div>@roomId</div>
+    <div class="question"><h3>@question.Question</h3></div>
+    <img class="questionImage" src="@question.Image">
+    <div class="itemscontainer">
+
+        @foreach (var answer in question.PossibleAnswers)
+        {
+            <button @onclick="() => AnswerPicked(answer.IsCorrect)" class="answer @(AddColor ? answer.IsCorrect ? "green" : "red" : "")">
+                @answer.Text
+            </button>
+        }
+    </div>
+    <button @onclick="() =>  NextQuestion()" class="next @(Visibility ? "visible" : "invisible")" >Next</button>
+}
+
+else
+{
+   <div>Waiting for other player</div>
+   <div>@roomId</div>
+}
+
+
+
+@*@if (!quizEnded)
 {
     <div>@test</div>
     <div class="question"><h3>@question.Question</h3></div>
@@ -21,10 +49,10 @@ else
 {
     <QuizEndView Score="count"></QuizEndView>
 }
-
+*@
 
 @code {
-    string test = "nieks";
+    string roomId = "nieks";
 
 
 
@@ -38,40 +66,47 @@ else
 
     public bool AddColor { get; set; }
 
+    public bool hasStarted;
+
     public void AddClassName()
     {
         AddColor = true;
     }
-    async void NextQuestion()
+    void NextQuestion()
     {
-        question = await ReturnQuestion();
+        question =  ReturnQuestion();
         AddColor = false;
         Visibility = false;
     }
 
     private bool quizEnded = false;
 
+    public int questionIndex = 0;
     private int count;
 
     [Inject]
     public IQuizService QuizService { get; set; }
 
-    
+    public List<QuizElement> questions  { get; set; }
 
-    public QuizElement question;
+    public QuizElement question { get; set; }
+
 
     protected async override Task OnInitializedAsync()
     {
-        question = await ReturnQuestion();
+
         await base.OnInitializedAsync();
         connection.On<string>("OnJoin", (param) =>
         {
-
+            roomId = param;
             StateHasChanged();
         });
-        connection.On<List<QuizElement>>("OnStart", (param) =>
+        connection.On<string>("OnStart", (param) =>
         {
 
+            questions = JsonConvert.DeserializeObject<List<QuizElement>>(param);
+            hasStarted = true;
+            question =  ReturnQuestion();
             StateHasChanged();
         });
 
@@ -80,25 +115,12 @@ else
 
     List<int> askedQuestions = new List<int>();
 
-    public async Task<QuizElement> ReturnQuestion()
+    public QuizElement ReturnQuestion()
     {
-        int rndQuestion;
-        if (askedQuestions.Count < 5)
-        {
-            Random rnd = new Random();
-            var questions = await QuizService.GetAllAsync();
-            do
-            {
-                rndQuestion = rnd.Next(questions.Count());
-            } while (askedQuestions.Contains(rndQuestion));
-            askedQuestions.Add(rndQuestion);
-            return questions.ToArray()[rndQuestion];
-        }
-        else
-        {
-            quizEnded = true;
-            return null;
-        }
+        var question =  questions[questionIndex];
+        questionIndex ++;
+        return question;
+
     }
 
 

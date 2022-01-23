@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.SignalR.Client
-
+    @inject NavigationManager NavManager;
 
 
 @if (!startGame)
@@ -22,7 +22,7 @@
 
 else
 {
-    <QuestionView connection="connection"></QuestionView>
+    <MultiPlayerQuestionView connection="connection"></MultiPlayerQuestionView>
 
 }
 
@@ -32,6 +32,7 @@ else
 @code {
     bool back = false;
     bool startGame;
+
     HubConnection connection { get; set; }
 
     [Inject]
@@ -49,7 +50,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         connection = new HubConnectionBuilder()
-       .WithUrl("https://localhost:44371/multiplayer")
+       .WithUrl(NavManager.ToAbsoluteUri("/multiplayer"))
        .Build();
         await ShowRooms();
     }
