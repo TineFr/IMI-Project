@@ -2,55 +2,60 @@
 
 
 
-@if (!back){
-    <div class="quiztitle"><h3>Multiplayer</h3></div>
-<div><img src="images/quiz/multiplayer.jpg" height="300px" /></div>
-<div class="itemscontainer">
-
+@*@if (!back)
+{*@
+    <h3>Multiplayer</h3>
     <div class="item">
         <button @onclick="CreateRoom">Create Room</button>
     </div>
-    <div class="item">
-        <button @onclick="JoinRoom" >Join Room</button>
+
+    <div class="quiztitle"><h3>Available Rooms</h3></div>
+
+    <div>
+        @foreach (var item in Rooms)
+        {
+            <button class="room" @onclick="() => JoinRoom(item.Id)" margin="10px"><p >@item.Name</p>Players: @item.playerAmount / @item.maxPlayerAmount</button>
+        }
     </div>
-        <div class="item">
-        <button @onclick="() => back = true" >Back to menu</button>
-    </div>
-
-</div>
-
-}
-else{
-    
-    <QuizOverview></QuizOverview>
-}
-
+@*}*@
 
 
 
 
 @code {
-    bool back;
+    bool back = false;
     HubConnection connection { get; set; }
 
-    List<string> rooms = new List<string>();
+    [Inject]
+    public IRoomService _roomService { get; set; }
 
-    protected override void OnInitialized()
+    private List<Room> Rooms  { get; set; }
+
+    private async Task ShowRooms()
+    {
+
+        Rooms = await _roomService.ShowAvailableRooms();
+        back = true;
+    }
+
+    protected override async Task OnInitializedAsync()
     {
         connection = new HubConnectionBuilder()
        .WithUrl("https://localhost:44371/multiplayer")
        .Build();
+        await ShowRooms();
     }
 
     private async Task CreateRoom()
     {
         await connection.StartAsync();
         string roomId = Guid.NewGuid().ToString();
-        await connection.SendAsync("JoinRoom", roomId);
+        await connection.SendAsync("CreateRoom", roomId,  "MyQuizRoom", 3);
     }
 
-    private async Task JoinRoom()
+    private async Task JoinRoom(string roomId)
     {
-        <RoomOverview></RoomOverview>
+      await connection.StartAsync();
+      await connection.SendAsync("JoinRoom", roomId);
     }
 }

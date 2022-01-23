@@ -126,3 +126,8 @@ button {
 button:focus{
     outline: none;
 }
+
+.room{
+    margin-top: 20px;
+
+}

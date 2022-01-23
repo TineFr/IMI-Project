@@ -32,7 +32,7 @@ namespace Imi.Project.Blazor
             services.AddTransient<ICageService, MockCageService>();
             services.AddTransient<ISpeciesService, MockSpeciesService>();
             services.AddTransient<IQuizService, QuizService>();
-            services.AddTransient<IRoomService, RoomService>();
+            services.AddSingleton<IRoomService, RoomService>();
             services.AddHttpClient();
             
 

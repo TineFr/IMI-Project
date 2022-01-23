@@ -2,6 +2,7 @@
 using Imi.Project.Blazor.Services.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Imi.Project.Blazor.Services
 {
@@ -10,28 +11,37 @@ namespace Imi.Project.Blazor.Services
 
         private readonly List<Room> Rooms = new List<Room>()
         {
-            new Room("Room 1", 2),
-            new Room("Room 2",2),
-            new Room("Room 3",2),
+            new Room("Room 1", 2, 0),
+            new Room("Room 2",2, 0),
+            new Room("Room 3",2, 0),
         };
-        public void AddRoom()
+        public void AddRoom(string roomId, string name, int maxPlayers)
         {
-            throw new System.NotImplementedException();
+            Rooms.Add(new Room(roomId, name, maxPlayers));
         }
 
-        public void DisposeRoom()
+        public void DisposeRoom(string roomId)
         {
-            throw new System.NotImplementedException();
+            var room = Rooms.SingleOrDefault(r => r.Id == roomId);
+            Rooms.Remove(room);
         }
 
-        public List<Room> ShowAllRooms()
+        public void AddPlayer(string roomId)
         {
-            return Rooms;
+            var room = Rooms.SingleOrDefault(r => r.Id == roomId);
+            var newroom = room.playerAmount++;
+            Rooms.Remove(room);
+            Rooms.Add(room);
         }
 
-        public List<Room> ShowAvailableRooms()
+        public Task<List<Room>> ShowAllRooms()
         {
-            return Rooms.Where(r => r.playerAmount < r.maxPlayerAmount).ToList();
+            return Task.FromResult(Rooms.OrderBy(r => r.Name).ToList());
+        }
+
+        public Task<List<Room>> ShowAvailableRooms()
+        {
+            return Task.FromResult(Rooms.Where(r => r.playerAmount < r.maxPlayerAmount).OrderBy(r => r.Name).ToList());
         }
     }
 }
