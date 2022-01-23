@@ -1,24 +1,33 @@
 ﻿
-<a href="@($"addbird")" type="button" class="btn submit">Add new</a>
-<div class="maincontainer">
-    <div class="itemscontainer">
+<a href="@($"addbird")" type="button" class="btn submit add">Add new</a>
+    <div class="indexContainer" >
 
-        @foreach (var item in Birds)
+        @if (Birds != null)
         {
-            <a href="@($"birddetails/{item.Id}")">
-                <div class="flexitem">
-                    <img class="itemimage" src="@item.Image" />
-                    <div>
-                        <h2>@item.Name</h2>
-                        <p>@item.Cage?.Name</p>
+            @foreach (var item in Birds)
+            {
+                <a href="@($"birddetails/{item.Id}")">
+                    <div class="containerItem">
+                        <div class="indexItem">
+                            <img class="itemImage" src="@item.Image" />
+                            <div>
+                                <h2>@item.Name</h2>
+                                <p>@item.Cage?.Name</p>
+                            </div>
+                            <img class="genderImage" src="@SetGenderImage(item.Gender.ToString())" />    
+                        </div>
                     </div>
-                    <img class="genderimage" src="@SetGenderImage(item.Gender.ToString())" />
-                </div>
-            </a>
+                </a>
+            }
+        
         }
-    </div>
-</div>
+        else
+        {
+           <div>Loading ...</div>
+        }
 
+
+        </div>
 
 @code {
 

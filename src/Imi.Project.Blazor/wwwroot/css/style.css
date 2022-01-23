@@ -318,6 +318,7 @@ input {
     display: flex;
     justify-content: start;
     flex-wrap: wrap;
+    padding-top: 30px;
 }
 
 .indexItem {
