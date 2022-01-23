@@ -22,26 +22,28 @@
 
 @code {
 
+    @inject NavigationManager NavManager;
 
     [Inject]
-    public ICageService cageService { get; set; }
-    @inject NavigationManager NavManager;
+    public IBaseApiService<CageRequestModel, CageModel> _cageService { get; set; }
+
 
     [Parameter]
     public Guid Id { get; set; }
 
     [Parameter]
-    public Cage Cage { get; set; }
+    public CageRequestModel Cage { get; set; }
 
 
     protected async override Task OnInitializedAsync()
     {
-        Cage = new Cage();
+        Cage = new CageRequestModel();
     }
 
     private async void AddCage()
     {
-        var result =  await cageService.AddAsync(Cage);
+
+        var result =  await _cageService.AddAsync("cages", Cage);
         if (result is object)
         {
           NavManager.NavigateTo($"cages");
