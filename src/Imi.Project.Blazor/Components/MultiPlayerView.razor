@@ -2,8 +2,8 @@
 
 
 
-@*@if (!back)
-{*@
+@if (!startGame)
+{
     <h3>Multiplayer</h3>
     <div class="item">
         <button @onclick="CreateRoom">Create Room</button>
@@ -12,18 +12,26 @@
     <div class="quiztitle"><h3>Available Rooms</h3></div>
 
     <div>
+        
         @foreach (var item in Rooms)
         {
             <button class="room" @onclick="() => JoinRoom(item.Id)" margin="10px"><p >@item.Name</p>Players: @item.playerAmount / @item.maxPlayerAmount</button>
         }
     </div>
-@*}*@
+}
+
+else
+{
+    <QuestionView connection="connection"></QuestionView>
+
+}
 
 
 
 
 @code {
     bool back = false;
+    bool startGame;
     HubConnection connection { get; set; }
 
     [Inject]
@@ -33,9 +41,9 @@
 
     private async Task ShowRooms()
     {
-
+        Rooms = null;
         Rooms = await _roomService.ShowAvailableRooms();
-        back = true;
+        //back = true;
     }
 
     protected override async Task OnInitializedAsync()
@@ -48,14 +56,17 @@
 
     private async Task CreateRoom()
     {
+
         await connection.StartAsync();
         string roomId = Guid.NewGuid().ToString();
-        await connection.SendAsync("CreateRoom", roomId,  "MyQuizRoom", 3);
+        await connection.SendAsync("CreateRoom", roomId, "name", 2);
+        startGame = true;
     }
 
     private async Task JoinRoom(string roomId)
     {
       await connection.StartAsync();
       await connection.SendAsync("JoinRoom", roomId);
+      startGame = true;
     }
 }

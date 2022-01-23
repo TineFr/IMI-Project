@@ -1,4 +1,5 @@
-﻿
+﻿@using Microsoft.AspNetCore.SignalR.Client
+
 @if (!quizEnded)
 {
 
@@ -23,6 +24,9 @@ else
 
 
 @code {
+
+    [Parameter]
+    public HubConnection connection { get; set; }
 
     public bool Visibility { get; set; }
 
@@ -52,6 +56,10 @@ else
     {
         question = await ReturnQuestion();
         await base.OnInitializedAsync();
+        connection.On("TableJoined", () =>
+        {
+            Console.WriteLine("someone joined our table");
+        });
 
     }
 
