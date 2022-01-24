@@ -47,7 +47,7 @@ namespace Imi.Project.Api.Core.Services
             }
 
             var filePathForDatabase = Path.Combine(pathForDatabase, newFileName);
-            return filePathForDatabase;
+            return filePathForDatabase + $"?{DateTime.Now.TimeOfDay}";
         }
 
         public void ValidateImage(IHasImage dto)

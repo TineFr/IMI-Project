@@ -63,8 +63,6 @@ namespace Imi.Project.Api.Core.Helper
 
         public static Prescription Update(this Prescription prescription, PrescriptionRequestDto prescriptionDto)
         {
-
-            //prescription.Id = prescriptionDto.Id;
             prescription.EndDate = prescriptionDto.EndDate;
             prescription.StartDate = prescriptionDto.StartDate;
             prescription.MedicineId = prescriptionDto.Medicine;
@@ -77,7 +75,6 @@ namespace Imi.Project.Api.Core.Helper
                     var birdprescription = new BirdPrescription
                     {
                         BirdId = bird,
-                        //PrescriptionId = prescriptionDto.Id
                     };
                     prescription.BirdPrescriptions.Add(birdprescription);
                 }

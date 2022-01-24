@@ -1,7 +1,7 @@
-﻿
+﻿@using Microsoft.AspNetCore.SignalR.Client
+
 @if (!quizEnded)
 {
-
     <div class="question"><h3>@question.Question</h3></div>
     <img class="questionImage" src="@question.Image">
     <div class="itemscontainer">
@@ -46,13 +46,14 @@ else
     [Inject]
     public IQuizService QuizService { get; set; }
 
+    
+
     public QuizElement question;
 
     protected async override Task OnInitializedAsync()
     {
         question = await ReturnQuestion();
         await base.OnInitializedAsync();
-
     }
 
     List<int> askedQuestions = new List<int>();

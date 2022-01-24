@@ -1,5 +1,10 @@
 ﻿
-@if (!Restart)
+@if (MainMenu)
+{
+    <QuizOverview></QuizOverview>
+}
+
+else if (!Restart)
 {
     @if (Score >= 3)
     {
@@ -21,13 +26,14 @@
         <button @onclick="() => Restart = true">Play again!</button>
     </div>
         <div class="item">
-            <button>Statistics</button>
+            <button @onclick="() => MainMenu = true">Main menu</button>
         </div>
 
     </div>
 }
 
-else
+
+else 
 {
     <QuestionView></QuestionView>
 }
@@ -38,4 +44,6 @@ else
     public int Score { get; set; }
 
     private bool Restart { get; set; } = false;
+
+    private bool MainMenu { get; set; } = false;
 }

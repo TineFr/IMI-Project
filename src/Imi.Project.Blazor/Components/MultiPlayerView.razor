@@ -1,0 +1,111 @@
+﻿@using Microsoft.AspNetCore.SignalR.Client
+    @inject NavigationManager NavManager;
+
+@if (!back)
+{
+    
+    @if(!registered)
+    {
+         <EditForm  Model="@player" OnSubmit="RegisterPlayer">
+            <div class="form-group">
+                <label>Enter player name :</label>
+                <div>
+                    <InputText @bind-Value="@player.Name"/>
+                </div>
+            </div>
+            <button type="submit">Submit</button>
+            <button type="button" @onclick="() => back = true" >Back</button>
+        </EditForm>
+    }
+
+    else if (!startGame)
+    {
+        <h3>Multiplayer</h3>
+        <div class="item">
+            <button @onclick="CreateRoom">Create Room</button>
+        </div>
+
+
+        @if (Rooms.Count > 0)
+        {
+            <div class="quiztitle"><h3>Available Rooms</h3></div>
+
+            <div>
+                @foreach (var item in Rooms)
+                {
+                    <button class="room" @onclick="() => JoinRoom(item.Id)" margin="10px"><p >@item.Name</p>Players: @item.Players.Count / @item.maxPlayerAmount</button>
+                }
+            </div>
+        }
+    }
+
+    else
+    {
+        <MultiPlayerQuestionView connection="connection"></MultiPlayerQuestionView>
+    }
+
+}
+
+else
+{
+    <QuizOverview></QuizOverview>
+
+}
+
+
+
+
+@code {
+    bool back = false;
+    bool startGame;
+    bool registered;
+
+    public Player player { get; set; } = new Player();
+
+    HubConnection connection { get; set; }
+
+    [Inject]
+    public IRoomService _roomService { get; set; }
+
+    private List<Room> Rooms  { get; set; }
+
+    private async Task ShowRooms()
+    {
+        Rooms = null;
+        Rooms = await _roomService.ShowAvailableRooms();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        connection = new HubConnectionBuilder()
+       .WithUrl(NavManager.ToAbsoluteUri("/multiplayer"))
+       .Build();
+        await ShowRooms();
+    }
+
+
+    private async Task RegisterPlayer()
+    {
+        await connection.StartAsync();
+        await connection.SendAsync("RegisterPlayer", player.Name);
+        connection.On("RegisterSuccess", () =>
+        {
+            registered = true;
+            StateHasChanged();
+        });
+    }
+
+
+    private async Task CreateRoom()
+    {
+        string roomId = Guid.NewGuid().ToString();
+        await connection.SendAsync("CreateRoom", roomId, "roomName", 3);
+        startGame = true;
+    }
+
+    private async Task JoinRoom(string roomId)
+    {
+      await connection.SendAsync("JoinRoom", roomId);
+      startGame = true;
+    }
+}

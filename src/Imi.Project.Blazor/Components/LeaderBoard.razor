@@ -1,0 +1,25 @@
+﻿
+
+<img src="images/quiz/leaderboard.png" height="200px" />
+
+<h3>LeaderBoard</h3>
+
+        @foreach (var player in Room?.Players.OrderByDescending(p => p.Score))
+        {
+@*            <div class="scoreView">@player.Name Score: @player.Score*@
+              <div>
+                 <div>@Room?.Players.OrderByDescending(p => p.Score).ToList().IndexOf(player)</div>
+                 <div>@player.Name</div>
+                 <div>@player.Score</div>
+            
+              </div>
+            
+        }
+
+
+@code {
+
+    [Parameter]
+    public Room Room { get; set; }
+
+}

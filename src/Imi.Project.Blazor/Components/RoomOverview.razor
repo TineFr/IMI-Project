@@ -1,0 +1,22 @@
+﻿<h3>Rooms</h3>
+
+<div>
+    @foreach (var item in Rooms)
+    {
+        <button margin="10px"><p >@item.Name</p>Players: @item.Players.Count / @item.maxPlayerAmount</button>
+    }
+</div>
+
+@code {
+
+    [Inject]
+    public IRoomService _roomService { get; set; }
+
+    private List<Room> Rooms  { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Rooms = await _roomService.ShowAvailableRooms();
+    }
+
+}

@@ -10,5 +10,7 @@ namespace Imi.Project.Blazor.Services.Interfaces
     {
         Task<IEnumerable<QuizElement>> GetAllAsync();
 
+        List<QuizElement> CreateQuiz();
+
     }
 }

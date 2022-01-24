@@ -131,5 +131,25 @@ namespace Imi.Project.Blazor.Services
         {
             return Task.FromResult(questionsRepository);
         }
+
+
+        public List<QuizElement> CreateQuiz()
+        {
+            List<QuizElement> quizElements = new List<QuizElement>();
+            List<int> askedQuestions = new List<int>();
+            var questions = questionsRepository;
+            int rndQuestion;
+            Random rnd = new Random();
+            for (int i = 0; i < 5; i++)
+            {
+                do
+                {
+                    rndQuestion = rnd.Next(questions.Count());
+                } while (askedQuestions.Contains(rndQuestion));
+                askedQuestions.Add(rndQuestion);
+                quizElements.Add(questions.ToArray()[rndQuestion]);
+            }
+            return quizElements;
+        }
     }
 }

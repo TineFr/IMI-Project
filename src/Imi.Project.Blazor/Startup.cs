@@ -1,3 +1,4 @@
+using Imi.Project.Blazor.Hubs;
 using Imi.Project.Blazor.Models.Api;
 using Imi.Project.Blazor.Services;
 using Imi.Project.Blazor.Services.Api;
@@ -5,9 +6,11 @@ using Imi.Project.Blazor.Services.Api.Interfaces;
 using Imi.Project.Blazor.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Linq;
 
 namespace Imi.Project.Blazor
 {
@@ -30,8 +33,15 @@ namespace Imi.Project.Blazor
             services.AddTransient<ICageService, MockCageService>();
             services.AddTransient<ISpeciesService, MockSpeciesService>();
             services.AddTransient<IQuizService, QuizService>();
-
+            services.AddSingleton<IRoomService, RoomService>();
+            services.AddSingleton<IPlayerService, PlayerService>();
             services.AddHttpClient();
+            services.AddResponseCompression(opts =>
+            {
+                opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
+                    new[] { "application/octet-stream" });
+            });
+
 
             services.AddScoped<IAuthApiService, AuthApiService>();
             services.AddScoped(typeof(IBaseApiService<BirdRequestModel, BirdModel>), typeof(BirdApiService));
@@ -60,7 +70,9 @@ namespace Imi.Project.Blazor
 
             app.UseEndpoints(endpoints =>
             {
+
                 endpoints.MapBlazorHub();
+                endpoints.MapHub<QuizHub>("/multiplayer");
                 endpoints.MapFallbackToPage("/_Host");
             });
         }
