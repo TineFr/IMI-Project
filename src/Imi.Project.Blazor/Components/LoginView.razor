@@ -43,11 +43,11 @@
 
     [Parameter]
 
-    public LoginRequestModel LoginModel { get; set; } = new LoginRequestModel();
-
-
-
-
+    public LoginRequestModel LoginModel { get; set; } = new LoginRequestModel
+    { 
+        Email = "tine.franchois@gmail.com",    //hard gecodeerd 
+        Password = "Pa$$w0rd"
+    };
 
     private async Task LogIn()
     {

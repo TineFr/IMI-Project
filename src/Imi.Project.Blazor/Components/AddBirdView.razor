@@ -25,7 +25,7 @@
             <InputSelect @bind-Value="Bird.SpeciesId">
                 @foreach (var species in Species)
                 {
-                   <option>@species.Name</option>
+                   <option value="@species.Id">@species.Name</option>
                 }
             </InputSelect>
             <ValidationMessage For="@(() => Bird.SpeciesId)" />
@@ -51,7 +51,7 @@
             <InputSelect @bind-Value="Bird.CageId">
                 @foreach (var cage in Cages)
                 {
-                   <option value="@cage.Name">@cage.Name</option>
+                   <option value="@cage.Id">@cage.Name</option>
                 }
             </InputSelect>
             <ValidationMessage For="@(() => Bird.CageId)" />

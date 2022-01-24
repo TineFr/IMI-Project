@@ -42,7 +42,7 @@
         Cage =  await _cageService.GetByIdAsync($"cages/{Id}");
     }
 
-    private async void DeleteCage(Guid id)
+    private async void DeleteCage(string id)
     {
           var result =  await _cageService.DeleteAsync($"cages/{Id}");
 

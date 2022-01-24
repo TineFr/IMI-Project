@@ -51,7 +51,7 @@
         return imageSource;
     }
 
-        private async void DeleteBird(Guid id)
+        private async void DeleteBird(string id)
     {
           var result =  await _birdService.DeleteAsync($"birds/{Id}");
 
