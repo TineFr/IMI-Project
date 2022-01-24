@@ -1,0 +1,208 @@
+﻿
+
+
+
+
+/* global*/
+/*...........................................................................*/
+
+
+.main {
+    flex: 1;
+}
+
+/*Header colors*/
+.blue {
+    background-color: #B5DEF0;
+}
+
+.green {
+    background-color: #D4E7C0;
+}
+
+.purple {
+    background-color: #EACFEF;
+}
+
+h1 {
+    font-size: 100px;
+    text-align: center;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+
+/*...........................................................................*/
+/*Login & register view*/
+/*...........................................................................*/
+
+.flexContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+
+.logoDiv {
+    text-align: center;
+}
+
+
+#logo {
+    height: 150px;
+    margin: 20px 0px 20px 0px;
+}
+
+#spMember {
+    font-size: small;
+    margin-right: 10px;
+}
+
+#divLogIn > h2, #divLogIn > label {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: black;
+}
+
+input {
+    width: 300px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 30px;
+}
+
+#divLogIn > h2 {
+    font-size: 30px;
+    font-weight: bold;
+    margin: 5px;
+    color: #D6B2DC;
+}
+
+#divLogIn {
+    text-align: start;
+    padding: 10px;
+    max-width: 332px;
+    padding-bottom: 15px;
+    border: 2px solid #D6B2DC;
+    border-radius: 10%;
+    word-wrap: break-word;
+}
+
+#divSignUp {
+    text-align: end;
+    margin: 10px;
+}
+
+/*sign in button */
+
+#btnSignIn, #btnSave {
+    background-color: #D6B2DC;
+    color: white;
+    width: 307px;
+    height: 40px;
+    border: 0;
+    margin-top: 10px;
+}
+
+    #btnSignIn:hover {
+        background-color: #d999e4;
+    }
+
+
+/*sign up button */
+#btnSignUp, #btnSignUp:active {
+    font-weight: bold;
+    background-color: white;
+    border: 0;
+    padding: 0;
+    color: black;
+    margin-top: 20px;
+    text-align: end;
+    text-decoration: none;
+}
+
+#btnSignUp:hover {
+    color: darkgrey;
+}
+
+
+/*...........................................................................*/
+/*collection view*/
+/*...........................................................................*/
+
+.indexContainer {
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+    padding-top: 40px;
+}
+
+.indexItem {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 200px 120px 20px;
+    height: 170px;
+    color: rgba(37, 37, 37, 0.651);
+    background-color: #EEEEEE;
+    border-radius: 20px;
+    cursor: pointer;
+    width: 420px;
+    word-wrap: break-word;
+}
+
+.indexItem:hover {
+    background-color: #C4C4C4;
+}
+
+
+.itemImage {
+    height: 100px;
+    width: auto;
+    max-width: 200px;
+    margin: 10px;
+    grid-column: 1;
+}
+
+.genderImage {
+    height: 50px;
+    padding: 10px;
+    grid-row: 0;
+}
+
+a, a:hover {
+    text-decoration: none;
+}
+
+.containerItem {
+    margin: 30px;
+}
+
+.btnAddNew {
+    position: fixed;
+    font-size: 35px;
+    border-radius: 50%;
+    background-color: #D4E7C0;
+    text-align: center;
+    border: none;
+    color: white;
+    width: 50px;
+    height: 50px;
+}
+
+.btnAddNew:hover{
+    text-decoration: none;
+    color: white;
+}
+
+
+
+/*...........................................................................*/
+/*add view*/
+/*...........................................................................*/
+
+.submit {
+    background-color: #D4E7C0 !important;
+    color: white
+}

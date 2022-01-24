@@ -119,7 +119,9 @@ button {
     padding: 5px;
     margin-top: 10px;
     border-radius: 10px;
-    }
+}
+
+
 
 .item > p:hover, button:hover{
     background: rgba(83, 83, 83, 0.61);

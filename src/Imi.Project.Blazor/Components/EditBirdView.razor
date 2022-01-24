@@ -22,7 +22,7 @@
          <div class="form-group">
         <label>Species :</label>
         <div>
-            <InputSelect @bind-Value="Bird.Species.Name">
+            <InputSelect @bind-Value="Bird.Species">
                 @foreach (var species in Species)
                 {
                     <option value="@species.Name">@species.Name</option>
