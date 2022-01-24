@@ -154,8 +154,7 @@ namespace Imi.Project.Api.Core.Helper
                     Name = bird.Name,
                     Cage = new CageResponseDto
                     {
-                        Id = bird.Cage.Id,
-                        Name = bird.Cage.Name
+                        Name = bird.Cage?.Name
                     },
                     Image = GetFullImageUrl(bird.Image)
                 };
