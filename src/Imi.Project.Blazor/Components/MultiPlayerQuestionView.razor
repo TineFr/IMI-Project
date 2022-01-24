@@ -5,23 +5,31 @@
 
 @if (hasStarted)
 {
-    <div class="question"><h3>@question.Question</h3></div>
-    <img class="questionImage" src="@question.Image">
-    <div class="itemscontainer">
+    @if(questionIndex > 5)
+    {
+        <div>Waiting on other players to finish...</div>
+    }
+    else
+    {
+        <div class="question"><h3>@question.Question</h3></div>
+        <img class="questionImage" src="@question.Image">
+        <div class="itemscontainer">
 
-        @foreach (var answer in question.PossibleAnswers)
-        {
-            <button @onclick="() => AnswerPicked(answer.IsCorrect)" class="answer @(AddColor ? answer.IsCorrect ? "green" : "red" : "")">
-                @answer.Text
-            </button>
-        }
-    </div>
-    <button @onclick="() =>  NextQuestion()" class="next @(Visibility ? "visible" : "invisible")">Next</button>
+            @foreach (var answer in question.PossibleAnswers)
+            {
+                <button @onclick="() => AnswerPicked(answer.IsCorrect)" class="answer @(AddColor ? answer.IsCorrect ? "green" : "red" : "")">
+                    @answer.Text
+                </button>
+            }
+        </div>
+        <button @onclick="() =>  NextQuestion()" class="next @(Visibility ? "visible" : "invisible")">Next</button>    
+    }
+
 }
 
 else if (quizEnded)
 {
-    <QuizEndView Score="count"></QuizEndView>
+    <LeaderBoard Room="room"></LeaderBoard>
 }
 
 else
@@ -105,7 +113,12 @@ else
             question = await ReturnQuestion();
             StateHasChanged();
         });
-
+        connection.On("QuizFinished", () =>
+        {
+            hasStarted = false;
+            quizEnded = true;
+            StateHasChanged();
+        });
 
     }
 
@@ -122,15 +135,10 @@ else
 
         else
         {
-            //quizEnded = true;
-            hasStarted =  false;
-            await connection.SendAsync("PlayerFinished");
+            questionIndex++;
+            await connection.SendAsync("PlayerFinished", room.Id, count);
             return null;
         }
-
-
-
-
     }
 
 

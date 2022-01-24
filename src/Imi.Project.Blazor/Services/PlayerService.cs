@@ -24,5 +24,14 @@ namespace Imi.Project.Blazor.Services
         {
            return Task.FromResult(Players);
         }
+
+        public void PlayerIsFinished(string id, int score)
+        {
+            var player = Players.FirstOrDefault(p => p.ConnectionId == id);
+            player.IsFinished = true;
+            player.Score = score;
+            Players.Remove(player);
+            Players.Add(player);
+        }
     }
 }

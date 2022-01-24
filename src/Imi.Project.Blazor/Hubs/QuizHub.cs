@@ -59,9 +59,12 @@ namespace Imi.Project.Blazor.Hubs
         }
 
 
-        public async Task PlayerFinished()
+        public async Task PlayerFinished(string roomId, int score)
         {
-            //_playerService.PlayerIsFinished(Context.ConnectionId);
+            _playerService.PlayerIsFinished(Context.ConnectionId, score);
+            var player = (await _playerService.GetPlayers()).ToList().FirstOrDefault(p => p.ConnectionId == Context.ConnectionId);
+            var quizFinished = _roomService.UpdateGameStats(roomId, player);
+            if (quizFinished) await Clients.Group(roomId).SendAsync("QuizFinished");
 
 
         }

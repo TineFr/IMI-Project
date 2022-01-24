@@ -47,5 +47,15 @@ namespace Imi.Project.Blazor.Services
         {
             return Rooms.FirstOrDefault(r => r.Id == roomdId);
         }
+
+        public bool UpdateGameStats(string roomId, Player player)
+        {
+            var room = Rooms.SingleOrDefault(r => r.Id == roomId);
+            room.RemovePlayer(player);
+            room.AddPlayer(player);
+            if (room.Players.Where(p => p.IsFinished).ToList().Count == room.maxPlayerAmount) return true;
+            else return false;
+
+        }
     }
 }

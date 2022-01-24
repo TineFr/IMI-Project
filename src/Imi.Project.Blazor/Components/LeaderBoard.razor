@@ -1,0 +1,13 @@
+﻿<h3>LeaderBoard</h3>
+
+        @foreach (var player in Room?.Players)
+        {
+            <div>@player.Name Score: @player.Score</div>
+        }
+
+@code {
+
+    [Parameter]
+    public Room Room { get; set; }
+
+}

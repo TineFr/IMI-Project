@@ -41,5 +41,10 @@ namespace Imi.Project.Blazor.Models.Quiz
         {
             Players.Add(player);
         }
+
+        public void RemovePlayer(Player player)
+        {
+            Players.Remove(player);
+        }
     }
 }
