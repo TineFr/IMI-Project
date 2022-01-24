@@ -2,7 +2,6 @@
 
 @if (!quizEnded)
 {
-    <div>@test</div>
     <div class="question"><h3>@question.Question</h3></div>
     <img class="questionImage" src="@question.Image">
     <div class="itemscontainer">
@@ -24,15 +23,6 @@ else
 
 
 @code {
-    string test = "nieks";
-
-
-
-    [Inject]
-    public  IRoomService _roomService { get; set; }
-
-    [Parameter]
-    public HubConnection connection { get; set; }
 
     public bool Visibility { get; set; }
 
@@ -64,18 +54,6 @@ else
     {
         question = await ReturnQuestion();
         await base.OnInitializedAsync();
-        connection.On<string>("OnJoin", (param) =>
-        {
-
-            StateHasChanged();
-        });
-        connection.On<List<QuizElement>>("OnStart", (param) =>
-        {
-
-            StateHasChanged();
-        });
-
-
     }
 
     List<int> askedQuestions = new List<int>();

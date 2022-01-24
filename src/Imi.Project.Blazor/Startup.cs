@@ -34,6 +34,7 @@ namespace Imi.Project.Blazor
             services.AddTransient<ISpeciesService, MockSpeciesService>();
             services.AddTransient<IQuizService, QuizService>();
             services.AddSingleton<IRoomService, RoomService>();
+            services.AddSingleton<IPlayerService, PlayerService>();
             services.AddHttpClient();
             services.AddResponseCompression(opts =>
             {

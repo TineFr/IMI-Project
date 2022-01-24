@@ -5,7 +5,6 @@
 
 @if (hasStarted)
 {
-        <div>@roomId</div>
     <div class="question"><h3>@question.Question</h3></div>
     <img class="questionImage" src="@question.Image">
     <div class="itemscontainer">
@@ -17,47 +16,40 @@
             </button>
         }
     </div>
-    <button @onclick="() =>  NextQuestion()" class="next @(Visibility ? "visible" : "invisible")" >Next</button>
+    <button @onclick="() =>  NextQuestion()" class="next @(Visibility ? "visible" : "invisible")">Next</button>
 }
 
-else
-{
-   <div>Waiting for other player</div>
-   <div>@roomId</div>
-}
-
-
-
-@*@if (!quizEnded)
-{
-    <div>@test</div>
-    <div class="question"><h3>@question.Question</h3></div>
-    <img class="questionImage" src="@question.Image">
-    <div class="itemscontainer">
-
-        @foreach (var answer in question.PossibleAnswers)
-        {
-            <button @onclick="() => AnswerPicked(answer.IsCorrect)" class="answer @(AddColor ? answer.IsCorrect ? "green" : "red" : "")">
-                @answer.Text
-            </button>
-        }
-    </div>
-    <button @onclick="() =>  NextQuestion()" class="next @(Visibility ? "visible" : "invisible")" >Next</button>
-}
-
-else
+else if (quizEnded)
 {
     <QuizEndView Score="count"></QuizEndView>
 }
-*@
+
+else
+{
+    <div>Waiting for other players...</div>
+    <div>Players in room:</div>
+    @if (room != null)
+    {
+        @foreach (var player in room?.Players)
+        {
+            <div>@player.Name</div>
+        }
+     }
+     <button>Leave Room</button>
+}
+
+
 
 @code {
-    string roomId = "nieks";
 
 
+    private string message = "Waiting for other player";
 
     [Inject]
     public  IRoomService _roomService { get; set; }
+
+    [Parameter]
+    public Room room { get; set;}
 
     [Parameter]
     public HubConnection connection { get; set; }
@@ -72,9 +64,9 @@ else
     {
         AddColor = true;
     }
-    void NextQuestion()
+    async void NextQuestion()
     {
-        question =  ReturnQuestion();
+        question = await ReturnQuestion();
         AddColor = false;
         Visibility = false;
     }
@@ -96,17 +88,21 @@ else
     {
 
         await base.OnInitializedAsync();
-        connection.On<string>("OnJoin", (param) =>
+        connection.On<string>("OnCreation", (roomId) =>
         {
-            roomId = param;
+            this.room = _roomService.GetById(roomId);
             StateHasChanged();
         });
-        connection.On<string>("OnStart", (param) =>
+        connection.On<string>("OnJoin", (roomId) =>
         {
-
-            questions = JsonConvert.DeserializeObject<List<QuizElement>>(param);
+            this.room = _roomService.GetById(roomId);
+            StateHasChanged();
+        });
+        connection.On<string>("OnStart", async (questions) =>
+        {
+            this.questions = JsonConvert.DeserializeObject<List<QuizElement>>(questions);
             hasStarted = true;
-            question =  ReturnQuestion();
+            question = await ReturnQuestion();
             StateHasChanged();
         });
 
@@ -115,11 +111,25 @@ else
 
     List<int> askedQuestions = new List<int>();
 
-    public QuizElement ReturnQuestion()
+    public async Task<QuizElement> ReturnQuestion()
     {
-        var question =  questions[questionIndex];
-        questionIndex ++;
-        return question;
+        if (questionIndex < 5)
+        {
+            var question = questions[questionIndex];
+            questionIndex++;
+            return question;
+        }
+
+        else
+        {
+            //quizEnded = true;
+            hasStarted =  false;
+            await connection.SendAsync("PlayerFinished");
+            return null;
+        }
+
+
+
 
     }
 

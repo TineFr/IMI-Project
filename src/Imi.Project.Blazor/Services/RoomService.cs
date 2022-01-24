@@ -8,16 +8,13 @@ namespace Imi.Project.Blazor.Services
 {
     public class RoomService : IRoomService
     {
-
         private readonly List<Room> Rooms = new List<Room>()
         {
-            new Room("Room 1", 2, 0),
-            new Room("Room 2",2, 0),
-            new Room("Room 3",2, 0),
+
         };
-        public void AddRoom(string roomId, string name, int maxPlayers)
+        public void AddRoom(string roomId, string name, int maxPlayers, Player player)
         {
-            Rooms.Add(new Room(roomId, name, maxPlayers));
+            Rooms.Add(new Room(roomId, name, maxPlayers, player ));
         }
 
         public void DisposeRoom(string roomId)
@@ -26,13 +23,13 @@ namespace Imi.Project.Blazor.Services
             Rooms.Remove(room);
         }
 
-        public bool AddPlayer(string roomId)
+        public bool AddPlayer(string roomId, Player player)
         {
             var room = Rooms.SingleOrDefault(r => r.Id == roomId);
-            var newroom = room.playerAmount++;
+            room.AddPlayer(player);
             Rooms.Remove(room);
             Rooms.Add(room);
-            if (room.playerAmount == room.maxPlayerAmount) return true;
+            if (room.Players.Count == room.maxPlayerAmount) return true;
             else return false;
         }
 
@@ -43,7 +40,12 @@ namespace Imi.Project.Blazor.Services
 
         public Task<List<Room>> ShowAvailableRooms()
         {
-            return Task.FromResult(Rooms.Where(r => r.playerAmount < r.maxPlayerAmount).OrderBy(r => r.Name).ToList());
+            return Task.FromResult(Rooms.Where(r => r.Players.Count < r.maxPlayerAmount).OrderBy(r => r.Name).ToList());
+        }
+
+        public Room GetById(string roomdId)
+        {
+            return Rooms.FirstOrDefault(r => r.Id == roomdId);
         }
     }
 }

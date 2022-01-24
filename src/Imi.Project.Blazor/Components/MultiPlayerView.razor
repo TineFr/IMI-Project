@@ -1,28 +1,54 @@
 ﻿@using Microsoft.AspNetCore.SignalR.Client
     @inject NavigationManager NavManager;
 
-
-@if (!startGame)
+@if (!back)
 {
-    <h3>Multiplayer</h3>
-    <div class="item">
-        <button @onclick="CreateRoom">Create Room</button>
-    </div>
+    
+    @if(!registered)
+    {
+         <EditForm  Model="@player" OnSubmit="RegisterPlayer">
+            <div class="form-group">
+                <label>Enter name :</label>
+                <div>
+                    <InputText @bind-Value="@player.Name"/>
+                </div>
+            </div>
+            <button type="submit">Submit</button>
+            <button type="button" @onclick="() => back = true" >Back</button>
+        </EditForm>
+    }
 
-    <div class="quiztitle"><h3>Available Rooms</h3></div>
+    else if (!startGame)
+    {
+        <h3>Multiplayer</h3>
+        <div class="item">
+            <button @onclick="CreateRoom">Create Room</button>
+        </div>
 
-    <div>
-        
-        @foreach (var item in Rooms)
+
+        @if (Rooms.Count > 0)
         {
-            <button class="room" @onclick="() => JoinRoom(item.Id)" margin="10px"><p >@item.Name</p>Players: @item.playerAmount / @item.maxPlayerAmount</button>
+            <div class="quiztitle"><h3>Available Rooms</h3></div>
+
+            <div>
+                @foreach (var item in Rooms)
+                {
+                    <button class="room" @onclick="() => JoinRoom(item.Id)" margin="10px"><p >@item.Name</p>Players: @item.Players.Count / @item.maxPlayerAmount</button>
+                }
+            </div>
         }
-    </div>
+    }
+
+    else
+    {
+        <MultiPlayerQuestionView connection="connection"></MultiPlayerQuestionView>
+    }
+
 }
 
 else
 {
-    <MultiPlayerQuestionView connection="connection"></MultiPlayerQuestionView>
+    <QuizOverview></QuizOverview>
 
 }
 
@@ -32,6 +58,9 @@ else
 @code {
     bool back = false;
     bool startGame;
+    bool registered;
+
+    public Player player { get; set; } = new Player();
 
     HubConnection connection { get; set; }
 
@@ -44,7 +73,6 @@ else
     {
         Rooms = null;
         Rooms = await _roomService.ShowAvailableRooms();
-        //back = true;
     }
 
     protected override async Task OnInitializedAsync()
@@ -55,18 +83,28 @@ else
         await ShowRooms();
     }
 
+
+    private async Task RegisterPlayer()
+    {
+        await connection.StartAsync();
+        await connection.SendAsync("RegisterPlayer", player.Name);
+        connection.On("RegisterSuccess", () =>
+        {
+            registered = true;
+            StateHasChanged();
+        });
+    }
+
+
     private async Task CreateRoom()
     {
-
-        await connection.StartAsync();
         string roomId = Guid.NewGuid().ToString();
-        await connection.SendAsync("CreateRoom", roomId, "name", 2);
+        await connection.SendAsync("CreateRoom", roomId, "roomName", 3);
         startGame = true;
     }
 
     private async Task JoinRoom(string roomId)
     {
-      await connection.StartAsync();
       await connection.SendAsync("JoinRoom", roomId);
       startGame = true;
     }

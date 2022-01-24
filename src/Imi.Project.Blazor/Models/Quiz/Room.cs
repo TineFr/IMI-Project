@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Imi.Project.Blazor.Models.Quiz
 {
@@ -8,7 +9,8 @@ namespace Imi.Project.Blazor.Models.Quiz
 
         public string Name { get; set; }
 
-        public int playerAmount { get; set; } = 1;
+        public List<Player> Players { get; set; } = new List<Player>();
+
 
         public int maxPlayerAmount { get; set; }
 
@@ -25,7 +27,19 @@ namespace Imi.Project.Blazor.Models.Quiz
         {
             this.Name = name;
             this.maxPlayerAmount = maxPlayerAmount;
-            this.playerAmount = playerAmount;
+        }
+
+        public Room(string roomId, string name, int maxPlayers, Player player)
+        {
+            this.Id = roomId;
+            this.Name = name;
+            this.maxPlayerAmount = maxPlayers;
+            Players.Add(player);
+        }
+
+        public void AddPlayer(Player player)
+        {
+            Players.Add(player);
         }
     }
 }
