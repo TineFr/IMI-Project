@@ -51,7 +51,6 @@ else
 }
 
 
-
 @code {
 
 
@@ -85,7 +84,13 @@ else
 
     private bool quizEnded = false;
 
-    public int questionIndex = 0;
+
+    public int questionIndex
+    { get; 
+
+        set; 
+    } 
+
     private int count;
 
     [Inject]
@@ -124,12 +129,15 @@ else
             StateHasChanged();
         });
 
+        questionIndex = 0;
+
     }
 
     List<int> askedQuestions = new List<int>();
 
     public async Task<QuizElement> ReturnQuestion()
     {
+        if (questionIndex == 6) questionIndex = 0;
         if (questionIndex < 5)
         {
             var question = questions[questionIndex];
