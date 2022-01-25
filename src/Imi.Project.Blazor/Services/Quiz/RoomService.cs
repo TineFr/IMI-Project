@@ -30,7 +30,7 @@ namespace Imi.Project.Blazor.Services
             room.AddPlayer(player);
             Rooms.Remove(room);
             Rooms.Add(room);
-            if (room.Players.Count == Convert.ToInt32(room.maxPlayerAmount)) return true;
+            if (room.Players.Count == Convert.ToInt32(room.MaxPlayerAmount)) return true;
             else return false;
         }
 
@@ -40,7 +40,7 @@ namespace Imi.Project.Blazor.Services
             room.AddPlayer(player);
             Rooms.Remove(room);
             Rooms.Add(room);
-            if (room.Players.Count == Convert.ToInt32(room.maxPlayerAmount)) return true;
+            if (room.Players.Count == Convert.ToInt32(room.MaxPlayerAmount)) return true;
             else return false;
         }
 
@@ -51,7 +51,7 @@ namespace Imi.Project.Blazor.Services
 
         public Task<List<Room>> ShowAvailableRooms()
         {
-            return Task.FromResult(Rooms.Where(r => r.Players.Count < Convert.ToInt32(r.maxPlayerAmount)).OrderBy(r => r.Name).ToList());
+            return Task.FromResult(Rooms.Where(r => r.Players.Count < Convert.ToInt32(r.MaxPlayerAmount)).OrderBy(r => r.Name).ToList());
         }
 
         public Room GetById(string roomdId)

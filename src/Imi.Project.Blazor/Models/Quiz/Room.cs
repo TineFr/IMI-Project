@@ -14,7 +14,7 @@ namespace Imi.Project.Blazor.Models.Quiz
 
         public List<Player> Players { get; set; } = new List<Player>();
 
-        public string maxPlayerAmount { get; set; } = "2";
+        public string MaxPlayerAmount { get; set; } = "2";
 
         public Room()
         {
@@ -25,20 +25,20 @@ namespace Imi.Project.Blazor.Models.Quiz
         {
             this.Name = name;
             Id = roomId;
-            this.maxPlayerAmount = maxPlayerAmount;
+            this.MaxPlayerAmount = maxPlayerAmount;
         }
 
         public Room(string name, string maxPlayerAmount)
         {
             this.Name = name;
-            this.maxPlayerAmount = maxPlayerAmount;
+            this.MaxPlayerAmount = maxPlayerAmount;
         }
 
         public Room(string roomId, string name, string maxPlayers, Player player)
         {
             this.Id = roomId;
             this.Name = name;
-            this.maxPlayerAmount = maxPlayers;
+            this.MaxPlayerAmount = maxPlayers;
             Players.Add(player);
         }
 

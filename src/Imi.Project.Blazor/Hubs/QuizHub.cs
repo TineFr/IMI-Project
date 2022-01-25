@@ -83,7 +83,7 @@ namespace Imi.Project.Blazor.Hubs
              Context.Abort();
         }
 
-        public async Task ResetPlayerStats()
+        public void ResetPlayerStats()
         {
             _playerService.ResetStats(Context.ConnectionId);
         }

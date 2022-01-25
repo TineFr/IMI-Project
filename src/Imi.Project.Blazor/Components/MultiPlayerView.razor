@@ -63,7 +63,7 @@
                     <div class="form-group">
                         <label class="name">Amount of players:</label>
                         <div>
-                            <InputSelect @bind-Value="Room.maxPlayerAmount" class="form-control col-sm-15">
+                            <InputSelect @bind-Value="Room.MaxPlayerAmount" class="form-control col-sm-15">
                                 @for (int i = 2; i < 6; i++)
                                 {
                                      <option value="@i">@i</option>
@@ -91,7 +91,7 @@
                     {
                         <div class="btnRoom" type="button" @onclick="() => JoinRoom(item.Id)">
                             <div>@item.Name</div>
-                            <div>Players: @item.Players.Count / @item.maxPlayerAmount</div>
+                            <div>Players: @item.Players.Count / @item.MaxPlayerAmount</div>
                         </div>
                     }
                 </div>
@@ -182,7 +182,7 @@ else
     private async Task CreateRoom()
     {
         string roomId = Guid.NewGuid().ToString();
-        await Connection.SendAsync("CreateRoom", roomId, Room.Name, Room.maxPlayerAmount);
+        await Connection.SendAsync("CreateRoom", roomId, Room.Name, Room.MaxPlayerAmount);
         startGame = true;
     }
 
