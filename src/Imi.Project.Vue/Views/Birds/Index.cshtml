@@ -53,7 +53,7 @@
 
 <div v-else>
 
-     <div class="backButton" v-on:click="overViewMode = true" type="button"><img class="longArrow" src="~/images/long-arrow.png"/>Back to list</div>          
+     <div class="backButton" v-on:click="backToList" type="button"><img class="longArrow" src="~/images/long-arrow.png"/>Back to list</div>          
         <div class="detailView" v-bind:class="{greenBorder : !detailMode, pinkBorder : deleteMode}">
             <div class="imageDiv">
                 <h1 class="detailTitle" v-bind:class="{greenBorder : !detailMode, pinkBorder : deleteMode}">{{mode}}</h1>
