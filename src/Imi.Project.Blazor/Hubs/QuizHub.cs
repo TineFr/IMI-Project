@@ -25,6 +25,7 @@ namespace Imi.Project.Blazor.Hubs
             await Groups.AddToGroupAsync(Context.ConnectionId, roomId);
             var player = (await _playerService.GetPlayers()).ToList().FirstOrDefault(p => p.ConnectionId == Context.ConnectionId);
             await Clients.Group(roomId).SendAsync("OnJoin", roomId);
+            await Clients.All.SendAsync("PlayerJoined");
             var result = _roomService.AddPlayer(roomId, player);
             if (result) await StartQuiz(roomId);
 
@@ -34,6 +35,7 @@ namespace Imi.Project.Blazor.Hubs
         {
             await Groups.AddToGroupAsync(Context.ConnectionId, roomId);
             await Clients.Group(roomId).SendAsync("OnCreation", roomId);
+            await Clients.All.SendAsync("RoomAdded");
             var player = (await _playerService.GetPlayers()).ToList().FirstOrDefault(p => p.ConnectionId == Context.ConnectionId);
             _roomService.AddRoom(roomId, name, maxPlayers, player);
 

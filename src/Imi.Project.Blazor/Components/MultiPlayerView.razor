@@ -146,7 +146,25 @@ else
        .WithUrl(NavManager.ToAbsoluteUri("/multiplayer"))
        .Build();
         await ShowRooms();
+        connection.On("PlayerJoined", async () =>
+        {
+            await ShowRooms();
+            StateHasChanged();
+        });
+        connection.On("RoomAdded", async () =>
+        {
+            await ShowRooms();
+            StateHasChanged();
+        });
     }
+
+
+
+
+
+
+
+
 
 
     private async Task RegisterPlayer()
