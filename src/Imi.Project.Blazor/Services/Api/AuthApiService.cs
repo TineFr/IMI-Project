@@ -34,20 +34,20 @@ namespace Imi.Project.Blazor.Services.Api
             }
         }
 
-        public async Task<string> Register(RegisterModel model)
-        {
-            try
-            {
-                var response = _httpClient.PostAsJsonAsync("auth/register", model).Result;
+        //public async Task<string> Register(RegisterModel model)
+        //{
+        //    try
+        //    {
+        //        var response = _httpClient.PostAsJsonAsync("auth/register", model).Result;
 
-                if (response.IsSuccessStatusCode) return null;
-                else return GetErrorMessage(await response.Content.ReadAsStringAsync());
-            }
-            catch (Exception)
-            {
-                return "Failed to connect to server";
-            }
-        }
+        //        if (response.IsSuccessStatusCode) return null;
+        //        else return GetErrorMessage(await response.Content.ReadAsStringAsync());
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return "Failed to connect to server";
+        //    }
+        //}
 
 
         public override string GetErrorMessage(string message)

@@ -1,29 +1,23 @@
 ﻿
-
 @if (Cage != null)
 {
-   <h1 class="purple">@Cage.Name</h1>
-
+<h1 class="green">@Cage.Name</h1>
+<a href="@($"cages")" type="button" class="btnBack"><img class="arrow" src="images/long-arrow.png"/></a>
+<div class="details">
 <div class="detailscontainer">
-    <div class="detailsflex">
 
         <img class="detailimage" src="@Cage.Image" />
         <div>
-            <h2>@Cage.Name</h2>
-            <p> Location: @Cage.Location</p>
-
-        </div>
+            <p><b>Location:</b>  @Cage.Location</p>
         <div class="d-xl-inline-flex">
-            <a href="@($"editcage/{Cage.Id}")" type="button" class="btn alert-light m-1  blue">Edit</a>
-            <a type="button" class="btn alert-danger m-1" @onclick="() => DeleteCage(Cage.Id)">Delete</a>
+            <a href="@($"editcage/{Cage.Id}")" type="button" class="btn edit m-1  blue">Edit</a>
+                <div type="button" class="btn del m-1" @onclick="() => DeleteCage(Cage.Id)">Delete</div>
         </div>
-    </div>
-
+        </div>
 </div> 
+
+</div>
 }
-
-
-
 
 @code {
     @inject NavigationManager NavManager;
@@ -42,7 +36,7 @@
         Cage =  await _cageService.GetByIdAsync($"cages/{Id}");
     }
 
-    private async void DeleteCage(Guid id)
+    private async void DeleteCage(string id)
     {
           var result =  await _cageService.DeleteAsync($"cages/{Id}");
 

@@ -17,7 +17,7 @@
 
             @foreach (var answer in question.PossibleAnswers)
             {
-                <button @onclick="() => AnswerPicked(answer.IsCorrect)" class="answer @(AddColor ? answer.IsCorrect ? "green" : "red" : "")">
+                <button @onclick="() => AnswerPicked(answer.IsCorrect)" class="answer @(AddColor ? answer.IsCorrect ? "correct" : "wrong" : "")">
                     @answer.Text
                 </button>
             }
@@ -29,23 +29,26 @@
 
 else if (quizEnded)
 {
-    <LeaderBoard Room="room"></LeaderBoard>
+    <LeaderBoard Room="room" Connection="Connection"></LeaderBoard>
 }
 
 else
 {
-    <div>Waiting for other players...</div>
-    <div>Players in room:</div>
-    @if (room != null)
+    <div>Waiting for other players to join...</div>
+
+
+        <div>Players in room:</div>
+
+    @if (room is object)
     {
         @foreach (var player in room?.Players)
         {
-            <div>@player.Name</div>
+            <div class="nameTag"><img class="avatar" src="@player.Avatar"/><p>@player.Name</p></div>
         }
      }
-     <button>Leave Room</button>
-}
 
+     <button class="item">Leave Room</button>
+}
 
 
 @code {
@@ -60,7 +63,7 @@ else
     public Room room { get; set;}
 
     [Parameter]
-    public HubConnection connection { get; set; }
+    public HubConnection Connection { get; set; }
 
     public bool Visibility { get; set; }
 
@@ -81,7 +84,13 @@ else
 
     private bool quizEnded = false;
 
-    public int questionIndex = 0;
+
+    public int questionIndex
+    { get; 
+
+        set; 
+    } 
+
     private int count;
 
     [Inject]
@@ -96,29 +105,31 @@ else
     {
 
         await base.OnInitializedAsync();
-        connection.On<string>("OnCreation", (roomId) =>
+        Connection.On<string>("OnCreation", (roomId) =>
         {
             this.room = _roomService.GetById(roomId);
             StateHasChanged();
         });
-        connection.On<string>("OnJoin", (roomId) =>
+        Connection.On<string>("OnJoin", (roomId) =>
         {
             this.room = _roomService.GetById(roomId);
             StateHasChanged();
         });
-        connection.On<string>("OnStart", async (questions) =>
+        Connection.On<string>("OnStart", async (questions) =>
         {
             this.questions = JsonConvert.DeserializeObject<List<QuizElement>>(questions);
             hasStarted = true;
             question = await ReturnQuestion();
             StateHasChanged();
         });
-        connection.On("QuizFinished", () =>
+        Connection.On("QuizFinished", () =>
         {
             hasStarted = false;
             quizEnded = true;
             StateHasChanged();
         });
+
+        questionIndex = 0;
 
     }
 
@@ -126,6 +137,7 @@ else
 
     public async Task<QuizElement> ReturnQuestion()
     {
+        if (questionIndex == 6) questionIndex = 0;
         if (questionIndex < 5)
         {
             var question = questions[questionIndex];
@@ -136,7 +148,7 @@ else
         else
         {
             questionIndex++;
-            await connection.SendAsync("PlayerFinished", room.Id, count);
+            await Connection.SendAsync("PlayerFinished", room.Id, count);
             return null;
         }
     }

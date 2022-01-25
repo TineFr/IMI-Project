@@ -1,7 +1,19 @@
 ﻿
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap');
 
+.enterName{
+    text-align: center;
+    padding: 50px;
+    border: 2px solid lightblue;
+    border-radius: 10%;
+}
 
+.enterName > label{
+    font-size: 20px;
+}
+.name {
+    font-size: 20px;
+}
 .mainContainer {
     display: flex;
     justify-content: center;
@@ -52,18 +64,18 @@ button {
     background-size: cover;
     background-position: center;
 }
-.green:hover {
+.correct:hover {
     background-color: lightgreen;
 }
-.red:hover {
+.wrong:hover {
     background-color: lightcoral;
 }
 
-.green {
+.correct {
     background-color: lightgreen;
 }
 
-.red {
+.wrong {
     background-color: lightcoral;
 }
 
@@ -119,7 +131,8 @@ button {
     padding: 5px;
     margin-top: 10px;
     border-radius: 10px;
-    }
+}
+
 
 .item > p:hover, button:hover{
     background: rgba(83, 83, 83, 0.61);
@@ -133,4 +146,113 @@ button:focus{
 .room{
     margin-top: 20px;
     width: 200px;
+}
+
+.player {
+    width: 200px;
+    background-color: rgba(83, 83, 83, 0.61);
+    color: white;
+}
+.availableRooms {
+    margin: 10px;
+    border: 2px solid lightblue;
+    padding: 20px;
+    width: 400px;
+    min-height: 300px;
+    border-radius: 40px 40px;
+}
+
+.btnRoom {
+    background-color: rgba(83, 83, 83, 0.61);
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    border-radius: 75px 75px;
+    height: 30px;
+    line-height: 30px;
+    margin: 5px;
+}
+
+.btnRoom:hover {
+    background-color: #D4E7C0;
+}
+
+.btnRoom > div{
+    margin: 0px 20px 0px 20px
+}
+
+.avatarContainer{
+    display:flex;
+    justify-content: space-evenly;
+}
+
+.avatar{
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+}
+
+
+
+[type=radio] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+
+[type=radio] + img {
+    cursor: pointer;
+}
+
+
+[type=radio]:checked + img {
+    outline: 2px solid #47a420;
+    border-radius: 5%;
+}
+
+.nameTag{
+    display:grid;
+    grid-template-columns: 70px 30px;
+    width: 250px;
+    border: 2px solid #808080;
+    border-radius: 75px 75px;
+    margin: 5px;
+}
+
+
+.leaderBoard:first-child {
+    border: 2px solid lightgreen !important;
+}
+
+.leaderboardTag{
+    display: grid;
+    grid-template-columns: 70px 120px auto;
+    width: 300px;
+    border: 2px solid #808080;
+    border-radius: 75px 75px;
+    margin: 5px;
+}
+
+.nameTag > .avatar, .leaderboardTag > .avatar{
+    grid-column: 1;
+    margin-left: 10px;
+}
+
+.nameTag > p, .leaderboardTag > p {
+    margin: 10px;
+    font-size: 20px;
+    color: #a5a5a5;
+    grid-column: 2;
+}
+
+.score {
+    grid-column: 3 !important;
+}
+
+.leaderBoardTitle {
+    font-size: 50px;
+    color: rgba(82, 83, 83, 0.74);
+    font-family: 'Source Sans Pro', sans-serif;
 }

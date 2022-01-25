@@ -1,6 +1,8 @@
-﻿<h3>Add bird</h3>
+﻿@if(Bird != null)
+{
+ <h3>Add bird</h3>
 
-<EditForm Model="@Bird" OnValidSubmit="@OnSubmit">
+<EditForm Model="@Bird" OnValidSubmit="@AddBird">
     <DataAnnotationsValidator />
     <div class="form-group">
         <label>Name :</label>
@@ -20,13 +22,13 @@
          <div class="form-group">
         <label>Species :</label>
         <div>
-            <InputSelect @bind-Value="Bird.Species">
+            <InputSelect @bind-Value="Bird.SpeciesId">
                 @foreach (var species in Species)
                 {
-                   <option>@species.Name</option>
+                   <option value="@species.Id">@species.Name</option>
                 }
             </InputSelect>
-            <ValidationMessage For="@(() => Bird.Species)" />
+            <ValidationMessage For="@(() => Bird.SpeciesId)" />
         </div>
     </div>
 
@@ -46,13 +48,13 @@
      <div class="form-group">
         <label>Cage :</label>
         <div>
-            <InputSelect @bind-Value="Bird.Cage">
+            <InputSelect @bind-Value="Bird.CageId">
                 @foreach (var cage in Cages)
                 {
-                   <option value="@cage.Name">@cage.Name</option>
+                   <option value="@cage.Id">@cage.Name</option>
                 }
             </InputSelect>
-            <ValidationMessage For="@(() => Bird.Cage)" />
+            <ValidationMessage For="@(() => Bird.CageId)" />
         </div>
     </div>
     <div class="form-group">
@@ -63,28 +65,31 @@
         </div>
     </div>
     <button type="submit" class="btn submit w-25 p-3">Save</button>
-</EditForm>
+</EditForm>   
+}
+
+
 
 @code {
 
-
-    [Inject]
-    public IBirdService birdService { get; set; }
-    [Inject]
-    public ICageService cageService { get; set; }
-    [Inject]
-    public ISpeciesService speciesService { get; set; }
     @inject NavigationManager NavManager;
+    [Inject]
+    public IBaseApiService<CageRequestModel, CageModel> _cageService {get; set;}
+    [Inject]
+    public  IBaseApiService<SpeciesModel, SpeciesModel> _speciesService {get; set;}
+    [Inject]
+    public  IBaseApiService<BirdRequestModel, BirdModel> _birdService {get; set;}
+
 
 
     [Parameter]
-    public Bird Bird { get; set; }
+    public BirdRequestModel Bird { get; set; }
 
     [Parameter]
-    public List<Cage> Cages { get; set; }   
+    public IEnumerable<CageModel> Cages { get; set; }   
     [Parameter]
 
-    public List<Species> Species { get; set; } 
+    public IEnumerable<SpeciesModel> Species { get; set; } 
 
     [Parameter]
     public List<string> Genders { get; set; } 
@@ -92,21 +97,19 @@
 
     protected async override Task OnInitializedAsync()
     {
-        Bird = new Bird(); 
-        Cages = await cageService.GetAllAsync();
-        Species = await speciesService.GetAllAsync();
+        Cages = await _cageService.GetAllAsync("me/cages?ItemsPerPage=1000");
+        Species = await _speciesService.GetAllAsync("species");
         Genders = Enum.GetNames(typeof(Common.Enums.Gender)).ToList();
+        Bird = new BirdRequestModel();
     }
 
-
-    private async void OnSubmit()
+    private async void AddBird()
     {
-        var result =  await birdService.AddAsync(Bird);
+        var result =  await _birdService.AddAsync($"birds", Bird);
         if (result is object)
         {
-            NavManager.NavigateTo($"birds");
+          NavManager.NavigateTo($"birds", true);
         }
-
     }
  
   

@@ -7,7 +7,7 @@ namespace Imi.Project.Blazor.Services.Api.Interfaces
     {
         Task<string> Authenticate(LoginRequestModel model);
 
-        Task<string> Register(RegisterModel model);
+        //Task<string> Register(RegisterModel model);
         void LogOut();
     }
 }

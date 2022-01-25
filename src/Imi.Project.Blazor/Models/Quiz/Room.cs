@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Imi.Project.Blazor.Models.Quiz
 {
@@ -7,33 +8,37 @@ namespace Imi.Project.Blazor.Models.Quiz
     {
         public string Id { get; set; } = Guid.NewGuid().ToString();
 
+        [Required(ErrorMessage = "Please enter a name")]
+        [MaxLength(15, ErrorMessage = "Name can not be longer than 15 characters")]
         public string Name { get; set; }
 
         public List<Player> Players { get; set; } = new List<Player>();
 
+        public string MaxPlayerAmount { get; set; } = "2";
 
-        public int maxPlayerAmount { get; set; }
+        public Room()
+        {
 
+        }
 
-
-        public Room(string roomId, string name, int maxPlayerAmount)
+        public Room(string roomId, string name, string maxPlayerAmount)
         {
             this.Name = name;
             Id = roomId;
-            this.maxPlayerAmount = maxPlayerAmount;
+            this.MaxPlayerAmount = maxPlayerAmount;
         }
 
-        public Room(string name, int maxPlayerAmount, int playerAmount)
+        public Room(string name, string maxPlayerAmount)
         {
             this.Name = name;
-            this.maxPlayerAmount = maxPlayerAmount;
+            this.MaxPlayerAmount = maxPlayerAmount;
         }
 
-        public Room(string roomId, string name, int maxPlayers, Player player)
+        public Room(string roomId, string name, string maxPlayers, Player player)
         {
             this.Id = roomId;
             this.Name = name;
-            this.maxPlayerAmount = maxPlayers;
+            this.MaxPlayerAmount = maxPlayers;
             Players.Add(player);
         }
 

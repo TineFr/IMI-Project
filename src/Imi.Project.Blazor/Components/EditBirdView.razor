@@ -22,10 +22,10 @@
          <div class="form-group">
         <label>Species :</label>
         <div>
-            <InputSelect @bind-Value="Bird.Species.Name">
+            <InputSelect @bind-Value="Bird.Species.Id">
                 @foreach (var species in Species)
                 {
-                    <option value="@species.Name">@species.Name</option>
+                    <option value="@species.Id">@species.Name</option>
                 }
             </InputSelect>
             <ValidationMessage For="@(() => Bird.Species)" />
@@ -48,10 +48,10 @@
     <div class="form-group">
         <label>Cage :</label>
         <div>
-            <InputSelect @bind-Value="Bird.Cage">
+            <InputSelect @bind-Value="Bird.Cage.Id">
                 @foreach (var cage in Cages)
                 {
-                    <option value="@cage.Name">@cage.Name</option>
+                    <option value="@cage.Id">@cage.Name</option>
                 }
             </InputSelect>
             <ValidationMessage For="@(() => Bird.Cage)" />

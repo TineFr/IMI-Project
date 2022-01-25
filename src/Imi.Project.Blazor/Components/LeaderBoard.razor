@@ -1,25 +1,54 @@
-﻿
+﻿@using Microsoft.AspNetCore.SignalR.Client
 
-<img src="images/quiz/leaderboard.png" height="200px" />
-
-<h3>LeaderBoard</h3>
-
+@if (showLeaderBoard)
+{
+      <h1 class="leaderBoardTitle">Leaderboard</h1>
+      <div class="leaderBoard">
         @foreach (var player in Room?.Players.OrderByDescending(p => p.Score))
         {
-@*            <div class="scoreView">@player.Name Score: @player.Score*@
-              <div>
-                 <div>@Room?.Players.OrderByDescending(p => p.Score).ToList().IndexOf(player)</div>
-                 <div>@player.Name</div>
-                 <div>@player.Score</div>
-            
-              </div>
-            
-        }
 
+            <div class="leaderboardTag"><img class="avatar" src="@player.Avatar"/><p>@player.Name</p><p class="score">@player.Score / 5</p></div>
+        }
+    </div>
+
+    <button class="submit item" type="button" @onclick="BackToMultiPlayer" >Play again</button>
+    <button class="item" type="button" @onclick="BackToMain" >Main menu</button>    
+}
+
+
+@if (back)
+{
+    <QuizOverview></QuizOverview>
+}
+
+@if (playAgain)
+{
+    <MultiPlayerView Registered="true" Connection="Connection"></MultiPlayerView>
+}
 
 @code {
-
+    bool back;
+    bool playAgain;
+    bool showLeaderBoard = true;
     [Parameter]
     public Room Room { get; set; }
+
+    [Parameter]
+    public HubConnection Connection { get; set; }
+
+
+    private async void BackToMain()
+    {
+        showLeaderBoard = false;
+        back = true;
+        await Connection.SendAsync("PlayerLeft");
+    }
+
+    private async void BackToMultiPlayer()
+    {
+        showLeaderBoard = false;
+        playAgain = true;
+        await Connection.SendAsync("ResetPlayerStats");
+    }
 
 }

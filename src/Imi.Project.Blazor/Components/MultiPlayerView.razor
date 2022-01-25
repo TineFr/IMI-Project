@@ -4,44 +4,104 @@
 @if (!back)
 {
     
-    @if(!registered)
+    @if(!Registered)
     {
-         <EditForm  Model="@player" OnSubmit="RegisterPlayer">
+        <div class="enterName">
+         <EditForm  Model="@Player" OnValidSubmit="RegisterPlayer">
+            <DataAnnotationsValidator />
             <div class="form-group">
-                <label>Enter player name :</label>
+                <label class="name">Enter player name:</label>
                 <div>
-                    <InputText @bind-Value="@player.Name"/>
+                    <InputText @bind-Value="Player.Name" class="form-control col-sm-15" />
+                    <ValidationMessage For="@(() => Player.Name)" />
                 </div>
             </div>
-            <button type="submit">Submit</button>
+            <div>
+                <label class="name">Chose your avatar:</label><br>
+                <label>
+                  <input type="radio"   name="test"  @onchange="@(() => Avatar = "blue.png")" checked>
+                  <img class="avatar"  src="images/quiz/avatars/blue.png">
+                </label>
+                <label>
+                  <input type="radio" name="test" @onchange="@(() => Avatar = "casso.png")">
+                  <img class="avatar"  src="images/quiz/avatars/casso.png">
+                </label>
+                <label>
+                  <input type="radio" name="test" @onchange="@(() => Avatar = "duck.png")">
+                  <img class="avatar"  src="images/quiz/avatars/duck.png">
+                </label>
+                <label>
+                  <input type="radio" name="test" @onchange="@(() => Avatar = "owl.png")">
+                  <img class="avatar"  src="images/quiz/avatars/owl.png">
+                </label>
+                 <label>
+                  <input type="radio" name="test" @onchange="@(() => Avatar = "toucan.png")">
+                  <img class="avatar"  src="images/quiz/avatars/toucan.png">
+                </label>
+            </div>
+            <button class="submit "type="submit">Submit</button>
             <button type="button" @onclick="() => back = true" >Back</button>
         </EditForm>
+        </div>
     }
 
     else if (!startGame)
     {
-        <h3>Multiplayer</h3>
-        <div class="item">
-            <button @onclick="CreateRoom">Create Room</button>
-        </div>
 
-
-        @if (Rooms.Count > 0)
+        if (createRoom)
         {
-            <div class="quiztitle"><h3>Available Rooms</h3></div>
+            <div class="enterName">
+                <EditForm  Model="@Room" OnValidSubmit="CreateRoom">
+                    <DataAnnotationsValidator />
+                    <div class="form-group">
+                        <label class="name">Room name:</label>
+                        <div>
+                            <InputText @bind-Value="Room.Name" class="form-control col-sm-15" />
+                            <ValidationMessage For="@(() => Room.Name)" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="name">Amount of players:</label>
+                        <div>
+                            <InputSelect @bind-Value="Room.MaxPlayerAmount" class="form-control col-sm-15">
+                                @for (int i = 2; i < 6; i++)
+                                {
+                                     <option value="@i">@i</option>
+                                }
+                         </InputSelect>
+                      </div>
+                  </div>
+                    <button class="submit "type="submit">Create</button>
+                    <button type="button" @onclick="() => back = true" >Back</button>
+                 </EditForm>
+             </div>
+        }
 
-            <div>
-                @foreach (var item in Rooms)
-                {
-                    <button class="room" @onclick="() => JoinRoom(item.Id)" margin="10px"><p >@item.Name</p>Players: @item.Players.Count / @item.maxPlayerAmount</button>
-                }
+        else
+        {
+            <div class="item">
+                <button @onclick="() => createRoom = true">Create Room</button>
             </div>
+            @if (Rooms?.Count > 0)
+            {
+                <div class="quiztitle m-2"><h3>Available Rooms</h3></div>
+
+                <div class="availableRooms">
+                    @foreach (var item in Rooms)
+                    {
+                        <div class="btnRoom" type="button" @onclick="() => JoinRoom(item.Id)">
+                            <div>@item.Name</div>
+                            <div>Players: @item.Players.Count / @item.MaxPlayerAmount</div>
+                        </div>
+                    }
+                </div>
+            }
         }
     }
 
     else
     {
-        <MultiPlayerQuestionView connection="connection"></MultiPlayerQuestionView>
+        <MultiPlayerQuestionView Connection="Connection"></MultiPlayerQuestionView>
     }
 
 }
@@ -58,11 +118,19 @@ else
 @code {
     bool back = false;
     bool startGame;
-    bool registered;
 
-    public Player player { get; set; } = new Player();
+    [Parameter]
+    public bool Registered  { get; set; }
 
-    HubConnection connection { get; set; }
+    bool createRoom;
+
+    public string Avatar { get; set; } = "blue.png";
+
+    public Player Player { get; set; } = new Player();
+
+    public Room Room { get; set; } = new Room();
+    [Parameter]
+    public HubConnection Connection { get; set; }
 
     [Inject]
     public IRoomService _roomService { get; set; }
@@ -77,20 +145,35 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        connection = new HubConnectionBuilder()
+
+        if (Connection == null)
+        {
+        Connection = new HubConnectionBuilder()
        .WithUrl(NavManager.ToAbsoluteUri("/multiplayer"))
        .Build();
-        await ShowRooms();
-    }
+        await Connection.StartAsync();
+        }
 
+        await ShowRooms();
+        Connection.On("PlayerJoined", async () =>
+        {
+            await ShowRooms();
+            StateHasChanged();
+        });
+        Connection.On("RoomAdded", async () =>
+        {
+            await ShowRooms();
+            StateHasChanged();
+        });
+    }
 
     private async Task RegisterPlayer()
     {
-        await connection.StartAsync();
-        await connection.SendAsync("RegisterPlayer", player.Name);
-        connection.On("RegisterSuccess", () =>
+
+        await Connection.SendAsync("RegisterPlayer", Player.Name, Avatar);
+        Connection.On("RegisterSuccess", () =>
         {
-            registered = true;
+            Registered = true;
             StateHasChanged();
         });
     }
@@ -99,13 +182,14 @@ else
     private async Task CreateRoom()
     {
         string roomId = Guid.NewGuid().ToString();
-        await connection.SendAsync("CreateRoom", roomId, "roomName", 3);
+        await Connection.SendAsync("CreateRoom", roomId, Room.Name, Room.MaxPlayerAmount);
         startGame = true;
     }
 
     private async Task JoinRoom(string roomId)
     {
-      await connection.SendAsync("JoinRoom", roomId);
+      await Connection.SendAsync("JoinRoom", roomId);
       startGame = true;
     }
+
 }

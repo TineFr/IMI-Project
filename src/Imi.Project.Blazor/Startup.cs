@@ -29,12 +29,6 @@ namespace Imi.Project.Blazor
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddTransient<IBirdService, MockBirdService>();
-            services.AddTransient<ICageService, MockCageService>();
-            services.AddTransient<ISpeciesService, MockSpeciesService>();
-            services.AddTransient<IQuizService, QuizService>();
-            services.AddSingleton<IRoomService, RoomService>();
-            services.AddSingleton<IPlayerService, PlayerService>();
             services.AddHttpClient();
             services.AddResponseCompression(opts =>
             {
@@ -42,11 +36,17 @@ namespace Imi.Project.Blazor
                     new[] { "application/octet-stream" });
             });
 
-
+            //api services
             services.AddScoped<IAuthApiService, AuthApiService>();
             services.AddScoped(typeof(IBaseApiService<BirdRequestModel, BirdModel>), typeof(BirdApiService));
             services.AddScoped(typeof(IBaseApiService<CageRequestModel, CageModel>), typeof(CageApiService));
             services.AddScoped(typeof(IBaseApiService<SpeciesModel, SpeciesModel>), typeof(BaseApiService<SpeciesModel, SpeciesModel>));
+
+
+            //quiz services
+            services.AddTransient<IQuizService, QuizService>();
+            services.AddSingleton<IRoomService, RoomService>();
+            services.AddSingleton<IPlayerService, PlayerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

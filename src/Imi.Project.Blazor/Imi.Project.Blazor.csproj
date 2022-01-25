@@ -13,4 +13,8 @@
     <ProjectReference Include="..\Imi.Project.Common\Imi.Project.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\quiz\avatars\" />
+  </ItemGroup>
+
 </Project>
