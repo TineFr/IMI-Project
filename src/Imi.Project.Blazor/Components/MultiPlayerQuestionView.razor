@@ -43,7 +43,7 @@ else
     {
         @foreach (var player in room?.Players)
         {
-            <div class="player">@player.Name</div>
+            <div class="nameTag"><img class="avatar" src="@player.Avatar"/><p>@player.Name</p></div>
         }
      }
 

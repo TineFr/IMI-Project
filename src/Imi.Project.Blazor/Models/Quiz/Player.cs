@@ -11,6 +11,7 @@ namespace Imi.Project.Blazor.Models.Quiz
         public int Score { get; set; }
         public bool IsFinished { get; set; }
         public string ConnectionId { get; set; }
+        public string Avatar { get; set; } = "images/quiz/avatars/";
 
 
         public Player()
@@ -18,10 +19,11 @@ namespace Imi.Project.Blazor.Models.Quiz
 
         }
 
-        public Player(string connectionId, string name)
+        public Player(string connectionId, string name, string avatar)
         {
             ConnectionId = connectionId;
             Name = name;
+            Avatar += avatar;
         }
 
         public void AddScore(int score)

@@ -47,12 +47,12 @@ namespace Imi.Project.Blazor.Hubs
 
         }
 
-        public async void RegisterPlayer(string name)
+        public async void RegisterPlayer(string name, string avatar)
         {
             var player = (await _playerService.GetPlayers()).ToList().FirstOrDefault(p => p.ConnectionId == Context.ConnectionId);
             if (player == null)
             {
-                player = new Player(Context.ConnectionId, name);
+                player = new Player(Context.ConnectionId, name, avatar);
                 _playerService.AddPlayer(player);
             }
             await Clients.Client(Context.ConnectionId).SendAsync("RegisterSuccess");

@@ -16,6 +16,29 @@
                     <ValidationMessage For="@(() => Player.Name)" />
                 </div>
             </div>
+            <div>
+                <label class="name">Chose your avatar:</label><br>
+                <label>
+                  <input type="radio"   name="test"  @onchange="@(() => Avatar = "blue.png")" checked>
+                  <img class="avatar"  src="images/quiz/avatars/blue.png">
+                </label>
+                <label>
+                  <input type="radio" name="test" @onchange="@(() => Avatar = "casso.png")">
+                  <img class="avatar"  src="images/quiz/avatars/casso.png">
+                </label>
+                <label>
+                  <input type="radio" name="test" @onchange="@(() => Avatar = "duck.png")">
+                  <img class="avatar"  src="images/quiz/avatars/duck.png">
+                </label>
+                <label>
+                  <input type="radio" name="test" @onchange="@(() => Avatar = "owl.png")">
+                  <img class="avatar"  src="images/quiz/avatars/owl.png">
+                </label>
+                 <label>
+                  <input type="radio" name="test" @onchange="@(() => Avatar = "toucan.png")">
+                  <img class="avatar"  src="images/quiz/avatars/toucan.png">
+                </label>
+            </div>
             <button class="submit "type="submit">Submit</button>
             <button type="button" @onclick="() => back = true" >Back</button>
         </EditForm>
@@ -98,6 +121,8 @@ else
     bool registered;
     bool createRoom;
 
+    public string Avatar { get; set; } = "blue.png";
+
     public Player Player { get; set; } = new Player();
 
     public Room Room { get; set; } = new Room();
@@ -127,7 +152,7 @@ else
     private async Task RegisterPlayer()
     {
         await connection.StartAsync();
-        await connection.SendAsync("RegisterPlayer", Player.Name);
+        await connection.SendAsync("RegisterPlayer", Player.Name, Avatar);
         connection.On("RegisterSuccess", () =>
         {
             registered = true;
