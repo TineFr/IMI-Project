@@ -92,7 +92,7 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
             }
         }
 
-        private DateTime startDate;
+        private DateTime startDate = DateTime.Now;
 
         public DateTime StartDate
         {
@@ -100,7 +100,7 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
             set { startDate = value; }
         }
 
-        private DateTime endDate;
+        private DateTime endDate = DateTime.Now;
 
         public DateTime EndDate
         {

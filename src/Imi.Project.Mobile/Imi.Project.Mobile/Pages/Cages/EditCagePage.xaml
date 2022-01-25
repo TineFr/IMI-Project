@@ -33,8 +33,8 @@
                     <Frame Style="{StaticResource EditFrame}">
                         <StackLayout>
                             <Label Text="Change image"  FontAttributes="Bold"></Label>
-                            <Image  Source="{Binding Image}" HeightRequest="30"></Image>
-                            <Button Text="From Camera"></Button>
+                            <Image x:Name="PhotoImage"  Source="{Binding Preview}"/>
+                            <Button Text="From Camera"  Command="{Binding TakeImage}"></Button>
                             <Button Text="From Gallery" Command="{Binding SelectImageCommand}"></Button>
                         </StackLayout>
                     </Frame>
