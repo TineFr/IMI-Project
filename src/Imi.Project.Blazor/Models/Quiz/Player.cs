@@ -6,7 +6,7 @@ namespace Imi.Project.Blazor.Models.Quiz
     public class Player
     {
         [Required(ErrorMessage = "Please enter a name")]
-        [MaxLength(15 , ErrorMessage = "Name can not be longer than 15 characters")]
+        [MaxLength(10 , ErrorMessage = "Name can not be longer than 10 characters")]
         public string Name { get; set; }
         public int Score { get; set; }
         public bool IsFinished { get; set; }

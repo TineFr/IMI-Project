@@ -33,5 +33,14 @@ namespace Imi.Project.Blazor.Services
             Players.Remove(player);
             Players.Add(player);
         }
+
+        public void ResetStats(string id)
+        {
+            var player = Players.FirstOrDefault(p => p.ConnectionId == id);
+            player.IsFinished = false;
+            player.Score = 0;
+            Players.Remove(player);
+            Players.Add(player);
+        }
     }
 }

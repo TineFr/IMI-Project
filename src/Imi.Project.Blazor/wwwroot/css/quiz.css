@@ -219,19 +219,40 @@ button:focus{
     border: 2px solid #808080;
     border-radius: 75px 75px;
     margin: 5px;
-
-
 }
 
-.nameTag > .avatar{
+
+.leaderBoard:first-child {
+    border: 2px solid lightgreen !important;
+}
+
+.leaderboardTag{
+    display: grid;
+    grid-template-columns: 70px 120px auto;
+    width: 300px;
+    border: 2px solid #808080;
+    border-radius: 75px 75px;
+    margin: 5px;
+}
+
+.nameTag > .avatar, .leaderboardTag > .avatar{
     grid-column: 1;
     margin-left: 10px;
-
 }
 
-.nameTag > p {
+.nameTag > p, .leaderboardTag > p {
     margin: 10px;
     font-size: 20px;
     color: #a5a5a5;
     grid-column: 2;
+}
+
+.score {
+    grid-column: 3 !important;
+}
+
+.leaderBoardTitle {
+    font-size: 50px;
+    color: rgba(82, 83, 83, 0.74);
+    font-family: 'Source Sans Pro', sans-serif;
 }

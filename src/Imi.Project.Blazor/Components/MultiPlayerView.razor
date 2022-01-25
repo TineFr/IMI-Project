@@ -4,7 +4,7 @@
 @if (!back)
 {
     
-    @if(!registered)
+    @if(!Registered)
     {
         <div class="enterName">
          <EditForm  Model="@Player" OnValidSubmit="RegisterPlayer">
@@ -82,7 +82,7 @@
             <div class="item">
                 <button @onclick="() => createRoom = true">Create Room</button>
             </div>
-            @if (Rooms.Count > 0)
+            @if (Rooms?.Count > 0)
             {
                 <div class="quiztitle m-2"><h3>Available Rooms</h3></div>
 
@@ -101,7 +101,7 @@
 
     else
     {
-        <MultiPlayerQuestionView connection="connection"></MultiPlayerQuestionView>
+        <MultiPlayerQuestionView Connection="Connection"></MultiPlayerQuestionView>
     }
 
 }
@@ -118,7 +118,10 @@ else
 @code {
     bool back = false;
     bool startGame;
-    bool registered;
+
+    [Parameter]
+    public bool Registered  { get; set; }
+
     bool createRoom;
 
     public string Avatar { get; set; } = "blue.png";
@@ -126,8 +129,8 @@ else
     public Player Player { get; set; } = new Player();
 
     public Room Room { get; set; } = new Room();
-
-    HubConnection connection { get; set; }
+    [Parameter]
+    public HubConnection Connection { get; set; }
 
     [Inject]
     public IRoomService _roomService { get; set; }
@@ -142,38 +145,35 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        connection = new HubConnectionBuilder()
+
+        if (Connection == null)
+        {
+        Connection = new HubConnectionBuilder()
        .WithUrl(NavManager.ToAbsoluteUri("/multiplayer"))
        .Build();
+        await Connection.StartAsync();
+        }
+
         await ShowRooms();
-        connection.On("PlayerJoined", async () =>
+        Connection.On("PlayerJoined", async () =>
         {
             await ShowRooms();
             StateHasChanged();
         });
-        connection.On("RoomAdded", async () =>
+        Connection.On("RoomAdded", async () =>
         {
             await ShowRooms();
             StateHasChanged();
         });
     }
 
-
-
-
-
-
-
-
-
-
     private async Task RegisterPlayer()
     {
-        await connection.StartAsync();
-        await connection.SendAsync("RegisterPlayer", Player.Name, Avatar);
-        connection.On("RegisterSuccess", () =>
+
+        await Connection.SendAsync("RegisterPlayer", Player.Name, Avatar);
+        Connection.On("RegisterSuccess", () =>
         {
-            registered = true;
+            Registered = true;
             StateHasChanged();
         });
     }
@@ -182,13 +182,13 @@ else
     private async Task CreateRoom()
     {
         string roomId = Guid.NewGuid().ToString();
-        await connection.SendAsync("CreateRoom", roomId, Room.Name, Room.maxPlayerAmount);
+        await Connection.SendAsync("CreateRoom", roomId, Room.Name, Room.maxPlayerAmount);
         startGame = true;
     }
 
     private async Task JoinRoom(string roomId)
     {
-      await connection.SendAsync("JoinRoom", roomId);
+      await Connection.SendAsync("JoinRoom", roomId);
       startGame = true;
     }
 

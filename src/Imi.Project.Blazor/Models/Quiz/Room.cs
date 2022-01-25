@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Imi.Project.Blazor.Models.Quiz
 {
@@ -7,6 +8,8 @@ namespace Imi.Project.Blazor.Models.Quiz
     {
         public string Id { get; set; } = Guid.NewGuid().ToString();
 
+        [Required(ErrorMessage = "Please enter a name")]
+        [MaxLength(15, ErrorMessage = "Name can not be longer than 15 characters")]
         public string Name { get; set; }
 
         public List<Player> Players { get; set; } = new List<Player>();

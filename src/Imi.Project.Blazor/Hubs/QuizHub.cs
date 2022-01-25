@@ -60,14 +60,32 @@ namespace Imi.Project.Blazor.Hubs
             await Clients.Client(Context.ConnectionId).SendAsync("RegisterSuccess");
         }
 
-
         public async Task PlayerFinished(string roomId, int score)
         {
             _playerService.PlayerIsFinished(Context.ConnectionId, score);
             var player = (await _playerService.GetPlayers()).ToList().FirstOrDefault(p => p.ConnectionId == Context.ConnectionId);
+            var room = _roomService.GetById(roomId);
             var quizFinished = _roomService.UpdateGameStats(roomId, player);
-            if (quizFinished) await Clients.Group(roomId).SendAsync("QuizFinished");
+            if (quizFinished)
+            {
+                await Clients.Group(roomId).SendAsync("QuizFinished");
+                for     (int i = 0; i < room.Players.Count(); i++)
+                {
+                    await Groups.RemoveFromGroupAsync(room.Players[i].ConnectionId, roomId);
+                }
+                _roomService.DisposeRoom(roomId);
+            }
         }
 
+        public void PlayerLeft()
+        {
+             _playerService.DisposePlayer(Context.ConnectionId);
+             Context.Abort();
+        }
+
+        public async Task ResetPlayerStats()
+        {
+            _playerService.ResetStats(Context.ConnectionId);
+        }
     }
 }
