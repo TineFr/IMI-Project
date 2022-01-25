@@ -55,7 +55,7 @@
 
         <!-- back arrow style-->
         <Style x:Key="BackArrow" TargetType="ImageButton">
-            <Setter Property="Source" Value="{extensions:ImageResource Imi.Project.Mobile.icons.leftarrow.png}" ></Setter>
+            <Setter Property="Source" Value="{extensions:ImageResource Imi.Project.Mobile.icons.leftarrow64.png}" ></Setter>
             <Setter Property="Aspect" Value="AspectFill" ></Setter>
             <Setter Property="Padding" Value="30" ></Setter>
             <Setter Property="BackgroundColor" Value="Transparent" ></Setter>
@@ -65,7 +65,7 @@
 
         <!--filter style-->
         <Style x:Key="Filter" TargetType="ImageButton">
-            <Setter Property="Source" Value="{extensions:ImageResource Imi.Project.Mobile.icons.filter.png}" ></Setter>
+            <Setter Property="Source" Value="{extensions:ImageResource Imi.Project.Mobile.icons.filter64.png}" ></Setter>
             <Setter Property="Aspect" Value="AspectFill" ></Setter>
             <Setter Property="Padding" Value="30" ></Setter>
             <Setter Property="BackgroundColor" Value="Transparent" ></Setter>
