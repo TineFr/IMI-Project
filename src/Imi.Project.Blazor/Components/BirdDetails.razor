@@ -2,22 +2,25 @@
 
 @if (@Bird != null)
 {
-    <h1 class="purple">@Bird.Name</h1>
-<div class="detailscontainer">
-    <div class="detailsflex">
+    <h1 class="green">@Bird.Name <img class="genderImage" src="@SetGenderImage(Bird.Gender.ToString())" /></h1>
+    <a href="@($"birds")" type="button" class="btnBack"><img class="arrow" src="images/long-arrow.png"/></a>
 
-        <img class="detailimage" src="@Bird.Image" />
+<div class="details">
+<div class="detailscontainer">
+
+       <img class="detailimage" src="@Bird.Image" />
         <div>
-            <h2>@Bird.Name</h2>
-            <p> Species: @Bird.Species.Name</p>
-            <p> Location: @Bird.Cage?.Name</p>
-            <img class="genderimage" src="@SetGenderImage(Bird.Gender.ToString())" />
+                @if (Bird.Species is object) { <p> <b>Species:</b> @Bird.Species?.Name</p>}
+                @if (Bird.Cage is object) {<p> <b>Location:</b> @Bird.Cage?.Name</p> }
+                <p> <b>Hatch date:</b> @Bird.HatchDate.ToString("d")</p>
+                @if (Bird.Food is object) {<p><b> Food:</b> @Bird.Food</p> }
+
+            <div class="d-xl-inline-flex">
+                <a href="@($"editbird/{Bird.Id}")" type="button" class="btn edit m-1">Edit</a>
+                <div type="button" class="btn del m-1" @onclick="() => DeleteBird(Bird.Id)">Delete</div>
+            </div>
         </div>
-          <div class="d-xl-inline-flex">
-            <a href="@($"editbird/{Bird.Id}")" type="button" class="btn edit  m-1">Edit</a>
-            <a type="button" class="btn alert-danger m-1" @onclick="() => DeleteBird(Bird.Id)">Delete</a>
-        </div>
-    </div>
+</div>
 
 </div>
 }

@@ -9,7 +9,7 @@ namespace Imi.Project.Blazor.Services.Interfaces
         public Task<List<Room>> ShowAvailableRooms();
         public Task<List<Room>> ShowAllRooms();
         public bool UpdateGameStats(string roomId, Player player);
-        public void AddRoom(string roomdId, string name, int maxPlayers, Player player);
+        public void AddRoom(string roomdId, string name, string maxPlayers, Player player);
         public Room GetById(string roomdId);
         public bool AddPlayer(string roomId, Player player);
         public void DisposeRoom(string roomId);

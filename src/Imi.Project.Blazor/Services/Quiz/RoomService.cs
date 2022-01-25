@@ -1,5 +1,6 @@
 ﻿using Imi.Project.Blazor.Models.Quiz;
 using Imi.Project.Blazor.Services.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace Imi.Project.Blazor.Services
         {
 
         };
-        public void AddRoom(string roomId, string name, int maxPlayers, Player player)
+        public void AddRoom(string roomId, string name, string maxPlayers, Player player)
         {
             Rooms.Add(new Room(roomId, name, maxPlayers, player ));
         }
@@ -29,7 +30,17 @@ namespace Imi.Project.Blazor.Services
             room.AddPlayer(player);
             Rooms.Remove(room);
             Rooms.Add(room);
-            if (room.Players.Count == room.maxPlayerAmount) return true;
+            if (room.Players.Count == Convert.ToInt32(room.maxPlayerAmount)) return true;
+            else return false;
+        }
+
+        public bool RemovePlayer(string roomId, Player player)
+        {
+            var room = Rooms.SingleOrDefault(r => r.Id == roomId);
+            room.AddPlayer(player);
+            Rooms.Remove(room);
+            Rooms.Add(room);
+            if (room.Players.Count == Convert.ToInt32(room.maxPlayerAmount)) return true;
             else return false;
         }
 
@@ -40,7 +51,7 @@ namespace Imi.Project.Blazor.Services
 
         public Task<List<Room>> ShowAvailableRooms()
         {
-            return Task.FromResult(Rooms.Where(r => r.Players.Count < r.maxPlayerAmount).OrderBy(r => r.Name).ToList());
+            return Task.FromResult(Rooms.Where(r => r.Players.Count < Convert.ToInt32(r.maxPlayerAmount)).OrderBy(r => r.Name).ToList());
         }
 
         public Room GetById(string roomdId)
@@ -53,7 +64,7 @@ namespace Imi.Project.Blazor.Services
             var room = Rooms.SingleOrDefault(r => r.Id == roomId);
             room.RemovePlayer(player);
             room.AddPlayer(player);
-            if (room.Players.Where(p => p.IsFinished).ToList().Count == room.maxPlayerAmount) return true;
+            if (room.Players.Where(p => p.IsFinished).ToList().Count == room.Players.Count()) return true;
             else return false;
 
         }

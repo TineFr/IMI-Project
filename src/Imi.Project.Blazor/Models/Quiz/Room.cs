@@ -11,25 +11,27 @@ namespace Imi.Project.Blazor.Models.Quiz
 
         public List<Player> Players { get; set; } = new List<Player>();
 
+        public string maxPlayerAmount { get; set; } = "2";
 
-        public int maxPlayerAmount { get; set; }
+        public Room()
+        {
 
+        }
 
-
-        public Room(string roomId, string name, int maxPlayerAmount)
+        public Room(string roomId, string name, string maxPlayerAmount)
         {
             this.Name = name;
             Id = roomId;
             this.maxPlayerAmount = maxPlayerAmount;
         }
 
-        public Room(string name, int maxPlayerAmount, int playerAmount)
+        public Room(string name, string maxPlayerAmount)
         {
             this.Name = name;
             this.maxPlayerAmount = maxPlayerAmount;
         }
 
-        public Room(string roomId, string name, int maxPlayers, Player player)
+        public Room(string roomId, string name, string maxPlayers, Player player)
         {
             this.Id = roomId;
             this.Name = name;

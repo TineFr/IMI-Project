@@ -1,7 +1,19 @@
 ﻿
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap');
 
+.enterName{
+    text-align: center;
+    padding: 50px;
+    border: 2px solid lightblue;
+    border-radius: 10%;
+}
 
+.enterName > label{
+    font-size: 20px;
+}
+.name {
+    font-size: 20px;
+}
 .mainContainer {
     display: flex;
     justify-content: center;
@@ -52,18 +64,18 @@ button {
     background-size: cover;
     background-position: center;
 }
-.green:hover {
+.correct:hover {
     background-color: lightgreen;
 }
-.red:hover {
+.wrong:hover {
     background-color: lightcoral;
 }
 
-.green {
+.correct {
     background-color: lightgreen;
 }
 
-.red {
+.wrong {
     background-color: lightcoral;
 }
 
@@ -122,7 +134,6 @@ button {
 }
 
 
-
 .item > p:hover, button:hover{
     background: rgba(83, 83, 83, 0.61);
     cursor: pointer;
@@ -135,4 +146,37 @@ button:focus{
 .room{
     margin-top: 20px;
     width: 200px;
+}
+
+.player {
+    width: 200px;
+    background-color: rgba(83, 83, 83, 0.61);
+    color: white;
+}
+.availableRooms {
+    margin: 10px;
+    border: 2px solid lightblue;
+    padding: 20px;
+    width: 400px;
+    min-height: 300px;
+    border-radius: 40px 40px;
+}
+
+.btnRoom {
+    background-color: rgba(83, 83, 83, 0.61);
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    border-radius: 75px 75px;
+    height: 30px;
+    line-height: 30px;
+    margin: 5px;
+}
+
+.btnRoom:hover {
+    background-color: #D4E7C0;
+}
+
+.btnRoom > div{
+    margin: 0px 20px 0px 20px
 }

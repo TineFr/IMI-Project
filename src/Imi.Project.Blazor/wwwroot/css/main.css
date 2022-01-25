@@ -3,6 +3,7 @@
 
 
 
+
 /* global*/
 /*...........................................................................*/
 
@@ -196,13 +197,72 @@ a, a:hover {
     color: white;
 }
 
+/*...........................................................................*/
+/*detail view*/
+/*...........................................................................*/
+
+.detailimage {
+    grid-column: 1;
+    height: 300px;
+    max-width: 450px;
+    border-radius: 5%;
+}
+
+.detailscontainer {
+    display: grid;
+    grid-template-columns: 450px auto;
+    column-gap: 20px;
+}
+
+.details {
+    width: 700px;
+    margin: auto;
+    margin-top: 40px;
+}
+
+.edit {
+    background-color: lightblue;
+    color: white;
+}
+.del{
+    background-color: indianred;
+    color: white;
+}
 
 
+.arrow{
+    width: 60px;
+    margin-left: 20px;
+
+}
 /*...........................................................................*/
 /*add view*/
 /*...........................................................................*/
-
 .submit {
     background-color: #D4E7C0 !important;
     color: white
+}
+
+    .submit:hover {
+        background: rgba(83, 83, 83, 0.61) !important;
+    }
+
+/*...........................................................................*/
+/*media querries*/
+/*...........................................................................*/
+@media only screen and (max-width: 800px) {
+    .detailscontainer {
+        grid-template-columns: auto;
+        text-align: center;
+    }
+    .detailimage{
+        height: auto;
+        width: 80%;
+    }
+
+    .details {
+        width: 100%;
+        text-align: center;
+    }
+
 }

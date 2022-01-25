@@ -17,7 +17,7 @@
 
             @foreach (var answer in question.PossibleAnswers)
             {
-                <button @onclick="() => AnswerPicked(answer.IsCorrect)" class="answer @(AddColor ? answer.IsCorrect ? "green" : "red" : "")">
+                <button @onclick="() => AnswerPicked(answer.IsCorrect)" class="answer @(AddColor ? answer.IsCorrect ? "correct" : "wrong" : "")">
                     @answer.Text
                 </button>
             }
@@ -34,16 +34,20 @@ else if (quizEnded)
 
 else
 {
-    <div>Waiting for other players...</div>
-    <div>Players in room:</div>
+    <div>Waiting for other players to join...</div>
+
+
+        <div>Players in room:</div>
+
     @if (room != null)
     {
         @foreach (var player in room?.Players)
         {
-            <div>@player.Name</div>
+            <div class="player">@player.Name</div>
         }
      }
-     <button>Leave Room</button>
+
+     <button class="item">Leave Room</button>
 }
 
 

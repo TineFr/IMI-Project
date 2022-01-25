@@ -12,12 +12,12 @@ namespace Imi.Project.Blazor.Services
 
         public void AddPlayer(Player player)
         {
-            Players.Add(player);
+             Players.Add(player);
         }
 
         public void DisposePlayer(string id)
         {
-            //Players.Remove(Players.FirstOrDefault(p => p.Id == id));
+            Players.Remove(Players.FirstOrDefault(p => p.ConnectionId == id));
         }
 
         public Task<List<Player>> GetPlayers()

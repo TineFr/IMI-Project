@@ -8,7 +8,7 @@
 
         @foreach (var answer in question.PossibleAnswers)
         {
-            <button @onclick="() => AnswerPicked(answer.IsCorrect)" class="answer @(AddColor ? answer.IsCorrect ? "green" : "red" : "")">
+            <button @onclick="() => AnswerPicked(answer.IsCorrect)" class="answer @(AddColor ? answer.IsCorrect ? "correct" : "wrong" : "")">
                 @answer.Text
             </button>
         }

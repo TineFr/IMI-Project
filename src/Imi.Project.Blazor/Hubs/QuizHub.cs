@@ -30,7 +30,7 @@ namespace Imi.Project.Blazor.Hubs
 
         }
 
-        public async Task CreateRoom(string roomId, string name, int maxPlayers)
+        public async Task CreateRoom(string roomId, string name, string maxPlayers)
         {
             await Groups.AddToGroupAsync(Context.ConnectionId, roomId);
             await Clients.Group(roomId).SendAsync("OnCreation", roomId);
@@ -65,10 +65,7 @@ namespace Imi.Project.Blazor.Hubs
             var player = (await _playerService.GetPlayers()).ToList().FirstOrDefault(p => p.ConnectionId == Context.ConnectionId);
             var quizFinished = _roomService.UpdateGameStats(roomId, player);
             if (quizFinished) await Clients.Group(roomId).SendAsync("QuizFinished");
-
-
         }
-
 
     }
 }
