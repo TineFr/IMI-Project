@@ -46,8 +46,6 @@ else
             <div class="nameTag"><img class="avatar" src="@player.Avatar"/><p>@player.Name</p></div>
         }
      }
-
-     <button class="item">Leave Room</button>
 }
 
 
@@ -70,6 +68,7 @@ else
     public bool AddColor { get; set; }
 
     public bool hasStarted;
+    public bool LeaveRoom;
 
     public void AddClassName()
     {
@@ -133,7 +132,11 @@ else
 
     }
 
-    List<int> askedQuestions = new List<int>();
+    private async void PlayerLeftRoom()
+    {
+        await Connection.SendAsync("PlayerLeftRoom", room.Id, count);
+        LeaveRoom = true;
+    }
 
     public async Task<QuizElement> ReturnQuestion()
     {
