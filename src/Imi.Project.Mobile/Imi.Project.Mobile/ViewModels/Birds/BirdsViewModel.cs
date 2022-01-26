@@ -46,6 +46,18 @@ namespace Imi.Project.Mobile.ViewModels.Birds
                 RaisePropertyChanged(nameof(NoBirdsMessage));
             }
         }
+
+        private bool search = true;
+
+        public bool Search
+        {
+            get { return search; }
+            set
+            {
+                search = value;
+                RaisePropertyChanged(nameof(Search));
+            }
+        }
         #endregion
         public override void Init(object initData)
         {
@@ -86,6 +98,20 @@ namespace Imi.Project.Mobile.ViewModels.Birds
                 {
                     await CoreMethods.PushPageModel<AddBirdViewModel>();
                 });
+
+        public ICommand OpenSearchCommand => new Command(
+            () =>
+            {
+                Search = true;
+            });
+
+        public ICommand FilterListCommand => new Command<string>(async (string query) =>
+        {
+            Birds = null;
+            var birds = await _birdApiService.GetAllAsync($"me/birds?Search={query}");
+            if (birds.ToList()[0].ErrorMessage is object) NoBirdsMessage = birdsMessage;
+            else Birds = new ObservableCollection<BirdModel>(birds);
+        });
 
         #endregion
     }
