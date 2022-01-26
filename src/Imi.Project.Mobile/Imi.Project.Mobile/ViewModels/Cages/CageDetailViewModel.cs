@@ -1,6 +1,8 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
+using Imi.Project.Mobile.Pages;
+using Plugin.FirebasePushNotification;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -18,7 +20,11 @@ namespace Imi.Project.Mobile.ViewModels.Cages
         public CageDetailViewModel(IBaseApiService<DailyTaskModel, DailyTaskModel> dailyTaskService)
         {
             _dailyTaskService = dailyTaskService;
+            MessagingCenter.Subscribe<CageDetailViewModel>(this, "Notification", (sender) => {
+                var test = "yeeees";
+            });
         }
+
 
         private ObservableCollection<DailyTaskModel> tasks;
 
@@ -77,6 +83,19 @@ namespace Imi.Project.Mobile.ViewModels.Cages
             Cage = initData as CageModel;
             await RefreshTasks();
             base.Init(initData);
+
+            //MessagingCenter.Subscribe(this, "Notification", (App sender) => {
+            //    //refresh classmates listview each time an update occurs 
+            //    var test = "yeeees";
+            //});
+
+
+
+
+            //MessagingCenter.Subscribe<Xamarin.Forms.Application>(Xamarin.Forms.Application.Current, "Notification", (sender) =>
+            //{
+            //    var test = "yeeees";
+            //});
         }
         public override void ReverseInit(object value)
         {
@@ -137,6 +156,9 @@ namespace Imi.Project.Mobile.ViewModels.Cages
                      await RefreshTasks();
                  };
              });
+
+
+
 
     }
 

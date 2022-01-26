@@ -5,17 +5,17 @@ using Imi.Project.Mobile.Core.Models;
 using Imi.Project.Mobile.Core.Services;
 using Imi.Project.Mobile.Validators;
 using Imi.Project.Mobile.ViewModels;
+using Plugin.FirebasePushNotification;
 using Xamarin.Forms;
 
 namespace Imi.Project.Mobile
 {
     public partial class App : Application
     {
+
         public App()
         {
             InitializeComponent();
-
-
 
             // api services
 
@@ -37,7 +37,22 @@ namespace Imi.Project.Mobile
             FreshIOC.Container.Register<IValidator<MedicineModel>, MedicineModelValidator>();
 
             MainPage = new FreshNavigationContainer(FreshPageModelResolver.ResolvePageModel<LoginViewModel>());
+
+            CrossFirebasePushNotification.Current.OnTokenRefresh += Current_OnTokenRefresh;
+            CrossFirebasePushNotification.Current.OnNotificationOpened += Current_OnNotificationOpened;
         }
+
+        private void Current_OnNotificationOpened(object source, FirebasePushNotificationResponseEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("Received");
+
+        }
+
+        private void Current_OnTokenRefresh(object source, FirebasePushNotificationTokenEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine($"TOKEN : {e.Token}");
+        }
+
         protected override void OnStart()
         {
         }
