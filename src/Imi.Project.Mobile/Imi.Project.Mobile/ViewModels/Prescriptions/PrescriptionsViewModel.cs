@@ -47,6 +47,18 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
                 RaisePropertyChanged(nameof(NoPrescriptionsMessage));
             }
         }
+
+        private bool search;
+
+        public bool Search
+        {
+            get { return search; }
+            set
+            {
+                search = value;
+                RaisePropertyChanged(nameof(Search));
+            }
+        }
         #endregion
 
 
@@ -92,6 +104,22 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
              {
                  await CoreMethods.PushPageModel<AddPrescriptionViewModel>();
              });
+
+        public ICommand OpenSearchCommand => new Command(
+           async () =>
+           {
+               Search = !Search;
+               if (!Search) await RefreshPrescriptions();
+           });
+
+        public ICommand FilterListCommand => new Command<string>(async (string query) =>
+        {
+            Prescriptions = null;
+            var prescriptions = await _prescriptionService.GetAllAsync($"me/prescriptions?Search={query}");
+            if (prescriptions.ToList()[0].ErrorMessage is object) NoPrescriptionsMessage = prescriptionsMessage;
+            else Prescriptions = new ObservableCollection<PrescriptionModel>(prescriptions);
+        });
+
 
         #endregion
     }

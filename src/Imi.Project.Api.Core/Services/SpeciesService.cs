@@ -35,13 +35,26 @@ namespace Imi.Project.Api.Core.Services
             SpeciesResponseDto result = species.MapToDto();
             return result;
         }
-        public async Task<IEnumerable<SpeciesResponseDto>> ListAllSpeciessAsync()
+        public async Task<IEnumerable<SpeciesResponseDto>> ListAllSpeciessAsync(string search)
         {
             var species = await _speciesRepository.ListAllAsync();
             if (species.Count() == 0)
             {
                 throw new ItemNotFoundException($"No species were found");
             }
+            if (!String.IsNullOrEmpty(search))
+            {
+                List<Species> results = new List<Species>();
+                results.AddRange(species.Where(b => b.Name.ToLower().Contains(search.ToLower())));
+                results.AddRange(species.Where(b => b.ScientificName.ToLower().Contains(search.ToLower()) && !results.Contains(b)));
+                results.AddRange(species.Where(b => b.Description.ToLower().Contains(search.ToLower()) && !results.Contains(b)));
+                if (results.Count == 0)
+                {
+                    throw new ItemNotFoundException($"No species were found");
+                }
+                else species = results;
+            }
+
             var result = species.MapToDtoList();
             return result;
         }

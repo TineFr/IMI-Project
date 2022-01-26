@@ -118,5 +118,30 @@ namespace Imi.Project.Api.Core.Services
                 throw new BadRequestException($"Start date can not be greater than enddate");
             }
         }
+
+        public async Task<IEnumerable<PrescriptionResponseDto>> GetFilteredPrescriptionsFromUser(Guid userId, string query)
+        {
+            if (await _prescriptionRepository.EntityExists<ApplicationUser>(userId))
+            {
+                IEnumerable<Prescription> prescriptions = await _prescriptionRepository.GetByUserIdAsync(userId);
+                if (prescriptions.Count() == 0)
+                {
+                    throw new ItemNotFoundException($"No cages were found");
+                }
+                if (!String.IsNullOrEmpty(query))
+                {
+                    List<Prescription> results = new List<Prescription>();
+                    results.AddRange(prescriptions.Where(b => b.Medicine.Name.ToLower().Contains(query.ToLower())));
+                    if (results.Count == 0)
+                    {
+                        throw new ItemNotFoundException($"No prescriptions were found");
+                    }
+                    else prescriptions = results;
+                }
+                var result = prescriptions.MapToDtoList();
+                return result;
+            }
+            else throw new ItemNotFoundException($"User with id {userId} does not exist");
+        }
     }
 }

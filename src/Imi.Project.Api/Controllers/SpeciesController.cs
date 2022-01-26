@@ -26,12 +26,12 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] PaginationParameters parameters)
+        public async Task<IActionResult> Get([FromQuery] PaginationParameters parameters, [FromQuery] string search)
         {
             IEnumerable<SpeciesResponseDto> paginatedResult;
             try
             {
-                var result = await _speciesService.ListAllSpeciessAsync();
+                var result = await _speciesService.ListAllSpeciessAsync(search);
                 var paginationData = new PaginationMetaData(parameters.Page, result.Count(), parameters.ItemsPerPage);
                 Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
                 paginatedResult = Pagination.AddPagination<SpeciesResponseDto>(result, parameters);

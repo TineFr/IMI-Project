@@ -13,12 +13,13 @@
                 <Label Text="My Birds" Style="{StaticResource MainLabel}"></Label>
             </Frame>
             <AbsoluteLayout Grid.Row="0" Grid.RowSpan="4">
-                <ImageButton Style="{StaticResource Filter}"></ImageButton>
-                <Image Style="{StaticResource Logo}" ></Image>
+                <ImageButton Style="{StaticResource Filter}" Command="{Binding OpenSearchCommand}" ></ImageButton>
+                <Image Style="{StaticResource Logo}"></Image>
             </AbsoluteLayout>
             <StackLayout Grid.Row="1" Orientation="Horizontal">
                 <Label Text="{Binding NoBirdsMessage}" IsVisible="{Binding NoBirdsMessage, Converter={StaticResource VisibilityConverter}}" Margin="5, 10, 5, 10"  HorizontalOptions="StartAndExpand"></Label>
-                <Button  x:Name="btnAddBird" Text="Add new" HorizontalOptions="EndAndExpand" WidthRequest="100" Margin="10" Command="{Binding AddBirdCommand}"></Button>
+                <SearchBar x:Name="searchBar" WidthRequest="250" SearchCommand="{Binding FilterListCommand}" SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" IsVisible="{Binding Search}" ></SearchBar>
+                <Button  x:Name="btnAddBird" Text="Add new" HorizontalOptions="EndAndExpand" WidthRequest="100"  Margin="10" Command="{Binding AddBirdCommand}"></Button>
             </StackLayout>
             <FlexLayout WidthRequest="700" HorizontalOptions="Center" Grid.Row="2" 
                                  Grid.RowSpan="3">

@@ -141,7 +141,7 @@ namespace Imi.Project.Api.Core.Services
             else throw new ItemNotFoundException($"User with id {id} does not exist");
         }
 
-        public async Task<IEnumerable<BirdResponseDto>> GetFilteredBirdsFromUser(Guid userId, Guid? speciesId, Guid? cageId)
+        public async Task<IEnumerable<BirdResponseDto>> GetFilteredBirdsFromUser(Guid userId, Guid? speciesId, Guid? cageId, string query)
         {
             if (await _birdRepository.EntityExists<ApplicationUser>(userId))
             {
@@ -165,6 +165,18 @@ namespace Imi.Project.Api.Core.Services
                     {
                         throw new ItemNotFoundException($"No birds were found");
                     }
+                }
+                if (!String.IsNullOrEmpty(query))
+                {
+                    List<Bird> results = new List<Bird>();
+                    results.AddRange(birds.Where(b => b.Name.ToLower().Contains(query.ToLower())));
+                    results.AddRange(birds.Where(b => b.Cage is object && b.Cage.Name.ToLower().Contains(query.ToLower()) && !results.Contains(b)));
+                    results.AddRange(birds.Where(b => b.Species is object && b.Species.Name.ToLower().Contains(query.ToLower()) && !results.Contains(b)));
+                    if (results.Count == 0)
+                    {
+                        throw new ItemNotFoundException($"No birds were found");
+                    }
+                    else birds = results;
                 }
                 var result = birds.MapToDtoList();
                 return result;
