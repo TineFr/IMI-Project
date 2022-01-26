@@ -166,8 +166,10 @@ namespace Imi.Project.Mobile.ViewModels.Cages
                var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions() { });
 
                if (photo != null)
+               {
                    Preview = ImageSource.FromStream(() => { return photo.GetStream(); });
-               Image = photo.GetStream();
+                   Image = photo.GetStream();
+               }
            });
         #endregion
 

@@ -170,8 +170,8 @@ namespace Imi.Project.Api.Core.Services
                 {
                     List<Bird> results = new List<Bird>();
                     results.AddRange(birds.Where(b => b.Name.ToLower().Contains(query.ToLower())));
-                    results.AddRange(birds.Where(b => b.Cage.Name.ToLower().Contains(query.ToLower()) && !results.Contains(b)));
-                    results.AddRange(birds.Where(b => b.Species.Name.ToLower().Contains(query.ToLower()) && !results.Contains(b)));
+                    results.AddRange(birds.Where(b => b.Cage is object && b.Cage.Name.ToLower().Contains(query.ToLower()) && !results.Contains(b)));
+                    results.AddRange(birds.Where(b => b.Species is object && b.Species.Name.ToLower().Contains(query.ToLower()) && !results.Contains(b)));
                     if (results.Count == 0)
                     {
                         throw new ItemNotFoundException($"No birds were found");
