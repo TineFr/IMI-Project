@@ -8,11 +8,11 @@
             <Frame Style="{StaticResource MainFrame}" BackgroundColor="{StaticResource Blue}">
                 <Label Text="Species Guide" Style="{StaticResource MainLabel}"></Label>
             </Frame>
-            <Label Grid.Row="1" Text="Most common cage species" HorizontalTextAlignment="Center" Margin="20" FontSize="20"></Label>
             <AbsoluteLayout Grid.Row="0" Grid.RowSpan="4">
-                <ImageButton Style="{StaticResource Filter}"></ImageButton>
+                <ImageButton Style="{StaticResource Filter}" Command="{Binding OpenSearchCommand}" ></ImageButton>
                 <Image Style="{StaticResource Logo}" ></Image>
             </AbsoluteLayout>
+            <SearchBar  Grid.Row="1" x:Name="searchBar" WidthRequest="250" SearchCommand="{Binding FilterListCommand}" SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" IsVisible="{Binding Search}" ></SearchBar>
             <FlexLayout WidthRequest="700" HorizontalOptions="Center" Grid.Row="2" 
                                  Grid.RowSpan="3">
                 <CollectionView  

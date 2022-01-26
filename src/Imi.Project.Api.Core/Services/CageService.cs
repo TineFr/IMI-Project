@@ -122,5 +122,31 @@ namespace Imi.Project.Api.Core.Services
                 throw new ItemNotFoundException($"User with id {dto.UserId} does not exist");
             }
         }
+
+        public async Task<IEnumerable<CageResponseDto>> GetFilteredCagesFromUser(Guid userId,string query)
+        {
+            if (await _cageRepository.EntityExists<ApplicationUser>(userId))
+            {
+                IEnumerable<Cage> cages = await _cageRepository.GetByUserIdAsync(userId);
+                if (cages.Count() == 0)
+                {
+                    throw new ItemNotFoundException($"No cages were found");
+                }
+                if (!String.IsNullOrEmpty(query))
+                {
+                    List<Cage> results = new List<Cage>();
+                    results.AddRange(cages.Where(b => b.Name.ToLower().Contains(query.ToLower())));
+                    results.AddRange(cages.Where(b => b.Location.ToLower().Contains(query.ToLower()) && !results.Contains(b)));
+                    if (results.Count == 0)
+                    {
+                        throw new ItemNotFoundException($"No cages were found");
+                    }
+                    else cages = results;
+                }
+                var result = cages.MapToDtoList();
+                return result;
+            }
+            else throw new ItemNotFoundException($"User with id {userId} does not exist");
+        }
     }
 }
