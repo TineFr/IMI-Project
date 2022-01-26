@@ -5,6 +5,7 @@ using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
+using Plugin.FirebasePushNotification;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -26,6 +27,8 @@ namespace Imi.Project.Mobile.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
             Window.SetStatusBarColor(Android.Graphics.Color.LightGray);
+
+            FirebasePushNotificationManager.ProcessIntent(this, Intent);
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {

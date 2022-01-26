@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "519450373496",
+    "project_id": "pushnotifications-4294a",
+    "storage_bucket": "pushnotifications-4294a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:519450373496:android:6a109bac13b540891bec8d",
+        "android_client_info": {
+          "package_name": "nl.franchois.imi.project.mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "519450373496-gbnu65hqvvtemeb7uh6ur5qh95vhc3su.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuoqoq-fsP-usTZpm6RhFC0DUKYDwX5ds"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "519450373496-gbnu65hqvvtemeb7uh6ur5qh95vhc3su.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

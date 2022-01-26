@@ -261,7 +261,18 @@ namespace Imi.Project.Api.Infrastructure.Seeding
                             UserId = Guid.Parse("00000000-0000-0000-0000-000000000001")
                         },
 
-
+                        new Bird
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000019"),
+                            Name = "Loki",
+                            CageId = Guid.Parse("00000000-0000-0000-0000-000000000011"),
+                            Gender = Common.Enums.Gender.Male,
+                            HatchDate = new DateTime(2015, 09, 08),
+                            Image = "images/bird/budgie4.jpg",
+                            SpeciesId = Guid.Parse("00000000-0000-0000-0000-000000000002"),
+                            Food = "Parakeet mix",
+                            UserId = Guid.Parse("00000000-0000-0000-0000-000000000001")
+                        },
 
 
                 });
