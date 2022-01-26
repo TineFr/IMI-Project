@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Imi.Project.Mobile.Pages.SpeciesGuide.SpeciesDetailPage">
+             x:Class="Imi.Project.Mobile.Pages.SpeciesGuide.SpeciesDetailPage"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
     <ContentPage.Content>
         <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
               RowDefinitions="{StaticResource MainGridRows}">
@@ -21,7 +22,11 @@
                     </StackLayout>
                 </StackLayout>
                 <Frame>
-                    <Image Source="{Binding Species.Image}" WidthRequest="340"></Image>
+                    <ff:CachedImage
+                            Source="{Binding Species.Image}" 
+                            WidthRequest="340"
+                            DownsampleToViewSize = "true">
+                    </ff:CachedImage>
                 </Frame>
                 <Frame>
                     <Label Text="{Binding Species.Description}"></Label>
