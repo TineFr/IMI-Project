@@ -3,8 +3,8 @@ var login = new Vue({
     el: '#divLogIn',
     data: {
         loginRequest: {
-            email: "",
-            password: ""
+            email: "tine.franchois@gmail.com",   //hard coded
+            password: "Pa$$w0rd"
         },
         errors: {
             password: [],
