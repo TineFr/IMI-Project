@@ -14,6 +14,7 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
     public class PrescriptionsViewModel : FreshBasePageModel
     {
         private const string prescriptionsMessage = "There are no prescriptions yet. Add a new prescription!";
+        private const string filterMessage = "No prescriptions found";
         private readonly IBaseApiService<PrescriptionRequestModel, PrescriptionModel> _prescriptionService;
 
         public PrescriptionsViewModel(IBaseApiService<PrescriptionRequestModel, PrescriptionModel> prescriptionService)
@@ -72,6 +73,7 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
 
         protected async override void ViewIsAppearing(object sender, EventArgs e)
         {
+            Search = false;
             base.ViewIsAppearing(sender, e);
             NoPrescriptionsMessage = null;
             await RefreshPrescriptions();
@@ -110,13 +112,14 @@ namespace Imi.Project.Mobile.ViewModels.Prescriptions
            {
                Search = !Search;
                if (!Search) await RefreshPrescriptions();
+               NoPrescriptionsMessage = "";
            });
 
         public ICommand FilterListCommand => new Command<string>(async (string query) =>
         {
             Prescriptions = null;
             var prescriptions = await _prescriptionService.GetAllAsync($"me/prescriptions?Search={query}");
-            if (prescriptions.ToList()[0].ErrorMessage is object) NoPrescriptionsMessage = prescriptionsMessage;
+            if (prescriptions.ToList()[0].ErrorMessage is object) NoPrescriptionsMessage = filterMessage;
             else Prescriptions = new ObservableCollection<PrescriptionModel>(prescriptions);
         });
 

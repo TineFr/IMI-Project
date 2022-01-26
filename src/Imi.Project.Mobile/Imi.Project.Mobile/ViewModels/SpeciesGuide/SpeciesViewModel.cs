@@ -1,6 +1,7 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -45,6 +46,25 @@ namespace Imi.Project.Mobile.ViewModels.SpeciesGuide
                 RaisePropertyChanged(nameof(Search));
             }
         }
+
+        private string notFound;
+
+        public string NotFound
+        {
+            get { return notFound; }
+            set
+            { 
+                notFound = value;
+                RaisePropertyChanged(nameof(NotFound));
+            }
+        }
+
+        protected override void ViewIsAppearing(object sender, EventArgs e)
+        {
+            Search = false;
+            base.ViewIsAppearing(sender, e);
+        }
+
         #endregion
         public override void Init(object initData)
         {
@@ -75,13 +95,15 @@ namespace Imi.Project.Mobile.ViewModels.SpeciesGuide
            {
                Search = !Search;
                if (!Search) await RefreshBirds();
+               NotFound = "";
            });
 
         public ICommand FilterListCommand => new Command<string>(async (string query) =>
         {
             Species = null;
             var species = await _speciesService.GetAllAsync($"species?Search={query}");
-            Species = new ObservableCollection<SpeciesModel>(species);
+            if (species.ToList()[0].ErrorMessage is object) NotFound = "No species found";
+            else Species = new ObservableCollection<SpeciesModel>(species);
         });
         #endregion
     }

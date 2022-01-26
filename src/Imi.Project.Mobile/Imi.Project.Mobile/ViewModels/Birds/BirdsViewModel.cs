@@ -13,6 +13,7 @@ namespace Imi.Project.Mobile.ViewModels.Birds
     public class BirdsViewModel : FreshBasePageModel
     {
         private const string birdsMessage = "There are no birds yet. Add a new bird!";
+        private const string filterMessage = "No birds found";
         private readonly IBaseApiService<BirdRequestModel, BirdModel> _birdApiService;
 
         public BirdsViewModel(IBaseApiService<BirdRequestModel, BirdModel> birdApiService)
@@ -68,6 +69,8 @@ namespace Imi.Project.Mobile.ViewModels.Birds
         protected async override void ViewIsAppearing(object sender, EventArgs e)
         {
             base.ViewIsAppearing(sender, e);
+            Search = false;
+            NoBirdsMessage = "";
             await RefreshBirds();
         }
 
@@ -104,13 +107,15 @@ namespace Imi.Project.Mobile.ViewModels.Birds
             {
                 Search = !Search;
                 if (!Search) await RefreshBirds();
+                NoBirdsMessage = "";
+                
             });
 
         public ICommand FilterListCommand => new Command<string>(async (string query) =>
         {
             Birds = null;
             var birds = await _birdApiService.GetAllAsync($"me/birds?Search={query}");
-            if (birds.ToList()[0].ErrorMessage is object) NoBirdsMessage = birdsMessage;
+            if (birds.ToList()[0].ErrorMessage is object) NoBirdsMessage = filterMessage;
             else Birds = new ObservableCollection<BirdModel>(birds);
         });
 

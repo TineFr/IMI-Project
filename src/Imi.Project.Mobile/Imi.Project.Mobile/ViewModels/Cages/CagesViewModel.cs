@@ -66,6 +66,7 @@ namespace Imi.Project.Mobile.ViewModels.Cages
 
         protected async override void ViewIsAppearing(object sender, EventArgs e)
         {
+            Search = false;
             base.ViewIsAppearing(sender, e);
             NoCagesMessage = null;
             await RefreshCages();
@@ -105,6 +106,7 @@ namespace Imi.Project.Mobile.ViewModels.Cages
            {
                Search = !Search;
                if (!Search) await RefreshCages();
+               NoCagesMessage = "";
            });
 
         public ICommand FilterListCommand => new Command<string>( async (string query) =>
