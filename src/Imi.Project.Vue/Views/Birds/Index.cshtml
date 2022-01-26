@@ -18,7 +18,6 @@
                     <option  class="non-option" class="default">All Cages</option>
                     <option v-for="cage in cages" v-bind:value="cage.id">{{cage.name}}</option>
                   </select>
-                   <div type="button" class="btnArrowUp" ><img class="upArrow" src="~/images/black-up.png"  v-on:click="toggleShowSelectionBoxes"/></div>
             </div>
             <div v-else>
                 <div type="button" class="btnShowSelections" v-on:click="toggleShowSelectionBoxes"><img class="imgFilter" src="~/images/filter.png"/></div>
