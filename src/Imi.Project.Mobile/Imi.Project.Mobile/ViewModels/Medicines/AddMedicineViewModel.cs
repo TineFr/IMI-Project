@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace Imi.Project.Mobile.ViewModels.Medicines
 {
-    class AddMedicineViewModel : FreshBasePageModel
+    public class AddMedicineViewModel : FreshBasePageModel
     {
         private readonly IBaseApiService<MedicineModel, MedicineModel> _medicineService;
         private readonly IValidator<MedicineModel> _medicineModelValidator;

@@ -130,7 +130,7 @@ namespace Imi.Project.Mobile.ViewModels.Birds
                 RaisePropertyChanged(nameof(Species));
             }
         }
-        private DateTime hatchDate;
+        private DateTime hatchDate = DateTime.Now;
         public DateTime HatchDate
         {
             get { return hatchDate; }
@@ -141,7 +141,17 @@ namespace Imi.Project.Mobile.ViewModels.Birds
             }
         }
 
+        private ImageSource preview;
 
+        public ImageSource Preview
+        {
+            get { return preview; }
+            set
+            {
+                preview = value;
+                RaisePropertyChanged(nameof(Preview));
+            }
+        }
 
         #endregion
 
@@ -240,7 +250,15 @@ namespace Imi.Project.Mobile.ViewModels.Birds
                     Image = stream;
                 }
             });
+        public ICommand TakeImage => new Command(
+           async () =>
+           {
+               var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions() { });
 
+               if (photo != null)
+                   Preview = ImageSource.FromStream(() => { return photo.GetStream(); });
+               Image = photo.GetStream();
+           });
         #endregion
 
         public async override void Init(object initData)
