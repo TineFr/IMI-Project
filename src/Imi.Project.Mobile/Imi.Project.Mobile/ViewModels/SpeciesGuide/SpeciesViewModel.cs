@@ -2,6 +2,8 @@
 using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -30,27 +32,31 @@ namespace Imi.Project.Mobile.ViewModels.SpeciesGuide
                 RaisePropertyChanged(nameof(Species));
             }
         }
+
+
+        private bool search = false;
+
+        public bool Search
+        {
+            get { return search; }
+            set
+            {
+                search = value;
+                RaisePropertyChanged(nameof(Search));
+            }
+        }
         #endregion
         public override void Init(object initData)
         {
             base.Init(initData);
             ShowSpeciesCommand.Execute(null);
         }
-
-
-        //  Species (voorlopig) alleen lezen
-
-        //protected async override void ViewIsAppearing(object sender, EventArgs e)
-        //{
-        //    base.ViewIsAppearing(sender, e);
-        //    await RefreshSpecies();
-        //}
-        //private async Task RefreshSpecies()
-        //{
-        //    var species = await speciesService.GetAllSpecies();
-        //    Species = null;
-        //    Species = new ObservableCollection<Species>(species);
-        //}
+        private async Task RefreshBirds()
+        {
+            Species = null;
+            var species = await _speciesService.GetAllAsync("species?ItemsPerPage=1000");
+            Species = new ObservableCollection<SpeciesModel>(species);
+        }
 
         #region commands
         public ICommand ShowSpeciesCommand => new Command(
@@ -64,6 +70,19 @@ namespace Imi.Project.Mobile.ViewModels.SpeciesGuide
             {
                 await CoreMethods.PushPageModel<SpeciesDetailViewModel>(species);
             });
+        public ICommand OpenSearchCommand => new Command(
+           async () =>
+           {
+               Search = !Search;
+               if (!Search) await RefreshBirds();
+           });
+
+        public ICommand FilterListCommand => new Command<string>(async (string query) =>
+        {
+            Species = null;
+            var species = await _speciesService.GetAllAsync($"species?Search={query}");
+            Species = new ObservableCollection<SpeciesModel>(species);
+        });
         #endregion
     }
 }

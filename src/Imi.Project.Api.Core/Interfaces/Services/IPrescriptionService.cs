@@ -14,6 +14,7 @@ namespace Imi.Project.Api.Core.Interfaces.Services
         Task<PrescriptionResponseDto> GetPrescriptionByIdAsync(Guid id);
         Task<PrescriptionResponseDto> AddPrescriptionAsync(PrescriptionRequestDto prescription);
         Task<PrescriptionResponseDto> UpdatePrescriptionAsync(Guid id, PrescriptionRequestDto Pprescription);
+        Task<IEnumerable<PrescriptionResponseDto>> GetFilteredPrescriptionsFromUser(Guid id, string query);
         Task DeletePrescriptionAsync(Guid id);
         Task DeleteMultiple(List<Prescription> prescriptions);
         Task<IEnumerable<PrescriptionResponseDto>> GetPrescriptionsByUserIdAsync(Guid id);

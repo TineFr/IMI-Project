@@ -174,7 +174,7 @@ namespace Imi.Project.Api.Core.Services
                     results.AddRange(birds.Where(b => b.Species.Name.ToLower().Contains(query.ToLower()) && !results.Contains(b)));
                     if (results.Count == 0)
                     {
-                        throw new ItemNotFoundException($"No cages were found");
+                        throw new ItemNotFoundException($"No birds were found");
                     }
                     else birds = results;
                 }

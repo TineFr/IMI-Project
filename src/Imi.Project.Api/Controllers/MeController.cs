@@ -119,13 +119,13 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpGet("prescriptions")]
-        public async Task<IActionResult> GetPrescriptionsFromUser([FromQuery] PaginationParameters parameters)
+        public async Task<IActionResult> GetPrescriptionsFromUser([FromQuery] PaginationParameters parameters, [FromQuery] string search)
         {
             Guid userId = User.GetUser();
             IEnumerable<PrescriptionResponseDto> paginatedResult;
             try
             {
-                var result = await _prescriptionService.GetPrescriptionsByUserIdAsync(userId);
+                var result = await _prescriptionService.GetFilteredPrescriptionsFromUser(userId, search);
                 var paginationData = new PaginationMetaData(parameters.Page, result.Count(), parameters.ItemsPerPage);
                 Response.Headers.Add("pagination", JsonConvert.SerializeObject(paginationData));
                 paginatedResult = Pagination.AddPagination<PrescriptionResponseDto>(result, parameters);

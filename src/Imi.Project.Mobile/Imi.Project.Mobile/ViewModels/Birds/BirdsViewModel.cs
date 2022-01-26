@@ -47,7 +47,7 @@ namespace Imi.Project.Mobile.ViewModels.Birds
             }
         }
 
-        private bool search = true;
+        private bool search = false;
 
         public bool Search
         {
@@ -76,7 +76,7 @@ namespace Imi.Project.Mobile.ViewModels.Birds
         {
             Birds = null;
             NoBirdsMessage = null;
-            var birds = await _birdApiService.GetAllAsync("me/birds");
+            var birds = await _birdApiService.GetAllAsync("me/birds?ItemsPerPage=1000");
             if (birds.ToList()[0].ErrorMessage is object) NoBirdsMessage = birdsMessage;
             else Birds = new ObservableCollection<BirdModel>(birds);
         }
@@ -100,9 +100,10 @@ namespace Imi.Project.Mobile.ViewModels.Birds
                 });
 
         public ICommand OpenSearchCommand => new Command(
-            () =>
+           async () =>
             {
-                Search = true;
+                Search = !Search;
+                if (!Search) await RefreshBirds();
             });
 
         public ICommand FilterListCommand => new Command<string>(async (string query) =>

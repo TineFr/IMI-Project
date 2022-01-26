@@ -45,7 +45,7 @@ namespace Imi.Project.Mobile.ViewModels.Cages
             }
         }
 
-        private bool search = true;
+        private bool search = false;
 
         public bool Search
         {
@@ -101,10 +101,11 @@ namespace Imi.Project.Mobile.ViewModels.Cages
             });
 
         public ICommand OpenSearchCommand => new Command(
-            () =>
-            {
-                Search = true;
-            });
+           async () =>
+           {
+               Search = !Search;
+               if (!Search) await RefreshCages();
+           });
 
         public ICommand FilterListCommand => new Command<string>( async (string query) =>
         {
