@@ -12,7 +12,6 @@ using System.Text;
 
 namespace Imi.Project.Mobile.Droid
 {
-
     [Application]
     public class MainApplication : Application
     {
@@ -35,11 +34,11 @@ namespace Imi.Project.Mobile.Droid
             }
 
 
-             //If debug you should reset the token each time.
+            //If debug you should reset the token each time.
             #if DEBUG
-                FirebasePushNotificationManager.Initialize(this, true);
+                          FirebasePushNotificationManager.Initialize(this,true);
             #else
-                FirebasePushNotificationManager.Initialize(this,false);
+                        FirebasePushNotificationManager.Initialize(this, false);
             #endif
 
             //Handle notification when app is closed here
@@ -52,5 +51,4 @@ namespace Imi.Project.Mobile.Droid
 
         }
     }
-
 }
