@@ -15,6 +15,7 @@
             <SearchBar  Grid.Row="1" x:Name="searchBar" WidthRequest="250" SearchCommand="{Binding FilterListCommand}" SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" IsVisible="{Binding Search}" ></SearchBar>
             <FlexLayout WidthRequest="700" HorizontalOptions="Center" Grid.Row="2" 
                                  Grid.RowSpan="3">
+                <Label Text="{Binding NotFound}" IsVisible="{Binding NotFound, Converter={StaticResource VisibilityConverter}}" Margin="40, 10, 5, 10" WidthRequest="350"></Label>
                 <CollectionView  
                                  x:Name="cvSpecies"
                                  Grid.Row="2" 

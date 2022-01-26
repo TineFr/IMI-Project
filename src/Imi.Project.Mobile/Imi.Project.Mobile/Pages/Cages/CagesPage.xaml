@@ -23,6 +23,7 @@
             </StackLayout>
             <StackLayout>
             </StackLayout>
+            <Label Text="{Binding NoCagesMessage}" IsVisible="{Binding NoCagesMessage, Converter={StaticResource VisibilityConverter}}" Margin="40, 10, 5, 10" WidthRequest="350"></Label>
             <CollectionView      Grid.Row="2" 
                                  Grid.RowSpan="3"
                                  x:Name="cvCages"
