@@ -45,6 +45,18 @@ namespace Imi.Project.Mobile.ViewModels.Cages
             }
         }
 
+        private bool search = true;
+
+        public bool Search
+        {
+            get { return search; }
+            set
+            {
+                search = value;
+                RaisePropertyChanged(nameof(Search));
+            }
+        }
+
         #endregion
         public override void Init(object initData)
         {
@@ -87,6 +99,21 @@ namespace Imi.Project.Mobile.ViewModels.Cages
             {
                 await CoreMethods.PushPageModel<AddCageViewModel>();
             });
+
+        public ICommand OpenSearchCommand => new Command(
+            () =>
+            {
+                Search = true;
+            });
+
+        public ICommand FilterListCommand => new Command<string>( async (string query) =>
+        {
+            Cages = null;
+            var cages = await _cageService.GetAllAsync($"me/cages?Search={query}");
+            if (cages.ToList()[0].ErrorMessage is object) NoCagesMessage = cagesMessage;
+            else Cages = new ObservableCollection<CageModel>(cages);
+        });
+
         #endregion
 
     }
