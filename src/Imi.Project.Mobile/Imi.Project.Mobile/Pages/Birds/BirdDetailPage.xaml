@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Imi.Project.Mobile.Pages.Birds.BirdDetailPage">
+             x:Class="Imi.Project.Mobile.Pages.Birds.BirdDetailPage"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
     <ContentPage.Content>
         <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
               RowDefinitions="{StaticResource MainGridRows}">
@@ -22,7 +23,11 @@
             </StackLayout>
             <ScrollView Grid.Row="2" Grid.RowSpan="2">
                 <StackLayout Grid.Row="1">
-                <Image Source="{Binding Bird.Image}" WidthRequest="340"></Image>
+                    <ff:CachedImage
+                                    Source="{Binding Bird.Image}" 
+                                    WidthRequest="340"
+                                    DownsampleToViewSize = "true">
+                    </ff:CachedImage>
                     <Frame WidthRequest="300" HeightRequest="80" HorizontalOptions="Center" IsVisible="{Binding Bird.Species, Converter={StaticResource ModelVisibilityConverter}}">
                     <StackLayout>
                         <Label Text="Species:"></Label>

@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Imi.Project.Mobile.Pages.Cages.CagesPage"
-             xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions">
+             xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
     <ContentPage.Content>
         <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
               RowDefinitions="{StaticResource MainGridRows}">
@@ -41,7 +42,14 @@
                             <Frame CornerRadius="20" BackgroundColor="#EEEEEE">
                                 <StackLayout>
                                     <Grid>
-                                        <Image Grid.Column="0" Source="{Binding Image}" HeightRequest="100" Aspect="AspectFit"></Image>
+                                        <ff:CachedImage
+                                                Grid.Column="0"
+                                                Source="{Binding Image}" 
+                                                HeightRequest="100"
+                                                DownsampleHeight="100"
+                                                DownsampleToViewSize = "true"
+                                                Aspect="AspectFit">
+                                        </ff:CachedImage>
                                     </Grid>
                                     <StackLayout HorizontalOptions="Center">
                                         <Label  Text="{Binding Name}" FontSize="15" FontAttributes="Bold" />

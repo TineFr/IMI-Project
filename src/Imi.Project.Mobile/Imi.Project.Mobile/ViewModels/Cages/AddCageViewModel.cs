@@ -3,6 +3,7 @@ using FreshMvvm;
 using Imi.Project.Mobile.Core;
 using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
+using Plugin.Media.Abstractions;
 using System.IO;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -145,7 +146,7 @@ namespace Imi.Project.Mobile.ViewModels.Cages
         public ICommand TakeImage => new Command(
            async () =>
            {
-               var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions() { });
+               var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions() { PhotoSize = PhotoSize.MaxWidthHeight, MaxWidthHeight = 600 } );
 
                if (photo != null)
                {

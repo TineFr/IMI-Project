@@ -4,6 +4,7 @@ using Imi.Project.Common.Enums;
 using Imi.Project.Mobile.Core;
 using Imi.Project.Mobile.Core.Interfaces;
 using Imi.Project.Mobile.Core.Models;
+using Plugin.Media.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -258,7 +259,7 @@ namespace Imi.Project.Mobile.ViewModels.Birds
         public ICommand TakeImage => new Command(
            async () =>
            {
-               var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions() { });
+               var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions() { PhotoSize = PhotoSize.MaxWidthHeight, MaxWidthHeight = 600 });
 
                if (photo != null)
                {
