@@ -173,7 +173,9 @@ namespace Imi.Project.Mobile.ViewModels.Cages
                 if (error.PropertyName == nameof(model.Location))
                 {
                     LocationMessage = error.ErrorMessage;
+
                 }
+
             }
             return validationResult.IsValid;
         }
