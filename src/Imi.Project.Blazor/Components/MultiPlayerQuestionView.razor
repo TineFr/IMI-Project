@@ -1,0 +1,177 @@
+﻿@using Microsoft.AspNetCore.SignalR.Client
+@using Newtonsoft.Json
+
+
+
+@if (hasStarted)
+{
+    @if(QuestionIndex > 5)
+    {
+        <div>Waiting on other players to finish...</div>
+    }
+    else
+    {
+        <div class="question"><h3>@question.Question</h3></div>
+        <img class="questionImage" src="@question.Image">
+        <div class="itemscontainer">
+
+            @foreach (var answer in question.PossibleAnswers)
+            {
+                <button @onclick="() => AnswerPicked(answer.IsCorrect)" class="answer @(AddColor ? answer.IsCorrect ? "correct" : "wrong" : "")">
+                    @answer.Text
+                </button>
+            }
+        </div>
+        <button @onclick="() =>  NextQuestion()" class="next @(Visibility ? "visible" : "invisible")">Next</button>    
+    }
+
+}
+
+else if (quizEnded)
+{
+    <LeaderBoard Room="room" Connection="Connection"></LeaderBoard>
+}
+
+else
+{
+    <div>Waiting for other players to join...</div>
+
+
+        <div>Players in room:</div>
+
+    @if (room is object)
+    {
+        @foreach (var player in room?.Players)
+        {
+            <div class="nameTag"><img class="avatar" src="@player.Avatar"/><p>@player.Name</p></div>
+        }
+     }
+}
+
+
+@code {
+
+
+    private string message = "Waiting for other player";
+
+    [Inject]
+    public  IRoomService _roomService { get; set; }
+
+    [Parameter]
+    public Room room { get; set;}
+
+    [Parameter]
+    public HubConnection Connection { get; set; }
+
+    public bool Visibility { get; set; }
+
+    public bool AddColor { get; set; }
+
+    public bool hasStarted;
+    public bool LeaveRoom;
+
+    public void AddClassName()
+    {
+        AddColor = true;
+    }
+    async void NextQuestion()
+    {
+        question = await ReturnQuestion();
+        AddColor = false;
+        Visibility = false;
+    }
+
+    private bool quizEnded = false;
+
+    [Parameter]
+    public int QuestionIndex
+    { get; 
+
+        set; 
+    } 
+
+    [Parameter]
+    public int Count
+    { get; 
+
+        set; 
+    } 
+    
+
+    [Inject]
+    public IQuizService QuizService { get; set; }
+
+    public List<QuizElement> questions  { get; set; }
+
+    public QuizElement question { get; set; }
+
+
+    protected async override Task OnInitializedAsync()
+    {
+
+        await base.OnInitializedAsync();
+        Connection.On<string>("OnCreation", (roomId) =>
+        {
+            this.room = _roomService.GetById(roomId);
+            StateHasChanged();
+        });
+        Connection.On<string>("OnJoin", (roomId) =>
+        {
+            this.room = _roomService.GetById(roomId);
+            StateHasChanged();
+        });
+        Connection.On<string>("OnStart", async (questions) =>
+        {
+            this.questions = JsonConvert.DeserializeObject<List<QuizElement>>(questions);
+            hasStarted = true;
+            question = await ReturnQuestion();
+            StateHasChanged();
+        });
+        Connection.On("QuizFinished", () =>
+        {
+            hasStarted = false;
+            quizEnded = true;
+            StateHasChanged();
+        });
+
+        QuestionIndex = 0;
+
+    }
+
+    private async void PlayerLeftRoom()
+    {
+        await Connection.SendAsync("PlayerLeftRoom", room.Id, Count);
+        LeaveRoom = true;
+    }
+
+    public async Task<QuizElement> ReturnQuestion()
+    {
+        if (QuestionIndex < 5)
+        {
+            var question = questions[QuestionIndex];
+            QuestionIndex++;
+            return question;
+        }
+
+        else
+        {
+            QuestionIndex++;
+            await Connection.SendAsync("PlayerFinished", room.Id, Count);
+            return null;
+        }
+    }
+
+
+    public void AnswerPicked(bool isCorrect)
+    {
+
+
+        AddClassName();
+        if (isCorrect) Count += 1;
+        Visibility = true;
+    }
+
+}
+
+
+

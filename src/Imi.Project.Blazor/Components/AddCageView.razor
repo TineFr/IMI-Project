@@ -1,0 +1,47 @@
+﻿
+<h3>Add cage</h3>
+
+<EditForm Model="@Cage" OnValidSubmit=@AddCage>
+    <DataAnnotationsValidator />
+    <div class="form-group">
+        <label>Name :</label>
+        <div>
+            <InputText @bind-Value="Cage.Name" class="form-control col-sm-3" />
+            <ValidationMessage For="@(() => Cage.Name)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Location :</label>
+        <div>
+            <InputText @bind-Value="Cage.Location" class="form-control col-sm-3" />
+            <ValidationMessage For="@(() => Cage.Location)" />
+        </div>
+    </div>
+    <button type="submit" class="btn submit w-25 p-3" >Save</button>
+</EditForm>
+
+@code {
+
+    @inject NavigationManager NavManager;
+
+    [Inject]
+    public IBaseApiService<CageRequestModel, CageModel> _cageService { get; set; }
+
+    [Parameter]
+    public CageRequestModel Cage { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Cage = new CageRequestModel();
+    }
+
+    private async void AddCage()
+    {
+        var result =  await _cageService.AddAsync("cages", Cage);
+        if (result is object)
+        {
+          NavManager.NavigateTo($"cages");
+        }
+    }
+
+}

@@ -1,0 +1,53 @@
+﻿
+<a href="@($"addbird")" type="button" class="btnAddNew">+</a>
+    <div class="indexContainer" >
+
+        @if (Birds != null)
+        {
+            @foreach (var item in Birds)
+            {
+                <a href="@($"birddetails/{item.Id}")">
+                    <div class="containerItem">
+                        <div class="indexItem">
+                            <img class="itemImage" src="@item.Image" />
+                            <div>
+                                <h2>@item.Name</h2>
+                                <p>@item.Cage?.Name</p>
+                            </div>
+                            <img class="genderImage" src="@SetGenderImage(item.Gender.ToString())" />    
+                        </div>
+                    </div>
+                </a>
+            }
+        
+        }
+        else
+        {
+           <div>Loading ...</div>
+        }
+
+
+        </div>
+
+@code {
+
+    private string SetGenderImage(string gender)
+    {
+        string imageSource = "";
+        imageSource = gender?.ToLower() == "male" ? "images/male.png" : "images/female.png";
+        return imageSource;
+    }
+
+    [Parameter]
+    public IEnumerable<BirdModel> Birds { get; set; } = new List<BirdModel>();
+
+    [Inject]
+    public IBaseApiService<BirdRequestModel, BirdModel> _birdService { get; set; }
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        Birds = await _birdService.GetAllAsync("me/birds?ItemsPerPage=1000");
+    }
+
+}

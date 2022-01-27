@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Imi.Project.Mobile.Pages.Cages.CageDetailPage"
+             xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions"
+             x:Name="PageBinding">
+    <ContentPage.Content>
+        <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
+              RowDefinitions="{StaticResource MainGridRows}">
+            <Frame Style="{StaticResource MainFrame}" BackgroundColor="{StaticResource Green}">
+
+             <Label Text="{Binding Cage.Name}" Style="{StaticResource MainLabel}"></Label>
+            </Frame>
+            <AbsoluteLayout Grid.Row="0" Grid.RowSpan="4">
+                <ImageButton x:Name="btnBack" Style="{StaticResource BackArrow}" Command="{Binding BackCommand}"></ImageButton>
+                <Image Style="{StaticResource Logo}" ></Image>
+            </AbsoluteLayout>
+            <StackLayout Grid.Row="1">
+                <Button  x:Name="btnEditCage" Text="Edit" HorizontalOptions="EndAndExpand" WidthRequest="100" Margin="10" Command="{Binding EditCageCommand}" CommandParameter="{Binding Cage}"></Button>
+            </StackLayout>
+            <StackLayout Grid.Row="2"  Grid.RowSpan="3">
+                <StackLayout>
+                        <Frame WidthRequest="300" HeightRequest="500" HorizontalOptions="Center">
+                            <Image Source="{Binding Cage.Image}" HeightRequest="200"></Image>
+                        </Frame>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                            <Label Text="Location:"></Label>
+                            <Label HeightRequest="50" HorizontalOptions="Center" Text="{Binding Cage.Location}"></Label>
+                        </StackLayout>
+                    </StackLayout>
+                    <Frame>
+                    <StackLayout>
+                    <Label Text="Daily Tasks" HorizontalTextAlignment="Center" FontSize="30"></Label>
+                        <FlexLayout FlowDirection="RightToLeft" JustifyContent="SpaceBetween" >
+                            <Label Text="{Binding NoTasksMessage}" HorizontalOptions="Start" Margin="15, 10, 0, 0"></Label>
+                            <Button x:Name="btnAddTask" Text="+" HorizontalOptions="End" BackgroundColor="{StaticResource Green}" Command="{Binding AddTaskCommand}" HeightRequest="40"  WidthRequest="40" ></Button>
+                        </FlexLayout>
+                        <ListView x:Name="lstTasks" SelectionMode="None" ItemsSource="{Binding Tasks}">
+                        <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <StackLayout Orientation="Horizontal" Style="{StaticResource CollectionSelection}">
+                                            <CheckBox x:Name= "chkTask" IsChecked="{Binding IsDone}"></CheckBox>
+                                        <Label Text="{Binding Description}" HorizontalOptions="StartAndExpand" Margin="10,0,0,0" FontSize="15" Padding="10"></Label>
+                                            <ImageButton x:Name="btnEditTask" Command="{Binding BindingContext.EditTaskCommand, Source={x:Reference PageBinding}}" CommandParameter="{Binding .}" Source="{extensions:ImageResource Imi.Project.Mobile.icons.pencil32.png}" WidthRequest="20" BackgroundColor="Transparent" ></ImageButton>
+                                            <ImageButton x:Name="btnDeleteTask" Command="{Binding BindingContext.DeleteTaskCommand, Source={x:Reference PageBinding}}" CommandParameter="{Binding .}" Source="{extensions:ImageResource Imi.Project.Mobile.icons.delete32.png}" WidthRequest="15" BackgroundColor="Transparent" Margin="5,0,10, 0"></ImageButton>
+                                        </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+
+                    </ListView>
+                        
+                </StackLayout>
+            </Frame>
+                </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

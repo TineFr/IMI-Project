@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+    <div class="flexContainer">
+        <div>
+            <div class="logoDiv">
+            <img id="logo" src="~/images/logolight.png" alt="logo">
+            </div>
+            <div id="divLogIn">
+                <h2>Sign in</h2>
+                <form v-on:submit.prevent="login">
+                    <div class="form-group">
+                       <label>E-mail:</label><br>
+                        <input type="email" placeholder="sample@gmail.com" v-model="loginRequest.email">
+                         <div class="error" v-if="errors.email != []">{{errors.email[0]}}</div> 
+                    </div>
+                    <div class="form-group">
+                        <label>Password:</label><br>
+                        <input placeholder="Acser!99B" type="password" v-model="loginRequest.password">
+                        <div class="error" v-if="errors.password != []">{{errors.password[0]}}</div> 
+                    </div>
+                    <button id="btnSignIn">Sign in</button>
+                    
+                    <div id="divSignUp"><span id="spMember">Not a member yet?</span><a id="btnSignUp" asp-controller="Auth" asp-action="Register">Sign up</a></div>
+                    <div class="error" v-if="apiErrorMessage != null">{{apiErrorMessage}}</div> 
+                </form>
+            </div>
+        </div>
+    </div>
+
+<script src="~/js/login.js" asp-append-version="true"></script>

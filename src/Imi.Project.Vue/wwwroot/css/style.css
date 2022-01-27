@@ -1,0 +1,593 @@
+﻿
+/*global*/
+
+
+.non-option{
+    color: black;
+    font-weight: bold;  
+}
+
+
+.end-alignment {
+    position: absolute;
+    right: 0;
+}
+
+.navbar-nav{
+    position: relative;
+}
+.deleteContainer {
+    z-index: 20;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    text-align: center;
+    background-color: #EEEEEE;
+    height: 100%;
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: transparent;
+}
+
+.deleteDiv {
+    background-color: #EEEEEE;
+    width: 50%;
+    margin: auto;
+    height: 150px;
+    text-align: center;
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+}
+
+.deleteDiv > h3 {
+    margin-bottom: 20px;
+}
+
+.deleteDiv > button {
+    margin: 10px;
+}
+
+.error {
+    color: indianred;
+    font-family: 'Trebuchet MS';
+}
+
+button:disabled {
+    background-color: yellow;
+}
+
+.default {
+    color: black;
+}
+
+
+.btnEdit, .btnSave {
+    background-color: lightgreen;
+}
+
+.btnDelete, .btnEdit, .btnSave, .btnCancel {
+    width: 100px;
+    text-align: center;
+    color: white;
+    border: 0;
+}
+
+.btnDelete, .btnCancel {
+    background-color: indianred;
+}
+
+.greenBorder {
+    border-color: lightgreen !important;
+}
+
+.pinkBorder {
+    border-color: lightpink !important;
+}
+
+/*Login & register view*/
+/*...........................................................................*/
+
+.flexContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.logoDiv {
+    text-align: center;
+}
+
+
+#logo {
+    height: 150px;
+    margin: 20px 0px 20px 0px;
+}
+
+#spMember {
+    font-size: small;
+    margin-right: 10px;
+}
+
+#divLogIn > h2, #divLogIn > label {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: black;
+}
+
+input {
+    width: 300px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 30px;
+}
+
+#divLogIn > h2 {
+    font-size: 30px;
+    font-weight: bold;
+    margin: 5px;
+    color: #D6B2DC;
+}
+
+#divLogIn {
+    text-align: start;
+    padding: 10px;
+    max-width: 332px;
+    padding-bottom: 15px;
+    border: 2px solid #D6B2DC;
+    border-radius: 10%;
+    word-wrap: break-word;
+}
+
+#divSignUp {
+    text-align: end;
+    margin: 10px;
+}
+
+/*sign in button */
+
+#btnSignIn, #btnSave {
+    background-color: #D6B2DC;
+    color: white;
+    width: 307px;
+    height: 40px;
+    border: 0;
+    margin-top: 10px;
+}
+
+    #btnSignIn:hover {
+        background-color: #d999e4;
+    }
+
+
+/*sign up button */
+#btnSignUp, #btnSignUp:active {
+    font-weight: bold;
+    background-color: white;
+    border: 0;
+    padding: 0;
+    color: black;
+    margin-top: 20px;
+    text-align: end;
+    text-decoration: none;
+}
+
+    #btnSignUp:hover {
+        color: darkgrey;
+    }
+
+/*vue influensed properties*/
+
+.isInVisible {
+    visibility: hidden;
+}
+
+/*...........................................................................*/
+/*Register specifics*/
+/*...........................................................................*/
+#divRegister {
+    text-align: start;
+    padding: 30px;
+    max-width: 372px;
+    border: 3px solid lightblue;
+    border-radius: 10%;
+    word-wrap: break-word;
+}
+
+    #divRegister > h2 {
+        font-size: 30px;
+        font-weight: bold;
+        margin: 5px;
+        color: lightblue;
+    }
+
+#registerLogo {
+    height: 110px;
+    margin: 0px 0px 10px 0px;
+}
+
+#btnSave {
+    background-color: lightblue;
+}
+
+.register {
+    height: 130px;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+/*...........................................................................*/
+/*birds index view*/
+/*...........................................................................*/
+
+.btnAddNew {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    border-radius: 50%;
+    background-color: lightblue;
+    border: none;
+    color: white;
+}
+
+.arrowContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.paginationDiv {
+    position: relative;
+}
+
+.btnShowSelections {
+    background-color: grey;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    position: relative;
+    margin: 0px;
+    margin-left: 3px;
+}
+
+.imgFilter {
+    height: 20px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.btnArrow {
+    background-color: grey;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    position: relative;
+    margin: 0px;
+    margin-left: 3px;
+}
+
+
+.btnArrowUp {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+}
+
+.imgArrow {
+    height: 20px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.upArrow {
+    position: absolute;
+    top: 10px;
+    height: 20px;
+    width: auto;
+}
+
+.btnAddNew > p {
+    margin: 0;
+    font-size: 50px;
+    position: absolute;
+    top: -17px;
+    right: 8px
+}
+
+.btnAddNew:hover {
+    background-color: rgb(148, 203, 221);
+}
+
+.indexHeader {
+    position: relative;
+}
+
+.indexContainer {
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+}
+
+.indexItem {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 200px 120px 20px;
+    height: 170px;
+    color: rgba(37, 37, 37, 0.651);
+    background-color: #EEEEEE;
+    border-radius: 20px;
+    cursor: pointer;
+    width: 420px;
+    word-wrap: break-word;
+}
+
+.indexItem:hover {
+    background-color: #C4C4C4;
+}
+
+
+.itemImage {
+    height: 100px;
+    width: auto;
+    max-width: 200px;
+    margin: 10px;
+    grid-column: 1;
+}
+
+.genderImage {
+    height: 50px;
+    padding: 10px;
+    grid-row: 0;
+}
+
+.indexTitle {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 50px;
+    padding: 10px;
+    border-bottom: 5px solid lightblue;
+    color: rgba(0, 0, 0, 0.651);
+}
+
+.indexItem > h2, .indexItem > p {
+    margin: 0;
+}
+
+.indexItem > h2 {
+    font-size: 30px;
+}
+
+a, a:hover {
+    text-decoration: none;
+}
+
+
+.mainContainer {
+    padding: 0 30px 20px 30px
+}
+
+
+.paginationDiv {
+    height: 50px;
+}
+
+
+
+.filterSelect {
+    height: 40px;
+    width: 200px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: white;
+    border: 0px;
+}
+
+
+.species {
+    background-color: lightblue;
+}
+
+.cage {
+    background-color: rgb(106, 195, 224);
+}
+
+.containerItem {
+    margin: 30px;
+}
+
+
+/*.detailImage{
+    height: 160px;
+    width: auto;
+    margin: 20px;
+}*/
+
+.maxWidth {
+    max-width: 500px;
+}
+
+/*detailScreen*/
+
+.detailView {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 400px 600px;
+    color: rgba(37, 37, 37, 0.651);
+    border: 2px solid lightblue;
+    /*    background-color: #EEEEEE;*/
+    background-color: white;
+    border-radius: 20px;
+    word-wrap: break-word;
+    width: 900px;
+    margin: 20px;
+    margin-left: 100px;
+    margin-top: 30px;
+    position: relative;
+}
+
+.form-group > p {
+    margin: 0;
+}
+
+.imageDiv {
+    grid-column: 0;
+}
+
+.detailImage {
+    height: 200px;
+    width: auto;
+    max-width: 400px;
+    margin: 20px;
+}
+
+.formDiv {
+    grid-column: 0;
+    padding: 30px;
+    margin-left: 40px;
+}
+
+.form-group > label {
+    font-weight: bold;
+}
+
+
+.longArrow {
+    width: 50px;
+    margin: 5px;
+}
+
+.backButton {
+    font-family: "Trebuchet MS";
+    font-size: 20px;
+    color: grey;
+}
+
+.detailTitle {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 30px;
+    padding: 10px;
+    border-bottom: 2px solid lightblue;
+    color: rgba(0, 0, 0, 0.651);
+}
+
+form > label {
+    font-size: 40px;
+}
+
+/*Facts view*/
+/*...........................................................................*/
+
+.factsTitle {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 90px;
+    padding: 10px;
+    color: rgba(0, 0, 0, 0.651);
+}
+
+.factContainer{
+    text-align: center;
+}
+
+.fact {
+    display: inline-block;
+    margin: 0;
+    width: 300px;
+    text-align: center;
+    word-break: break-word;
+    color: #495057;
+}
+
+.factImageContainer {
+    grid-column: 2;
+    margin-top: 30px;
+    border: 3px solid lightblue;
+    padding: 10px;
+}
+
+.factImage{
+    max-height: 400px;
+    min-height: 250px;
+    max-width: auto;
+}
+
+.arrow-left {
+    grid-column: 1;
+    width: 0;
+    height: 0;
+    border-top: 50px solid transparent;
+    border-bottom: 50px solid transparent;
+    border-right: 50px solid lightblue;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+
+.arrow-right {
+    grid-column: 3;
+    width: 0;
+    height: 0;
+    margin-left: 150px;
+    border-top: 50px solid transparent;
+    border-bottom: 50px solid transparent;
+    border-left: 50px solid lightblue;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.boxContainer {
+    display: grid;
+    grid-template-columns: 200px 900px 200px;
+    position: relative;
+}
+
+@media only screen and (max-width: 650px) {
+    .factsTitle {
+        font-size: 45px;
+    }
+
+    .factImage {
+        max-width: 45vw;
+        height: auto;
+    }
+
+    .boxContainer {
+        display: grid;
+        grid-template-columns: 20vw 50vw 20vw;
+        position: relative;
+    }
+
+    .arrow-right{
+        margin-left: 10vw;
+    }
+}
+
+@media only screen and (max-width: 1300px) {
+    .factImage {
+        max-width: 45vw;
+        height: auto;
+    }
+
+    .boxContainer {
+        display: grid;
+        grid-template-columns: 20vw 50vw 20vw;
+        position: relative;
+    }
+
+    .arrow-right {
+        margin-left: 10vw;
+    }
+}

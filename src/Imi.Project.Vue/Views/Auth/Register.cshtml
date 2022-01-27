@@ -1,0 +1,51 @@
+﻿   @{
+    ViewData["Title"] = "Register";
+}
+ 
+<div class="flexContainer">
+        <div>
+            <div class="logoDiv">
+           <img id="registerLogo" src="~/images/budgieregister.png" alt="logo">
+           <h3>Welcome</h3>
+           </div>
+            <div id="divRegister">
+                <h2>Register</h2>
+                <form v-on:submit.prevent="register">
+                     <div>
+                        <label>Name:</label><br>
+                         <input type="text" placeholder="ex:Depp"  v-model="registerRequest.name">
+                         <div class="error" v-if="errors.name != []">{{errors.name[0]}}</div> 
+                     </div>
+                     <div>
+                        <label>First name:</label><br>
+                         <input type="text" placeholder="ex:Johonny"  v-model="registerRequest.firstName">
+                         <div class="error" v-if="errors.firstName != []">{{errors.firstName[0]}}</div> 
+                     </div>
+                    <div>
+                       <label>E-mail:</label><br>
+                        <input type="email" placeholder="ex:sample@gmail.com" v-model="registerRequest.email">
+                        <div class="error" v-if="errors.email != []">{{errors.email[0]}}</div> 
+                    </div>
+                    <div>
+                        <label>Date Of Birth:</label><br>
+                        <input type="date"  v-model="registerRequest.dateOfBirth">
+                        <div class="error" v-if="errors.dateOfBirth != []">{{errors.dateOfBirth[0]}}</div> 
+                     </div>
+                    <div>
+                        <label>Password:</label><br>
+                        <input type="password" placeholder="ex:Acser!99B"  v-model="registerRequest.password">
+                        <div class="error" v-if="errors.password != []">{{errors.password[0]}}</div> 
+                    </div>
+                    <div>
+                        <label>Confirm Password:</label><br>
+                        <input type="password" placeholder="ex:Acser!99B"  v-model="registerRequest.confirmPassword">
+                        <div class="error" v-if="errors.confirmPassword != []">{{errors.confirmPassword[0]}}</div> 
+                    </div>
+                    <button id="btnSave">Save</button>
+                    <div class="error" v-if="apiErrorMessage != null">{{apiErrorMessage}}</div> 
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/js/register.js" asp-append-version="true"></script>

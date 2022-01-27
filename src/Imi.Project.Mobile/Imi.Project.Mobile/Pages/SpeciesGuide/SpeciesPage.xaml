@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:models1="clr-namespace:Imi.Project.Mobile.Core.Models;assembly=Imi.Project.Mobile.Core"
+             x:Class="Imi.Project.Mobile.Pages.SpeciesGuide.SpeciesPage">
+    <ContentPage.Content>
+        <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
+              RowDefinitions="{StaticResource MainGridRows}">
+            <Frame Style="{StaticResource MainFrame}" BackgroundColor="{StaticResource Blue}">
+                <Label Text="Species Guide" Style="{StaticResource MainLabel}"></Label>
+            </Frame>
+            <AbsoluteLayout Grid.Row="0" Grid.RowSpan="4">
+                <ImageButton Style="{StaticResource Filter}" Command="{Binding OpenSearchCommand}" ></ImageButton>
+                <Image Style="{StaticResource Logo}" ></Image>
+            </AbsoluteLayout>
+            <SearchBar  Grid.Row="1" x:Name="searchBar" WidthRequest="250" SearchCommand="{Binding FilterListCommand}" SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" IsVisible="{Binding Search}" ></SearchBar>
+            <FlexLayout WidthRequest="700" HorizontalOptions="Center" Grid.Row="2" 
+                                 Grid.RowSpan="3">
+                <Label Text="{Binding NotFound}" IsVisible="{Binding NotFound, Converter={StaticResource VisibilityConverter}}" Margin="40, 10, 5, 10" WidthRequest="350"></Label>
+                <CollectionView  
+                                 x:Name="cvSpecies"
+                                 Grid.Row="2" 
+                                 Grid.RowSpan="3"
+                                 SelectionMode="Single"
+                                 ItemsSource="{Binding Species}"
+                                 SelectionChangedCommand="{Binding ViewSpeciesCommand}"
+                                 SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference cvSpecies}}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models1:SpeciesModel" >
+                            <StackLayout Style="{StaticResource CollectionSelection}">
+
+                                <Frame Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="Center" Margin="10,5,10,5"  BackgroundColor="#EEEEEE"
+                                           HeightRequest="35">
+                                    <FlexLayout JustifyContent="Center">
+                                        <StackLayout HorizontalOptions="Center">
+                                            <Label  Text="{Binding Name}" FontSize="20" HorizontalTextAlignment="Center" />
+                                            <Label  Text="{Binding ScientificName}" FontAttributes="italic"  HorizontalTextAlignment="Center"/>
+                                        </StackLayout>
+                                    </FlexLayout>
+                                </Frame>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </FlexLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

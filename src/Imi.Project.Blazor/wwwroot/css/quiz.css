@@ -1,0 +1,258 @@
+﻿
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap');
+
+.enterName{
+    text-align: center;
+    padding: 50px;
+    border: 2px solid lightblue;
+    border-radius: 10%;
+}
+
+.enterName > label{
+    font-size: 20px;
+}
+.name {
+    font-size: 20px;
+}
+.mainContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 5vh;
+}
+
+.question > h3 {
+    font-size: 1.2em;
+}
+
+.scoreView{
+    display: grid;
+
+}
+
+button {
+    border: none;
+}
+
+.question, .quiztitle {
+    text-align-last: center;
+    font-size: 1em;
+    color: rgba(82, 83, 83, 0.74);
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.questionImage {
+
+    width:auto;
+    max-width: 400px;
+    max-height:300px;
+    height: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 25px;
+    border: 5px solid white;
+}
+
+.mainImage {
+
+    background-image: url(/images/quiz/logolightnotext.png);
+    width: 300px;
+    height: 300px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.correct:hover {
+    background-color: lightgreen;
+}
+.wrong:hover {
+    background-color: lightcoral;
+}
+
+.correct {
+    background-color: lightgreen;
+}
+
+.wrong {
+    background-color: lightcoral;
+}
+
+.itemscontainer {
+    max-width: 600px;
+    grid-row: 2;
+    grid-column: 2;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+    border-radius: 5%;
+}
+
+.item, .answer, .next {
+    margin: 15px;
+    border: 10px white;
+    position: relative;
+    width: 250px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+}
+
+.next {
+    background: rgba(83, 83, 83, 0.61);
+}
+
+.visible{
+    visibility: visible;
+}
+
+.invisible{
+    visibility: hidden;
+}
+
+.item > img {
+    height: auto;
+    width: 100%;
+}
+
+.item > p, button {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 20px;
+    overflow: hidden;
+    left: 0;
+    background: rgba(153, 198, 216, 0.74);
+    color: rgb(255, 255, 255);
+    width: 100%;
+    padding: 5px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+
+.item > p:hover, button:hover{
+    background: rgba(83, 83, 83, 0.61);
+    cursor: pointer;
+}
+
+button:focus{
+    outline: none;
+}
+
+.room{
+    margin-top: 20px;
+    width: 200px;
+}
+
+.player {
+    width: 200px;
+    background-color: rgba(83, 83, 83, 0.61);
+    color: white;
+}
+.availableRooms {
+    margin: 10px;
+    border: 2px solid lightblue;
+    padding: 20px;
+    width: 400px;
+    min-height: 300px;
+    border-radius: 40px 40px;
+}
+
+.btnRoom {
+    background-color: rgba(83, 83, 83, 0.61);
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    border-radius: 75px 75px;
+    height: 30px;
+    line-height: 30px;
+    margin: 5px;
+}
+
+.btnRoom:hover {
+    background-color: #D4E7C0;
+}
+
+.btnRoom > div{
+    margin: 0px 20px 0px 20px
+}
+
+.avatarContainer{
+    display:flex;
+    justify-content: space-evenly;
+}
+
+.avatar{
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+}
+
+
+
+[type=radio] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+
+[type=radio] + img {
+    cursor: pointer;
+}
+
+
+[type=radio]:checked + img {
+    outline: 2px solid #47a420;
+    border-radius: 5%;
+}
+
+.nameTag{
+    display:grid;
+    grid-template-columns: 70px 30px;
+    width: 250px;
+    border: 2px solid #808080;
+    border-radius: 75px 75px;
+    margin: 5px;
+}
+
+
+.leaderBoard:first-child {
+    border: 2px solid lightgreen !important;
+}
+
+.leaderboardTag{
+    display: grid;
+    grid-template-columns: 70px 120px auto;
+    width: 300px;
+    border: 2px solid #808080;
+    border-radius: 75px 75px;
+    margin: 5px;
+}
+
+.nameTag > .avatar, .leaderboardTag > .avatar{
+    grid-column: 1;
+    margin-left: 10px;
+}
+
+.nameTag > p, .leaderboardTag > p {
+    margin: 10px;
+    font-size: 20px;
+    color: #a5a5a5;
+    grid-column: 2;
+}
+
+.score {
+    grid-column: 3 !important;
+}
+
+.leaderBoardTitle {
+    font-size: 50px;
+    color: rgba(82, 83, 83, 0.74);
+    font-family: 'Source Sans Pro', sans-serif;
+}

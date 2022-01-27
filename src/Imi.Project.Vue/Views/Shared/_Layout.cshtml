@@ -6,12 +6,16 @@
     <title>@ViewData["Title"] - Imi.Project.Vue</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+    <script src="~/lib/vue/vue.js"></script>
+@*  <script src="~/lib/axios.min.js"></script>*@
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
-    <header>
+    <header v-if="navBarIsVisible">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Imi.Project.Vue</a>
+                <img class="navbar-brand" height="70px" src="~/images/logolight.png" />
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -19,17 +23,29 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Birds" asp-action="Index">Birds</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Cages" asp-action="Index">Cages</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Medicines" asp-action="Index">Medicines</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Species" asp-action="Index">Species</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Facts" asp-action="Index">Fun Facts!</a>
+                        </li>
+                        <li class="nav-item end-alignment">
+                            <div  type="button" class="nav-link text-dark" v-on:click="logOut">Log out</div>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="mainContainer">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -37,12 +53,13 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2021 - Imi.Project.Vue - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2022 - My Aviary
         </div>
     </footer>
+    <script src="~/js/global.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
+
 </body>
 </html>

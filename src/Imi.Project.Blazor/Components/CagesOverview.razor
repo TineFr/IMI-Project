@@ -1,0 +1,43 @@
+﻿
+<a href="@($"addcage")" type="button" class="btnAddNew">+</a>
+    <div class="indexContainer" >
+
+        @if (Cages != null)
+        {
+            @foreach (var item in Cages)
+            {
+                <a href="@($"cagedetails/{item.Id}")">
+                    <div class="containerItem">
+                        <div class="indexItem">
+                            <img class="itemImage" src="@item.Image" />
+                            <div>
+                                <h2>@item.Name</h2>
+                                <p>@item.Location</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            }   
+        }
+        else
+        {
+           <div>Loading ...</div>
+        }
+
+        </div>
+
+@code {
+
+
+    [Parameter]
+    public IEnumerable<CageModel> Cages { get; set; } = new List<CageModel>();
+
+    [Inject]
+    public IBaseApiService<CageRequestModel, CageModel> _cageService { get; set; }
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        Cages = await _cageService.GetAllAsync("me/cages?ItemsPerPage=1000");
+    }
+}

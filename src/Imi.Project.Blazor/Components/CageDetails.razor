@@ -1,0 +1,52 @@
+﻿
+@if (Cage != null)
+{
+<h1 class="green">@Cage.Name</h1>
+<a href="@($"cages")" type="button" class="btnBack"><img class="arrow" src="images/long-arrow.png"/></a>
+<div class="details">
+<div class="detailscontainer">
+
+        <img class="detailimage" src="@Cage.Image" />
+        <div>
+            <p><b>Location:</b>  @Cage.Location</p>
+        <div class="d-xl-inline-flex">
+            <a href="@($"editcage/{Cage.Id}")" type="button" class="btn edit m-1  blue">Edit</a>
+                <div type="button" class="btn del m-1" @onclick="() => DeleteCage(Cage.Id)">Delete</div>
+        </div>
+        </div>
+</div> 
+
+</div>
+}
+
+@code {
+    @inject NavigationManager NavManager;
+
+    [Parameter]
+    public CageModel Cage { get; set; }
+
+    [Inject]
+    public IBaseApiService<CageRequestModel, CageModel> _cageService { get; set; }
+
+    [Parameter]
+    public Guid Id { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        Cage =  await _cageService.GetByIdAsync($"cages/{Id}");
+    }
+
+    private async void DeleteCage(string id)
+    {
+          var result =  await _cageService.DeleteAsync($"cages/{Id}");
+
+        if (result is object)
+        {
+
+
+        }
+        else NavManager.NavigateTo("cages");
+    }
+
+
+}

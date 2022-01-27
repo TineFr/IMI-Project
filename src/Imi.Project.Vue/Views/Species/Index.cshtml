@@ -1,0 +1,98 @@
+﻿<div id="speciesIndex">
+        <div class="indexHeader">
+        <h1 class="indexTitle">Species</h1>
+    <button v-if="overViewMode" class="btnAddNew" v-on:click="toAddMode"><p>+</p></button>
+    </div>
+
+    <div v-if="overViewMode">
+
+            <div class="paginationDiv">
+                <div>
+                      <div class="arrowContainer">
+                          <div v-if="hasPreviousPage" type="button" class="btnArrow"><img class="imgArrow" src="~/images/left-arrow.png"  v-on:click="onPreviousPageClicked"/></div>
+                          <div v-if="hasNextPage" type="button" class="btnArrow"><img class="imgArrow" src="~/images/right-arrow.png"  v-on:click="onNextPageClicked"/></div>
+                      </div>
+                </div>
+
+            <div class="indexContainer" >
+
+             <div v-if="apiErrorMessage">{{apiErrorMessage}}</div>
+
+                    <div class="containerItem" v-for="specimen in species">
+                
+                            <div class="indexItem" v-on:click="toDetailMode(specimen)">
+
+                                <div>
+                                    <h2>{{specimen.name}}</h2>
+                                    <p>{{specimen.scientificName}}</p>
+                                </div>   
+                           </div>
+                    </div>
+             </div>
+    </div>
+    </div>
+
+    <div v-else>
+
+         <div class="backButton" v-on:click="backToList" type="button"><img class="longArrow" src="~/images/long-arrow.png"/>Back to list</div>          
+            <div class="detailView" v-bind:class="{greenBorder : !detailMode, pinkBorder : deleteMode}">
+                <div class="imageDiv">
+                    <h1 class="detailTitle" v-bind:class="{greenBorder : !detailMode, pinkBorder : deleteMode}">{{mode}}</h1>
+                    <img class="detailImage" v-bind:src="currentSpecies.image"/>
+               </div>
+               <div class="formDiv">
+                 <form>
+                    <div v-if="currentSpecies">
+                        <div class="form-group">
+                            <label>Name:</label><br>
+                            <input v-model="currentSpecies.name"  class="form-control col-sm-5" v-bind:readonly="detailMode" >
+                            <div class="error" v-if="errors.name != []">{{errors.name[0]}}</div> 
+                        </div>
+        
+                        <div class="form-group">
+                            <label>Scientific name:</label><br>
+                            <input v-model="currentSpecies.scientificName"  class="form-control col-sm-5" v-bind:readonly="detailMode" >
+                            <div class="error" v-if="errors.scientificName != []">{{errors.scientificName[0]}}</div> 
+                        </div>
+
+                        <div class="form-group">
+                            <label>Description:</label><br>
+                            <textarea rows="8" cols="50" v-model="currentSpecies.description"  class="form-control col-sm-8" v-bind:readonly="detailMode" ></textarea>
+                            <div class="error" v-if="errors.description != []">{{errors.description[0]}}</div> 
+                        </div>
+
+                        <div v-if="!detailMode && !deleteMode" class="form-group">
+                             <label>Image:</label><br>
+                             <input type="file" accept="image/*"  v-on:change="uploadImage"> 
+                        </div>
+
+                        <div v-if="detailMode">       
+                            <button type="button" v-on:click="toEditMode()" class="btnEdit">Edit</button>
+                            <button type="button" v-on:click="toDeleteMode()" class="btnDelete">Delete</button>
+                        </div> 
+                        <div v-else-if="deleteMode">
+                            <div class="deleteContainer">
+                                <div class="deleteDiv">
+                                <h3>Are you sure you want to delete this species?</h3>
+                                <button class="btnSave" type="button" v-on:click="deleteSpecies()">Yes</button>
+                                <button class="btnCancel" type="button" v-on:click="cancelClicked">Cancel</button><br />
+                                <label class="error" v-if="apiErrorMessage != null">{{apiErrorMessage}}</label>
+                            </div>
+                           </div>
+                        </div>
+                       <div v-else>
+                            <button class="btnSave" type="button" v-on:click="editSpecies(editMode)">Save</button>
+                            <button class="btnCancel" type="button" v-on:click="cancelClicked">Cancel</button><br />
+                            <label class="error" v-if="apiErrorMessage != null">{{apiErrorMessage}}</label>
+                        </div>
+                    </div>
+                </form>
+               </div>
+            </div>
+        </div>
+
+    </div>
+<script src="~/js/species.js" asp-append-version="true"></script>
+
+
+              

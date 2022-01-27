@@ -1,8 +1,109 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:extensions="clr-namespace:Imi.Project.Mobile.Extensions"
+             xmlns:converters="clr-namespace:Imi.Project.Mobile.Converters"
              x:Class="Imi.Project.Mobile.App">
     <Application.Resources>
 
+        <converters:TextToVisibilityConverter x:Key="VisibilityConverter" />
+        <converters:ModelToVisibilityConverter x:Key="ModelVisibilityConverter" />
+        <converters:DateToStringConverter x:Key="DateTimeConverter"/>
+
+        <!--navbar color-->
+        <Style TargetType="NavigationPage">
+            <Setter Property="BarBackgroundColor" Value="#B7D7F0"></Setter>
+        </Style>
+
+        <!--selection color-->
+
+        <Style x:Key="CollectionSelection" TargetType="StackLayout">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                        Value="Transparent" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+        <!--edit frame-->
+        <Style x:Key="EditFrame" TargetType="Frame">
+            <Setter Property="WidthRequest" Value="300" ></Setter>
+            <Setter Property="HorizontalOptions" Value="Center" ></Setter>
+        </Style>
+
+        <!--colors-->
+        <Color x:Key="Green">#D4E7C0</Color>
+        <Color x:Key="Purple">#DEC5E1</Color>
+        <Color x:Key="Blue">#B7D7F0</Color>
+        <Color x:Key="Yellow">LightYellow</Color>
+        <Color x:Key="Pink">#E7C0D2</Color>
+        <Color x:Key="Red">#CD5C5C</Color>
+
+        <!--error label-->
+        <Style x:Key="Error" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource Red}" ></Setter>
+            <Setter Property="HorizontalOptions" Value="Center"></Setter>
+            <Setter Property="WidthRequest" Value="300"></Setter>
+        </Style>
+
+
+        <!-- back arrow style-->
+        <Style x:Key="BackArrow" TargetType="ImageButton">
+            <Setter Property="Source" Value="{extensions:ImageResource Imi.Project.Mobile.icons.leftarrow64.png}" ></Setter>
+            <Setter Property="Aspect" Value="AspectFill" ></Setter>
+            <Setter Property="Padding" Value="30" ></Setter>
+            <Setter Property="BackgroundColor" Value="Transparent" ></Setter>
+            <Setter Property="AbsoluteLayout.LayoutBounds" Value="0.02, 10, 100, 100" ></Setter>
+            <Setter Property="AbsoluteLayout.LayoutFlags" Value="XProportional" ></Setter>
+        </Style>
+
+        <!--filter style-->
+        <Style x:Key="Filter" TargetType="ImageButton">
+            <Setter Property="Source" Value="{extensions:ImageResource Imi.Project.Mobile.icons.filter64.png}" ></Setter>
+            <Setter Property="Aspect" Value="AspectFill" ></Setter>
+            <Setter Property="Padding" Value="30" ></Setter>
+            <Setter Property="BackgroundColor" Value="Transparent" ></Setter>
+            <Setter Property="AbsoluteLayout.LayoutBounds" Value="0.05, 10, 100, 100" ></Setter>
+            <Setter Property="AbsoluteLayout.LayoutFlags" Value="XProportional" ></Setter>
+        </Style>
+        <!--logo style-->
+        <Style x:Key="Logo" TargetType="Image">
+            <Setter Property="Source" Value="{extensions:ImageResource Imi.Project.Mobile.icons.logolightwhite.png}" ></Setter>
+            <Setter Property="AbsoluteLayout.LayoutBounds" Value="0.97, 10, 50, 50" ></Setter>
+            <Setter Property="AbsoluteLayout.LayoutFlags" Value="XProportional" ></Setter>
+        </Style>
+        <!--Main frame style-->
+        <Style x:Key="MainLabel" TargetType="Label">
+            <Setter Property="FontSize" Value="30" ></Setter>
+            <Setter Property="TextColor" Value="white" ></Setter>
+            <Setter Property="HorizontalOptions" Value="Center" ></Setter>
+            <Setter Property="VerticalOptions" Value="End" ></Setter>
+        </Style>
+        <!--Main frame style-->
+        <Style x:Key="MainFrame" TargetType="Frame">
+            <Setter Property="Grid.Row" Value="0" ></Setter>
+            <Setter Property="HeightRequest" Value="20" ></Setter>
+        </Style>
+        <!--Main grid defenitions-->
+        <ColumnDefinitionCollection
+        x:Key="MainGridColumns">
+            <ColumnDefinition
+            Width="*" />
+        </ColumnDefinitionCollection>
+        <RowDefinitionCollection
+        x:Key="MainGridRows">
+            <RowDefinition
+            Height="130" />
+            <RowDefinition
+            Height="80" />
+            <RowDefinition
+            Height="*" />
+        </RowDefinitionCollection>
     </Application.Resources>
 </Application>

@@ -1,0 +1,67 @@
+﻿
+<h3>Edit cage</h3>
+
+
+@if (Cage != null)
+{
+    <EditForm Model="@Cage" OnValidSubmit="@EditCage">
+    <DataAnnotationsValidator />
+    <div class="form-group">
+        <label>Name :</label>
+        <div>
+            <InputText @bind-Value="Cage.Name" class="form-control col-sm-3" />
+            <ValidationMessage For="@(() => Cage.Name)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Location :</label>
+        <div>
+            <InputText @bind-Value="Cage.Location" class="form-control col-sm-3" />
+            <ValidationMessage For="@(() => Cage.Location)" />
+        </div>
+    </div>
+    <button type="submit" class="btn submit w-25 p-3">Save</button>
+</EditForm>
+}
+
+
+@code {
+
+    @inject NavigationManager NavManager;
+
+    [Inject]
+    public IBaseApiService<CageRequestModel, CageModel> _cageService { get; set; }
+
+
+    [Parameter]
+    public Guid Id { get; set; }
+
+    [Parameter]
+    public CageModel Cage { get; set; }
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        Cage =  await _cageService.GetByIdAsync($"cages/{Id}");
+    }
+
+
+    private async void EditCage()
+    {
+        CageRequestModel model = new CageRequestModel
+        {
+            Name = Cage.Name,
+            Location = Cage.Location
+
+        };
+
+        var result =  await _cageService.UpdateAsync($"cages/{Cage.Id}", model);
+        if (result is object)
+        {
+          NavManager.NavigateTo($"cagedetails/{Cage.Id}");
+        }
+    }
+ 
+  
+
+}

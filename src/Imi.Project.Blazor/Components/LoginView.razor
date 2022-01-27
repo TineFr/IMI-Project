@@ -1,0 +1,68 @@
+﻿
+<div class="flexContainer">
+        <div>
+            <div class="logoDiv">
+            <img id="logo" src="images/logolight.png" alt="logo">
+            </div>
+            <div id="divLogIn">
+                <h2>Sign in</h2>
+                <EditForm  Model="@LoginModel" OnValidSubmit="@LogIn">
+                    <DataAnnotationsValidator />
+                    <div class="form-group">
+                        <label>Email :</label>
+                        <div>
+                            <InputText @bind-Value="LoginModel.Email" class="form-control" />
+                            <ValidationMessage For="@(() => LoginModel.Email)" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Password :</label>
+                        <div>
+                            <InputText @bind-Value="LoginModel.Password" type="password" class="form-control" />
+                            <ValidationMessage For="@(() => LoginModel.Password)" />
+                        </div>
+                    </div>
+                    <button id="btnSignIn"  type="submit">Sign in</button>
+                    <div class="error">@ApiMessage</div> 
+                </EditForm>
+            </div>
+        </div>
+    </div>
+
+@code {
+
+    [Inject] 
+
+    public IAuthApiService _authApiService { get; set; }
+
+    @inject NavigationManager NavManager;
+
+    [Parameter]
+
+    public string ApiMessage { get; set; } = null;
+
+    [Parameter]
+
+    public LoginRequestModel LoginModel { get; set; } = new LoginRequestModel
+    { 
+        Email = "tine.franchois@gmail.com",    //hard gecodeerd 
+        Password = "Pa$$w0rd"
+    };
+
+    private async Task LogIn()
+    {
+
+        string response = await _authApiService.Authenticate(LoginModel);
+        if (response is object)
+        {
+            ApiMessage = response;
+        }
+        else
+        {
+             NavManager.NavigateTo("birds", true);
+        }
+    }
+ 
+  
+
+}

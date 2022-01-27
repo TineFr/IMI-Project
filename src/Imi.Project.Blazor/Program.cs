@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Imi.Project.Blazor.Hubs;
 using System;
 using System.Collections.Generic;
 using System.IO;

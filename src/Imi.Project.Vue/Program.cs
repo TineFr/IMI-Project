@@ -20,7 +20,9 @@ namespace Imi.Project.Vue
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder
+                        .UseUrls("http://0.0.0.0:4999")
+                        .UseStartup<Startup>();
                 });
     }
 }

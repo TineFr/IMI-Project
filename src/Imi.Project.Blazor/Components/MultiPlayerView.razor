@@ -1,0 +1,195 @@
+﻿@using Microsoft.AspNetCore.SignalR.Client
+    @inject NavigationManager NavManager;
+
+@if (!back)
+{
+    
+    @if(!Registered)
+    {
+        <div class="enterName">
+         <EditForm  Model="@Player" OnValidSubmit="RegisterPlayer">
+            <DataAnnotationsValidator />
+            <div class="form-group">
+                <label class="name">Enter player name:</label>
+                <div>
+                    <InputText @bind-Value="Player.Name" class="form-control col-sm-15" />
+                    <ValidationMessage For="@(() => Player.Name)" />
+                </div>
+            </div>
+            <div>
+                <label class="name">Chose your avatar:</label><br>
+                <label>
+                  <input type="radio"   name="test"  @onchange="@(() => Avatar = "blue.png")" checked>
+                  <img class="avatar"  src="images/quiz/avatars/blue.png">
+                </label>
+                <label>
+                  <input type="radio" name="test" @onchange="@(() => Avatar = "casso.png")">
+                  <img class="avatar"  src="images/quiz/avatars/casso.png">
+                </label>
+                <label>
+                  <input type="radio" name="test" @onchange="@(() => Avatar = "duck.png")">
+                  <img class="avatar"  src="images/quiz/avatars/duck.png">
+                </label>
+                <label>
+                  <input type="radio" name="test" @onchange="@(() => Avatar = "owl.png")">
+                  <img class="avatar"  src="images/quiz/avatars/owl.png">
+                </label>
+                 <label>
+                  <input type="radio" name="test" @onchange="@(() => Avatar = "toucan.png")">
+                  <img class="avatar"  src="images/quiz/avatars/toucan.png">
+                </label>
+            </div>
+            <button class="submit "type="submit">Submit</button>
+            <button type="button" @onclick="() => back = true" >Back</button>
+        </EditForm>
+        </div>
+    }
+
+    else if (!startGame)
+    {
+
+        if (createRoom)
+        {
+            <div class="enterName">
+                <EditForm  Model="@Room" OnValidSubmit="CreateRoom">
+                    <DataAnnotationsValidator />
+                    <div class="form-group">
+                        <label class="name">Room name:</label>
+                        <div>
+                            <InputText @bind-Value="Room.Name" class="form-control col-sm-15" />
+                            <ValidationMessage For="@(() => Room.Name)" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="name">Amount of players:</label>
+                        <div>
+                            <InputSelect @bind-Value="Room.MaxPlayerAmount" class="form-control col-sm-15">
+                                @for (int i = 2; i < 6; i++)
+                                {
+                                     <option value="@i">@i</option>
+                                }
+                         </InputSelect>
+                      </div>
+                  </div>
+                    <button class="submit "type="submit">Create</button>
+                    <button type="button" @onclick="() => back = true" >Back</button>
+                 </EditForm>
+             </div>
+        }
+
+        else
+        {
+            <div class="item">
+                <button @onclick="() => createRoom = true">Create Room</button>
+            </div>
+            @if (Rooms?.Count > 0)
+            {
+                <div class="quiztitle m-2"><h3>Available Rooms</h3></div>
+
+                <div class="availableRooms">
+                    @foreach (var item in Rooms)
+                    {
+                        <div class="btnRoom" type="button" @onclick="() => JoinRoom(item.Id)">
+                            <div>@item.Name</div>
+                            <div>Players: @item.Players.Count / @item.MaxPlayerAmount</div>
+                        </div>
+                    }
+                </div>
+            }
+        }
+    }
+
+    else
+    {
+        <MultiPlayerQuestionView Connection="Connection" Count="0" QuestionIndex=0></MultiPlayerQuestionView>
+    }
+
+}
+
+else
+{
+    <QuizOverview></QuizOverview>
+
+}
+
+
+
+
+@code {
+    bool back = false;
+    bool startGame;
+
+    [Parameter]
+    public bool Registered  { get; set; }
+
+    bool createRoom;
+
+    public string Avatar { get; set; } = "blue.png";
+
+    public Player Player { get; set; } = new Player();
+
+    public Room Room { get; set; } = new Room();
+    [Parameter]
+    public HubConnection Connection { get; set; }
+
+    [Inject]
+    public IRoomService _roomService { get; set; }
+
+    private List<Room> Rooms  { get; set; }
+
+    private async Task ShowRooms()
+    {
+        Rooms = null;
+        Rooms = await _roomService.ShowAvailableRooms();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        if (Connection == null)
+        {
+        Connection = new HubConnectionBuilder()
+       .WithUrl(NavManager.ToAbsoluteUri("/multiplayer"))
+       .Build();
+        await Connection.StartAsync();
+        }
+
+        await ShowRooms();
+        Connection.On("PlayerJoined", async () =>
+        {
+            await ShowRooms();
+            StateHasChanged();
+        });
+        Connection.On("RoomAdded", async () =>
+        {
+            await ShowRooms();
+            StateHasChanged();
+        });
+    }
+
+    private async Task RegisterPlayer()
+    {
+
+        await Connection.SendAsync("RegisterPlayer", Player.Name, Avatar);
+        Connection.On("RegisterSuccess", () =>
+        {
+            Registered = true;
+            StateHasChanged();
+        });
+    }
+
+
+    private async Task CreateRoom()
+    {
+        string roomId = Guid.NewGuid().ToString();
+        await Connection.SendAsync("CreateRoom", roomId, Room.Name, Room.MaxPlayerAmount);
+        startGame = true;
+    }
+
+    private async Task JoinRoom(string roomId)
+    {
+      await Connection.SendAsync("JoinRoom", roomId);
+      startGame = true;
+    }
+
+}

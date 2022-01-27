@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Imi.Project.Mobile.Pages.Medicines.EditMedicinePage">
+    <NavigationPage.TitleView>
+        <Label Text="Edit Medication" TextColor="white" VerticalTextAlignment="Center"/>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <Grid ColumnDefinitions="{StaticResource MainGridColumns}"
+              RowDefinitions="{StaticResource MainGridRows}">
+            <ScrollView Grid.Row="1" Grid.RowSpan="3" >
+                <StackLayout Grid.Row="1" Grid.RowSpan="2" >
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
+                            <Label Text="Name" FontAttributes="Bold"></Label>
+                            <Entry x:Name="entrName" Text="{Binding Name}"></Entry>
+                            <Label Text="{Binding NameMessage}" Style="{StaticResource Error}" IsVisible="{Binding NameMessage, Converter={StaticResource VisibilityConverter}}"></Label>
+
+                        </StackLayout>
+                    </Frame>
+                    <Frame Style="{StaticResource EditFrame}">
+                        <StackLayout>
+                            <Label Text="Usage"  FontAttributes="Bold"></Label>
+                            <Entry x:Name="entrUsage" Text="{Binding Usage}"></Entry>
+                            <Label Text="{Binding UsageMessage}" Style="{StaticResource Error}" IsVisible="{Binding UsageMessage, Converter={StaticResource VisibilityConverter}}"></Label>
+
+                        </StackLayout>
+                    </Frame>
+                    <Button x:Name="btnSave" Text="Save" Command="{Binding SaveCommand}" Margin="25" BackgroundColor="{StaticResource Green}"></Button>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

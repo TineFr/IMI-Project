@@ -1,0 +1,69 @@
+﻿
+
+@if (@Bird != null)
+{
+    <h1 class="green">@Bird.Name <img class="genderImage" src="@SetGenderImage(Bird.Gender.ToString())" /></h1>
+    <a href="@($"birds")" type="button" class="btnBack"><img class="arrow" src="images/long-arrow.png"/></a>
+
+<div class="details">
+<div class="detailscontainer">
+
+       <img class="detailimage" src="@Bird.Image" />
+        <div>
+                @if (Bird.Species is object) { <p> <b>Species:</b> @Bird.Species?.Name</p>}
+                @if (Bird.Cage is object) {<p> <b>Location:</b> @Bird.Cage?.Name</p> }
+                <p> <b>Hatch date:</b> @Bird.HatchDate.ToString("d")</p>
+                @if (Bird.Food is object) {<p><b> Food:</b> @Bird.Food</p> }
+
+            <div class="d-xl-inline-flex">
+                <a href="@($"editbird/{Bird.Id}")" type="button" class="btn edit m-1">Edit</a>
+                <div type="button" class="btn del m-1" @onclick="() => DeleteBird(Bird.Id)">Delete</div>
+            </div>
+        </div>
+</div>
+
+</div>
+}
+
+
+
+
+@code {
+
+    @inject NavigationManager NavManager;
+    [Parameter]
+    public BirdModel Bird { get; set; } 
+
+    [Inject]
+    public IBaseApiService<BirdRequestModel, BirdModel> _birdService { get; set; }
+
+    [Parameter]
+    public Guid Id { get; set; }
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        Bird =  await _birdService.GetByIdAsync($"birds/{Id}");
+
+    }
+
+    private string SetGenderImage(string gender)
+    {
+        string imageSource = "";
+        imageSource = gender.ToLower() == "male" ? "images/male.png" : "images/female.png";
+        return imageSource;
+    }
+
+        private async void DeleteBird(string id)
+    {
+          var result =  await _birdService.DeleteAsync($"birds/{Id}");
+
+        if (result is object)
+        {
+
+
+        }
+        else NavManager.NavigateTo("birds");
+
+    }
+}
