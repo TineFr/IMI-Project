@@ -5,7 +5,7 @@
 
 @if (hasStarted)
 {
-    @if(questionIndex > 5)
+    @if(QuestionIndex > 5)
     {
         <div>Waiting on other players to finish...</div>
     }
@@ -83,14 +83,20 @@ else
 
     private bool quizEnded = false;
 
-
-    public int questionIndex
+    [Parameter]
+    public int QuestionIndex
     { get; 
 
         set; 
     } 
 
-    private int count;
+    [Parameter]
+    public int Count
+    { get; 
+
+        set; 
+    } 
+    
 
     [Inject]
     public IQuizService QuizService { get; set; }
@@ -128,30 +134,29 @@ else
             StateHasChanged();
         });
 
-        questionIndex = 0;
+        QuestionIndex = 0;
 
     }
 
     private async void PlayerLeftRoom()
     {
-        await Connection.SendAsync("PlayerLeftRoom", room.Id, count);
+        await Connection.SendAsync("PlayerLeftRoom", room.Id, Count);
         LeaveRoom = true;
     }
 
     public async Task<QuizElement> ReturnQuestion()
     {
-        if (questionIndex == 6) questionIndex = 0;
-        if (questionIndex < 5)
+        if (QuestionIndex < 5)
         {
-            var question = questions[questionIndex];
-            questionIndex++;
+            var question = questions[QuestionIndex];
+            QuestionIndex++;
             return question;
         }
 
         else
         {
-            questionIndex++;
-            await Connection.SendAsync("PlayerFinished", room.Id, count);
+            QuestionIndex++;
+            await Connection.SendAsync("PlayerFinished", room.Id, Count);
             return null;
         }
     }
@@ -159,8 +164,10 @@ else
 
     public void AnswerPicked(bool isCorrect)
     {
+
+
         AddClassName();
-        if (isCorrect) count += 1;
+        if (isCorrect) Count += 1;
         Visibility = true;
     }
 
