@@ -23,7 +23,7 @@ namespace Imi.Project.Mobile.UWP.Services
             {
                 file = await folder.GetFileAsync(sound);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 file = await folder.GetFileAsync("crickets.mp3");
             }
