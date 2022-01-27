@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Plugin.FirebasePushNotification;
 
 namespace Imi.Project.Mobile.UWP
 {
@@ -20,7 +21,8 @@ namespace Imi.Project.Mobile.UWP
         public MainPage()
         {
             this.InitializeComponent();
-
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
+            //FirebasePushNotificationManager.ProcessIntent(Intent);
             LoadApplication(new Imi.Project.Mobile.App());
         }
     }

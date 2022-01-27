@@ -36,22 +36,27 @@ namespace Imi.Project.Mobile
             FreshIOC.Container.Register<IValidator<CageRequestModel>, CageRequestModelValidator>();
             FreshIOC.Container.Register<IValidator<MedicineModel>, MedicineModelValidator>();
 
+
+            // dependency services
+            FreshIOC.Container.Register(DependencyService.Get<IImageService>());
+            FreshIOC.Container.Register(DependencyService.Get<ISoundService>());
+
             MainPage = new FreshNavigationContainer(FreshPageModelResolver.ResolvePageModel<LoginViewModel>());
 
-            CrossFirebasePushNotification.Current.OnTokenRefresh += Current_OnTokenRefresh;
-            CrossFirebasePushNotification.Current.OnNotificationOpened += Current_OnNotificationOpened;
+            //    CrossFirebasePushNotification.Current.OnTokenRefresh += Current_OnTokenRefresh;
+            //    CrossFirebasePushNotification.Current.OnNotificationOpened += Current_OnNotificationOpened;
         }
 
-        private void Current_OnNotificationOpened(object source, FirebasePushNotificationResponseEventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine("Received");
+        //private void Current_OnNotificationOpened(object source, FirebasePushNotificationResponseEventArgs e)
+        //{
+        //    System.Diagnostics.Debug.WriteLine("Received");
 
-        }
+        //}
 
-        private void Current_OnTokenRefresh(object source, FirebasePushNotificationTokenEventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine($"TOKEN : {e.Token}");
-        }
+        //private void Current_OnTokenRefresh(object source, FirebasePushNotificationTokenEventArgs e)
+        //{
+        //    System.Diagnostics.Debug.WriteLine($"TOKEN : {e.Token}");
+        //}
 
         protected override void OnStart()
         {
