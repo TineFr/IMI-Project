@@ -31,7 +31,8 @@
                 <Frame>
                     <Label Text="{Binding Species.Description}"></Label>
                 </Frame>
-            </FlexLayout>
+                <Button Text="Play Sound" Command="{Binding PlaySoundCommand}"></Button>
+                </FlexLayout>
                 </StackLayout>
             </ScrollView>
         </Grid>
