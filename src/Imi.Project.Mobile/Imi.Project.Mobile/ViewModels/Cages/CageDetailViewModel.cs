@@ -20,9 +20,7 @@ namespace Imi.Project.Mobile.ViewModels.Cages
         public CageDetailViewModel(IBaseApiService<DailyTaskModel, DailyTaskModel> dailyTaskService)
         {
             _dailyTaskService = dailyTaskService;
-            MessagingCenter.Subscribe<CageDetailViewModel>(this, "Notification", (sender) => {
-                var test = "yeeees";
-            });
+
         }
 
 
