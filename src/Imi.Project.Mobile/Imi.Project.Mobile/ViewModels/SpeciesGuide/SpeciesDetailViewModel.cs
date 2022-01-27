@@ -32,7 +32,15 @@ namespace Imi.Project.Mobile.ViewModels.SpeciesGuide
             Species = initData as SpeciesModel;
             base.Init(initData);
         }
+        protected override void ViewIsDisappearing(object sender, EventArgs e)
+        {
+            if (isPlaying)
+            {
+                _soundService.StopSound();
+                isPlaying = false;
+            }
 
+        }
         public ICommand BackCommand => new Command(
              async () =>
              {

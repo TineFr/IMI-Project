@@ -15,11 +15,18 @@ namespace Imi.Project.Mobile.UWP.Services
         MediaElement element;
         public async Task PlayBirdSound(string sound)
         {
+            Windows.Storage.StorageFile file;
             element = new MediaElement();
             Windows.Storage.StorageFolder folder = await Windows.ApplicationModel.Package
                 .Current.InstalledLocation.GetFolderAsync("Assets");
-           Windows.Storage.StorageFile file = await folder.GetFileAsync(sound);
-            if (file != null) file = await folder.GetFileAsync("crickets.mp3");
+            try
+            {
+                file = await folder.GetFileAsync(sound);
+            }
+            catch (Exception ex)
+            {
+                file = await folder.GetFileAsync("crickets.mp3");
+            }
             var stream = await file.OpenReadAsync();
             element.SetSource(stream, file.ContentType);
             element.Play();

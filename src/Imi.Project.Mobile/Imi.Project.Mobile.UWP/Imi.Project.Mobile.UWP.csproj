@@ -105,7 +105,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\budgie.mp3" />
+    <Content Include="Assets\budgerigar.mp3" />
     <Content Include="Assets\cockatiel.mp3" />
     <Content Include="Assets\crickets.mp3" />
     <Content Include="Assets\LargeTile.scale-100.png" />
